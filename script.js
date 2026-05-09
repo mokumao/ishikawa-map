@@ -456,7 +456,7 @@ map.on('popupopen', function(e) {
     if (pr.right  > mr.right  - pad) dx = pr.right  - mr.right  + pad;
 
     if (dx !== 0 || dy !== 0) {
-      map.panBy([dx, dy], { animate: true, duration: 1.0, easeLinearity: 0.05 }); // じわっとパン
+      map.panBy([dx, dy], { animate: true, duration: 1.0, easeLinearity: 0.01 }); // じわっとパン
     }
   });
 });
