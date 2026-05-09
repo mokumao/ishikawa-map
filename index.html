@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2e7d32">
+  <title>うるま市石川 飲食店マップ</title>
+  <link rel="stylesheet" href="leaflet/leaflet.css"/>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- パスワードオーバーレイ -->
+  <div id="passwordOverlay" class="pw-overlay">
+    <div class="pw-box">
+      <div class="pw-logo">🗺</div>
+      <h2 class="pw-title">うるま市石川 飲食店マップ</h2>
+      <p class="pw-desc">このページは確認用です。パスワードを入力してください。</p>
+      <div class="pw-input-wrap">
+        <input type="password" id="pwInput" class="pw-input"
+               placeholder="パスワード"
+               onkeydown="if(event.key==='Enter')checkPassword()"
+               autocomplete="current-password">
+      </div>
+      <p class="pw-error" id="pwError"></p>
+      <button class="pw-btn" onclick="checkPassword()">入力する</button>
+    </div>
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <h1>🗺 うるま市石川 飲食店マップ</h1>
+      <p class="notice">⚠️ 営業時間や定休日は変更される可能性があります。最新情報は各店舗ページをご確認ください。</p>
+    </div>
+  </header>
+
+  <!-- サイト説明バー -->
+  <div class="intro-bar">
+    <div class="intro-inner">
+      <p class="intro-text">
+        🌺 <strong>沖縄県うるま市石川エリア</strong>の飲食店情報を地図でまとめたサイトです。
+        地図のピンや一覧の店名をクリックすると、営業時間・定休日・アクセスなどの詳細を確認できます。
+        ジャンル絞り込みやキーワード検索もご利用いただけます。
+      </p>
+    </div>
+  </div>
+
+  <!-- 作成中バナー -->
+  <div class="wip-bar">
+    <span class="wip-icon">🚧</span>
+    このサイトは現在作成中です。掲載情報が間違っている場合があります。正式公開前の確認用ページです。
+  </div>
+
+  <!-- スマホ用タブ切り替え（デスクトップでは非表示） -->
+  <div class="mobile-tabs" role="tablist" aria-label="表示切り替え">
+    <button class="tab-btn active" id="tabMap"  onclick="switchTab('map')" role="tab" aria-selected="true">🗺 地図</button>
+    <button class="tab-btn"        id="tabList" onclick="switchTab('list')" role="tab" aria-selected="false">📋 一覧</button>
+  </div>
+
+  <!-- メインコンテンツ（サイドバー＋地図） -->
+  <div class="app-body" id="appBody" data-view="map">
+
+    <aside class="sidebar" id="sidebar" aria-label="飲食店一覧">
+      <div class="search-section">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="search" id="searchInput" class="search-input"
+                 placeholder="店名・ジャンル・住所・営業時間で検索…"
+                 autocomplete="off" aria-label="店舗を検索">
+          <button class="search-clear" id="searchClear" aria-label="検索をクリア" hidden>✕</button>
+        </div>
+      </div>
+      <div class="filter-section">
+        <p class="filter-label">ジャンルで絞り込み</p>
+        <div class="filter-buttons" id="filterButtons"></div>
+      </div>
+      <p class="shop-count" id="shopCount"></p>
+      <div class="shop-list" id="shopList" role="list"></div>
+    </aside>
+
+    <div id="map" aria-label="うるま市石川 飲食店マップ"></div>
+
+  </div>
+
+  <footer>
+    <p class="footer-main">🌊 うるま市石川 飲食店マップ &nbsp;|&nbsp; 掲載情報は調査時点のものです</p>
+    <p class="footer-sub">地図データ &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors</p>
+  </footer>
+
+  <script src="leaflet/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
