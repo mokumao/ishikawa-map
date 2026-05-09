@@ -426,7 +426,7 @@ const markersData = restaurants.map((r, idx) => {
     icon:  makePinIcon(color, r.warn),
     title: r.name
   });
-  marker.bindPopup(makePopup(r), { maxWidth: 300, autoPan: false });
+  marker.bindPopup(makePopup(r), { maxWidth: 300, autoPan: true });
   marker.addTo(map);
 
   marker.on('click', () => setActiveItem(idx));
