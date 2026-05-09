@@ -426,12 +426,39 @@ const markersData = restaurants.map((r, idx) => {
     icon:  makePinIcon(color, r.warn),
     title: r.name
   });
-  marker.bindPopup(makePopup(r), { maxWidth: 300, autoPan: true });
+  marker.bindPopup(makePopup(r), { maxWidth: 300, autoPan: false });
   marker.addTo(map);
 
   marker.on('click', () => setActiveItem(idx));
 
   return { restaurant: r, marker, idx };
+});
+
+// 地図アイコン直接クリック時：ポップアップが見えるようゆっくりパン
+focusShop._fromSidebar = false;
+map.on('popupopen', function(e) {
+  if (focusShop._fromSidebar) return; // サイドバーから開いた場合はスキップ
+
+  // ポップアップ描画後に位置を測定してパン
+  requestAnimationFrame(function() {
+    const popupEl = e.popup.getElement();
+    const mapEl   = map.getContainer();
+    if (!popupEl || !mapEl) return;
+
+    const pr  = popupEl.getBoundingClientRect();
+    const mr  = mapEl.getBoundingClientRect();
+    const pad = 10;
+    let dx = 0, dy = 0;
+
+    if (pr.top    < mr.top    + pad) dy = pr.top    - mr.top    - pad;
+    if (pr.bottom > mr.bottom - pad) dy = pr.bottom - mr.bottom + pad;
+    if (pr.left   < mr.left   + pad) dx = pr.left   - mr.left   - pad;
+    if (pr.right  > mr.right  - pad) dx = pr.right  - mr.right  + pad;
+
+    if (dx !== 0 || dy !== 0) {
+      map.panBy([dx, dy], { animate: true, duration: 0.5 }); // ゆっくりパン
+    }
+  });
 });
 
 // ── 凡例コントロール ─────────────────────────────────────────────
@@ -579,7 +606,9 @@ function focusShop(idx) {
 
     // アニメーション完了後にポップアップを開く（重複防止）
     focusShop._onMoveEnd = function() {
+      focusShop._fromSidebar = true;  // サイドバーから開いたフラグON
       data.marker.openPopup();
+      focusShop._fromSidebar = false; // フラグOFF
     };
     map.once('moveend', focusShop._onMoveEnd);
   }, 200);
