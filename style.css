@@ -524,7 +524,7 @@ footer a:hover { text-decoration: underline; }
 .label-toggle-btn {
   display: block;
   background: #fff;
-  border: 2px solid #b0bec5;
+  border: 2px solid #e53935;
   border-radius: 7px;
   padding: 6px 11px;
   font-size: .78rem;
