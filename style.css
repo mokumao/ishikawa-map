@@ -49,7 +49,7 @@ header h1 {
 }
 .notice {
   display: inline-block;
-  font-size: .78rem;
+  font-size: .9rem;
   color: rgba(255,255,255,.9);
   line-height: 1.45;
   white-space: nowrap;
@@ -57,7 +57,7 @@ header h1 {
   text-overflow: ellipsis;
 }
 .intro-text {
-  font-size: .67rem;
+  font-size: .78rem;
   color: rgba(255,255,255,.9);
   line-height: 1.5;
   white-space: nowrap;
