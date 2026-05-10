@@ -427,12 +427,37 @@ const markersData = restaurants.map((r, idx) => {
     title: r.name
   });
   marker.bindPopup(makePopup(r), { maxWidth: 300, autoPan: false });
+  marker.bindTooltip(r.name, {
+    permanent:  true,
+    direction:  'top',
+    offset:     [0, -46],
+    className:  'shop-label'
+  });
   marker.addTo(map);
 
   marker.on('click', () => setActiveItem(idx));
 
   return { restaurant: r, marker, idx };
 });
+
+// ── 店名ラベル 表示/非表示トグルボタン ─────────────────────────────
+let labelsVisible = true;
+const LabelToggleControl = L.Control.extend({
+  options: { position: 'topright' },
+  onAdd() {
+    const btn = L.DomUtil.create('button', 'label-toggle-btn');
+    btn.innerHTML = '🏪 店名を隠す';
+    btn.title = '店名ラベルの表示／非表示';
+    L.DomEvent.on(btn, 'click', function(e) {
+      L.DomEvent.stopPropagation(e);
+      labelsVisible = !labelsVisible;
+      map.getContainer().classList.toggle('labels-hidden', !labelsVisible);
+      btn.innerHTML = labelsVisible ? '🏪 店名を隠す' : '🏪 店名を表示';
+    });
+    return btn;
+  }
+});
+new LabelToggleControl().addTo(map);
 
 // 地図アイコン直接クリック時：ポップアップが見えるようゆっくりパン
 focusShop._fromSidebar = false;
