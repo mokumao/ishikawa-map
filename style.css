@@ -49,16 +49,18 @@ header h1 {
 }
 .notice {
   display: inline-block;
-  font-size: .9rem;
-  color: rgba(255,255,255,.9);
+  font-size: 1.0rem;
+  color: #fff;
+  font-weight: 600;
   line-height: 1.45;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .intro-text {
-  font-size: .78rem;
-  color: rgba(255,255,255,.9);
+  font-size: .88rem;
+  color: #fff;
+  font-weight: 600;
   line-height: 1.5;
   white-space: nowrap;
   overflow: hidden;
