@@ -16,19 +16,34 @@ body {
 
 /* ── Header ───────────────────────────────────────────────── */
 header {
-  background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 60%, #388e3c 100%);
+  background: linear-gradient(135deg, #0d2b6b 0%, #1565c0 60%, #1976d2 100%);
   color: #fff;
   padding: 10px 16px 8px;
   flex-shrink: 0;
   box-shadow: 0 2px 6px rgba(0,0,0,.25);
   z-index: 1000;
 }
-.header-inner { max-width: 1200px; margin: 0 auto; }
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.header-left {
+  flex-shrink: 0;
+}
+.header-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
 header h1 {
-  font-size: 1.25rem;
+  font-size: 1.6rem;
   font-weight: 700;
   letter-spacing: .03em;
-  margin-bottom: 6px;
+  line-height: 1.3;
   text-shadow: 0 1px 3px rgba(0,0,0,.3);
 }
 .notice {
@@ -41,6 +56,12 @@ header h1 {
   border-left: 4px solid #ff8f00;
   line-height: 1.45;
 }
+.intro-text {
+  font-size: .78rem;
+  color: rgba(255,255,255,.9);
+  line-height: 1.6;
+}
+.intro-text strong { color: #fff; font-weight: 700; }
 
 /* ── Password overlay ─────────────────────────────────────── */
 .pw-overlay {
@@ -134,20 +155,8 @@ header h1 {
 }
 .wip-icon { margin-right: 5px; }
 
-/* ── Intro bar（説明バー） ────────────────────────────────── */
-.intro-bar {
-  flex-shrink: 0;
-  background: linear-gradient(to right, #e8f5e9, #e0f2f1);
-  border-bottom: 1px solid #b2dfdb;
-  padding: 9px 16px;
-}
-.intro-inner { max-width: 1200px; margin: 0 auto; }
-.intro-text {
-  font-size: .8rem;
-  color: #1b4a3a;
-  line-height: 1.65;
-}
-.intro-text strong { color: #1b5e20; }
+/* ── Intro bar（廃止・ヘッダーに統合） ────────────────────── */
+.intro-bar { display: none; }
 
 /* ── Mobile tabs（スマホのみ表示） ─────────────────────────── */
 .mobile-tabs { display: none; }
