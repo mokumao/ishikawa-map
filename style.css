@@ -689,13 +689,6 @@ footer a:hover { text-decoration: underline; }
     margin: 8px 11px !important;
   }
 
-  /* ズームコントロール（＋－）をスマホでは右上に移動
-     → ポップアップの店名が重ならないようにする */
-  .leaflet-top.leaflet-left {
-    left: auto;
-    right: 10px;
-  }
-
   /* × 閉じるボタンを大きく・見やすく（右端にかからないよう内側に） */
   .leaflet-popup-close-button {
     width: 30px !important;

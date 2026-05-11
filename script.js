@@ -507,31 +507,65 @@ const LabelToggleControl = L.Control.extend({
 });
 new LabelToggleControl().addTo(map);
 
-// 地図アイコン直接クリック時：ポップアップが見えるようゆっくりパン
+// 地図アイコン直接クリック時：ポップアップが見えるようパン
 focusShop._fromSidebar = false;
 map.on('popupopen', function(e) {
   if (focusShop._fromSidebar) return; // サイドバーから開いた場合はスキップ
 
-  // ポップアップ描画後に位置を測定してパン
-  requestAnimationFrame(function() {
-    const popupEl = e.popup.getElement();
+  setTimeout(function() {
+    const popup   = e.popup;
+    const popupEl = popup.getElement();
     const mapEl   = map.getContainer();
     if (!popupEl || !mapEl) return;
 
     const pr  = popupEl.getBoundingClientRect();
     const mr  = mapEl.getBoundingClientRect();
-    const pad = 10;
-    let dx = 0, dy = 0;
 
-    if (pr.top    < mr.top    + pad) dy = pr.top    - mr.top    - pad;
-    if (pr.bottom > mr.bottom - pad) dy = pr.bottom - mr.bottom + pad;
-    if (pr.left   < mr.left   + pad) dx = pr.left   - mr.left   - pad;
-    if (pr.right  > mr.right  - pad) dx = pr.right  - mr.right  + pad;
+    if (window.innerWidth <= 767) {
+      // ── スマホ：ポップアップ＋矢印＋マーカーアイコンがすべて見えるよう自動パン ──
+      // マーカーのピクセル位置（地図コンテナ基準）
+      const latlng   = popup.getLatLng();
+      const mPx      = map.latLngToContainerPoint(latlng);
+      // ビューポート基準のマーカーY（iconAnchorがアイコン底辺なのでそのまま使用）
+      const markerVY = mr.top + mPx.y;
 
-    if (dx !== 0 || dy !== 0) {
-      map.panBy([dx, dy], { animate: true, duration: 1.0, easeLinearity: 0.01 }); // じわっとパン
+      const padTop    = 80;   // ＋－ボタン（約70px）をクリアする余白
+      const padBottom = 25;   // マーカーアイコン底辺の余白
+      const padSide   = 10;
+      let dx = 0, dy = 0;
+
+      // 縦方向：ポップアップ上部を優先し、次にマーカーが見えるか確認
+      if (pr.top < mr.top + padTop) {
+        // ポップアップ上部が隠れている → 内容を下に移動
+        dy = pr.top - mr.top - padTop;
+      } else if (markerVY > mr.bottom - padBottom) {
+        // マーカーが画面下に隠れている → 内容を上に移動
+        dy = markerVY - (mr.bottom - padBottom);
+      }
+
+      // 横方向
+      if (pr.left < mr.left + padSide) {
+        dx = pr.left - mr.left - padSide;
+      } else if (pr.right > mr.right - padSide) {
+        dx = pr.right - mr.right + padSide;
+      }
+
+      if (dx !== 0 || dy !== 0) {
+        map.panBy([dx, dy], { animate: true, duration: 0.4 });
+      }
+    } else {
+      // ── デスクトップ：ポップアップが見切れないよう最小限パン ──
+      const pad = 10;
+      let dx = 0, dy = 0;
+      if (pr.top    < mr.top    + pad) dy = pr.top    - mr.top    - pad;
+      if (pr.bottom > mr.bottom - pad) dy = pr.bottom - mr.bottom + pad;
+      if (pr.left   < mr.left   + pad) dx = pr.left   - mr.left   - pad;
+      if (pr.right  > mr.right  - pad) dx = pr.right  - mr.right  + pad;
+      if (dx !== 0 || dy !== 0) {
+        map.panBy([dx, dy], { animate: true, duration: 1.0, easeLinearity: 0.01 });
+      }
     }
-  });
+  }, 80);
 });
 
 // ── 凡例コントロール ─────────────────────────────────────────────
