@@ -14,6 +14,19 @@ body {
   color: #263238;
 }
 
+/* ── iPhoneセーフエリアスペーサー（スマホのみ有効） ─────────────── */
+.safe-area-top {
+  display: none;           /* PCでは非表示 */
+  flex-shrink: 0;
+  background: #1976d2;     /* ヘッダーと同じ青色 */
+}
+@media (max-width: 767px) {
+  body.header-collapsed .safe-area-top {
+    display: block;
+    height: env(safe-area-inset-top, 50px);
+  }
+}
+
 /* ── Header ───────────────────────────────────────────────── */
 header {
   background: #1976d2;
@@ -656,8 +669,9 @@ footer a:hover { text-decoration: underline; }
   body.header-collapsed .swipe-hint {
     flex-direction: column-reverse;
   }
+  /* ヘッダー非表示時にスペーサーでカメラ（Dynamic Island）を回避 */
   body.header-collapsed .mobile-tabs {
-    padding-top: env(safe-area-inset-top, 0px);
+    padding-top: 0;
   }
   body.header-collapsed .swipe-hint::before {
     content: '▼';
