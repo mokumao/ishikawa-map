@@ -651,9 +651,13 @@ footer a:hover { text-decoration: underline; }
     background: #e53935;
     border-radius: 1px;
   }
-  /* ヘッダー非表示時 → 棒が上・▼が下（下向き矢印） */
+  /* ヘッダー非表示時 → 棒が上・▼が下（下向き矢印）
+     かつ、カメラ/ノッチのセーフエリア分だけタブバーを下げる */
   body.header-collapsed .swipe-hint {
     flex-direction: column-reverse;
+  }
+  body.header-collapsed .mobile-tabs {
+    padding-top: env(safe-area-inset-top, 0px);
   }
   body.header-collapsed .swipe-hint::before {
     content: '▼';
