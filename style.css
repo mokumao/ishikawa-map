@@ -588,6 +588,28 @@ footer a:hover { text-decoration: underline; }
 ═══════════════════════════════════════════════════════════ */
 @media (max-width: 767px) {
 
+  /* ── 凡例（ジャンル）をスマホでは非表示 ── */
+  .map-legend { display: none !important; }
+
+  /* ── ヘッダー折りたたみアニメーション ── */
+  header, .wip-bar {
+    transition: max-height 0.35s ease, opacity 0.35s ease,
+                padding 0.35s ease;
+    overflow: hidden;
+  }
+  body.header-collapsed header {
+    max-height: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    opacity: 0;
+  }
+  body.header-collapsed .wip-bar {
+    max-height: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    opacity: 0;
+  }
+
   /* モバイルタブを表示 */
   .mobile-tabs {
     display: flex;

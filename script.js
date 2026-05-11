@@ -3,6 +3,28 @@
    地図: OpenStreetMap + Leaflet
 ================================================================ */
 
+// ── スマホ：タブバーを上スワイプでヘッダー折りたたみ ───────────────
+(function () {
+  const tabs = document.querySelector('.mobile-tabs');
+  if (!tabs) return;
+  let startY = 0;
+
+  tabs.addEventListener('touchstart', function (e) {
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+
+  tabs.addEventListener('touchend', function (e) {
+    const dy = e.changedTouches[0].clientY - startY;
+    if (dy < -40) {
+      // 上にスワイプ → ヘッダーを隠して地図を広げる
+      document.body.classList.add('header-collapsed');
+    } else if (dy > 40) {
+      // 下にスワイプ → ヘッダーを戻す
+      document.body.classList.remove('header-collapsed');
+    }
+  }, { passive: true });
+})();
+
 // ── パスワード処理 ──────────────────────────────────────────────
 (function () {
   const overlay = document.getElementById('passwordOverlay');
