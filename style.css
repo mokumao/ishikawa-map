@@ -686,20 +686,27 @@ footer a:hover { text-decoration: underline; }
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch;
     max-height: calc(100svh - 200px);
-    margin: 10px 14px !important;
+    margin: 8px 11px !important;
   }
 
-  /* × 閉じるボタンを大きく・見やすく */
+  /* ズームコントロール（＋－）をスマホでは右上に移動
+     → ポップアップの店名が重ならないようにする */
+  .leaflet-top.leaflet-left {
+    left: auto;
+    right: 10px;
+  }
+
+  /* × 閉じるボタンを大きく・見やすく（右端にかからないよう内側に） */
   .leaflet-popup-close-button {
-    width: 32px !important;
-    height: 32px !important;
-    font-size: 22px !important;
-    line-height: 30px !important;
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 20px !important;
+    line-height: 28px !important;
     background: #fff !important;
     border-radius: 50% !important;
     box-shadow: 0 2px 6px rgba(0,0,0,.3) !important;
-    top: -12px !important;
-    right: -12px !important;
+    top: -10px !important;
+    right: 2px !important;
     color: #333 !important;
     text-align: center !important;
   }
@@ -756,10 +763,13 @@ footer a:hover { text-decoration: underline; }
   .intro-bar   { padding: 7px 12px; }
   .intro-text  { font-size: .74rem; }
 
-  /* ポップアップ */
-  .popup-wrap  { max-width: 240px; font-size: .8rem; }
-  .popup-name  { font-size: .93rem; }
-  .popup-btn   { font-size: .73rem; padding: 5px 6px; }
+  /* ポップアップ（全体的にやや小さく） */
+  .popup-wrap  { min-width: 180px; max-width: 220px; font-size: .76rem; }
+  .popup-name  { font-size: .88rem; }
+  .popup-btn   { font-size: .71rem; padding: 5px 5px; }
+  .popup-genre { font-size: .68rem; margin-bottom: 7px; }
+  .popup-table { font-size: .74rem; }
+  .popup-table td.label { font-size: .68rem; }
 }
 
 @media (max-width: 360px) {
