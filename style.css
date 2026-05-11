@@ -627,15 +627,33 @@ footer a:hover { text-decoration: underline; }
     left: 50%;
     transform: translateX(-50%);
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+  }
+  /* 三角部分（▲） */
+  .swipe-hint::before {
+    content: '▲';
     font-size: 1.1rem;
     font-weight: 900;
     color: #e53935;
     line-height: 1;
   }
-  /* ヘッダーが表示中 → 上矢印（上に引っ張れる） */
-  .swipe-hint::before { content: '↑'; }
-  /* ヘッダーが隠れているとき → 下矢印（下に引っ張れる） */
-  body.header-collapsed .swipe-hint::before { content: '↓'; }
+  /* 棒部分（短く太い） */
+  .swipe-hint::after {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 7px;
+    background: #e53935;
+    border-radius: 1px;
+  }
+  /* ヘッダー非表示時 → 棒が上・▼が下（下向き矢印） */
+  body.header-collapsed .swipe-hint {
+    flex-direction: column-reverse;
+  }
+  body.header-collapsed .swipe-hint::before { content: '▼'; }
   .tab-btn {
     flex: 1;
     padding: 10px 8px;
