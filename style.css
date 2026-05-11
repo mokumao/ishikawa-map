@@ -638,8 +638,9 @@ footer a:hover { text-decoration: underline; }
     font-size: 1.1rem;
     font-weight: 900;
     color: #e53935;
-    line-height: 0.85;
+    line-height: 1;
     display: block;
+    margin-bottom: -3px;
   }
   /* 棒部分（短く太い） */
   .swipe-hint::after {
