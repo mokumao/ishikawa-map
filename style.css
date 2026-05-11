@@ -655,7 +655,11 @@ footer a:hover { text-decoration: underline; }
   body.header-collapsed .swipe-hint {
     flex-direction: column-reverse;
   }
-  body.header-collapsed .swipe-hint::before { content: '▼'; }
+  body.header-collapsed .swipe-hint::before {
+    content: '▼';
+    margin-bottom: 0;
+    margin-top: -3px;
+  }
   .tab-btn {
     flex: 1;
     padding: 10px 8px;
