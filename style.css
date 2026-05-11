@@ -617,7 +617,25 @@ footer a:hover { text-decoration: underline; }
     background: #fff;
     border-bottom: 2px solid #e0e0e0;
     z-index: 900;
+    position: relative;
+    align-items: center;
   }
+
+  /* スワイプ方向ヒント矢印 */
+  .swipe-hint {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: #e53935;
+    line-height: 1;
+  }
+  /* ヘッダーが表示中 → 上矢印（上に引っ張れる） */
+  .swipe-hint::before { content: '▲'; }
+  /* ヘッダーが隠れているとき → 下矢印（下に引っ張れる） */
+  body.header-collapsed .swipe-hint::before { content: '▼'; }
   .tab-btn {
     flex: 1;
     padding: 10px 8px;
