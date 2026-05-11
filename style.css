@@ -14,18 +14,6 @@ body {
   color: #263238;
 }
 
-/* ── iPhoneセーフエリアスペーサー（スマホのみ有効） ─────────────── */
-.safe-area-top {
-  display: none;           /* PCでは非表示 */
-  flex-shrink: 0;
-  background: #1976d2;     /* ヘッダーと同じ青色 */
-}
-@media (max-width: 767px) {
-  body.header-collapsed .safe-area-top {
-    display: block;
-    height: env(safe-area-inset-top, 50px);
-  }
-}
 
 /* ── Header ───────────────────────────────────────────────── */
 header {
@@ -664,14 +652,25 @@ footer a:hover { text-decoration: underline; }
     background: #e53935;
     border-radius: 1px;
   }
-  /* ヘッダー非表示時 → 棒が上・▼が下（下向き矢印）
-     かつ、カメラ/ノッチのセーフエリア分だけタブバーを下げる */
+  /* ヘッダー非表示時 → 棒が上・▼が下（下向き矢印） */
   body.header-collapsed .swipe-hint {
     flex-direction: column-reverse;
   }
-  /* ヘッダー非表示時にスペーサーでカメラ（Dynamic Island）を回避 */
+
+  /* ヘッダー非表示時：タブバーをiOS安全領域直下に固定
+     position:fixed + top:0 はiOSが自動でカメラ/Dynamic Island下に配置 */
   body.header-collapsed .mobile-tabs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
     padding-top: 0;
+  }
+
+  /* fixedになったタブバーの高さ分だけ地図を下にずらす */
+  body.header-collapsed .app-body {
+    padding-top: 46px;
   }
   body.header-collapsed .swipe-hint::before {
     content: '▼';
