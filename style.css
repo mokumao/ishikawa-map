@@ -633,9 +633,9 @@ footer a:hover { text-decoration: underline; }
     line-height: 1;
   }
   /* ヘッダーが表示中 → 上矢印（上に引っ張れる） */
-  .swipe-hint::before { content: '▲'; }
+  .swipe-hint::before { content: '↑'; }
   /* ヘッダーが隠れているとき → 下矢印（下に引っ張れる） */
-  body.header-collapsed .swipe-hint::before { content: '▼'; }
+  body.header-collapsed .swipe-hint::before { content: '↓'; }
   .tab-btn {
     flex: 1;
     padding: 10px 8px;
