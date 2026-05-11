@@ -672,6 +672,37 @@ footer a:hover { text-decoration: underline; }
   body.header-collapsed .app-body {
     padding-top: 46px;
   }
+
+  /* ── スマホ：ポップアップを見やすく ── */
+
+  /* 高さ制限＋スクロール対応 */
+  .leaflet-popup-content-wrapper {
+    max-height: calc(100svh - 180px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .leaflet-popup-content {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100svh - 200px);
+    margin: 10px 14px !important;
+  }
+
+  /* × 閉じるボタンを大きく・見やすく */
+  .leaflet-popup-close-button {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 22px !important;
+    line-height: 30px !important;
+    background: #fff !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,.3) !important;
+    top: -12px !important;
+    right: -12px !important;
+    color: #333 !important;
+    text-align: center !important;
+  }
   body.header-collapsed .swipe-hint::before {
     content: '▼';
     margin-bottom: 0;

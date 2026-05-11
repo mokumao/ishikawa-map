@@ -491,7 +491,7 @@ const markersData = restaurants.map((r, idx) => {
 // ── 店名ラベル 表示/非表示トグルボタン ─────────────────────────────
 let labelsVisible = true;
 const LabelToggleControl = L.Control.extend({
-  options: { position: 'topright' },
+  options: { position: window.innerWidth <= 767 ? 'bottomright' : 'topright' },
   onAdd() {
     const btn = L.DomUtil.create('button', 'label-toggle-btn');
     btn.innerHTML = '🏪 店名を隠す';
