@@ -599,9 +599,9 @@ map.on('popupopen', function(e) {
   pinCloseMarker = L.marker(latlng, {
     icon: L.divIcon({
       className: '',
-      html: '<div class="pin-close-btn">✕</div>',
-      iconSize:   [38, 38],
-      iconAnchor: [19, -4], // ピン先端(y=0)より下に配置（マイナス=下方向へずらす）
+      html: '<div class="pin-close-btn">×</div>',
+      iconSize:   [30, 30],
+      iconAnchor: [15, -4], // ピン先端より下に配置
     }),
     pane:         'closeBtnPane', // ポップアップより前面のペインへ
     interactive:  true,
