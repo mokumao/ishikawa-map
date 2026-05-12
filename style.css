@@ -512,12 +512,12 @@ footer a:hover { text-decoration: underline; }
   justify-content: center;
   font-size: 20px;
   font-weight: 900;
+  line-height: normal;
+  padding: 0;
   color: #333;
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  line-height: 28px;
-  text-align: center;
 }
 
 /* ── 店名ラベル（永続ツールチップ） ──────────────────────────── */
@@ -709,19 +709,23 @@ footer a:hover { text-decoration: underline; }
     margin: 8px 11px !important;
   }
 
-  /* × 閉じるボタンを大きく・見やすく（右端にかからないよう内側に） */
+  /* × 閉じるボタン（右上）：flexで完全中央寄せ */
   .leaflet-popup-close-button {
     width: 30px !important;
     height: 30px !important;
     font-size: 20px !important;
-    line-height: 28px !important;
+    font-weight: 900 !important;
+    line-height: normal !important;
+    padding: 0 !important;          /* Leafletデフォルトpadding(4px 4px 0 0)をリセット */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     background: #fff !important;
     border-radius: 50% !important;
     box-shadow: 0 2px 6px rgba(0,0,0,.3) !important;
     top: -10px !important;
     right: 2px !important;
     color: #333 !important;
-    text-align: center !important;
   }
   body.header-collapsed .swipe-hint::before {
     content: '▼';
