@@ -581,6 +581,43 @@ map.on('popupopen', function(e) {
   }, 80);
 });
 
+// ── ピンの上に「閉じる×」ボタンを追加（スマホ片手操作対応） ──────────
+// ポップアップペイン(z-index:700)より上に表示するカスタムペインを作成
+const closeBtnPane = map.createPane('closeBtnPane');
+closeBtnPane.style.zIndex = 750;   // ポップアップ(700)より前面
+closeBtnPane.style.pointerEvents = 'none'; // マーカー要素が個別に制御
+
+let pinCloseMarker = null;
+
+map.on('popupopen', function(e) {
+  // 既存の×ボタンマーカーをリセット
+  if (pinCloseMarker) { map.removeLayer(pinCloseMarker); pinCloseMarker = null; }
+
+  const latlng = e.popup.getLatLng();
+  if (!latlng) return;
+
+  pinCloseMarker = L.marker(latlng, {
+    icon: L.divIcon({
+      className: '',
+      html: '<div class="pin-close-btn">✕</div>',
+      iconSize:   [38, 38],
+      iconAnchor: [19, 42], // ピンアイコンに重ねて表示
+    }),
+    pane:         'closeBtnPane', // ポップアップより前面のペインへ
+    interactive:  true,
+    keyboard:     false,
+  }).addTo(map);
+
+  pinCloseMarker.on('click', function(ev) {
+    L.DomEvent.stopPropagation(ev);
+    map.closePopup();
+  });
+});
+
+map.on('popupclose', function() {
+  if (pinCloseMarker) { map.removeLayer(pinCloseMarker); pinCloseMarker = null; }
+});
+
 // ── ポップアップを触っても地図をパンできるようにする ────────────────
 map.on('popupopen', function(e) {
   const popupEl = e.popup.getElement();
