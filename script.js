@@ -601,7 +601,7 @@ map.on('popupopen', function(e) {
       className: '',
       html: '<div class="pin-close-btn">✕</div>',
       iconSize:   [38, 38],
-      iconAnchor: [19, 42], // ピンアイコンに重ねて表示
+      iconAnchor: [19, -4], // ピン先端(y=0)より下に配置（マイナス=下方向へずらす）
     }),
     pane:         'closeBtnPane', // ポップアップより前面のペインへ
     interactive:  true,
