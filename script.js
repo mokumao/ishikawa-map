@@ -581,6 +581,39 @@ map.on('popupopen', function(e) {
   }, 80);
 });
 
+// ── ポップアップを触っても地図をパンできるようにする ────────────────
+map.on('popupopen', function(e) {
+  const popupEl = e.popup.getElement();
+  if (!popupEl) return;
+
+  let lastX = 0, lastY = 0;
+
+  function onTouchStart(te) {
+    if (te.touches.length !== 1) return;
+    lastX = te.touches[0].clientX;
+    lastY = te.touches[0].clientY;
+  }
+
+  function onTouchMove(te) {
+    if (te.touches.length !== 1) return;
+    const dx = te.touches[0].clientX - lastX;
+    const dy = te.touches[0].clientY - lastY;
+    lastX = te.touches[0].clientX;
+    lastY = te.touches[0].clientY;
+    // タッチの移動量をそのまま地図のパンに転送（-dx/-dyで自然なドラッグ方向）
+    map.panBy([-dx, -dy], { animate: false });
+  }
+
+  popupEl.addEventListener('touchstart', onTouchStart, { passive: true });
+  popupEl.addEventListener('touchmove',  onTouchMove,  { passive: true });
+
+  // ポップアップが閉じたらイベントリスナーを削除
+  map.once('popupclose', function() {
+    popupEl.removeEventListener('touchstart', onTouchStart);
+    popupEl.removeEventListener('touchmove',  onTouchMove);
+  });
+});
+
 // ── 凡例コントロール ─────────────────────────────────────────────
 const legendItems = [
   { color: "#e53935", label: "居酒屋・食堂" },
