@@ -483,7 +483,20 @@ const markersData = restaurants.map((r, idx) => {
   });
   marker.addTo(map);
 
-  marker.on('click', () => setActiveItem(idx));
+  marker.on('click', function() {
+    setActiveItem(idx);
+
+    // スマホでヘッダーが表示中の場合：まず折りたたんで地図を大きくしてからポップアップ表示
+    // → ポップアップ・矢印・ピンアイコンがすべて画面内に収まるようにする
+    if (window.innerWidth <= 767 && !document.body.classList.contains('header-collapsed')) {
+      marker.closePopup();                          // 即座に閉じる
+      document.body.classList.add('header-collapsed'); // ヘッダー折りたたみ
+      setTimeout(function() {
+        map.invalidateSize();                       // 地図サイズ更新
+        marker.openPopup();                         // 拡大した地図でポップアップ表示
+      }, 380);                                      // CSSアニメーション(0.35s)完了後
+    }
+  });
 
   return { restaurant: r, marker, idx };
 });
