@@ -424,8 +424,12 @@ function makePopup(r) {
 // ── 地図初期化 ───────────────────────────────────────────────────
 const map = L.map("map", {
   center: [26.430, 127.828],
-  zoom:   14
+  zoom:   14,
+  zoomControl: false   // デフォルト左上を無効化→左下に再配置
 });
+
+// ＋－ボタンを左下に配置（片手操作しやすい位置）
+L.control.zoom({ position: 'bottomleft' }).addTo(map);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
