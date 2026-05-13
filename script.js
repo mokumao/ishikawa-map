@@ -511,13 +511,13 @@ const LabelToggleControl = L.Control.extend({
   options: { position: window.innerWidth <= 767 ? 'bottomright' : 'topright' },
   onAdd() {
     const btn = L.DomUtil.create('button', 'label-toggle-btn');
-    btn.innerHTML = '🏪 店名を隠す';
+    btn.innerHTML = '店名を隠す';
     btn.title = '店名ラベルの表示／非表示';
     L.DomEvent.on(btn, 'click', function(e) {
       L.DomEvent.stopPropagation(e);
       labelsVisible = !labelsVisible;
       map.getContainer().classList.toggle('labels-hidden', !labelsVisible);
-      btn.innerHTML = labelsVisible ? '🏪 店名を隠す' : '🏪 店名を表示';
+      btn.innerHTML = labelsVisible ? '店名を隠す' : '店名を表示';
     });
     return btn;
   }

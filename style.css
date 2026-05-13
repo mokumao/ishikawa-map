@@ -795,7 +795,25 @@ footer a:hover { text-decoration: underline; }
   .popup-btn   { width: 100%; }
 }
 
-/* ── ズームコントロール（左下配置） ────────────────────────── */
+/* ── ズームコントロール（左下配置・赤枠） ─────────────────── */
+/* コンテナ全体に赤枠（「店名を隠す」と同じ 2px #e53935） */
+.leaflet-control-zoom {
+  border: 2px solid #e53935 !important;
+  border-radius: 7px !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,.2) !important;
+  overflow: hidden;
+}
+
+/* Leaflet デフォルトの個別ボーダーをリセット */
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  border: none !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+}
+.leaflet-control-zoom-out {
+  border-bottom: none !important;
+}
+
 /* デスクトップ：左下に余白 */
 .leaflet-bottom.leaflet-left .leaflet-control-zoom {
   margin-left: 12px;
