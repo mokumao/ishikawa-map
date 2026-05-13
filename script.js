@@ -542,18 +542,22 @@ map.on('popupopen', function(e) {
       // ビューポート基準のマーカーY（iconAnchorがアイコン底辺なのでそのまま使用）
       const markerVY = mr.top + mPx.y;
 
+      // ピン下×ボタンの下端位置
+      // iconAnchor.y = -4 → ボタン上端はmarkerVYの4px下、ボタン高さ30px
+      const closeBtnBottom = markerVY + 4 + 30; // = markerVY + 34
+
       const padTop    = 80;   // ＋－ボタン（約70px）をクリアする余白
-      const padBottom = 25;   // マーカーアイコン底辺の余白
+      const padBottom = 20;   // ピン下×ボタンがよく見えるための余白
       const padSide   = 10;
       let dx = 0, dy = 0;
 
-      // 縦方向：ポップアップ上部を優先し、次にマーカーが見えるか確認
+      // 縦方向：ポップアップ上部を優先し、次にピン下×ボタンが見えるか確認
       if (pr.top < mr.top + padTop) {
         // ポップアップ上部が隠れている → 内容を下に移動
         dy = pr.top - mr.top - padTop;
-      } else if (markerVY > mr.bottom - padBottom) {
-        // マーカーが画面下に隠れている → 内容を上に移動
-        dy = markerVY - (mr.bottom - padBottom);
+      } else if (closeBtnBottom > mr.bottom - padBottom) {
+        // ピン下×ボタンが画面下に隠れている → ×ボタン全体が見えるよう上に移動
+        dy = closeBtnBottom - (mr.bottom - padBottom);
       }
 
       // 横方向
