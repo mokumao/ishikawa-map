@@ -870,4 +870,49 @@ function initSearch() {
 // ── 初期化 ───────────────────────────────────────────────────────
 buildFilterButtons();
 initSearch();
+
+// ── スマホ：ダブルタップ＋ドラッグでズーム（グーグルマップ方式）──
+// 上にドラッグ→縮小 / 下にドラッグ→拡大
+(function() {
+  const mapEl        = map.getContainer();
+  const DOUBLE_TAP_MS = 300;  // ダブルタップ判定時間（ms）
+  const PX_PER_ZOOM   = 80;   // 何px動かすと1ズームレベル変わるか
+
+  let lastTapTime = 0;
+  let dragging    = false;
+  let startY      = 0;
+  let startZoom   = 0;
+
+  mapEl.addEventListener('touchstart', function(e) {
+    if (e.touches.length !== 1) { dragging = false; return; }
+
+    const now    = Date.now();
+    const touchY = e.touches[0].clientY;
+
+    if (now - lastTapTime < DOUBLE_TAP_MS && !dragging) {
+      // ダブルタップ検出 → ドラッグズームモード開始
+      dragging    = true;
+      startY      = touchY;
+      startZoom   = map.getZoom();
+      lastTapTime = 0;
+      e.preventDefault(); // ブラウザ・Leafletのダブルタップズームを抑制
+    } else {
+      dragging    = false;
+      lastTapTime = now;
+    }
+  }, { passive: false });
+
+  mapEl.addEventListener('touchmove', function(e) {
+    if (!dragging || e.touches.length !== 1) return;
+    e.preventDefault();
+
+    const dy        = e.touches[0].clientY - startY; // 下方向が正
+    const zoomDelta = dy / PX_PER_ZOOM;              // 下=拡大、上=縮小
+    map.setZoom(startZoom + zoomDelta, { animate: false });
+  }, { passive: false });
+
+  mapEl.addEventListener('touchend', function() {
+    dragging = false;
+  });
+})();
 renderShopList();
