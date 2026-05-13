@@ -873,8 +873,9 @@ initSearch();
 
 // ── スマホ：ダブルタップ＋ドラッグでズーム（グーグルマップ方式）──
 // 上にドラッグ→縮小 / 下にドラッグ→拡大
+// タップした地点を固定したままスムーズに拡大縮小する
 (function() {
-  const mapEl        = map.getContainer();
+  const mapEl         = map.getContainer();
   const DOUBLE_TAP_MS = 300;  // ダブルタップ判定時間（ms）
   const PX_PER_ZOOM   = 80;   // 何px動かすと1ズームレベル変わるか
 
@@ -882,18 +883,22 @@ initSearch();
   let dragging    = false;
   let startY      = 0;
   let startZoom   = 0;
+  let tapPoint    = null; // ダブルタップ位置（mapコンテナ相対ピクセル）
 
   mapEl.addEventListener('touchstart', function(e) {
     if (e.touches.length !== 1) { dragging = false; return; }
 
-    const now    = Date.now();
-    const touchY = e.touches[0].clientY;
+    const now   = Date.now();
+    const touch = e.touches[0];
 
     if (now - lastTapTime < DOUBLE_TAP_MS && !dragging) {
       // ダブルタップ検出 → ドラッグズームモード開始
       dragging    = true;
-      startY      = touchY;
+      startY      = touch.clientY;
       startZoom   = map.getZoom();
+      // タップ位置をmapコンテナ相対座標で記録（ズームの中心に使う）
+      const rect  = mapEl.getBoundingClientRect();
+      tapPoint    = L.point(touch.clientX - rect.left, touch.clientY - rect.top);
       lastTapTime = 0;
       e.preventDefault(); // ブラウザ・Leafletのダブルタップズームを抑制
     } else {
@@ -908,7 +913,8 @@ initSearch();
 
     const dy        = e.touches[0].clientY - startY; // 下方向が正
     const zoomDelta = dy / PX_PER_ZOOM;              // 下=拡大、上=縮小
-    map.setZoom(startZoom + zoomDelta, { animate: false });
+    // タップした点を中心にズーム → 場所が飛ばずスムーズに拡大縮小
+    map.setZoomAround(tapPoint, startZoom + zoomDelta, { animate: false });
   }, { passive: false });
 
   mapEl.addEventListener('touchend', function() {
