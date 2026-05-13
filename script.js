@@ -426,8 +426,6 @@ const map = L.map("map", {
   center: [26.430, 127.828],
   zoom:   14,
   zoomControl: false,  // デフォルト左上を無効化→左下に再配置
-  zoomSnap:  0,        // 連続ズームを許可（ダブルタップドラッグをスムーズに）
-  zoomDelta: 1,        // ＋－ボタンは1レベル刻み
 });
 
 // ＋－ボタン：スマホ→左下、PC→左上
@@ -874,20 +872,19 @@ buildFilterButtons();
 initSearch();
 
 // ── スマホ：ダブルタップ＋ドラッグでズーム（グーグルマップ方式）──
-// 上にドラッグ→縮小 / 下にドラッグ→拡大
-// タップした地点を固定したままスムーズに拡大縮小する
+// ドラッグ中はCSSスケールで滑らかに表示、指を離した時だけLeafletズームをコミット
 (function() {
   const mapEl         = map.getContainer();
   const DOUBLE_TAP_MS = 300;  // ダブルタップ判定時間（ms）
-  const PX_PER_ZOOM   = 80;   // 何px動かすと1ズームレベル変わるか
+  const PX_PER_ZOOM   = 100;  // 何px動かすと1ズームレベル変わるか
 
-  let lastTapTime  = 0;
-  let dragging     = false;
-  let startY       = 0;
-  let startZoom    = 0;
-  let tapPoint     = null; // ダブルタップ位置（mapコンテナ相対ピクセル）
-  let pendingZoom  = null; // RAF待ちのズーム値
-  let rafId        = null; // requestAnimationFrame ID
+  let lastTapTime = 0;
+  let dragging    = false;
+  let startY      = 0;
+  let startZoom   = 0;
+  let tapPoint    = null;  // mapコンテナ相対のタップ座標
+  let lastDy      = 0;
+  let mapPane     = null;  // .leaflet-map-pane への参照
 
   mapEl.addEventListener('touchstart', function(e) {
     if (e.touches.length !== 1) { dragging = false; return; }
@@ -896,16 +893,24 @@ initSearch();
     const touch = e.touches[0];
 
     if (now - lastTapTime < DOUBLE_TAP_MS && !dragging) {
-      // ダブルタップ検出 → ドラッグズームモード開始
+      // ダブルタップ検出 → CSS変形ズームモード開始
       dragging    = true;
       startY      = touch.clientY;
+      lastDy      = 0;
       startZoom   = map.getZoom();
-      // タップ位置をmapコンテナ相対座標で記録（ズームの中心に使う）
-      const rect  = mapEl.getBoundingClientRect();
-      tapPoint    = L.point(touch.clientX - rect.left, touch.clientY - rect.top);
+
+      const mapRect = mapEl.getBoundingClientRect();
+      tapPoint = L.point(touch.clientX - mapRect.left, touch.clientY - mapRect.top);
+
+      // マップペインを取得（CSSスケールを直接適用する対象）
+      mapPane = mapEl.querySelector('.leaflet-map-pane');
+
+      // Leafletのパン操作を一時停止（干渉防止）
+      map.dragging.disable();
+      map.doubleClickZoom.disable();
+
       lastTapTime = 0;
-      pendingZoom = null;
-      e.preventDefault(); // ブラウザ・Leafletのダブルタップズームを抑制
+      e.preventDefault();
     } else {
       dragging    = false;
       lastTapTime = now;
@@ -916,27 +921,40 @@ initSearch();
     if (!dragging || e.touches.length !== 1) return;
     e.preventDefault();
 
-    const dy     = e.touches[0].clientY - startY; // 下=拡大、上=縮小
-    pendingZoom  = startZoom + dy / PX_PER_ZOOM;
+    lastDy = e.touches[0].clientY - startY;  // 下=拡大、上=縮小
+    const scale = Math.pow(2, lastDy / PX_PER_ZOOM);
 
-    // RAF でスロットリング → 描画タイミングに合わせてズームを適用
-    if (!rafId) {
-      rafId = requestAnimationFrame(function() {
-        if (pendingZoom !== null) {
-          map.setZoomAround(tapPoint, pendingZoom, { animate: false });
-          pendingZoom = null;
-        }
-        rafId = null;
-      });
+    if (mapPane) {
+      // LeafletのtranslateにCSSスケールを重ねる（GPU処理でスムーズ）
+      const pos = map._getMapPanePos();
+      mapPane.style.transformOrigin = tapPoint.x + 'px ' + tapPoint.y + 'px';
+      mapPane.style.transform =
+        'translate3d(' + pos.x + 'px,' + pos.y + 'px,0) scale(' + scale + ')';
     }
   }, { passive: false });
 
   mapEl.addEventListener('touchend', function() {
     if (!dragging) return;
     dragging = false;
-    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-    // 離した時点で最終ズームを整数に丸める（オプション：コメントアウトで無効化）
-    // map.setZoom(Math.round(map.getZoom()), { animate: true });
+
+    // CSSスケールをリセット（Leafletのtranslateに戻す）
+    if (mapPane) {
+      const pos = map._getMapPanePos();
+      mapPane.style.transform = 'translate3d(' + pos.x + 'px,' + pos.y + 'px,0)';
+      mapPane.style.transformOrigin = '';
+      mapPane = null;
+    }
+
+    // Leafletの操作を再有効化
+    map.dragging.enable();
+    map.doubleClickZoom.enable();
+
+    // 指を離した時だけズームをコミット（1回のみ・アニメーション付き）
+    const newZoom = Math.max(
+      map.getMinZoom(),
+      Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
+    );
+    map.setZoomAround(tapPoint, newZoom, { animate: true });
   });
 })();
 renderShopList();
