@@ -425,7 +425,9 @@ function makePopup(r) {
 const map = L.map("map", {
   center: [26.430, 127.828],
   zoom:   14,
-  zoomControl: false   // デフォルト左上を無効化→左下に再配置
+  zoomControl: false,  // デフォルト左上を無効化→左下に再配置
+  zoomSnap:  0,        // 連続ズームを許可（ダブルタップドラッグをスムーズに）
+  zoomDelta: 1,        // ＋－ボタンは1レベル刻み
 });
 
 // ＋－ボタン：スマホ→左下、PC→左上
@@ -879,11 +881,13 @@ initSearch();
   const DOUBLE_TAP_MS = 300;  // ダブルタップ判定時間（ms）
   const PX_PER_ZOOM   = 80;   // 何px動かすと1ズームレベル変わるか
 
-  let lastTapTime = 0;
-  let dragging    = false;
-  let startY      = 0;
-  let startZoom   = 0;
-  let tapPoint    = null; // ダブルタップ位置（mapコンテナ相対ピクセル）
+  let lastTapTime  = 0;
+  let dragging     = false;
+  let startY       = 0;
+  let startZoom    = 0;
+  let tapPoint     = null; // ダブルタップ位置（mapコンテナ相対ピクセル）
+  let pendingZoom  = null; // RAF待ちのズーム値
+  let rafId        = null; // requestAnimationFrame ID
 
   mapEl.addEventListener('touchstart', function(e) {
     if (e.touches.length !== 1) { dragging = false; return; }
@@ -900,6 +904,7 @@ initSearch();
       const rect  = mapEl.getBoundingClientRect();
       tapPoint    = L.point(touch.clientX - rect.left, touch.clientY - rect.top);
       lastTapTime = 0;
+      pendingZoom = null;
       e.preventDefault(); // ブラウザ・Leafletのダブルタップズームを抑制
     } else {
       dragging    = false;
@@ -911,14 +916,27 @@ initSearch();
     if (!dragging || e.touches.length !== 1) return;
     e.preventDefault();
 
-    const dy        = e.touches[0].clientY - startY; // 下方向が正
-    const zoomDelta = dy / PX_PER_ZOOM;              // 下=拡大、上=縮小
-    // タップした点を中心にズーム → 場所が飛ばずスムーズに拡大縮小
-    map.setZoomAround(tapPoint, startZoom + zoomDelta, { animate: false });
+    const dy     = e.touches[0].clientY - startY; // 下=拡大、上=縮小
+    pendingZoom  = startZoom + dy / PX_PER_ZOOM;
+
+    // RAF でスロットリング → 描画タイミングに合わせてズームを適用
+    if (!rafId) {
+      rafId = requestAnimationFrame(function() {
+        if (pendingZoom !== null) {
+          map.setZoomAround(tapPoint, pendingZoom, { animate: false });
+          pendingZoom = null;
+        }
+        rafId = null;
+      });
+    }
   }, { passive: false });
 
   mapEl.addEventListener('touchend', function() {
+    if (!dragging) return;
     dragging = false;
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    // 離した時点で最終ズームを整数に丸める（オプション：コメントアウトで無効化）
+    // map.setZoom(Math.round(map.getZoom()), { animate: true });
   });
 })();
 renderShopList();
