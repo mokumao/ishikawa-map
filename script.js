@@ -428,8 +428,8 @@ const map = L.map("map", {
   zoomControl: false   // デフォルト左上を無効化→左下に再配置
 });
 
-// ＋－ボタンを左下に配置（片手操作しやすい位置）
-L.control.zoom({ position: 'bottomleft' }).addTo(map);
+// ＋－ボタン：スマホ→左下、PC→左上
+L.control.zoom({ position: window.innerWidth <= 767 ? 'bottomleft' : 'topleft' }).addTo(map);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
@@ -508,7 +508,7 @@ const markersData = restaurants.map((r, idx) => {
 // ── 店名ラベル 表示/非表示トグルボタン ─────────────────────────────
 let labelsVisible = true;
 const LabelToggleControl = L.Control.extend({
-  options: { position: window.innerWidth <= 767 ? 'bottomright' : 'topright' },
+  options: { position: window.innerWidth <= 767 ? 'bottomright' : 'topleft' },
   onAdd() {
     const btn = L.DomUtil.create('button', 'label-toggle-btn');
     btn.innerHTML = '店名を隠す';

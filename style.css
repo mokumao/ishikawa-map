@@ -795,6 +795,21 @@ footer a:hover { text-decoration: underline; }
   .popup-btn   { width: 100%; }
 }
 
+/* ── PC：左上コントロールを横並び（＋－ ＋ 店名ボタン） ──── */
+@media (min-width: 768px) {
+  .leaflet-top.leaflet-left {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    top: 10px;
+    left: 10px;
+  }
+  /* コントロール間の横間隔 */
+  .leaflet-top.leaflet-left .leaflet-control {
+    margin: 0 8px 0 0;
+  }
+}
+
 /* ── ズームコントロール（左下配置・赤枠） ─────────────────── */
 /* コンテナ全体に赤枠（「店名を隠す」と同じ 2px #e53935） */
 .leaflet-control-zoom {
