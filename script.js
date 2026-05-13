@@ -899,11 +899,15 @@ initSearch();
       lastDy      = 0;
       startZoom   = map.getZoom();
 
-      const mapRect = mapEl.getBoundingClientRect();
-      tapPoint = L.point(touch.clientX - mapRect.left, touch.clientY - mapRect.top);
-
       // マップペインを取得（CSSスケールを直接適用する対象）
       mapPane = mapEl.querySelector('.leaflet-map-pane');
+
+      // スケールの原点を地図の中心に固定（中心がずれないように）
+      if (mapPane) {
+        const cx = mapEl.offsetWidth  / 2;
+        const cy = mapEl.offsetHeight / 2;
+        mapPane.style.transformOrigin = cx + 'px ' + cy + 'px';
+      }
 
       // Leafletのパン操作を一時停止（干渉防止）
       map.dragging.disable();
@@ -927,7 +931,6 @@ initSearch();
     if (mapPane) {
       // LeafletのtranslateにCSSスケールを重ねる（GPU処理でスムーズ）
       const pos = map._getMapPanePos();
-      mapPane.style.transformOrigin = tapPoint.x + 'px ' + tapPoint.y + 'px';
       mapPane.style.transform =
         'translate3d(' + pos.x + 'px,' + pos.y + 'px,0) scale(' + scale + ')';
     }
@@ -949,12 +952,12 @@ initSearch();
     map.dragging.enable();
     map.doubleClickZoom.enable();
 
-    // 指を離した時だけズームをコミット（1回のみ・アニメーション付き）
+    // 指を離した時だけ地図中心を固定したままズームをコミット
     const newZoom = Math.max(
       map.getMinZoom(),
       Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
     );
-    map.setZoomAround(tapPoint, newZoom, { animate: true });
+    map.setZoom(newZoom, { animate: true });
   });
 })();
 renderShopList();
