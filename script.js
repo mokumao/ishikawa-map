@@ -688,20 +688,29 @@ map.on('popupopen', function(e) {
   }
 
   // ── PC：マウスホイールでポップアップ上からも地図をズーム ────────
-  function onWheel(we) {
+  // Leafletが .leaflet-popup-content-wrapper に disableScrollPropagation() を
+  // 適用しているため、バブルフェーズではイベントが届かない。
+  // → mapコンテナにキャプチャフェーズで捕捉し、ポップアップ内からのホイールを処理する。
+  var mapContainer = map.getContainer();
+
+  function onWheelCapture(we) {
+    var wrapper = document.querySelector('.leaflet-popup-content-wrapper');
+    if (!wrapper || !wrapper.contains(we.target)) return; // ポップアップ外は無視
     we.preventDefault();
     we.stopPropagation();
-    // LeafletのスクロールズームハンドラにそのままイベントをTransfer
-    if (map.scrollWheelZoom && map.scrollWheelZoom._onWheelScroll) {
-      map.scrollWheelZoom._onWheelScroll(we);
-    }
+    // マウス位置を中心にズーム（上スクロール＝拡大、下スクロール＝縮小）
+    var mapRect = mapContainer.getBoundingClientRect();
+    var point   = L.point(we.clientX - mapRect.left, we.clientY - mapRect.top);
+    var delta   = we.deltaY < 0 ? 1 : -1;
+    map.setZoomAround(point, map.getZoom() + delta, { animate: true });
   }
+
+  mapContainer.addEventListener('wheel', onWheelCapture, { capture: true, passive: false });
 
   // ポップアップエリアにグラブカーソルを表示
   popupEl.style.cursor = 'grab';
 
   popupEl.addEventListener('mousedown', onMouseDown);
-  popupEl.addEventListener('wheel',     onWheel, { passive: false });
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup',   onMouseUp);
 
@@ -710,7 +719,7 @@ map.on('popupopen', function(e) {
     popupEl.removeEventListener('touchstart', onTouchStart);
     popupEl.removeEventListener('touchmove',  onTouchMove);
     popupEl.removeEventListener('mousedown',  onMouseDown);
-    popupEl.removeEventListener('wheel',      onWheel);
+    mapContainer.removeEventListener('wheel', onWheelCapture, { capture: true });
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup',   onMouseUp);
     popupEl.style.cursor = '';
