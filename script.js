@@ -493,12 +493,19 @@ const markersData = restaurants.map((r, idx) => {
   marker.addTo(map);
 
   marker.on('click', function() {
+    // スマホでマーカーをタップした瞬間の地図中心を保存（ポップアップ閉時に復元）
+    if (window.innerWidth <= 767) {
+      _savedCenterBeforePopup = map.getCenter();
+    }
+
     setActiveItem(idx);
 
     // スマホでヘッダーが表示中の場合：まず折りたたんで地図を大きくしてからポップアップ表示
     // → ポップアップ・矢印・ピンアイコンがすべて画面内に収まるようにする
     if (window.innerWidth <= 767 && !document.body.classList.contains('header-collapsed')) {
-      marker.closePopup();                          // 即座に閉じる
+      _isReopening = true;             // 内部close-reopen：popupcloseで復元しない
+      marker.closePopup();             // 即座に閉じる
+      _isReopening = false;
       document.body.classList.add('header-collapsed'); // ヘッダー折りたたみ
       setTimeout(function() {
         map.invalidateSize();                       // 地図サイズ更新
@@ -548,9 +555,14 @@ if (window.innerWidth <= 767) {
   new LabelToggleControl().addTo(map);
 }
 
+// ── ポップアップ開閉で地図位置を保存・復元（スマホ・地図クリック時のみ） ──
+let _savedCenterBeforePopup = null;
+let _isReopening = false; // marker.closePopup() の内部close-reopen中フラグ
+
 // 地図アイコン直接クリック時：ポップアップが見えるようパン
 focusShop._fromSidebar = false;
 map.on('popupopen', function(e) {
+
   if (focusShop._fromSidebar) return; // サイドバーから開いた場合はスキップ
 
   setTimeout(function() {
@@ -648,6 +660,12 @@ map.on('popupopen', function(e) {
 
 map.on('popupclose', function() {
   if (pinCloseMarker) { map.removeLayer(pinCloseMarker); pinCloseMarker = null; }
+  if (_isReopening) return; // 内部close-reopen中は復元しない
+  // ポップアップを閉じたら元の地図位置にスムーズに戻す
+  if (_savedCenterBeforePopup) {
+    map.panTo(_savedCenterBeforePopup, { animate: true, duration: 0.5 });
+    _savedCenterBeforePopup = null;
+  }
 });
 
 // ── ポップアップを触っても地図をパンできるようにする ────────────────
@@ -891,6 +909,7 @@ function focusShop(idx) {
     // アニメーション完了後にポップアップを開く（重複防止）
     focusShop._onMoveEnd = function() {
       focusShop._fromSidebar = true;  // サイドバーから開いたフラグON
+      _savedCenterBeforePopup = null; // サイドバー遷移では位置復元しない
       data.marker.openPopup();
       focusShop._fromSidebar = false; // フラグOFF
     };
