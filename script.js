@@ -636,6 +636,7 @@ map.on('popupopen', function(e) {
   const popupEl = e.popup.getElement();
   if (!popupEl) return;
 
+  // ── スマホ：タッチでパン ──────────────────────────────────────
   let lastX = 0, lastY = 0;
 
   function onTouchStart(te) {
@@ -650,17 +651,57 @@ map.on('popupopen', function(e) {
     const dy = te.touches[0].clientY - lastY;
     lastX = te.touches[0].clientX;
     lastY = te.touches[0].clientY;
-    // タッチの移動量をそのまま地図のパンに転送（-dx/-dyで自然なドラッグ方向）
     map.panBy([-dx, -dy], { animate: false });
   }
 
   popupEl.addEventListener('touchstart', onTouchStart, { passive: true });
   popupEl.addEventListener('touchmove',  onTouchMove,  { passive: true });
 
-  // ポップアップが閉じたらイベントリスナーを削除
+  // ── PC：マウスでポップアップをつかんで地図をパン ─────────────
+  let isDragging = false;
+  let lastMouseX = 0, lastMouseY = 0;
+
+  function onMouseDown(me) {
+    // ×ボタン・リンク・ボタンはクリック動作を維持
+    if (me.target.closest('a, button, .leaflet-popup-close-button, .pin-close-btn')) return;
+    if (me.button !== 0) return; // 左クリックのみ
+    isDragging  = true;
+    lastMouseX  = me.clientX;
+    lastMouseY  = me.clientY;
+    popupEl.style.cursor = 'grabbing';
+    me.preventDefault();
+  }
+
+  function onMouseMove(me) {
+    if (!isDragging) return;
+    const dx = me.clientX - lastMouseX;
+    const dy = me.clientY - lastMouseY;
+    lastMouseX = me.clientX;
+    lastMouseY = me.clientY;
+    map.panBy([-dx, -dy], { animate: false });
+  }
+
+  function onMouseUp() {
+    if (!isDragging) return;
+    isDragging = false;
+    popupEl.style.cursor = 'grab';
+  }
+
+  // ポップアップエリアにグラブカーソルを表示
+  popupEl.style.cursor = 'grab';
+
+  popupEl.addEventListener('mousedown', onMouseDown);
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup',   onMouseUp);
+
+  // ポップアップが閉じたらすべてのイベントリスナーを削除
   map.once('popupclose', function() {
     popupEl.removeEventListener('touchstart', onTouchStart);
     popupEl.removeEventListener('touchmove',  onTouchMove);
+    popupEl.removeEventListener('mousedown',  onMouseDown);
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup',   onMouseUp);
+    popupEl.style.cursor = '';
   });
 });
 
