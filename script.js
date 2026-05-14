@@ -556,7 +556,7 @@ map.on('popupopen', function(e) {
       const closeBtnBottom = markerVY + 4 + 30; // = markerVY + 34
 
       const padTop    = 80;   // ＋－ボタン（約70px）をクリアする余白
-      const padBottom = 20;   // ピン下×ボタンがよく見えるための余白
+      const padBottom = 65;   // 中央下の「店名を表示」ボタン（約45px）＋余白
       const padSide   = 10;
       let dx = 0, dy = 0;
 
