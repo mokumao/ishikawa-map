@@ -512,22 +512,41 @@ const markersData = restaurants.map((r, idx) => {
 
 // ── 店名ラベル 表示/非表示トグルボタン ─────────────────────────────
 let labelsVisible = true;
-const LabelToggleControl = L.Control.extend({
-  options: { position: window.innerWidth <= 767 ? 'bottomright' : 'topleft' },
-  onAdd() {
-    const btn = L.DomUtil.create('button', 'label-toggle-btn');
-    btn.innerHTML = '店名を隠す';
-    btn.title = '店名ラベルの表示／非表示';
-    L.DomEvent.on(btn, 'click', function(e) {
-      L.DomEvent.stopPropagation(e);
-      labelsVisible = !labelsVisible;
-      map.getContainer().classList.toggle('labels-hidden', !labelsVisible);
-      btn.innerHTML = labelsVisible ? '店名を隠す' : '店名を表示';
-    });
-    return btn;
-  }
-});
-new LabelToggleControl().addTo(map);
+
+if (window.innerWidth <= 767) {
+  // スマホ：Leafletコンテナ外（body直下）に配置
+  // Leafletは内部で overflow:hidden を設定するため、
+  // コンテナ内の position:fixed が正しく動作しないケースがある
+  const btn = document.createElement('button');
+  btn.className = 'label-toggle-btn';
+  btn.innerHTML = '店名を隠す';
+  btn.title = '店名ラベルの表示／非表示';
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    labelsVisible = !labelsVisible;
+    map.getContainer().classList.toggle('labels-hidden', !labelsVisible);
+    btn.innerHTML = labelsVisible ? '店名を隠す' : '店名を表示';
+  });
+  document.body.appendChild(btn);
+} else {
+  // PC：Leafletコントロールとして topleft に配置
+  const LabelToggleControl = L.Control.extend({
+    options: { position: 'topleft' },
+    onAdd() {
+      const btn = L.DomUtil.create('button', 'label-toggle-btn');
+      btn.innerHTML = '店名を隠す';
+      btn.title = '店名ラベルの表示／非表示';
+      L.DomEvent.on(btn, 'click', function(e) {
+        L.DomEvent.stopPropagation(e);
+        labelsVisible = !labelsVisible;
+        map.getContainer().classList.toggle('labels-hidden', !labelsVisible);
+        btn.innerHTML = labelsVisible ? '店名を隠す' : '店名を表示';
+      });
+      return btn;
+    }
+  });
+  new LabelToggleControl().addTo(map);
+}
 
 // 地図アイコン直接クリック時：ポップアップが見えるようパン
 focusShop._fromSidebar = false;
