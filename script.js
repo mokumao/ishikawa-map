@@ -902,11 +902,14 @@ initSearch();
       // マップペインを取得（CSSスケールを直接適用する対象）
       mapPane = mapEl.querySelector('.leaflet-map-pane');
 
-      // スケールの原点を地図の中心に固定（中心がずれないように）
+      // スケールの原点を「ペインのローカル座標系での地図中心」に正確に設定
+      // ペインはLeafletのtranslate3d(pos.x, pos.y)で動いているため、
+      // コンテナ中心 - paneOffset = ペインローカル座標での地図中心
       if (mapPane) {
-        const cx = mapEl.offsetWidth  / 2;
-        const cy = mapEl.offsetHeight / 2;
-        mapPane.style.transformOrigin = cx + 'px ' + cy + 'px';
+        const pos = map._getMapPanePos();
+        const originX = mapEl.offsetWidth  / 2 - pos.x;
+        const originY = mapEl.offsetHeight / 2 - pos.y;
+        mapPane.style.transformOrigin = originX + 'px ' + originY + 'px';
       }
 
       // Leafletのパン操作を一時停止（干渉防止）
