@@ -838,9 +838,9 @@ footer a:hover { text-decoration: underline; }
 
 /* モバイル：ボタンを大きく・親指が届きやすい高さに */
 @media (max-width: 767px) {
-  /* ズームコントロール全体を画面下から160pxの位置に上げる */
+  /* ズームコントロール：ポップアップと重ならない位置（下から100px） */
   .leaflet-bottom.leaflet-left {
-    bottom: 160px !important;
+    bottom: 100px !important;
   }
   .leaflet-bottom.leaflet-left .leaflet-control-zoom {
     margin-left: 10px;
