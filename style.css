@@ -485,16 +485,24 @@ footer a:hover { text-decoration: underline; }
   clip-path: polygon(30% 0%, 70% 0%, 70% 52%, 100% 52%, 50% 100%, 0% 52%, 30% 52%) !important;
 }
 
-/* 閉じるボタン（×）を太い赤・大きめに */
+/* 閉じるボタン（×）— PC・スマホ共通：白丸・赤文字・中央寄せ */
 .leaflet-popup-close-button {
-  color: #e53935 !important;
-  font-size: 28px !important;
+  width: 30px !important;
+  height: 30px !important;
+  background: #fff !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,.3) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-family: Tahoma, Verdana, sans-serif !important;
+  font-size: 20px !important;
   font-weight: 900 !important;
-  line-height: 28px !important;
-  width: 34px !important;
-  height: 34px !important;
-  top: 4px !important;
-  right: 4px !important;
+  line-height: normal !important;
+  padding: 0 !important;
+  color: #e53935 !important;
+  top: -10px !important;
+  right: 2px !important;
 }
 .leaflet-popup-close-button:hover {
   color: #b71c1c !important;
@@ -710,24 +718,7 @@ footer a:hover { text-decoration: underline; }
     margin: 8px 11px !important;
   }
 
-  /* × 閉じるボタン（右上）：flexで完全中央寄せ */
-  .leaflet-popup-close-button {
-    width: 30px !important;
-    height: 30px !important;
-    font-size: 20px !important;
-    font-weight: 900 !important;
-    line-height: normal !important;
-    padding: 0 !important;          /* Leafletデフォルトpadding(4px 4px 0 0)をリセット */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: #fff !important;
-    border-radius: 50% !important;
-    box-shadow: 0 2px 6px rgba(0,0,0,.3) !important;
-    top: -10px !important;
-    right: 2px !important;
-    color: #e53935 !important;
-  }
+  /* × 閉じるボタン（右上）：グローバルで統一済み・モバイル追加指定なし */
   body.header-collapsed .swipe-hint::before {
     content: '▼';
     margin-bottom: 0;
