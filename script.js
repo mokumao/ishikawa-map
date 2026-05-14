@@ -687,10 +687,21 @@ map.on('popupopen', function(e) {
     popupEl.style.cursor = 'grab';
   }
 
+  // ── PC：マウスホイールでポップアップ上からも地図をズーム ────────
+  function onWheel(we) {
+    we.preventDefault();
+    we.stopPropagation();
+    // LeafletのスクロールズームハンドラにそのままイベントをTransfer
+    if (map.scrollWheelZoom && map.scrollWheelZoom._onWheelScroll) {
+      map.scrollWheelZoom._onWheelScroll(we);
+    }
+  }
+
   // ポップアップエリアにグラブカーソルを表示
   popupEl.style.cursor = 'grab';
 
   popupEl.addEventListener('mousedown', onMouseDown);
+  popupEl.addEventListener('wheel',     onWheel, { passive: false });
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup',   onMouseUp);
 
@@ -699,6 +710,7 @@ map.on('popupopen', function(e) {
     popupEl.removeEventListener('touchstart', onTouchStart);
     popupEl.removeEventListener('touchmove',  onTouchMove);
     popupEl.removeEventListener('mousedown',  onMouseDown);
+    popupEl.removeEventListener('wheel',      onWheel);
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup',   onMouseUp);
     popupEl.style.cursor = '';
