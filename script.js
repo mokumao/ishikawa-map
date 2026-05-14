@@ -29,6 +29,11 @@
 (function () {
   const overlay = document.getElementById('passwordOverlay');
   if (!overlay) return;
+  // localhost からのアクセスはパスワードをスキップ（プレビュー確認用）
+  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    overlay.classList.add('hidden');
+    return;
+  }
   // 同じブラウザセッションで認証済みならスキップ
   if (sessionStorage.getItem('authenticated') === '1') {
     overlay.classList.add('hidden');
