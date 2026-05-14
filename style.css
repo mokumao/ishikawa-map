@@ -545,11 +545,11 @@ footer a:hover { text-decoration: underline; }
 
 /* ── スマホ：「店名を表示」ボタンを画面中央下に固定 ────────── */
 /* Leafletコンテナ位置に関わらず position:fixed で中央下に配置 */
-/* bottom:42px で「Leaflet | © OpenStreetMap contributors」と重ならないよう余白確保 */
+/* bottom:28px で「Leaflet | © OpenStreetMap contributors」と約11px隙間を確保 */
 @media (max-width: 767px) {
   .label-toggle-btn {
     position: fixed !important;
-    bottom: 42px !important;
+    bottom: 28px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     z-index: 1000 !important;
