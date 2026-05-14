@@ -792,6 +792,11 @@ footer a:hover { text-decoration: underline; }
   .popup-genre { font-size: .68rem; margin-bottom: 7px; }
   .popup-table { font-size: .74rem; }
   .popup-table td.label { font-size: .68rem; }
+
+  /* スマホ：フッターを非表示
+     地図内に「Leaflet | © OpenStreetMap contributors」が表示されるため
+     OpenStreetMapの帰属表示義務は満たされる */
+  footer { display: none !important; }
 }
 
 @media (max-width: 360px) {
