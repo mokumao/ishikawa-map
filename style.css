@@ -374,15 +374,8 @@ header h1 {
 }
 
 /* ── Footer ───────────────────────────────────────────────── */
-footer {
-  background: #1b3a2e;
-  color: #80cbc4;
-  text-align: center;
-  padding: 9px 16px 8px;
-  font-size: .72rem;
-  flex-shrink: 0;
-  line-height: 1.6;
-}
+/* 全画面で非表示。地図内の「Leaflet | © OpenStreetMap contributors」で帰属表示義務を満たす */
+footer { display: none !important; }
 .footer-main { color: #a5d6a7; font-weight: 600; margin-bottom: 1px; }
 .footer-sub  { color: #607d6e; font-size: .68rem; }
 footer a { color: #80cbc4; text-decoration: none; }
@@ -552,10 +545,11 @@ footer a:hover { text-decoration: underline; }
 
 /* ── スマホ：「店名を表示」ボタンを画面中央下に固定 ────────── */
 /* Leafletコンテナ位置に関わらず position:fixed で中央下に配置 */
+/* bottom:42px で「Leaflet | © OpenStreetMap contributors」と重ならないよう余白確保 */
 @media (max-width: 767px) {
   .label-toggle-btn {
     position: fixed !important;
-    bottom: 12px !important;
+    bottom: 42px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     z-index: 1000 !important;
@@ -793,9 +787,7 @@ footer a:hover { text-decoration: underline; }
   .popup-table { font-size: .74rem; }
   .popup-table td.label { font-size: .68rem; }
 
-  /* スマホ：フッターを非表示
-     地図内に「Leaflet | © OpenStreetMap contributors」が表示されるため
-     OpenStreetMapの帰属表示義務は満たされる */
+  /* スマホ：フッターを非表示（PCも同様 — 下記グローバルルール参照） */
   footer { display: none !important; }
 }
 
