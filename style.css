@@ -675,7 +675,7 @@ footer a:hover { text-decoration: underline; }
     line-height: 1;
   }
   .sh-up, .sh-down {
-    font-size: 1.1rem;
+    font-size: 1.6rem;
     font-weight: 900;
     color: #e53935;
     line-height: 1;
@@ -773,25 +773,24 @@ footer a:hover { text-decoration: underline; }
     -webkit-tap-highlight-color: transparent;
   }
   .info-menu-btn:active { background: #f5e89a; }
-  /* 情報パネルの下部（↑ボタン左右） */
+  /* 情報パネルの下部（⬆ボタン左右） */
   .info-panel-footer {
-    background: #fff;
-    border-top: 1px solid #ddd;
+    background: #f0f0f0;
+    border-top: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 32px 20px;
-    margin-bottom: 16px;
+    padding: 0 40px 8px;
   }
   .info-close-btn {
-    font-size: 1.6rem;
+    font-size: 2.4rem;
     font-weight: 900;
     color: #e53935;
     cursor: pointer;
-    padding: 6px 16px;
-    border: 2px solid #e53935;
-    border-radius: 50%;
+    padding: 4px 8px;
     line-height: 1;
+    border: none;
+    background: none;
     -webkit-tap-highlight-color: transparent;
   }
 
