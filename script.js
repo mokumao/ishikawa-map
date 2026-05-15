@@ -443,7 +443,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 // 石川エリアの初期表示位置
 const ISHIKAWA_CENTER = [26.430, 127.828];
-const ISHIKAWA_ZOOM   = 14;
+const ISHIKAWA_ZOOM   = window.innerWidth <= 767 ? 13 : 14;
 
 // 初期表示を石川エリアに固定（invalidateSizeを使わず直接setView）
 setTimeout(() => {
@@ -518,15 +518,19 @@ const markersData = restaurants.map((r, idx) => {
 });
 
 // ── 店名ラベル 表示/非表示トグルボタン ─────────────────────────────
-let labelsVisible = true;
+// スマホは初期状態で非表示、PCは表示
+let labelsVisible = window.innerWidth > 767;
 
 if (window.innerWidth <= 767) {
-  // スマホ：Leafletコンテナ外（body直下）に配置
+  // スマホ：初期状態で非表示にする
+  map.getContainer().classList.add('labels-hidden');
+
+  // Leafletコンテナ外（body直下）に配置
   // Leafletは内部で overflow:hidden を設定するため、
   // コンテナ内の position:fixed が正しく動作しないケースがある
   const btn = document.createElement('button');
   btn.className = 'label-toggle-btn';
-  btn.innerHTML = '店名を隠す';
+  btn.innerHTML = '店名を表示';
   btn.title = '店名ラベルの表示／非表示';
   btn.addEventListener('click', function(e) {
     e.stopPropagation();
