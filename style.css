@@ -164,6 +164,9 @@ header h1 {
 /* ── Intro bar（廃止・ヘッダーに統合） ────────────────────── */
 .intro-bar { display: none; }
 
+/* 情報パネルはスマホのみ（PCでは常に非表示） */
+.info-panel { display: none; }
+
 /* ── Mobile tabs（スマホのみ表示） ─────────────────────────── */
 .mobile-tabs { display: none; }
 
@@ -658,7 +661,7 @@ footer a:hover { text-decoration: underline; }
     align-items: center;
   }
 
-  /* スワイプ方向ヒント矢印 */
+  /* スワイプ方向ヒント矢印（▲▼を常に両方表示） */
   .swipe-hint {
     position: absolute;
     left: 50%;
@@ -667,31 +670,17 @@ footer a:hover { text-decoration: underline; }
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0;
+    gap: 0px;
+    line-height: 1;
   }
-  /* 三角部分（▲） */
-  .swipe-hint::before {
-    content: '▲';
-    font-size: 1.1rem;
+  .sh-up, .sh-down {
+    font-size: 0.95rem;
     font-weight: 900;
     color: #e53935;
     line-height: 1;
-    display: block;
-    margin-bottom: -3px;
   }
-  /* 棒部分（短く太い） */
-  .swipe-hint::after {
-    content: '';
-    display: block;
-    width: 5px;
-    height: 7px;
-    background: #e53935;
-    border-radius: 1px;
-  }
-  /* ヘッダー非表示時 → 棒が上・▼が下（下向き矢印） */
-  body.header-collapsed .swipe-hint {
-    flex-direction: column-reverse;
-  }
+  .sh-up  { margin-bottom: -2px; }
+  .sh-down { margin-top: -2px; }
 
   /* ヘッダー非表示時：タブバーをiOS安全領域直下に固定
      position:fixed + top:0 はiOSが自動でカメラ/Dynamic Island下に配置 */
@@ -726,11 +715,6 @@ footer a:hover { text-decoration: underline; }
   }
 
   /* × 閉じるボタン（右上）：グローバルで統一済み・モバイル追加指定なし */
-  body.header-collapsed .swipe-hint::before {
-    content: '▼';
-    margin-bottom: 0;
-    margin-top: -3px;
-  }
   .tab-btn {
     flex: 1;
     padding: 10px 8px;
@@ -749,11 +733,64 @@ footer a:hover { text-decoration: underline; }
     border-bottom-color: #2e7d32;
   }
 
-  /* サイドバー・地図を data-view で切り替え */
+  /* サイドバー・地図・情報パネルを data-view で切り替え */
   .app-body { flex-direction: column; }
 
-  .app-body[data-view="map"]  .sidebar { display: none; }
-  .app-body[data-view="list"] #map     { display: none; }
+  .app-body[data-view="map"]  .sidebar    { display: none; }
+  .app-body[data-view="map"]  .info-panel { display: none; }
+  .app-body[data-view="list"] #map        { display: none; }
+  .app-body[data-view="list"] .info-panel { display: none; }
+  .app-body[data-view="info"] .sidebar    { display: none; }
+  .app-body[data-view="info"] #map        { display: none; }
+
+  /* 情報パネル本体 */
+  .info-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #f0f0f0;
+    overflow: hidden;
+  }
+  .info-panel-inner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    padding: 24px 20px;
+  }
+  .info-menu-btn {
+    background: #fdf6d8;
+    border: 1px solid #d4c97a;
+    border-radius: 28px;
+    padding: 18px 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: inherit;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .info-menu-btn:active { background: #f5e89a; }
+  /* 情報パネルの下部（▲ボタン） */
+  .info-panel-footer {
+    background: #fff;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 8px 20px 12px;
+    min-height: 44px;
+  }
+  .info-close-btn {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #e53935;
+    cursor: pointer;
+    padding: 4px 12px;
+    -webkit-tap-highlight-color: transparent;
+  }
 
   /* サイドバーをフル高さに */
   .sidebar {

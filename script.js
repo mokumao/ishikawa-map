@@ -3,7 +3,7 @@
    地図: OpenStreetMap + Leaflet
 ================================================================ */
 
-// ── スマホ：タブバーを上スワイプでヘッダー折りたたみ ───────────────
+// ── スマホ：タブバーのスワイプでヘッダー操作・情報パネル表示 ────────
 (function () {
   const tabs = document.querySelector('.mobile-tabs');
   if (!tabs) return;
@@ -16,14 +16,56 @@
   tabs.addEventListener('touchend', function (e) {
     const dy = e.changedTouches[0].clientY - startY;
     if (dy < -40) {
-      // 上にスワイプ → ヘッダーを隠して地図を広げる
-      document.body.classList.add('header-collapsed');
-    } else if (dy > 40) {
-      // 下にスワイプ → ヘッダーを戻す
+      // 上にスワイプ → ヘッダーを表示して通常状態に戻す
       document.body.classList.remove('header-collapsed');
+    } else if (dy > 40) {
+      // 下にスワイプ → 情報パネルを表示
+      const appBody = document.getElementById('appBody');
+      if (appBody) appBody.dataset.view = 'info';
     }
   }, { passive: true });
 })();
+
+// ── 情報パネルの閉じるボタン（▲）・フッタースワイプで地図に戻る ────
+(function () {
+  document.addEventListener('DOMContentLoaded', function () {
+    const closeBtn = document.getElementById('infoPanelClose');
+    const footer   = document.getElementById('infoPanelFooter');
+    if (!closeBtn || !footer) return;
+
+    function closeInfoPanel() {
+      const appBody = document.getElementById('appBody');
+      if (appBody) {
+        appBody.dataset.view = 'map';
+        setTimeout(() => { if (typeof map !== 'undefined') map.invalidateSize(); }, 50);
+      }
+    }
+
+    closeBtn.addEventListener('click', closeInfoPanel);
+
+    // フッターを上にスワイプしても閉じる
+    let startY = 0;
+    footer.addEventListener('touchstart', function (e) {
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+    footer.addEventListener('touchend', function (e) {
+      const dy = e.changedTouches[0].clientY - startY;
+      if (dy < -30) closeInfoPanel();
+    }, { passive: true });
+  });
+})();
+
+// ── 情報パネル：各ボタンのセクション表示 ────────────────────────────
+function openInfoSection(section) {
+  // 将来コンテンツを追加予定。現在は準備中メッセージを表示。
+  const labels = {
+    'about-site':     'このサイトについて',
+    'about-ishikawa': '石川について',
+    'faq':            'Q & A',
+    'feedback':       'ご意見・ご要望'
+  };
+  alert('「' + (labels[section] || section) + '」のページは準備中です。');
+}
 
 // ── パスワード処理 ──────────────────────────────────────────────
 (function () {

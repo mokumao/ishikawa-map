@@ -48,7 +48,10 @@
   <!-- スマホ用タブ切り替え（デスクトップでは非表示） -->
   <div class="mobile-tabs" role="tablist" aria-label="表示切り替え">
     <button class="tab-btn active" id="tabMap"  onclick="switchTab('map')" role="tab" aria-selected="true">🗺 地図</button>
-    <span class="swipe-hint" aria-hidden="true"></span>
+    <span class="swipe-hint" aria-hidden="true">
+      <span class="sh-up">▲</span>
+      <span class="sh-down">▼</span>
+    </span>
     <button class="tab-btn"        id="tabList" onclick="switchTab('list')" role="tab" aria-selected="false">📋 一覧</button>
   </div>
 
@@ -74,6 +77,19 @@
     </aside>
 
     <div id="map" aria-label="うるま市石川 飲食店マップ"></div>
+
+    <!-- 情報パネル（スワイプ下で表示） -->
+    <div class="info-panel" id="infoPanel">
+      <div class="info-panel-inner">
+        <button class="info-menu-btn" onclick="openInfoSection('about-site')">このサイトについて</button>
+        <button class="info-menu-btn" onclick="openInfoSection('about-ishikawa')">石川について</button>
+        <button class="info-menu-btn" onclick="openInfoSection('faq')">Q &amp; A</button>
+        <button class="info-menu-btn" onclick="openInfoSection('feedback')">ご意見・ご要望</button>
+      </div>
+      <div class="info-panel-footer" id="infoPanelFooter">
+        <span class="info-close-btn" id="infoPanelClose">▲</span>
+      </div>
+    </div>
 
   </div>
 
