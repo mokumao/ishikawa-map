@@ -506,6 +506,12 @@ const map = L.map("map", {
 // ＋－ボタン：スマホ→左下、PC→左上
 L.control.zoom({ position: window.innerWidth <= 767 ? 'bottomleft' : 'topleft' }).addTo(map);
 
+// ダブルクリック/ダブルタップで 0.5 ずつズームイン（デフォルトの1段より細かく）
+map.doubleClickZoom.disable();
+map.on('dblclick', function () {
+  map.zoomIn(0.5);
+});
+
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
   maxZoom: 19
