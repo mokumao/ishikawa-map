@@ -501,8 +501,9 @@ setTimeout(() => {
   const miniMapEl = document.getElementById('minimap');
   if (!miniMapEl) return;
 
+  // ミニマップ中心 = 石川エリア中心（主地図の初期位置と同じ）
   const miniMap = L.map('minimap', {
-    center:             [26.427, 127.823],
+    center:             ISHIKAWA_CENTER,
     zoom:               12,
     zoomControl:        false,
     attributionControl: false,
@@ -526,28 +527,41 @@ setTimeout(() => {
     iconSize:   [20, 20],
     iconAnchor: [10, 10]
   });
-  const miniStar = L.marker([26.430, 127.828], {
+  const miniStar = L.marker(ISHIKAWA_CENTER, {
     icon: starIcon, zIndexOffset: 1000
   }).addTo(miniMap);
 
-  // メイン地図の移動で★を追従
+  // ポップアップ中は move イベントで上書きしないためのフラグ
+  let _popupOpen = false;
+
+  // メイン地図のパンで★を追従（ポップアップ表示中はスキップ）
   map.on('move', function () {
-    miniStar.setLatLng(map.getCenter());
+    if (!_popupOpen) miniStar.setLatLng(map.getCenter());
   });
 
   // ポップアップ表示時：その店舗位置に★を移動
+  // 自動パン（0.4s）完了後に再設定して move による上書きを防ぐ
   map.on('popupopen', function (e) {
+    _popupOpen = true;
     const latlng = e.popup.getLatLng();
-    if (latlng) miniStar.setLatLng(latlng);
+    if (!latlng) return;
+    miniStar.setLatLng(latlng);
+    setTimeout(function () {
+      if (_popupOpen) miniStar.setLatLng(latlng);
+    }, 500);
   });
 
   // ポップアップを閉じたら地図中心に戻す
   map.on('popupclose', function () {
+    _popupOpen = false;
     miniStar.setLatLng(map.getCenter());
   });
 
   // ミニマップへのクリックが主地図に伝播しないよう防ぐ
   L.DomEvent.disableClickPropagation(miniMapEl);
+
+  // コンテナが完全にレンダリングされてからサイズを再計算
+  setTimeout(() => miniMap.invalidateSize(), 300);
 })();
 
 // ── 石川エリア境界線 ─────────────────────────────────────────────

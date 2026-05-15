@@ -177,6 +177,7 @@ header h1 {
   flex-direction: row;
   min-height: 0;
   overflow: hidden;
+  position: relative; /* ミニマップの絶対配置基準 */
 }
 
 /* ── Sidebar ──────────────────────────────────────────────── */
@@ -769,8 +770,10 @@ body.info-open .label-toggle-btn { display: none !important; }
   .app-body[data-view="map"]  .info-panel { display: none; }
   .app-body[data-view="list"] #map        { display: none; }
   .app-body[data-view="list"] .info-panel { display: none; }
+  .app-body[data-view="list"] #minimap    { display: none; }
   .app-body[data-view="info"] .sidebar    { display: none; }
   .app-body[data-view="info"] #map        { display: none; }
+  .app-body[data-view="info"] #minimap    { display: none; }
 
   /* 情報パネル本体 */
   .info-panel {
