@@ -665,19 +665,20 @@ footer a:hover { text-decoration: underline; }
   .swipe-hint {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
     pointer-events: none;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
+    gap: 3px;
     line-height: 1;
   }
   .sh-up, .sh-down {
     font-size: 1.1rem;
     font-weight: 900;
     color: #e53935;
-    line-height: 1.1;
+    line-height: 1;
     display: block;
   }
 
