@@ -661,7 +661,7 @@ footer a:hover { text-decoration: underline; }
     align-items: center;
   }
 
-  /* スワイプ方向ヒント矢印（▲▼を常に両方表示） */
+  /* スワイプ方向ヒント矢印（↑↓を常に両方表示） */
   .swipe-hint {
     position: absolute;
     left: 50%;
@@ -670,17 +670,16 @@ footer a:hover { text-decoration: underline; }
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0px;
+    gap: 2px;
     line-height: 1;
   }
   .sh-up, .sh-down {
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     font-weight: 900;
     color: #e53935;
-    line-height: 1;
+    line-height: 1.1;
+    display: block;
   }
-  .sh-up  { margin-bottom: -2px; }
-  .sh-down { margin-top: -2px; }
 
   /* ヘッダー非表示時：タブバーをiOS安全領域直下に固定
      position:fixed + top:0 はiOSが自動でカメラ/Dynamic Island下に配置 */
@@ -773,22 +772,25 @@ footer a:hover { text-decoration: underline; }
     -webkit-tap-highlight-color: transparent;
   }
   .info-menu-btn:active { background: #f5e89a; }
-  /* 情報パネルの下部（▲ボタン） */
+  /* 情報パネルの下部（↑ボタン左右） */
   .info-panel-footer {
     background: #fff;
     border-top: 1px solid #ddd;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    padding: 8px 20px 12px;
-    min-height: 44px;
+    padding: 10px 32px 20px;
+    margin-bottom: 16px;
   }
   .info-close-btn {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     font-weight: 900;
     color: #e53935;
     cursor: pointer;
-    padding: 4px 12px;
+    padding: 6px 16px;
+    border: 2px solid #e53935;
+    border-radius: 50%;
+    line-height: 1;
     -webkit-tap-highlight-color: transparent;
   }
 

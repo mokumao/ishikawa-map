@@ -29,9 +29,8 @@
 // ── 情報パネルの閉じるボタン（▲）・フッタースワイプで地図に戻る ────
 (function () {
   document.addEventListener('DOMContentLoaded', function () {
-    const closeBtn = document.getElementById('infoPanelClose');
-    const footer   = document.getElementById('infoPanelFooter');
-    if (!closeBtn || !footer) return;
+    const footer = document.getElementById('infoPanelFooter');
+    if (!footer) return;
 
     function closeInfoPanel() {
       const appBody = document.getElementById('appBody');
@@ -41,7 +40,10 @@
       }
     }
 
-    closeBtn.addEventListener('click', closeInfoPanel);
+    // 左右どちらの↑ボタンを押しても閉じる
+    document.querySelectorAll('.info-close-btn').forEach(function(btn) {
+      btn.addEventListener('click', closeInfoPanel);
+    });
 
     // フッターを上にスワイプしても閉じる
     let startY = 0;
