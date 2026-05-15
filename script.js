@@ -512,6 +512,7 @@ map.on('dblclick', function () {
   map.zoomIn(0.5);
 });
 
+
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
   maxZoom: 19
@@ -1209,11 +1210,16 @@ initSearch();
     map.doubleClickZoom.enable();
 
     // 指を離した時だけ地図中心を固定したままズームをコミット
-    const newZoom = Math.max(
-      map.getMinZoom(),
-      Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
-    );
-    map.setZoom(newZoom, { animate: true });
+    // ドラッグなし（lastDy=0）の場合はダブルタップ単体 → 0.5ズームイン
+    if (lastDy === 0) {
+      map.zoomIn(0.5);
+    } else {
+      const newZoom = Math.max(
+        map.getMinZoom(),
+        Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
+      );
+      map.setZoom(newZoom, { animate: true });
+    }
   });
 })();
 renderShopList();
