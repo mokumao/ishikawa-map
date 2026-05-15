@@ -633,6 +633,12 @@ body.info-open .label-toggle-btn { display: none !important; }
   /* ── 凡例（ジャンル）をスマホでは非表示 ── */
   .map-legend { display: none !important; }
 
+  /* ── スマホではWIPバーを常に非表示（地図エリアを広く） ── */
+  .wip-bar { display: none !important; }
+
+  /* ── 情報パネル表示中はタブバーも非表示 ── */
+  body.info-open .mobile-tabs { display: none !important; }
+
   /* ── ヘッダー折りたたみアニメーション ── */
   header, .wip-bar {
     transition: max-height 0.35s ease, opacity 0.35s ease,
