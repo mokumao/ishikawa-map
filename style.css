@@ -167,6 +167,11 @@ header h1 {
 /* 情報パネルはスマホのみ（PCでは常に非表示） */
 .info-panel { display: none; }
 
+/* スマホ専用要素（PCでは非表示） */
+.header-mobile   { display: none; }
+.side-swipe-ctrl { display: none; }
+.bottom-tabs     { display: none; }
+
 /* ── Mobile tabs（スマホのみ表示） ─────────────────────────── */
 .mobile-tabs { display: none; }
 
@@ -658,8 +663,97 @@ body.info-open .label-toggle-btn { display: none !important; }
   /* ── スマホではWIPバーを常に非表示（地図エリアを広く） ── */
   .wip-bar { display: none !important; }
 
-  /* ── 情報パネル表示中はタブバーも非表示 ── */
-  body.info-open .mobile-tabs { display: none !important; }
+  /* ── 情報パネル表示中はタブバー・サイドボタン・ボトムバーも非表示 ── */
+  body.info-open .mobile-tabs     { display: none !important; }
+  body.info-open .side-swipe-ctrl { display: none !important; }
+  body.info-open .bottom-tabs     { display: none !important; }
+
+  /* ── スマホ用ヘッダー（PCヘッダーを隠してモバイル版を表示） ── */
+  .header-inner  { display: none; }
+  .header-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px 14px 7px;
+  }
+  .header-mobile-h1 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: .01em;
+    line-height: 1.3;
+    margin: 0;
+  }
+  .header-mobile-sub {
+    font-size: .72rem;
+    color: rgba(255,255,255,.88);
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  /* ── 旧タブバーをスマホでは非表示（DOM は残す） ── */
+  .mobile-tabs { display: none !important; }
+
+  /* ── ヘッダー折りたたみ時：旧タブバーがないためpadding不要 ── */
+  body.header-collapsed .app-body { padding-top: 0; }
+
+  /* ── 左側スワイプコントロール ── */
+  .side-swipe-ctrl {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: absolute;
+    left: 10px;
+    bottom: 36%;
+    z-index: 1000;
+    pointer-events: auto;
+  }
+  .side-swipe-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .92);
+    border: 2px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0,0,0,.28);
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #e53935;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    line-height: 1;
+  }
+
+  /* ── ボトムタブバー ── */
+  .bottom-tabs {
+    display: flex;
+    flex-shrink: 0;
+    background: #fff;
+    border-top: 1px solid #e0e0e0;
+    z-index: 900;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  .bottom-tab-btn {
+    flex: 1;
+    padding: 11px 4px;
+    font-size: .82rem;
+    font-weight: 700;
+    font-family: inherit;
+    border: none;
+    background: transparent;
+    color: #90a4ae;
+    cursor: pointer;
+    border-top: 3px solid transparent;
+    transition: color .15s, border-color .15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .bottom-tab-btn.active {
+    color: #2e7d32;
+    border-top-color: #2e7d32;
+  }
 
   /* ── ヘッダー折りたたみアニメーション ── */
   header, .wip-bar {
@@ -680,18 +774,7 @@ body.info-open .label-toggle-btn { display: none !important; }
     opacity: 0;
   }
 
-  /* モバイルタブを表示 */
-  .mobile-tabs {
-    display: flex;
-    flex-shrink: 0;
-    background: #fff;
-    border-bottom: 2px solid #e0e0e0;
-    z-index: 900;
-    position: relative;
-    align-items: center;
-  }
-
-  /* スワイプ方向ヒント矢印（↑↓を常に両方表示） */
+  /* スワイプ方向ヒント矢印（↑↓を常に両方表示・旧タブバー内） */
   .swipe-hint {
     position: absolute;
     left: 50%;
@@ -712,21 +795,7 @@ body.info-open .label-toggle-btn { display: none !important; }
     display: block;
   }
 
-  /* ヘッダー非表示時：タブバーをiOS安全領域直下に固定
-     position:fixed + top:0 はiOSが自動でカメラ/Dynamic Island下に配置 */
-  body.header-collapsed .mobile-tabs {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-    padding-top: 0;
-  }
-
-  /* fixedになったタブバーの高さ分だけ地図を下にずらす */
-  body.header-collapsed .app-body {
-    padding-top: 46px;
-  }
+  /* ヘッダー折りたたみ時：旧タブバーは非表示のためfixed化不要 */
 
   /* ── スマホ：ポップアップを見やすく ── */
 

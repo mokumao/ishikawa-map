@@ -28,6 +28,7 @@
   </div>
 
   <header>
+    <!-- PC用レイアウト（スマホでは非表示） -->
     <div class="header-inner">
       <div class="header-left">
         <h1>🗺 うるま市石川<br>飲食店マップ</h1>
@@ -36,6 +37,11 @@
         <p class="notice">⚠️ 営業時間や定休日は変更される可能性があります。最新情報は各店舗ページをご確認ください。</p>
         <p class="intro-text">🌺 沖縄県うるま市石川エリアの飲食店を地図でまとめたサイトです。ピン・店名クリックで詳細確認、ジャンル絞り込み・キーワード検索もご利用いただけます。</p>
       </div>
+    </div>
+    <!-- スマホ用レイアウト（PCでは非表示） -->
+    <div class="header-mobile">
+      <h1 class="header-mobile-h1">あなたの知らない石川マップ</h1>
+      <p class="header-mobile-sub">店舗の情報は不正確かもしれません。</p>
     </div>
   </header>
 
@@ -93,6 +99,19 @@
       </div>
     </div>
 
+    <!-- 左側スワイプコントロール（スマホのみ・地図ビュー時） -->
+    <div class="side-swipe-ctrl" id="sideSwipeCtrl">
+      <button class="side-swipe-btn" id="sideSwipeUp" aria-label="ヘッダーを表示/非表示">⬆</button>
+      <button class="side-swipe-btn" id="sideSwipeDown" aria-label="情報パネルを開く">⬇</button>
+    </div>
+
+  </div>
+
+  <!-- ボトムタブバー（スマホのみ） -->
+  <div class="bottom-tabs" id="bottomTabs">
+    <button class="bottom-tab-btn active" id="bottomTabMap" onclick="switchTab('map')">🗺 地図</button>
+    <button class="bottom-tab-btn" id="bottomLabelBtn" onclick="toggleLabels()">店名を表示</button>
+    <button class="bottom-tab-btn" id="bottomTabList" onclick="switchTab('list')">📋 一覧</button>
   </div>
 
   <footer>

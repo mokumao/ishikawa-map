@@ -27,6 +27,30 @@
   }, { passive: true });
 })();
 
+// ── 左側スワイプボタン（⬆⬇）のクリックハンドラ ──────────────────
+(function () {
+  document.addEventListener('DOMContentLoaded', function () {
+    const upBtn   = document.getElementById('sideSwipeUp');
+    const downBtn = document.getElementById('sideSwipeDown');
+    if (!upBtn || !downBtn) return;
+
+    upBtn.addEventListener('click', function () {
+      // ヘッダー表示/非表示トグル
+      document.body.classList.toggle('header-collapsed');
+      if (typeof map !== 'undefined') setTimeout(() => map.invalidateSize(), 50);
+    });
+
+    downBtn.addEventListener('click', function () {
+      // 情報パネルを開く
+      const appBody = document.getElementById('appBody');
+      if (appBody) {
+        appBody.dataset.view = 'info';
+        document.body.classList.add('info-open');
+      }
+    });
+  });
+})();
+
 // ── 情報パネルの閉じるボタン（▲）・フッタースワイプで地図に戻る ────
 (function () {
   document.addEventListener('DOMContentLoaded', function () {
@@ -636,23 +660,8 @@ const markersData = restaurants.map((r, idx) => {
 let labelsVisible = window.innerWidth > 767;
 
 if (window.innerWidth <= 767) {
-  // スマホ：初期状態で非表示にする
+  // スマホ：初期状態で非表示にする（ボタンはボトムバーの #bottomLabelBtn を使用）
   map.getContainer().classList.add('labels-hidden');
-
-  // Leafletコンテナ外（body直下）に配置
-  // Leafletは内部で overflow:hidden を設定するため、
-  // コンテナ内の position:fixed が正しく動作しないケースがある
-  const btn = document.createElement('button');
-  btn.className = 'label-toggle-btn';
-  btn.innerHTML = '店名を表示';
-  btn.title = '店名ラベルの表示／非表示';
-  btn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    labelsVisible = !labelsVisible;
-    map.getContainer().classList.toggle('labels-hidden', !labelsVisible);
-    btn.innerHTML = labelsVisible ? '店名を隠す' : '店名を表示';
-  });
-  document.body.appendChild(btn);
 } else {
   // PC：Leafletコントロールとして topleft に配置
   const LabelToggleControl = L.Control.extend({
@@ -1052,14 +1061,29 @@ function switchTab(tab) {
   const appBody = document.getElementById('appBody');
   appBody.dataset.view = tab;
 
+  // 旧タブバー（DOM上は残存）
   document.getElementById('tabMap').classList.toggle('active',  tab === 'map');
   document.getElementById('tabMap').setAttribute('aria-selected', tab === 'map');
   document.getElementById('tabList').classList.toggle('active', tab === 'list');
   document.getElementById('tabList').setAttribute('aria-selected', tab === 'list');
 
+  // ボトムタブバー
+  const bMap  = document.getElementById('bottomTabMap');
+  const bList = document.getElementById('bottomTabList');
+  if (bMap)  bMap.classList.toggle('active',  tab === 'map');
+  if (bList) bList.classList.toggle('active', tab === 'list');
+
   if (tab === 'map') {
     setTimeout(() => map.invalidateSize(), 50);
   }
+}
+
+// ── 店名ラベルトグル（ボトムバーから呼び出し） ──────────────────
+function toggleLabels() {
+  labelsVisible = !labelsVisible;
+  map.getContainer().classList.toggle('labels-hidden', !labelsVisible);
+  const btn = document.getElementById('bottomLabelBtn');
+  if (btn) btn.textContent = labelsVisible ? '店名を隠す' : '店名を表示';
 }
 
 // ── 検索ボックス初期化 ──────────────────────────────────────────
