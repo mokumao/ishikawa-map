@@ -577,6 +577,8 @@ footer a:hover { text-decoration: underline; }
   transition: background .15s;
 }
 .label-toggle-btn:hover { background: #f0f4f8; }
+/* 情報パネル表示中は店名ボタンを非表示 */
+body.info-open .label-toggle-btn { display: none !important; }
 
 /* ── Legend ───────────────────────────────────────────────── */
 .map-legend {
@@ -675,7 +677,7 @@ footer a:hover { text-decoration: underline; }
     line-height: 1;
   }
   .sh-up, .sh-down {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     font-weight: 900;
     color: #e53935;
     line-height: 1;
@@ -778,12 +780,12 @@ footer a:hover { text-decoration: underline; }
     background: #f0f0f0;
     border-top: none;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 0 40px 8px;
+    padding: 20px 40px 80px;
   }
   .info-close-btn {
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     font-weight: 900;
     color: #e53935;
     cursor: pointer;

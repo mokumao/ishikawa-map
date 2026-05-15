@@ -22,6 +22,7 @@
       // 下にスワイプ → 情報パネルを表示
       const appBody = document.getElementById('appBody');
       if (appBody) appBody.dataset.view = 'info';
+      document.body.classList.add('info-open');
     }
   }, { passive: true });
 })();
@@ -36,6 +37,7 @@
       const appBody = document.getElementById('appBody');
       if (appBody) {
         appBody.dataset.view = 'map';
+        document.body.classList.remove('info-open');
         setTimeout(() => { if (typeof map !== 'undefined') map.invalidateSize(); }, 50);
       }
     }
