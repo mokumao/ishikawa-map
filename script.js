@@ -496,6 +496,60 @@ setTimeout(() => {
   map.setView(ISHIKAWA_CENTER, ISHIKAWA_ZOOM, { reset: true, animate: false });
 }, 500);
 
+// ── ミニマップ（右上の概要図） ─────────────────────────────────────
+(function () {
+  const miniMapEl = document.getElementById('minimap');
+  if (!miniMapEl) return;
+
+  const miniMap = L.map('minimap', {
+    center:             [26.427, 127.823],
+    zoom:               12,
+    zoomControl:        false,
+    attributionControl: false,
+    dragging:           false,
+    touchZoom:          false,
+    doubleClickZoom:    false,
+    scrollWheelZoom:    false,
+    boxZoom:            false,
+    keyboard:           false,
+    tap:                false
+  });
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18
+  }).addTo(miniMap);
+
+  // ★マーカー（メイン地図の中心位置を示す）
+  const starIcon = L.divIcon({
+    html:       '<span class="mini-star-icon">★</span>',
+    className:  '',
+    iconSize:   [20, 20],
+    iconAnchor: [10, 10]
+  });
+  const miniStar = L.marker([26.430, 127.828], {
+    icon: starIcon, zIndexOffset: 1000
+  }).addTo(miniMap);
+
+  // メイン地図の移動で★を追従
+  map.on('move', function () {
+    miniStar.setLatLng(map.getCenter());
+  });
+
+  // ポップアップ表示時：その店舗位置に★を移動
+  map.on('popupopen', function (e) {
+    const latlng = e.popup.getLatLng();
+    if (latlng) miniStar.setLatLng(latlng);
+  });
+
+  // ポップアップを閉じたら地図中心に戻す
+  map.on('popupclose', function () {
+    miniStar.setLatLng(map.getCenter());
+  });
+
+  // ミニマップへのクリックが主地図に伝播しないよう防ぐ
+  L.DomEvent.disableClickPropagation(miniMapEl);
+})();
+
 // ── 石川エリア境界線 ─────────────────────────────────────────────
 // Googleマップのピンク点線境界を参考に更新
 L.polygon([
