@@ -598,48 +598,64 @@ setTimeout(() => {
     fill:     false
   }).addTo(miniMap);
 
-  // 2重丸マーカー（メイン地図の中心位置を示す）
-  const starIcon = L.divIcon({
-    html:       '<div class="mini-target-icon"></div>',
-    className:  '',
-    iconSize:   [10, 10],
-    iconAnchor: [5, 5]
-  });
-  const miniStar = L.marker(ISHIKAWA_CENTER, {
-    icon: starIcon, zIndexOffset: 1000
-  }).addTo(miniMap);
+  // ── CSSオーバーレイ式2重丸（ミニマップ枠端でクランプ表示） ──────
+  // Leafletマーカーはoverflowでクリップされ消えてしまうため
+  // #minimap直下にdivを置き、ピクセル座標でクランプして端に半分見える表示を実現
+  const miniTargetEl = document.createElement('div');
+  miniTargetEl.className = 'mini-target-icon';
+  miniTargetEl.style.cssText =
+    'position:absolute;z-index:1000;transform:translate(-50%,-50%);pointer-events:none;';
+  miniMapEl.appendChild(miniTargetEl);
 
-  // ポップアップ中は move イベントで上書きしないためのフラグ
   let _popupOpen = false;
+  let _targetLatLng = L.latLng(ISHIKAWA_CENTER);
 
-  // メイン地図のパンで★を追従（ポップアップ表示中はスキップ）
+  // latlng → ミニマップのピクセル座標に変換し、枠内にクランプして配置
+  function updateMiniTarget() {
+    var pt = miniMap.latLngToContainerPoint(_targetLatLng);
+    var w  = miniMapEl.offsetWidth;
+    var h  = miniMapEl.offsetHeight;
+    var x  = Math.max(0, Math.min(w, pt.x));
+    var y  = Math.max(0, Math.min(h, pt.y));
+    miniTargetEl.style.left = x + 'px';
+    miniTargetEl.style.top  = y + 'px';
+  }
+
+  // メイン地図のパンで追従（ポップアップ表示中はスキップ）
   map.on('move', function () {
-    if (!_popupOpen) miniStar.setLatLng(map.getCenter());
+    if (!_popupOpen) {
+      _targetLatLng = map.getCenter();
+      updateMiniTarget();
+    }
   });
 
-  // ポップアップ表示時：その店舗位置に★を移動
-  // 自動パン（0.4s）完了後に再設定して move による上書きを防ぐ
+  // ポップアップ表示時：その店舗位置に移動
   map.on('popupopen', function (e) {
     _popupOpen = true;
     const latlng = e.popup.getLatLng();
     if (!latlng) return;
-    miniStar.setLatLng(latlng);
+    _targetLatLng = latlng;
+    updateMiniTarget();
     setTimeout(function () {
-      if (_popupOpen) miniStar.setLatLng(latlng);
+      if (_popupOpen) { _targetLatLng = latlng; updateMiniTarget(); }
     }, 500);
   });
 
   // ポップアップを閉じたら地図中心に戻す
   map.on('popupclose', function () {
     _popupOpen = false;
-    miniStar.setLatLng(map.getCenter());
+    _targetLatLng = map.getCenter();
+    updateMiniTarget();
   });
 
   // ミニマップへのクリックが主地図に伝播しないよう防ぐ
   L.DomEvent.disableClickPropagation(miniMapEl);
 
-  // コンテナが完全にレンダリングされてからサイズを再計算
-  setTimeout(() => miniMap.invalidateSize(), 300);
+  // コンテナが完全にレンダリングされてからサイズ再計算＋初期位置設定
+  setTimeout(function () {
+    miniMap.invalidateSize();
+    updateMiniTarget();
+  }, 300);
 })();
 
 // ── 石川エリア境界線 ─────────────────────────────────────────────
