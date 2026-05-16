@@ -612,11 +612,13 @@ setTimeout(() => {
 
   // latlng → ミニマップのピクセル座標に変換し、枠内にクランプして配置
   function updateMiniTarget() {
-    var pt = miniMap.latLngToContainerPoint(_targetLatLng);
-    var w  = miniMapEl.clientWidth;   // border除外（content幅）
-    var h  = miniMapEl.clientHeight;  // border除外（content高さ）
-    var x  = Math.max(0, Math.min(w, pt.x));
-    var y  = Math.max(0, Math.min(h, pt.y));
+    var pt    = miniMap.latLngToContainerPoint(_targetLatLng);
+    var w     = miniMapEl.clientWidth;
+    var h     = miniMapEl.clientHeight;
+    // 端から2px内側にクランプ → 2重丸の約2/3が見える（半分より分かりやすく）
+    var inset = 2;
+    var x = Math.max(inset, Math.min(w - inset, pt.x));
+    var y = Math.max(inset, Math.min(h - inset, pt.y));
     miniTargetEl.style.left = x + 'px';
     miniTargetEl.style.top  = y + 'px';
   }
