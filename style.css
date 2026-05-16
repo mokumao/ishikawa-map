@@ -587,18 +587,24 @@ footer a:hover { text-decoration: underline; }
 body.info-open .label-toggle-btn { display: none !important; }
 
 /* ── 地図中央固定★マーク ─────────────────────────────────────── */
+/* 大きな地図中央：2重丸マーク */
 .map-center-star {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  z-index: 450; /* タイル(200)より上、マーカー(600)より下 */
-  font-size: 24px;
-  color: #e53935;
-  text-shadow: 0 0 6px rgba(255,255,255,.95), 1px 1px 3px rgba(0,0,0,.6);
+  z-index: 450;
   pointer-events: none;
-  line-height: 1;
   user-select: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid #e53935;
+  /* box-shadow で外側の丸を追加（white隙間 + 赤外輪） */
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,0.85),
+    0 0 0 7px #e53935,
+    0 0 6px 8px rgba(0,0,0,0.18);
 }
 
 /* ── ミニマップ（右上の概要図） ───────────────────────────────── */
@@ -613,6 +619,16 @@ body.info-open .label-toggle-btn { display: none !important; }
   border-radius: 6px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
   overflow: hidden;
+}
+/* ミニマップ上の2重丸マーク */
+.mini-target-icon {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #e53935;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,0.9),
+    0 0 0 5px #e53935;
 }
 .mini-star-icon {
   font-size: 18px;

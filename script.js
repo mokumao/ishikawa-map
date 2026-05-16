@@ -575,12 +575,12 @@ setTimeout(() => {
     maxZoom: 18
   }).addTo(miniMap);
 
-  // ★マーカー（メイン地図の中心位置を示す）
+  // 2重丸マーカー（メイン地図の中心位置を示す）
   const starIcon = L.divIcon({
-    html:       '<span class="mini-star-icon">★</span>',
+    html:       '<div class="mini-target-icon"></div>',
     className:  '',
-    iconSize:   [20, 20],
-    iconAnchor: [10, 10]
+    iconSize:   [22, 22],
+    iconAnchor: [11, 11]
   });
   const miniStar = L.marker(ISHIKAWA_CENTER, {
     icon: starIcon, zIndexOffset: 1000
