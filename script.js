@@ -613,8 +613,8 @@ setTimeout(() => {
   // latlng → ミニマップのピクセル座標に変換し、枠内にクランプして配置
   function updateMiniTarget() {
     var pt = miniMap.latLngToContainerPoint(_targetLatLng);
-    var w  = miniMapEl.offsetWidth;
-    var h  = miniMapEl.offsetHeight;
+    var w  = miniMapEl.clientWidth;   // border除外（content幅）
+    var h  = miniMapEl.clientHeight;  // border除外（content高さ）
     var x  = Math.max(0, Math.min(w, pt.x));
     var y  = Math.max(0, Math.min(h, pt.y));
     miniTargetEl.style.left = x + 'px';
