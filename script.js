@@ -579,8 +579,8 @@ setTimeout(() => {
   const starIcon = L.divIcon({
     html:       '<div class="mini-target-icon"></div>',
     className:  '',
-    iconSize:   [22, 22],
-    iconAnchor: [11, 11]
+    iconSize:   [10, 10],
+    iconAnchor: [5, 5]
   });
   const miniStar = L.marker(ISHIKAWA_CENTER, {
     icon: starIcon, zIndexOffset: 1000
