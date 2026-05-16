@@ -792,6 +792,10 @@ map.on('popupopen', function(e) {
   });
 });
 
+// ポップアップ開閉時：ミニマップ・中央★・左矢印をポップアップの裏に隠す
+map.on('popupopen',  function() { document.body.classList.add('popup-open');    });
+map.on('popupclose', function() { document.body.classList.remove('popup-open'); });
+
 map.on('popupclose', function() {
   if (pinCloseMarker) { map.removeLayer(pinCloseMarker); pinCloseMarker = null; }
   if (_isReopening) return; // 内部close-reopen中は復元しない
