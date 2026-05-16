@@ -587,7 +587,12 @@ footer a:hover { text-decoration: underline; }
 body.info-open .label-toggle-btn { display: none !important; }
 
 /* ── 地図中央固定★マーク ─────────────────────────────────────── */
-/* 大きな地図中央：2重丸マーク（中心塗りつぶし） */
+/* 大きな地図中央：2重丸マーク（ソナー波紋） */
+@keyframes sonar-target {
+  0%   { transform: translate(-50%, -50%) scale(0.1); opacity: 1; }
+  80%  { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1);   opacity: 0; }
+}
 .map-center-star {
   position: absolute;
   left: 50%;
@@ -603,6 +608,7 @@ body.info-open .label-toggle-btn { display: none !important; }
   box-shadow:
     0 0 0 3px #fff,
     0 0 0 6px #e53935;
+  animation: sonar-target 2.8s ease-out infinite;
 }
 
 /* ── ミニマップ（右上の概要図） ───────────────────────────────── */
