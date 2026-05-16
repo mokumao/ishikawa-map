@@ -522,6 +522,30 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 const ISHIKAWA_CENTER = [26.430, 127.828];
 const ISHIKAWA_ZOOM   = window.innerWidth <= 767 ? 13 : 14;
 
+// ── ポップアップペインをmap-pane（transformあり）の外へ移動 ─────────────
+// leaflet-map-paneのCSSトランスフォームがz-indexのスタッキングコンテキストを閉じ込めるため
+// ポップアップペインをmap containerの直接の子に移動し、z-index 1100を有効にする
+(function () {
+  map.whenReady(function () {
+    var popupPane    = map.getPanes().popupPane;
+    var mapContainer = map.getContainer();
+
+    // ポップアップペインをmap containerの直接の子へ移動
+    mapContainer.appendChild(popupPane);
+    popupPane.style.position = 'absolute';
+    popupPane.style.zIndex   = '1100';
+
+    // map-paneのtranslateをpopupPaneのleft/topで再現し位置を合わせる
+    function syncPopupPanePos() {
+      var pos = map._getMapPanePos();
+      popupPane.style.left = pos.x + 'px';
+      popupPane.style.top  = pos.y + 'px';
+    }
+    syncPopupPanePos();
+    map.on('move zoom viewreset', syncPopupPanePos);
+  });
+})();
+
 // 初期表示を石川エリアに固定（invalidateSizeを使わず直接setView）
 setTimeout(() => {
   map.setView(ISHIKAWA_CENTER, ISHIKAWA_ZOOM, { reset: true, animate: false });

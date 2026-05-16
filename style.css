@@ -683,10 +683,8 @@ body.info-open .label-toggle-btn { display: none !important; }
   body.info-open .side-swipe-ctrl { display: none !important; }
   body.info-open .bottom-tabs     { display: none !important; }
 
-  /* ── ポップアップ表示中：ポップアップを最前面へ、中央★のみ非表示 ── */
-  /* ミニマップ・左矢印は後ろに残す（地図ずらし時も見える）           */
-  body.popup-open .leaflet-popup-pane { z-index: 1100 !important; }
-  body.popup-open .map-center-star    { display: none !important; }
+  /* ── ポップアップ表示中：中央★のみ非表示（ポップアップテキストと重なるため） ── */
+  body.popup-open .map-center-star { display: none !important; }
 
   /* ── スマホ用ヘッダー（PCヘッダーを隠してモバイル版を表示） ── */
   .header-inner  { display: none; }
