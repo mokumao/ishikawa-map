@@ -17,6 +17,73 @@
     });
 })();
 
+// ── 現在地ボタン ──────────────────────────────────────────────────
+(function () {
+  const btn = document.getElementById('locateBtn');
+  if (!btn) return;
+
+  let locationMarker = null;
+  let locationCircle = null;
+
+  btn.addEventListener('click', function () {
+    if (!navigator.geolocation) {
+      alert('このブラウザは位置情報に対応していません。');
+      return;
+    }
+
+    // 取得中アニメーション
+    btn.classList.add('locating');
+    btn.textContent = '⏳';
+
+    navigator.geolocation.getCurrentPosition(
+      function (pos) {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        const acc = pos.coords.accuracy; // 精度（メートル）
+
+        // 地図を現在地に移動
+        map.flyTo([lat, lng], 16, { duration: 1.2 });
+
+        // 前の現在地マーカーを削除
+        if (locationMarker) { locationMarker.remove(); }
+        if (locationCircle)  { locationCircle.remove();  }
+
+        // 精度を示す薄い青円
+        locationCircle = L.circle([lat, lng], {
+          radius:      acc,
+          color:       '#1565c0',
+          fillColor:   '#1565c0',
+          fillOpacity: 0.12,
+          weight:      1
+        }).addTo(map);
+
+        // 現在地マーカー（青丸）
+        locationMarker = L.circleMarker([lat, lng], {
+          radius:      8,
+          color:       '#fff',
+          fillColor:   '#1565c0',
+          fillOpacity: 1,
+          weight:      3
+        }).addTo(map);
+        locationMarker.bindPopup('📍 現在地').openPopup();
+
+        btn.classList.remove('locating');
+        btn.textContent = '📍';
+      },
+      function (err) {
+        btn.classList.remove('locating');
+        btn.textContent = '📍';
+        if (err.code === 1) {
+          alert('位置情報の使用が拒否されました。\nスマホの設定でブラウザの位置情報を許可してください。');
+        } else {
+          alert('現在地を取得できませんでした。もう一度お試しください。');
+        }
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  });
+})();
+
 // ── スマホ：タブバーのスワイプでヘッダー操作・情報パネル表示 ────────
 (function () {
   const tabs = document.querySelector('.mobile-tabs');

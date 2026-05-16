@@ -780,6 +780,19 @@ body.info-open .label-toggle-btn { display: none !important; }
     line-height: 1;
   }
 
+  .locate-btn {
+    margin-top: 6px;
+    color: #1565c0 !important;
+    font-size: 1.2rem !important;
+  }
+  .locate-btn.locating {
+    animation: locate-pulse 1s ease-in-out infinite;
+  }
+  @keyframes locate-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+  }
+
   /* ── ボトムタブバー ── */
   .bottom-tabs {
     display: flex;
