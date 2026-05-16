@@ -363,5 +363,25 @@ const restaurants = [
     website:    "https://r.goope.jp/kinnokura/",
     detailText: "",
     photos:     []
+  },
+
+  // ── テスト用店舗（石川ビーチ沖合・動作確認専用） ─────────────────
+  {
+    name:      "【テスト】石川ビーチ海上店",
+    genre:     "テスト用",
+    address:   "石川ビーチ沖合（テスト用・実在しません）",
+    hours:     "テスト営業時間 9:00〜18:00",
+    closed:    "テスト定休日",
+    note:      "これは動作確認用のテスト店舗です。実在しません。店舗オーナー操作機能の確認に使用します。",
+    sourceUrl: "",
+    warn:      false,
+    lat:       26.4268,
+    lng:       127.8415,
+    twitter:    "",
+    instagram:  "",
+    youtube:    "",
+    website:    "",
+    detailText: "これはテスト用の店舗です。\n\n今後、店舗オーナーが自分で情報を更新・追加できる機能の確認に使用します。\n\n実際の営業はしていません。",
+    photos:     []
   }
 ];
