@@ -133,8 +133,10 @@ function checkPassword() {
   }
 }
 
-// ── 店舗データ ─────────────────────────────────────────────────
-const restaurants = [
+// ── 店舗データは restaurants-data.js で定義（index.html から先読み込み）──
+
+// ── (以下はデータ移動前の名残コメント。データは上記ファイル参照) ──
+const _restaurants_placeholder = [
   {
     name:      "酒楽場うまし家",
     genre:     "居酒屋",
@@ -453,7 +455,7 @@ function gmapUrl(name, address) {
 }
 
 // ── ポップアップ HTML 生成 ────────────────────────────────────────
-function makePopup(r) {
+function makePopup(r, idx) {
   const hoursHtml  = r.hours.replace(/\n/g, "<br>");
   const closedHtml = (r.closed.includes("要確認"))
     ? `<span style="color:#e65100">${r.closed}</span>`
@@ -489,9 +491,8 @@ function makePopup(r) {
         <a href="${gmapUrl(r.name, r.address)}"
            target="_blank" rel="noopener noreferrer"
            class="popup-btn gmap">📍 Googleマップで見る</a>
-        <a href="${r.sourceUrl}"
-           target="_blank" rel="noopener noreferrer"
-           class="popup-btn source">🔗 情報源を見る</a>
+        <a href="detail.html#${idx}"
+           class="popup-btn source">📄 店舗詳細を見る</a>
       </div>
     </div>`;
 }
@@ -693,7 +694,7 @@ const markersData = restaurants.map((r, idx) => {
     icon:  makePinIcon(color, r.warn),
     title: r.name
   });
-  marker.bindPopup(makePopup(r), { maxWidth: 300, autoPan: false });
+  marker.bindPopup(makePopup(r, idx), { maxWidth: 300, autoPan: false });
   marker.bindTooltip(r.name, {
     permanent:  true,
     direction:  'top',

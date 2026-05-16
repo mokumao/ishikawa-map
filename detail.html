@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2e7d32">
+  <title>店舗詳細 | うるま市石川 飲食店マップ</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif;
+      background: #f5f5f5;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    /* ── ヘッダー ── */
+    .detail-header {
+      background: #2e7d32;
+      color: #fff;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,.25);
+    }
+    .back-btn {
+      background: rgba(255,255,255,.18);
+      border: none;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .back-btn:hover { background: rgba(255,255,255,.28); }
+    .header-title {
+      font-size: 1rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ── メインカード ── */
+    .detail-card {
+      max-width: 640px;
+      margin: 20px auto;
+      padding: 0 12px 40px;
+    }
+
+    .shop-hero {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px 20px 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      margin-bottom: 14px;
+    }
+
+    .shop-name {
+      font-size: 1.5rem;
+      font-weight: 800;
+      line-height: 1.3;
+      color: #1b5e20;
+    }
+    .shop-genre-badge {
+      display: inline-block;
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 6px;
+    }
+    .warn-badge {
+      display: inline-block;
+      background: #fff3e0;
+      color: #e65100;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 6px;
+      margin-left: 6px;
+    }
+
+    /* ── セクション共通 ── */
+    .section {
+      background: #fff;
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #888;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    /* ── 基本情報テーブル ── */
+    .info-table { width: 100%; border-collapse: collapse; }
+    .info-table tr { border-bottom: 1px solid #f5f5f5; }
+    .info-table tr:last-child { border-bottom: none; }
+    .info-table td { padding: 9px 0; vertical-align: top; font-size: 0.9rem; line-height: 1.55; }
+    .info-table .lbl {
+      color: #888; font-size: 0.78rem; font-weight: 700;
+      width: 72px; padding-right: 10px; padding-top: 11px;
+      white-space: nowrap;
+    }
+    .warn-text { color: #e65100; }
+
+    /* ── 警告ボックス ── */
+    .warn-box {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      color: #5d3200;
+      line-height: 1.5;
+    }
+
+    /* ── SNSリンクボタン ── */
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+    }
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity .15s;
+    }
+    .link-btn:hover { opacity: .8; }
+    .link-btn .icon { font-size: 1.2rem; flex-shrink: 0; }
+    .link-x        { background: #000;    color: #fff; }
+    .link-ig       { background: linear-gradient(135deg,#f9ce34,#ee2a7b,#6228d7); color: #fff; }
+    .link-yt       { background: #ff0000; color: #fff; }
+    .link-web      { background: #1565c0; color: #fff; }
+    .link-source   { background: #e8f5e9; color: #2e7d32; border: 1.5px solid #a5d6a7; }
+
+    /* ── 紹介文 ── */
+    .detail-text {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: #333;
+      white-space: pre-wrap;
+    }
+
+    /* ── 写真ギャラリー ── */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 8px;
+    }
+    .photo-grid img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: zoom-in;
+      transition: opacity .15s;
+    }
+    .photo-grid img:hover { opacity: .85; }
+
+    /* ── 写真ライトボックス ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.85);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 16px; right: 20px;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      background: none;
+      border: none;
+    }
+
+    /* ── 未入力プレースホルダー ── */
+    .empty-note {
+      color: #bbb;
+      font-size: 0.85rem;
+      font-style: italic;
+    }
+
+    /* ── Googleマップボタン ── */
+    .gmap-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 13px;
+      background: #e8f5e9;
+      color: #1b5e20;
+      border: 1.5px solid #a5d6a7;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .gmap-btn:hover { background: #c8e6c9; }
+
+    /* ── フッター ── */
+    .detail-footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #aaa;
+      padding: 20px 16px;
+    }
+
+    /* ── エラー表示 ── */
+    .error-box {
+      text-align: center;
+      padding: 60px 20px;
+      color: #888;
+    }
+    .error-box h2 { font-size: 1.2rem; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+  <header class="detail-header">
+    <a class="back-btn" href="index.html">← 地図に戻る</a>
+    <span class="header-title" id="headerTitle">店舗詳細</span>
+  </header>
+
+  <main class="detail-card" id="detailCard">
+    <div class="error-box"><p>読み込み中…</p></div>
+  </main>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">✕</button>
+    <img src="" alt="" id="lightboxImg">
+  </div>
+
+  <footer class="detail-footer">
+    🌊 うるま市石川 飲食店マップ &nbsp;|&nbsp; 掲載情報は調査時点のものです
+  </footer>
+
+  <script src="restaurants-data.js"></script>
+  <script>
+    (function () {
+      // IDパラメータ取得（ハッシュ #N 形式）
+      const hash = location.hash.replace('#', '');
+      const idx = parseInt(hash, 10);
+      const r = restaurants[idx];
+      const card = document.getElementById('detailCard');
+
+      if (!r) {
+        card.innerHTML = `<div class="error-box"><h2>店舗が見つかりません</h2><p><a href="index.html">地図に戻る</a></p></div>`;
+        return;
+      }
+
+      // タイトル更新
+      document.title = r.name + ' | うるま市石川 飲食店マップ';
+      document.getElementById('headerTitle').textContent = r.name;
+
+      // Google マップ URL
+      function gmapUrl() {
+        return 'https://www.google.com/maps/search/?api=1&query='
+             + encodeURIComponent(r.name + ' ' + r.address);
+      }
+
+      // 営業時間整形
+      const hoursHtml = r.hours.replace(/\n/g, '<br>');
+
+      // 定休日整形
+      const closedHtml = r.closed.includes('要確認')
+        ? `<span class="warn-text">${r.closed}</span>`
+        : r.closed;
+
+      // SNS・リンクボタン
+      const links = [];
+      if (r.twitter)   links.push(`<a href="${r.twitter}"   class="link-btn link-x"   target="_blank" rel="noopener"><span class="icon">𝕏</span> X（Twitter）</a>`);
+      if (r.instagram) links.push(`<a href="${r.instagram}" class="link-btn link-ig"  target="_blank" rel="noopener"><span class="icon">📸</span> Instagram</a>`);
+      if (r.youtube)   links.push(`<a href="${r.youtube}"   class="link-btn link-yt"  target="_blank" rel="noopener"><span class="icon">▶</span> YouTube</a>`);
+      if (r.website)   links.push(`<a href="${r.website}"   class="link-btn link-web" target="_blank" rel="noopener"><span class="icon">🌐</span> 公式サイト</a>`);
+      if (r.sourceUrl) links.push(`<a href="${r.sourceUrl}" class="link-btn link-source" target="_blank" rel="noopener"><span class="icon">🔗</span> 情報源</a>`);
+
+      const linksSection = links.length > 0
+        ? `<div class="section">
+             <div class="section-title">リンク</div>
+             <div class="link-grid">${links.join('')}</div>
+           </div>`
+        : '';
+
+      // 紹介文セクション
+      const textSection = `<div class="section">
+        <div class="section-title">店舗紹介・詳細情報</div>
+        ${r.detailText
+          ? `<p class="detail-text">${r.detailText}</p>`
+          : `<p class="empty-note">現在、詳細情報は準備中です。</p>`}
+      </div>`;
+
+      // 写真セクション
+      let photosSection = '';
+      if (r.photos && r.photos.length > 0) {
+        const imgs = r.photos.map((src, i) =>
+          `<img src="${src}" alt="${r.name} 写真${i+1}" loading="lazy" onclick="openLightbox('${src}')">`
+        ).join('');
+        photosSection = `<div class="section">
+          <div class="section-title">写真</div>
+          <div class="photo-grid">${imgs}</div>
+        </div>`;
+      }
+
+      // 警告ボックス
+      const warnSection = r.warn
+        ? `<div class="section"><div class="warn-box">⚠️ ${r.note}</div></div>`
+        : '';
+
+      // HTML構築
+      card.innerHTML = `
+        <!-- ショップヒーロー -->
+        <div class="shop-hero">
+          <div class="shop-name">${r.name}</div>
+          <span class="shop-genre-badge">${r.genre}</span>
+          ${r.warn ? '<span class="warn-badge">⚠️ 要確認</span>' : ''}
+        </div>
+
+        <!-- 基本情報 -->
+        <div class="section">
+          <div class="section-title">基本情報</div>
+          <table class="info-table">
+            <tr>
+              <td class="lbl">住所</td>
+              <td>${r.address}</td>
+            </tr>
+            <tr>
+              <td class="lbl">営業時間</td>
+              <td>${hoursHtml}</td>
+            </tr>
+            <tr>
+              <td class="lbl">定休日</td>
+              <td>${closedHtml}</td>
+            </tr>
+            ${!r.warn ? `<tr><td class="lbl">備考</td><td>${r.note}</td></tr>` : ''}
+          </table>
+        </div>
+
+        <!-- 警告 -->
+        ${warnSection}
+
+        <!-- Googleマップ -->
+        <a href="${gmapUrl()}" target="_blank" rel="noopener" class="gmap-btn" style="margin-bottom:14px;">
+          📍 Googleマップで見る
+        </a>
+
+        <!-- リンク -->
+        ${linksSection}
+
+        <!-- 紹介文 -->
+        ${textSection}
+
+        <!-- 写真 -->
+        ${photosSection}
+      `;
+    })();
+
+    // ライトボックス
+    function openLightbox(src) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+    document.getElementById('lightboxClose').addEventListener('click', function () {
+      document.getElementById('lightbox').classList.remove('open');
+    });
+    document.getElementById('lightbox').addEventListener('click', function (e) {
+      if (e.target === this) this.classList.remove('open');
+    });
+  </script>
+</body>
+</html>
