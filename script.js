@@ -3,6 +3,20 @@
    地図: OpenStreetMap + Leaflet
 ================================================================ */
 
+// ── GoatCounter 訪問者数をヘッダーに表示 ─────────────────────────
+(function () {
+  const el = document.getElementById('visitorCount');
+  if (!el) return;
+  fetch('https://ishikawamap.goatcounter.com/counter//ishikawa-map.json')
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      el.textContent = '👁 ' + d.count + '人';
+    })
+    .catch(function () {
+      el.textContent = '';   // 取得失敗時は非表示
+    });
+})();
+
 // ── スマホ：タブバーのスワイプでヘッダー操作・情報パネル表示 ────────
 (function () {
   const tabs = document.querySelector('.mobile-tabs');

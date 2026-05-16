@@ -714,6 +714,21 @@ body.info-open .label-toggle-btn { display: none !important; }
     gap: 2px;
     padding: 6px 14px 7px;
   }
+  .header-mobile-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .visitor-badge {
+    font-size: .72rem;
+    font-weight: 700;
+    color: #fff;
+    background: rgba(255,255,255,.18);
+    padding: 2px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: .01em;
+  }
   .header-mobile-h1 {
     font-size: 1.05rem;
     font-weight: 800;
