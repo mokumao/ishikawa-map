@@ -530,9 +530,6 @@ footer a:hover { text-decoration: underline; }
   height: 14px;
   border-radius: 50%;
   background: #1565c0;
-  box-shadow:
-    0 0 0 3px #fff,
-    0 0 0 6px #1565c0;
   animation: location-sonar 2.8s ease-out infinite;
   flex-shrink: 0;
 }

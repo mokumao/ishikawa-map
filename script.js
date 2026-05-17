@@ -80,7 +80,7 @@
             if (!m || !m.getElement()) return;
             var tag = m.getElement().querySelector('.location-label-tag');
             if (tag) tag.style.display = 'none';
-          }, 2000);
+          }, 5000);
         })(locationMarker);
 
         btn.classList.remove('locating');
