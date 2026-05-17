@@ -546,8 +546,13 @@ footer a:hover { text-decoration: underline; }
   margin-top: 5px;
 }
 
-/* ── ピン上の閉じるボタン ─────────────────────────────────────── */
+/* ── ポップアップ直下の閉じるボタン ──────────────────────────── */
 .pin-close-btn {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  margin-top: 8px;
+  transform: translateX(-50%);
   width: 30px;
   height: 30px;
   background: #fff;
@@ -556,7 +561,7 @@ footer a:hover { text-decoration: underline; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Tahoma, Verdana, sans-serif; /* 右上×と同じフォント */
+  font-family: Tahoma, Verdana, sans-serif;
   font-size: 20px;
   font-weight: 900;
   line-height: normal;
@@ -565,6 +570,7 @@ footer a:hover { text-decoration: underline; }
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  z-index: 10;
 }
 
 /* ── 店名ラベル（永続ツールチップ） ──────────────────────────── */

@@ -1093,40 +1093,27 @@ map.on('popupopen', function(e) {
   }, 80);
 });
 
-// ── ピンの上に「閉じる×」ボタンを追加（スマホ片手操作対応） ──────────
-// ポップアップペイン(z-index:700)より上に表示するカスタムペインを作成
-const closeBtnPane = map.createPane('closeBtnPane');
-closeBtnPane.style.zIndex = 750;   // ポップアップ(700)より前面
-closeBtnPane.style.pointerEvents = 'none'; // マーカー要素が個別に制御
-
-let pinCloseMarker = null;
-
+// ── ポップアップのすぐ下に「閉じる×」ボタンをDOM追加 ────────────────
 map.on('popupopen', function(e) {
-  // 既存の×ボタンマーカーをリセット
-  if (pinCloseMarker) { map.removeLayer(pinCloseMarker); pinCloseMarker = null; }
-
-  // 現在地マーカーのポップアップには pin-close-btn を追加しない
+  // 現在地マーカーのポップアップには × を追加しない
   if (e.popup._source && e.popup._source._isLocationMarker) return;
 
-  const latlng = e.popup.getLatLng();
-  if (!latlng) return;
+  setTimeout(function() {
+    var popupEl = e.popup.getElement();
+    if (!popupEl) return;
+    // 既存の × ボタンを除去（念のため）
+    var existing = popupEl.querySelector('.pin-close-btn');
+    if (existing) existing.remove();
 
-  pinCloseMarker = L.marker(latlng, {
-    icon: L.divIcon({
-      className: '',
-      html: '<div class="pin-close-btn">×</div>',
-      iconSize:   [30, 30],
-      iconAnchor: [15, -4], // ピン先端より下に配置
-    }),
-    pane:         'closeBtnPane', // ポップアップより前面のペインへ
-    interactive:  true,
-    keyboard:     false,
-  }).addTo(map);
-
-  pinCloseMarker.on('click', function(ev) {
-    L.DomEvent.stopPropagation(ev);
-    map.closePopup();
-  });
+    var btn = document.createElement('div');
+    btn.className = 'pin-close-btn';
+    btn.textContent = '×';
+    btn.addEventListener('click', function(ev) {
+      ev.stopPropagation();
+      map.closePopup();
+    });
+    popupEl.appendChild(btn);
+  }, 50);
 });
 
 // ポップアップ開閉時：ミニマップ・中央★・左矢印をポップアップの裏に隠す
@@ -1134,7 +1121,6 @@ map.on('popupopen',  function() { document.body.classList.add('popup-open');    
 map.on('popupclose', function() { document.body.classList.remove('popup-open'); });
 
 map.on('popupclose', function() {
-  if (pinCloseMarker) { map.removeLayer(pinCloseMarker); pinCloseMarker = null; }
   if (_isReopening) return; // 内部close-reopen中は復元しない
   // ポップアップを閉じたら元の地図位置にスムーズに戻す
   if (_savedCenterBeforePopup) {
