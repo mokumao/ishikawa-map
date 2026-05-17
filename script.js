@@ -23,13 +23,45 @@
     });
 })();
 
-// ── 現在地ボタン ──────────────────────────────────────────────────
+// ── 現在地ボタン（リアルタイム追跡） ────────────────────────────
 (function () {
   const btn = document.getElementById('locateBtn');
   if (!btn) return;
 
   let locationMarker = null;
-  let locationCircle = null;
+  let watchId        = null;  // watchPosition の ID
+  let isFirstFix     = true;  // 初回取得フラグ
+
+  // ── マーカー生成（ソナードット + 「現在地」ラベル） ──────────
+  function createMarker(lat, lng) {
+    if (locationMarker) { locationMarker.remove(); locationMarker = null; }
+
+    locationMarker = L.marker([lat, lng], {
+      icon: L.divIcon({
+        className: '',
+        html: '<div class="location-marker-wrap">' +
+                '<div class="location-sonar-dot"></div>' +
+                '<div class="location-label-tag">現在地</div>' +
+              '</div>',
+        iconSize:   [90, 46],
+        iconAnchor: [45, 7]
+      }),
+      zIndexOffset: 1000
+    }).addTo(map);
+    locationMarker._isLocationMarker = true;
+
+    // 5秒後にラベルを0.5秒フェードアウト
+    ;(function(m) {
+      setTimeout(function() {
+        if (!m || !m.getElement()) return;
+        var tag = m.getElement().querySelector('.location-label-tag');
+        if (!tag) return;
+        tag.style.transition = 'opacity 0.5s ease';
+        tag.style.opacity    = '0';
+        setTimeout(function() { if (tag) tag.style.display = 'none'; }, 500);
+      }, 5000);
+    })(locationMarker);
+  }
 
   btn.addEventListener('click', function () {
     if (!navigator.geolocation) {
@@ -37,72 +69,53 @@
       return;
     }
 
-    // 取得中アニメーション
+    // 前のウォッチを停止してリセット
+    if (watchId !== null) {
+      navigator.geolocation.clearWatch(watchId);
+      watchId = null;
+    }
+    if (locationMarker) { locationMarker.remove(); locationMarker = null; }
+
+    isFirstFix = true;
     btn.classList.add('locating');
     btn.textContent = '⏳';
 
-    navigator.geolocation.getCurrentPosition(
+    // watchPosition でリアルタイム追跡開始
+    watchId = navigator.geolocation.watchPosition(
       function (pos) {
         const lat = pos.coords.latitude;
         const lng = pos.coords.longitude;
-        const acc = pos.coords.accuracy; // 精度（メートル）
 
-        // 地図を現在地に移動
-        map.flyTo([lat, lng], 16, { duration: 1.2 });
-
-        // 前の現在地マーカーを削除
-        if (locationMarker) { locationMarker.remove(); }
-        if (locationCircle)  { locationCircle.remove();  }
-
-        // 精度円は非表示（ソナードットのみ表示）
-        // locationCircle は削除済み
-
-        // 現在地マーカー（ソナー波紋アニメーション + 「現在地」ラベル）
-        locationMarker = L.marker([lat, lng], {
-          icon: L.divIcon({
-            className: '',
-            html: '<div class="location-marker-wrap">' +
-                    '<div class="location-sonar-dot"></div>' +
-                    '<div class="location-label-tag">現在地</div>' +
-                  '</div>',
-            iconSize:   [90, 46],
-            iconAnchor: [45, 7]  // ソナードット中心（上から7px）を座標に合わせる
-          }),
-          zIndexOffset: 1000
-        }).addTo(map);
-        // 現在地マーカーの識別フラグ（pin-close-btn 生成をスキップするため）
-        locationMarker._isLocationMarker = true;
-        // ポップアップなし
-
-        // 5秒後に「現在地」ラベルをゆっくりフェードアウト → ソナードットのみ残す
-        ;(function(m) {
-          setTimeout(function() {
-            if (!m || !m.getElement()) return;
-            var tag = m.getElement().querySelector('.location-label-tag');
-            if (!tag) return;
-            // CSS transitionでゆっくり透明に（1.5秒）
-            tag.style.transition = 'opacity 0.5s ease';
-            tag.style.opacity = '0';
-            // フェード完了後に非表示にしてレイアウトから除外
-            setTimeout(function() {
-              if (tag) tag.style.display = 'none';
-            }, 500);
-          }, 5000);
-        })(locationMarker);
-
-        btn.classList.remove('locating');
-        btn.textContent = '現在地';
-      },
-      function (err) {
-        btn.classList.remove('locating');
-        btn.textContent = '現在地';
-        if (err.code === 1) {
-          alert('位置情報の使用が拒否されました。\nスマホの設定でブラウザの位置情報を許可してください。');
+        if (isFirstFix) {
+          // ── 初回：地図を現在地に移動してマーカー新規作成 ──
+          isFirstFix = false;
+          btn.classList.remove('locating');
+          btn.textContent = '現在地';
+          map.flyTo([lat, lng], 16, { duration: 1.2 });
+          createMarker(lat, lng);
         } else {
-          alert('現在地を取得できませんでした。もう一度お試しください。');
+          // ── 以降：マーカーを新しい位置に移動するだけ（地図は動かさない） ──
+          if (locationMarker) {
+            locationMarker.setLatLng([lat, lng]);
+          } else {
+            createMarker(lat, lng);
+          }
         }
       },
-      { enableHighAccuracy: true, timeout: 10000 }
+      function (err) {
+        // 初回取得失敗時のみUIリセット＆エラー表示
+        if (isFirstFix) {
+          isFirstFix = false;
+          btn.classList.remove('locating');
+          btn.textContent = '現在地';
+          if (err.code === 1) {
+            alert('位置情報の使用が拒否されました。\nスマホの設定でブラウザの位置情報を許可してください。');
+            if (watchId !== null) { navigator.geolocation.clearWatch(watchId); watchId = null; }
+          }
+        }
+        // 追跡中の一時エラーは無視（次の取得を待つ）
+      },
+      { enableHighAccuracy: true, maximumAge: 0, timeout: 30000 }
     );
   });
 })();
