@@ -9,7 +9,7 @@
   if (!el) return;
   // サイト全体の累計訪問数（GoatCounter の公開カウンター機能を要有効化）
   // 設定: https://ishikawamap.goatcounter.com/settings/main → Allow public access
-  fetch('https://ishikawamap.goatcounter.com/counter/.json')
+  fetch('https://ishikawamap.goatcounter.com/counter//ishikawa-map/.json')
     .then(function (r) {
       if (!r.ok) throw new Error('status ' + r.status);
       return r.json();
