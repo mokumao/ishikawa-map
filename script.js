@@ -814,6 +814,9 @@ const markersData = restaurants.map((r, idx) => {
       _startY = e.touches[0].clientY;
       _pt = setTimeout(function() {
         _fired = true;
+        // 指を離した後の合成クリックでポップアップが閉じないよう一時的にブロック
+        map.options.closePopupOnClick = false;
+        setTimeout(function() { map.options.closePopupOnClick = true; }, 700);
         openThisPopup();
       }, 200);
     }, { passive: true });
