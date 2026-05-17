@@ -81,12 +81,12 @@
             var tag = m.getElement().querySelector('.location-label-tag');
             if (!tag) return;
             // CSS transitionでゆっくり透明に（1.5秒）
-            tag.style.transition = 'opacity 1.5s ease';
+            tag.style.transition = 'opacity 0.5s ease';
             tag.style.opacity = '0';
             // フェード完了後に非表示にしてレイアウトから除外
             setTimeout(function() {
               if (tag) tag.style.display = 'none';
-            }, 1500);
+            }, 500);
           }, 5000);
         })(locationMarker);
 
