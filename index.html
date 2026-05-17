@@ -89,6 +89,31 @@
     <div id="map" aria-label="うるま市石川 飲食店マップ">
       <!-- 地図中央固定★（スクロールしても動かない） -->
       <div class="map-center-star" aria-hidden="true"></div>
+
+      <!-- 歯車メニュー（スマホのみ） -->
+      <div id="gearMenu" class="gear-menu" style="display:none;">
+        <!-- メインメニュー -->
+        <div id="gearMenuMain" class="gear-panel">
+          <div class="gear-row">
+            <button class="gear-menu-btn" id="gearLangBtn">言語</button>
+            <button class="gear-menu-btn" id="gearListBtn">リスト</button>
+          </div>
+          <div class="gear-row">
+            <button class="gear-menu-btn gear-back-btn" id="gearCloseBtn">戻る</button>
+          </div>
+        </div>
+        <!-- 言語サブメニュー -->
+        <div id="gearMenuLang" class="gear-panel" style="display:none;">
+          <div class="gear-row">
+            <button class="gear-menu-btn" id="gearLangJa">日本語</button>
+            <button class="gear-menu-btn" id="gearLangEn">英語</button>
+            <button class="gear-menu-btn" id="gearLangZh">中国語</button>
+          </div>
+          <div class="gear-row">
+            <button class="gear-menu-btn gear-back-btn" id="gearLangBack">戻る</button>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- ミニマップ（主地図の外に配置して座標干渉を回避） -->
     <div id="minimap"></div>

@@ -125,6 +125,59 @@
   });
 })();
 
+// ── 歯車メニュー ─────────────────────────────────────────────────
+(function () {
+  var menu     = document.getElementById('gearMenu');
+  var panelMain = document.getElementById('gearMenuMain');
+  var panelLang = document.getElementById('gearMenuLang');
+
+  function showMain() {
+    menu.style.display = 'block';
+    panelMain.style.display = 'flex';
+    panelLang.style.display = 'none';
+  }
+  function showLang() {
+    panelMain.style.display = 'none';
+    panelLang.style.display = 'flex';
+  }
+  function closeMenu() {
+    menu.style.display = 'none';
+    panelMain.style.display = 'flex';
+    panelLang.style.display = 'none';
+  }
+
+  // 歯車ボタン：メニュー開閉トグル
+  document.getElementById('gearBtn').addEventListener('click', function (e) {
+    L.DomEvent && L.DomEvent.stopPropagation(e);
+    if (menu.style.display === 'none') { showMain(); } else { closeMenu(); }
+  });
+
+  // メインメニュー
+  document.getElementById('gearLangBtn').addEventListener('click', showLang);
+  document.getElementById('gearListBtn').addEventListener('click', function () {
+    closeMenu();
+    switchTab('list');
+  });
+  document.getElementById('gearCloseBtn').addEventListener('click', closeMenu);
+
+  // 言語サブメニュー
+  document.getElementById('gearLangJa').addEventListener('click', function () {
+    alert('日本語表示（現在の設定です）');
+  });
+  document.getElementById('gearLangEn').addEventListener('click', function () {
+    alert('英語対応は準備中です。');
+  });
+  document.getElementById('gearLangZh').addEventListener('click', function () {
+    alert('中国語対応は準備中です。');
+  });
+  document.getElementById('gearLangBack').addEventListener('click', showMain);
+
+  // 地図クリックでメニューを閉じる
+  document.getElementById('map').addEventListener('click', function () {
+    if (menu.style.display !== 'none') closeMenu();
+  });
+})();
+
 // ── スマホ：タブバーのスワイプでヘッダー操作・情報パネル表示 ────────
 (function () {
   const tabs = document.querySelector('.mobile-tabs');

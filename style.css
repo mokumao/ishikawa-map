@@ -832,6 +832,44 @@ body.info-open .label-toggle-btn { display: none !important; }
     color: #546e7a !important;
     font-size: 1.3rem !important;
   }
+
+  /* ── 歯車メニュー ── */
+  .gear-menu {
+    position: absolute;
+    left: 70px;
+    top: 38%;
+    z-index: 1001;
+    pointer-events: auto;
+  }
+  .gear-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .gear-row {
+    display: flex;
+    gap: 10px;
+  }
+  .gear-menu-btn {
+    background: #fff;
+    border: 1.5px solid #ddd;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    font-family: inherit;
+    color: #263238;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,.22);
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .12s;
+  }
+  .gear-menu-btn:active { background: #f0f4f0; }
+  .gear-back-btn {
+    color: #e53935;
+    border-color: #ffcdd2;
+  }
   .locate-btn.locating {
     animation: locate-pulse 1s ease-in-out infinite;
   }
