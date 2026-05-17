@@ -118,6 +118,11 @@
       { enableHighAccuracy: true, maximumAge: 0, timeout: 30000 }
     );
   });
+
+  // ページを離れるときにGPS追跡を自動停止（バッテリー節約）
+  window.addEventListener('pagehide', function () {
+    if (watchId !== null) { navigator.geolocation.clearWatch(watchId); watchId = null; }
+  });
 })();
 
 // ── スマホ：タブバーのスワイプでヘッダー操作・情報パネル表示 ────────
