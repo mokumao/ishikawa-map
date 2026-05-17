@@ -975,6 +975,21 @@ const markersData = restaurants.map((r, idx) => {
   return { restaurant: r, marker, idx };
 });
 
+// ── ポップアップ表示中のマーカーをソナー点滅させる ──────────────
+map.on('popupopen', function(e) {
+  var src = e.popup._source;
+  // 現在地マーカーは除外・店舗マーカーのみ対象
+  if (src && src.getElement && !src._isLocationMarker) {
+    var el = src.getElement();
+    if (el) el.classList.add('marker-active-pulse');
+  }
+});
+map.on('popupclose', function() {
+  document.querySelectorAll('.marker-active-pulse').forEach(function(el) {
+    el.classList.remove('marker-active-pulse');
+  });
+});
+
 // ── 店名ラベル 表示/非表示トグルボタン ─────────────────────────────
 // スマホは初期状態で非表示、PCは表示
 let labelsVisible = window.innerWidth > 767;

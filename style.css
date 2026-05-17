@@ -510,6 +510,16 @@ footer a:hover { text-decoration: underline; }
   color: #b71c1c !important;
 }
 
+/* ── ポップアップ表示中のマーカーをソナー点滅 ───────────────── */
+@keyframes marker-sonar-pulse {
+  0%,100% { filter: brightness(1)   drop-shadow(0 0  0px rgba(255,255,255,0)); }
+  50%     { filter: brightness(1.4) drop-shadow(0 0 10px rgba(255,255,255,1))
+                                    drop-shadow(0 0  4px rgba(255,100,100,0.7)); }
+}
+.marker-active-pulse {
+  animation: marker-sonar-pulse 0.9s ease-in-out infinite;
+}
+
 /* ── 現在地マーカー（ソナー波紋 + ラベル） ───────────────────── */
 .location-marker-wrap {
   display: flex;
