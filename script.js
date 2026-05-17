@@ -812,7 +812,7 @@ const markersData = restaurants.map((r, idx) => {
       _pt = setTimeout(function() {
         _fired = true;
         openThisPopup();
-      }, 500);
+      }, 200);
     }, { passive: true });
     el.addEventListener('touchmove', function() {
       clearTimeout(_pt);
