@@ -375,6 +375,7 @@ const restaurants = [
     note:      "これは動作確認用のテスト店舗です。実在しません。店舗オーナー操作機能の確認に使用します。",
     sourceUrl: "",
     warn:      false,
+    alwaysShow: true,
     lat:       26.4268,
     lng:       127.8415,
     twitter:    "",

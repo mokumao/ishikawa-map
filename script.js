@@ -1094,8 +1094,11 @@ function buildFilterButtons() {
 
 // ── 表示判定（フィルター＋検索の両方を満たすか） ────────────────
 function isVisible(r) {
-  const filterObj = FILTERS.find(f => f.id === currentFilter);
-  if (!filterObj.test(r.genre)) return false;
+  // alwaysShow フラグがある店舗はフィルターに関わらず常時表示
+  if (!r.alwaysShow) {
+    const filterObj = FILTERS.find(f => f.id === currentFilter);
+    if (!filterObj.test(r.genre)) return false;
+  }
   if (!currentSearch) return true;
   const q = currentSearch.toLowerCase();
   return (
