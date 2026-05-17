@@ -57,22 +57,29 @@
           weight:      1
         }).addTo(map);
 
-        // 現在地マーカー（青丸）
-        locationMarker = L.circleMarker([lat, lng], {
-          radius:      8,
-          color:       '#fff',
-          fillColor:   '#1565c0',
-          fillOpacity: 1,
-          weight:      3
+        // 現在地マーカー（「現在地」ラベルアイコン）
+        locationMarker = L.marker([lat, lng], {
+          icon: L.divIcon({
+            className: '',
+            html: '<div class="location-pin-label">📍 現在地</div>',
+            iconSize:    [80, 30],
+            iconAnchor:  [40, 30],
+            popupAnchor: [0, -34]
+          }),
+          zIndexOffset: 1000
         }).addTo(map);
-        locationMarker.bindPopup('📍 現在地').openPopup();
+        // 現在地マーカーの識別フラグ（pin-close-btn 生成をスキップするため）
+        locationMarker._isLocationMarker = true;
+        locationMarker.bindPopup('📍 現在地です', {
+          className: 'location-popup'
+        }).openPopup();
 
         btn.classList.remove('locating');
-        btn.textContent = '📍';
+        btn.textContent = '現在地';
       },
       function (err) {
         btn.classList.remove('locating');
-        btn.textContent = '📍';
+        btn.textContent = '現在地';
         if (err.code === 1) {
           alert('位置情報の使用が拒否されました。\nスマホの設定でブラウザの位置情報を許可してください。');
         } else {
@@ -989,6 +996,9 @@ let pinCloseMarker = null;
 map.on('popupopen', function(e) {
   // 既存の×ボタンマーカーをリセット
   if (pinCloseMarker) { map.removeLayer(pinCloseMarker); pinCloseMarker = null; }
+
+  // 現在地マーカーのポップアップには pin-close-btn を追加しない
+  if (e.popup._source && e.popup._source._isLocationMarker) return;
 
   const latlng = e.popup.getLatLng();
   if (!latlng) return;
