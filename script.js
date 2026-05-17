@@ -172,6 +172,9 @@
   });
   document.getElementById('gearLangBack').addEventListener('click', showMain);
 
+  // メニュー内のクリックが地図に伝播しないようにブロック
+  menu.addEventListener('click', function (e) { e.stopPropagation(); });
+
   // 地図クリックでメニューを閉じる
   document.getElementById('map').addEventListener('click', function () {
     if (menu.style.display !== 'none') closeMenu();
