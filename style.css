@@ -832,6 +832,15 @@ body.info-open .label-toggle-btn { display: none !important; }
     line-height: 1.25 !important;
     white-space: nowrap !important;
   }
+  .ishikawa-btn {
+    margin-top: 6px;
+    color: #2e7d32 !important;
+    font-size: 0.6rem !important;
+    border-radius: 8px !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+    font-weight: 900 !important;
+  }
   .gear-btn {
     margin-top: 6px;
     color: #546e7a !important;

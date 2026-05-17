@@ -23,6 +23,15 @@
     });
 })();
 
+// ── 石川全域ボタン ────────────────────────────────────────────
+(function () {
+  var btn = document.getElementById('ishikawaBtn');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    map.flyTo(ISHIKAWA_CENTER, ISHIKAWA_ZOOM, { duration: 1.0 });
+  });
+})();
+
 // ── 現在地ボタン（リアルタイム追跡） ────────────────────────────
 (function () {
   const btn = document.getElementById('locateBtn');
