@@ -55,7 +55,8 @@
         iconSize:   [90, 46],
         iconAnchor: [45, 7]
       }),
-      zIndexOffset: 1000
+      zIndexOffset: 1000,
+      interactive:  false   // クリックを透過→下の店舗マーカーが反応できる
     }).addTo(map);
     locationMarker._isLocationMarker = true;
 
@@ -631,7 +632,7 @@ function makePinIcon(fillColor, isWarn) {
     html: svg,
     iconSize:   [30, 42],
     iconAnchor: [15, 42],
-    popupAnchor:[0, -62]
+    popupAnchor:[0, -92]
   });
 }
 
