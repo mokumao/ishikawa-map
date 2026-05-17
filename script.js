@@ -802,13 +802,16 @@ setTimeout(() => {
     miniTargetEl.style.top  = y + 'px';
   }
 
-  // メイン地図のパンで追従（ポップアップ表示中はスキップ）
-  map.on('move', function () {
+  // メイン地図のパン・ズームで追従（ポップアップ表示中はスキップ）
+  function syncMinimap() {
     if (!_popupOpen) {
       _targetLatLng = map.getCenter();
       updateMiniTarget();
     }
-  });
+  }
+  map.on('move',    syncMinimap);  // パン中リアルタイム追従
+  map.on('moveend', syncMinimap);  // アニメーション完了後に必ず同期
+  map.on('zoomend', syncMinimap);  // ズーム変化後も同期
 
   // ポップアップ表示時：その店舗位置に移動
   map.on('popupopen', function (e) {
