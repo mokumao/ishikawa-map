@@ -57,22 +57,31 @@
           weight:      1
         }).addTo(map);
 
-        // 現在地マーカー（「現在地」ラベルアイコン）
+        // 現在地マーカー（ソナー波紋アニメーション + 「現在地」ラベル）
         locationMarker = L.marker([lat, lng], {
           icon: L.divIcon({
             className: '',
-            html: '<div class="location-pin-label">📍 現在地</div>',
-            iconSize:    [80, 30],
-            iconAnchor:  [40, 30],
-            popupAnchor: [0, -34]
+            html: '<div class="location-marker-wrap">' +
+                    '<div class="location-sonar-dot"></div>' +
+                    '<div class="location-label-tag">現在地</div>' +
+                  '</div>',
+            iconSize:   [90, 46],
+            iconAnchor: [45, 7]  // ソナードット中心（上から7px）を座標に合わせる
           }),
           zIndexOffset: 1000
         }).addTo(map);
         // 現在地マーカーの識別フラグ（pin-close-btn 生成をスキップするため）
         locationMarker._isLocationMarker = true;
-        locationMarker.bindPopup('📍 現在地です', {
-          className: 'location-popup'
-        }).openPopup();
+        // ポップアップなし
+
+        // 2秒後に「現在地」ラベルを非表示 → ソナードットのみ残す
+        ;(function(m) {
+          setTimeout(function() {
+            if (!m || !m.getElement()) return;
+            var tag = m.getElement().querySelector('.location-label-tag');
+            if (tag) tag.style.display = 'none';
+          }, 2000);
+        })(locationMarker);
 
         btn.classList.remove('locating');
         btn.textContent = '現在地';

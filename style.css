@@ -510,23 +510,44 @@ footer a:hover { text-decoration: underline; }
   color: #b71c1c !important;
 }
 
-/* ── 現在地マーカーラベル ─────────────────────────────────────── */
-.location-pin-label {
+/* ── 現在地マーカー（ソナー波紋 + ラベル） ───────────────────── */
+.location-marker-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ソナー波紋アニメーション（地図中央の2重丸と同じ動き） */
+@keyframes location-sonar {
+  0%   { transform: scale(0.15); opacity: 1; }
+  80%  { transform: scale(1);    opacity: 1; }
+  100% { transform: scale(1);    opacity: 0; }
+}
+.location-sonar-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #1565c0;
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px #1565c0;
+  animation: location-sonar 2.8s ease-out infinite;
+  flex-shrink: 0;
+}
+
+/* 「現在地」ラベル（2秒後にJSで display:none） */
+.location-label-tag {
   background: #1565c0;
   color: #fff;
   font-weight: 700;
   font-size: 0.78rem;
-  padding: 4px 10px;
+  padding: 3px 10px;
   border-radius: 12px;
   white-space: nowrap;
   box-shadow: 0 2px 6px rgba(0,0,0,.35);
-  display: inline-block;
-  user-select: none;
-}
-
-/* 現在地ポップアップ：赤い矢印（popup-tip）を非表示 */
-.leaflet-popup.location-popup .leaflet-popup-tip-container {
-  display: none !important;
+  margin-top: 5px;
 }
 
 /* ── ピン上の閉じるボタン ─────────────────────────────────────── */
