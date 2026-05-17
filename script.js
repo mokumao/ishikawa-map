@@ -847,14 +847,21 @@ const markersData = restaurants.map((r, idx) => {
   marker.off('click');
 
   if ('ontouchstart' in window) {
-    // ── スマホ：0.5秒長押しでポップアップ ──
+    // ── スマホ：0.2秒長押しでポップアップ ──
     var markerEl = marker.getElement();
     if (markerEl) setupLongPress(markerEl);
 
-    marker.once('tooltipopen', function() {
-      var ttEl = marker.getTooltip().getElement();
-      if (ttEl) setupLongPress(ttEl);
-    });
+    // permanent:true のツールチップは marker.addTo(map) 時点で既に開いている。
+    // そのため tooltipopen イベントはもう発火済みで once() では拾えない。
+    // setTimeout(0) でDOM更新後に要素を取得して長押しを設定する。
+    ;(function(m) {
+      setTimeout(function() {
+        var tooltip = m.getTooltip();
+        if (!tooltip) return;
+        var ttEl = tooltip.getElement();
+        if (ttEl) setupLongPress(ttEl);
+      }, 0);
+    })(marker);
   } else {
     // ── デスクトップ：通常クリックでポップアップ ──
     marker.on('click', function(e) {
