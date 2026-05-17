@@ -784,6 +784,16 @@ const markersData = restaurants.map((r, idx) => {
   });
   marker.addTo(map);
 
+  // 店舗名ラベルをタップ/クリックしてもポップアップを開く
+  marker.once('tooltipopen', function () {
+    const el = marker.getTooltip().getElement();
+    if (!el) return;
+    L.DomEvent.on(el, 'click touchend', function (e) {
+      L.DomEvent.stopPropagation(e);
+      marker.fire('click');
+    });
+  });
+
   marker.on('click', function() {
     // スマホでマーカーをタップした瞬間の地図中心を保存（ポップアップ閉時に復元）
     if (window.innerWidth <= 767) {

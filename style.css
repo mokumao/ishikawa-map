@@ -542,6 +542,8 @@ footer a:hover { text-decoration: underline; }
   padding: 2px 7px !important;
   white-space: nowrap !important;
   box-shadow: 0 1px 5px rgba(0,0,0,.18) !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
 }
 .shop-label::before {
   border-top-color: #b0bec5 !important;
