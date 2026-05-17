@@ -54,14 +54,8 @@
         if (locationMarker) { locationMarker.remove(); }
         if (locationCircle)  { locationCircle.remove();  }
 
-        // 精度を示す薄い青円
-        locationCircle = L.circle([lat, lng], {
-          radius:      acc,
-          color:       '#1565c0',
-          fillColor:   '#1565c0',
-          fillOpacity: 0.12,
-          weight:      1
-        }).addTo(map);
+        // 精度円は非表示（ソナードットのみ表示）
+        // locationCircle は削除済み
 
         // 現在地マーカー（ソナー波紋アニメーション + 「現在地」ラベル）
         locationMarker = L.marker([lat, lng], {
