@@ -471,20 +471,9 @@ footer a:hover { text-decoration: underline; }
 .leaflet-popup-content { margin: 14px 14px 12px !important; }
 .leaflet-popup-tip-container { margin-top: -1px; }
 
-/* ポップアップの矢印を下向き矢印（↓）形に */
+/* ポップアップの下向き赤矢印を非表示 */
 .leaflet-popup-tip-container {
-  width: 40px !important;
-  height: 28px !important;
-  margin-top: -1px !important;
-}
-.leaflet-popup-tip {
-  background: #e53935 !important;
-  box-shadow: none !important;
-  width: 30px !important;
-  height: 30px !important;
-  transform: none !important;
-  margin: 0 auto !important;
-  clip-path: polygon(30% 0%, 70% 0%, 70% 52%, 100% 52%, 50% 100%, 0% 52%, 30% 52%) !important;
+  display: none !important;
 }
 
 /* 閉じるボタン（×）— PC・スマホ共通：白丸・赤文字・中央寄せ */
