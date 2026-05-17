@@ -827,6 +827,11 @@ body.info-open .label-toggle-btn { display: none !important; }
     line-height: 1.25 !important;
     white-space: nowrap !important;
   }
+  .gear-btn {
+    margin-top: 6px;
+    color: #546e7a !important;
+    font-size: 1.3rem !important;
+  }
   .locate-btn.locating {
     animation: locate-pulse 1s ease-in-out infinite;
   }

@@ -16,7 +16,7 @@
     })
     .then(function (d) {
       const count = d.count_unique || d.count || '?';
-      el.textContent = '👁 ' + count + '人';
+      el.textContent = '本日の訪問者 ' + count + ' 人';
     })
     .catch(function () {
       el.textContent = ''; // 取得失敗時は非表示
@@ -74,12 +74,19 @@
         locationMarker._isLocationMarker = true;
         // ポップアップなし
 
-        // 2秒後に「現在地」ラベルを非表示 → ソナードットのみ残す
+        // 5秒後に「現在地」ラベルをゆっくりフェードアウト → ソナードットのみ残す
         ;(function(m) {
           setTimeout(function() {
             if (!m || !m.getElement()) return;
             var tag = m.getElement().querySelector('.location-label-tag');
-            if (tag) tag.style.display = 'none';
+            if (!tag) return;
+            // CSS transitionでゆっくり透明に（1.5秒）
+            tag.style.transition = 'opacity 1.5s ease';
+            tag.style.opacity = '0';
+            // フェード完了後に非表示にしてレイアウトから除外
+            setTimeout(function() {
+              if (tag) tag.style.display = 'none';
+            }, 1500);
           }, 5000);
         })(locationMarker);
 
