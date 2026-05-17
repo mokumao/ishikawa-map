@@ -7,13 +7,19 @@
 (function () {
   const el = document.getElementById('visitorCount');
   if (!el) return;
-  fetch('https://ishikawamap.goatcounter.com/counter//ishikawa-map.json')
-    .then(function (r) { return r.json(); })
+  // サイト全体の累計訪問数（GoatCounter の公開カウンター機能を要有効化）
+  // 設定: https://ishikawamap.goatcounter.com/settings/main → Allow public access
+  fetch('https://ishikawamap.goatcounter.com/counter/.json')
+    .then(function (r) {
+      if (!r.ok) throw new Error('status ' + r.status);
+      return r.json();
+    })
     .then(function (d) {
-      el.textContent = '👁 ' + d.count + '人';
+      const count = d.count_unique || d.count || '?';
+      el.textContent = '👁 ' + count + '人';
     })
     .catch(function () {
-      el.textContent = '';   // 取得失敗時は非表示
+      el.textContent = ''; // 取得失敗時は非表示
     });
 })();
 
