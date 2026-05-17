@@ -807,16 +807,24 @@ const markersData = restaurants.map((r, idx) => {
   // ── 長押し設定（スマホ用）────────────────────────────────────────
   function setupLongPress(el) {
     var _pt = null, _fired = false;
-    el.addEventListener('touchstart', function() {
+    var _startX = 0, _startY = 0;
+    el.addEventListener('touchstart', function(e) {
       _fired = false;
+      _startX = e.touches[0].clientX;
+      _startY = e.touches[0].clientY;
       _pt = setTimeout(function() {
         _fired = true;
         openThisPopup();
       }, 200);
     }, { passive: true });
-    el.addEventListener('touchmove', function() {
-      clearTimeout(_pt);
-      _fired = false;
+    el.addEventListener('touchmove', function(e) {
+      // 10px以上動いた場合のみキャンセル（微妙な揺れは無視）
+      var dx = Math.abs(e.touches[0].clientX - _startX);
+      var dy = Math.abs(e.touches[0].clientY - _startY);
+      if (dx > 10 || dy > 10) {
+        clearTimeout(_pt);
+        _fired = false;
+      }
     }, { passive: true });
     el.addEventListener('touchend', function(e) {
       clearTimeout(_pt);
