@@ -784,37 +784,81 @@ const markersData = restaurants.map((r, idx) => {
   });
   marker.addTo(map);
 
-  // 店舗名ラベルをタップ/クリックしてもポップアップを開く
-  marker.once('tooltipopen', function () {
-    const el = marker.getTooltip().getElement();
-    if (!el) return;
-    L.DomEvent.on(el, 'click touchend', function (e) {
-      L.DomEvent.stopPropagation(e);
-      marker.fire('click');
-    });
-  });
-
-  marker.on('click', function() {
-    // スマホでマーカーをタップした瞬間の地図中心を保存（ポップアップ閉時に復元）
+  // ── ポップアップを開く共通処理 ──────────────────────────────────
+  function openThisPopup() {
     if (window.innerWidth <= 767) {
       _savedCenterBeforePopup = map.getCenter();
     }
-
     setActiveItem(idx);
-
-    // スマホでヘッダーが表示中の場合：まず折りたたんで地図を大きくしてからポップアップ表示
-    // → ポップアップ・矢印・ピンアイコンがすべて画面内に収まるようにする
     if (window.innerWidth <= 767 && !document.body.classList.contains('header-collapsed')) {
-      _isReopening = true;             // 内部close-reopen：popupcloseで復元しない
-      marker.closePopup();             // 即座に閉じる
+      _isReopening = true;
+      marker.closePopup();
       _isReopening = false;
-      document.body.classList.add('header-collapsed'); // ヘッダー折りたたみ
+      document.body.classList.add('header-collapsed');
       setTimeout(function() {
-        map.invalidateSize();                       // 地図サイズ更新
-        marker.openPopup();                         // 拡大した地図でポップアップ表示
-      }, 380);                                      // CSSアニメーション(0.35s)完了後
+        map.invalidateSize();
+        marker.openPopup();
+      }, 380);
+    } else {
+      marker.openPopup();
     }
-  });
+  }
+
+  // ── 長押し設定（スマホ用）────────────────────────────────────────
+  function setupLongPress(el) {
+    var _pt = null, _fired = false;
+    el.addEventListener('touchstart', function() {
+      _fired = false;
+      _pt = setTimeout(function() {
+        _fired = true;
+        openThisPopup();
+      }, 500);
+    }, { passive: true });
+    el.addEventListener('touchmove', function() {
+      clearTimeout(_pt);
+      _fired = false;
+    }, { passive: true });
+    el.addEventListener('touchend', function(e) {
+      clearTimeout(_pt);
+      if (_fired) {
+        _fired = false;
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, { passive: false });
+    el.addEventListener('touchcancel', function() {
+      clearTimeout(_pt);
+      _fired = false;
+    }, { passive: true });
+  }
+
+  // Leaflet の bindPopup が登録した内部クリックハンドラを削除して自前で制御
+  marker.off('click');
+
+  if ('ontouchstart' in window) {
+    // ── スマホ：0.5秒長押しでポップアップ ──
+    var markerEl = marker.getElement();
+    if (markerEl) setupLongPress(markerEl);
+
+    marker.once('tooltipopen', function() {
+      var ttEl = marker.getTooltip().getElement();
+      if (ttEl) setupLongPress(ttEl);
+    });
+  } else {
+    // ── デスクトップ：通常クリックでポップアップ ──
+    marker.on('click', function(e) {
+      L.DomEvent.stopPropagation(e);
+      openThisPopup();
+    });
+    marker.once('tooltipopen', function() {
+      var ttEl = marker.getTooltip().getElement();
+      if (!ttEl) return;
+      L.DomEvent.on(ttEl, 'click', function(e) {
+        L.DomEvent.stopPropagation(e);
+        openThisPopup();
+      });
+    });
+  }
 
   return { restaurant: r, marker, idx };
 });
