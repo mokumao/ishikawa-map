@@ -1,0 +1,72 @@
+name: Update Visitor Count
+
+on:
+  schedule:
+    - cron: '0 * * * *'   # 毎時0分（UTC）= 毎時9分（JST）に実行
+  workflow_dispatch:        # GitHub画面から手動実行も可能
+
+permissions:
+  contents: write           # gh-dataブランチへのプッシュ権限
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout gh-data branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-data
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch GoatCounter count and update visitor-log.json
+        run: |
+          python3 << 'PYEOF'
+          import json, urllib.request, sys
+          from datetime import datetime, timezone, timedelta
+
+          JST = timezone(timedelta(hours=9))
+          now = datetime.now(JST)
+          cutoff = now - timedelta(hours=49)   # 49時間以内だけ保持
+
+          # GoatCounter 公開カウンターAPIから累計取得
+          try:
+              url = 'https://ishikawamap.goatcounter.com/counter//ishikawa-map/.json'
+              with urllib.request.urlopen(url, timeout=15) as resp:
+                  response = json.loads(resp.read())
+              count = int(response.get('count_unique') or response.get('count') or 0)
+              print(f'Fetched count: {count}')
+          except Exception as e:
+              print(f'Failed to fetch count: {e}')
+              sys.exit(0)   # 失敗時はコミットしない
+
+          # 既存ログ読み込み
+          try:
+              with open('visitor-log.json', 'r') as f:
+                  data = json.load(f)
+          except Exception:
+              data = []
+
+          # 49時間以内のデータだけ保持（今日＋昨日分を確保）
+          data = [d for d in data if datetime.fromisoformat(d['ts']) > cutoff]
+
+          # 新エントリ追加
+          data.append({"ts": now.isoformat(), "count": count})
+
+          with open('visitor-log.json', 'w') as f:
+              json.dump(data, f, ensure_ascii=False, indent=2)
+
+          print(f'Saved {len(data)} entries. Latest: {count} at {now.isoformat()}')
+          PYEOF
+
+      - name: Commit and push to gh-data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add visitor-log.json
+          if ! git diff --staged --quiet; then
+            git commit -m "🤖 visitor-log $(TZ='Asia/Tokyo' date '+%Y-%m-%d %H:%M') JST"
+            git push origin gh-data
+          else
+            echo "No changes to commit"
+          fi

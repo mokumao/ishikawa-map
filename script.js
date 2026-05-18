@@ -3,23 +3,60 @@
    地図: OpenStreetMap + Leaflet
 ================================================================ */
 
-// ── GoatCounter 訪問者数をヘッダーに表示 ─────────────────────────
+// ── 本日の訪問者数を表示（JST 0:00〜現在の差分） ─────────────────
+// gh-dataブランチのvisitor-log.jsonから1時間ごとのスナップショットを読み取り、
+// 今日JST0時の累計との差分で「今日の訪問者数」を計算する。
 (function () {
-  const el = document.getElementById('visitorCount');
+  var el = document.getElementById('visitorCount');
   if (!el) return;
-  // サイト全体の累計訪問数（GoatCounter の公開カウンター機能を要有効化）
-  // 設定: https://ishikawamap.goatcounter.com/settings/main → Allow public access
-  fetch('https://ishikawamap.goatcounter.com/counter//ishikawa-map/.json')
+
+  var LOG_URL = 'https://raw.githubusercontent.com/mokumao/ishikawa-map/gh-data/visitor-log.json';
+
+  // JST今日0時のUTCタイムスタンプ（ミリ秒）を返す
+  function todayMidnightJST() {
+    var now = new Date();
+    var jstMs = now.getTime() + 9 * 60 * 60 * 1000;
+    var jst = new Date(jstMs);
+    return Date.UTC(jst.getUTCFullYear(), jst.getUTCMonth(), jst.getUTCDate())
+           - 9 * 60 * 60 * 1000;
+  }
+
+  fetch(LOG_URL + '?_=' + Date.now())  // キャッシュ回避
     .then(function (r) {
       if (!r.ok) throw new Error('status ' + r.status);
       return r.json();
     })
-    .then(function (d) {
-      const count = d.count_unique || d.count || '?';
-      el.textContent = '本日の訪問者 ' + count + ' 人';
+    .then(function (data) {
+      if (!data || data.length === 0) throw new Error('empty');
+
+      var midnight = todayMidnightJST();
+
+      // 最新エントリの累計
+      var latestCount = data[data.length - 1].count;
+
+      // 今日0時以前の最後のエントリを探す（その時点の累計が「今日の起点」）
+      var baseCount = null;
+      for (var i = data.length - 1; i >= 0; i--) {
+        if (new Date(data[i].ts).getTime() <= midnight) {
+          baseCount = data[i].count;
+          break;
+        }
+      }
+      // 0時前のデータがなければ最も古いエントリを起点とする
+      if (baseCount === null) baseCount = data[0].count;
+
+      var todayCount = Math.max(0, latestCount - baseCount);
+      el.textContent = '本日の訪問者 ' + todayCount + ' 人';
     })
     .catch(function () {
-      el.textContent = ''; // 取得失敗時は非表示
+      // visitor-log.jsonが未整備の間は累計APIにフォールバック
+      fetch('https://ishikawamap.goatcounter.com/counter//ishikawa-map/.json')
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          var count = d.count_unique || d.count || '?';
+          el.textContent = '累計訪問者 ' + count + ' 人';
+        })
+        .catch(function () { el.textContent = ''; });
     });
 })();
 
