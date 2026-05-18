@@ -177,23 +177,27 @@
 
 // ── 歯車メニュー ─────────────────────────────────────────────────
 (function () {
-  var menu     = document.getElementById('gearMenu');
+  var menu      = document.getElementById('gearMenu');
   var panelMain = document.getElementById('gearMenuMain');
   var panelLang = document.getElementById('gearMenuLang');
+  var overlay   = document.getElementById('gearOverlay');
 
   function showMain() {
     menu.style.display = 'block';
     panelMain.style.display = 'flex';
     panelLang.style.display = 'none';
+    overlay.classList.add('active');    // 背景をグレーオーバーレイで封鎖
   }
   function showLang() {
     panelMain.style.display = 'none';
     panelLang.style.display = 'flex';
+    // オーバーレイは維持（言語サブメニュー中も背景封鎖）
   }
   function closeMenu() {
     menu.style.display = 'none';
     panelMain.style.display = 'flex';
     panelLang.style.display = 'none';
+    overlay.classList.remove('active'); // オーバーレイ解除
   }
 
   // 歯車ボタン：メニュー開閉トグル

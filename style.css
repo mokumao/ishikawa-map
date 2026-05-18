@@ -848,12 +848,24 @@ body.info-open .label-toggle-btn { display: none !important; }
     font-size: 1.3rem !important;
   }
 
+  /* ── 歯車メニュー用オーバーレイ ── */
+  .gear-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.38);
+    z-index: 1500;   /* 歯車メニュー(1501)より下・他全要素より上 */
+  }
+  .gear-overlay.active {
+    display: block;
+  }
+
   /* ── 歯車メニュー ── */
   .gear-menu {
     position: absolute;
     left: 70px;
     top: 38%;
-    z-index: 1001;
+    z-index: 1501;   /* オーバーレイより前面 */
     pointer-events: auto;
   }
   .gear-panel {
