@@ -110,6 +110,9 @@
     })(locationMarker);
   }
 
+  // ボタンの元のSVGを保存しておく
+  var _locateBtnOrigHTML = btn.innerHTML;
+
   btn.addEventListener('click', function () {
     if (!navigator.geolocation) {
       alert('このブラウザは位置情報に対応していません。');
@@ -125,7 +128,7 @@
 
     isFirstFix = true;
     btn.classList.add('locating');
-    btn.textContent = '⏳';
+    // SVGアイコンはそのまま保持（locatingクラスのアニメーションで状態を示す）
 
     // watchPosition でリアルタイム追跡開始
     watchId = navigator.geolocation.watchPosition(
@@ -137,7 +140,7 @@
           // ── 初回：地図を現在地に移動してマーカー新規作成 ──
           isFirstFix = false;
           btn.classList.remove('locating');
-          btn.textContent = '現在地';
+          btn.innerHTML = _locateBtnOrigHTML; // SVGアイコンを復元
           map.flyTo([lat, lng], 16, { duration: 1.2 });
           createMarker(lat, lng);
         } else {
@@ -154,7 +157,7 @@
         if (isFirstFix) {
           isFirstFix = false;
           btn.classList.remove('locating');
-          btn.textContent = '現在地';
+          btn.innerHTML = _locateBtnOrigHTML; // SVGアイコンを復元
           if (err.code === 1) {
             alert('位置情報の使用が拒否されました。\nスマホの設定でブラウザの位置情報を許可してください。');
             if (watchId !== null) { navigator.geolocation.clearWatch(watchId); watchId = null; }
