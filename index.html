@@ -95,7 +95,20 @@
         <!-- メインメニュー -->
         <div id="gearMenuMain" class="gear-panel">
           <div class="gear-row">
-            <button class="gear-menu-btn" id="gearLangBtn">言語</button>
+            <button class="gear-menu-btn" id="gearLangBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 34" width="44" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <!-- 頭の輪郭（横顔） -->
+                <circle cx="13" cy="14" r="10" fill="none"/>
+                <!-- 目 -->
+                <circle cx="16" cy="11" r="1.5" fill="currentColor" stroke="none"/>
+                <!-- 口から言葉が出る線 -->
+                <path d="M21 16 L26 13" stroke-width="1.5"/>
+                <!-- 「あ」文字 -->
+                <text x="25" y="15" font-size="11" font-family="sans-serif" fill="currentColor" stroke="none" font-weight="bold">あ</text>
+                <!-- 「A」文字 -->
+                <text x="33" y="26" font-size="11" font-family="sans-serif" fill="currentColor" stroke="none" font-weight="bold">A</text>
+              </svg>
+            </button>
             <button class="gear-menu-btn" id="gearListBtn">リスト</button>
           </div>
           <div class="gear-row">
@@ -136,7 +149,14 @@
     <div class="side-swipe-ctrl" id="sideSwipeCtrl">
       <button class="side-swipe-btn" id="sideSwipeUp" aria-label="ヘッダーを表示/非表示">⬆</button>
       <button class="side-swipe-btn" id="sideSwipeDown" aria-label="情報パネルを開く">⬇</button>
-      <button class="side-swipe-btn locate-btn" id="locateBtn" aria-label="現在地に移動">現在地</button>
+      <button class="side-swipe-btn locate-btn" id="locateBtn" aria-label="現在地に移動">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 30" width="22" height="27" fill="currentColor">
+          <!-- 下向き矢印 -->
+          <path d="M9 0 h6 v13 h6 L12 25 3 13 h6 z"/>
+          <!-- 着地を示す楕円リング -->
+          <ellipse cx="12" cy="28" rx="9" ry="2.8" fill="none" stroke="currentColor" stroke-width="2.2"/>
+        </svg>
+      </button>
       <button class="side-swipe-btn ishikawa-btn" id="ishikawaBtn" aria-label="石川全域を表示">全域</button>
       <button class="side-swipe-btn gear-btn" id="gearBtn" aria-label="設定">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">

@@ -827,10 +827,11 @@ body.info-open .label-toggle-btn { display: none !important; }
   .locate-btn {
     margin-top: 6px;
     color: #1565c0 !important;
-    font-size: 0.6rem !important;
-    border-radius: 8px !important;
-    line-height: 1.25 !important;
-    white-space: nowrap !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
   .ishikawa-btn {
     margin-top: 6px;
