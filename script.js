@@ -123,6 +123,12 @@ function setLanguage(lang) {
   if (typeof renderShopList    === 'function') renderShopList();
   // 開いているポップアップを閉じる（古い言語のまま残らないように）
   if (typeof map !== 'undefined' && map) map.closePopup();
+  // 全マーカーのポップアップを新言語で再バインド
+  if (typeof markersData !== 'undefined') {
+    markersData.forEach(function(d) {
+      d.marker.bindPopup(makePopup(d.restaurant, d.idx), { maxWidth: 300, autoPan: false });
+    });
+  }
 }
 
 // ── ジャンル英語マッピング ────────────────────────────────────────
