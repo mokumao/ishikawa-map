@@ -565,6 +565,19 @@ function checkPassword() {
   if (input.value === '321') {
     sessionStorage.setItem('authenticated', '1');
     overlay.classList.add('hidden');
+
+    // GoatCounter にパスワード認証成功イベントを送信
+    // （/ishikawa-map のカウントとは別に「password-success」として記録）
+    setTimeout(function() {
+      if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+        window.goatcounter.count({
+          path:  'password-success',
+          title: 'パスワード認証成功',
+          event: true
+        });
+      }
+    }, 500); // GoatCounter の非同期読み込み完了を待つ
+
     // オーバーレイ消去後に石川エリアを中央に表示
     setTimeout(() => {
       if (typeof map !== 'undefined') {
