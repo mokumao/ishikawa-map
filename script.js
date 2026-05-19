@@ -125,6 +125,70 @@ function setLanguage(lang) {
   if (typeof map !== 'undefined' && map) map.closePopup();
 }
 
+// ── ジャンル英語マッピング ────────────────────────────────────────
+var GENRE_EN = {
+  '居酒屋':                    'Izakaya',
+  '居酒屋・食堂':              'Izakaya / Diner',
+  '居酒屋・創作料理':          'Izakaya / Creative',
+  '居酒屋・和食':              'Izakaya / Japanese',
+  '食堂・居酒屋':              'Diner / Izakaya',
+  '食堂':                      'Diner',
+  'バル（中華・和食・バー）':  'Bar (Chinese/Japanese/Bar)',
+  '焼肉':                      'BBQ',
+  'カフェ':                    'Café',
+  'カフェ・イタリアン':        'Café / Italian',
+  'カフェ・バー（ハワイ料理）':'Café / Bar (Hawaiian)',
+  'カフェ・パン':              'Café / Bakery',
+  'カフェ・八重山そば':        'Café / Yaeyama Soba',
+  '沖縄そば・食堂':            'Okinawa Soba / Diner',
+  '沖縄料理':                  'Okinawan Cuisine',
+  'ハンバーガー':              'Burger',
+  '焼き鳥・居酒屋':            'Yakitori / Izakaya',
+  'ラーメン':                  'Ramen',
+  'テスト用':                  'Test',
+};
+
+// 曜日・共通語句を英語に変換（hours / closed フィールド用）
+function translateDays(str) {
+  if (!str) return str;
+  var d = { 月:'Mon', 火:'Tue', 水:'Wed', 木:'Thu', 金:'Fri', 土:'Sat', 日:'Sun' };
+  return str
+    // フル曜日名（長いほうから先に）
+    .replace(/月曜日/g,'Monday').replace(/火曜日/g,'Tuesday')
+    .replace(/水曜日/g,'Wednesday').replace(/木曜日/g,'Thursday')
+    .replace(/金曜日/g,'Friday').replace(/土曜日/g,'Saturday')
+    .replace(/日曜日/g,'Sunday')
+    // 複合: 土・日・祝日 など
+    .replace(/土・日・祝日/g,'Sat, Sun & Holidays')
+    // 範囲: 月〜金 など
+    .replace(/([月火水木金土日])〜([月火水木金土日])/g, function(_,a,b){ return d[a]+'–'+d[b]; })
+    // 共通語句
+    .replace(/年中無休/g,'Open year-round')
+    .replace(/不定休/g,'Irregular')
+    .replace(/要確認/g,'Please check')
+    .replace(/祝日/g,'Holidays')
+    .replace(/翌/g,'(next day) ')
+    .replace(/ランチ/g,'Lunch')
+    .replace(/ディナー/g,'Dinner')
+    .replace(/夜/g,'Evening')
+    .replace(/頃/g,' approx.')
+    .replace(/売り切れ次第終了/g,'until sold out')
+    .replace(/年末年始/g,'year-end/new year')
+    .replace(/旧盆休あり/g,'incl. Obon holiday')
+    .replace(/昼営業なし/g,'no lunch service')
+    .replace(/なし/g,'None')
+    // 残りの単体曜日略字
+    .replace(/([月火水木金土日])/g, function(_,c){ return d[c]; })
+    // 残った「・」区切りを「, 」に
+    .replace(/・/g, ', ');
+}
+
+// 言語別フィールド取得ヘルパー
+function rGenre(r)  { return (_currentLang !== 'ja' && GENRE_EN[r.genre]) ? GENRE_EN[r.genre] : r.genre; }
+function rHours(r)  { return _currentLang !== 'ja' ? translateDays(r.hours)  : r.hours;  }
+function rClosed(r) { return _currentLang !== 'ja' ? translateDays(r.closed) : r.closed; }
+function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : r.note;  }
+
 // ── 本日の訪問者数を表示（JST 0:00〜現在の差分） ─────────────────
 // gh-dataブランチのvisitor-log.jsonから1時間ごとのスナップショットを読み取り、
 // 今日JST0時の累計との差分で「今日の訪問者数」を計算する。
@@ -831,21 +895,23 @@ function gmapUrl(name, address) {
 
 // ── ポップアップ HTML 生成 ────────────────────────────────────────
 function makePopup(r, idx) {
-  const hoursHtml  = r.hours.replace(/\n/g, "<br>");
+  const hoursHtml  = rHours(r).replace(/\n/g, "<br>");
+  const closedVal  = rClosed(r);
   const closedHtml = (r.closed.includes("要確認"))
-    ? `<span style="color:#e65100">${r.closed}</span>`
-    : r.closed;
+    ? `<span style="color:#e65100">${closedVal}</span>`
+    : closedVal;
+  const noteVal  = rNote(r);
   const noteHtml = r.warn
-    ? `<div class="popup-warning">⚠️ ${r.note}</div>`
+    ? `<div class="popup-warning">⚠️ ${noteVal}</div>`
     : `<tr>
          <td class="label">${t('popup.note')}</td>
-         <td class="value">${r.note}</td>
+         <td class="value">${noteVal}</td>
        </tr>`;
 
   return `
     <div class="popup-wrap">
       <div class="popup-name">${r.name}</div>
-      <span class="popup-genre">${r.genre}</span>
+      <span class="popup-genre">${rGenre(r)}</span>
       <table class="popup-table">
         <tr>
           <td class="label">${t('popup.address')}</td>
@@ -1527,10 +1593,10 @@ function renderShopList() {
            onclick="focusShop(${idx})"
            onkeydown="if(event.key==='Enter'||event.key===' ')focusShop(${idx})">
         <div class="shop-item-name">${r.name}${warnBadge}</div>
-        <span class="shop-item-genre" style="background:${genreColor_}22;color:${genreColor_}">${r.genre}</span>
+        <span class="shop-item-genre" style="background:${genreColor_}22;color:${genreColor_}">${rGenre(r)}</span>
         <div class="shop-item-info">
-          <span class="shop-item-hours" title="${r.hours.replace(/\n/g, ' / ')}">${fmtHours(r.hours)}</span>
-          <span class="shop-item-closed">${t('list.closed')}${r.closed}</span>
+          <span class="shop-item-hours" title="${rHours(r).replace(/\n/g, ' / ')}">${fmtHours(rHours(r))}</span>
+          <span class="shop-item-closed">${t('list.closed')}${rClosed(r)}</span>
         </div>
       </div>`;
   }).join('');
