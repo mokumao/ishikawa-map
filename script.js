@@ -1190,62 +1190,44 @@ const markersData = restaurants.map((r, idx) => {
     }
   }
 
-  // ── 長押し設定（スマホ用）────────────────────────────────────────
-  function setupLongPress(el) {
-    var _pt = null, _fired = false;
+  // ── タップ設定（スマホ用）────────────────────────────────────────
+  // 指が10px以上動いた場合はスクロール・パン操作とみなしてポップアップを開かない
+  function setupTap(el) {
     var _startX = 0, _startY = 0;
     el.addEventListener('touchstart', function(e) {
-      _fired = false;
       _startX = e.touches[0].clientX;
       _startY = e.touches[0].clientY;
-      _pt = setTimeout(function() {
-        _fired = true;
-        // 指を離した後の合成クリックでポップアップが閉じないよう一時的にブロック
-        map.options.closePopupOnClick = false;
-        setTimeout(function() { map.options.closePopupOnClick = true; }, 700);
-        openThisPopup();
-      }, 200);
-    }, { passive: true });
-    el.addEventListener('touchmove', function(e) {
-      // 10px以上動いた場合のみキャンセル（微妙な揺れは無視）
-      var dx = Math.abs(e.touches[0].clientX - _startX);
-      var dy = Math.abs(e.touches[0].clientY - _startY);
-      if (dx > 10 || dy > 10) {
-        clearTimeout(_pt);
-        _fired = false;
-      }
     }, { passive: true });
     el.addEventListener('touchend', function(e) {
-      clearTimeout(_pt);
-      if (_fired) {
-        _fired = false;
-        e.preventDefault();
-        e.stopPropagation();
-      }
+      var dx = Math.abs(e.changedTouches[0].clientX - _startX);
+      var dy = Math.abs(e.changedTouches[0].clientY - _startY);
+      if (dx > 10 || dy > 10) return; // パン操作はスルー
+      e.preventDefault();
+      e.stopPropagation();
+      // 合成クリックでポップアップが閉じないよう一時ブロック
+      map.options.closePopupOnClick = false;
+      setTimeout(function() { map.options.closePopupOnClick = true; }, 400);
+      openThisPopup();
     }, { passive: false });
-    el.addEventListener('touchcancel', function() {
-      clearTimeout(_pt);
-      _fired = false;
-    }, { passive: true });
   }
 
   // Leaflet の bindPopup が登録した内部クリックハンドラを削除して自前で制御
   marker.off('click');
 
   if ('ontouchstart' in window) {
-    // ── スマホ：0.2秒長押しでポップアップ ──
+    // ── スマホ：ワンタップでポップアップ ──
     var markerEl = marker.getElement();
-    if (markerEl) setupLongPress(markerEl);
+    if (markerEl) setupTap(markerEl);
 
     // permanent:true のツールチップは marker.addTo(map) 時点で既に開いている。
     // そのため tooltipopen イベントはもう発火済みで once() では拾えない。
-    // setTimeout(0) でDOM更新後に要素を取得して長押しを設定する。
+    // setTimeout(0) でDOM更新後に要素を取得してタップを設定する。
     ;(function(m) {
       setTimeout(function() {
         var tooltip = m.getTooltip();
         if (!tooltip) return;
         var ttEl = tooltip.getElement();
-        if (ttEl) setupLongPress(ttEl);
+        if (ttEl) setupTap(ttEl);
       }, 0);
     })(marker);
   } else {
