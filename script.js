@@ -182,22 +182,41 @@
   var panelLang = document.getElementById('gearMenuLang');
   var overlay   = document.getElementById('gearOverlay');
 
+  // 地図操作を完全に停止する
+  function disableMap() {
+    map.dragging.disable();
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();
+    if (map.tap) map.tap.disable();
+  }
+  // 地図操作を再開する
+  function enableMap() {
+    map.dragging.enable();
+    map.touchZoom.enable();
+    map.doubleClickZoom.enable();
+    map.scrollWheelZoom.enable();
+    if (map.tap) map.tap.enable();
+  }
+
   function showMain() {
     menu.style.display = 'block';
     panelMain.style.display = 'flex';
     panelLang.style.display = 'none';
     overlay.classList.add('active');    // 背景をグレーオーバーレイで封鎖
+    disableMap();                       // 地図操作を停止
   }
   function showLang() {
     panelMain.style.display = 'none';
     panelLang.style.display = 'flex';
-    // オーバーレイは維持（言語サブメニュー中も背景封鎖）
+    // オーバーレイ・地図停止は維持
   }
   function closeMenu() {
     menu.style.display = 'none';
     panelMain.style.display = 'flex';
     panelLang.style.display = 'none';
     overlay.classList.remove('active'); // オーバーレイ解除
+    enableMap();                        // 地図操作を再開
   }
 
   // 歯車ボタン：メニュー開閉トグル
