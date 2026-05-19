@@ -41,28 +41,28 @@
     <!-- スマホ用レイアウト（PCでは非表示） -->
     <div class="header-mobile">
       <div class="header-mobile-top">
-        <h1 class="header-mobile-h1">石川マップ</h1>
+        <h1 class="header-mobile-h1" data-i18n="header.title">石川マップ</h1>
         <span class="visitor-badge" id="visitorCount">👁 ...</span>
       </div>
-      <p class="header-mobile-sub">この情報は不正確な場合もあります。→参照</p>
-      <p class="header-mobile-sub">あなたの知らない石川が見つかるかも</p>
+      <p class="header-mobile-sub" data-i18n="header.sub1">この情報は不正確な場合もあります。→参照</p>
+      <p class="header-mobile-sub" data-i18n="header.sub2">あなたの知らない石川が見つかるかも</p>
     </div>
   </header>
 
   <!-- 作成中バナー -->
   <div class="wip-bar">
     <span class="wip-icon">🚧</span>
-    このサイトは現在作成中です。掲載情報が間違っている場合があります。正式公開前の確認用ページです。
+    <span data-i18n="wip.text">このサイトは現在作成中です。掲載情報が間違っている場合があります。正式公開前の確認用ページです。</span>
   </div>
 
   <!-- スマホ用タブ切り替え（デスクトップでは非表示） -->
   <div class="mobile-tabs" role="tablist" aria-label="表示切り替え">
-    <button class="tab-btn active" id="tabMap"  onclick="switchTab('map')" role="tab" aria-selected="true">🗺 地図</button>
+    <button class="tab-btn active" id="tabMap"  onclick="switchTab('map')" role="tab" aria-selected="true" data-i18n="tab.map">🗺 地図</button>
     <span class="swipe-hint" aria-hidden="true">
       <span class="sh-up">⬆</span>
       <span class="sh-down">⬇</span>
     </span>
-    <button class="tab-btn"        id="tabList" onclick="switchTab('list')" role="tab" aria-selected="false">📋 一覧</button>
+    <button class="tab-btn"        id="tabList" onclick="switchTab('list')" role="tab" aria-selected="false" data-i18n="tab.list">📋 一覧</button>
   </div>
 
   <!-- メインコンテンツ（サイドバー＋地図） -->
@@ -73,13 +73,13 @@
         <div class="search-wrap">
           <span class="search-icon">🔍</span>
           <input type="search" id="searchInput" class="search-input"
-                 placeholder="店名・ジャンル・住所・営業時間で検索…"
+                 placeholder="店名・ジャンル・住所・営業時間で検索…" data-i18n-ph="search.placeholder"
                  autocomplete="off" aria-label="店舗を検索">
           <button class="search-clear" id="searchClear" aria-label="検索をクリア" hidden>✕</button>
         </div>
       </div>
       <div class="filter-section">
-        <p class="filter-label">ジャンルで絞り込み</p>
+        <p class="filter-label" data-i18n="filter.label">ジャンルで絞り込み</p>
         <div class="filter-buttons" id="filterButtons"></div>
       </div>
       <p class="shop-count" id="shopCount"></p>
@@ -109,21 +109,21 @@
                 <text x="33" y="26" font-size="11" font-family="sans-serif" fill="currentColor" stroke="none" font-weight="bold">A</text>
               </svg>
             </button>
-            <button class="gear-menu-btn" id="gearListBtn">リスト</button>
+            <button class="gear-menu-btn" id="gearListBtn" data-i18n="gear.list">リスト</button>
           </div>
           <div class="gear-row">
-            <button class="gear-menu-btn gear-back-btn" id="gearCloseBtn">戻る</button>
+            <button class="gear-menu-btn gear-back-btn" id="gearCloseBtn" data-i18n="gear.back">戻る</button>
           </div>
         </div>
         <!-- 言語サブメニュー -->
         <div id="gearMenuLang" class="gear-panel" style="display:none;">
           <div class="gear-row">
-            <button class="gear-menu-btn" id="gearLangJa">日本語</button>
-            <button class="gear-menu-btn" id="gearLangEn">英語</button>
-            <button class="gear-menu-btn" id="gearLangZh">中国語</button>
+            <button class="gear-menu-btn" id="gearLangJa" data-i18n="lang.ja">日本語</button>
+            <button class="gear-menu-btn" id="gearLangEn" data-i18n="lang.en">英語</button>
+            <button class="gear-menu-btn" id="gearLangZh" data-i18n="lang.zh">中国語</button>
           </div>
           <div class="gear-row">
-            <button class="gear-menu-btn gear-back-btn" id="gearLangBack">戻る</button>
+            <button class="gear-menu-btn gear-back-btn" id="gearLangBack" data-i18n="lang.back">戻る</button>
           </div>
         </div>
       </div>
@@ -134,11 +134,11 @@
     <!-- 情報パネル（スワイプ下で表示） -->
     <div class="info-panel" id="infoPanel">
       <div class="info-panel-inner">
-        <button class="info-menu-btn" onclick="openInfoSection('about-site')">このサイトについて</button>
-        <button class="info-menu-btn" onclick="openInfoSection('about-ishikawa')">石川について</button>
-        <button class="info-menu-btn" onclick="openInfoSection('faq')">Q &amp; A</button>
-        <button class="info-menu-btn" onclick="openInfoSection('feedback')">ご意見・ご要望</button>
-        <button class="info-menu-btn" onclick="openInfoSection('today-ishikawa')">今日の石川情報</button>
+        <button class="info-menu-btn" onclick="openInfoSection('about-site')" data-i18n="info.about-site">このサイトについて</button>
+        <button class="info-menu-btn" onclick="openInfoSection('about-ishikawa')" data-i18n="info.about-ishikawa">石川について</button>
+        <button class="info-menu-btn" onclick="openInfoSection('faq')" data-i18n="info.faq">Q &amp; A</button>
+        <button class="info-menu-btn" onclick="openInfoSection('feedback')" data-i18n="info.feedback">ご意見・ご要望</button>
+        <button class="info-menu-btn" onclick="openInfoSection('today-ishikawa')" data-i18n="info.today">今日の石川情報</button>
       </div>
       <div class="info-panel-footer" id="infoPanelFooter">
         <span class="info-close-btn">⬆</span>
@@ -176,13 +176,13 @@
 
   <!-- ボトムタブバー（スマホのみ） -->
   <div class="bottom-tabs" id="bottomTabs">
-    <button class="bottom-tab-btn active" id="bottomTabMap" onclick="switchTab('map')">🗺 地図</button>
-    <button class="bottom-tab-btn" id="bottomLabelBtn" onclick="toggleLabels()">店名を表示</button>
-    <button class="bottom-tab-btn" id="bottomTabList" onclick="switchTab('list')">📋 一覧</button>
+    <button class="bottom-tab-btn active" id="bottomTabMap" onclick="switchTab('map')" data-i18n="bottom.map">🗺 地図</button>
+    <button class="bottom-tab-btn" id="bottomLabelBtn" onclick="toggleLabels()" data-i18n="btn.showNames">店名を表示</button>
+    <button class="bottom-tab-btn" id="bottomTabList" onclick="switchTab('list')" data-i18n="bottom.list">📋 一覧</button>
   </div>
 
   <footer>
-    <p class="footer-main">🌊 うるま市石川 飲食店マップ &nbsp;|&nbsp; 掲載情報は調査時点のものです</p>
+    <p class="footer-main" data-i18n="footer.main">🌊 うるま市石川 飲食店マップ &nbsp;|&nbsp; 掲載情報は調査時点のものです</p>
     <p class="footer-sub">地図データ &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors</p>
   </footer>
 

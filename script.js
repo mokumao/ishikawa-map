@@ -3,6 +3,128 @@
    地図: OpenStreetMap + Leaflet
 ================================================================ */
 
+// ── 多言語対応 (i18n) ─────────────────────────────────────────────
+var _currentLang = 'ja';
+
+var TRANSLATIONS = {
+  ja: {
+    'header.title':        '石川マップ',
+    'header.sub1':         'この情報は不正確な場合もあります。→参照',
+    'header.sub2':         'あなたの知らない石川が見つかるかも',
+    'wip.text':            'このサイトは現在作成中です。掲載情報が間違っている場合があります。正式公開前の確認用ページです。',
+    'tab.map':             '🗺 地図',
+    'tab.list':            '📋 一覧',
+    'search.placeholder':  '店名・ジャンル・住所・営業時間で検索…',
+    'filter.label':        'ジャンルで絞り込み',
+    'btn.showNames':       '店名を表示',
+    'bottom.map':          '🗺 地図',
+    'bottom.list':         '📋 一覧',
+    'gear.list':           'リスト',
+    'gear.back':           '戻る',
+    'lang.ja':             '日本語',
+    'lang.en':             '英語',
+    'lang.zh':             '中国語',
+    'lang.back':           '戻る',
+    'info.about-site':     'このサイトについて',
+    'info.about-ishikawa': '石川について',
+    'info.faq':            'Q & A',
+    'info.feedback':       'ご意見・ご要望',
+    'info.today':          '今日の石川情報',
+    'popup.address':       '住所',
+    'popup.hours':         '営業時間',
+    'popup.closed':        '定休日',
+    'popup.note':          '備考',
+    'popup.gmap':          '📍 Googleマップで見る',
+    'popup.detail':        '📄 店舗詳細を見る',
+    'count.results':       '{n} 件表示中',
+    'list.closed':         '定休日：',
+    'filter.all':          'すべて',
+    'filter.izakaya':      '居酒屋・食堂',
+    'filter.cafe':         'カフェ',
+    'filter.yakiniku':     '焼肉',
+    'filter.bar':          'バル',
+    'filter.ramen':        'ラーメン',
+    'footer.main':         '🌊 うるま市石川 飲食店マップ  |  掲載情報は調査時点のものです',
+    'visitor.today':       '本日の訪問者 {n} 人',
+    'visitor.total':       '累計訪問者 {n} 人',
+  },
+  en: {
+    'header.title':        'Ishikawa Map',
+    'header.sub1':         'Info may be inaccurate. →More info',
+    'header.sub2':         'Discover hidden gems in Ishikawa!',
+    'wip.text':            'This site is under construction. Some info may be incorrect.',
+    'tab.map':             '🗺 Map',
+    'tab.list':            '📋 List',
+    'search.placeholder':  'Search by name, genre, address, hours…',
+    'filter.label':        'Filter by genre',
+    'btn.showNames':       'Show names',
+    'bottom.map':          '🗺 Map',
+    'bottom.list':         '📋 List',
+    'gear.list':           'List',
+    'gear.back':           'Back',
+    'lang.ja':             'Japanese',
+    'lang.en':             'English',
+    'lang.zh':             'Chinese',
+    'lang.back':           'Back',
+    'info.about-site':     'About this site',
+    'info.about-ishikawa': 'About Ishikawa',
+    'info.faq':            'Q & A',
+    'info.feedback':       'Feedback',
+    'info.today':          'Ishikawa Today',
+    'popup.address':       'Address',
+    'popup.hours':         'Hours',
+    'popup.closed':        'Closed',
+    'popup.note':          'Note',
+    'popup.gmap':          '📍 Open in Google Maps',
+    'popup.detail':        '📄 View Details',
+    'count.results':       '{n} results',
+    'list.closed':         'Closed: ',
+    'filter.all':          'All',
+    'filter.izakaya':      'Izakaya / Diner',
+    'filter.cafe':         'Café',
+    'filter.yakiniku':     'BBQ',
+    'filter.bar':          'Bar',
+    'filter.ramen':        'Ramen',
+    'footer.main':         '🌊 Ishikawa, Uruma City  |  Info as of survey date',
+    'visitor.today':       "Today's visitors: {n}",
+    'visitor.total':       'Total visitors: {n}',
+  }
+};
+
+// 翻訳キーから文字列を返す
+function t(key, vars) {
+  var dict = TRANSLATIONS[_currentLang] || TRANSLATIONS['ja'];
+  var str  = dict[key] || TRANSLATIONS['ja'][key] || key;
+  if (vars) {
+    Object.keys(vars).forEach(function(k) {
+      str = str.replace('{' + k + '}', vars[k]);
+    });
+  }
+  return str;
+}
+
+// data-i18n属性を持つ静的要素を一括更新
+function applyLangToDOM() {
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el) {
+    el.placeholder = t(el.getAttribute('data-i18n-ph'));
+  });
+}
+
+// 言語を切り替えてUIを再描画
+function setLanguage(lang) {
+  _currentLang = lang;
+  applyLangToDOM();
+  // フィルターボタン再描画
+  if (typeof buildFilterButtons === 'function') buildFilterButtons();
+  // 店舗リスト再描画
+  if (typeof renderShopList    === 'function') renderShopList();
+  // 開いているポップアップを閉じる（古い言語のまま残らないように）
+  if (typeof map !== 'undefined' && map) map.closePopup();
+}
+
 // ── 本日の訪問者数を表示（JST 0:00〜現在の差分） ─────────────────
 // gh-dataブランチのvisitor-log.jsonから1時間ごとのスナップショットを読み取り、
 // 今日JST0時の累計との差分で「今日の訪問者数」を計算する。
@@ -46,7 +168,7 @@
       if (baseCount === null) baseCount = data[0].count;
 
       var todayCount = Math.max(0, latestCount - baseCount);
-      el.textContent = '本日の訪問者 ' + todayCount + ' 人';
+      el.textContent = t('visitor.today', { n: todayCount });
     })
     .catch(function () {
       // visitor-log.jsonが未整備の間は累計APIにフォールバック
@@ -54,7 +176,7 @@
         .then(function (r) { return r.json(); })
         .then(function (d) {
           var count = d.count_unique || d.count || '?';
-          el.textContent = '累計訪問者 ' + count + ' 人';
+          el.textContent = t('visitor.total', { n: count });
         })
         .catch(function () { el.textContent = ''; });
     });
@@ -235,10 +357,12 @@
 
   // 言語サブメニュー
   document.getElementById('gearLangJa').addEventListener('click', function () {
-    alert('日本語表示（現在の設定です）');
+    setLanguage('ja');
+    closeMenu();
   });
   document.getElementById('gearLangEn').addEventListener('click', function () {
-    alert('英語対応は準備中です。');
+    setLanguage('en');
+    closeMenu();
   });
   document.getElementById('gearLangZh').addEventListener('click', function () {
     alert('中国語対応は準備中です。');
@@ -714,7 +838,7 @@ function makePopup(r, idx) {
   const noteHtml = r.warn
     ? `<div class="popup-warning">⚠️ ${r.note}</div>`
     : `<tr>
-         <td class="label">備考</td>
+         <td class="label">${t('popup.note')}</td>
          <td class="value">${r.note}</td>
        </tr>`;
 
@@ -724,15 +848,15 @@ function makePopup(r, idx) {
       <span class="popup-genre">${r.genre}</span>
       <table class="popup-table">
         <tr>
-          <td class="label">住所</td>
+          <td class="label">${t('popup.address')}</td>
           <td class="value">${r.address}</td>
         </tr>
         <tr>
-          <td class="label">営業時間</td>
+          <td class="label">${t('popup.hours')}</td>
           <td class="value">${hoursHtml}</td>
         </tr>
         <tr>
-          <td class="label">定休日</td>
+          <td class="label">${t('popup.closed')}</td>
           <td class="value">${closedHtml}</td>
         </tr>
         ${r.warn ? "" : noteHtml}
@@ -741,9 +865,9 @@ function makePopup(r, idx) {
       <div class="popup-links">
         <a href="${gmapUrl(r.name, r.address)}"
            target="_blank" rel="noopener noreferrer"
-           class="popup-btn gmap">📍 Googleマップで見る</a>
+           class="popup-btn gmap">${t('popup.gmap')}</a>
         <a href="detail.html#${idx}"
-           class="popup-btn source">📄 店舗詳細を見る</a>
+           class="popup-btn source">${t('popup.detail')}</a>
       </div>
     </div>`;
 }
@@ -1330,10 +1454,11 @@ new LegendControl().addTo(map);
 // ── フィルターボタン生成 ─────────────────────────────────────────
 function buildFilterButtons() {
   const container = document.getElementById('filterButtons');
+  container.innerHTML = ''; // 再描画時にリセット
   FILTERS.forEach(f => {
     const btn = document.createElement('button');
-    btn.className   = 'filter-btn' + (f.id === 'all' ? ' active' : '');
-    btn.textContent = f.label;
+    btn.className   = 'filter-btn' + (f.id === currentFilter ? ' active' : '');
+    btn.textContent = t('filter.' + f.id); // 翻訳対応
     btn.style.setProperty('--fc', f.color);
     btn.setAttribute('data-filter', f.id);
     btn.addEventListener('click', () => applyFilter(f.id));
@@ -1383,7 +1508,7 @@ function renderShopList() {
   const visible = markersData.filter(({ restaurant: r }) => isVisible(r));
 
   const shopCount = document.getElementById('shopCount');
-  shopCount.textContent = `${visible.length} 件表示中`;
+  shopCount.textContent = t('count.results', { n: visible.length });
 
   const shopList = document.getElementById('shopList');
   if (visible.length === 0) {
@@ -1405,7 +1530,7 @@ function renderShopList() {
         <span class="shop-item-genre" style="background:${genreColor_}22;color:${genreColor_}">${r.genre}</span>
         <div class="shop-item-info">
           <span class="shop-item-hours" title="${r.hours.replace(/\n/g, ' / ')}">${fmtHours(r.hours)}</span>
-          <span class="shop-item-closed">定休日：${r.closed}</span>
+          <span class="shop-item-closed">${t('list.closed')}${r.closed}</span>
         </div>
       </div>`;
   }).join('');
@@ -1626,3 +1751,4 @@ initSearch();
   });
 })();
 renderShopList();
+applyLangToDOM();
