@@ -442,25 +442,58 @@ footer a:hover { text-decoration: underline; }
 }
 .popup-links {
   display: flex;
-  gap: 6px;
+  align-items: center;
+  gap: 5px;
   margin-top: 10px;
-  flex-wrap: wrap;
+}
+.popup-btns-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
 }
 .popup-btn {
+  display: block;
   flex: 1;
   display: inline-block;
   text-align: center;
-  padding: 6px 8px;
+  padding: 6px 6px;
   border-radius: 5px;
   font-size: .77rem;
   font-weight: 700;
   text-decoration: none;
   transition: opacity .15s, transform .1s;
   white-space: nowrap;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .popup-btn:hover { opacity: .85; transform: translateY(-1px); }
 .popup-btn.gmap   { background: #1565c0; color: #fff; }
 .popup-btn.source { background: #e65100; color: #fff; }
+/* ポップアップ内 両サイド × ボタン */
+.popup-close-side {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  font-size: 15px;
+  font-weight: 900;
+  color: #aaa;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+  font-family: Tahoma, Verdana, sans-serif;
+  transition: color .12s, background .12s;
+  -webkit-tap-highlight-color: transparent;
+}
+.popup-close-side:hover { color: #e53935; background: #ffebee; border-color: #ffcdd2; }
 
 /* ── Leaflet popup overrides ──────────────────────────────── */
 .leaflet-popup-content-wrapper {
@@ -476,27 +509,9 @@ footer a:hover { text-decoration: underline; }
   display: none !important;
 }
 
-/* 閉じるボタン（×）— PC・スマホ共通：白丸・赤文字・中央寄せ */
+/* Leaflet デフォルト閉じるボタン — 非表示（代わりにポップアップ内の×を使用） */
 .leaflet-popup-close-button {
-  width: 30px !important;
-  height: 30px !important;
-  background: #fff !important;
-  border-radius: 50% !important;
-  box-shadow: 0 2px 6px rgba(0,0,0,.3) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-family: Tahoma, Verdana, sans-serif !important;
-  font-size: 20px !important;
-  font-weight: 900 !important;
-  line-height: normal !important;
-  padding: 0 !important;
-  color: #e53935 !important;
-  top: -10px !important;
-  right: 2px !important;
-}
-.leaflet-popup-close-button:hover {
-  color: #b71c1c !important;
+  display: none !important;
 }
 
 /* ── ポップアップ表示中のマーカーをソナー点滅 ───────────────── */
@@ -546,32 +561,6 @@ footer a:hover { text-decoration: underline; }
   margin-top: 5px;
 }
 
-/* ── ポップアップ直下の閉じるボタン ──────────────────────────── */
-.pin-close-btn {
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  margin-top: 8px;
-  transform: translateX(-50%);
-  width: 30px;
-  height: 30px;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0,0,0,.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Tahoma, Verdana, sans-serif;
-  font-size: 20px;
-  font-weight: 900;
-  line-height: normal;
-  padding: 0;
-  color: #e53935;
-  cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  z-index: 10;
-}
 
 /* ── 店名ラベル（永続ツールチップ） ──────────────────────────── */
 .shop-label {
@@ -1114,8 +1103,7 @@ body.info-open .label-toggle-btn { display: none !important; }
 }
 
 @media (max-width: 360px) {
-  .popup-links { flex-direction: column; }
-  .popup-btn   { width: 100%; }
+  .popup-btn { font-size: .68rem; }
 }
 
 /* ── PC：左上コントロールを横並び（＋－ ＋ 店名ボタン） ──── */

@@ -889,7 +889,7 @@ function makePinIcon(fillColor, isWarn) {
     html: svg,
     iconSize:   [30, 42],
     iconAnchor: [15, 42],
-    popupAnchor:[0, -92]
+    popupAnchor:[0, -48]
   });
 }
 
@@ -935,11 +935,15 @@ function makePopup(r, idx) {
       </table>
       ${r.warn ? noteHtml : ""}
       <div class="popup-links">
-        <a href="${gmapUrl(r.name, r.address)}"
-           target="_blank" rel="noopener noreferrer"
-           class="popup-btn gmap">${t('popup.gmap')}</a>
-        <a href="detail.html#${idx}"
-           class="popup-btn source">${t('popup.detail')}</a>
+        <button class="popup-close-side" onclick="map.closePopup()">×</button>
+        <div class="popup-btns-col">
+          <a href="${gmapUrl(r.name, r.address)}"
+             target="_blank" rel="noopener noreferrer"
+             class="popup-btn gmap">${t('popup.gmap')}</a>
+          <a href="detail.html#${idx}"
+             class="popup-btn source">${t('popup.detail')}</a>
+        </div>
+        <button class="popup-close-side" onclick="map.closePopup()">×</button>
       </div>
     </div>`;
 }
@@ -1362,28 +1366,6 @@ map.on('popupopen', function(e) {
   }, 80);
 });
 
-// ── ポップアップのすぐ下に「閉じる×」ボタンをDOM追加 ────────────────
-map.on('popupopen', function(e) {
-  // 現在地マーカーのポップアップには × を追加しない
-  if (e.popup._source && e.popup._source._isLocationMarker) return;
-
-  setTimeout(function() {
-    var popupEl = e.popup.getElement();
-    if (!popupEl) return;
-    // 既存の × ボタンを除去（念のため）
-    var existing = popupEl.querySelector('.pin-close-btn');
-    if (existing) existing.remove();
-
-    var btn = document.createElement('div');
-    btn.className = 'pin-close-btn';
-    btn.textContent = '×';
-    btn.addEventListener('click', function(ev) {
-      ev.stopPropagation();
-      map.closePopup();
-    });
-    popupEl.appendChild(btn);
-  }, 50);
-});
 
 // ポップアップ開閉時：ミニマップ・中央★・左矢印をポップアップの裏に隠す
 map.on('popupopen',  function() { document.body.classList.add('popup-open');    });
@@ -1430,7 +1412,7 @@ map.on('popupopen', function(e) {
 
   function onMouseDown(me) {
     // ×ボタン・リンク・ボタンはクリック動作を維持
-    if (me.target.closest('a, button, .leaflet-popup-close-button, .pin-close-btn')) return;
+    if (me.target.closest('a, button, .leaflet-popup-close-button')) return;
     if (me.button !== 0) return; // 左クリックのみ
     isDragging  = true;
     lastMouseX  = me.clientX;
