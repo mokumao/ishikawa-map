@@ -894,8 +894,10 @@ body.info-open .label-toggle-btn { display: none !important; }
   }
   .gear-menu-btn:active { background: #f0f4f0; }
   .gear-back-btn {
-    color: #e53935;
     border-color: #ffcdd2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .locate-btn.locating {
     animation: locate-pulse 1s ease-in-out infinite;
