@@ -1371,6 +1371,25 @@ map.on('popupopen', function(e) {
 map.on('popupopen',  function() { document.body.classList.add('popup-open');    });
 map.on('popupclose', function() { document.body.classList.remove('popup-open'); });
 
+// ── ポップアップ誤タップ防止：開いた直後 500ms はコンテンツを無効化 ───────
+// 理由：アイコンを押している指がそのままポップアップ上に乗り、
+//       離した瞬間にボタン類が反応してしまう現象を防ぐ。
+map.on('popupopen', function(e) {
+  if (e.popup._source && e.popup._source._isLocationMarker) return;
+  setTimeout(function() {
+    var popupEl = e.popup.getElement();
+    if (!popupEl) return;
+    var wrap = popupEl.querySelector('.leaflet-popup-content-wrapper');
+    if (!wrap) return;
+    wrap.style.pointerEvents = 'none';        // タッチ・クリックを一時ブロック
+    wrap.style.userSelect   = 'none';
+    setTimeout(function() {
+      wrap.style.pointerEvents = '';           // 500ms 後に解除
+      wrap.style.userSelect   = '';
+    }, 500);
+  }, 0);
+});
+
 map.on('popupclose', function() {
   if (_isReopening) return; // 内部close-reopen中は復元しない
   // ポップアップを閉じたら元の地図位置にスムーズに戻す
