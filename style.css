@@ -1015,9 +1015,11 @@ body.info-open .label-toggle-btn { display: none !important; }
 
   .app-body[data-view="map"]  .sidebar    { display: none; }
   .app-body[data-view="map"]  .info-panel { display: none; }
-  .app-body[data-view="list"] #map        { display: none; }
-  .app-body[data-view="list"] .info-panel { display: none; }
-  .app-body[data-view="list"] #minimap    { display: none; }
+  .app-body[data-view="list"] #map           { display: none; }
+  .app-body[data-view="list"] .info-panel   { display: none; }
+  .app-body[data-view="list"] #minimap      { display: none; }
+  .app-body[data-view="list"] .side-swipe-ctrl { display: none !important; }
+  .app-body[data-view="list"] #gearOverlay  { display: none !important; }
   .app-body[data-view="info"] .sidebar    { display: none; }
   .app-body[data-view="info"] #map        { display: none; }
   .app-body[data-view="info"] #minimap    { display: none; }
