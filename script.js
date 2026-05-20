@@ -1215,7 +1215,12 @@ const markersData = restaurants.map((r, idx) => {
         var rect = map.getContainer().getBoundingClientRect();
         var cp = L.point(endX - rect.left, endY - rect.top);
         var latlng = map.containerPointToLatLng(cp);
-        map.setView(latlng, map.getZoom() + 1, { animate: true });
+        var targetZoom = map.getZoom() + 1;
+        // setTimeout で遅延実行：Leaflet のタッチイベント処理が完了してからズームすることで
+        // ドラッグハンドラの内部状態が壊れないようにする
+        setTimeout(function() {
+          map.setView(latlng, targetZoom, { animate: true });
+        }, 50);
         return;
       }
       // 300ms待ってから「シングルタップ確定」としてポップアップを開く
