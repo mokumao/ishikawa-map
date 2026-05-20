@@ -1191,9 +1191,11 @@ const markersData = restaurants.map((r, idx) => {
   }
 
   // ── タップ設定（スマホ用）────────────────────────────────────────
-  // 指が10px以上動いた場合はスクロール・パン操作とみなしてポップアップを開かない
+  // ・指が10px以上動いた場合はパン操作とみなしてポップアップを開かない
+  // ・300ms以内に2回タップされた場合はダブルタップ（ズーム）とみなしてキャンセル
   function setupTap(el) {
     var _startX = 0, _startY = 0;
+    var _tapTimer = null;
     el.addEventListener('touchstart', function(e) {
       _startX = e.touches[0].clientX;
       _startY = e.touches[0].clientY;
@@ -1204,10 +1206,19 @@ const markersData = restaurants.map((r, idx) => {
       if (dx > 10 || dy > 10) return; // パン操作はスルー
       e.preventDefault();
       e.stopPropagation();
-      // 合成クリックでポップアップが閉じないよう一時ブロック
-      map.options.closePopupOnClick = false;
-      setTimeout(function() { map.options.closePopupOnClick = true; }, 400);
-      openThisPopup();
+      if (_tapTimer) {
+        // 300ms以内に2回目 → ダブルタップ：ポップアップを開かずズームに任せる
+        clearTimeout(_tapTimer);
+        _tapTimer = null;
+        return;
+      }
+      // 300ms待ってから「シングルタップ確定」としてポップアップを開く
+      _tapTimer = setTimeout(function() {
+        _tapTimer = null;
+        map.options.closePopupOnClick = false;
+        setTimeout(function() { map.options.closePopupOnClick = true; }, 400);
+        openThisPopup();
+      }, 300);
     }, { passive: false });
   }
 
