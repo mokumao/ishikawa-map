@@ -1391,6 +1391,8 @@ map.on('popupclose', function() { document.body.classList.remove('popup-open'); 
 // ── ポップアップ誤タップ防止：開いた直後 500ms はコンテンツを無効化 ───────
 // 理由：アイコンを押している指がそのままポップアップ上に乗り、
 //       離した瞬間にボタン類が反応してしまう現象を防ぐ。
+// ※ .popup-close-side には CSS で pointer-events:auto を指定しているため
+//    この 500ms ブロック中でも × ボタンは有効のまま。
 map.on('popupopen', function(e) {
   if (e.popup._source && e.popup._source._isLocationMarker) return;
   setTimeout(function() {
@@ -1404,6 +1406,16 @@ map.on('popupopen', function(e) {
       wrap.style.pointerEvents = '';           // 500ms 後に解除
       wrap.style.userSelect   = '';
     }, 500);
+
+    // × ボタンに直接 touchend を付けてポップアップを閉じる（二重保険）
+    var closeBtns = popupEl.querySelectorAll('.popup-close-side');
+    closeBtns.forEach(function(btn) {
+      btn.addEventListener('touchend', function(ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        map.closePopup();
+      }, { once: true, passive: false });
+    });
   }, 0);
 });
 
