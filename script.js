@@ -1192,7 +1192,7 @@ const markersData = restaurants.map((r, idx) => {
 
   // ── タップ設定（スマホ用）────────────────────────────────────────
   // ・指が10px以上動いた場合はパン操作とみなしてポップアップを開かない
-  // ・300ms以内に2回タップされた場合はダブルタップ（ズーム）とみなしてキャンセル
+  // ・300ms以内に2回タップされた場合はダブルタップとみなし、タップ位置へズームイン
   function setupTap(el) {
     var _startX = 0, _startY = 0;
     var _tapTimer = null;
@@ -1201,15 +1201,21 @@ const markersData = restaurants.map((r, idx) => {
       _startY = e.touches[0].clientY;
     }, { passive: true });
     el.addEventListener('touchend', function(e) {
-      var dx = Math.abs(e.changedTouches[0].clientX - _startX);
-      var dy = Math.abs(e.changedTouches[0].clientY - _startY);
+      var endX = e.changedTouches[0].clientX;
+      var endY = e.changedTouches[0].clientY;
+      var dx = Math.abs(endX - _startX);
+      var dy = Math.abs(endY - _startY);
       if (dx > 10 || dy > 10) return; // パン操作はスルー
       e.preventDefault();
       e.stopPropagation();
       if (_tapTimer) {
-        // 300ms以内に2回目 → ダブルタップ：ポップアップを開かずズームに任せる
+        // 300ms以内に2回目 → ダブルタップ：ポップアップをキャンセルしてタップ位置へズームイン
         clearTimeout(_tapTimer);
         _tapTimer = null;
+        var rect = map.getContainer().getBoundingClientRect();
+        var cp = L.point(endX - rect.left, endY - rect.top);
+        var latlng = map.containerPointToLatLng(cp);
+        map.setView(latlng, map.getZoom() + 1, { animate: true });
         return;
       }
       // 300ms待ってから「シングルタップ確定」としてポップアップを開く
