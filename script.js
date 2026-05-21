@@ -337,7 +337,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 
           // ── 2ステップアニメーション ──
           // Step1: ゆっくり広域に引いて「現在地がどこか」を見せる
-          map.flyTo([lat, lng], 11, { duration: 2.2, easeLinearity: 0.25 });
+          map.flyTo([lat, lng], 10, { duration: 2.2, easeLinearity: 0.25 });
           // Step2: moveend後に少し停止してからゆっくりズームイン
           map.once('moveend', function () {
             setTimeout(function () {
