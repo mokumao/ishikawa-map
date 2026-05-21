@@ -378,10 +378,11 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 
 // ── 歯車メニュー ─────────────────────────────────────────────────
 (function () {
-  var menu      = document.getElementById('gearMenu');
-  var panelMain = document.getElementById('gearMenuMain');
-  var panelLang = document.getElementById('gearMenuLang');
-  var overlay   = document.getElementById('gearOverlay');
+  var menu         = document.getElementById('gearMenu');
+  var panelMain    = document.getElementById('gearMenuMain');
+  var panelLang    = document.getElementById('gearMenuLang');
+  var panelCategory= document.getElementById('gearMenuCategory');
+  var overlay      = document.getElementById('gearOverlay');
 
   // 地図操作を完全に停止する
   function disableMap() {
@@ -402,20 +403,27 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 
   function showMain() {
     menu.style.display = 'block';
-    panelMain.style.display = 'flex';
-    panelLang.style.display = 'none';
+    panelMain.style.display     = 'flex';
+    panelLang.style.display     = 'none';
+    panelCategory.style.display = 'none';
     overlay.classList.add('active');    // 背景をグレーオーバーレイで封鎖
     disableMap();                       // 地図操作を停止
   }
   function showLang() {
-    panelMain.style.display = 'none';
-    panelLang.style.display = 'flex';
-    // オーバーレイ・地図停止は維持
+    panelMain.style.display     = 'none';
+    panelLang.style.display     = 'flex';
+    panelCategory.style.display = 'none';
+  }
+  function showCategory() {
+    panelMain.style.display     = 'none';
+    panelLang.style.display     = 'none';
+    panelCategory.style.display = 'flex';
   }
   function closeMenu() {
     menu.style.display = 'none';
-    panelMain.style.display = 'flex';
-    panelLang.style.display = 'none';
+    panelMain.style.display     = 'flex';
+    panelLang.style.display     = 'none';
+    panelCategory.style.display = 'none';
     overlay.classList.remove('active'); // オーバーレイ解除
     enableMap();                        // 地図操作を再開
   }
@@ -428,11 +436,21 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 
   // メインメニュー
   document.getElementById('gearLangBtn').addEventListener('click', showLang);
-  document.getElementById('gearListBtn').addEventListener('click', function () {
-    closeMenu();
-    switchTab('list');
-  });
+  document.getElementById('gearListBtn').addEventListener('click', showCategory);
   document.getElementById('gearCloseBtn').addEventListener('click', closeMenu);
+
+  // カテゴリサブメニュー
+  document.getElementById('gearCatFood').addEventListener('click', function () {
+    closeMenu();
+    switchTab('list'); // 飲食店一覧を表示
+  });
+  document.getElementById('gearCatConbini').addEventListener('click', function () {
+    alert('コンビニ情報は準備中です。');
+  });
+  document.getElementById('gearCatGas').addEventListener('click', function () {
+    alert('ガソリンスタンド情報は準備中です。');
+  });
+  document.getElementById('gearCatBack').addEventListener('click', showMain);
 
   // 言語サブメニュー
   document.getElementById('gearLangJa').addEventListener('click', function () {
