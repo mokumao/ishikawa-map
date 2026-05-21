@@ -337,12 +337,12 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 
           // ── 2ステップアニメーション ──
           // Step1: ゆっくり広域に引いて「現在地がどこか」を見せる
-          map.flyTo([lat, lng], 12, { duration: 2.2, easeLinearity: 0.25 });
+          map.flyTo([lat, lng], 12, { duration: 1.0, easeLinearity: 0.25 });
           // Step2: moveend後に少し停止してからゆっくりズームイン
           map.once('moveend', function () {
             setTimeout(function () {
               map.flyTo([lat, lng], 16, { duration: 2.2, easeLinearity: 0.25 });
-            }, 700); // 広域で約0.7秒停止
+            }, 500); // 広域で約0.5秒停止
           });
         } else {
           // ── 以降：マーカーを新しい位置に移動するだけ（地図は動かさない） ──
