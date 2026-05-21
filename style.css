@@ -515,14 +515,16 @@ footer a:hover { text-decoration: underline; }
   display: none !important;
 }
 
-/* ── ポップアップ表示中のマーカーをソナー点滅 ───────────────── */
-@keyframes marker-sonar-pulse {
-  0%,100% { filter: brightness(1)   drop-shadow(0 0  0px rgba(255,255,255,0)); }
-  50%     { filter: brightness(1.4) drop-shadow(0 0 10px rgba(255,255,255,1))
-                                    drop-shadow(0 0  4px rgba(255,100,100,0.7)); }
+/* ── ポップアップ表示中のマーカーを縮小→拡大でアニメーション ── */
+/* ピン先端（bottom center）を基準に拡縮することで地図上の位置がずれない */
+@keyframes marker-shrink-pulse {
+  0%   { transform: scale(1);    }
+  45%  { transform: scale(0.55); }
+  100% { transform: scale(1);    }
 }
 .marker-active-pulse {
-  animation: marker-sonar-pulse 0.9s ease-in-out infinite;
+  animation: marker-shrink-pulse 1s ease-in-out infinite;
+  transform-origin: bottom center;
 }
 
 /* ── 現在地マーカー（ソナー波紋 + ラベル） ───────────────────── */
