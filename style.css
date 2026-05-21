@@ -516,17 +516,24 @@ footer a:hover { text-decoration: underline; }
 }
 
 /* ── ポップアップ表示中のマーカーを縮小→拡大でアニメーション ── */
-/* Leaflet は transform:translate3d() でマーカーを配置するため、
-   同じ transform を上書きすると位置が消える。
-   CSS 個別変換プロパティ「scale」を使うことで競合を避ける。   */
+/* Leaflet は .leaflet-marker-icon に transform:translate3d() を設定するため
+   その要素に scale/transform を書くと transform-origin が translate の内側で
+   評価され、スケール時に位置がずれる。
+   解決策：SVGをラッパー div.pin-anim-wrap で囲み、そちらをアニメーション。
+   pin-anim-wrap には Leaflet の transform がないので transform-origin が正確に動く。 */
 @keyframes marker-shrink-pulse {
   0%   { scale: 1;    }
   45%  { scale: 0.55; }
   100% { scale: 1;    }
 }
-.marker-active-pulse {
+.pin-anim-wrap {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.marker-active-pulse .pin-anim-wrap {
   animation: marker-shrink-pulse 1s ease-in-out infinite;
-  transform-origin: bottom center; /* ピン先端を基準に拡縮 → 地図上の位置がずれない */
+  transform-origin: 50% 100%; /* ピン先端（下中央）を基準に拡縮 */
 }
 
 /* ── 現在地マーカー（ソナー波紋 + ラベル） ───────────────────── */

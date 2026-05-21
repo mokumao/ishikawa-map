@@ -899,7 +899,7 @@ function makePinIcon(fillColor, isWarn) {
     </svg>`;
   return L.divIcon({
     className: "",
-    html: svg,
+    html: `<div class="pin-anim-wrap">${svg}</div>`,
     iconSize:   [30, 42],
     iconAnchor: [15, 42],
     popupAnchor:[0, -48]
