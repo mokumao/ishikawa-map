@@ -1236,23 +1236,18 @@ const markersData = restaurants.map((r, idx) => {
       e.preventDefault();
       e.stopPropagation();
       if (_tapTimer) {
-        // 300ms以内に2回目 → ダブルタップ：ポップアップをキャンセルしてタップ位置へズームイン
+        // 300ms以内に2回目 → ダブルタップ：ポップアップをキャンセルして現在中心のままズームイン
+        // ※ setView(latlng) だと店舗位置が中心になるため zoomIn() で中心を変えずにズーム
         clearTimeout(_tapTimer);
         _tapTimer = null;
-        var rect = map.getContainer().getBoundingClientRect();
-        var cp = L.point(endX - rect.left, endY - rect.top);
-        var latlng = map.containerPointToLatLng(cp);
-        var targetZoom = map.getZoom() + 1;
         setTimeout(function() {
           // ① ズーム前にドラッグハンドラをリセット
-          //    e.stopPropagation()でLeafletがtouchendを受け取れていないため
-          //    ドラッグハンドラが「タッチ中」のままになる → disable/enableで初期化
           if (map.dragging) {
             map.dragging.disable();
             map.dragging.enable();
           }
-          map.setView(latlng, targetZoom, { animate: true });
-          // ② ズームアニメーション完了後にも再度リセット（確実に初期状態に戻す）
+          map.zoomIn(1, { animate: true });
+          // ② ズームアニメーション完了後にも再度リセット
           map.once('moveend', function() {
             if (map.dragging) {
               map.dragging.disable();
