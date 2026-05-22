@@ -998,10 +998,10 @@ const map = L.map("map", {
 // ＋－ボタン：スマホ→左下、PC→左上
 L.control.zoom({ position: window.innerWidth <= 767 ? 'bottomleft' : 'topleft' }).addTo(map);
 
-// ダブルクリック/ダブルタップで 0.5 ずつズームイン（デフォルトの1段より細かく）
+// ダブルクリック/ダブルタップでスムーズズームイン（クリック地点を中心に flyTo）
 map.doubleClickZoom.disable();
-map.on('dblclick', function () {
-  map.zoomIn(0.5);
+map.on('dblclick', function (e) {
+  map.flyTo(e.latlng, map.getZoom() + 1, { duration: 0.4, easeLinearity: 0.5 });
 });
 
 
