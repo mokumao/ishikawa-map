@@ -1860,6 +1860,12 @@ initSearch();
       lastDy      = 0;
       startZoom   = map.getZoom();
 
+      // タップ位置を latlng に変換（ズーム中心として使用）
+      const mapRect = mapEl.getBoundingClientRect();
+      tapPoint = map.containerPointToLatLng(
+        L.point(touch.clientX - mapRect.left, touch.clientY - mapRect.top)
+      );
+
       // マップペインを取得（CSSスケールを直接適用する対象）
       mapPane = mapEl.querySelector('.leaflet-map-pane');
 
@@ -1918,7 +1924,7 @@ initSearch();
     // 指を離した時だけ地図中心を固定したままズームをコミット
     if (lastDy === 0) {
       // 純粋なダブルタップ → +2ズーム（dblclick が届かない場合に備えてここで処理）
-      map.setView(map.getCenter(), map.getZoom() + 1, { animate: true });
+      map.setView(tapPoint || map.getCenter(), map.getZoom() + 1, { animate: true });
       window._dblTapJustHandled = true;
       setTimeout(function() { window._dblTapJustHandled = false; }, 600);
     } else {
