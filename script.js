@@ -1267,7 +1267,7 @@ const markersData = restaurants.map((r, idx) => {
             map.dragging.disable();
             map.dragging.enable();
           }
-          map.zoomIn(1, { animate: true });
+          map.zoomIn(2, { animate: true });
           // ② ズームアニメーション完了後にも再度リセット
           map.once('moveend', function() {
             if (map.dragging) {
