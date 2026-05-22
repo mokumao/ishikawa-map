@@ -1004,7 +1004,7 @@ L.control.zoom({ position: window.innerWidth <= 767 ? 'bottomleft' : 'topleft' }
 // setView + CSS トランジション（GPU加速）で滑らかに。
 map.doubleClickZoom.disable();
 map.on('dblclick', function (e) {
-  map.setView(e.latlng, map.getZoom() + 1, { animate: true });
+  map.setView(e.latlng, map.getZoom() + 2, { animate: true });
 
   // ── スマホ：ダブルタップ後に指を押したままドラッグすると
   // ブラウザが「ダブルタップドラッグズーム」ジェスチャーと解釈し
