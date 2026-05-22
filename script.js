@@ -1006,7 +1006,7 @@ map.doubleClickZoom.disable();
 map.on('dblclick', function (e) {
   // スマホでは IIFE（ダブルタップ+ドラッグ処理）がすでにズームを処理済みの場合はスキップ
   if (window._dblTapJustHandled) return;
-  map.setView(e.latlng, map.getZoom() + 2, { animate: true });
+  map.setView(e.latlng, map.getZoom() + 1, { animate: true });
 
   // ── スマホ：ダブルタップ後に指を押したままドラッグすると
   // ブラウザが「ダブルタップドラッグズーム」ジェスチャーと解釈し
@@ -1269,7 +1269,7 @@ const markersData = restaurants.map((r, idx) => {
             map.dragging.disable();
             map.dragging.enable();
           }
-          map.zoomIn(2, { animate: true });
+          map.zoomIn(1, { animate: true });
           // ② ズームアニメーション完了後にも再度リセット
           map.once('moveend', function() {
             if (map.dragging) {
@@ -1918,7 +1918,7 @@ initSearch();
     // 指を離した時だけ地図中心を固定したままズームをコミット
     if (lastDy === 0) {
       // 純粋なダブルタップ → +2ズーム（dblclick が届かない場合に備えてここで処理）
-      map.setView(map.getCenter(), map.getZoom() + 2, { animate: true });
+      map.setView(map.getCenter(), map.getZoom() + 1, { animate: true });
       window._dblTapJustHandled = true;
       setTimeout(function() { window._dblTapJustHandled = false; }, 600);
     } else {
