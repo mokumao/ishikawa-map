@@ -1467,26 +1467,41 @@ map.on('popupopen', function(e) {
   const popupEl = e.popup.getElement();
   if (!popupEl) return;
 
-  // ── スマホ：ポップアップ範囲内タッチのみドラッグを一時無効化 ──────────────
-  // キャプチャフェーズで座標を確認し、ポップアップ内なら disable → touchend で enable。
-  // pointer-events:none 中でも座標ベースで正確に判定するためキャプチャを使用。
-  // ポップアップ外（地図エリア）のタッチはそのままドラッグ可能。
+  // ── スマホ：ポップアップを触っても地図をスクロールできるよう手動パン実装 ──────
+  // Leaflet の disableClickPropagation が touchstart のバブルを止めるが、
+  // 同一要素の後続リスナーは呼ばれるため、ここで手動 panBy を実装する。
+  // ポップアップ外（地図エリア）は Leaflet の通常ドラッグをそのまま使う。
   var _mc = map.getContainer();
-  function onTouchStartCapture(te) {
-    var touch = te.touches[0];
-    if (!touch) return;
-    var rect = popupEl.getBoundingClientRect();
-    if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
-        touch.clientY >= rect.top  && touch.clientY <= rect.bottom) {
-      map.dragging.disable();
-    }
+  var _pw = popupEl.querySelector('.leaflet-popup-content-wrapper');
+  var _lTX = 0, _lTY = 0, _tDragging = false;
+
+  function onWrapTouchStart(te) {
+    if (te.touches.length !== 1) return;
+    _lTX = te.touches[0].clientX;
+    _lTY = te.touches[0].clientY;
+    _tDragging = false;
+    // Leaflet のドラッグが干渉しないよう一時無効化
+    map.dragging.disable();
   }
-  function onTouchEndCapture() {
+  function onWrapTouchMove(te) {
+    if (te.touches.length !== 1) return;
+    var dx = te.touches[0].clientX - _lTX;
+    var dy = te.touches[0].clientY - _lTY;
+    if (!_tDragging && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) _tDragging = true;
+    if (!_tDragging) return;
+    _lTX = te.touches[0].clientX;
+    _lTY = te.touches[0].clientY;
+    map.panBy([-dx, -dy], { animate: false });
+  }
+  function onWrapTouchEnd() {
     map.dragging.enable();
   }
-  _mc.addEventListener('touchstart', onTouchStartCapture, { capture: true, passive: true });
-  _mc.addEventListener('touchend',   onTouchEndCapture,   { capture: true, passive: true });
-  _mc.addEventListener('touchcancel',onTouchEndCapture,   { capture: true, passive: true });
+  if (_pw) {
+    _pw.addEventListener('touchstart', onWrapTouchStart, { passive: true });
+    _pw.addEventListener('touchmove',  onWrapTouchMove,  { passive: true });
+    _pw.addEventListener('touchend',   onWrapTouchEnd,   { passive: true });
+    _pw.addEventListener('touchcancel',onWrapTouchEnd,   { passive: true });
+  }
 
   // ── PC：マウスでポップアップをつかんで地図をパン ─────────────
   let isDragging = false;
@@ -1548,9 +1563,12 @@ map.on('popupopen', function(e) {
   // ポップアップが閉じたらすべてのイベントリスナーを削除し、ドラッグを再有効化
   map.once('popupclose', function() {
     map.dragging.enable(); // 念のため再有効化
-    _mc.removeEventListener('touchstart', onTouchStartCapture, { capture: true });
-    _mc.removeEventListener('touchend',   onTouchEndCapture,   { capture: true });
-    _mc.removeEventListener('touchcancel',onTouchEndCapture,   { capture: true });
+    if (_pw) {
+      _pw.removeEventListener('touchstart', onWrapTouchStart);
+      _pw.removeEventListener('touchmove',  onWrapTouchMove);
+      _pw.removeEventListener('touchend',   onWrapTouchEnd);
+      _pw.removeEventListener('touchcancel',onWrapTouchEnd);
+    }
     popupEl.removeEventListener('mousedown',  onMouseDown);
     mapContainer.removeEventListener('wheel', onWheelCapture, { capture: true });
     document.removeEventListener('mousemove', onMouseMove);
