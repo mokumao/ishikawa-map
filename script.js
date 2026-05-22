@@ -1467,19 +1467,26 @@ map.on('popupopen', function(e) {
   const popupEl = e.popup.getElement();
   if (!popupEl) return;
 
-  // ── スマホ：ポップアップが開いている間は地図ドラッグを完全無効化 ──────────
-  // stopPropagation だけでは Leaflet のタッチハンドラを止められないケースがあるため、
-  // map.dragging.disable() で確実に防ぐ。閉じたら再有効化。
-  const wasEnabled = map.dragging.enabled();
-  if (wasEnabled) map.dragging.disable();
-
-  // ── スマホ：ポップアップ上のタッチが地図ドラッグハンドラに届かないよう伝播を止める ──
-  // （補助的な保護：dragging.disable だけでは防ぎきれないエッジケース用）
-  function stopTouchProp(te) {
-    te.stopPropagation();
+  // ── スマホ：ポップアップ範囲内タッチのみドラッグを一時無効化 ──────────────
+  // キャプチャフェーズで座標を確認し、ポップアップ内なら disable → touchend で enable。
+  // pointer-events:none 中でも座標ベースで正確に判定するためキャプチャを使用。
+  // ポップアップ外（地図エリア）のタッチはそのままドラッグ可能。
+  var _mc = map.getContainer();
+  function onTouchStartCapture(te) {
+    var touch = te.touches[0];
+    if (!touch) return;
+    var rect = popupEl.getBoundingClientRect();
+    if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+        touch.clientY >= rect.top  && touch.clientY <= rect.bottom) {
+      map.dragging.disable();
+    }
   }
-  popupEl.addEventListener('touchstart', stopTouchProp, { passive: true });
-  popupEl.addEventListener('touchmove',  stopTouchProp, { passive: true });
+  function onTouchEndCapture() {
+    map.dragging.enable();
+  }
+  _mc.addEventListener('touchstart', onTouchStartCapture, { capture: true, passive: true });
+  _mc.addEventListener('touchend',   onTouchEndCapture,   { capture: true, passive: true });
+  _mc.addEventListener('touchcancel',onTouchEndCapture,   { capture: true, passive: true });
 
   // ── PC：マウスでポップアップをつかんで地図をパン ─────────────
   let isDragging = false;
@@ -1540,9 +1547,10 @@ map.on('popupopen', function(e) {
 
   // ポップアップが閉じたらすべてのイベントリスナーを削除し、ドラッグを再有効化
   map.once('popupclose', function() {
-    if (wasEnabled) map.dragging.enable(); // ドラッグ再有効化
-    popupEl.removeEventListener('touchstart', stopTouchProp);
-    popupEl.removeEventListener('touchmove',  stopTouchProp);
+    map.dragging.enable(); // 念のため再有効化
+    _mc.removeEventListener('touchstart', onTouchStartCapture, { capture: true });
+    _mc.removeEventListener('touchend',   onTouchEndCapture,   { capture: true });
+    _mc.removeEventListener('touchcancel',onTouchEndCapture,   { capture: true });
     popupEl.removeEventListener('mousedown',  onMouseDown);
     mapContainer.removeEventListener('wheel', onWheelCapture, { capture: true });
     document.removeEventListener('mousemove', onMouseMove);
