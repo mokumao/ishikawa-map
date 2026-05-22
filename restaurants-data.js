@@ -385,6 +385,50 @@ const restaurants = [
     photos:     []
   },
 
+  // ── コンビニエンスストア ──────────────────────────────────────────
+  {
+    name:      "ローソン うるま石川店",
+    genre:     "コンビニ",
+    address:   "沖縄県うるま市石川2丁目1-1",
+    hours:     "24時間",
+    closed:    "年中無休",
+    note:      "ATM・コピー機あり",
+    note_en:   "ATM and copy machine available.",
+    sourceUrl: "https://store.lawson.co.jp/",
+    warn:      false,
+    lat:       26.4298,
+    lng:       127.8222,
+    twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
+  },
+  {
+    name:      "ファミリーマート うるま石川店",
+    genre:     "コンビニ",
+    address:   "沖縄県うるま市石川東恩納",
+    hours:     "24時間",
+    closed:    "年中無休",
+    note:      "ATM・イートインスペースあり",
+    note_en:   "ATM and eat-in space available.",
+    sourceUrl: "https://www.family.co.jp/",
+    warn:      false,
+    lat:       26.4342,
+    lng:       127.8265,
+    twitter: "", instagram: "", youtube: "", website: "https://www.family.co.jp/", detailText: "", photos: []
+  },
+  {
+    name:      "セブンイレブン うるま石川1丁目店",
+    genre:     "コンビニ",
+    address:   "沖縄県うるま市石川1丁目",
+    hours:     "24時間",
+    closed:    "年中無休",
+    note:      "ATM・コピー機あり",
+    note_en:   "ATM and copy machine available.",
+    sourceUrl: "https://www.sej.co.jp/",
+    warn:      false,
+    lat:       26.4272,
+    lng:       127.8281,
+    twitter: "", instagram: "", youtube: "", website: "https://www.sej.co.jp/", detailText: "", photos: []
+  },
+
   // ── テスト用店舗（石川ビーチ沖合・動作確認専用） ─────────────────
   {
     name:      "【テスト】石川ビーチ海上店",

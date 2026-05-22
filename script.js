@@ -44,6 +44,7 @@ var TRANSLATIONS = {
     'filter.yakiniku':     '焼肉',
     'filter.bar':          'バル',
     'filter.ramen':        'ラーメン',
+    'filter.conbini':      'コンビニ',
     'footer.main':         '🌊 うるま市石川 飲食店マップ  |  掲載情報は調査時点のものです',
     'visitor.today':       '本日の訪問者 {n} 人',
     'visitor.total':       '累計訪問者 {n} 人',
@@ -85,6 +86,7 @@ var TRANSLATIONS = {
     'filter.yakiniku':     'BBQ',
     'filter.bar':          'Bar',
     'filter.ramen':        'Ramen',
+    'filter.conbini':      'Convenience Store',
     'footer.main':         '🌊 Ishikawa, Uruma City  |  Info as of survey date',
     'visitor.today':       "Today's visitors: {n}",
     'visitor.total':       'Total visitors: {n}',
@@ -442,10 +444,13 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   // カテゴリサブメニュー
   document.getElementById('gearCatFood').addEventListener('click', function () {
     closeMenu();
-    switchTab('list'); // 飲食店一覧を表示
+    applyFilter('all'); // 飲食店（コンビニ除く）フィルターに切り替え
+    switchTab('list');
   });
   document.getElementById('gearCatConbini').addEventListener('click', function () {
-    alert('コンビニ情報は準備中です。');
+    closeMenu();
+    applyFilter('conbini');
+    switchTab('list');
   });
   document.getElementById('gearCatGas').addEventListener('click', function () {
     alert('ガソリンスタンド情報は準備中です。');
@@ -878,12 +883,14 @@ function fmtHours(hours) {
 
 // ── フィルター定義 ───────────────────────────────────────────────
 const FILTERS = [
-  { id: 'all',      label: 'すべて',       color: '#546e7a', test: () => true },
+  { id: 'all',      label: 'すべて',       color: '#546e7a', test: g => g !== 'コンビニ' },
   { id: 'izakaya',  label: '居酒屋・食堂', color: '#e53935', test: g => g.includes('居酒屋') || g.includes('食堂') },
   { id: 'cafe',     label: 'カフェ',       color: '#00897b', test: g => g.includes('カフェ') },
   { id: 'yakiniku', label: '焼肉',         color: '#fb8c00', test: g => g.includes('焼肉') },
   { id: 'bar',      label: 'バル',         color: '#8e24aa', test: g => g.includes('バル') },
   { id: 'ramen',    label: 'ラーメン',     color: '#c62828', test: g => g.includes('ラーメン') },
+  // コンビニはサイドバーには表示しない（歯車メニューから切り替え）
+  { id: 'conbini',  label: 'コンビニ',     color: '#0067CC', test: g => g === 'コンビニ', hidden: true },
 ];
 
 let currentFilter = 'all';
@@ -909,13 +916,26 @@ function genreColor(genre) {
   return DEFAULT_COLOR;
 }
 
+// ── コンビニブランド情報（アイコン色・ラベル文字） ────────────────
+function conbiniBrandInfo(name) {
+  if (name.includes('ローソン'))          return { color: '#0067CC', label: 'L' };
+  if (name.includes('ファミリーマート'))  return { color: '#1fb1a4', label: 'F' };
+  if (name.includes('セブンイレブン') || name.includes('7-Eleven')) return { color: '#e31837', label: '7' };
+  return { color: '#555555', label: 'C' };
+}
+
 // ── SVG ピンアイコン生成 ─────────────────────────────────────────
-function makePinIcon(fillColor, isWarn) {
+// innerLabel: コンビニブランドの頭文字など（省略時は白丸のみ）
+function makePinIcon(fillColor, isWarn, innerLabel) {
   const color = isWarn ? WARN_COLOR : fillColor;
-  const inner = isWarn
-    ? `<text x="15" y="18" text-anchor="middle" font-size="11"
-             font-weight="900" fill="${color}" font-family="sans-serif">!</text>`
-    : "";
+  let inner = '';
+  if (isWarn) {
+    inner = `<text x="15" y="18" text-anchor="middle" font-size="11"
+             font-weight="900" fill="${color}" font-family="sans-serif">!</text>`;
+  } else if (innerLabel) {
+    inner = `<text x="15" y="18" text-anchor="middle" font-size="10"
+             font-weight="900" fill="${color}" font-family="sans-serif">${innerLabel}</text>`;
+  }
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 42" width="30" height="42">
       <path d="M15 1C8.1 1 2.5 6.6 2.5 13.5C2.5 22.9 15 41 15 41
@@ -1206,9 +1226,17 @@ L.polygon([
 
 // ── マーカー生成・保持 ───────────────────────────────────────────
 const markersData = restaurants.map((r, idx) => {
-  const color  = genreColor(r.genre);
+  let color, pinLabel;
+  if (r.genre === 'コンビニ') {
+    const brand = conbiniBrandInfo(r.name);
+    color    = brand.color;
+    pinLabel = brand.label;
+  } else {
+    color    = genreColor(r.genre);
+    pinLabel = undefined;
+  }
   const marker = L.marker([r.lat, r.lng], {
-    icon:  makePinIcon(color, r.warn),
+    icon:  makePinIcon(color, r.warn, pinLabel),
     title: r.name
   });
   marker.bindPopup(makePopup(r, idx), { maxWidth: 300, autoPan: false });
@@ -1635,6 +1663,7 @@ function buildFilterButtons() {
   const container = document.getElementById('filterButtons');
   container.innerHTML = ''; // 再描画時にリセット
   FILTERS.forEach(f => {
+    if (f.hidden) return; // コンビニなどサイドバー非表示フィルターはスキップ
     const btn = document.createElement('button');
     btn.className   = 'filter-btn' + (f.id === currentFilter ? ' active' : '');
     btn.textContent = t('filter.' + f.id); // 翻訳対応
@@ -1914,5 +1943,5 @@ initSearch();
     // lastDy !== 0: touchmove中にすでにズームをコミット済み → 何もしない（戻り動作なし）
   });
 })();
-renderShopList();
+applyFilter('all'); // 初期状態：飲食店のみ表示（コンビニはデフォルト非表示）
 applyLangToDOM();
