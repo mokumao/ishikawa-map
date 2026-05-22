@@ -1910,15 +1910,12 @@ initSearch();
       mapPane = null;
     }
 
-    // Leafletの操作を再有効化
+    // Leafletのパン操作を再有効化（doubleClickZoom は global で disable 済みのため enable しない）
     map.dragging.enable();
-    map.doubleClickZoom.enable();
 
     // 指を離した時だけ地図中心を固定したままズームをコミット
-    // ドラッグなし（lastDy=0）の場合はダブルタップ単体 → 0.5ズームイン
-    if (lastDy === 0) {
-      map.zoomIn(0.5);
-    } else {
+    // ドラッグなし（lastDy=0）の場合はダブルタップ単体 → dblclick ハンドラーに任せる
+    if (lastDy !== 0) {
       const newZoom = Math.max(
         map.getMinZoom(),
         Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
