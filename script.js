@@ -1001,7 +1001,7 @@ L.control.zoom({ position: window.innerWidth <= 767 ? 'bottomleft' : 'topleft' }
 // ダブルクリック/ダブルタップでスムーズズームイン（クリック地点を中心に flyTo）
 map.doubleClickZoom.disable();
 map.on('dblclick', function (e) {
-  map.flyTo(e.latlng, map.getZoom() + 1, { duration: 0.4, easeLinearity: 0.5 });
+  map.flyTo(e.latlng, map.getZoom() + 1, { duration: 0.8, easeLinearity: 0.5 });
 });
 
 
