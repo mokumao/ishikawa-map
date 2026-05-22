@@ -1004,6 +1004,8 @@ L.control.zoom({ position: window.innerWidth <= 767 ? 'bottomleft' : 'topleft' }
 // setView + CSS トランジション（GPU加速）で滑らかに。
 map.doubleClickZoom.disable();
 map.on('dblclick', function (e) {
+  // スマホでは IIFE（ダブルタップ+ドラッグ処理）がすでにズームを処理済みの場合はスキップ
+  if (window._dblTapJustHandled) return;
   map.setView(e.latlng, map.getZoom() + 2, { animate: true });
 
   // ── スマホ：ダブルタップ後に指を押したままドラッグすると
@@ -1914,8 +1916,12 @@ initSearch();
     map.dragging.enable();
 
     // 指を離した時だけ地図中心を固定したままズームをコミット
-    // ドラッグなし（lastDy=0）の場合はダブルタップ単体 → dblclick ハンドラーに任せる
-    if (lastDy !== 0) {
+    if (lastDy === 0) {
+      // 純粋なダブルタップ → +2ズーム（dblclick が届かない場合に備えてここで処理）
+      map.setView(map.getCenter(), map.getZoom() + 2, { animate: true });
+      window._dblTapJustHandled = true;
+      setTimeout(function() { window._dblTapJustHandled = false; }, 600);
+    } else {
       const newZoom = Math.max(
         map.getMinZoom(),
         Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
