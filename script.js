@@ -1463,10 +1463,23 @@ map.on('popupclose', function() {
 });
 
 // ── ポップアップ上のPC操作（マウスドラッグ・ホイール）を地図に伝える ──────
-// ※ スマホのタッチパンは意図せず地図が動く問題があるため無効
 map.on('popupopen', function(e) {
   const popupEl = e.popup.getElement();
   if (!popupEl) return;
+
+  // ── スマホ：ポップアップが開いている間は地図ドラッグを完全無効化 ──────────
+  // stopPropagation だけでは Leaflet のタッチハンドラを止められないケースがあるため、
+  // map.dragging.disable() で確実に防ぐ。閉じたら再有効化。
+  const wasEnabled = map.dragging.enabled();
+  if (wasEnabled) map.dragging.disable();
+
+  // ── スマホ：ポップアップ上のタッチが地図ドラッグハンドラに届かないよう伝播を止める ──
+  // （補助的な保護：dragging.disable だけでは防ぎきれないエッジケース用）
+  function stopTouchProp(te) {
+    te.stopPropagation();
+  }
+  popupEl.addEventListener('touchstart', stopTouchProp, { passive: true });
+  popupEl.addEventListener('touchmove',  stopTouchProp, { passive: true });
 
   // ── PC：マウスでポップアップをつかんで地図をパン ─────────────
   let isDragging = false;
@@ -1525,8 +1538,11 @@ map.on('popupopen', function(e) {
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup',   onMouseUp);
 
-  // ポップアップが閉じたらすべてのイベントリスナーを削除
+  // ポップアップが閉じたらすべてのイベントリスナーを削除し、ドラッグを再有効化
   map.once('popupclose', function() {
+    if (wasEnabled) map.dragging.enable(); // ドラッグ再有効化
+    popupEl.removeEventListener('touchstart', stopTouchProp);
+    popupEl.removeEventListener('touchmove',  stopTouchProp);
     popupEl.removeEventListener('mousedown',  onMouseDown);
     mapContainer.removeEventListener('wheel', onWheelCapture, { capture: true });
     document.removeEventListener('mousemove', onMouseMove);
