@@ -496,6 +496,12 @@ footer a:hover { text-decoration: underline; }
 }
 .popup-close-side:hover { color: #e53935; background: #ffebee; border-color: #ffcdd2; }
 
+/* ── Leaflet ズームアニメーションを0.6秒に延長（デフォルト0.25s） ──────── */
+/* GPU加速CSSトランジションなのでモバイルでも滑らか */
+.leaflet-zoom-anim .leaflet-zoom-animated {
+  transition: transform 0.6s cubic-bezier(0, 0, 0.25, 1) !important;
+}
+
 /* ── Leaflet popup overrides ──────────────────────────────── */
 .leaflet-popup-content-wrapper {
   border-radius: 10px !important;
