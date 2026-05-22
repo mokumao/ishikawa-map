@@ -1910,29 +1910,33 @@ initSearch();
     if (!dragging) return;
     dragging = false;
 
-    // CSSスケールをリセット（Leafletのtranslateに戻す）
-    if (mapPane) {
-      const pos = map._getMapPanePos();
-      mapPane.style.transform = 'translate3d(' + pos.x + 'px,' + pos.y + 'px,0)';
-      mapPane.style.transformOrigin = '';
-      mapPane = null;
-    }
-
-    // Leafletのパン操作を再有効化（doubleClickZoom は global で disable 済みのため enable しない）
+    // Leafletのパン操作を再有効化
     map.dragging.enable();
 
-    // 指を離した時だけ地図中心を固定したままズームをコミット
     if (lastDy === 0) {
-      // 純粋なダブルタップ → +2ズーム（dblclick が届かない場合に備えてここで処理）
+      // 純粋なダブルタップ → CSSスケールをリセットしてからズーム
+      if (mapPane) {
+        const pos = map._getMapPanePos();
+        mapPane.style.transform = 'translate3d(' + pos.x + 'px,' + pos.y + 'px,0)';
+        mapPane.style.transformOrigin = '';
+        mapPane = null;
+      }
       map.setView(tapPoint || map.getCenter(), map.getZoom() + 1, { animate: true });
       window._dblTapJustHandled = true;
       setTimeout(function() { window._dblTapJustHandled = false; }, 600);
     } else {
+      // ドラッグズーム → setZoom(animate:false) を先に呼ぶことで
+      // Leaflet が mapPane.style.transform を上書き → CSSスケールが自動解除される
+      // 「元に戻る→アニメーション」の二段動作がなくなりシームレスに確定する
       const newZoom = Math.max(
         map.getMinZoom(),
         Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
       );
-      map.setZoom(newZoom, { animate: true });
+      map.setZoom(newZoom, { animate: false });
+      if (mapPane) {
+        mapPane.style.transformOrigin = '';
+        mapPane = null;
+      }
     }
   });
 })();
