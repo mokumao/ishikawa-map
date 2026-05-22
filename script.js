@@ -1462,31 +1462,11 @@ map.on('popupclose', function() {
   }
 });
 
-// ── ポップアップを触っても地図をパンできるようにする ────────────────
+// ── ポップアップ上のPC操作（マウスドラッグ・ホイール）を地図に伝える ──────
+// ※ スマホのタッチパンは意図せず地図が動く問題があるため無効
 map.on('popupopen', function(e) {
   const popupEl = e.popup.getElement();
   if (!popupEl) return;
-
-  // ── スマホ：タッチでパン ──────────────────────────────────────
-  let lastX = 0, lastY = 0;
-
-  function onTouchStart(te) {
-    if (te.touches.length !== 1) return;
-    lastX = te.touches[0].clientX;
-    lastY = te.touches[0].clientY;
-  }
-
-  function onTouchMove(te) {
-    if (te.touches.length !== 1) return;
-    const dx = te.touches[0].clientX - lastX;
-    const dy = te.touches[0].clientY - lastY;
-    lastX = te.touches[0].clientX;
-    lastY = te.touches[0].clientY;
-    map.panBy([-dx, -dy], { animate: false });
-  }
-
-  popupEl.addEventListener('touchstart', onTouchStart, { passive: true });
-  popupEl.addEventListener('touchmove',  onTouchMove,  { passive: true });
 
   // ── PC：マウスでポップアップをつかんで地図をパン ─────────────
   let isDragging = false;
@@ -1547,8 +1527,6 @@ map.on('popupopen', function(e) {
 
   // ポップアップが閉じたらすべてのイベントリスナーを削除
   map.once('popupclose', function() {
-    popupEl.removeEventListener('touchstart', onTouchStart);
-    popupEl.removeEventListener('touchmove',  onTouchMove);
     popupEl.removeEventListener('mousedown',  onMouseDown);
     mapContainer.removeEventListener('wheel', onWheelCapture, { capture: true });
     document.removeEventListener('mousemove', onMouseMove);
