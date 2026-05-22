@@ -1833,19 +1833,19 @@ buildFilterButtons();
 initSearch();
 
 // ── スマホ：ダブルタップ＋ドラッグでズーム（グーグルマップ方式）──
-// ドラッグ中はCSSスケールで滑らかに表示、指を離した時だけLeafletズームをコミット
+// CSSスケールを使わず setZoom を直接呼ぶことで指離し時の戻り動作を排除
 (function() {
   const mapEl         = map.getContainer();
   const DOUBLE_TAP_MS = 300;  // ダブルタップ判定時間（ms）
   const PX_PER_ZOOM   = 100;  // 何px動かすと1ズームレベル変わるか
 
-  let lastTapTime = 0;
-  let dragging    = false;
-  let startY      = 0;
-  let startZoom   = 0;
-  let tapPoint    = null;  // mapコンテナ相対のタップ座標
-  let lastDy      = 0;
-  let mapPane     = null;  // .leaflet-map-pane への参照
+  let lastTapTime  = 0;
+  let dragging     = false;
+  let startY       = 0;
+  let startZoom    = 0;
+  let tapPoint     = null;
+  let lastDy       = 0;
+  let _pendingZoom = null;  // rAFスロットル用
 
   mapEl.addEventListener('touchstart', function(e) {
     if (e.touches.length !== 1) { dragging = false; return; }
@@ -1854,35 +1854,19 @@ initSearch();
     const touch = e.touches[0];
 
     if (now - lastTapTime < DOUBLE_TAP_MS && !dragging) {
-      // ダブルタップ検出 → CSS変形ズームモード開始
-      dragging    = true;
-      startY      = touch.clientY;
-      lastDy      = 0;
-      startZoom   = map.getZoom();
+      // ダブルタップ検出 → ドラッグズームモード開始
+      dragging  = true;
+      startY    = touch.clientY;
+      lastDy    = 0;
+      startZoom = map.getZoom();
 
-      // タップ位置を latlng に変換（ズーム中心として使用）
+      // タップ位置を latlng に変換（純粋ダブルタップ時のズーム中心として使用）
       const mapRect = mapEl.getBoundingClientRect();
       tapPoint = map.containerPointToLatLng(
         L.point(touch.clientX - mapRect.left, touch.clientY - mapRect.top)
       );
 
-      // マップペインを取得（CSSスケールを直接適用する対象）
-      mapPane = mapEl.querySelector('.leaflet-map-pane');
-
-      // スケールの原点を「ペインのローカル座標系での地図中心」に正確に設定
-      // ペインはLeafletのtranslate3d(pos.x, pos.y)で動いているため、
-      // コンテナ中心 - paneOffset = ペインローカル座標での地図中心
-      if (mapPane) {
-        const pos = map._getMapPanePos();
-        const originX = mapEl.offsetWidth  / 2 - pos.x;
-        const originY = mapEl.offsetHeight / 2 - pos.y;
-        mapPane.style.transformOrigin = originX + 'px ' + originY + 'px';
-      }
-
-      // Leafletのパン操作を一時停止（干渉防止）
       map.dragging.disable();
-      map.doubleClickZoom.disable();
-
       lastTapTime = 0;
       e.preventDefault();
     } else {
@@ -1896,48 +1880,38 @@ initSearch();
     e.preventDefault();
 
     lastDy = e.touches[0].clientY - startY;  // 下=拡大、上=縮小
-    const scale = Math.pow(2, lastDy / PX_PER_ZOOM);
+    const newZoom = Math.max(
+      map.getMinZoom(),
+      Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
+    );
 
-    if (mapPane) {
-      // LeafletのtranslateにCSSスケールを重ねる（GPU処理でスムーズ）
-      const pos = map._getMapPanePos();
-      mapPane.style.transform =
-        'translate3d(' + pos.x + 'px,' + pos.y + 'px,0) scale(' + scale + ')';
+    // rAFでスロットル：毎フレーム最新ズームを適用（CSSスケールなし）
+    if (_pendingZoom === null) {
+      _pendingZoom = newZoom;
+      requestAnimationFrame(function() {
+        if (_pendingZoom !== null) {
+          map.setZoom(_pendingZoom, { animate: false });
+          _pendingZoom = null;
+        }
+      });
+    } else {
+      _pendingZoom = newZoom;
     }
   }, { passive: false });
 
   mapEl.addEventListener('touchend', function() {
     if (!dragging) return;
-    dragging = false;
-
-    // Leafletのパン操作を再有効化
+    dragging     = false;
+    _pendingZoom = null;
     map.dragging.enable();
 
     if (lastDy === 0) {
-      // 純粋なダブルタップ → CSSスケールをリセットしてからズーム
-      if (mapPane) {
-        const pos = map._getMapPanePos();
-        mapPane.style.transform = 'translate3d(' + pos.x + 'px,' + pos.y + 'px,0)';
-        mapPane.style.transformOrigin = '';
-        mapPane = null;
-      }
+      // 純粋なダブルタップ → タップ位置中心に +1ズーム
       map.setView(tapPoint || map.getCenter(), map.getZoom() + 1, { animate: true });
       window._dblTapJustHandled = true;
       setTimeout(function() { window._dblTapJustHandled = false; }, 600);
-    } else {
-      // ドラッグズーム → setZoom(animate:false) を先に呼ぶことで
-      // Leaflet が mapPane.style.transform を上書き → CSSスケールが自動解除される
-      // 「元に戻る→アニメーション」の二段動作がなくなりシームレスに確定する
-      const newZoom = Math.max(
-        map.getMinZoom(),
-        Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
-      );
-      map.setZoom(newZoom, { animate: false });
-      if (mapPane) {
-        mapPane.style.transformOrigin = '';
-        mapPane = null;
-      }
     }
+    // lastDy !== 0: touchmove中にすでにズームをコミット済み → 何もしない（戻り動作なし）
   });
 })();
 renderShopList();
