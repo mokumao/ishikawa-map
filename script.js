@@ -1005,6 +1005,24 @@ L.control.zoom({ position: window.innerWidth <= 767 ? 'bottomleft' : 'topleft' }
 map.doubleClickZoom.disable();
 map.on('dblclick', function (e) {
   map.setView(e.latlng, map.getZoom() + 1, { animate: true });
+
+  // ── スマホ：ダブルタップ後に指を押したままドラッグすると
+  // ブラウザが「ダブルタップドラッグズーム」ジェスチャーと解釈し
+  // 指を離したときにカクカクした動きが起きる。
+  // touchend まで touchmove を preventDefault + stopPropagation で封鎖する。
+  if ('ontouchstart' in window) {
+    var mc = map.getContainer();
+    function blockDragZoom(te) {
+      te.preventDefault();
+      te.stopPropagation();
+    }
+    function releaseDragZoomBlock() {
+      mc.removeEventListener('touchmove', blockDragZoom, { capture: true });
+    }
+    mc.addEventListener('touchmove',  blockDragZoom,         { capture: true, passive: false });
+    mc.addEventListener('touchend',   releaseDragZoomBlock,  { capture: true, passive: true, once: true });
+    mc.addEventListener('touchcancel',releaseDragZoomBlock,  { capture: true, passive: true, once: true });
+  }
 });
 
 
