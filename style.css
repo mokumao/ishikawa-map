@@ -380,6 +380,7 @@ header h1 {
   flex: 1;
   min-height: 0;
   min-width: 0;
+  touch-action: manipulation; /* ダブルタップドラッグによるブラウザ独自ズームを無効化 */
 }
 /* タイル未読み込み部分の背景をOSMタイルの地色に合わせてグレーを隠す */
 #map.leaflet-container {
