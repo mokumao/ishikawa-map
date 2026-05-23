@@ -1877,6 +1877,9 @@ initSearch();
       startZoom  = map.getZoom();
       mapCenter  = map.getCenter(); // ドラッグ中は地図中心を固定
 
+      // 拡大縮小操作時はポップアップを閉じる
+      map.closePopup();
+
       const mapRect = mapEl.getBoundingClientRect();
       tapPoint      = map.containerPointToLatLng(
         L.point(touch.clientX - mapRect.left, touch.clientY - mapRect.top)
