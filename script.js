@@ -1421,22 +1421,10 @@ focusShop._fromSidebar = false;
 map.on('popupopen', function(e) {
 
   if (focusShop._fromSidebar) return; // サイドバーから開いた場合はスキップ
+  if (window.innerWidth <= 767) return; // スマホ：自動パンなし（panByアニメ中にドラッグが競合してジャンプするため廃止）
 
-  // タッチ開始時にオートパンをキャンセル
-  // 理由：ポップアップ表示直後に panBy が発火するタイミングでユーザーが
-  //       スクロールを開始すると、panBy が割り込んで地図が瞬時に動く問題を防止する。
-  var _autoPanTimer = null;
-  var _mapEl = map.getContainer();
-  function _cancelAutoPan() {
-    if (_autoPanTimer !== null) { clearTimeout(_autoPanTimer); _autoPanTimer = null; }
-    _mapEl.removeEventListener('touchstart', _cancelAutoPan, true);
-  }
-  _mapEl.addEventListener('touchstart', _cancelAutoPan, { capture: true, passive: true });
-  map.once('popupclose', _cancelAutoPan);
-
-  _autoPanTimer = setTimeout(function() {
-    _autoPanTimer = null;
-    _mapEl.removeEventListener('touchstart', _cancelAutoPan, true);
+  // ── デスクトップ：ポップアップが見切れないよう最小限パン ──
+  setTimeout(function() {
     const popup   = e.popup;
     const popupEl = popup.getElement();
     const mapEl   = map.getContainer();
@@ -1444,55 +1432,14 @@ map.on('popupopen', function(e) {
 
     const pr  = popupEl.getBoundingClientRect();
     const mr  = mapEl.getBoundingClientRect();
-
-    if (window.innerWidth <= 767) {
-      // ── スマホ：ポップアップ＋矢印＋マーカーアイコンがすべて見えるよう自動パン ──
-      // マーカーのピクセル位置（地図コンテナ基準）
-      const latlng   = popup.getLatLng();
-      const mPx      = map.latLngToContainerPoint(latlng);
-      // ビューポート基準のマーカーY（iconAnchorがアイコン底辺なのでそのまま使用）
-      const markerVY = mr.top + mPx.y;
-
-      // ピン下×ボタンの下端位置
-      // iconAnchor.y = -4 → ボタン上端はmarkerVYの4px下、ボタン高さ30px
-      const closeBtnBottom = markerVY + 4 + 30; // = markerVY + 34
-
-      const padTop    = 80;   // ＋－ボタン（約70px）をクリアする余白
-      const padBottom = 80;   // 中央下の「店名を表示」ボタン（bottom:28px+高さ34px+余白）
-      const padSide   = 10;
-      let dx = 0, dy = 0;
-
-      // 縦方向：ポップアップ上部を優先し、次にピン下×ボタンが見えるか確認
-      if (pr.top < mr.top + padTop) {
-        // ポップアップ上部が隠れている → 内容を下に移動
-        dy = pr.top - mr.top - padTop;
-      } else if (closeBtnBottom > mr.bottom - padBottom) {
-        // ピン下×ボタンが画面下に隠れている → ×ボタン全体が見えるよう上に移動
-        dy = closeBtnBottom - (mr.bottom - padBottom);
-      }
-
-      // 横方向
-      if (pr.left < mr.left + padSide) {
-        dx = pr.left - mr.left - padSide;
-      } else if (pr.right > mr.right - padSide) {
-        dx = pr.right - mr.right + padSide;
-      }
-
-      if (dx !== 0 || dy !== 0) {
-        // animate:false にすることでアニメーション中にドラッグが割り込んでジャンプする問題を防止
-        map.panBy([dx, dy], { animate: false });
-      }
-    } else {
-      // ── デスクトップ：ポップアップが見切れないよう最小限パン ──
-      const pad = 10;
-      let dx = 0, dy = 0;
-      if (pr.top    < mr.top    + pad) dy = pr.top    - mr.top    - pad;
-      if (pr.bottom > mr.bottom - pad) dy = pr.bottom - mr.bottom + pad;
-      if (pr.left   < mr.left   + pad) dx = pr.left   - mr.left   - pad;
-      if (pr.right  > mr.right  - pad) dx = pr.right  - mr.right  + pad;
-      if (dx !== 0 || dy !== 0) {
-        map.panBy([dx, dy], { animate: true, duration: 1.0, easeLinearity: 0.01 });
-      }
+    const pad = 10;
+    let dx = 0, dy = 0;
+    if (pr.top    < mr.top    + pad) dy = pr.top    - mr.top    - pad;
+    if (pr.bottom > mr.bottom - pad) dy = pr.bottom - mr.bottom + pad;
+    if (pr.left   < mr.left   + pad) dx = pr.left   - mr.left   - pad;
+    if (pr.right  > mr.right  - pad) dx = pr.right  - mr.right  + pad;
+    if (dx !== 0 || dy !== 0) {
+      map.panBy([dx, dy], { animate: true, duration: 1.0, easeLinearity: 0.01 });
     }
   }, 80);
 });
