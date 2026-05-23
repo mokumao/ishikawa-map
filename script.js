@@ -1327,29 +1327,35 @@ const markersData = restaurants.map((r, idx) => {
 
   if ('ontouchstart' in window) {
     // ── スマホ：ワンタップでポップアップ ──
-    var markerEl = marker.getElement();
-    if (markerEl) setupTap(markerEl);
-
-    // permanent:true のツールチップは marker.addTo(map) 時点で既に開いている。
-    // そのため tooltipopen イベントはもう発火済みで once() では拾えない。
-    // setTimeout(0) でDOM更新後に要素を取得してタップを設定する。
-    ;(function(m) {
+    // フィルターで remove → addTo されるたびに Leaflet は新しい DOM 要素を生成するため、
+    // marker.on('add') でマップに追加されるたびに setupTap を再設定する。
+    function bindTapToElement() {
+      var markerEl = marker.getElement();
+      if (markerEl) setupTap(markerEl);
       setTimeout(function() {
-        var tooltip = m.getTooltip();
+        var tooltip = marker.getTooltip();
         if (!tooltip) return;
         var ttEl = tooltip.getElement();
         if (ttEl) setupTap(ttEl);
       }, 0);
-    })(marker);
+    }
+    // 初回（すでに addTo(map) 済み）
+    bindTapToElement();
+    // フィルター切り替えなどで再 addTo されたとき
+    marker.on('add', function() {
+      setTimeout(bindTapToElement, 0);
+    });
   } else {
     // ── デスクトップ：通常クリックでポップアップ ──
     marker.on('click', function(e) {
       L.DomEvent.stopPropagation(e);
       openThisPopup();
     });
-    marker.once('tooltipopen', function() {
+    // tooltipopen は remove→addTo のたびに再発火するので once でなく on で受ける
+    marker.on('tooltipopen', function() {
       var ttEl = marker.getTooltip().getElement();
       if (!ttEl) return;
+      L.DomEvent.off(ttEl, 'click'); // 二重登録を防ぐ
       L.DomEvent.on(ttEl, 'click', function(e) {
         L.DomEvent.stopPropagation(e);
         openThisPopup();
