@@ -1859,28 +1859,50 @@ initSearch();
   let lastDy            = 0;
   let _rafId            = null;
   let _snapCanvas       = null;
+  let _snapOffX         = 0; // マップコンテナからのキャンバス左オフセット (px)
+  let _snapOffY         = 0; // マップコンテナからのキャンバス上オフセット (px)
 
   // 現在見えているタイルをキャンバスに描いてオーバーレイとして貼る
+  // ── キャンバスを 3× サイズ（上下左右に 1 画面分拡張）で作成することで
+  //    ズームアウト時にキャンバスの端が見えて四角い枠が出る問題を解消する。
+  //    縮小率 0.5（1段階ズームアウト）でも画面全体をカバーできる。
   function createSnapshot() {
     const w   = mapEl.clientWidth;
     const h   = mapEl.clientHeight;
-    const dpr = window.devicePixelRatio || 1;
+    // DPR を 1 に固定：ジェスチャー中の一時表示なので高解像度不要、メモリ節約
+    const dpr = 1;
+
+    // 3× サイズ・中心を画面中央に合わせる（上下左右に w/h ずつ拡張）
+    const cw = w * 3;
+    const ch = h * 3;
+    _snapOffX = -w; // left: -w → キャンバス左端が画面左より w だけ外側
+    _snapOffY = -h; // top:  -h → キャンバス上端が画面上より h だけ外側
 
     const cv  = document.createElement('canvas');
-    cv.width  = w * dpr;
-    cv.height = h * dpr;
+    cv.width  = cw * dpr;
+    cv.height = ch * dpr;
     cv.style.cssText =
-      'position:absolute;top:0;left:0;width:' + w + 'px;height:' + h + 'px;' +
+      'position:absolute;' +
+      'top:'  + _snapOffY + 'px;' +
+      'left:' + _snapOffX + 'px;' +
+      'width:' + cw + 'px;height:' + ch + 'px;' +
       'z-index:450;pointer-events:none;';
 
     const ctx     = cv.getContext('2d');
     ctx.scale(dpr, dpr);
+
+    // 背景を地図コンテナと同色で塗りつぶし（タイル未ロード領域を隠す）
+    ctx.fillStyle = '#f2ede8';
+    ctx.fillRect(0, 0, cw, ch);
+
     const mapRect = mapEl.getBoundingClientRect();
 
+    // タイルはキャンバスのオフセット分ずらして描画
     mapEl.querySelectorAll('.leaflet-tile-loaded').forEach(function(img) {
       var r = img.getBoundingClientRect();
       ctx.drawImage(img,
-        r.left - mapRect.left, r.top - mapRect.top,
+        r.left - mapRect.left - _snapOffX, // キャンバス座標系 X
+        r.top  - mapRect.top  - _snapOffY, // キャンバス座標系 Y
         r.width, r.height);
     });
 
@@ -1928,8 +1950,12 @@ initSearch();
       _rafId = requestAnimationFrame(function() {
         _rafId = null;
         if (!_snapCanvas) return;
+        // transformOrigin はキャンバス自身の座標系で指定する。
+        // キャンバスは (_snapOffX, _snapOffY) に配置されているので
+        // タップ点のキャンバス内座標 = containerPoint - offset
         _snapCanvas.style.transformOrigin =
-          tapContainerPoint.x + 'px ' + tapContainerPoint.y + 'px';
+          (tapContainerPoint.x - _snapOffX) + 'px ' +
+          (tapContainerPoint.y - _snapOffY) + 'px';
         _snapCanvas.style.transform = 'scale(' + scale + ')';
       });
     }
