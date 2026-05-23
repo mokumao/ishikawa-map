@@ -1023,58 +1023,32 @@ const map = L.map("map", {
 L.control.zoom({ position: window.innerWidth <= 767 ? 'bottomleft' : 'topleft' }).addTo(map);
 
 // ダブルクリック/ダブルタップでスムーズズームイン（CSSトランジション使用）
+// flyTo はJSアニメーションのためモバイルでカクつくことがある。
+// setView + CSS トランジション（GPU加速）で滑らかに。
 map.doubleClickZoom.disable();
 map.on('dblclick', function (e) {
+  // スマホでは IIFE（ダブルタップ+ドラッグ処理）がすでにズームを処理済みの場合はスキップ
   if (window._dblTapJustHandled) return;
   map.setView(e.latlng, map.getZoom() + 1, { animate: true });
-});
 
-// ── ダブルタップホールドドラッグを touchstart 段階でブロック ──────────────
-// 問題：ダブルタップ後に指を離さずドラッグすると、ブラウザが「ドラッグズーム」
-//       ジェスチャーと解釈して地図が四角の枠で表示される。
-// 原因：従来の blockDragZoom は dblclick ハンドラ内で登録していたが、
-//       dblclick は指を離した後（touchend 後）に発火するため、
-//       指を押したまま動かす touchmove には間に合わない。
-// 修正：touchstart でダブルタップを検出し、即座に touchmove をブロックする。
-if ('ontouchstart' in window) {
-  (function () {
+  // ── スマホ：ダブルタップ後に指を押したままドラッグすると
+  // ブラウザが「ダブルタップドラッグズーム」ジェスチャーと解釈し
+  // 指を離したときにカクカクした動きが起きる。
+  // touchend まで touchmove を preventDefault + stopPropagation で封鎖する。
+  if ('ontouchstart' in window) {
     var mc = map.getContainer();
-    var _lastEnd = { time: 0, x: 0, y: 0 };
-    var _blocking = false;
-
-    // 前回の touchend 位置・時刻を記録
-    mc.addEventListener('touchend', function (e) {
-      if (e.changedTouches.length !== 1) return;
-      _lastEnd.time = Date.now();
-      _lastEnd.x = e.changedTouches[0].clientX;
-      _lastEnd.y = e.changedTouches[0].clientY;
-      _blocking = false;
-    }, { capture: true, passive: true });
-
-    mc.addEventListener('touchcancel', function () {
-      _blocking = false;
-    }, { capture: true, passive: true });
-
-    // 2回目のタッチ開始時にダブルタップホールドを検出 → 即ブロック
-    mc.addEventListener('touchstart', function (e) {
-      if (e.touches.length !== 1) { _blocking = false; return; }
-      var now = Date.now();
-      var t   = e.touches[0];
-      var dx  = Math.abs(t.clientX - _lastEnd.x);
-      var dy  = Math.abs(t.clientY - _lastEnd.y);
-      // 前回 touchend から 300ms 以内、30px 以内 = ダブルタップホールド
-      _blocking = (now - _lastEnd.time < 300 && dx < 30 && dy < 30);
-    }, { capture: true, passive: true });
-
-    // touchmove でブラウザのドラッグズームを完全に阻止
-    mc.addEventListener('touchmove', function (e) {
-      if (_blocking) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    }, { capture: true, passive: false });
-  })();
-}
+    function blockDragZoom(te) {
+      te.preventDefault();
+      te.stopPropagation();
+    }
+    function releaseDragZoomBlock() {
+      mc.removeEventListener('touchmove', blockDragZoom, { capture: true });
+    }
+    mc.addEventListener('touchmove',  blockDragZoom,         { capture: true, passive: false });
+    mc.addEventListener('touchend',   releaseDragZoomBlock,  { capture: true, passive: true, once: true });
+    mc.addEventListener('touchcancel',releaseDragZoomBlock,  { capture: true, passive: true, once: true });
+  }
+});
 
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
