@@ -1430,9 +1430,6 @@ map.on('popupopen', function(e) {
   function _cancelAutoPan() {
     if (_autoPanTimer !== null) { clearTimeout(_autoPanTimer); _autoPanTimer = null; }
     _mapEl.removeEventListener('touchstart', _cancelAutoPan, true);
-    // タイマー発火後に panBy アニメーション中であれば即座に停止する
-    // （アニメーション中にドラッグが割り込むと Leaflet が位置を誤計算してジャンプするため）
-    map.stop();
   }
   _mapEl.addEventListener('touchstart', _cancelAutoPan, { capture: true, passive: true });
   map.once('popupclose', _cancelAutoPan);
@@ -1482,7 +1479,8 @@ map.on('popupopen', function(e) {
       }
 
       if (dx !== 0 || dy !== 0) {
-        map.panBy([dx, dy], { animate: true, duration: 0.4 });
+        // animate:false にすることでアニメーション中にドラッグが割り込んでジャンプする問題を防止
+        map.panBy([dx, dy], { animate: false });
       }
     } else {
       // ── デスクトップ：ポップアップが見切れないよう最小限パン ──
