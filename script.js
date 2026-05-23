@@ -1426,6 +1426,14 @@ map.on('dragstart', function() {
   _savedCenterBeforePopup = null;
 });
 
+// タッチ開始時も即座にクリア
+// 理由：Leaflet は 15px 未満の移動を「click」と判定してポップアップを閉じる。
+//       その際に panTo(_savedCenterBeforePopup) が発火し「シュッ」と動く。
+//       地図を触った瞬間にクリアすることで、popupclose 時に panTo が起動しないようにする。
+map.getContainer().addEventListener('touchstart', function() {
+  _savedCenterBeforePopup = null;
+}, { passive: true, capture: true });
+
 // 地図アイコン直接クリック時：ポップアップが見えるようパン
 focusShop._fromSidebar = false;
 map.on('popupopen', function(e) {
