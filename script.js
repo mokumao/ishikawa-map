@@ -1854,16 +1854,15 @@ initSearch();
   let dragging          = false;
   let startY            = 0;
   let startZoom         = 0;
-  let tapPoint          = null;
-  let tapContainerPoint = null;
+  let tapPoint          = null;   // ダブルタップ位置（純粋ダブルタップ時のズーム中心）
+  let mapCenter         = null;   // ドラッグ開始時の地図中心（ドラッグズーム時の中心）
   let lastDy            = 0;
   let _rafId            = null;
 
   // ── ダブルタップ＋ドラッグズーム
-  // ジェスチャー中は Leaflet 内部の zoomanim イベントを fire する。
-  // これによりタイルが CSS transform でスケールされるだけ（新規読み込みなし）。
-  // → 四角い枠なし・タイルが灰色にならない・なめらかなズームプレビュー。
-  // 指を離したときだけ setZoomAround で整数ズームに確定しタイルを読み込む。
+  // ・純粋ダブルタップ   → タップ位置を中心に +1ズーム
+  // ・ダブルタップ＋ドラッグ → 地図の中心位置を固定したまま拡大縮小
+  // ジェスチャー中は zoomanim イベントで CSS transform のみ（タイル再読み込みなし）
 
   mapEl.addEventListener('touchstart', function(e) {
     if (e.touches.length !== 1) { dragging = false; return; }
@@ -1872,14 +1871,16 @@ initSearch();
     const touch = e.touches[0];
 
     if (now - lastTapTime < DOUBLE_TAP_MS && !dragging) {
-      dragging  = true;
-      startY    = touch.clientY;
-      lastDy    = 0;
-      startZoom = map.getZoom();
+      dragging   = true;
+      startY     = touch.clientY;
+      lastDy     = 0;
+      startZoom  = map.getZoom();
+      mapCenter  = map.getCenter(); // ドラッグ中は地図中心を固定
 
-      const mapRect     = mapEl.getBoundingClientRect();
-      tapContainerPoint = L.point(touch.clientX - mapRect.left, touch.clientY - mapRect.top);
-      tapPoint          = map.containerPointToLatLng(tapContainerPoint);
+      const mapRect = mapEl.getBoundingClientRect();
+      tapPoint      = map.containerPointToLatLng(
+        L.point(touch.clientX - mapRect.left, touch.clientY - mapRect.top)
+      );
 
       map.dragging.disable();
       lastTapTime = 0;
@@ -1901,9 +1902,8 @@ initSearch();
     if (_rafId === null) {
       _rafId = requestAnimationFrame(function() {
         _rafId = null;
-        // zoomanim イベントを直接 fire → Leaflet がタイルを CSS transform で
-        // スケールするだけ（新規タイル読み込みなし）→ 灰色にならない
-        map.fire('zoomanim', { center: tapPoint, zoom: clampedZoom });
+        // 地図の中心を固定したまま zoomanim でタイルを CSS スケール
+        map.fire('zoomanim', { center: mapCenter, zoom: clampedZoom });
       });
     }
   }, { passive: false });
@@ -1916,17 +1916,17 @@ initSearch();
     map.dragging.enable();
 
     if (lastDy === 0) {
-      // 純粋なダブルタップ → タップ位置中心に +1ズーム
+      // 純粋なダブルタップ → タップ位置を中心に +1ズーム
       map.setView(tapPoint || map.getCenter(), startZoom + 1, { animate: true });
       window._dblTapJustHandled = true;
       setTimeout(function() { window._dblTapJustHandled = false; }, 600);
     } else {
-      // ドラッグズーム確定：整数ズームにスナップしてタイル読み込み
+      // ドラッグズーム確定：地図中心を固定したまま整数ズームに確定
       const finalZoom = Math.max(
         map.getMinZoom(),
         Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
       );
-      map.setZoomAround(tapContainerPoint, Math.round(finalZoom), { animate: false });
+      map.setView(mapCenter, Math.round(finalZoom), { animate: false });
     }
   });
 })();
