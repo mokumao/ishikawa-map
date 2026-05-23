@@ -1287,6 +1287,15 @@ const markersData = restaurants.map((r, idx) => {
       if (dx > 10 || dy > 10) return; // パン操作はスルー
       e.preventDefault();
       e.stopPropagation();
+      // ── ドラッグ状態リセット（ジャンプバグ修正）──────────────────
+      // stopPropagation により document への touchend 伝播が止まり、
+      // Leaflet の finishDrag が呼ばれない。すると Xe._dragging が残り、
+      // 次の地図タッチ時に _onDown が _startPos/_startPoint を更新せず、
+      // 古いマーカー位置を基点に計算して地図が瞬時に大きくジャンプする。
+      // 対策: ここで手動で finishDrag を呼び Xe._dragging をリセットする。
+      if (L.Draggable && L.Draggable._dragging) {
+        L.Draggable._dragging.finishDrag(true); // noInertia=true でドリフトなし
+      }
       if (_tapTimer) {
         // 300ms以内に2回目 → ダブルタップ：ポップアップをキャンセルして現在中心のままズームイン
         // ※ setView(latlng) だと店舗位置が中心になるため zoomIn() で中心を変えずにズーム
