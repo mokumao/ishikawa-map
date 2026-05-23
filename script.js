@@ -1327,21 +1327,26 @@ const markersData = restaurants.map((r, idx) => {
 
   if ('ontouchstart' in window) {
     // ── スマホ：ワンタップでポップアップ ──
-    // フィルターで remove → addTo されるたびに Leaflet は新しい DOM 要素を生成するため、
-    // marker.on('add') でマップに追加されるたびに setupTap を再設定する。
+    // 問題: フィルター切替で remove→addTo すると Leaflet が新しい DOM 要素を生成し
+    //       古い setupTap リスナーが消える。また、マップロード完了時に 'add' が
+    //       遅延発火し setupTap が二重登録される場合がある。
+    // 対策: 要素に _tapSetup フラグを付けて重複登録を防ぎ、新要素には必ず再設定する。
+    function attachTap(el) {
+      if (!el || el._tapSetup) return; // すでに設定済みの要素はスキップ
+      el._tapSetup = true;
+      setupTap(el);
+    }
     function bindTapToElement() {
-      var markerEl = marker.getElement();
-      if (markerEl) setupTap(markerEl);
+      attachTap(marker.getElement());
       setTimeout(function() {
         var tooltip = marker.getTooltip();
         if (!tooltip) return;
-        var ttEl = tooltip.getElement();
-        if (ttEl) setupTap(ttEl);
+        attachTap(tooltip.getElement());
       }, 0);
     }
     // 初回（すでに addTo(map) 済み）
     bindTapToElement();
-    // フィルター切り替えなどで再 addTo されたとき
+    // フィルター切り替え等で再 addTo されたとき（新要素が生成されフラグなし → 再設定）
     marker.on('add', function() {
       setTimeout(bindTapToElement, 0);
     });
@@ -1352,14 +1357,17 @@ const markersData = restaurants.map((r, idx) => {
       openThisPopup();
     });
     // tooltipopen は remove→addTo のたびに再発火するので once でなく on で受ける
+    // ※ 関数参照を保持して L.DomEvent.off で正しく削除し二重登録を防ぐ
+    var _ttClickFn = null;
     marker.on('tooltipopen', function() {
       var ttEl = marker.getTooltip().getElement();
       if (!ttEl) return;
-      L.DomEvent.off(ttEl, 'click'); // 二重登録を防ぐ
-      L.DomEvent.on(ttEl, 'click', function(e) {
+      if (_ttClickFn) L.DomEvent.off(ttEl, 'click', _ttClickFn);
+      _ttClickFn = function(e) {
         L.DomEvent.stopPropagation(e);
         openThisPopup();
-      });
+      };
+      L.DomEvent.on(ttEl, 'click', _ttClickFn);
     });
   }
 
