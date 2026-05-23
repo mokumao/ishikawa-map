@@ -313,6 +313,9 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       return;
     }
 
+    // ポップアップを閉じる
+    map.closePopup();
+
     // 前のウォッチを停止してリセット
     if (watchId !== null) {
       navigator.geolocation.clearWatch(watchId);
