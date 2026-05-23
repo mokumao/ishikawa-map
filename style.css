@@ -381,6 +381,10 @@ header h1 {
   min-height: 0;
   min-width: 0;
 }
+/* タイル未読み込み部分の背景をOSMタイルの地色に合わせてグレーを隠す */
+#map.leaflet-container {
+  background: #f2ede8;
+}
 
 /* ── Footer ───────────────────────────────────────────────── */
 /* 全画面で非表示。地図内の「Leaflet | © OpenStreetMap contributors」で帰属表示義務を満たす */

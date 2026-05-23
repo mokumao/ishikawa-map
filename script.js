@@ -1053,7 +1053,8 @@ map.on('dblclick', function (e) {
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
-  maxZoom: 19
+  maxZoom: 19,
+  keepBuffer: 4
 }).addTo(map);
 
 // 石川エリアの初期表示位置
@@ -1865,8 +1866,9 @@ buildFilterButtons();
 initSearch();
 
 // ── スマホ：ダブルタップ＋ドラッグでズーム（グーグルマップ方式）──
-// ドラッグ中はmapPaneをCSSスケールするだけ（タイル再読み込みなし＝グレー化なし）
-// 指を離した瞬間にCSSスケールをリセットして setZoomAround を1回だけ呼ぶ
+// ドラッグ開始時にタイルをキャンバスへスナップショット → キャンバスをCSSスケール
+// タイル再読み込みが一切発生しないのでグレー化ゼロ
+// 指を離したときにキャンバスを破棄して setZoomAround を1回だけ呼ぶ
 (function() {
   const mapEl         = map.getContainer();
   const DOUBLE_TAP_MS = 300;
@@ -1876,26 +1878,38 @@ initSearch();
   let dragging          = false;
   let startY            = 0;
   let startZoom         = 0;
-  let tapPoint          = null;   // latlng（純粋ダブルタップ用）
-  let tapContainerPoint = null;   // コンテナ座標（スケール原点 & setZoomAround用）
-  let panePosAtStart    = null;   // ドラッグ開始時の mapPane 位置
+  let tapPoint          = null;
+  let tapContainerPoint = null;
   let lastDy            = 0;
   let _rafId            = null;
+  let _snapCanvas       = null;
 
-  const mapPane = map.getPanes().mapPane;
+  // 現在見えているタイルをキャンバスに描いてオーバーレイとして貼る
+  function createSnapshot() {
+    const w   = mapEl.clientWidth;
+    const h   = mapEl.clientHeight;
+    const dpr = window.devicePixelRatio || 1;
 
-  // mapPane の CSS transform をスケール付きで更新（タイル再読み込みなし）
-  function applyPaneScale(scale) {
-    const tx = panePosAtStart.x;
-    const ty = panePosAtStart.y;
-    const ox = tapContainerPoint.x;
-    const oy = tapContainerPoint.y;
-    // タップ点 (ox, oy) を固定したままスケールする合成変換
-    mapPane.style.transformOrigin = '0 0';
-    mapPane.style.transform =
-      'translate3d(' + (tx + (ox - tx) * (1 - scale)) + 'px,' +
-                       (ty + (oy - ty) * (1 - scale)) + 'px,0)' +
-      ' scale(' + scale + ')';
+    const cv  = document.createElement('canvas');
+    cv.width  = w * dpr;
+    cv.height = h * dpr;
+    cv.style.cssText =
+      'position:absolute;top:0;left:0;width:' + w + 'px;height:' + h + 'px;' +
+      'z-index:450;pointer-events:none;';
+
+    const ctx     = cv.getContext('2d');
+    ctx.scale(dpr, dpr);
+    const mapRect = mapEl.getBoundingClientRect();
+
+    mapEl.querySelectorAll('.leaflet-tile-loaded').forEach(function(img) {
+      var r = img.getBoundingClientRect();
+      ctx.drawImage(img,
+        r.left - mapRect.left, r.top - mapRect.top,
+        r.width, r.height);
+    });
+
+    mapEl.appendChild(cv);
+    return cv;
   }
 
   mapEl.addEventListener('touchstart', function(e) {
@@ -1910,13 +1924,11 @@ initSearch();
       lastDy    = 0;
       startZoom = map.getZoom();
 
-      const mapRect = mapEl.getBoundingClientRect();
-      const cx = touch.clientX - mapRect.left;
-      const cy = touch.clientY - mapRect.top;
-
-      tapContainerPoint = L.point(cx, cy);
+      const mapRect     = mapEl.getBoundingClientRect();
+      tapContainerPoint = L.point(touch.clientX - mapRect.left, touch.clientY - mapRect.top);
       tapPoint          = map.containerPointToLatLng(tapContainerPoint);
-      panePosAtStart    = map._getMapPanePos().clone();
+
+      _snapCanvas = createSnapshot();
 
       map.dragging.disable();
       lastTapTime = 0;
@@ -1932,15 +1944,17 @@ initSearch();
     e.preventDefault();
 
     lastDy = e.touches[0].clientY - startY;
-    const rawZoom = startZoom + lastDy / PX_PER_ZOOM;
+    const rawZoom     = startZoom + lastDy / PX_PER_ZOOM;
     const clampedZoom = Math.max(map.getMinZoom(), Math.min(map.getMaxZoom(), rawZoom));
-    const scale = Math.pow(2, clampedZoom - startZoom);
+    const scale       = Math.pow(2, clampedZoom - startZoom);
 
-    // rAFでスロットル（CSS transform なのでタイル再読み込みは発生しない）
     if (_rafId === null) {
       _rafId = requestAnimationFrame(function() {
         _rafId = null;
-        applyPaneScale(scale);
+        if (!_snapCanvas) return;
+        _snapCanvas.style.transformOrigin =
+          tapContainerPoint.x + 'px ' + tapContainerPoint.y + 'px';
+        _snapCanvas.style.transform = 'scale(' + scale + ')';
       });
     }
   }, { passive: false });
@@ -1950,9 +1964,7 @@ initSearch();
     dragging = false;
     if (_rafId !== null) { cancelAnimationFrame(_rafId); _rafId = null; }
 
-    // mapPane の CSS をリセット（setZoomAround が正しい transform を上書きする）
-    mapPane.style.transform       = '';
-    mapPane.style.transformOrigin = '';
+    if (_snapCanvas) { _snapCanvas.remove(); _snapCanvas = null; }
 
     map.dragging.enable();
 
@@ -1962,7 +1974,7 @@ initSearch();
       window._dblTapJustHandled = true;
       setTimeout(function() { window._dblTapJustHandled = false; }, 600);
     } else {
-      // ドラッグズーム確定：タイル再読み込みはここで1回だけ
+      // ドラッグズーム確定：タイル読み込みはここで1回だけ
       const finalZoom = Math.max(
         map.getMinZoom(),
         Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
