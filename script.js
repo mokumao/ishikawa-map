@@ -1860,10 +1860,10 @@ initSearch();
   let _rafId            = null;
 
   // ── ダブルタップ＋ドラッグズーム
-  // キャンバスオーバーレイは使わず、Leaflet のネイティブ fractional zoom を使う。
-  // ジェスチャー中は zoomSnap=0 にして setZoomAround() をリアルタイム呼び出し。
-  // タイルは CSS transform でスケールされるだけなので新規ロードなし＝滑らか。
-  // 四角い枠が出る問題は根本的に解消（キャンバス自体を使わないため）。
+  // ジェスチャー中は Leaflet 内部の zoomanim イベントを fire する。
+  // これによりタイルが CSS transform でスケールされるだけ（新規読み込みなし）。
+  // → 四角い枠なし・タイルが灰色にならない・なめらかなズームプレビュー。
+  // 指を離したときだけ setZoomAround で整数ズームに確定しタイルを読み込む。
 
   mapEl.addEventListener('touchstart', function(e) {
     if (e.touches.length !== 1) { dragging = false; return; }
@@ -1880,9 +1880,6 @@ initSearch();
       const mapRect     = mapEl.getBoundingClientRect();
       tapContainerPoint = L.point(touch.clientX - mapRect.left, touch.clientY - mapRect.top);
       tapPoint          = map.containerPointToLatLng(tapContainerPoint);
-
-      // fractional zoom を有効化（ジェスチャー中のなめらかなスケール用）
-      map.options.zoomSnap = 0;
 
       map.dragging.disable();
       lastTapTime = 0;
@@ -1904,8 +1901,9 @@ initSearch();
     if (_rafId === null) {
       _rafId = requestAnimationFrame(function() {
         _rafId = null;
-        // Leaflet のタイル pane を CSS スケールするだけ（新規タイル読み込みなし）
-        map.setZoomAround(tapContainerPoint, clampedZoom, { animate: false });
+        // zoomanim イベントを直接 fire → Leaflet がタイルを CSS transform で
+        // スケールするだけ（新規タイル読み込みなし）→ 灰色にならない
+        map.fire('zoomanim', { center: tapPoint, zoom: clampedZoom });
       });
     }
   }, { passive: false });
@@ -1915,8 +1913,6 @@ initSearch();
     dragging = false;
     if (_rafId !== null) { cancelAnimationFrame(_rafId); _rafId = null; }
 
-    // zoomSnap を元に戻してから整数ズームに確定
-    map.options.zoomSnap = 1;
     map.dragging.enable();
 
     if (lastDy === 0) {
