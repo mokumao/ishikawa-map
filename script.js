@@ -1858,56 +1858,12 @@ initSearch();
   let tapContainerPoint = null;
   let lastDy            = 0;
   let _rafId            = null;
-  let _snapObj          = null; // { wrapper, cv } のオブジェクト
 
-  // 現在見えているタイルをキャンバスに描いてオーバーレイとして貼る
-  // ── ラッパー div（overflow:hidden + 背景色）でキャンバスを囲むことで
-  //    ズームアウト時にキャンバスの端が見えて四角い枠が出る問題を解消する。
-  //    キャンバスはビューポートサイズのみ（タイル描画エリア＝画面内）とし、
-  //    縮小時にキャンバス端がラッパー内で見えても背景色がシームレスに補完。
-  function createSnapshot() {
-    const w   = mapEl.clientWidth;
-    const h   = mapEl.clientHeight;
-    const dpr = 1; // ジェスチャー中の一時表示なのでDPR=1で十分
-
-    // ラッパー div：マップコンテナと同サイズ、overflow:hidden でキャンバス端をクリップ
-    const wrapper = document.createElement('div');
-    wrapper.style.cssText =
-      'position:absolute;top:0;left:0;' +
-      'width:' + w + 'px;height:' + h + 'px;' +
-      'overflow:hidden;z-index:450;pointer-events:none;' +
-      'background:#f2ede8;'; // タイル未描画領域をシームレスに補完
-
-    // キャンバス：ビューポートと同サイズ（拡張不要）
-    const cv  = document.createElement('canvas');
-    cv.width  = w * dpr;
-    cv.height = h * dpr;
-    cv.style.cssText =
-      'position:absolute;top:0;left:0;' +
-      'width:' + w + 'px;height:' + h + 'px;';
-
-    const ctx = cv.getContext('2d');
-    ctx.scale(dpr, dpr);
-
-    // 背景を地図コンテナと同色で塗りつぶし（タイル間の隙間を隠す）
-    ctx.fillStyle = '#f2ede8';
-    ctx.fillRect(0, 0, w, h);
-
-    const mapRect = mapEl.getBoundingClientRect();
-
-    // 現在ロード済みのタイルをキャンバスに描画
-    mapEl.querySelectorAll('.leaflet-tile-loaded').forEach(function(img) {
-      var r = img.getBoundingClientRect();
-      ctx.drawImage(img,
-        r.left - mapRect.left,
-        r.top  - mapRect.top,
-        r.width, r.height);
-    });
-
-    wrapper.appendChild(cv);
-    mapEl.appendChild(wrapper);
-    return { wrapper: wrapper, cv: cv };
-  }
+  // ── ダブルタップ＋ドラッグズーム
+  // キャンバスオーバーレイは使わず、Leaflet のネイティブ fractional zoom を使う。
+  // ジェスチャー中は zoomSnap=0 にして setZoomAround() をリアルタイム呼び出し。
+  // タイルは CSS transform でスケールされるだけなので新規ロードなし＝滑らか。
+  // 四角い枠が出る問題は根本的に解消（キャンバス自体を使わないため）。
 
   mapEl.addEventListener('touchstart', function(e) {
     if (e.touches.length !== 1) { dragging = false; return; }
@@ -1925,7 +1881,8 @@ initSearch();
       tapContainerPoint = L.point(touch.clientX - mapRect.left, touch.clientY - mapRect.top);
       tapPoint          = map.containerPointToLatLng(tapContainerPoint);
 
-      _snapObj = createSnapshot();
+      // fractional zoom を有効化（ジェスチャー中のなめらかなスケール用）
+      map.options.zoomSnap = 0;
 
       map.dragging.disable();
       lastTapTime = 0;
@@ -1943,18 +1900,12 @@ initSearch();
     lastDy = e.touches[0].clientY - startY;
     const rawZoom     = startZoom + lastDy / PX_PER_ZOOM;
     const clampedZoom = Math.max(map.getMinZoom(), Math.min(map.getMaxZoom(), rawZoom));
-    const scale       = Math.pow(2, clampedZoom - startZoom);
 
     if (_rafId === null) {
       _rafId = requestAnimationFrame(function() {
         _rafId = null;
-        if (!_snapObj) return;
-        // transformOrigin はキャンバス自身の座標系で指定する。
-        // キャンバスはラッパー内で (0, 0) から始まるのでコンテナ座標 = キャンバス座標
-        _snapObj.cv.style.transformOrigin =
-          tapContainerPoint.x + 'px ' +
-          tapContainerPoint.y + 'px';
-        _snapObj.cv.style.transform = 'scale(' + scale + ')';
+        // Leaflet のタイル pane を CSS スケールするだけ（新規タイル読み込みなし）
+        map.setZoomAround(tapContainerPoint, clampedZoom, { animate: false });
       });
     }
   }, { passive: false });
@@ -1964,8 +1915,8 @@ initSearch();
     dragging = false;
     if (_rafId !== null) { cancelAnimationFrame(_rafId); _rafId = null; }
 
-    if (_snapObj) { _snapObj.wrapper.remove(); _snapObj = null; }
-
+    // zoomSnap を元に戻してから整数ズームに確定
+    map.options.zoomSnap = 1;
     map.dragging.enable();
 
     if (lastDy === 0) {
@@ -1974,7 +1925,7 @@ initSearch();
       window._dblTapJustHandled = true;
       setTimeout(function() { window._dblTapJustHandled = false; }, 600);
     } else {
-      // ドラッグズーム確定：タイル読み込みはここで1回だけ
+      // ドラッグズーム確定：整数ズームにスナップしてタイル読み込み
       const finalZoom = Math.max(
         map.getMinZoom(),
         Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
