@@ -1254,9 +1254,6 @@ const markersData = restaurants.map((r, idx) => {
 
   // ── ポップアップを開く共通処理 ──────────────────────────────────
   function openThisPopup() {
-    if (window.innerWidth <= 767) {
-      _savedCenterBeforePopup = map.getCenter();
-    }
     setActiveItem(idx);
     if (window.innerWidth <= 767 && !document.body.classList.contains('header-collapsed')) {
       _isReopening = true;
@@ -1416,23 +1413,8 @@ if (window.innerWidth <= 767) {
   new LabelToggleControl().addTo(map);
 }
 
-// ── ポップアップ開閉で地図位置を保存・復元（スマホ・地図クリック時のみ） ──
-let _savedCenterBeforePopup = null;
+// ── ポップアップ内部close-reopenフラグ ──
 let _isReopening = false; // marker.closePopup() の内部close-reopen中フラグ
-
-// ドラッグ開始時は「ポップアップを閉じたら元位置に戻る」機能を無効化
-// （地図をスクロール後にポップアップが閉じて地図が飛ぶのを防止）
-map.on('dragstart', function() {
-  _savedCenterBeforePopup = null;
-});
-
-// タッチ開始時も即座にクリア
-// 理由：Leaflet は 15px 未満の移動を「click」と判定してポップアップを閉じる。
-//       その際に panTo(_savedCenterBeforePopup) が発火し「シュッ」と動く。
-//       地図を触った瞬間にクリアすることで、popupclose 時に panTo が起動しないようにする。
-map.getContainer().addEventListener('touchstart', function() {
-  _savedCenterBeforePopup = null;
-}, { passive: true, capture: true });
 
 // 地図アイコン直接クリック時：ポップアップが見えるようパン
 focusShop._fromSidebar = false;
@@ -1550,13 +1532,9 @@ map.on('popupopen', function(e) {
   }, 0);
 });
 
+// popupclose: _isReopening チェックのみ（位置復元は廃止）
 map.on('popupclose', function() {
-  if (_isReopening) return; // 内部close-reopen中は復元しない
-  // ポップアップを閉じたら元の地図位置にスムーズに戻す
-  if (_savedCenterBeforePopup) {
-    map.panTo(_savedCenterBeforePopup, { animate: true, duration: 0.5 });
-    _savedCenterBeforePopup = null;
-  }
+  // _isReopening フラグは内部close-reopen中のみ使用（現在は参照なし）
 });
 
 // ── ポップアップ上のPC操作（マウスドラッグ・ホイール）を地図に伝える ──────
