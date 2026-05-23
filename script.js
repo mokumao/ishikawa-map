@@ -1420,13 +1420,33 @@ if (window.innerWidth <= 767) {
 let _savedCenterBeforePopup = null;
 let _isReopening = false; // marker.closePopup() の内部close-reopen中フラグ
 
+// ドラッグ開始時は「ポップアップを閉じたら元位置に戻る」機能を無効化
+// （地図をスクロール後にポップアップが閉じて地図が飛ぶのを防止）
+map.on('dragstart', function() {
+  _savedCenterBeforePopup = null;
+});
+
 // 地図アイコン直接クリック時：ポップアップが見えるようパン
 focusShop._fromSidebar = false;
 map.on('popupopen', function(e) {
 
   if (focusShop._fromSidebar) return; // サイドバーから開いた場合はスキップ
 
-  setTimeout(function() {
+  // タッチ開始時にオートパンをキャンセル
+  // 理由：ポップアップ表示直後に panBy が発火するタイミングでユーザーが
+  //       スクロールを開始すると、panBy が割り込んで地図が瞬時に動く問題を防止する。
+  var _autoPanTimer = null;
+  var _mapEl = map.getContainer();
+  function _cancelAutoPan() {
+    if (_autoPanTimer !== null) { clearTimeout(_autoPanTimer); _autoPanTimer = null; }
+    _mapEl.removeEventListener('touchstart', _cancelAutoPan, true);
+  }
+  _mapEl.addEventListener('touchstart', _cancelAutoPan, { capture: true, passive: true });
+  map.once('popupclose', _cancelAutoPan);
+
+  _autoPanTimer = setTimeout(function() {
+    _autoPanTimer = null;
+    _mapEl.removeEventListener('touchstart', _cancelAutoPan, true);
     const popup   = e.popup;
     const popupEl = popup.getElement();
     const mapEl   = map.getContainer();
