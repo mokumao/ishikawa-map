@@ -1865,19 +1865,38 @@ buildFilterButtons();
 initSearch();
 
 // ── スマホ：ダブルタップ＋ドラッグでズーム（グーグルマップ方式）──
-// CSSスケールを使わず setZoom を直接呼ぶことで指離し時の戻り動作を排除
+// ドラッグ中はmapPaneをCSSスケールするだけ（タイル再読み込みなし＝グレー化なし）
+// 指を離した瞬間にCSSスケールをリセットして setZoomAround を1回だけ呼ぶ
 (function() {
   const mapEl         = map.getContainer();
-  const DOUBLE_TAP_MS = 300;  // ダブルタップ判定時間（ms）
-  const PX_PER_ZOOM   = 100;  // 何px動かすと1ズームレベル変わるか
+  const DOUBLE_TAP_MS = 300;
+  const PX_PER_ZOOM   = 100;
 
-  let lastTapTime  = 0;
-  let dragging     = false;
-  let startY       = 0;
-  let startZoom    = 0;
-  let tapPoint     = null;
-  let lastDy       = 0;
-  let _pendingZoom = null;  // rAFスロットル用
+  let lastTapTime       = 0;
+  let dragging          = false;
+  let startY            = 0;
+  let startZoom         = 0;
+  let tapPoint          = null;   // latlng（純粋ダブルタップ用）
+  let tapContainerPoint = null;   // コンテナ座標（スケール原点 & setZoomAround用）
+  let panePosAtStart    = null;   // ドラッグ開始時の mapPane 位置
+  let lastDy            = 0;
+  let _rafId            = null;
+
+  const mapPane = map.getPanes().mapPane;
+
+  // mapPane の CSS transform をスケール付きで更新（タイル再読み込みなし）
+  function applyPaneScale(scale) {
+    const tx = panePosAtStart.x;
+    const ty = panePosAtStart.y;
+    const ox = tapContainerPoint.x;
+    const oy = tapContainerPoint.y;
+    // タップ点 (ox, oy) を固定したままスケールする合成変換
+    mapPane.style.transformOrigin = '0 0';
+    mapPane.style.transform =
+      'translate3d(' + (tx + (ox - tx) * (1 - scale)) + 'px,' +
+                       (ty + (oy - ty) * (1 - scale)) + 'px,0)' +
+      ' scale(' + scale + ')';
+  }
 
   mapEl.addEventListener('touchstart', function(e) {
     if (e.touches.length !== 1) { dragging = false; return; }
@@ -1886,17 +1905,18 @@ initSearch();
     const touch = e.touches[0];
 
     if (now - lastTapTime < DOUBLE_TAP_MS && !dragging) {
-      // ダブルタップ検出 → ドラッグズームモード開始
       dragging  = true;
       startY    = touch.clientY;
       lastDy    = 0;
       startZoom = map.getZoom();
 
-      // タップ位置を latlng に変換（純粋ダブルタップ時のズーム中心として使用）
       const mapRect = mapEl.getBoundingClientRect();
-      tapPoint = map.containerPointToLatLng(
-        L.point(touch.clientX - mapRect.left, touch.clientY - mapRect.top)
-      );
+      const cx = touch.clientX - mapRect.left;
+      const cy = touch.clientY - mapRect.top;
+
+      tapContainerPoint = L.point(cx, cy);
+      tapPoint          = map.containerPointToLatLng(tapContainerPoint);
+      panePosAtStart    = map._getMapPanePos().clone();
 
       map.dragging.disable();
       lastTapTime = 0;
@@ -1911,39 +1931,44 @@ initSearch();
     if (!dragging || e.touches.length !== 1) return;
     e.preventDefault();
 
-    lastDy = e.touches[0].clientY - startY;  // 下=拡大、上=縮小
-    const newZoom = Math.max(
-      map.getMinZoom(),
-      Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
-    );
+    lastDy = e.touches[0].clientY - startY;
+    const rawZoom = startZoom + lastDy / PX_PER_ZOOM;
+    const clampedZoom = Math.max(map.getMinZoom(), Math.min(map.getMaxZoom(), rawZoom));
+    const scale = Math.pow(2, clampedZoom - startZoom);
 
-    // rAFでスロットル：毎フレーム最新ズームを適用（CSSスケールなし）
-    if (_pendingZoom === null) {
-      _pendingZoom = newZoom;
-      requestAnimationFrame(function() {
-        if (_pendingZoom !== null) {
-          map.setZoom(_pendingZoom, { animate: false });
-          _pendingZoom = null;
-        }
+    // rAFでスロットル（CSS transform なのでタイル再読み込みは発生しない）
+    if (_rafId === null) {
+      _rafId = requestAnimationFrame(function() {
+        _rafId = null;
+        applyPaneScale(scale);
       });
-    } else {
-      _pendingZoom = newZoom;
     }
   }, { passive: false });
 
   mapEl.addEventListener('touchend', function() {
     if (!dragging) return;
-    dragging     = false;
-    _pendingZoom = null;
+    dragging = false;
+    if (_rafId !== null) { cancelAnimationFrame(_rafId); _rafId = null; }
+
+    // mapPane の CSS をリセット（setZoomAround が正しい transform を上書きする）
+    mapPane.style.transform       = '';
+    mapPane.style.transformOrigin = '';
+
     map.dragging.enable();
 
     if (lastDy === 0) {
       // 純粋なダブルタップ → タップ位置中心に +1ズーム
-      map.setView(tapPoint || map.getCenter(), map.getZoom() + 1, { animate: true });
+      map.setView(tapPoint || map.getCenter(), startZoom + 1, { animate: true });
       window._dblTapJustHandled = true;
       setTimeout(function() { window._dblTapJustHandled = false; }, 600);
+    } else {
+      // ドラッグズーム確定：タイル再読み込みはここで1回だけ
+      const finalZoom = Math.max(
+        map.getMinZoom(),
+        Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
+      );
+      map.setZoomAround(tapContainerPoint, Math.round(finalZoom), { animate: false });
     }
-    // lastDy !== 0: touchmove中にすでにズームをコミット済み → 何もしない（戻り動作なし）
   });
 })();
 applyFilter('all'); // 初期状態：飲食店のみ表示（コンビニはデフォルト非表示）
