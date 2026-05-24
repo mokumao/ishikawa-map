@@ -442,7 +442,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   // openedViaPin=false のとき：従来の動作（フィルター変更→一覧へ）
   let openedViaPin  = false;
   const catSel      = new Set(); // 'food' | 'conbini'
-  const btnAll     = document.getElementById('gearCatAll');
+  const btnAll      = document.getElementById('gearCatAll');
+  const btnClear    = document.getElementById('gearCatClear');
   const btnFood     = document.getElementById('gearCatFood');
   const btnConbini  = document.getElementById('gearCatConbini');
   // ※ map は後で定義されるため、markerPane はイベントハンドラ内で取得する
@@ -464,8 +465,6 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     L.DomEvent && L.DomEvent.stopPropagation(e);
     openedViaPin = true;
     catSel.clear();
-    btnAll.textContent = 'すべて';
-    btnAll.classList.remove('cat-selected');
     btnFood.classList.remove('cat-selected');
     btnConbini.classList.remove('cat-selected');
     // 全マーカーを一旦非表示
@@ -509,24 +508,21 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   document.getElementById('gearCloseBtn').addEventListener('click', closeMenu);
 
   // カテゴリサブメニュー
-  // 「すべて/解除」ボタン：全カテゴリを一括選択/解除
+  // 「すべて」ボタン：飲食店・コンビニを全選択
   btnAll.addEventListener('click', function () {
     if (!openedViaPin) return;
-    if (btnAll.textContent === 'すべて') {
-      catSel.add('food'); catSel.add('conbini');
-      btnFood.classList.add('cat-selected');
-      btnConbini.classList.add('cat-selected');
-      updateCatPreview();
-      btnAll.textContent = '解除';
-      btnAll.classList.add('cat-selected');
-    } else {
-      catSel.clear();
-      btnFood.classList.remove('cat-selected');
-      btnConbini.classList.remove('cat-selected');
-      updateCatPreview();
-      btnAll.textContent = 'すべて';
-      btnAll.classList.remove('cat-selected');
-    }
+    catSel.add('food'); catSel.add('conbini');
+    btnFood.classList.add('cat-selected');
+    btnConbini.classList.add('cat-selected');
+    updateCatPreview();
+  });
+  // 「解除」ボタン：全選択を解除
+  btnClear.addEventListener('click', function () {
+    if (!openedViaPin) return;
+    catSel.clear();
+    btnFood.classList.remove('cat-selected');
+    btnConbini.classList.remove('cat-selected');
+    updateCatPreview();
   });
 
   btnFood.addEventListener('click', function () {
@@ -565,8 +561,6 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       }
       // 選択があった場合はupdateCatPreviewで表示中のアイコンをそのまま維持
       catSel.clear();
-      btnAll.textContent = 'すべて';
-      btnAll.classList.remove('cat-selected');
     }
     closeMenu();
   });
