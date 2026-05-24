@@ -442,6 +442,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   // openedViaPin=false のとき：従来の動作（フィルター変更→一覧へ）
   let openedViaPin  = false;
   const catSel      = new Set(); // 'food' | 'conbini'
+  const btnAll     = document.getElementById('gearCatAll');
   const btnFood     = document.getElementById('gearCatFood');
   const btnConbini  = document.getElementById('gearCatConbini');
   // ※ map は後で定義されるため、markerPane はイベントハンドラ内で取得する
@@ -462,6 +463,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     L.DomEvent && L.DomEvent.stopPropagation(e);
     openedViaPin = true;
     catSel.clear();
+    btnAll.textContent = 'すべて';
+    btnAll.classList.remove('cat-selected');
     btnFood.classList.remove('cat-selected');
     btnConbini.classList.remove('cat-selected');
     // 全マーカーを一旦非表示
@@ -505,6 +508,29 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   document.getElementById('gearCloseBtn').addEventListener('click', closeMenu);
 
   // カテゴリサブメニュー
+  // 「すべて/解除」ボタン：全カテゴリを一括選択/解除
+  btnAll.addEventListener('click', function () {
+    if (!openedViaPin) return;
+    if (btnAll.textContent === 'すべて') {
+      // 全選択：飲食店・コンビニ両方を選択状態に
+      catSel.add('food');
+      catSel.add('conbini');
+      btnFood.classList.add('cat-selected');
+      btnConbini.classList.add('cat-selected');
+      updateCatPreview();
+      btnAll.textContent = '解除';
+      btnAll.classList.add('cat-selected');
+    } else {
+      // 全解除：両方の選択を解除してアイコンを非表示に
+      catSel.clear();
+      btnFood.classList.remove('cat-selected');
+      btnConbini.classList.remove('cat-selected');
+      updateCatPreview();
+      btnAll.textContent = 'すべて';
+      btnAll.classList.remove('cat-selected');
+    }
+  });
+
   btnFood.addEventListener('click', function () {
     if (openedViaPin) {
       // トグル選択
@@ -542,6 +568,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       }
       // 選択があった場合はupdateCatPreviewで表示中のアイコンをそのまま維持
       catSel.clear();
+      btnAll.textContent = 'すべて';
+      btnAll.classList.remove('cat-selected');
     }
     closeMenu();
   });
