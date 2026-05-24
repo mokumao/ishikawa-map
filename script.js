@@ -447,21 +447,27 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   const btnConbini  = document.getElementById('gearCatConbini');
   // ※ map は後で定義されるため、markerPane はイベントハンドラ内で取得する
 
-  // ダブルタップ時にボタンのclickが発火しないよう保護する
-  // touchstart が300ms以内に2回来たら preventDefault() でclickを抑制
-  function preventDoubleTapClick(btn) {
-    var lastTouch = 0;
-    btn.addEventListener('touchstart', function(e) {
-      var now = Date.now();
-      if (now - lastTouch < 300) {
-        e.preventDefault(); // ダブルタップ2回目のclickイベントを抑制
-      }
-      lastTouch = now;
-    }, { passive: false });
+  // ダブルタップ保護（店舗ポップアップと同じ方式）
+  // 1回目のタップから300ms待ち、その間に2回目が来たらキャンセル（ズーム扱い）
+  // 2回目が来なければactionを実行する
+  function doDelayedAction(btn, action) {
+    var now = Date.now();
+    if (!btn._dtLast) btn._dtLast = 0;
+    if (now - btn._dtLast < 300) {
+      // 300ms以内に2回目 → ダブルタップとみなし1回目の予約をキャンセル
+      clearTimeout(btn._dtTimer);
+      btn._dtTimer = null;
+      btn._dtLast = 0;
+      return;
+    }
+    btn._dtLast = now;
+    clearTimeout(btn._dtTimer);
+    btn._dtTimer = setTimeout(function() {
+      btn._dtTimer = null;
+      btn._dtLast = 0;
+      action();
+    }, 300);
   }
-  [btnAll, btnFood, btnConbini,
-   document.getElementById('gearCatGas'),
-   document.getElementById('gearCatBack')].forEach(preventDoubleTapClick);
 
   // 選択中カテゴリに合わせてマーカーを表示（タップ不可モード）
   function updateCatPreview() {
@@ -527,32 +533,33 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   // 「すべて/解除」ボタン：全カテゴリを一括選択/解除
   btnAll.addEventListener('click', function () {
     if (!openedViaPin) return;
-    if (btnAll.textContent === 'すべて') {
-      // 全選択：飲食店・コンビニ両方を選択状態に
-      catSel.add('food');
-      catSel.add('conbini');
-      btnFood.classList.add('cat-selected');
-      btnConbini.classList.add('cat-selected');
-      updateCatPreview();
-      btnAll.textContent = '解除';
-      btnAll.classList.add('cat-selected');
-    } else {
-      // 全解除：両方の選択を解除してアイコンを非表示に
-      catSel.clear();
-      btnFood.classList.remove('cat-selected');
-      btnConbini.classList.remove('cat-selected');
-      updateCatPreview();
-      btnAll.textContent = 'すべて';
-      btnAll.classList.remove('cat-selected');
-    }
+    doDelayedAction(btnAll, function() {
+      if (btnAll.textContent === 'すべて') {
+        catSel.add('food'); catSel.add('conbini');
+        btnFood.classList.add('cat-selected');
+        btnConbini.classList.add('cat-selected');
+        updateCatPreview();
+        btnAll.textContent = '解除';
+        btnAll.classList.add('cat-selected');
+      } else {
+        catSel.clear();
+        btnFood.classList.remove('cat-selected');
+        btnConbini.classList.remove('cat-selected');
+        updateCatPreview();
+        btnAll.textContent = 'すべて';
+        btnAll.classList.remove('cat-selected');
+      }
+    });
   });
 
   btnFood.addEventListener('click', function () {
     if (openedViaPin) {
-      // トグル選択
-      if (catSel.has('food')) { catSel.delete('food'); btnFood.classList.remove('cat-selected'); }
-      else                    { catSel.add('food');    btnFood.classList.add('cat-selected'); }
-      updateCatPreview();
+      // ピンモード：ダブルタップ保護付きトグル選択
+      doDelayedAction(btnFood, function() {
+        if (catSel.has('food')) { catSel.delete('food'); btnFood.classList.remove('cat-selected'); }
+        else                    { catSel.add('food');    btnFood.classList.add('cat-selected'); }
+        updateCatPreview();
+      });
     } else {
       closeMenu();
       applyFilter('all');
@@ -561,9 +568,12 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   });
   btnConbini.addEventListener('click', function () {
     if (openedViaPin) {
-      if (catSel.has('conbini')) { catSel.delete('conbini'); btnConbini.classList.remove('cat-selected'); }
-      else                       { catSel.add('conbini');    btnConbini.classList.add('cat-selected'); }
-      updateCatPreview();
+      // ピンモード：ダブルタップ保護付きトグル選択
+      doDelayedAction(btnConbini, function() {
+        if (catSel.has('conbini')) { catSel.delete('conbini'); btnConbini.classList.remove('cat-selected'); }
+        else                       { catSel.add('conbini');    btnConbini.classList.add('cat-selected'); }
+        updateCatPreview();
+      });
     } else {
       closeMenu();
       applyFilter('conbini');
