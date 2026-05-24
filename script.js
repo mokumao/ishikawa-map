@@ -441,20 +441,24 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   // openedViaPin=true のとき：トグル選択・地図上に表示のみ・タップ不可
   // openedViaPin=false のとき：従来の動作（フィルター変更→一覧へ）
   let openedViaPin  = false;
-  const catSel      = new Set(); // 'food' | 'conbini'
+  const catSel      = new Set(); // 'food' | 'conbini' | 'gas'
   const btnAll      = document.getElementById('gearCatAll');
   const btnClear    = document.getElementById('gearCatClear');
   const btnFood     = document.getElementById('gearCatFood');
   const btnConbini  = document.getElementById('gearCatConbini');
+  const btnGas      = document.getElementById('gearCatGas');
   // ※ map は後で定義されるため、markerPane はイベントハンドラ内で取得する
 
 
   // 選択中カテゴリに合わせてマーカーを表示（タップ不可モード）
   function updateCatPreview() {
     markersData.forEach(function({ restaurant: r, marker }) {
-      var isFood = r.genre !== 'コンビニ';
-      var show   = (catSel.has('food') && isFood) ||
-                   (catSel.has('conbini') && !isFood);
+      var isFood   = r.genre !== 'コンビニ' && r.genre !== 'ガソリン';
+      var isConbini = r.genre === 'コンビニ';
+      var isGas    = r.genre === 'ガソリン';
+      var show = (catSel.has('food')   && isFood) ||
+                 (catSel.has('conbini') && isConbini) ||
+                 (catSel.has('gas')    && isGas);
       if (show) { if (!map.hasLayer(marker)) marker.addTo(map); }
       else       { if (map.hasLayer(marker))  map.removeLayer(marker); }
     });
@@ -467,6 +471,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     catSel.clear();
     btnFood.classList.remove('cat-selected');
     btnConbini.classList.remove('cat-selected');
+    btnGas.classList.remove('cat-selected');
     // 全マーカーを一旦非表示
     markersData.forEach(function({ marker }) {
       if (map.hasLayer(marker)) map.removeLayer(marker);
@@ -508,12 +513,13 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   document.getElementById('gearCloseBtn').addEventListener('click', closeMenu);
 
   // カテゴリサブメニュー
-  // 「すべて」ボタン：飲食店・コンビニを全選択
+  // 「すべて」ボタン：飲食店・コンビニ・ガソリンを全選択
   btnAll.addEventListener('click', function () {
     if (!openedViaPin) return;
-    catSel.add('food'); catSel.add('conbini');
+    catSel.add('food'); catSel.add('conbini'); catSel.add('gas');
     btnFood.classList.add('cat-selected');
     btnConbini.classList.add('cat-selected');
+    btnGas.classList.add('cat-selected');
     updateCatPreview();
   });
   // 「解除」ボタン：全選択を解除
@@ -522,6 +528,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     catSel.clear();
     btnFood.classList.remove('cat-selected');
     btnConbini.classList.remove('cat-selected');
+    btnGas.classList.remove('cat-selected');
     updateCatPreview();
   });
 
@@ -547,8 +554,15 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       switchTab('list');
     }
   });
-  document.getElementById('gearCatGas').addEventListener('click', function () {
-    if (!openedViaPin) alert('ガソリンスタンド情報は準備中です。');
+  btnGas.addEventListener('click', function () {
+    if (openedViaPin) {
+      if (catSel.has('gas')) { catSel.delete('gas'); btnGas.classList.remove('cat-selected'); }
+      else                   { catSel.add('gas');    btnGas.classList.add('cat-selected'); }
+      updateCatPreview();
+    } else {
+      closeMenu();
+      applyFilter('all');
+    }
   });
   // 閉じるボタン：選択モード終了→通常の地図に戻る
   document.getElementById('gearCatBack').addEventListener('click', function () {
@@ -561,6 +575,9 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       }
       // 選択があった場合はupdateCatPreviewで表示中のアイコンをそのまま維持
       catSel.clear();
+      btnFood.classList.remove('cat-selected');
+      btnConbini.classList.remove('cat-selected');
+      btnGas.classList.remove('cat-selected');
     }
     closeMenu();
   });
@@ -991,14 +1008,15 @@ function fmtHours(hours) {
 
 // ── フィルター定義 ───────────────────────────────────────────────
 const FILTERS = [
-  { id: 'all',      label: 'すべて',       color: '#546e7a', test: g => g !== 'コンビニ' },
+  { id: 'all',      label: 'すべて',       color: '#546e7a', test: g => g !== 'コンビニ' && g !== 'ガソリン' },
   { id: 'izakaya',  label: '居酒屋・食堂', color: '#e53935', test: g => g.includes('居酒屋') || g.includes('食堂') },
   { id: 'cafe',     label: 'カフェ',       color: '#00897b', test: g => g.includes('カフェ') },
   { id: 'yakiniku', label: '焼肉',         color: '#fb8c00', test: g => g.includes('焼肉') },
   { id: 'bar',      label: 'バル',         color: '#8e24aa', test: g => g.includes('バル') },
   { id: 'ramen',    label: 'ラーメン',     color: '#c62828', test: g => g.includes('ラーメン') },
-  // コンビニはサイドバーには表示しない（歯車メニューから切り替え）
+  // コンビニ・ガソリンはサイドバーには表示しない（歯車メニューから切り替え）
   { id: 'conbini',  label: 'コンビニ',     color: '#0067CC', test: g => g === 'コンビニ', hidden: true },
+  { id: 'gas',      label: 'ガソリン',     color: '#ff6f00', test: g => g === 'ガソリン', hidden: true },
 ];
 
 let currentFilter = 'all';
@@ -1030,6 +1048,12 @@ function conbiniBrandInfo(name) {
   if (name.includes('ファミリーマート'))  return { color: '#1fb1a4', label: 'F' };
   if (name.includes('セブンイレブン') || name.includes('7-Eleven')) return { color: '#e31837', label: '7' };
   return { color: '#555555', label: 'C' };
+}
+
+// ── ガソリンスタンドブランド情報（アイコン色・ラベル文字） ─────────
+function gasBrandInfo(name) {
+  if (name.includes('ENEOS'))  return { color: '#1565c0', label: 'E' };
+  return { color: '#ff6f00', label: 'G' };
 }
 
 // ── SVG ピンアイコン生成 ─────────────────────────────────────────
@@ -1338,6 +1362,10 @@ const markersData = restaurants.map((r, idx) => {
   let color, pinLabel;
   if (r.genre === 'コンビニ') {
     const brand = conbiniBrandInfo(r.name);
+    color    = brand.color;
+    pinLabel = brand.label;
+  } else if (r.genre === 'ガソリン') {
+    const brand = gasBrandInfo(r.name);
     color    = brand.color;
     pinLabel = brand.label;
   } else {

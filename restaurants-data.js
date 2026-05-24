@@ -429,6 +429,50 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://www.sej.co.jp/", detailText: "", photos: []
   },
 
+  // ── ガソリンスタンド ──────────────────────────────────────────────
+  {
+    name:      "ENEOSサンセール石川インターSS",
+    genre:     "ガソリン",
+    address:   "沖縄県うるま市石川2337",
+    hours:     "24時間",
+    closed:    "年中無休",
+    note:      "石川インター近く。株式会社山城石油が運営",
+    note_en:   "Near Ishikawa interchange. Operated by Yamashiro Oil.",
+    sourceUrl: "https://navitime.co.jp/",
+    warn:      false,
+    lat:       26.434555,
+    lng:       127.826689,
+    twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
+  },
+  {
+    name:      "伊波SS（神谷石油）",
+    genre:     "ガソリン",
+    address:   "沖縄県うるま市石川伊波309",
+    hours:     "要確認",
+    closed:    "要確認",
+    note:      "営業時間・定休日は要確認",
+    note_en:   "Please confirm hours and holidays before visiting.",
+    sourceUrl: "https://navitime.co.jp/",
+    warn:      true,
+    lat:       26.414359,
+    lng:       127.823418,
+    twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
+  },
+  {
+    name:      "嘉手苅SS（くだか石油）",
+    genre:     "ガソリン",
+    address:   "沖縄県うるま市石川嘉手苅141-6",
+    hours:     "要確認",
+    closed:    "要確認",
+    note:      "営業時間・定休日は要確認",
+    note_en:   "Please confirm hours and holidays before visiting.",
+    sourceUrl: "https://navitime.co.jp/",
+    warn:      true,
+    lat:       26.420632,
+    lng:       127.813352,
+    twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
+  },
+
   // ── テスト用店舗（石川ビーチ沖合・動作確認専用） ─────────────────
   {
     name:      "【テスト】石川ビーチ海上店",
