@@ -430,7 +430,11 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     panelLang.style.display     = 'none';
     panelCategory.style.display = 'none';
     overlay.classList.remove('active', 'map-interactive'); // オーバーレイ解除
-    enableMap();                        // 地図操作を再開（歯車メニューで無効化した場合）
+    // ブロッキングdiv・サイドボタンを復元
+    var blocker = document.getElementById('catModeBlocker');
+    if (blocker) blocker.parentNode.removeChild(blocker);
+    document.getElementById('sideSwipeCtrl').style.pointerEvents = '';
+    enableMap();                        // 地図操作を再開（map.tap.enable含む）
   }
 
   // ── カテゴリ選択モード（ピンボタン経由）────────────────────────
@@ -471,6 +475,19 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     showCategory();
     overlay.classList.add('active', 'map-interactive'); // pointer-events:none で地図操作を通す
     // disableMap() は呼ばない → ドラッグ・ピンチ・ダブルタップズームは動作継続
+
+    // クリック操作を遮断するブロッキングdivを#map内に挿入
+    // z-index 700 = markerPane(600)より上・gearMenu(1501)/zoomCtrl(1502)より下
+    // touchイベントは通過 → ドラッグ・ダブルタップズームは維持
+    var blocker = document.createElement('div');
+    blocker.id = 'catModeBlocker';
+    blocker.style.cssText = 'position:absolute;inset:0;z-index:700;background:transparent;pointer-events:auto;';
+    blocker.addEventListener('click', function(e) { e.stopPropagation(); });
+    document.getElementById('map').appendChild(blocker);
+    // サイドボタン（現在地・石川・歯車など）も操作不可に
+    document.getElementById('sideSwipeCtrl').style.pointerEvents = 'none';
+    // Leafletのタップ合成クリックも無効化
+    if (map.tap) map.tap.disable();
   });
 
   // 歯車ボタン：メニュー開閉トグル
