@@ -1178,8 +1178,12 @@ body.info-open .label-toggle-btn { display: none !important; }
   border-radius: 7px !important;
   box-shadow: 0 2px 6px rgba(0,0,0,.2) !important;
   overflow: hidden;
-  position: relative !important;
-  z-index: 1502 !important; /* カテゴリオーバーレイ(1500)より前面に常時表示 */
+}
+
+/* ズームコントロールのコンテナをオーバーレイ(z-index:1500)より前面に
+   ※ Leafletのデフォルトは z-index:1000 のためオーバーレイに隠れてしまう */
+.leaflet-bottom.leaflet-left {
+  z-index: 1502 !important;
 }
 
 /* Leaflet デフォルトの個別ボーダーをリセット */
