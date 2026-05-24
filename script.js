@@ -440,14 +440,14 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   const catSel      = new Set(); // 'food' | 'conbini'
   const btnFood     = document.getElementById('gearCatFood');
   const btnConbini  = document.getElementById('gearCatConbini');
-  const markerPane  = map.getPane('markerPane');
+  // ※ map は後で定義されるため、markerPane はイベントハンドラ内で取得する
 
   // 選択中カテゴリに合わせてマーカーを表示（タップ不可モード）
   function updateCatPreview() {
     markersData.forEach(function({ restaurant: r, marker }) {
-      var isFood    = r.genre !== 'コンビニ';
-      var show      = (catSel.has('food') && isFood) ||
-                      (catSel.has('conbini') && !isFood);
+      var isFood = r.genre !== 'コンビニ';
+      var show   = (catSel.has('food') && isFood) ||
+                   (catSel.has('conbini') && !isFood);
       if (show) { if (!map.hasLayer(marker)) marker.addTo(map); }
       else       { if (map.hasLayer(marker))  map.removeLayer(marker); }
     });
@@ -464,8 +464,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     markersData.forEach(function({ marker }) {
       if (map.hasLayer(marker)) map.removeLayer(marker);
     });
-    // マーカーのタップを無効化
-    markerPane.style.pointerEvents = 'none';
+    // マーカーのタップを無効化（mapは初期化済みなのでここで取得）
+    map.getPane('markerPane').style.pointerEvents = 'none';
     // パネルだけ表示（暗幕なし・地図操作そのまま）
     menu.style.display = 'block';
     showCategory();
@@ -517,8 +517,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     if (openedViaPin) {
       openedViaPin = false;
       catSel.clear();
-      markerPane.style.pointerEvents = ''; // タップを元に戻す
-      applyFilter(currentFilter);          // 元のフィルターを復元
+      map.getPane('markerPane').style.pointerEvents = ''; // タップを元に戻す
+      applyFilter(currentFilter);                         // 元のフィルターを復元
     }
     closeMenu();
   });
