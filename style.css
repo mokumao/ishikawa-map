@@ -870,9 +870,9 @@ body.info-open .label-toggle-btn { display: none !important; }
     align-items: center !important;
     justify-content: center !important;
   }
-  /* カテゴリ選択モード：選択済みボタン（うす赤背景） */
+  /* カテゴリ選択モード：選択済みボタン（不透明な薄赤背景） */
   .gear-menu-btn.cat-selected {
-    background: rgba(229, 57, 53, 0.18) !important;
+    background: #ffcdd2 !important;
     border-color: #e53935 !important;
     color: #b71c1c !important;
   }

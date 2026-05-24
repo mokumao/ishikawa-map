@@ -466,9 +466,11 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     });
     // マーカーのタップを無効化（mapは初期化済みなのでここで取得）
     map.getPane('markerPane').style.pointerEvents = 'none';
-    // パネルだけ表示（暗幕なし・地図操作そのまま）
+    // パネルを開く＋オーバーレイで背景を操作不可に
     menu.style.display = 'block';
     showCategory();
+    overlay.classList.add('active');
+    disableMap();
   });
 
   // 歯車ボタン：メニュー開閉トグル
