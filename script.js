@@ -447,6 +447,22 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   const btnConbini  = document.getElementById('gearCatConbini');
   // ※ map は後で定義されるため、markerPane はイベントハンドラ内で取得する
 
+  // ダブルタップ時にボタンのclickが発火しないよう保護する
+  // touchstart が300ms以内に2回来たら preventDefault() でclickを抑制
+  function preventDoubleTapClick(btn) {
+    var lastTouch = 0;
+    btn.addEventListener('touchstart', function(e) {
+      var now = Date.now();
+      if (now - lastTouch < 300) {
+        e.preventDefault(); // ダブルタップ2回目のclickイベントを抑制
+      }
+      lastTouch = now;
+    }, { passive: false });
+  }
+  [btnAll, btnFood, btnConbini,
+   document.getElementById('gearCatGas'),
+   document.getElementById('gearCatBack')].forEach(preventDoubleTapClick);
+
   // 選択中カテゴリに合わせてマーカーを表示（タップ不可モード）
   function updateCatPreview() {
     markersData.forEach(function({ restaurant: r, marker }) {
