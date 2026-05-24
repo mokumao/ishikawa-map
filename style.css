@@ -895,6 +895,66 @@ body.info-open .label-toggle-btn { display: none !important; }
     box-shadow: 0 1px 4px rgba(0,0,0,0.18);
   }
 
+  /* カテゴリパネル展開時：歯車メニューを画面下2/3のシートに変換 */
+  .gear-menu.cat-mode {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    bottom: 50px !important;
+    width: 100% !important;
+    background: rgba(255,255,255,0.97);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.22);
+    padding: 12px 0 6px;
+    z-index: 1502 !important;
+  }
+  /* 操作ボタン行（すべて・解除・閉じる） */
+  .cat-ctrl-row {
+    display: flex;
+    gap: 8px;
+    padding: 0 10px 10px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 6px;
+  }
+  .cat-ctrl-btn {
+    flex: 1;
+    padding: 8px 4px;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  /* カテゴリ4列グリッド */
+  .cat-icon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 7px;
+    padding: 0 10px;
+    overflow-y: auto;
+    max-height: calc(60vh - 80px);
+  }
+  .cat-icon-btn {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 7px 2px !important;
+    gap: 5px !important;
+    white-space: normal !important;
+    min-height: 62px;
+  }
+  .cat-icon {
+    font-size: 1.35rem;
+    line-height: 1;
+    display: block;
+  }
+  .cat-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.2;
+    display: block;
+  }
+
   /* カテゴリ選択モード：選択済みボタン（不透明な薄赤背景） */
   .gear-menu-btn.cat-selected {
     background: #ffcdd2 !important;

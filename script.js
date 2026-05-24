@@ -407,6 +407,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   }
 
   function showMain() {
+    menu.classList.remove('cat-mode');
     menu.style.display = 'block';
     panelMain.style.display     = 'flex';
     panelLang.style.display     = 'none';
@@ -415,16 +416,19 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     disableMap();                       // 地図操作を停止
   }
   function showLang() {
+    menu.classList.remove('cat-mode');
     panelMain.style.display     = 'none';
     panelLang.style.display     = 'flex';
     panelCategory.style.display = 'none';
   }
   function showCategory() {
+    menu.classList.add('cat-mode');  // 画面下2/3シートに展開
     panelMain.style.display     = 'none';
     panelLang.style.display     = 'none';
     panelCategory.style.display = 'flex';
   }
   function closeMenu() {
+    menu.classList.remove('cat-mode');
     menu.style.display = 'none';
     panelMain.style.display     = 'flex';
     panelLang.style.display     = 'none';
