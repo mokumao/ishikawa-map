@@ -870,6 +870,31 @@ body.info-open .label-toggle-btn { display: none !important; }
     align-items: center !important;
     justify-content: center !important;
   }
+  /* カテゴリ選択中ラベルバー（地図下部） */
+  .cat-label-bar {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 900;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .cat-label-chip {
+    background: rgba(255,255,255,0.95);
+    border: 2px solid #e53935;
+    color: #b71c1c;
+    border-radius: 5px;
+    padding: 4px 14px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  }
+
   /* カテゴリ選択モード：選択済みボタン（不透明な薄赤背景） */
   .gear-menu-btn.cat-selected {
     background: #ffcdd2 !important;

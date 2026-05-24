@@ -462,6 +462,31 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       if (show) { if (!map.hasLayer(marker)) marker.addTo(map); }
       else       { if (map.hasLayer(marker))  map.removeLayer(marker); }
     });
+    updateCatLabel();
+  }
+
+  // カテゴリラベルバーを catSel の内容で更新する
+  function updateCatLabel() {
+    var bar = document.getElementById('catLabelBar');
+    if (!bar) return;
+    var labels = [];
+    if (catSel.has('food'))    labels.push('飲食店');
+    if (catSel.has('conbini')) labels.push('コンビニ');
+    if (catSel.has('gas'))     labels.push('ガソリン');
+    if (labels.length === 3) labels = ['すべて'];
+    if (labels.length === 0) {
+      bar.style.display = 'none';
+    } else {
+      bar.innerHTML = labels.map(function(l) {
+        return '<span class="cat-label-chip">' + l + '</span>';
+      }).join('');
+      bar.style.display = 'flex';
+    }
+  }
+
+  function hideCatLabel() {
+    var bar = document.getElementById('catLabelBar');
+    if (bar) bar.style.display = 'none';
   }
 
   // ピンボタン：カテゴリ選択モードで開く（オーバーレイなし・地図パン可）
@@ -469,6 +494,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     L.DomEvent && L.DomEvent.stopPropagation(e);
     openedViaPin = true;
     catSel.clear();
+    hideCatLabel();
     btnFood.classList.remove('cat-selected');
     btnConbini.classList.remove('cat-selected');
     btnGas.classList.remove('cat-selected');
@@ -572,8 +598,11 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       if (catSel.size === 0) {
         // 何も選択せずに閉じた場合は元のフィルターを復元
         applyFilter(currentFilter);
+        hideCatLabel();
+      } else {
+        // 選択中のカテゴリをラベルバーに表示してから catSel をリセット
+        updateCatLabel();
       }
-      // 選択があった場合はupdateCatPreviewで表示中のアイコンをそのまま維持
       catSel.clear();
       btnFood.classList.remove('cat-selected');
       btnConbini.classList.remove('cat-selected');
@@ -1809,6 +1838,10 @@ function isVisible(r) {
 // ── フィルター適用 ───────────────────────────────────────────────
 function applyFilter(filterId) {
   currentFilter = filterId;
+
+  // カテゴリラベルバーを非表示（通常モードに戻るため）
+  var catBar = document.getElementById('catLabelBar');
+  if (catBar) catBar.style.display = 'none';
 
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.filter === filterId);
