@@ -426,6 +426,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     panelMain.style.display     = 'none';
     panelLang.style.display     = 'none';
     panelCategory.style.display = 'flex';
+    document.getElementById('minimap').style.display = 'none'; // ミニマップ非表示
   }
   function closeMenu() {
     menu.classList.remove('cat-mode');
@@ -433,6 +434,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     panelMain.style.display     = 'flex';
     panelLang.style.display     = 'none';
     panelCategory.style.display = 'none';
+    document.getElementById('minimap').style.display = ''; // ミニマップ再表示
     overlay.classList.remove('active', 'map-interactive'); // オーバーレイ解除
     // ブロッキングdiv・サイドボタンを復元
     var blocker = document.getElementById('catModeBlocker');
