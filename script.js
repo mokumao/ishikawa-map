@@ -535,9 +535,13 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   document.getElementById('gearCatBack').addEventListener('click', function () {
     if (openedViaPin) {
       openedViaPin = false;
-      catSel.clear();
       map.getPane('markerPane').style.pointerEvents = ''; // タップを元に戻す
-      applyFilter(currentFilter);                         // 元のフィルターを復元
+      if (catSel.size === 0) {
+        // 何も選択せずに閉じた場合は元のフィルターを復元
+        applyFilter(currentFilter);
+      }
+      // 選択があった場合はupdateCatPreviewで表示中のアイコンをそのまま維持
+      catSel.clear();
     }
     closeMenu();
   });
