@@ -542,9 +542,9 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   // メニュー内のクリックが地図に伝播しないようにブロック
   menu.addEventListener('click', function (e) { e.stopPropagation(); });
 
-  // 地図クリックでメニューを閉じる
+  // 地図クリックでメニューを閉じる（ピンモード中は「閉じる」ボタンのみで閉じる）
   document.getElementById('map').addEventListener('click', function () {
-    if (menu.style.display !== 'none') closeMenu();
+    if (menu.style.display !== 'none' && !openedViaPin) closeMenu();
   });
 })();
 
