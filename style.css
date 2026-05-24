@@ -870,6 +870,18 @@ body.info-open .label-toggle-btn { display: none !important; }
     align-items: center !important;
     justify-content: center !important;
   }
+  /* カテゴリ選択モード：選択済みボタン（うす赤背景） */
+  .gear-menu-btn.cat-selected {
+    background: rgba(229, 57, 53, 0.18) !important;
+    border-color: #e53935 !important;
+    color: #b71c1c !important;
+  }
+  /* 閉じるボタン（青背景・白文字） */
+  .gear-menu-btn.close-btn {
+    background: #1565c0 !important;
+    color: #fff !important;
+    border-color: #1565c0 !important;
+  }
 
   /* ── 歯車メニュー用オーバーレイ ── */
   .gear-overlay {

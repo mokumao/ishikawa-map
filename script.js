@@ -433,13 +433,42 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     enableMap();                        // 地図操作を再開
   }
 
-  // ピンボタン：カテゴリパネルを直接開く
+  // ── カテゴリ選択モード（ピンボタン経由）────────────────────────
+  // openedViaPin=true のとき：トグル選択・地図上に表示のみ・タップ不可
+  // openedViaPin=false のとき：従来の動作（フィルター変更→一覧へ）
+  let openedViaPin  = false;
+  const catSel      = new Set(); // 'food' | 'conbini'
+  const btnFood     = document.getElementById('gearCatFood');
+  const btnConbini  = document.getElementById('gearCatConbini');
+  const markerPane  = map.getPane('markerPane');
+
+  // 選択中カテゴリに合わせてマーカーを表示（タップ不可モード）
+  function updateCatPreview() {
+    markersData.forEach(function({ restaurant: r, marker }) {
+      var isFood    = r.genre !== 'コンビニ';
+      var show      = (catSel.has('food') && isFood) ||
+                      (catSel.has('conbini') && !isFood);
+      if (show) { if (!map.hasLayer(marker)) marker.addTo(map); }
+      else       { if (map.hasLayer(marker))  map.removeLayer(marker); }
+    });
+  }
+
+  // ピンボタン：カテゴリ選択モードで開く（オーバーレイなし・地図パン可）
   document.getElementById('categoryPinBtn').addEventListener('click', function (e) {
     L.DomEvent && L.DomEvent.stopPropagation(e);
+    openedViaPin = true;
+    catSel.clear();
+    btnFood.classList.remove('cat-selected');
+    btnConbini.classList.remove('cat-selected');
+    // 全マーカーを一旦非表示
+    markersData.forEach(function({ marker }) {
+      if (map.hasLayer(marker)) map.removeLayer(marker);
+    });
+    // マーカーのタップを無効化
+    markerPane.style.pointerEvents = 'none';
+    // パネルだけ表示（暗幕なし・地図操作そのまま）
     menu.style.display = 'block';
     showCategory();
-    overlay.classList.add('active');
-    disableMap();
   });
 
   // 歯車ボタン：メニュー開閉トグル
@@ -450,24 +479,49 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 
   // メインメニュー
   document.getElementById('gearLangBtn').addEventListener('click', showLang);
-  document.getElementById('gearListBtn').addEventListener('click', showCategory);
+  document.getElementById('gearListBtn').addEventListener('click', function () {
+    openedViaPin = false; // 歯車メニューから開いた扱いに
+    showCategory();
+  });
   document.getElementById('gearCloseBtn').addEventListener('click', closeMenu);
 
   // カテゴリサブメニュー
-  document.getElementById('gearCatFood').addEventListener('click', function () {
-    closeMenu();
-    applyFilter('all'); // 飲食店（コンビニ除く）フィルターに切り替え
-    switchTab('list');
+  btnFood.addEventListener('click', function () {
+    if (openedViaPin) {
+      // トグル選択
+      if (catSel.has('food')) { catSel.delete('food'); btnFood.classList.remove('cat-selected'); }
+      else                    { catSel.add('food');    btnFood.classList.add('cat-selected'); }
+      updateCatPreview();
+    } else {
+      closeMenu();
+      applyFilter('all');
+      switchTab('list');
+    }
   });
-  document.getElementById('gearCatConbini').addEventListener('click', function () {
-    closeMenu();
-    applyFilter('conbini');
-    switchTab('list');
+  btnConbini.addEventListener('click', function () {
+    if (openedViaPin) {
+      if (catSel.has('conbini')) { catSel.delete('conbini'); btnConbini.classList.remove('cat-selected'); }
+      else                       { catSel.add('conbini');    btnConbini.classList.add('cat-selected'); }
+      updateCatPreview();
+    } else {
+      closeMenu();
+      applyFilter('conbini');
+      switchTab('list');
+    }
   });
   document.getElementById('gearCatGas').addEventListener('click', function () {
-    alert('ガソリンスタンド情報は準備中です。');
+    if (!openedViaPin) alert('ガソリンスタンド情報は準備中です。');
   });
-  document.getElementById('gearCatBack').addEventListener('click', closeMenu);
+  // 閉じるボタン：選択モード終了→通常の地図に戻る
+  document.getElementById('gearCatBack').addEventListener('click', function () {
+    if (openedViaPin) {
+      openedViaPin = false;
+      catSel.clear();
+      markerPane.style.pointerEvents = ''; // タップを元に戻す
+      applyFilter(currentFilter);          // 元のフィルターを復元
+    }
+    closeMenu();
+  });
 
   // 言語サブメニュー
   document.getElementById('gearLangJa').addEventListener('click', function () {
