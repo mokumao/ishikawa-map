@@ -894,6 +894,10 @@ body.info-open .label-toggle-btn { display: none !important; }
   .gear-overlay.active {
     display: block;
   }
+  /* カテゴリ選択モード：ビジュアルのみ・タッチを地図に通す */
+  .gear-overlay.map-interactive {
+    pointer-events: none !important;
+  }
 
   /* ── 歯車メニュー ── */
   .gear-menu {
@@ -1174,6 +1178,8 @@ body.info-open .label-toggle-btn { display: none !important; }
   border-radius: 7px !important;
   box-shadow: 0 2px 6px rgba(0,0,0,.2) !important;
   overflow: hidden;
+  position: relative !important;
+  z-index: 1502 !important; /* カテゴリオーバーレイ(1500)より前面に常時表示 */
 }
 
 /* Leaflet デフォルトの個別ボーダーをリセット */

@@ -429,8 +429,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     panelMain.style.display     = 'flex';
     panelLang.style.display     = 'none';
     panelCategory.style.display = 'none';
-    overlay.classList.remove('active'); // オーバーレイ解除
-    enableMap();                        // 地図操作を再開
+    overlay.classList.remove('active', 'map-interactive'); // オーバーレイ解除
+    enableMap();                        // 地図操作を再開（歯車メニューで無効化した場合）
   }
 
   // ── カテゴリ選択モード（ピンボタン経由）────────────────────────
@@ -466,11 +466,11 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     });
     // マーカーのタップを無効化（mapは初期化済みなのでここで取得）
     map.getPane('markerPane').style.pointerEvents = 'none';
-    // パネルを開く＋オーバーレイで背景を操作不可に
+    // パネルを開く＋オーバーレイ（グレー表示のみ・地図操作は維持）
     menu.style.display = 'block';
     showCategory();
-    overlay.classList.add('active');
-    disableMap();
+    overlay.classList.add('active', 'map-interactive'); // pointer-events:none で地図操作を通す
+    // disableMap() は呼ばない → ドラッグ・ピンチ・ダブルタップズームは動作継続
   });
 
   // 歯車ボタン：メニュー開閉トグル
