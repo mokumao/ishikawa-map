@@ -861,6 +861,15 @@ body.info-open .label-toggle-btn { display: none !important; }
     color: #546e7a !important;
     font-size: 1.3rem !important;
   }
+  .category-pin-btn {
+    margin-top: 6px;
+    background: #fff !important;
+    border: 2.5px solid #e53935 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
 
   /* ── 歯車メニュー用オーバーレイ ── */
   .gear-overlay {

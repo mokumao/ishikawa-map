@@ -433,6 +433,15 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     enableMap();                        // 地図操作を再開
   }
 
+  // ピンボタン：カテゴリパネルを直接開く
+  document.getElementById('categoryPinBtn').addEventListener('click', function (e) {
+    L.DomEvent && L.DomEvent.stopPropagation(e);
+    menu.style.display = 'block';
+    showCategory();
+    overlay.classList.add('active');
+    disableMap();
+  });
+
   // 歯車ボタン：メニュー開閉トグル
   document.getElementById('gearBtn').addEventListener('click', function (e) {
     L.DomEvent && L.DomEvent.stopPropagation(e);
@@ -458,7 +467,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   document.getElementById('gearCatGas').addEventListener('click', function () {
     alert('ガソリンスタンド情報は準備中です。');
   });
-  document.getElementById('gearCatBack').addEventListener('click', showMain);
+  document.getElementById('gearCatBack').addEventListener('click', closeMenu);
 
   // 言語サブメニュー
   document.getElementById('gearLangJa').addEventListener('click', function () {
