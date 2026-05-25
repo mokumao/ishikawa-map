@@ -499,15 +499,15 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   document.getElementById('categoryPinBtn').addEventListener('click', function (e) {
     L.DomEvent && L.DomEvent.stopPropagation(e);
     openedViaPin = true;
-    catSel.clear();
-    hideCatLabel();
-    btnFood.classList.remove('cat-selected');
-    btnConbini.classList.remove('cat-selected');
-    btnGas.classList.remove('cat-selected');
-    // 全マーカーを一旦非表示
-    markersData.forEach(function({ marker }) {
-      if (map.hasLayer(marker)) map.removeLayer(marker);
-    });
+    if (catSel.size === 0) {
+      // 何も選択されていない場合（初回・解除後）：全マーカーを非表示にして新規選択
+      hideCatLabel();
+      markersData.forEach(function({ marker }) {
+        if (map.hasLayer(marker)) map.removeLayer(marker);
+      });
+    }
+    // catSel に選択済みがある場合（状態Bからの復帰）：
+    // ボタン状態・マーカーをそのまま維持してパネルを再表示
     // マーカーのタップを無効化（mapは初期化済みなのでここで取得）
     map.getPane('markerPane').style.pointerEvents = 'none';
     // パネルを開く＋オーバーレイ（グレー表示のみ・地図操作は維持）
@@ -606,13 +606,10 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
         applyFilter(currentFilter);
         hideCatLabel();
       } else {
-        // 選択中のカテゴリをラベルバーに表示してから catSel をリセット
+        // 選択中のカテゴリをラベルバーに表示
+        // catSel・ボタン状態はそのまま保持（涙目アイコンで戻れるように）
         updateCatLabel();
       }
-      catSel.clear();
-      btnFood.classList.remove('cat-selected');
-      btnConbini.classList.remove('cat-selected');
-      btnGas.classList.remove('cat-selected');
     }
     closeMenu();
   });
