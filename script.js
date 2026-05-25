@@ -500,11 +500,23 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     L.DomEvent && L.DomEvent.stopPropagation(e);
     openedViaPin = true;
     if (catSel.size === 0) {
-      // 何も選択されていない場合（初回・解除後）：全マーカーを非表示にして新規選択
-      hideCatLabel();
-      markersData.forEach(function({ marker }) {
-        if (map.hasLayer(marker)) map.removeLayer(marker);
-      });
+      // マーカーが表示中かどうか確認して自動的に catSel へ反映
+      var hasFood    = markersData.some(function(d) { return d.restaurant.genre !== 'コンビニ' && d.restaurant.genre !== 'ガソリン' && map.hasLayer(d.marker); });
+      var hasConbini = markersData.some(function(d) { return d.restaurant.genre === 'コンビニ'  && map.hasLayer(d.marker); });
+      var hasGas     = markersData.some(function(d) { return d.restaurant.genre === 'ガソリン'  && map.hasLayer(d.marker); });
+      if (hasFood || hasConbini || hasGas) {
+        // マーカーが表示中 → 現在の表示状態をそのまま catSel に反映してパネルを開く
+        if (hasFood)    { catSel.add('food');    btnFood.classList.add('cat-selected'); }
+        if (hasConbini) { catSel.add('conbini'); btnConbini.classList.add('cat-selected'); }
+        if (hasGas)     { catSel.add('gas');     btnGas.classList.add('cat-selected'); }
+        // マーカーはそのまま維持
+      } else {
+        // 何も表示されていない → 全マーカーを非表示にして新規選択
+        hideCatLabel();
+        markersData.forEach(function({ marker }) {
+          if (map.hasLayer(marker)) map.removeLayer(marker);
+        });
+      }
     }
     // catSel に選択済みがある場合（状態Bからの復帰）：
     // ボタン状態・マーカーをそのまま維持してパネルを再表示
@@ -2102,5 +2114,9 @@ initSearch();
     }
   });
 })();
-applyFilter('all'); // 初期状態：飲食店のみ表示（コンビニはデフォルト非表示）
+applyFilter('all'); // サイドバー・フィルターボタンの初期化
+// 初期表示：飲食店に加えてコンビニ・ガソリンも最初から表示する
+markersData.forEach(function({ restaurant: r, marker }) {
+  if (!map.hasLayer(marker)) marker.addTo(map);
+});
 applyLangToDOM();
