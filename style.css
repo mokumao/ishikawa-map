@@ -946,7 +946,6 @@ body.info-open .label-toggle-btn { display: none !important; }
     background: #cccccc !important;
     border-color: #aaaaaa !important;
     color: #777777 !important;
-    opacity: 0.7 !important;
   }
 
   /* カテゴリ選択モード：選択済みボタン（不透明な薄赤背景） */
