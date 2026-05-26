@@ -435,6 +435,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     panelLang.style.display     = 'none';
     panelCategory.style.display = 'none';
     document.getElementById('minimap').style.display = ''; // ミニマップ再表示
+    setTimeout(function () { if (window._resetMinimap) window._resetMinimap(); }, 50); // サイズ再計算
     overlay.classList.remove('active', 'map-interactive'); // オーバーレイ解除
     // ブロッキングdiv・サイドボタンを復元
     var blocker = document.getElementById('catModeBlocker');
@@ -1368,11 +1369,31 @@ setTimeout(() => {
   // ミニマップへのクリックが主地図に伝播しないよう防ぐ
   L.DomEvent.disableClickPropagation(miniMapEl);
 
-  // コンテナが完全にレンダリングされてからサイズ再計算＋初期位置設定
-  setTimeout(function () {
+  // ミニマップを正しい位置・サイズに強制リセットする関数
+  function resetMinimap() {
     miniMap.invalidateSize();
+    miniMap.setView(ISHIKAWA_CENTER, 12, { animate: false }); // 中心・ズームを強制リセット
     updateMiniTarget();
-  }, 300);
+  }
+
+  // ① 初期化：十分な時間をとってサイズ再計算（低速端末対策）
+  setTimeout(resetMinimap, 300);
+  setTimeout(resetMinimap, 800); // 二重保険
+
+  // ② バックグラウンドから復帰時（iOS/Androidでタブが一時停止→戻るとズレる）
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) {
+      setTimeout(resetMinimap, 200);
+    }
+  });
+
+  // ③ 画面回転・リサイズ時
+  window.addEventListener('resize', function () {
+    setTimeout(resetMinimap, 150);
+  });
+
+  // ④ カテゴリパネルで非表示→再表示されたときに呼べるよう外部公開
+  window._resetMinimap = resetMinimap;
 })();
 
 // ── 石川エリア境界線 ─────────────────────────────────────────────
