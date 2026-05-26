@@ -462,15 +462,12 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     var allSelected = catSel.has('food') && catSel.has('conbini') && catSel.has('gas');
     if (allSelected) {
       btnAll.classList.add('cat-all-active');
-      // CSS が効かない環境向けにインラインスタイルも直接設定（オレンジ確認用）
-      btnAll.style.background = '#ff6600';
-      btnAll.style.borderColor = '#cc4400';
-      btnAll.style.color = '#ffffff';
+      btnAll.style.cssText = 'background:#ff6600!important;border-color:#cc4400!important;color:#ffffff!important;';
+      btnAll.textContent = '✓すべて';
     } else {
       btnAll.classList.remove('cat-all-active');
-      btnAll.style.background = '';
-      btnAll.style.borderColor = '';
-      btnAll.style.color = '';
+      btnAll.style.cssText = '';
+      btnAll.textContent = 'すべて';
     }
   }
 
