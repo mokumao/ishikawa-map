@@ -442,13 +442,11 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     if (blocker) blocker.parentNode.removeChild(blocker);
     document.getElementById('sideSwipeCtrl').style.pointerEvents = '';
     enableMap();                        // 地図操作を再開（map.tap.enable含む）
-    // ピンボタン経由で開いた場合、地図を元の位置に即座に戻す
-    if (openedViaPin && savedCenter) {
-      var _c = savedCenter, _z = savedZoom;
-      savedCenter = null;
-      savedZoom   = null;
-      map.stop(); // 進行中のアニメーションを即座にキャンセル
-      map.setView(_c, _z, { animate: false }); // アニメなしで確実に復元
+    // ピンボタン経由で開いた場合、panByの逆操作で確実に元の位置に戻す
+    if (openedViaPin && savedPanPixels > 0) {
+      var _px = savedPanPixels;
+      savedPanPixels = 0;
+      map.panBy([0, -_px], { animate: false }); // ずらした量だけ逆方向に即座に戻す
     }
     openedViaPin = false;
   }
@@ -457,8 +455,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   // openedViaPin=true のとき：トグル選択・地図上に表示のみ・タップ不可
   // openedViaPin=false のとき：従来の動作（フィルター変更→一覧へ）
   let openedViaPin  = false;
-  let savedCenter   = null;  // ピンパネル表示前の地図中心
-  let savedZoom     = null;  // ピンパネル表示前のズーム
+  let savedPanPixels = 0;   // ピンパネル表示時にずらしたピクセル量（復元用）
   const catSel      = new Set(); // 'food' | 'conbini' | 'gas'
   const btnAll      = document.getElementById('gearCatAll');
   const btnClear    = document.getElementById('gearCatClear');
@@ -562,24 +559,17 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     map.getPane('markerPane').style.pointerEvents = 'none';
     // ヘッダーを非表示にして地図エリアを広げる
     document.querySelector('header').style.display = 'none';
-    // 現在の地図位置を保存（閉じるときに復元するため）
-    savedCenter = map.getCenter();
-    savedZoom   = map.getZoom();
     // パネルを開く＋オーバーレイ（グレー表示のみ・地図操作は維持）
     menu.style.display = 'block';
     showCategory();
     overlay.classList.add('active', 'map-interactive'); // pointer-events:none で地図操作を通す
-    // パネルが描画されてから地図を上にシフト
-    // panByではなくsetViewで統一（iOS Safariでの競合を防ぐ）
+    // パネルが描画されてから地図を上にシフト（panByで確実に移動）
     requestAnimationFrame(function () {
       var panelTop  = menu.getBoundingClientRect().top;
-      var panPixels = (window.innerHeight - panelTop) / 2;
-      if (panPixels > 0) {
-        // ピクセルオフセット → LatLng に変換してsetView
-        var cPx      = map.latLngToContainerPoint(savedCenter);
-        var shiftPx  = L.point(cPx.x, cPx.y + panPixels);
-        var shifted  = map.containerPointToLatLng(shiftPx);
-        map.setView(shifted, savedZoom, { animate: true, duration: 0.4 });
+      var px        = Math.round((window.innerHeight - panelTop) / 2);
+      if (px > 0) {
+        savedPanPixels = px; // ずらした量を保存（復元用）
+        map.panBy([0, px], { animate: true, duration: 0.4 });
       }
     });
     // disableMap() は呼ばない → ドラッグ・ピンチ・ダブルタップズームは動作継続
