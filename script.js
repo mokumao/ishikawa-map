@@ -442,18 +442,13 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     if (blocker) blocker.parentNode.removeChild(blocker);
     document.getElementById('sideSwipeCtrl').style.pointerEvents = '';
     enableMap();                        // 地図操作を再開（map.tap.enable含む）
-    // ピンボタン経由で開いた場合、地図を元の位置に戻す
+    // ピンボタン経由で開いた場合、地図を元の位置に即座に戻す
     if (openedViaPin && savedCenter) {
       var _c = savedCenter, _z = savedZoom;
       savedCenter = null;
       savedZoom   = null;
-      // panByアニメーションが残っている場合に競合するため
-      // stop()で強制停止してからsetView（アニメなし）で確実に戻す
-      map.stop();
-      setTimeout(function () {
-        map.stop(); // 念のため再度止める
-        map.setView(_c, _z, { animate: false });
-      }, 50);
+      map.stop(); // 進行中のアニメーションを即座にキャンセル
+      map.setView(_c, _z, { animate: false }); // アニメなしで確実に復元
     }
     openedViaPin = false;
   }
@@ -574,11 +569,18 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     menu.style.display = 'block';
     showCategory();
     overlay.classList.add('active', 'map-interactive'); // pointer-events:none で地図操作を通す
-    // パネルが描画されてから地図を上にシフト（元の中心がパネルの上の見える位置に来るよう）
+    // パネルが描画されてから地図を上にシフト
+    // panByではなくsetViewで統一（iOS Safariでの競合を防ぐ）
     requestAnimationFrame(function () {
-      var panelTop  = menu.getBoundingClientRect().top; // パネル上端のY座標
-      var panPixels = (window.innerHeight - panelTop) / 2; // 半分だけ上にシフト
-      if (panPixels > 0) map.panBy([0, panPixels], { animate: true, duration: 0.4 });
+      var panelTop  = menu.getBoundingClientRect().top;
+      var panPixels = (window.innerHeight - panelTop) / 2;
+      if (panPixels > 0) {
+        // ピクセルオフセット → LatLng に変換してsetView
+        var cPx      = map.latLngToContainerPoint(savedCenter);
+        var shiftPx  = L.point(cPx.x, cPx.y + panPixels);
+        var shifted  = map.containerPointToLatLng(shiftPx);
+        map.setView(shifted, savedZoom, { animate: true, duration: 0.4 });
+      }
     });
     // disableMap() は呼ばない → ドラッグ・ピンチ・ダブルタップズームは動作継続
 
