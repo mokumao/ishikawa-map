@@ -941,11 +941,11 @@ body.info-open .label-toggle-btn { display: none !important; }
     width: 100% !important;
   }
 
-  /* 「すべて」ボタン：全カテゴリ選択済みのときグレーアウト */
+  /* 「すべて」ボタン：全カテゴリ選択済みのときグレーアウト（確認用：目立つ色） */
   .gear-menu-btn.cat-all-active {
-    background: #e0e0e0 !important;
-    border-color: #bdbdbd !important;
-    color: #9e9e9e !important;
+    background: #ff6600 !important;
+    border-color: #cc4400 !important;
+    color: #ffffff !important;
   }
 
   /* カテゴリ選択モード：選択済みボタン（不透明な薄赤背景） */
