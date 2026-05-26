@@ -457,6 +457,16 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   // ※ map は後で定義されるため、markerPane はイベントハンドラ内で取得する
 
 
+  // 「すべて」ボタンのグレーアウトを catSel の状態に合わせて更新
+  function updateAllBtn() {
+    var allSelected = catSel.has('food') && catSel.has('conbini') && catSel.has('gas');
+    if (allSelected) {
+      btnAll.classList.add('cat-all-active');
+    } else {
+      btnAll.classList.remove('cat-all-active');
+    }
+  }
+
   // 選択中カテゴリに合わせてマーカーを表示（タップ不可モード）
   function updateCatPreview() {
     markersData.forEach(function({ restaurant: r, marker }) {
@@ -469,6 +479,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       if (show) { if (!map.hasLayer(marker)) marker.addTo(map); }
       else       { if (map.hasLayer(marker))  map.removeLayer(marker); }
     });
+    updateAllBtn();
     updateCatLabel();
   }
 
@@ -510,6 +521,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
         if (hasFood)    { catSel.add('food');    btnFood.classList.add('cat-selected'); }
         if (hasConbini) { catSel.add('conbini'); btnConbini.classList.add('cat-selected'); }
         if (hasGas)     { catSel.add('gas');     btnGas.classList.add('cat-selected'); }
+        updateAllBtn(); // 全選択状態ならすべてボタンをグレーアウト
         // マーカーはそのまま維持
       } else {
         // 何も表示されていない → 全マーカーを非表示にして新規選択
@@ -565,7 +577,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     btnFood.classList.add('cat-selected');
     btnConbini.classList.add('cat-selected');
     btnGas.classList.add('cat-selected');
-    updateCatPreview();
+    updateCatPreview(); // 内部で updateAllBtn() も呼ばれる
   });
   // 「解除」ボタン：全選択を解除
   btnClear.addEventListener('click', function () {
@@ -574,7 +586,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     btnFood.classList.remove('cat-selected');
     btnConbini.classList.remove('cat-selected');
     btnGas.classList.remove('cat-selected');
-    updateCatPreview();
+    updateCatPreview(); // 内部で updateAllBtn() も呼ばれる
   });
 
   btnFood.addEventListener('click', function () {
