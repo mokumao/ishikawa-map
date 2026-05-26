@@ -462,12 +462,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     var allSelected = catSel.has('food') && catSel.has('conbini') && catSel.has('gas');
     if (allSelected) {
       btnAll.classList.add('cat-all-active');
-      btnAll.style.cssText = 'background:#ff6600!important;border-color:#cc4400!important;color:#ffffff!important;';
-      btnAll.textContent = '✓すべて';
     } else {
       btnAll.classList.remove('cat-all-active');
-      btnAll.style.cssText = '';
-      btnAll.textContent = 'すべて';
     }
   }
 

@@ -944,9 +944,9 @@ body.info-open .label-toggle-btn { display: none !important; }
   /* 「すべて」ボタン：全カテゴリ選択済みのときグレーアウト */
   .gear-menu-btn.cat-all-active {
     background: #cccccc !important;
-    border-color: #999999 !important;
-    color: #666666 !important;
-    opacity: 0.55 !important;
+    border-color: #aaaaaa !important;
+    color: #777777 !important;
+    opacity: 0.7 !important;
   }
 
   /* カテゴリ選択モード：選択済みボタン（不透明な薄赤背景） */
@@ -1300,9 +1300,3 @@ body.info-open .label-toggle-btn { display: none !important; }
   }
 }
 
-/* 「すべて」ボタングレーアウト（グローバル宣言・メディアクエリ外） */
-.gear-menu-btn.cat-all-active {
-  background: #ff6600 !important;
-  border-color: #cc4400 !important;
-  color: #ffffff !important;
-}
