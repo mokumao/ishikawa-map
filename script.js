@@ -2172,11 +2172,12 @@ initSearch();
       setTimeout(function() { window._dblTapJustHandled = false; }, 600);
     } else {
       // ドラッグズーム確定：地図中心を固定したまま整数ズームに確定
+      // animate:falseだとzoomanim→setView切り替え時にぴくっとするため短いアニメで滑らかに
       const finalZoom = Math.max(
         map.getMinZoom(),
         Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
       );
-      map.setView(mapCenter, Math.round(finalZoom), { animate: false });
+      map.setView(mapCenter, Math.round(finalZoom), { animate: true, duration: 0.12 });
     }
   });
 })();
