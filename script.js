@@ -549,6 +549,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     }
     // マーカーのタップを無効化（mapは初期化済みなのでここで取得）
     map.getPane('markerPane').style.pointerEvents = 'none';
+    // ヘッダーを非表示にして地図エリアを広げる
+    document.querySelector('header').style.display = 'none';
     // パネルを開く＋オーバーレイ（グレー表示のみ・地図操作は維持）
     menu.style.display = 'block';
     showCategory();
