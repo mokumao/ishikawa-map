@@ -442,12 +442,21 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     if (blocker) blocker.parentNode.removeChild(blocker);
     document.getElementById('sideSwipeCtrl').style.pointerEvents = '';
     enableMap();                        // 地図操作を再開（map.tap.enable含む）
+    // ピンボタン経由で開いた場合、地図を元の位置に戻す
+    if (openedViaPin && savedCenter) {
+      map.setView(savedCenter, savedZoom, { animate: true, duration: 0.4 });
+      savedCenter = null;
+      savedZoom   = null;
+    }
+    openedViaPin = false;
   }
 
   // ── カテゴリ選択モード（ピンボタン経由）────────────────────────
   // openedViaPin=true のとき：トグル選択・地図上に表示のみ・タップ不可
   // openedViaPin=false のとき：従来の動作（フィルター変更→一覧へ）
   let openedViaPin  = false;
+  let savedCenter   = null;  // ピンパネル表示前の地図中心
+  let savedZoom     = null;  // ピンパネル表示前のズーム
   const catSel      = new Set(); // 'food' | 'conbini' | 'gas'
   const btnAll      = document.getElementById('gearCatAll');
   const btnClear    = document.getElementById('gearCatClear');
@@ -551,10 +560,19 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     map.getPane('markerPane').style.pointerEvents = 'none';
     // ヘッダーを非表示にして地図エリアを広げる
     document.querySelector('header').style.display = 'none';
+    // 現在の地図位置を保存（閉じるときに復元するため）
+    savedCenter = map.getCenter();
+    savedZoom   = map.getZoom();
     // パネルを開く＋オーバーレイ（グレー表示のみ・地図操作は維持）
     menu.style.display = 'block';
     showCategory();
     overlay.classList.add('active', 'map-interactive'); // pointer-events:none で地図操作を通す
+    // パネルが描画されてから地図を上にシフト（元の中心がパネルの上の見える位置に来るよう）
+    requestAnimationFrame(function () {
+      var panelTop  = menu.getBoundingClientRect().top; // パネル上端のY座標
+      var panPixels = (window.innerHeight - panelTop) / 2; // 半分だけ上にシフト
+      if (panPixels > 0) map.panBy([0, panPixels], { animate: true, duration: 0.4 });
+    });
     // disableMap() は呼ばない → ドラッグ・ピンチ・ダブルタップズームは動作継続
 
     // クリック操作を遮断するブロッキングdivを#map内に挿入
