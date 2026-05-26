@@ -948,6 +948,13 @@ body.info-open .label-toggle-btn { display: none !important; }
     color: #777777 !important;
   }
 
+  /* 「解除」ボタン：何も選択されていないときグレーアウト */
+  .gear-menu-btn.cat-clear-inactive {
+    background: #cccccc !important;
+    border-color: #aaaaaa !important;
+    color: #777777 !important;
+  }
+
   /* カテゴリ選択モード：選択済みボタン（不透明な薄赤背景） */
   .gear-menu-btn.cat-selected {
     background: #ffcdd2 !important;

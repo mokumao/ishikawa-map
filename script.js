@@ -467,6 +467,15 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     }
   }
 
+  // 「解除」ボタンのグレーアウトを catSel の状態に合わせて更新
+  function updateClearBtn() {
+    if (catSel.size === 0) {
+      btnClear.classList.add('cat-clear-inactive');
+    } else {
+      btnClear.classList.remove('cat-clear-inactive');
+    }
+  }
+
   // 選択中カテゴリに合わせてマーカーを表示（タップ不可モード）
   function updateCatPreview() {
     markersData.forEach(function({ restaurant: r, marker }) {
@@ -480,6 +489,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       else       { if (map.hasLayer(marker))  map.removeLayer(marker); }
     });
     updateAllBtn();
+    updateClearBtn();
     updateCatLabel();
   }
 
@@ -521,7 +531,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
         if (hasFood)    { catSel.add('food');    btnFood.classList.add('cat-selected'); }
         if (hasConbini) { catSel.add('conbini'); btnConbini.classList.add('cat-selected'); }
         if (hasGas)     { catSel.add('gas');     btnGas.classList.add('cat-selected'); }
-        updateAllBtn(); // 全選択状態ならすべてボタンをグレーアウト
+        updateAllBtn();   // 全選択状態ならすべてボタンをグレーアウト
+        updateClearBtn(); // 選択があれば解除ボタンをアクティブに
         // マーカーはそのまま維持
       } else {
         // 何も表示されていない → 全マーカーを非表示にして新規選択
@@ -529,10 +540,13 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
         markersData.forEach(function({ marker }) {
           if (map.hasLayer(marker)) map.removeLayer(marker);
         });
+        updateClearBtn(); // 何も選択なし → 解除ボタンをグレーアウト
       }
+    } else {
+      // catSel に選択済みがある場合（状態Bからの復帰）：ボタン状態・マーカーをそのまま維持
+      updateAllBtn();
+      updateClearBtn();
     }
-    // catSel に選択済みがある場合（状態Bからの復帰）：
-    // ボタン状態・マーカーをそのまま維持してパネルを再表示
     // マーカーのタップを無効化（mapは初期化済みなのでここで取得）
     map.getPane('markerPane').style.pointerEvents = 'none';
     // パネルを開く＋オーバーレイ（グレー表示のみ・地図操作は維持）
