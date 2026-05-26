@@ -443,14 +443,17 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     document.getElementById('sideSwipeCtrl').style.pointerEvents = '';
     enableMap();                        // 地図操作を再開（map.tap.enable含む）
     // ピンボタン経由で開いた場合、地図を元の位置に戻す
-    // （enableMap直後はLeaflet内部状態が安定しないため少し遅らせる）
     if (openedViaPin && savedCenter) {
       var _c = savedCenter, _z = savedZoom;
       savedCenter = null;
       savedZoom   = null;
+      // panByアニメーションが残っている場合に競合するため
+      // stop()で強制停止してからsetView（アニメなし）で確実に戻す
+      map.stop();
       setTimeout(function () {
-        map.setView(_c, _z, { animate: true, duration: 0.4 });
-      }, 80);
+        map.stop(); // 念のため再度止める
+        map.setView(_c, _z, { animate: false });
+      }, 50);
     }
     openedViaPin = false;
   }
