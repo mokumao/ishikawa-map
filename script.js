@@ -2172,19 +2172,12 @@ initSearch();
       setTimeout(function() { window._dblTapJustHandled = false; }, 600);
     } else {
       // ドラッグズーム確定：地図中心を固定したまま整数ズームに確定
-      // zooanim（CSSトランスフォーム）の最終フレームを描画させてから確定することで
-      // 切り替え時の微細な動きを最小化する
+      // animate:falseだとzoomanim→setView切り替え時にぴくっとするため短いアニメで滑らかに
       const finalZoom = Math.max(
         map.getMinZoom(),
         Math.min(map.getMaxZoom(), startZoom + lastDy / PX_PER_ZOOM)
       );
-      const roundedZoom = Math.round(finalZoom);
-      // ① まず現在の表示ズームに最も近い整数ズームをzoominimで先行表示
-      map.fire('zoomanim', { center: mapCenter, zoom: roundedZoom });
-      // ② 1フレーム後にsetView確定（CSSトランスフォームが整数ズームで安定してから）
-      requestAnimationFrame(function() {
-        map.setView(mapCenter, roundedZoom, { animate: false });
-      });
+      map.setView(mapCenter, Math.round(finalZoom), { animate: true, duration: 0.12 });
     }
   });
 })();
