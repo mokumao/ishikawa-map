@@ -440,10 +440,11 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     // ブロッキングdiv・サイドボタンを復元
     var blocker = document.getElementById('catModeBlocker');
     if (blocker) blocker.parentNode.removeChild(blocker);
-    var ctrl2 = document.getElementById('sideSwipeCtrl');
-    ctrl2.style.pointerEvents = '';
-    ctrl2.style.zIndex = ''; // z-indexを元に戻す
-    document.getElementById('ishikawaBtn').style.pointerEvents = ''; // 石川ボタンも元に戻す
+    document.getElementById('sideSwipeCtrl').style.zIndex = ''; // z-indexを元に戻す
+    ['sideSwipeUp','sideSwipeDown','locateBtn','categoryPinBtn','gearBtn'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) { el.style.opacity = ''; el.style.pointerEvents = ''; }
+    });
     // ピンボタン経由で開いた場合、panByの逆操作で元の位置に戻す
     // ※ enableMap()より前に実行（dragging.enable等のリセットで打ち消されないよう）
     if (openedViaPin && savedPanPixels > 0) {
@@ -586,11 +587,13 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     blocker.style.cssText = 'position:absolute;inset:0;z-index:700;background:transparent;pointer-events:auto;';
     blocker.addEventListener('click', function(e) { e.stopPropagation(); });
     document.getElementById('map').appendChild(blocker);
-    // サイドボタン（現在地・歯車など）も操作不可に（石川ボタンは有効のまま）
-    var ctrl = document.getElementById('sideSwipeCtrl');
-    ctrl.style.pointerEvents = 'none';
-    ctrl.style.zIndex = '1501'; // オーバーレイ(1500)より手前に出して石川ボタンを見えるように
-    document.getElementById('ishikawaBtn').style.pointerEvents = 'auto'; // 石川ボタンのみ有効化
+    // 石川ボタン以外をグレーアウト＋操作不可に（石川ボタンはオーバーレイより手前で有効のまま）
+    document.getElementById('sideSwipeCtrl').style.zIndex = '1501'; // コンテナ全体をオーバーレイより上へ
+    ['sideSwipeUp','sideSwipeDown','locateBtn','categoryPinBtn','gearBtn'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) { el.style.opacity = '0.35'; el.style.pointerEvents = 'none'; }
+    });
+    // ishikawaBtnはそのまま（通常表示・クリック可能）
     // Leafletのタップ合成クリックも無効化
     if (map.tap) map.tap.disable();
   });
