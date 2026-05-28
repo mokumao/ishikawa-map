@@ -446,7 +446,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     if (openedViaPin && savedPanPixels > 0) {
       var _px = savedPanPixels;
       savedPanPixels = 0;
-      map.panBy([0, -_px], { animate: true, duration: 0.35 });
+      map.panBy([0, -_px], { animate: true, duration: 0.7 });
     }
     openedViaPin = false;
     enableMap();                        // 地図操作を再開（map.tap.enable含む）
@@ -570,7 +570,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       var px        = Math.round((window.innerHeight - panelTop) / 2);
       if (px > 0) {
         savedPanPixels = px; // ずらした量を保存（復元用）
-        map.panBy([0, px], { animate: true, duration: 0.4 });
+        map.panBy([0, px], { animate: true, duration: 0.8 });
       }
     });
     // disableMap() は呼ばない → ドラッグ・ピンチ・ダブルタップズームは動作継続
