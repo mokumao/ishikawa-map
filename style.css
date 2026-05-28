@@ -912,14 +912,14 @@ body.info-open .label-toggle-btn { display: none !important; }
   /* 操作ボタン行（すべて・解除・閉じる） */
   .cat-ctrl-row {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     padding: 0;
     border-bottom: none;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
   }
   .cat-ctrl-btn {
     flex: 1;
-    padding: 9px 4px;
+    padding: 4px 4px;
     font-size: 0.82rem;
     text-align: center;
   }
@@ -927,13 +927,13 @@ body.info-open .label-toggle-btn { display: none !important; }
   .cat-icon-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    gap: 5px;
     padding: 0;
     overflow-y: visible;
     max-height: none;
   }
   .cat-icon-btn {
-    padding: 9px 4px !important;
+    padding: 4px 4px !important;
     font-size: 0.82rem !important;
     white-space: nowrap !important;
     text-align: center !important;
