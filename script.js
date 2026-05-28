@@ -441,14 +441,15 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     var blocker = document.getElementById('catModeBlocker');
     if (blocker) blocker.parentNode.removeChild(blocker);
     document.getElementById('sideSwipeCtrl').style.pointerEvents = '';
-    enableMap();                        // 地図操作を再開（map.tap.enable含む）
-    // ピンボタン経由で開いた場合、panByの逆操作で確実に元の位置に戻す
+    // ピンボタン経由で開いた場合、panByの逆操作で元の位置に戻す
+    // ※ enableMap()より前に実行（dragging.enable等のリセットで打ち消されないよう）
     if (openedViaPin && savedPanPixels > 0) {
       var _px = savedPanPixels;
       savedPanPixels = 0;
-      map.panBy([0, -_px], { animate: false }); // ずらした量だけ逆方向に即座に戻す
+      map.panBy([0, -_px], { animate: false });
     }
     openedViaPin = false;
+    enableMap();                        // 地図操作を再開（map.tap.enable含む）
   }
 
   // ── カテゴリ選択モード（ピンボタン経由）────────────────────────
