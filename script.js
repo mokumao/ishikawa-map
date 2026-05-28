@@ -259,7 +259,17 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   var btn = document.getElementById('ishikawaBtn');
   if (!btn) return;
   btn.addEventListener('click', function () {
-    map.flyTo(ISHIKAWA_CENTER, ISHIKAWA_ZOOM, { duration: 1.0 });
+    if (openedViaPin && savedPanPixels > 0) {
+      // カテゴリパネル表示中：石川中心が画面上部に来るようオフセット
+      var zoom = ISHIKAWA_ZOOM;
+      var center = L.latLng(ISHIKAWA_CENTER);
+      var centerPx = map.project(center, zoom);
+      var offsetPx = centerPx.subtract([0, savedPanPixels]);
+      var adjustedCenter = map.unproject(offsetPx, zoom);
+      map.flyTo(adjustedCenter, zoom, { duration: 1.0 });
+    } else {
+      map.flyTo(ISHIKAWA_CENTER, ISHIKAWA_ZOOM, { duration: 1.0 });
+    }
   });
 })();
 
