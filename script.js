@@ -657,7 +657,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   // 閉じるボタン：選択モード終了→通常の地図に戻る
   document.getElementById('gearCatBack').addEventListener('click', function () {
     if (openedViaPin) {
-      openedViaPin = false;
+      // openedViaPin = false はcloseMenu()内で行う（地図復元チェックのため）
       map.getPane('markerPane').style.pointerEvents = ''; // タップを元に戻す
       if (catSel.size === 0) {
         // 何も選択せずに閉じた場合は元のフィルターを復元
