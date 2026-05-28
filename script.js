@@ -254,24 +254,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     });
 })();
 
-// ── 石川全域ボタン ────────────────────────────────────────────
-(function () {
-  var btn = document.getElementById('ishikawaBtn');
-  if (!btn) return;
-  btn.addEventListener('click', function () {
-    if (openedViaPin && savedPanPixels > 0) {
-      // カテゴリパネル表示中：石川中心が画面上部に来るようオフセット
-      var zoom = ISHIKAWA_ZOOM;
-      var center = L.latLng(ISHIKAWA_CENTER);
-      var centerPx = map.project(center, zoom);
-      var offsetPx = centerPx.subtract([0, savedPanPixels]);
-      var adjustedCenter = map.unproject(offsetPx, zoom);
-      map.flyTo(adjustedCenter, zoom, { duration: 1.0 });
-    } else {
-      map.flyTo(ISHIKAWA_CENTER, ISHIKAWA_ZOOM, { duration: 1.0 });
-    }
-  });
-})();
+// ── 石川全域ボタン（カテゴリIIFE内で定義）─────────────────────────
+// ※ openedViaPin / savedPanPixels へのアクセスが必要なためカテゴリIIFE内に移動
 
 // ── 現在地ボタン（リアルタイム追跡） ────────────────────────────
 (function () {
@@ -713,6 +697,26 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   document.getElementById('map').addEventListener('click', function () {
     if (menu.style.display !== 'none' && !openedViaPin) closeMenu();
   });
+
+  // ── 石川全域ボタン ────────────────────────────────────────────
+  // openedViaPin / savedPanPixels にアクセスするためカテゴリIIFE内で登録
+  (function () {
+    var btn = document.getElementById('ishikawaBtn');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      if (openedViaPin && savedPanPixels > 0) {
+        // カテゴリパネル表示中：石川中心が画面上部に来るようオフセット
+        var zoom = ISHIKAWA_ZOOM;
+        var center = L.latLng(ISHIKAWA_CENTER);
+        var centerPx = map.project(center, zoom);
+        var offsetPx = centerPx.subtract([0, savedPanPixels]);
+        var adjustedCenter = map.unproject(offsetPx, zoom);
+        map.flyTo(adjustedCenter, zoom, { duration: 1.0 });
+      } else {
+        map.flyTo(ISHIKAWA_CENTER, ISHIKAWA_ZOOM, { duration: 1.0 });
+      }
+    });
+  })();
 })();
 
 // ── スマホ：タブバーのスワイプでヘッダー操作・情報パネル表示 ────────
