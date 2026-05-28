@@ -446,7 +446,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     if (openedViaPin && savedPanPixels > 0) {
       var _px = savedPanPixels;
       savedPanPixels = 0;
-      map.panBy([0, -_px], { animate: false });
+      map.panBy([0, -_px], { animate: true, duration: 0.35 });
     }
     openedViaPin = false;
     enableMap();                        // 地図操作を再開（map.tap.enable含む）
