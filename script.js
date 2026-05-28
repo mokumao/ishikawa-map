@@ -570,7 +570,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       var px        = Math.round((window.innerHeight - panelTop) / 2);
       if (px > 0) {
         savedPanPixels = px; // ずらした量を保存（復元用）
-        map.panBy([0, px], { animate: true, duration: 0.8 });
+        map.panBy([0, px], { animate: true, duration: 0.7 });
       }
     });
     // disableMap() は呼ばない → ドラッグ・ピンチ・ダブルタップズームは動作継続
