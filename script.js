@@ -1177,17 +1177,16 @@ function makePinIcon(fillColor, isWarn, innerLabel) {
   let inner = '';
   if (isWarn) {
     inner = `<text x="15" y="18" text-anchor="middle" font-size="11"
-             font-weight="900" fill="${color}" font-family="sans-serif">!</text>`;
+             font-weight="900" fill="white" font-family="sans-serif">!</text>`;
   } else if (innerLabel) {
     inner = `<text x="15" y="18" text-anchor="middle" font-size="10"
-             font-weight="900" fill="${color}" font-family="sans-serif">${innerLabel}</text>`;
+             font-weight="900" fill="white" font-family="sans-serif">${innerLabel}</text>`;
   }
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 42" width="30" height="42">
       <path d="M15 1C8.1 1 2.5 6.6 2.5 13.5C2.5 22.9 15 41 15 41
                C15 41 27.5 22.9 27.5 13.5C27.5 6.6 21.9 1 15 1Z"
             fill="${color}" stroke="white" stroke-width="2.2"/>
-      <circle cx="15" cy="13.5" r="5.5" fill="white" opacity="0.92"/>
       ${inner}
     </svg>`;
   return L.divIcon({
