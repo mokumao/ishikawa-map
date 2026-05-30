@@ -455,7 +455,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   // openedViaPin=false のとき：従来の動作（フィルター変更→一覧へ）
   let openedViaPin  = false;
   let savedPanPixels = 0;   // ピンパネル表示時にずらしたピクセル量（復元用）
-  const catSel      = new Set(); // 'food' | 'conbini' | 'gas'
+  const catSel      = new Set(); // 'food' | 'conbini' | 'gas'（現在表示中）
+  const catChipSet  = new Set(); // チップバーに表示するカテゴリ（パネル閉時に記憶）
   const btnAll      = document.getElementById('gearCatAll');
   const btnClear    = document.getElementById('gearCatClear');
   const btnFood     = document.getElementById('gearCatFood');
@@ -500,39 +501,55 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     updateCatLabel();
   }
 
-  // カテゴリラベルバーを catSel の内容で更新する
-  function updateCatLabel() {
+  // カテゴリラベルバーを更新（catChipSet のチップを表示、catSel で色決定）
+  // showAll=true のとき catSel の内容を catChipSet にコピーしてからバーを描画
+  function updateCatLabel(showAll) {
     var bar = document.getElementById('catLabelBar');
     if (!bar) return;
-    var labels = [];
-    if (catSel.has('food'))    labels.push('飲食店');
-    if (catSel.has('conbini')) labels.push('コンビニ');
-    if (catSel.has('gas'))     labels.push('ガソリン');
-    if (labels.length === 3) labels = ['すべて'];
-    var catKeys = catSel.has('food') ? ['food'] : [];
-    if (catSel.has('conbini')) catKeys.push('conbini');
-    if (catSel.has('gas'))     catKeys.push('gas');
-    if (labels.length === 0) {
-      bar.style.display = 'none';
-    } else {
-      var chips = labels.length === 3
-        ? [{ label: 'すべて', cls: '' }]
-        : labels.map(function(l, i) {
-            var cls = l === '飲食店' ? 'chip-food'
-                    : l === 'コンビニ' ? 'chip-conbini'
-                    : l === 'ガソリン' ? 'chip-gas' : '';
-            return { label: l, cls: cls };
-          });
-      bar.innerHTML = chips.map(function(c) {
-        return '<span class="cat-label-chip ' + c.cls + '">' + c.label + '</span>';
-      }).join('');
-      bar.style.display = 'flex';
+    if (showAll) {
+      catChipSet.clear();
+      if (catSel.has('food'))    catChipSet.add('food');
+      if (catSel.has('conbini')) catChipSet.add('conbini');
+      if (catSel.has('gas'))     catChipSet.add('gas');
     }
+    if (catChipSet.size === 0) {
+      bar.style.display = 'none';
+      return;
+    }
+    // チップ定義（catChipSet の順で表示）
+    var defs = [
+      { key: 'food',    label: '飲食店', cls: 'chip-food'    },
+      { key: 'conbini', label: 'コンビニ', cls: 'chip-conbini' },
+      { key: 'gas',     label: 'ガソリン', cls: 'chip-gas'     },
+    ].filter(function(d) { return catChipSet.has(d.key); });
+
+    bar.innerHTML = defs.map(function(d) {
+      var active = catSel.has(d.key) ? ' chip-active' : '';
+      return '<span class="cat-label-chip ' + d.cls + active + '" data-cat="' + d.key + '">'
+           + d.label + '</span>';
+    }).join('');
+    bar.style.display = 'flex';
+
+    // チップクリック：ピン表示トグル
+    bar.querySelectorAll('.cat-label-chip').forEach(function(chip) {
+      chip.addEventListener('click', function() {
+        var key = chip.getAttribute('data-cat');
+        if (catSel.has(key)) {
+          catSel.delete(key);
+          chip.classList.remove('chip-active');
+        } else {
+          catSel.add(key);
+          chip.classList.add('chip-active');
+        }
+        updateCatPreview();
+      });
+    });
   }
 
   function hideCatLabel() {
     var bar = document.getElementById('catLabelBar');
     if (bar) bar.style.display = 'none';
+    catChipSet.clear();
   }
 
   // ピンボタン：カテゴリ選択モードで開く（オーバーレイなし・地図パン可）
@@ -681,7 +698,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       } else {
         // 選択中のカテゴリをラベルバーに表示
         // catSel・ボタン状態はそのまま保持（涙目アイコンで戻れるように）
-        updateCatLabel();
+        updateCatLabel(true); // catSel を catChipSet にコピーしてバー生成
       }
     }
     closeMenu();

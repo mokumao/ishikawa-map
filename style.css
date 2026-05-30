@@ -881,10 +881,10 @@ body.info-open .label-toggle-btn { display: none !important; }
     flex-wrap: wrap;
     gap: 6px;
     justify-content: center;
-    pointer-events: none;
+    pointer-events: auto;
   }
   .cat-label-chip {
-    background: rgba(255,255,255,0.95);
+    background: rgba(255,255,255,0.95); /* 非表示状態：白 */
     border: 2px solid #e53935;
     color: #b71c1c;
     border-radius: 5px;
@@ -893,13 +893,14 @@ body.info-open .label-toggle-btn { display: none !important; }
     font-weight: bold;
     letter-spacing: 0.03em;
     box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
-  /* 飲食店チップ：うす赤 */
-  .cat-label-chip.chip-food    { background: #ffcdd2; }
-  /* コンビニチップ：うすオレンジ */
-  .cat-label-chip.chip-conbini { background: #ffe0b2; }
-  /* ガソリンチップ：うす青 */
-  .cat-label-chip.chip-gas     { background: #bbdefb; }
+  /* 表示中（active）のチップ：カテゴリ色 */
+  .cat-label-chip.chip-food.chip-active    { background: #ffcdd2; }
+  .cat-label-chip.chip-conbini.chip-active { background: #ffe0b2; }
+  .cat-label-chip.chip-gas.chip-active     { background: #bbdefb; }
 
   /* カテゴリパネル展開時：白囲みなし・左端アイコンを避けた透明グリッド */
   .gear-menu.cat-mode {
