@@ -1160,7 +1160,7 @@ function gasBrandInfo(name) {
 // ── SVG ピンアイコン生成 ─────────────────────────────────────────
 // innerLabel: コンビニブランドの頭文字など（省略時は白丸のみ）
 function makePinIcon(fillColor, isWarn, innerLabel) {
-  const color = isWarn ? WARN_COLOR : fillColor;
+  const color = fillColor; // カテゴリ色を使用（warn店舗も同じ色）
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 42" width="30" height="42">
       <path d="M15 1C8.1 1 2.5 6.6 2.5 13.5C2.5 22.9 15 41 15 41
