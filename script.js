@@ -486,13 +486,22 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 
   // 選択中カテゴリに合わせてマーカーを表示（タップ不可モード）
   function updateCatPreview() {
+    var NON_FOOD = ['コンビニ','ガソリン','宿泊','金融','教育','観光'];
     markersData.forEach(function({ restaurant: r, marker }) {
-      var isFood   = r.genre !== 'コンビニ' && r.genre !== 'ガソリン';
-      var isConbini = r.genre === 'コンビニ';
-      var isGas    = r.genre === 'ガソリン';
-      var show = (catSel.has('food')   && isFood) ||
-                 (catSel.has('conbini') && isConbini) ||
-                 (catSel.has('gas')    && isGas);
+      var isFood     = !NON_FOOD.includes(r.genre);
+      var isConbini  = r.genre === 'コンビニ';
+      var isGas      = r.genre === 'ガソリン';
+      var isStay     = r.genre === '宿泊';
+      var isFinance  = r.genre === '金融';
+      var isEducation = r.genre === '教育';
+      var isTourism  = r.genre === '観光';
+      var show = (catSel.has('food')      && isFood)      ||
+                 (catSel.has('conbini')   && isConbini)   ||
+                 (catSel.has('gas')       && isGas)       ||
+                 (catSel.has('stay')      && isStay)      ||
+                 (catSel.has('finance')   && isFinance)   ||
+                 (catSel.has('education') && isEducation) ||
+                 (catSel.has('tourism')   && isTourism);
       if (show) { if (!map.hasLayer(marker)) marker.addTo(map); }
       else       { if (map.hasLayer(marker))  map.removeLayer(marker); }
     });
@@ -508,9 +517,9 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     if (!bar) return;
     if (showAll) {
       catChipSet.clear();
-      if (catSel.has('food'))    catChipSet.add('food');
-      if (catSel.has('conbini')) catChipSet.add('conbini');
-      if (catSel.has('gas'))     catChipSet.add('gas');
+      ['food','conbini','gas','stay','finance','education','tourism'].forEach(function(k) {
+        if (catSel.has(k)) catChipSet.add(k);
+      });
     }
     if (catChipSet.size === 0) {
       bar.style.display = 'none';
@@ -518,9 +527,13 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     }
     // チップ定義（catChipSet の順で表示）
     var defs = [
-      { key: 'food',    label: '飲食店', cls: 'chip-food'    },
-      { key: 'conbini', label: 'コンビニ', cls: 'chip-conbini' },
-      { key: 'gas',     label: 'ガソリン', cls: 'chip-gas'     },
+      { key: 'food',      label: '飲食店',  cls: 'chip-food'      },
+      { key: 'conbini',   label: 'コンビニ', cls: 'chip-conbini'   },
+      { key: 'gas',       label: 'ガソリン', cls: 'chip-gas'       },
+      { key: 'stay',      label: '宿泊',    cls: 'chip-stay'      },
+      { key: 'finance',   label: '金融',    cls: 'chip-finance'   },
+      { key: 'education', label: '教育',    cls: 'chip-education' },
+      { key: 'tourism',   label: '観光',    cls: 'chip-tourism'   },
     ].filter(function(d) { return catChipSet.has(d.key); });
 
     bar.innerHTML = defs.map(function(d) {
@@ -558,14 +571,22 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     openedViaPin = true;
     if (catSel.size === 0) {
       // マーカーが表示中かどうか確認して自動的に catSel へ反映
-      var hasFood    = markersData.some(function(d) { return d.restaurant.genre !== 'コンビニ' && d.restaurant.genre !== 'ガソリン' && map.hasLayer(d.marker); });
-      var hasConbini = markersData.some(function(d) { return d.restaurant.genre === 'コンビニ'  && map.hasLayer(d.marker); });
-      var hasGas     = markersData.some(function(d) { return d.restaurant.genre === 'ガソリン'  && map.hasLayer(d.marker); });
-      if (hasFood || hasConbini || hasGas) {
-        // マーカーが表示中 → 現在の表示状態をそのまま catSel に反映してパネルを開く
-        if (hasFood)    { catSel.add('food');    btnFood.classList.add('cat-selected'); }
-        if (hasConbini) { catSel.add('conbini'); btnConbini.classList.add('cat-selected'); }
-        if (hasGas)     { catSel.add('gas');     btnGas.classList.add('cat-selected'); }
+      var NON_FOOD2 = ['コンビニ','ガソリン','宿泊','金融','教育','観光'];
+      var hasFood     = markersData.some(function(d) { return !NON_FOOD2.includes(d.restaurant.genre) && map.hasLayer(d.marker); });
+      var hasConbini  = markersData.some(function(d) { return d.restaurant.genre === 'コンビニ' && map.hasLayer(d.marker); });
+      var hasGas      = markersData.some(function(d) { return d.restaurant.genre === 'ガソリン' && map.hasLayer(d.marker); });
+      var hasStay     = markersData.some(function(d) { return d.restaurant.genre === '宿泊'     && map.hasLayer(d.marker); });
+      var hasFinance  = markersData.some(function(d) { return d.restaurant.genre === '金融'     && map.hasLayer(d.marker); });
+      var hasEducation = markersData.some(function(d) { return d.restaurant.genre === '教育'    && map.hasLayer(d.marker); });
+      var hasTourism  = markersData.some(function(d) { return d.restaurant.genre === '観光'     && map.hasLayer(d.marker); });
+      if (hasFood || hasConbini || hasGas || hasStay || hasFinance || hasEducation || hasTourism) {
+        if (hasFood)      { catSel.add('food');      btnFood.classList.add('cat-selected'); }
+        if (hasConbini)   { catSel.add('conbini');   btnConbini.classList.add('cat-selected'); }
+        if (hasGas)       { catSel.add('gas');        btnGas.classList.add('cat-selected'); }
+        if (hasStay)      { catSel.add('stay');       document.getElementById('gearCatStay').classList.add('cat-selected'); }
+        if (hasFinance)   { catSel.add('finance');    document.getElementById('gearCatFinance').classList.add('cat-selected'); }
+        if (hasEducation) { catSel.add('education');  document.getElementById('gearCatEducation').classList.add('cat-selected'); }
+        if (hasTourism)   { catSel.add('tourism');    document.getElementById('gearCatTourism').classList.add('cat-selected'); }
         updateAllBtn();   // 全選択状態ならすべてボタンをグレーアウト
         updateClearBtn(); // 選択があれば解除ボタンをアクティブに
         // マーカーはそのまま維持
@@ -638,19 +659,21 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   // 「すべて」ボタン：飲食店・コンビニ・ガソリンを全選択
   btnAll.addEventListener('click', function () {
     if (!openedViaPin) return;
-    catSel.add('food'); catSel.add('conbini'); catSel.add('gas');
-    btnFood.classList.add('cat-selected');
-    btnConbini.classList.add('cat-selected');
-    btnGas.classList.add('cat-selected');
+    ['food','conbini','gas','stay','finance','education','tourism'].forEach(function(k) { catSel.add(k); });
+    [btnFood, btnConbini, btnGas,
+     document.getElementById('gearCatStay'), document.getElementById('gearCatFinance'),
+     document.getElementById('gearCatEducation'), document.getElementById('gearCatTourism')
+    ].forEach(function(b) { if (b) b.classList.add('cat-selected'); });
     updateCatPreview(); // 内部で updateAllBtn() も呼ばれる
   });
   // 「解除」ボタン：全選択を解除
   btnClear.addEventListener('click', function () {
     if (!openedViaPin) return;
     catSel.clear();
-    btnFood.classList.remove('cat-selected');
-    btnConbini.classList.remove('cat-selected');
-    btnGas.classList.remove('cat-selected');
+    [btnFood, btnConbini, btnGas,
+     document.getElementById('gearCatStay'), document.getElementById('gearCatFinance'),
+     document.getElementById('gearCatEducation'), document.getElementById('gearCatTourism')
+    ].forEach(function(b) { if (b) b.classList.remove('cat-selected'); });
     updateCatPreview(); // 内部で updateAllBtn() も呼ばれる
   });
 
@@ -685,6 +708,42 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       closeMenu();
       applyFilter('all');
     }
+  });
+  // 宿泊ボタン
+  document.getElementById('gearCatStay').addEventListener('click', function () {
+    if (openedViaPin) {
+      var b = document.getElementById('gearCatStay');
+      if (catSel.has('stay')) { catSel.delete('stay'); b.classList.remove('cat-selected'); }
+      else                    { catSel.add('stay');    b.classList.add('cat-selected'); }
+      updateCatPreview();
+    } else { closeMenu(); }
+  });
+  // 金融ボタン
+  document.getElementById('gearCatFinance').addEventListener('click', function () {
+    if (openedViaPin) {
+      var b = document.getElementById('gearCatFinance');
+      if (catSel.has('finance')) { catSel.delete('finance'); b.classList.remove('cat-selected'); }
+      else                       { catSel.add('finance');    b.classList.add('cat-selected'); }
+      updateCatPreview();
+    } else { closeMenu(); }
+  });
+  // 教育ボタン
+  document.getElementById('gearCatEducation').addEventListener('click', function () {
+    if (openedViaPin) {
+      var b = document.getElementById('gearCatEducation');
+      if (catSel.has('education')) { catSel.delete('education'); b.classList.remove('cat-selected'); }
+      else                         { catSel.add('education');    b.classList.add('cat-selected'); }
+      updateCatPreview();
+    } else { closeMenu(); }
+  });
+  // 観光ボタン
+  document.getElementById('gearCatTourism').addEventListener('click', function () {
+    if (openedViaPin) {
+      var b = document.getElementById('gearCatTourism');
+      if (catSel.has('tourism')) { catSel.delete('tourism'); b.classList.remove('cat-selected'); }
+      else                       { catSel.add('tourism');    b.classList.add('cat-selected'); }
+      updateCatPreview();
+    } else { closeMenu(); }
   });
   // 閉じるボタン：選択モード終了→通常の地図に戻る
   document.getElementById('gearCatBack').addEventListener('click', function () {
@@ -1165,11 +1224,15 @@ let currentFilter = 'all';
 let currentSearch  = '';
 
 // ── カテゴリ別マーカーカラー ────────────────────────────────────
-const FOOD_COLOR   = "#e53935"; // 飲食店：赤
-const CONBINI_COLOR = "#fb8c00"; // コンビニ：オレンジ
-const GAS_COLOR    = "#1565c0"; // ガソリン：青
-const DEFAULT_COLOR = FOOD_COLOR;
-const WARN_COLOR    = "#f57c00";
+const FOOD_COLOR      = "#e53935"; // 飲食店：赤
+const CONBINI_COLOR   = "#fb8c00"; // コンビニ：オレンジ
+const GAS_COLOR       = "#1565c0"; // ガソリン：青
+const STAY_COLOR      = "#7b1fa2"; // 宿泊：紫
+const FINANCE_COLOR   = "#2e7d32"; // 金融：緑
+const EDUCATION_COLOR = "#00695c"; // 教育：ティール
+const TOURISM_COLOR   = "#0097a7"; // 観光：シアン
+const DEFAULT_COLOR   = FOOD_COLOR;
+const WARN_COLOR      = "#f57c00";
 
 function genreColor(genre) {
   return FOOD_COLOR; // 飲食店はすべて赤
@@ -1501,17 +1564,21 @@ L.polygon([
 const markersData = restaurants.map((r, idx) => {
   let color, pinLabel;
   if (r.genre === 'コンビニ') {
-    const brand = conbiniBrandInfo(r.name);
-    color    = brand.color;
-    pinLabel = brand.label;
+    color = CONBINI_COLOR;
   } else if (r.genre === 'ガソリン') {
-    const brand = gasBrandInfo(r.name);
-    color    = brand.color;
-    pinLabel = brand.label;
+    color = GAS_COLOR;
+  } else if (r.genre === '宿泊') {
+    color = STAY_COLOR;
+  } else if (r.genre === '金融') {
+    color = FINANCE_COLOR;
+  } else if (r.genre === '教育') {
+    color = EDUCATION_COLOR;
+  } else if (r.genre === '観光') {
+    color = TOURISM_COLOR;
   } else {
-    color    = genreColor(r.genre);
-    pinLabel = undefined;
+    color = FOOD_COLOR;
   }
+  pinLabel = undefined;
   const marker = L.marker([r.lat, r.lng], {
     icon:  makePinIcon(color, r.warn, pinLabel),
     title: r.name

@@ -901,6 +901,14 @@ body.info-open .label-toggle-btn { display: none !important; }
   .cat-label-chip.chip-food.chip-active    { background: #ffcdd2; }
   .cat-label-chip.chip-conbini.chip-active { background: #ffe0b2; }
   .cat-label-chip.chip-gas.chip-active     { background: #bbdefb; }
+  /* 宿泊チップ：うす紫 */
+  .cat-label-chip.chip-stay.chip-active      { background: #e1bee7; }
+  /* 金融チップ：うす緑 */
+  .cat-label-chip.chip-finance.chip-active   { background: #c8e6c9; }
+  /* 教育チップ：うすティール */
+  .cat-label-chip.chip-education.chip-active { background: #b2dfdb; }
+  /* 観光チップ：うすシアン */
+  .cat-label-chip.chip-tourism.chip-active   { background: #b2ebf2; }
 
   /* カテゴリパネル展開時：白囲みなし・左端アイコンを避けた透明グリッド */
   .gear-menu.cat-mode {
@@ -978,6 +986,11 @@ body.info-open .label-toggle-btn { display: none !important; }
   #gearCatGas.cat-selected {
     background: #bbdefb !important;
   }
+  /* 新カテゴリボタンの選択色 */
+  #gearCatStay.cat-selected      { background: #e1bee7 !important; }
+  #gearCatFinance.cat-selected   { background: #c8e6c9 !important; }
+  #gearCatEducation.cat-selected { background: #b2dfdb !important; }
+  #gearCatTourism.cat-selected   { background: #b2ebf2 !important; }
   /* 閉じるボタン（青背景・白文字） */
   .gear-menu-btn.close-btn {
     background: #1565c0 !important;

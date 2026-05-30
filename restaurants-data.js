@@ -493,5 +493,153 @@ const restaurants = [
     website:    "",
     detailText: "これはテスト用の店舗です。\n\n今後、店舗オーナーが自分で情報を更新・追加できる機能の確認に使用します。\n\n実際の営業はしていません。",
     photos:     []
+  },
+  // ── 宿泊施設 ───────────────────────────────────────────────────
+  {
+    name:      "ココ ガーデンリゾート オキナワ",
+    genre:     "宿泊",
+    address:   "沖縄県うるま市石川伊波501",
+    hours:     "チェックイン 15:00〜 / チェックアウト 〜11:00",
+    closed:    "年中無休",
+    note:      "石川海岸沿いのリゾートホテル",
+    sourceUrl: "https://cocogarden.com/",
+    warn:      false,
+    lat:       26.4452,
+    lng:       127.8098
+  },
+  {
+    name:      "アンサ沖縄リゾート",
+    genre:     "宿泊",
+    address:   "沖縄県うるま市石川山城1468",
+    hours:     "チェックイン 15:00〜 / チェックアウト 〜11:00",
+    closed:    "年中無休",
+    note:      "石川エリアのリゾートホテル",
+    sourceUrl: "https://www.city.uruma.lg.jp/sportscamp/21522/index.html",
+    warn:      false,
+    lat:       26.4198,
+    lng:       127.8188
+  },
+  {
+    name:      "民宿レキオ",
+    genre:     "宿泊",
+    address:   "沖縄県うるま市石川2-26-4",
+    hours:     "チェックイン 16:00〜 / チェックアウト 〜10:00",
+    closed:    "要確認",
+    note:      "石川エリアの民宿",
+    sourceUrl: "http://www.lequio7.sakura.ne.jp/",
+    warn:      false,
+    lat:       26.4305,
+    lng:       127.8293
+  },
+  {
+    name:      "民宿やすま",
+    genre:     "宿泊",
+    address:   "沖縄県うるま市石川曙2丁目3-1",
+    hours:     "チェックイン 16:00〜 / チェックアウト 〜10:00",
+    closed:    "要確認",
+    note:      "石川エリアの民宿",
+    sourceUrl: "https://uruma-ru.jp/stay/",
+    warn:      false,
+    lat:       26.4330,
+    lng:       127.8232
+  },
+  // ── 金融機関 ───────────────────────────────────────────────────
+  {
+    name:      "琉球銀行 石川支店",
+    genre:     "金融",
+    address:   "沖縄県うるま市石川2-23-6",
+    hours:     "平日 9:00〜15:00",
+    closed:    "土・日・祝日",
+    note:      "ATMは時間外も利用可",
+    sourceUrl: "https://www.ryugin.co.jp/tenpo/atm_search/shop-5030/",
+    warn:      false,
+    lat:       26.4308,
+    lng:       127.8290
+  },
+  {
+    name:      "沖縄銀行 石川支店",
+    genre:     "金融",
+    address:   "沖縄県うるま市石川2丁目24-1",
+    hours:     "平日 9:00〜15:00",
+    closed:    "土・日・祝日",
+    note:      "ATMは時間外も利用可",
+    sourceUrl: "https://gincode.com/branch_0188_315",
+    warn:      false,
+    lat:       26.4312,
+    lng:       127.8296
+  },
+  {
+    name:      "石川郵便局",
+    genre:     "金融",
+    address:   "沖縄県うるま市石川東山本町1-1-2",
+    hours:     "郵便 平日9:00〜17:00 / 貯金 平日9:00〜16:00",
+    closed:    "土・日・祝日",
+    note:      "ATMあり（土日も利用可）",
+    sourceUrl: "https://map.japanpost.jp/p/search/dtl/300170031000/",
+    warn:      false,
+    lat:       26.4165,
+    lng:       127.8342
+  },
+  // ── 教育施設 ───────────────────────────────────────────────────
+  {
+    name:      "うるま市立宮森小学校",
+    genre:     "教育",
+    address:   "沖縄県うるま市石川1丁目46-1",
+    hours:     "平日 8:00〜17:00（登校日）",
+    closed:    "土・日・祝日・長期休暇",
+    note:      "",
+    sourceUrl: "https://www.city.uruma.lg.jp/",
+    warn:      false,
+    lat:       26.4315,
+    lng:       127.8265
+  },
+  {
+    name:      "うるま市立石川中学校",
+    genre:     "教育",
+    address:   "沖縄県うるま市石川440番地1",
+    hours:     "平日 8:00〜17:00（登校日）",
+    closed:    "土・日・祝日・長期休暇",
+    note:      "",
+    sourceUrl: "https://j-ishikawa.edu.city.uruma.okinawa.jp/",
+    warn:      false,
+    lat:       26.4285,
+    lng:       127.8225
+  },
+  {
+    name:      "沖縄県立石川高等学校",
+    genre:     "教育",
+    address:   "沖縄県うるま市石川伊波861",
+    hours:     "平日 8:00〜17:00（登校日）",
+    closed:    "土・日・祝日・長期休暇",
+    note:      "普通科",
+    sourceUrl: "https://www.ishikawa-h.open.ed.jp/",
+    warn:      false,
+    lat:       26.4440,
+    lng:       127.8118
+  },
+  // ── 観光スポット ───────────────────────────────────────────────
+  {
+    name:      "石川ビーチ（石川公園）",
+    genre:     "観光",
+    address:   "沖縄県うるま市石川曙",
+    hours:     "年中無休（自由）",
+    closed:    "なし",
+    note:      "ウィンドサーフィンで有名な市民ビーチ。リーフ内は砂地で安全",
+    sourceUrl: "https://www.okinawastory.jp/spot/600006184",
+    warn:      false,
+    lat:       26.4445,
+    lng:       127.8332
+  },
+  {
+    name:      "石川岳（市民の森公園）",
+    genre:     "観光",
+    address:   "沖縄県うるま市石川",
+    hours:     "年中無休（自由）",
+    closed:    "なし",
+    note:      "標高204m。山頂展望台から太平洋と東シナ海を一望できる",
+    sourceUrl: "https://www.city.uruma.lg.jp/miryoku/p000001.html",
+    warn:      false,
+    lat:       26.4300,
+    lng:       127.8098
   }
 ];
