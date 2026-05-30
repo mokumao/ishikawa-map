@@ -1136,38 +1136,25 @@ const FILTERS = [
 let currentFilter = 'all';
 let currentSearch  = '';
 
-// ── ジャンル別マーカーカラー ────────────────────────────────────
-const GENRE_COLORS = [
-  { test: g => g.includes("焼肉"),      color: "#fb8c00" },
-  { test: g => g.includes("バル"),      color: "#8e24aa" },
-  { test: g => g.includes("カフェ"),    color: "#00897b" },
-  { test: g => g.includes("ラーメン"),  color: "#c62828" },
-  { test: g => g.includes("ハンバーガー"), color: "#f57f17" },
-  { test: g => g.includes("沖縄料理"), color: "#2e7d32" },
-  { test: g => g.includes("居酒屋") || g.includes("食堂"), color: "#e53935" },
-];
-const DEFAULT_COLOR = "#1565c0";
+// ── カテゴリ別マーカーカラー ────────────────────────────────────
+const FOOD_COLOR   = "#e53935"; // 飲食店：赤
+const CONBINI_COLOR = "#fb8c00"; // コンビニ：オレンジ
+const GAS_COLOR    = "#1565c0"; // ガソリン：青
+const DEFAULT_COLOR = FOOD_COLOR;
 const WARN_COLOR    = "#f57c00";
 
 function genreColor(genre) {
-  for (const rule of GENRE_COLORS) {
-    if (rule.test(genre)) return rule.color;
-  }
-  return DEFAULT_COLOR;
+  return FOOD_COLOR; // 飲食店はすべて赤
 }
 
-// ── コンビニブランド情報（アイコン色・ラベル文字） ────────────────
+// ── コンビニブランド情報（アイコン色） ────────────────────────────
 function conbiniBrandInfo(name) {
-  if (name.includes('ローソン'))          return { color: '#0067CC', label: 'L' };
-  if (name.includes('ファミリーマート'))  return { color: '#1fb1a4', label: 'F' };
-  if (name.includes('セブンイレブン') || name.includes('7-Eleven')) return { color: '#e31837', label: '7' };
-  return { color: '#555555', label: 'C' };
+  return { color: CONBINI_COLOR, label: '' }; // コンビニはすべてオレンジ
 }
 
-// ── ガソリンスタンドブランド情報（アイコン色・ラベル文字） ─────────
+// ── ガソリンスタンドブランド情報（アイコン色） ────────────────────
 function gasBrandInfo(name) {
-  if (name.includes('ENEOS'))  return { color: '#1565c0', label: 'E' };
-  return { color: '#ff6f00', label: 'G' };
+  return { color: GAS_COLOR, label: '' }; // ガソリンはすべて青
 }
 
 // ── SVG ピンアイコン生成 ─────────────────────────────────────────
