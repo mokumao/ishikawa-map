@@ -922,6 +922,8 @@ body.info-open .label-toggle-btn { display: none !important; }
     padding: 4px 4px;
     font-size: 0.82rem;
     text-align: center;
+    white-space: normal;
+    line-height: 1.2;
   }
   /* カテゴリ3列グリッド（テキストのみ・背景透過で地図透け） */
   .cat-icon-grid {
