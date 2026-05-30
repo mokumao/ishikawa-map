@@ -509,11 +509,22 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     if (catSel.has('conbini')) labels.push('コンビニ');
     if (catSel.has('gas'))     labels.push('ガソリン');
     if (labels.length === 3) labels = ['すべて'];
+    var catKeys = catSel.has('food') ? ['food'] : [];
+    if (catSel.has('conbini')) catKeys.push('conbini');
+    if (catSel.has('gas'))     catKeys.push('gas');
     if (labels.length === 0) {
       bar.style.display = 'none';
     } else {
-      bar.innerHTML = labels.map(function(l) {
-        return '<span class="cat-label-chip">' + l + '</span>';
+      var chips = labels.length === 3
+        ? [{ label: 'すべて', cls: '' }]
+        : labels.map(function(l, i) {
+            var cls = l === '飲食店' ? 'chip-food'
+                    : l === 'コンビニ' ? 'chip-conbini'
+                    : l === 'ガソリン' ? 'chip-gas' : '';
+            return { label: l, cls: cls };
+          });
+      bar.innerHTML = chips.map(function(c) {
+        return '<span class="cat-label-chip ' + c.cls + '">' + c.label + '</span>';
       }).join('');
       bar.style.display = 'flex';
     }

@@ -894,6 +894,12 @@ body.info-open .label-toggle-btn { display: none !important; }
     letter-spacing: 0.03em;
     box-shadow: 0 1px 4px rgba(0,0,0,0.18);
   }
+  /* 飲食店チップ：うす赤 */
+  .cat-label-chip.chip-food    { background: #ffcdd2; }
+  /* コンビニチップ：うすオレンジ */
+  .cat-label-chip.chip-conbini { background: #ffe0b2; }
+  /* ガソリンチップ：うす青 */
+  .cat-label-chip.chip-gas     { background: #bbdefb; }
 
   /* カテゴリパネル展開時：白囲みなし・左端アイコンを避けた透明グリッド */
   .gear-menu.cat-mode {
