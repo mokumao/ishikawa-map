@@ -709,7 +709,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
         var zoom = ISHIKAWA_ZOOM;
         var center = L.latLng(ISHIKAWA_CENTER);
         var centerPx = map.project(center, zoom);
-        var offsetPx = centerPx.subtract([0, savedPanPixels]);
+        var offsetPx = centerPx.add([0, savedPanPixels]);
         var adjustedCenter = map.unproject(offsetPx, zoom);
         map.flyTo(adjustedCenter, zoom, { duration: 1.0 });
       } else {
