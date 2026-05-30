@@ -957,11 +957,19 @@ body.info-open .label-toggle-btn { display: none !important; }
     color: #777777 !important;
   }
 
-  /* カテゴリ選択モード：選択済みボタン（不透明な薄赤背景） */
+  /* カテゴリ選択モード：選択済みボタン（飲食店=うす赤・デフォルト） */
   .gear-menu-btn.cat-selected {
     background: #ffcdd2 !important;
     border-color: #e53935 !important;
     color: #b71c1c !important;
+  }
+  /* コンビニ選択済み：うすオレンジ */
+  #gearCatConbini.cat-selected {
+    background: #ffe0b2 !important;
+  }
+  /* ガソリン選択済み：うす青 */
+  #gearCatGas.cat-selected {
+    background: #bbdefb !important;
   }
   /* 閉じるボタン（青背景・白文字） */
   .gear-menu-btn.close-btn {
