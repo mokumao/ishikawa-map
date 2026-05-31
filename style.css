@@ -870,19 +870,25 @@ body.info-open .label-toggle-btn { display: none !important; }
     align-items: center !important;
     justify-content: center !important;
   }
-  /* カテゴリ選択中ラベルバー（地図下部） */
+  /* カテゴリ選択中ラベルバー（地図下部・2行横スクロール） */
   .cat-label-bar {
     position: absolute;
     bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
     z-index: 900;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-auto-flow: column;
     gap: 6px;
-    justify-content: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 10px;
     pointer-events: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
   }
+  .cat-label-bar::-webkit-scrollbar { display: none; } /* Chrome/Safari */
   .cat-label-chip {
     background: rgba(255,255,255,0.95); /* 非表示状態：白 */
     border: 2px solid #e53935;
@@ -892,6 +898,7 @@ body.info-open .label-toggle-btn { display: none !important; }
     font-size: 13px;
     font-weight: bold;
     letter-spacing: 0.03em;
+    white-space: nowrap;
     box-shadow: 0 1px 4px rgba(0,0,0,0.18);
     cursor: pointer;
     user-select: none;
