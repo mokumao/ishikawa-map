@@ -598,22 +598,27 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     // スクロールイベントで矢印更新
     bar.addEventListener('scroll', updateChipArrows, { passive: true });
 
-    // タッチでの横スクロール（Leafletにタッチを奪われないよう制御）
-    var _tx = 0, _sl = 0, _dragging = false;
+    // タッチでの横スクロール（即時反応・Leaflet干渉防止）
+    var _tx = 0, _sl = 0, _dragging = false, _raf = null;
     bar.addEventListener('touchstart', function(e) {
       _tx = e.touches[0].clientX;
       _sl = bar.scrollLeft;
       _dragging = false;
-    }, { passive: true });
+      e.stopPropagation(); // touchstartからLeafletに渡さない
+    }, { passive: false });
 
     bar.addEventListener('touchmove', function(e) {
       var dx = _tx - e.touches[0].clientX;
-      var dy = Math.abs(e.touches[0].clientY - (e.touches[0].clientY)); // 縦は0
-      if (!_dragging && Math.abs(dx) > 5) _dragging = true;
+      if (!_dragging && Math.abs(dx) > 2) _dragging = true; // 閾値2pxで即反応
       if (_dragging) {
-        bar.scrollLeft = _sl + dx;
-        e.stopPropagation(); // Leafletに渡さない
-        updateChipArrows();
+        e.stopPropagation();
+        var newLeft = _sl + dx;
+        // requestAnimationFrameでスムーズに更新
+        if (_raf) cancelAnimationFrame(_raf);
+        _raf = requestAnimationFrame(function() {
+          bar.scrollLeft = newLeft;
+          updateChipArrows();
+        });
       }
     }, { passive: false });
 
