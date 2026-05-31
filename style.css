@@ -877,9 +877,12 @@ body.info-open .label-toggle-btn { display: none !important; }
     left: 0;
     right: 0;
     z-index: 900;
-    display: grid;
-    grid-template-rows: auto auto;
-    grid-auto-flow: column;
+    /* 縦方向にflexで並べて折り返す → 2行×複数列の横スクロール */
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    height: 74px; /* チップ1個32px × 2行 + gap6px = 70px、余裕を持たせて74px */
     gap: 6px;
     overflow-x: auto;
     overflow-y: hidden;
