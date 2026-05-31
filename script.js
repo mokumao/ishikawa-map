@@ -598,14 +598,11 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     // スクロールイベントで矢印更新
     bar.addEventListener('scroll', updateChipArrows, { passive: true });
 
-    // タッチでの横スクロール（差分方式・慣性デセル付き）
-    var _lastX = 0, _lastDelta = 0, _dragging = false, _momRaf = null;
+    // タッチでの横スクロール（差分方式・境界クランプでスナップバック防止）
+    var _lastX = 0, _dragging = false;
 
     bar.addEventListener('touchstart', function(e) {
-      // 慣性アニメーション中なら止める
-      if (_momRaf) { cancelAnimationFrame(_momRaf); _momRaf = null; }
       _lastX = e.touches[0].clientX;
-      _lastDelta = 0;
       _dragging = false;
       e.stopPropagation();
     }, { passive: false });
@@ -616,32 +613,18 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       if (!_dragging && Math.abs(delta) > 1) _dragging = true;
       if (_dragging) {
         e.stopPropagation();
-        bar.scrollLeft += delta;
-        _lastDelta = delta;  // 最後の移動量を記憶（慣性の初速に使う）
+        // 境界でクランプ（0〜maxScrollを超えないので戻りが発生しない）
+        var maxScroll = bar.scrollWidth - bar.clientWidth;
+        bar.scrollLeft = Math.max(0, Math.min(bar.scrollLeft + delta, maxScroll));
         _lastX = currentX;
         updateChipArrows();
       }
     }, { passive: false });
 
     bar.addEventListener('touchend', function(e) {
-      if (!_dragging) return;
-      e.stopPropagation();
+      if (_dragging) e.stopPropagation();
       _dragging = false;
-      // 慣性減速アニメーション（指を離してもスムーズに減速）
-      var v = _lastDelta * 10; // 初速（最後の移動量から）
-      var maxScroll = bar.scrollWidth - bar.clientWidth;
-      function momentumStep() {
-        if (Math.abs(v) < 0.3) { updateChipArrows(); return; }
-        v *= 0.88; // 摩擦係数（小さいほど早く止まる）
-        var next = bar.scrollLeft + v;
-        // 境界を超えないよう滑らかに制限
-        if (next < 0) { bar.scrollLeft = 0; updateChipArrows(); return; }
-        if (next > maxScroll) { bar.scrollLeft = maxScroll; updateChipArrows(); return; }
-        bar.scrollLeft = next;
-        updateChipArrows();
-        _momRaf = requestAnimationFrame(momentumStep);
-      }
-      _momRaf = requestAnimationFrame(momentumStep);
+      updateChipArrows();
     }, { passive: false });
 
     bar.scrollLeft = 0;
