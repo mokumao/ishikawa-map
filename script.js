@@ -598,27 +598,23 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     // スクロールイベントで矢印更新
     bar.addEventListener('scroll', updateChipArrows, { passive: true });
 
-    // タッチでの横スクロール（即時反応・Leaflet干渉防止）
-    var _tx = 0, _sl = 0, _dragging = false, _raf = null;
+    // タッチでの横スクロール（差分方式・即時反応）
+    var _lastX = 0, _dragging = false;
     bar.addEventListener('touchstart', function(e) {
-      _tx = e.touches[0].clientX;
-      _sl = bar.scrollLeft;
+      _lastX = e.touches[0].clientX;
       _dragging = false;
-      e.stopPropagation(); // touchstartからLeafletに渡さない
+      e.stopPropagation();
     }, { passive: false });
 
     bar.addEventListener('touchmove', function(e) {
-      var dx = _tx - e.touches[0].clientX;
-      if (!_dragging && Math.abs(dx) > 2) _dragging = true; // 閾値2pxで即反応
+      var currentX = e.touches[0].clientX;
+      var delta = _lastX - currentX; // 1イベント分の移動量
+      if (!_dragging && Math.abs(delta) > 1) _dragging = true;
       if (_dragging) {
         e.stopPropagation();
-        var newLeft = _sl + dx;
-        // requestAnimationFrameでスムーズに更新
-        if (_raf) cancelAnimationFrame(_raf);
-        _raf = requestAnimationFrame(function() {
-          bar.scrollLeft = newLeft;
-          updateChipArrows();
-        });
+        bar.scrollLeft += delta;   // 差分を即加算（rAF不要）
+        _lastX = currentX;         // 次のイベントの基点を更新
+        updateChipArrows();
       }
     }, { passive: false });
 
