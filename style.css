@@ -870,28 +870,61 @@ body.info-open .label-toggle-btn { display: none !important; }
     align-items: center !important;
     justify-content: center !important;
   }
-  /* カテゴリ選択中ラベルバー（地図下部・2行横スクロール） */
-  .cat-label-bar {
+  /* カテゴリ選択中ラベルバー ラッパー（矢印＋スクロールエリア） */
+  .cat-label-wrapper {
     position: absolute;
     bottom: 10px;
     left: 0;
     right: 0;
     z-index: 900;
-    /* 縦方向にflexで並べて折り返す → 2行×複数列の横スクロール */
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 6px;
+    pointer-events: auto;
+    min-height: 74px; /* チップバーの高さを確保 */
+  }
+  /* 左右スクロール矢印ボタン */
+  .cat-scroll-btn {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: rgba(255,255,255,0.93);
+    border: 2px solid #e53935;
+    border-radius: 50%;
+    color: #b71c1c;
+    font-size: 11px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+    transition: opacity .2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .cat-scroll-btn.arrow-hidden {
+    visibility: hidden;
+    pointer-events: none;
+  }
+  /* カテゴリ選択中ラベルバー（2行・横スクロール） */
+  .cat-label-bar {
+    flex: 1;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     align-content: flex-start;
-    height: 74px; /* チップ1個32px × 2行 + gap6px = 70px、余裕を持たせて74px */
+    height: 74px; /* 32px × 2行 + gap6px = 70px + 余裕 */
     gap: 6px;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 0 10px;
     pointer-events: auto;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
+    scroll-behavior: smooth;
   }
-  .cat-label-bar::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+  .cat-label-bar::-webkit-scrollbar { display: none; }
   .cat-label-chip {
     background: rgba(255,255,255,0.95); /* 非表示状態：白 */
     border: 2px solid #e53935;

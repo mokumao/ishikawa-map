@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#2e7d32">
   <title>うるま市石川 飲食店マップ</title>
   <link rel="stylesheet" href="leaflet/leaflet.css"/>
-  <link rel="stylesheet" href="style.css?v=20260531b">
+  <link rel="stylesheet" href="style.css?v=20260531c">
 </head>
 <body>
 
@@ -91,7 +91,11 @@
       <div class="map-center-star" aria-hidden="true"></div>
 
       <!-- カテゴリ選択中の表示ラベル -->
-      <div id="catLabelBar" class="cat-label-bar" style="display:none;" aria-live="polite"></div>
+      <div id="catLabelWrapper" class="cat-label-wrapper" style="display:none;">
+        <button class="cat-scroll-btn" id="catScrollLeft" aria-label="左へスクロール">◀</button>
+        <div id="catLabelBar" class="cat-label-bar" aria-live="polite"></div>
+        <button class="cat-scroll-btn" id="catScrollRight" aria-label="右へスクロール">▶</button>
+      </div>
 
       <!-- 歯車メニュー（スマホのみ） -->
       <div id="gearMenu" class="gear-menu" style="display:none;">
@@ -229,7 +233,7 @@
 
   <script src="leaflet/leaflet.js"></script>
   <script src="restaurants-data.js?v=20260529b"></script>
-  <script src="script.js?v=20260530j"></script>
+  <script src="script.js?v=20260531a"></script>
   <!-- GoatCounter アクセス解析 -->
   <script data-goatcounter="https://ishikawamap.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>

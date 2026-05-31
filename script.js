@@ -521,8 +521,9 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
         if (catSel.has(k)) catChipSet.add(k);
       });
     }
+    var wrapper = document.getElementById('catLabelWrapper');
     if (catChipSet.size === 0) {
-      bar.style.display = 'none';
+      if (wrapper) wrapper.style.display = 'none';
       return;
     }
     // チップ定義（catChipSet の順で表示）
@@ -541,7 +542,9 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       return '<span class="cat-label-chip ' + d.cls + active + '" data-cat="' + d.key + '">'
            + d.label + '</span>';
     }).join('');
-    bar.style.display = 'flex';
+
+    // ラッパーを表示
+    if (wrapper) wrapper.style.display = 'flex';
 
     // チップクリック：ピン表示トグル
     bar.querySelectorAll('.cat-label-chip').forEach(function(chip) {
@@ -557,12 +560,42 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
         updateCatPreview();
       });
     });
+
+    // 矢印ボタンをセットアップ
+    setupChipScrollBtns();
   }
 
   function hideCatLabel() {
-    var bar = document.getElementById('catLabelBar');
-    if (bar) bar.style.display = 'none';
+    var wrapper = document.getElementById('catLabelWrapper');
+    if (wrapper) wrapper.style.display = 'none';
     catChipSet.clear();
+  }
+
+  // 矢印ボタンの表示/非表示を更新
+  function updateChipArrows() {
+    var bar   = document.getElementById('catLabelBar');
+    var left  = document.getElementById('catScrollLeft');
+    var right = document.getElementById('catScrollRight');
+    if (!bar || !left || !right) return;
+    var atLeft  = bar.scrollLeft <= 1;
+    var atRight = bar.scrollLeft >= bar.scrollWidth - bar.clientWidth - 1;
+    left.classList.toggle('arrow-hidden', atLeft);
+    right.classList.toggle('arrow-hidden', atRight);
+  }
+
+  // 矢印クリックのセットアップ（updateCatLabel後に呼ぶ）
+  function setupChipScrollBtns() {
+    var bar   = document.getElementById('catLabelBar');
+    var left  = document.getElementById('catScrollLeft');
+    var right = document.getElementById('catScrollRight');
+    if (!bar || !left || !right) return;
+    // 1列分のスクロール量（チップ幅 + gap の概算）
+    var scrollAmt = 90;
+    left.onclick  = function() { bar.scrollLeft -= scrollAmt * 3; setTimeout(updateChipArrows, 350); };
+    right.onclick = function() { bar.scrollLeft += scrollAmt * 3; setTimeout(updateChipArrows, 350); };
+    bar.addEventListener('scroll', updateChipArrows, { passive: true });
+    bar.scrollLeft = 0;
+    setTimeout(updateChipArrows, 50);
   }
 
   // ピンボタン：カテゴリ選択モードで開く（オーバーレイなし・地図パン可）
@@ -2028,9 +2061,9 @@ function isVisible(r) {
 function applyFilter(filterId) {
   currentFilter = filterId;
 
-  // カテゴリラベルバーを非表示（通常モードに戻るため）
-  var catBar = document.getElementById('catLabelBar');
-  if (catBar) catBar.style.display = 'none';
+  // カテゴリラベルバーラッパーを非表示（通常モードに戻るため）
+  var catWrapper = document.getElementById('catLabelWrapper');
+  if (catWrapper) catWrapper.style.display = 'none';
 
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.filter === filterId);
