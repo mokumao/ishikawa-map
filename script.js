@@ -598,9 +598,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     // スクロールイベントで矢印更新
     bar.addEventListener('scroll', updateChipArrows, { passive: true });
 
-    // タッチでの横スクロール（差分方式・境界クランプでスナップバック防止）
+    // タッチでの横スクロール（差分方式・即時反応）
     var _lastX = 0, _dragging = false;
-
     bar.addEventListener('touchstart', function(e) {
       _lastX = e.touches[0].clientX;
       _dragging = false;
@@ -613,9 +612,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       if (!_dragging && Math.abs(delta) > 1) _dragging = true;
       if (_dragging) {
         e.stopPropagation();
-        // 境界でクランプ（0〜maxScrollを超えないので戻りが発生しない）
-        var maxScroll = bar.scrollWidth - bar.clientWidth;
-        bar.scrollLeft = Math.max(0, Math.min(bar.scrollLeft + delta, maxScroll));
+        bar.scrollLeft += delta;
         _lastX = currentX;
         updateChipArrows();
       }

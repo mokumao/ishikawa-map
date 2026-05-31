@@ -920,9 +920,9 @@ body.info-open .label-toggle-btn { display: none !important; }
     overflow-x: auto;
     overflow-y: hidden;
     pointer-events: auto;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     scroll-behavior: auto;
-    overscroll-behavior-x: none; /* ゴム紐バウンスを防止 */
   }
   .cat-label-bar::-webkit-scrollbar { display: none; }
   .cat-label-chip {
