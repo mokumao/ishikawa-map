@@ -2053,6 +2053,34 @@ const LegendControl = L.Control.extend({
 });
 new LegendControl().addTo(map);
 
+// ── ダブルタップドラッグズーム中のピン震え防止 ──────────────────────
+// zoom イベント中はマーカー/ツールチップを非表示、終了後に復元
+(function () {
+  var _zoomTimer = null;
+  function hidePanes() {
+    ['markerPane', 'tooltipPane'].forEach(function(name) {
+      var p = map.getPane(name);
+      if (p) p.style.opacity = '0';
+    });
+  }
+  function showPanes() {
+    ['markerPane', 'tooltipPane'].forEach(function(name) {
+      var p = map.getPane(name);
+      if (p) p.style.opacity = '';
+    });
+  }
+  map.on('zoom', function() {
+    hidePanes();
+    clearTimeout(_zoomTimer);
+    _zoomTimer = setTimeout(showPanes, 200);
+  });
+  // ズーム終了後は必ず表示を戻す
+  map.on('zoomend', function() {
+    clearTimeout(_zoomTimer);
+    _zoomTimer = setTimeout(showPanes, 50);
+  });
+})();
+
 // ── フィルターボタン生成 ─────────────────────────────────────────
 function buildFilterButtons() {
   const container = document.getElementById('filterButtons');
