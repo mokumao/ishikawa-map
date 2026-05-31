@@ -583,17 +583,46 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     right.classList.toggle('arrow-hidden', atRight);
   }
 
-  // 矢印クリックのセットアップ（updateCatLabel後に呼ぶ）
+  // 矢印クリック＋タッチスクロールのセットアップ（updateCatLabel後に呼ぶ）
   function setupChipScrollBtns() {
     var bar   = document.getElementById('catLabelBar');
     var left  = document.getElementById('catScrollLeft');
     var right = document.getElementById('catScrollRight');
     if (!bar || !left || !right) return;
-    // 1列分のスクロール量（チップ幅 + gap の概算）
+
+    // 矢印ボタン：クリックでスクロール
     var scrollAmt = 90;
     left.onclick  = function() { bar.scrollLeft -= scrollAmt * 3; setTimeout(updateChipArrows, 350); };
     right.onclick = function() { bar.scrollLeft += scrollAmt * 3; setTimeout(updateChipArrows, 350); };
+
+    // スクロールイベントで矢印更新
     bar.addEventListener('scroll', updateChipArrows, { passive: true });
+
+    // タッチでの横スクロール（Leafletにタッチを奪われないよう制御）
+    var _tx = 0, _sl = 0, _dragging = false;
+    bar.addEventListener('touchstart', function(e) {
+      _tx = e.touches[0].clientX;
+      _sl = bar.scrollLeft;
+      _dragging = false;
+    }, { passive: true });
+
+    bar.addEventListener('touchmove', function(e) {
+      var dx = _tx - e.touches[0].clientX;
+      var dy = Math.abs(e.touches[0].clientY - (e.touches[0].clientY)); // 縦は0
+      if (!_dragging && Math.abs(dx) > 5) _dragging = true;
+      if (_dragging) {
+        bar.scrollLeft = _sl + dx;
+        e.stopPropagation(); // Leafletに渡さない
+        updateChipArrows();
+      }
+    }, { passive: false });
+
+    bar.addEventListener('touchend', function(e) {
+      if (_dragging) e.stopPropagation();
+      _dragging = false;
+      updateChipArrows();
+    }, { passive: false });
+
     bar.scrollLeft = 0;
     setTimeout(updateChipArrows, 50);
   }
