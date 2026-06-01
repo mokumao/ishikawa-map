@@ -931,21 +931,21 @@ map.on('load', function() {
   // 現在のスタイルはズーム20でも18px程度と細すぎるため、
   // ズームアップするほど道路が広く見えるよう全レイヤーを再設定する
   const roadWidthMap = {
-    'road_motorway':                  ['interpolate', ['exponential', 2], ['zoom'], 5,0,   7,1,   12,3,   14,6,   16,16,  18,45,  20,130],
-    'road_motorway_casing':           ['interpolate', ['exponential', 2], ['zoom'], 5,0.5, 7,1.5, 12,4.5, 14,8.5, 16,21,  18,53,  20,142],
-    'road_motorway_link':             ['interpolate', ['exponential', 2], ['zoom'], 12,1.5,        14,4,   16,11,  18,30,  20,85],
-    'road_motorway_link_casing':      ['interpolate', ['exponential', 2], ['zoom'], 12,2,          14,5.5, 16,14,  18,36,  20,95],
-    'road_trunk_primary':             ['interpolate', ['exponential', 2], ['zoom'], 5,0,   7,1,   12,3,   14,6,   16,16,  18,45,  20,130],
-    'road_trunk_primary_casing':      ['interpolate', ['exponential', 2], ['zoom'], 5,0.5, 7,1.5, 12,4.5, 14,8.5, 16,21,  18,53,  20,142],
-    'road_secondary_tertiary':        ['interpolate', ['exponential', 2], ['zoom'], 8,0.5, 10,1,  12,2,   14,4.5, 16,12,  18,32,  20,90],
-    'road_secondary_tertiary_casing': ['interpolate', ['exponential', 2], ['zoom'], 8,1,   10,1.5,12,3,   14,6.5, 16,16,  18,39,  20,102],
-    'road_minor':                     ['interpolate', ['exponential', 2], ['zoom'], 13,0.5,        14,2,   16,7,   18,18,  20,50],
-    'road_minor_casing':              ['interpolate', ['exponential', 2], ['zoom'], 13,1,          14,3.5, 16,10,  18,24,  20,62],
-    'road_link':                      ['interpolate', ['exponential', 2], ['zoom'], 12,0.5,13,1.5, 14,3,   16,9,   18,25,  20,70],
-    'road_link_casing':               ['interpolate', ['exponential', 2], ['zoom'], 12,1,  13,2,   14,4.5, 16,12,  18,31,  20,82],
-    'road_service_track':             ['interpolate', ['exponential', 2], ['zoom'], 15,0.5,        16,3,   18,9,   20,25],
-    'road_service_track_casing':      ['interpolate', ['exponential', 2], ['zoom'], 15,1,          16,4.5, 18,13,  20,35],
-    'road_path_pedestrian':           ['interpolate', ['exponential', 2], ['zoom'], 14,0.5,        16,2,   18,5,   20,14],
+    'road_motorway':                  ['interpolate', ['exponential', 2], ['zoom'], 5,0,   7,1,   12,2.5, 14,5,   16,10,  18,24,  20,60],
+    'road_motorway_casing':           ['interpolate', ['exponential', 2], ['zoom'], 5,0.5, 7,1.5, 12,4,   14,7.5, 16,14,  18,30,  20,70],
+    'road_motorway_link':             ['interpolate', ['exponential', 2], ['zoom'], 12,1.5,        14,3.5, 16,8,   18,18,  20,45],
+    'road_motorway_link_casing':      ['interpolate', ['exponential', 2], ['zoom'], 12,2,          14,5,   16,11,  18,23,  20,54],
+    'road_trunk_primary':             ['interpolate', ['exponential', 2], ['zoom'], 5,0,   7,1,   12,2.5, 14,5,   16,10,  18,24,  20,60],
+    'road_trunk_primary_casing':      ['interpolate', ['exponential', 2], ['zoom'], 5,0.5, 7,1.5, 12,4,   14,7.5, 16,14,  18,30,  20,70],
+    'road_secondary_tertiary':        ['interpolate', ['exponential', 2], ['zoom'], 8,0.5, 10,1,  12,1.5, 14,3.5, 16,7.5, 18,17,  20,42],
+    'road_secondary_tertiary_casing': ['interpolate', ['exponential', 2], ['zoom'], 8,1,   10,1.5,12,2.5, 14,5.5, 16,11,  18,23,  20,54],
+    'road_minor':                     ['interpolate', ['exponential', 2], ['zoom'], 13,0.5,        14,2,   16,5,   18,11,  20,28],
+    'road_minor_casing':              ['interpolate', ['exponential', 2], ['zoom'], 13,1,          14,3.5, 16,8,   18,16,  20,38],
+    'road_link':                      ['interpolate', ['exponential', 2], ['zoom'], 12,0.5,13,1.5, 14,2.5, 16,6,   18,14,  20,36],
+    'road_link_casing':               ['interpolate', ['exponential', 2], ['zoom'], 12,1,  13,2,   14,4,   16,9,   18,19,  20,46],
+    'road_service_track':             ['interpolate', ['exponential', 2], ['zoom'], 15,0.5,        16,2,   18,5,   20,13],
+    'road_service_track_casing':      ['interpolate', ['exponential', 2], ['zoom'], 15,1,          16,3,   18,7.5, 20,19],
+    'road_path_pedestrian':           ['interpolate', ['exponential', 2], ['zoom'], 14,0.5,        16,1.5, 18,4,   20,10],
   };
   Object.entries(roadWidthMap).forEach(function([id, width]) {
     if (map.getLayer(id)) map.setPaintProperty(id, 'line-width', width);
