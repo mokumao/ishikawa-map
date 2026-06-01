@@ -934,11 +934,12 @@ map.on('load', function() {
   // 各ズームで約2倍ずつ拡大（Googleマップと同等のスケール）
   const roadWidthMap = {
     'road_motorway':                  ['interpolate', ['linear'], ['zoom'], 7,1,  12,2,  14,6,  16,20,  18,65,  20,200],
-    'road_motorway_casing':           ['interpolate', ['linear'], ['zoom'], 7,1.5,12,3,  14,9,  16,26,  18,76,  20,215],
+    // casing = fill と同幅にして内側への白線を消す（デュアルキャリッジウェイ対策）
+    'road_motorway_casing':           ['interpolate', ['linear'], ['zoom'], 7,1,  12,2,  14,6,  16,20,  18,65,  20,200],
     'road_motorway_link':             ['interpolate', ['linear'], ['zoom'],       12,1.5,14,4,  16,14,  18,46,  20,145],
-    'road_motorway_link_casing':      ['interpolate', ['linear'], ['zoom'],       12,2,  14,6,  16,18,  18,55,  20,160],
+    'road_motorway_link_casing':      ['interpolate', ['linear'], ['zoom'],       12,1.5,14,4,  16,14,  18,46,  20,145],
     'road_trunk_primary':             ['interpolate', ['linear'], ['zoom'], 7,1,  12,2,  14,6,  16,20,  18,65,  20,200],
-    'road_trunk_primary_casing':      ['interpolate', ['linear'], ['zoom'], 7,1.5,12,3,  14,9,  16,26,  18,76,  20,215],
+    'road_trunk_primary_casing':      ['interpolate', ['linear'], ['zoom'], 7,1,  12,2,  14,6,  16,20,  18,65,  20,200],
     'road_secondary_tertiary':        ['interpolate', ['linear'], ['zoom'], 8,0.5,12,1.5,14,4.5,16,15,  18,48,  20,148],
     'road_secondary_tertiary_casing': ['interpolate', ['linear'], ['zoom'], 8,1,  12,2.5,14,7,  16,21,  18,58,  20,163],
     'road_minor':                     ['interpolate', ['linear'], ['zoom'],       12,0.5,14,2.5,16,9,   18,28,  20,88],
