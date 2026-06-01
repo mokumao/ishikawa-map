@@ -2053,47 +2053,35 @@ const LegendControl = L.Control.extend({
 });
 new LegendControl().addTo(map);
 
-// ── ズーム中のピン震え防止＋ダブルタップドラッグの地図震え根本解消 ────────
+// ── ダブルタップドラッグズーム：ピンのみ一時非表示（地図・ズームはそのまま） ────
+// ピンは隠すが地図タイルとズームアニメーションは通常通り表示する
 (function () {
   var mapEl = document.getElementById('map');
   var _zoomTimer = null;
 
-  // マーカー/ツールチップを一時非表示（ピンチズーム・ボタンズームでも有効）
-  function hidePanes() {
-    ['markerPane', 'tooltipPane'].forEach(function(name) {
-      var p = map.getPane(name); if (p) p.style.opacity = '0';
-    });
-  }
   function showPanes() {
-    ['markerPane', 'tooltipPane'].forEach(function(name) {
-      var p = map.getPane(name); if (p) p.style.opacity = '';
-    });
+    var p = map.getPane('markerPane');
+    var t = map.getPane('tooltipPane');
+    if (p) p.style.visibility = '';
+    if (t) t.style.visibility = '';
   }
-  map.on('zoom', function() {
-    hidePanes(); clearTimeout(_zoomTimer); _zoomTimer = setTimeout(showPanes, 200);
-  });
-  map.on('zoomend', function() {
-    clearTimeout(_zoomTimer); _zoomTimer = setTimeout(showPanes, 50);
-  });
+  function hidePinsOnly() {
+    var p = map.getPane('markerPane');
+    var t = map.getPane('tooltipPane');
+    if (p) p.style.visibility = 'hidden';
+    if (t) t.style.visibility = 'hidden';
+  }
 
-  // ── ダブルタップドラッグズームの根本対策 ────────────────────────────
-  // Leafletはdocumentのtouchmoveで連続ズームを実行する。
-  // captureフェーズで先取りしてLeafletに渡さず、指を離した時に1回だけズームする。
-  var _tapTime = 0, _tapY = 0;
-  var _isDblDrag = false, _dragStartY = 0, _lastY = 0, _startZoom = 0;
+  // ダブルタップドラッグ中のみピンを非表示（地図はそのまま）
+  var _tapTime = 0, _tapY = 0, _isDblDrag = false;
 
-  // map上のtouchstartでダブルタップを検出
   mapEl.addEventListener('touchstart', function(e) {
     if (e.touches.length !== 1) { _isDblDrag = false; return; }
     var now = Date.now();
     var y = e.touches[0].clientY;
     if (now - _tapTime < 300 && Math.abs(y - _tapY) < 40) {
-      // ダブルタップ確定 → 連続ズームをブロックする準備
-      _isDblDrag  = true;
-      _dragStartY = y;
-      _lastY      = y;
-      _startZoom  = map.getZoom();
-      hidePanes(); // 操作開始時点で即非表示
+      _isDblDrag = true;
+      hidePinsOnly(); // ピンのみ非表示
     } else {
       _isDblDrag = false;
     }
@@ -2101,27 +2089,23 @@ new LegendControl().addTo(map);
     _tapY    = y;
   }, { passive: true });
 
-  // documentのtouchmoveをcaptureフェーズで横取り → Leafletの連続ズームを阻止
-  document.addEventListener('touchmove', function(e) {
-    if (!_isDblDrag || e.touches.length !== 1) return;
-    _lastY = e.touches[0].clientY;
-    e.stopPropagation(); // target・バブルフェーズへの伝播を止める（Leafletに渡さない）
-  }, { capture: true, passive: false });
-
-  // touchend: ドラッグ距離からズーム量を計算して1回だけスムーズにズーム
-  mapEl.addEventListener('touchend', function(e) {
+  // ドラッグ終了・指離しでピンを復元
+  mapEl.addEventListener('touchend', function() {
     if (!_isDblDrag) return;
     _isDblDrag = false;
-    var deltaY = _dragStartY - _lastY; // 上へドラッグ=正=ズームイン
-    var zoomDelta = deltaY / 80;       // 80pxで1ズームレベル相当
-    if (Math.abs(zoomDelta) < 0.2) zoomDelta = 1; // 微小ドラッグは+1レベル
-    map.setZoom(Math.round((_startZoom + zoomDelta) * 2) / 2, { animate: true });
+    clearTimeout(_zoomTimer);
+    _zoomTimer = setTimeout(showPanes, 100);
+  }, { passive: true });
+  mapEl.addEventListener('touchcancel', function() {
+    _isDblDrag = false;
+    showPanes();
   }, { passive: true });
 
-  // キャンセル時はリセット
-  mapEl.addEventListener('touchcancel', function() {
-    _isDblDrag = false; showPanes();
-  }, { passive: true });
+  // ズーム終了後にも念のため復元（ピンチズームなど）
+  map.on('zoomend', function() {
+    clearTimeout(_zoomTimer);
+    _zoomTimer = setTimeout(showPanes, 80);
+  });
 })();
 
 // ── フィルターボタン生成 ─────────────────────────────────────────
