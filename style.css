@@ -523,33 +523,32 @@ footer a:hover { text-decoration: underline; }
   will-change: transform;
 }
 
-/* ── Leaflet popup overrides ──────────────────────────────── */
-.leaflet-popup-content-wrapper {
-  border-radius: 10px !important;
-  box-shadow: 0 4px 16px rgba(0,0,0,.2) !important;
-  padding: 0 !important;
-  user-select: none;        /* テキスト選択を無効化（ドラッグ中の誤選択防止） */
+/* ── MapLibre popup overrides ────────────────────────────── */
+.maplibregl-popup-content {
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.2);
+  padding: 14px 14px 12px;
+  user-select: none;
   -webkit-user-select: none;
 }
-.leaflet-popup-content { margin: 14px 14px 12px !important; }
-.leaflet-popup-tip-container { margin-top: -1px; }
 
-/* ポップアップの下向き赤矢印を非表示 */
-.leaflet-popup-tip-container {
+/* ポップアップ矢印（tip）は非表示 */
+.maplibregl-popup-tip {
   display: none !important;
 }
 
-/* Leaflet デフォルト閉じるボタン — 非表示（代わりにポップアップ内の×を使用） */
-.leaflet-popup-close-button {
+/* デフォルト閉じるボタン非表示（内部の×ボタンを使用） */
+.maplibregl-popup-close-button {
   display: none !important;
 }
+
+/* マップのフォーカスアウトライン除去 */
+.maplibregl-canvas { outline: none; }
+
+/* カテゴリパネル表示中：マーカークリック無効 */
+.markers-no-pointer .maplibregl-marker { pointer-events: none !important; }
 
 /* ── ポップアップ表示中のマーカーを縮小→拡大でアニメーション ── */
-/* Leaflet は .leaflet-marker-icon に transform:translate3d() を設定するため
-   その要素に scale/transform を書くと transform-origin が translate の内側で
-   評価され、スケール時に位置がずれる。
-   解決策：SVGをラッパー div.pin-anim-wrap で囲み、そちらをアニメーション。
-   pin-anim-wrap には Leaflet の transform がないので transform-origin が正確に動く。 */
 @keyframes marker-shrink-pulse {
   0%   { scale: 1;    }
   45%  { scale: 0.55; }
@@ -603,26 +602,27 @@ footer a:hover { text-decoration: underline; }
 }
 
 
-/* ── 店名ラベル（永続ツールチップ） ──────────────────────────── */
+/* ── 店名ラベル（マーカー内・絶対配置） ────────────────────── */
 .shop-label {
-  background: rgba(255,255,255,0.93) !important;
-  border: 1px solid #b0bec5 !important;
-  border-radius: 5px !important;
-  font-size: .72rem !important;
-  font-weight: 700 !important;
-  color: #263238 !important;
-  padding: 2px 7px !important;
-  white-space: nowrap !important;
-  box-shadow: 0 1px 5px rgba(0,0,0,.18) !important;
-  cursor: pointer !important;
-  pointer-events: auto !important;
-}
-.shop-label::before {
-  border-top-color: #b0bec5 !important;
+  position: absolute;
+  bottom: 44px;           /* ピン（42px）の上 + 2px の隙間 */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.93);
+  border: 1px solid #b0bec5;
+  border-radius: 5px;
+  font-size: .72rem;
+  font-weight: 700;
+  color: #263238;
+  padding: 2px 7px;
+  white-space: nowrap;
+  box-shadow: 0 1px 5px rgba(0,0,0,.18);
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 /* ラベル一括非表示 */
-.labels-hidden .leaflet-tooltip {
+.labels-hidden .shop-label {
   display: none !important;
 }
 
@@ -1193,17 +1193,11 @@ body.info-open .label-toggle-btn { display: none !important; }
   /* ── スマホ：ポップアップを見やすく ── */
 
   /* 高さ制限＋スクロール対応 */
-  .leaflet-popup-content-wrapper {
+  .maplibregl-popup-content {
     max-height: calc(100svh - 180px);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-  .leaflet-popup-content {
-    overflow-y: auto !important;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    max-height: calc(100svh - 200px);
-    margin: 8px 11px !important;
+    padding: 8px 11px;
   }
 
   /* × 閉じるボタン（右上）：グローバルで統一済み・モバイル追加指定なし */
