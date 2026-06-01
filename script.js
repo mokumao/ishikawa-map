@@ -1028,22 +1028,28 @@ function makePinSVG(color) {
 const markersData = restaurants.map((r, idx) => {
   const color = markerColor(r);
 
-  // マーカーのルート要素（ピン＋ラベル）
+  // マーカーのルート要素（MapLibreが position:absolute を付与するため position は設定しない）
   const root = document.createElement('div');
-  root.className = 'pin-root';
-  root.style.cssText = 'position:relative;width:30px;height:42px;cursor:pointer;';
+  root.style.cssText = 'width:30px;height:42px;cursor:pointer;';
+
+  // ピン＋ラベルの内部ラッパー（position:relative でラベルを相対配置）
+  const pinInner = document.createElement('div');
+  pinInner.className = 'pin-root';
+  pinInner.style.cssText = 'position:relative;width:30px;height:42px;';
 
   // SVGアニメーションラッパー
   const pinWrap = document.createElement('div');
   pinWrap.className = 'pin-anim-wrap';
   pinWrap.innerHTML = makePinSVG(color);
-  root.appendChild(pinWrap);
+  pinInner.appendChild(pinWrap);
 
   // 店名ラベル
   const label = document.createElement('div');
   label.className = 'shop-label';
   label.textContent = r.name;
-  root.appendChild(label);
+  pinInner.appendChild(label);
+
+  root.appendChild(pinInner);
 
   // ポップアップ
   const popup = new maplibregl.Popup({
