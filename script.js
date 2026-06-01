@@ -926,6 +926,23 @@ map.on('load', function() {
     source: 'ishikawa-boundary',
     paint: { 'line-color': '#e53935', 'line-width': 3, 'line-opacity': 0.85 }
   });
+
+  // ── 道路幅をズーム20以降も継続して拡大 ──────────────────────────
+  // スタイルの補間式はズーム20で終わっているため、22まで延長する
+  map.getStyle().layers.forEach(function(layer) {
+    if (layer.type !== 'line') return;
+    if (!layer.id.includes('road')) return;
+    const w = layer.paint && layer.paint['line-width'];
+    if (!Array.isArray(w) || w[0] !== 'interpolate') return;
+    const base = (w[1][0] === 'exponential') ? w[1][1] : 1.2;
+    // 最後のズームストップが20の場合のみ延長
+    const lastZoomIdx = w.length - 2;
+    if (w[lastZoomIdx] !== 20) return;
+    const lastVal = w[lastZoomIdx + 1];
+    // ズーム22の値 = zoom20の値 × base^2
+    const val22 = +(lastVal * Math.pow(base, 2)).toFixed(2);
+    map.setPaintProperty(layer.id, 'line-width', [...w, 22, val22]);
+  });
 });
 
 // ── ミニマップ ────────────────────────────────────────────────────
