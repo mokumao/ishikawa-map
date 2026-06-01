@@ -2053,8 +2053,60 @@ const LegendControl = L.Control.extend({
 });
 new LegendControl().addTo(map);
 
-// ── ズーム中のピン表示：Leafletデフォルト動作（非表示処理なし） ──────────
-// ピンは常に表示。CSS will-changeによるGPU合成層で震えを軽減。
+// ── ダブルタップドラッグズーム：ピンのみ一時非表示（地図・ズームはそのまま） ────
+// ピンは隠すが地図タイルとズームアニメーションは通常通り表示する
+(function () {
+  var mapEl = document.getElementById('map');
+  var _zoomTimer = null;
+
+  function showPanes() {
+    var p = map.getPane('markerPane');
+    var t = map.getPane('tooltipPane');
+    if (p) p.style.visibility = '';
+    if (t) t.style.visibility = '';
+  }
+  function hidePinsOnly() {
+    var p = map.getPane('markerPane');
+    var t = map.getPane('tooltipPane');
+    if (p) p.style.visibility = 'hidden';
+    if (t) t.style.visibility = 'hidden';
+  }
+
+  // ダブルタップドラッグ中のみピンを非表示（地図はそのまま）
+  var _tapTime = 0, _tapY = 0, _isDblDrag = false;
+
+  mapEl.addEventListener('touchstart', function(e) {
+    if (e.touches.length !== 1) { _isDblDrag = false; return; }
+    var now = Date.now();
+    var y = e.touches[0].clientY;
+    if (now - _tapTime < 300 && Math.abs(y - _tapY) < 40) {
+      _isDblDrag = true;
+      hidePinsOnly(); // ピンのみ非表示
+    } else {
+      _isDblDrag = false;
+    }
+    _tapTime = now;
+    _tapY    = y;
+  }, { passive: true });
+
+  // ドラッグ終了・指離しでピンを復元
+  mapEl.addEventListener('touchend', function() {
+    if (!_isDblDrag) return;
+    _isDblDrag = false;
+    clearTimeout(_zoomTimer);
+    _zoomTimer = setTimeout(showPanes, 100);
+  }, { passive: true });
+  mapEl.addEventListener('touchcancel', function() {
+    _isDblDrag = false;
+    showPanes();
+  }, { passive: true });
+
+  // ズーム終了後にも念のため復元（ピンチズームなど）
+  map.on('zoomend', function() {
+    clearTimeout(_zoomTimer);
+    _zoomTimer = setTimeout(showPanes, 80);
+  });
+})();
 
 // ── フィルターボタン生成 ─────────────────────────────────────────
 function buildFilterButtons() {
