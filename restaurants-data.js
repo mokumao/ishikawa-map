@@ -504,8 +504,8 @@ const restaurants = [
     note:      "石川海岸沿いのリゾートホテル",
     sourceUrl: "https://cocogarden.com/",
     warn:      false,
-    lat:       26.4452,
-    lng:       127.8098
+    lat:       26.42030,
+    lng:       127.81988
   },
   {
     name:      "アンサ沖縄リゾート",
@@ -516,8 +516,8 @@ const restaurants = [
     note:      "石川エリアのリゾートホテル",
     sourceUrl: "https://www.city.uruma.lg.jp/sportscamp/21522/index.html",
     warn:      false,
-    lat:       26.4198,
-    lng:       127.8188
+    lat:       26.41774,
+    lng:       127.79255
   },
   {
     name:      "民宿レキオ",
@@ -528,8 +528,8 @@ const restaurants = [
     note:      "石川エリアの民宿",
     sourceUrl: "http://www.lequio7.sakura.ne.jp/",
     warn:      false,
-    lat:       26.4305,
-    lng:       127.8293
+    lat:       26.42586,
+    lng:       127.82483
   },
   {
     name:      "民宿やすま",
@@ -540,8 +540,8 @@ const restaurants = [
     note:      "石川エリアの民宿",
     sourceUrl: "https://uruma-ru.jp/stay/",
     warn:      false,
-    lat:       26.4330,
-    lng:       127.8232
+    lat:       26.42059,
+    lng:       127.82524
   },
   // ── 金融機関 ───────────────────────────────────────────────────
   {
@@ -553,8 +553,8 @@ const restaurants = [
     note:      "ATMは時間外も利用可",
     sourceUrl: "https://www.ryugin.co.jp/tenpo/atm_search/shop-5030/",
     warn:      false,
-    lat:       26.4308,
-    lng:       127.8290
+    lat:       26.42626,
+    lng:       127.82578
   },
   {
     name:      "沖縄銀行 石川支店",
@@ -577,8 +577,8 @@ const restaurants = [
     note:      "ATMあり（土日も利用可）",
     sourceUrl: "https://map.japanpost.jp/p/search/dtl/300170031000/",
     warn:      false,
-    lat:       26.4165,
-    lng:       127.8342
+    lat:       26.43363,
+    lng:       127.83207
   },
   // ── 教育施設 ───────────────────────────────────────────────────
   {
@@ -590,8 +590,8 @@ const restaurants = [
     note:      "",
     sourceUrl: "https://www.city.uruma.lg.jp/",
     warn:      false,
-    lat:       26.4315,
-    lng:       127.8265
+    lat:       26.43175,
+    lng:       127.82759
   },
   {
     name:      "うるま市立石川中学校",
@@ -602,8 +602,8 @@ const restaurants = [
     note:      "",
     sourceUrl: "https://j-ishikawa.edu.city.uruma.okinawa.jp/",
     warn:      false,
-    lat:       26.4285,
-    lng:       127.8225
+    lat:       26.42399,
+    lng:       127.82429
   },
   {
     name:      "沖縄県立石川高等学校",
@@ -614,8 +614,8 @@ const restaurants = [
     note:      "普通科",
     sourceUrl: "https://www.ishikawa-h.open.ed.jp/",
     warn:      false,
-    lat:       26.4440,
-    lng:       127.8118
+    lat:       26.41535,
+    lng:       127.82052
   },
   // ── 観光スポット ───────────────────────────────────────────────
   {
@@ -627,8 +627,8 @@ const restaurants = [
     note:      "ウィンドサーフィンで有名な市民ビーチ。リーフ内は砂地で安全",
     sourceUrl: "https://www.okinawastory.jp/spot/600006184",
     warn:      false,
-    lat:       26.4445,
-    lng:       127.8332
+    lat:       26.42574,
+    lng:       127.82849
   },
   {
     name:      "石川岳（市民の森公園）",
@@ -639,7 +639,7 @@ const restaurants = [
     note:      "標高204m。山頂展望台から太平洋と東シナ海を一望できる",
     sourceUrl: "https://www.city.uruma.lg.jp/miryoku/p000001.html",
     warn:      false,
-    lat:       26.4300,
-    lng:       127.8098
+    lat:       26.44810,
+    lng:       127.83208
   }
 ];
