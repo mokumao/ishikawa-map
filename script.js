@@ -952,6 +952,12 @@ map.on('load', function() {
   Object.entries(roadWidthMap).forEach(function([id, width]) {
     if (map.getLayer(id)) map.setPaintProperty(id, 'line-width', width);
   });
+
+  // 道路沿いの歩道点線を非表示
+  ['road_path_pedestrian', 'tunnel_path_pedestrian',
+   'bridge_path_pedestrian', 'bridge_path_pedestrian_casing'].forEach(function(id) {
+    if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', 'none');
+  });
 });
 
 // ── ミニマップ ────────────────────────────────────────────────────
