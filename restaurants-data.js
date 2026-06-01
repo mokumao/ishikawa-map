@@ -565,8 +565,8 @@ const restaurants = [
     note:      "ATMは時間外も利用可",
     sourceUrl: "https://gincode.com/branch_0188_315",
     warn:      false,
-    lat:       26.4312,
-    lng:       127.8296
+    lat:       26.42583,
+    lng:       127.82546
   },
   {
     name:      "石川郵便局",
