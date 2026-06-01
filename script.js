@@ -931,24 +931,24 @@ map.on('load', function() {
   // ── 道路幅をズームに比例して拡大（Googleマップ相当） ───────────
   // 現在のスタイルはズーム20でも18px程度と細すぎるため、
   // ズームアップするほど道路が広く見えるよう全レイヤーを再設定する
-  // 各ズームで約2倍ずつ拡大（Googleマップと同等のスケール）
+  // ズームに応じて道路幅を拡大しつつ、ピン位置が正確に見える程度に抑制
   const roadWidthMap = {
-    'road_motorway':                  ['interpolate', ['linear'], ['zoom'], 7,1,  12,2,  14,6,  16,20,  18,65,  20,200],
+    'road_motorway':                  ['interpolate', ['linear'], ['zoom'], 7,0.8,12,1.5,14,4,  16,10,  18,30,  20,90],
     // casing = fill と同幅にして内側への白線を消す（デュアルキャリッジウェイ対策）
-    'road_motorway_casing':           ['interpolate', ['linear'], ['zoom'], 7,1,  12,2,  14,6,  16,20,  18,65,  20,200],
-    'road_motorway_link':             ['interpolate', ['linear'], ['zoom'],       12,1.5,14,4,  16,14,  18,46,  20,145],
-    'road_motorway_link_casing':      ['interpolate', ['linear'], ['zoom'],       12,1.5,14,4,  16,14,  18,46,  20,145],
-    'road_trunk_primary':             ['interpolate', ['linear'], ['zoom'], 7,1,  12,2,  14,6,  16,20,  18,65,  20,200],
-    'road_trunk_primary_casing':      ['interpolate', ['linear'], ['zoom'], 7,1,  12,2,  14,6,  16,20,  18,65,  20,200],
-    'road_secondary_tertiary':        ['interpolate', ['linear'], ['zoom'], 8,0.5,12,1.5,14,4.5,16,15,  18,48,  20,148],
-    'road_secondary_tertiary_casing': ['interpolate', ['linear'], ['zoom'], 8,1,  12,2.5,14,7,  16,21,  18,58,  20,163],
-    'road_minor':                     ['interpolate', ['linear'], ['zoom'],       12,0.5,14,2.5,16,9,   18,28,  20,88],
-    'road_minor_casing':              ['interpolate', ['linear'], ['zoom'],       12,1,  14,4,  16,13,  18,37,  20,103],
-    'road_link':                      ['interpolate', ['linear'], ['zoom'],       12,1,  14,3,  16,10,  18,33,  20,103],
-    'road_link_casing':               ['interpolate', ['linear'], ['zoom'],       12,1.5,14,4.5,16,14,  18,42,  20,118],
-    'road_service_track':             ['interpolate', ['linear'], ['zoom'],             14,1,  16,4.5, 18,14,  20,44],
-    'road_service_track_casing':      ['interpolate', ['linear'], ['zoom'],             14,1.5,16,6.5, 18,20,  20,60],
-    'road_path_pedestrian':           ['interpolate', ['linear'], ['zoom'],             14,0.5,16,2.5, 18,8,   20,25],
+    'road_motorway_casing':           ['interpolate', ['linear'], ['zoom'], 7,0.8,12,1.5,14,4,  16,10,  18,30,  20,90],
+    'road_motorway_link':             ['interpolate', ['linear'], ['zoom'],       12,1,  14,2.5,16,7,   18,22,  20,68],
+    'road_motorway_link_casing':      ['interpolate', ['linear'], ['zoom'],       12,1,  14,2.5,16,7,   18,22,  20,68],
+    'road_trunk_primary':             ['interpolate', ['linear'], ['zoom'], 7,0.8,12,1.5,14,4,  16,10,  18,30,  20,90],
+    'road_trunk_primary_casing':      ['interpolate', ['linear'], ['zoom'], 7,0.8,12,1.5,14,4,  16,10,  18,30,  20,90],
+    'road_secondary_tertiary':        ['interpolate', ['linear'], ['zoom'], 8,0.5,12,1,  14,3,  16,8,   18,22,  20,68],
+    'road_secondary_tertiary_casing': ['interpolate', ['linear'], ['zoom'], 8,0.8,12,1.5,14,4.5,16,11,  18,28,  20,80],
+    'road_minor':                     ['interpolate', ['linear'], ['zoom'],       12,0.5,14,1.5,16,5,   18,14,  20,42],
+    'road_minor_casing':              ['interpolate', ['linear'], ['zoom'],       12,1,  14,2.5,16,7.5, 18,19,  20,54],
+    'road_link':                      ['interpolate', ['linear'], ['zoom'],       12,0.8,14,2,  16,5.5, 18,16,  20,50],
+    'road_link_casing':               ['interpolate', ['linear'], ['zoom'],       12,1,  14,3,  16,8,   18,21,  20,62],
+    'road_service_track':             ['interpolate', ['linear'], ['zoom'],             14,0.8,16,2.5, 18,7,   20,22],
+    'road_service_track_casing':      ['interpolate', ['linear'], ['zoom'],             14,1,  16,3.5, 18,10,  20,30],
+    'road_path_pedestrian':           ['interpolate', ['linear'], ['zoom'],             14,0.5,16,1.5, 18,4,   20,12],
   };
   Object.entries(roadWidthMap).forEach(function([id, width]) {
     if (map.getLayer(id)) map.setPaintProperty(id, 'line-width', width);
