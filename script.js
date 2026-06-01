@@ -877,6 +877,7 @@ const map = new maplibregl.Map({
   style:             'https://tiles.openfreemap.org/styles/liberty',
   center:            ISHIKAWA_CENTER,
   zoom:              ISHIKAWA_ZOOM,
+  maxZoom:           17,
   attributionControl: false,
 });
 
