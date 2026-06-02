@@ -1388,8 +1388,9 @@ function makePopup(r, idx) {
 
 // ── 地図初期化 ───────────────────────────────────────────────────
 const map = L.map("map", {
-  center: [26.430, 127.828],
-  zoom:   14,
+  center:  [26.430, 127.828],
+  zoom:    14,
+  maxZoom: 21,
   zoomControl: false,  // デフォルト左上を無効化→左下に再配置
   zoomSnap: 0,         // ズームレベルをスナップしない（指離し時のアニメーションを防止）
 });
@@ -1428,7 +1429,8 @@ map.on('dblclick', function (e) {
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
-  maxZoom: 19,
+  maxNativeZoom: 19,
+  maxZoom: 21,
   keepBuffer: 4
 }).addTo(map);
 
