@@ -928,32 +928,6 @@ map.on('load', function() {
     paint: { 'line-color': '#e53935', 'line-width': 3, 'line-opacity': 0.85 }
   });
 
-  // ── 道路幅をズームに比例して拡大（Googleマップ相当） ───────────
-  // 現在のスタイルはズーム20でも18px程度と細すぎるため、
-  // ズームアップするほど道路が広く見えるよう全レイヤーを再設定する
-  // ズームに応じて道路幅を拡大しつつ、ピン位置が正確に見える程度に抑制
-  const roadWidthMap = {
-    'road_motorway':                  ['interpolate', ['linear'], ['zoom'], 7,0.8,12,1.5,14,4,  16,10,  18,30,  20,90],
-    // casing = fill と同幅にして内側への白線を消す（デュアルキャリッジウェイ対策）
-    'road_motorway_casing':           ['interpolate', ['linear'], ['zoom'], 7,0.8,12,1.5,14,4,  16,10,  18,30,  20,90],
-    'road_motorway_link':             ['interpolate', ['linear'], ['zoom'],       12,1,  14,2.5,16,7,   18,22,  20,68],
-    'road_motorway_link_casing':      ['interpolate', ['linear'], ['zoom'],       12,1,  14,2.5,16,7,   18,22,  20,68],
-    'road_trunk_primary':             ['interpolate', ['linear'], ['zoom'], 7,0.8,12,1.5,14,4,  16,10,  18,30,  20,90],
-    'road_trunk_primary_casing':      ['interpolate', ['linear'], ['zoom'], 7,0.8,12,1.5,14,4,  16,10,  18,30,  20,90],
-    'road_secondary_tertiary':        ['interpolate', ['linear'], ['zoom'], 8,0.5,12,1,  14,3,  16,8,   18,22,  20,68],
-    'road_secondary_tertiary_casing': ['interpolate', ['linear'], ['zoom'], 8,0.8,12,1.5,14,4.5,16,11,  18,28,  20,80],
-    'road_minor':                     ['interpolate', ['linear'], ['zoom'],       12,0.5,14,1.5,16,5,   18,14,  20,42],
-    'road_minor_casing':              ['interpolate', ['linear'], ['zoom'],       12,1,  14,2.5,16,7.5, 18,19,  20,54],
-    'road_link':                      ['interpolate', ['linear'], ['zoom'],       12,0.8,14,2,  16,5.5, 18,16,  20,50],
-    'road_link_casing':               ['interpolate', ['linear'], ['zoom'],       12,1,  14,3,  16,8,   18,21,  20,62],
-    'road_service_track':             ['interpolate', ['linear'], ['zoom'],             14,0.8,16,2.5, 18,7,   20,22],
-    'road_service_track_casing':      ['interpolate', ['linear'], ['zoom'],             14,1,  16,3.5, 18,10,  20,30],
-    'road_path_pedestrian':           ['interpolate', ['linear'], ['zoom'],             14,0.5,16,1.5, 18,4,   20,12],
-  };
-  Object.entries(roadWidthMap).forEach(function([id, width]) {
-    if (map.getLayer(id)) map.setPaintProperty(id, 'line-width', width);
-  });
-
   // 道路沿いの歩道点線を非表示
   ['road_path_pedestrian', 'tunnel_path_pedestrian',
    'bridge_path_pedestrian', 'bridge_path_pedestrian_casing'].forEach(function(id) {
