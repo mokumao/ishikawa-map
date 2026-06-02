@@ -1448,14 +1448,16 @@ const ISHIKAWA_ZOOM   = window.innerWidth <= 767 ? 13 : 14;
 
     // ポップアップペインをmap containerの直接の子へ移動
     mapContainer.appendChild(popupPane);
-    popupPane.style.position = 'absolute';
-    popupPane.style.zIndex   = '1100';
+    popupPane.style.position   = 'absolute';
+    popupPane.style.zIndex     = '1100';
+    popupPane.style.left       = '0';
+    popupPane.style.top        = '0';
+    popupPane.style.willChange = 'transform';
 
-    // map-paneのtranslateをpopupPaneのleft/topで再現し位置を合わせる
+    // left/topではなくtransformで同期（layout reflow回避・GPU処理）
     function syncPopupPanePos() {
       var pos = map._getMapPanePos();
-      popupPane.style.left = pos.x + 'px';
-      popupPane.style.top  = pos.y + 'px';
+      popupPane.style.transform = 'translate(' + pos.x + 'px,' + pos.y + 'px)';
     }
     syncPopupPanePos();
     map.on('move zoom viewreset', syncPopupPanePos);

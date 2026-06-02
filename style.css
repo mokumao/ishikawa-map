@@ -509,7 +509,10 @@ footer a:hover { text-decoration: underline; }
 /* ── GPU合成層でタイル・マーカーの描画を安定化 ─────────────────────── */
 /* ダブルタップドラッグズーム時の地図の震えを軽減する */
 .leaflet-tile-pane,
-.leaflet-map-pane {
+.leaflet-map-pane,
+.leaflet-marker-pane,
+.leaflet-tooltip-pane,
+.leaflet-overlay-pane {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   will-change: transform;
