@@ -503,7 +503,7 @@ footer a:hover { text-decoration: underline; }
 
 /* ── Leaflet ズームアニメーション ───────────────────────────────── */
 .leaflet-zoom-anim .leaflet-zoom-animated {
-  transition: transform 0.5s cubic-bezier(0, 0, 0.25, 1) !important;
+  transition: transform 0.8s cubic-bezier(0, 0, 0.25, 1) !important;
 }
 
 /* ── GPU合成層でタイル・マーカーの描画を安定化 ─────────────────────── */
