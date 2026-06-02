@@ -396,8 +396,8 @@ const restaurants = [
     note_en:   "ATM and copy machine available.",
     sourceUrl: "https://store.lawson.co.jp/",
     warn:      false,
-    lat:       26.42580,
-    lng:       127.82557,
+    lat:       26.42517,
+    lng:       127.82526,
     twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
   },
   {
@@ -565,8 +565,8 @@ const restaurants = [
     note:      "ATMは時間外も利用可",
     sourceUrl: "https://gincode.com/branch_0188_315",
     warn:      false,
-    lat:       26.42517,
-    lng:       127.82526
+    lat:       26.42580,
+    lng:       127.82557
   },
   {
     name:      "石川郵便局",
