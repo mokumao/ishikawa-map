@@ -15,9 +15,13 @@ from html import unescape
 # ── 日時設定（日本時間） ──────────────────────────────────────────
 JST = timezone(timedelta(hours=9))
 now_jst = datetime.now(JST)
-today_str  = now_jst.strftime('%Y年%m月%d日')
-today_date = now_jst.strftime('%Y-%m-%d')
+today_str   = now_jst.strftime('%Y年%m月%d日')
+today_date  = now_jst.strftime('%Y-%m-%d')
 updated_str = now_jst.strftime('%Y年%m月%d日 %H:%M')
+
+# 掲載期間：7日以内（過去）＋ 未来の情報は無制限
+DAYS_LIMIT  = 7
+cutoff_date = now_jst - timedelta(days=DAYS_LIMIT)
 
 # ── 石川関連キーワード ─────────────────────────────────────────────
 ISHIKAWA_KEYWORDS = [
@@ -72,6 +76,40 @@ def truncate(text, length=130):
         return ''
     return text[:length] + '…' if len(text) > length else text
 
+def get_pub_date(entry):
+    """RSSエントリから公開日時を取得してdatetimeで返す。取得できない場合はNone"""
+    import time
+    for field in ('published_parsed', 'updated_parsed', 'created_parsed'):
+        t = entry.get(field)
+        if t:
+            try:
+                # time.struct_time → UTC datetime → JST datetime
+                dt_utc = datetime(*t[:6], tzinfo=timezone.utc)
+                return dt_utc.astimezone(JST)
+            except Exception:
+                continue
+    return None
+
+def is_within_period(pub_date):
+    """公開日が掲載対象期間内か判定（7日以内の過去 or 未来）"""
+    if pub_date is None:
+        return True  # 日付不明の場合は掲載する（除外しすぎを防ぐ）
+    return pub_date >= cutoff_date  # cutoff_date以降（7日前〜未来）
+
+def format_date_label(pub_date):
+    """表示用の日付ラベルを返す"""
+    if pub_date is None:
+        return ''
+    delta = (pub_date.date() - now_jst.date()).days
+    if delta > 0:
+        return f'予定 {pub_date.strftime("%m/%d")}'
+    elif delta == 0:
+        return f'本日 {pub_date.strftime("%H:%M")}'
+    elif delta == -1:
+        return f'昨日 {pub_date.strftime("%m/%d")}'
+    else:
+        return pub_date.strftime('%m/%d')
+
 # ── メイン処理 ────────────────────────────────────────────────────
 
 def fetch_articles():
@@ -101,6 +139,11 @@ def fetch_articles():
                 if source['filter'] and not is_ishikawa_related(title, summary):
                     continue
 
+                # 日付フィルタ：7日以内の過去 or 未来のみ掲載
+                pub_date = get_pub_date(entry)
+                if not is_within_period(pub_date):
+                    continue
+
                 # 重複除去（タイトル冒頭20文字で判定）
                 key = title[:20]
                 if key in seen:
@@ -108,10 +151,12 @@ def fetch_articles():
                 seen.add(key)
 
                 articles.append({
-                    'title':   title,
-                    'summary': truncate(summary),
-                    'link':    link,
-                    'source':  source['name'],
+                    'title':      title,
+                    'summary':    truncate(summary),
+                    'link':       link,
+                    'source':     source['name'],
+                    'date_label': format_date_label(pub_date),
+                    'pub_date':   pub_date.isoformat() if pub_date else '',
                 })
                 count += 1
 
@@ -128,12 +173,25 @@ def generate_html(articles):
 
     # ── 記事カード HTML ──
     if articles:
+        # 未来の記事を先頭に、それ以降は新しい順にソート
+        def sort_key(a):
+            if not a['pub_date']:
+                return '0000'
+            return a['pub_date']
+        articles.sort(key=sort_key, reverse=True)
+
         cards = ''
         for a in articles:
-            summary_html = f'<p class="ns">{a["summary"]}</p>' if a['summary'] else ''
+            summary_html   = f'<p class="ns">{a["summary"]}</p>' if a['summary'] else ''
+            date_html      = f'<span class="date-label">{a["date_label"]}</span>' if a['date_label'] else ''
+            is_future      = a['pub_date'] and a['pub_date'] > now_jst.isoformat()
+            future_class   = ' future' if is_future else ''
             cards += f'''
-    <article class="ni">
-      <a class="nt" href="{a['link']}" target="_blank" rel="noopener noreferrer">{a['title']}</a>
+    <article class="ni{future_class}">
+      <div class="ni-header">
+        <a class="nt" href="{a['link']}" target="_blank" rel="noopener noreferrer">{a['title']}</a>
+        {date_html}
+      </div>
       {summary_html}
       <span class="src">出典：{a['source']}</span>
     </article>'''
@@ -224,6 +282,21 @@ def generate_html(articles):
       margin-bottom: 6px;
     }}
     .src {{ font-size: 0.72rem; color: #aaa; }}
+    .ni-header {{ display: flex; align-items: flex-start; gap: 8px; margin-bottom: 5px; }}
+    .ni-header .nt {{ margin-bottom: 0; flex: 1; }}
+    .date-label {{
+      flex-shrink: 0;
+      font-size: 0.68rem;
+      font-weight: bold;
+      background: #f5f5f5;
+      color: #888;
+      border-radius: 4px;
+      padding: 2px 6px;
+      margin-top: 3px;
+      white-space: nowrap;
+    }}
+    .ni.future {{ border-left-color: #1565c0; }}
+    .ni.future .date-label {{ background: #e3f2fd; color: #1565c0; }}
     /* ── 記事なし ── */
     .empty {{
       background: #fff;
@@ -270,7 +343,7 @@ def generate_html(articles):
     os.makedirs('news', exist_ok=True)
     with open('news/index.html', 'w', encoding='utf-8') as f:
         f.write(html)
-    print(f"\n✅ news/index.html を生成しました（{len(articles)}件）")
+    print(f"\n[OK] news/index.html を生成しました（{len(articles)}件）")
 
     # JSON も保存（将来の活用のため）
     data = {
@@ -281,13 +354,13 @@ def generate_html(articles):
     }
     with open('news/today.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    print("✅ news/today.json を生成しました")
+    print("[OK] news/today.json を生成しました")
 
 
 # ── エントリーポイント ─────────────────────────────────────────────
 if __name__ == '__main__':
-    print(f"=== 今日の石川ニュース収集開始 {today_str} ===\n")
+    print(f"=== Ishikawa News Fetch Start: {today_date} ===\n")
     articles = fetch_articles()
-    print(f"\n合計: {len(articles)}件\n")
+    print(f"\nTotal: {len(articles)} articles\n")
     generate_html(articles)
-    print("\n=== 完了 ===")
+    print("\n=== Done ===")
