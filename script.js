@@ -1739,6 +1739,8 @@ const markersData = restaurants.map((r, idx) => {
       // 300ms待ってから「シングルタップ確定」としてポップアップを開く
       _tapTimer = setTimeout(function() {
         _tapTimer = null;
+        // ダブルタップ+ドラッグ中はポップアップを開かない
+        if (window._dblTapDragActive) return;
         map.options.closePopupOnClick = false;
         setTimeout(function() { map.options.closePopupOnClick = true; }, 400);
         openThisPopup();
@@ -2299,6 +2301,9 @@ initSearch();
       startZoom  = map.getZoom();
       mapCenter  = map.getCenter(); // ドラッグ中は地図中心を固定
 
+      // ダブルタップ+ドラッグ中フラグ：マーカーの300msタイマーでポップアップが開くのを防ぐ
+      window._dblTapDragActive = true;
+
       // 拡大縮小操作時はポップアップを閉じる
       map.closePopup();
 
@@ -2336,6 +2341,7 @@ initSearch();
   mapEl.addEventListener('touchend', function() {
     if (!dragging) return;
     dragging = false;
+    window._dblTapDragActive = false;
     if (_rafId !== null) { cancelAnimationFrame(_rafId); _rafId = null; }
 
     map.dragging.enable();
