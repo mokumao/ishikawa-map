@@ -3,7 +3,7 @@
 const restaurants = [
   {
     name:      "酒楽場うまし家",
-    genre:     "居酒屋",
+    genre:     "居酒屋等",
     address:   "沖縄県うるま市石川1丁目28-18",
     hours:     "17:00〜翌1:00",
     closed:    "火曜日",
@@ -42,7 +42,7 @@ const restaurants = [
   },
   {
     name:      "杏屋 石川店",
-    genre:     "居酒屋・創作料理",
+    genre:     "居酒屋等",
     address:   "沖縄県うるま市石川白浜1-4-7",
     hours:     "18:00〜翌3:00（料理L.O. 翌1:45）",
     closed:    "なし（年中無休）",
@@ -156,7 +156,7 @@ const restaurants = [
   },
   {
     name:      "喜食てんてん",
-    genre:     "食堂・居酒屋",
+    genre:     "居酒屋等",
     address:   "沖縄県うるま市石川山城1706-6",
     hours:     "ランチ 11:00〜13:30\n居酒屋 18:00〜24:00",
     closed:    "日曜日",
@@ -175,7 +175,7 @@ const restaurants = [
   },
   {
     name:      "居酒屋パラダイス",
-    genre:     "居酒屋・食堂",
+    genre:     "居酒屋等",
     address:   "沖縄県うるま市石川2丁目39-15",
     hours:     "ランチ 11:30〜15:00\n居酒屋 18:00〜24:00",
     closed:    "要確認（月・木、または水・第5日曜という情報あり）",
@@ -196,7 +196,7 @@ const restaurants = [
   // ── 追加10店舗（2026-05-08） ─────────────────────────────────────
   {
     name:      "まるみつ食堂",
-    genre:     "沖縄そば・食堂",
+    genre:     "食事処",
     address:   "沖縄県うるま市石川東山1丁目22-11",
     hours:     "10:30〜14:30頃（売り切れ次第終了）",
     closed:    "水曜日（年末年始・旧盆休あり）",
@@ -234,7 +234,7 @@ const restaurants = [
   },
   {
     name:      "大衆酒場 照らす家 石川店",
-    genre:     "居酒屋",
+    genre:     "居酒屋等",
     address:   "沖縄県うるま市石川白浜1丁目3-5",
     hours:     "〜翌3:00（詳細は要確認）",
     closed:    "要確認",
@@ -253,7 +253,7 @@ const restaurants = [
   },
   {
     name:      "榮料理店（さかえりょうりてん）",
-    genre:     "沖縄料理",
+    genre:     "食事処",
     address:   "沖縄県うるま市石川伊波1553-463",
     hours:     "18:00〜21:30",
     closed:    "日曜日・不定休",
@@ -272,7 +272,7 @@ const restaurants = [
   },
   {
     name:      "パーラー K's Pit（ケーズピット）",
-    genre:     "ハンバーガー",
+    genre:     "食事処",
     address:   "沖縄県うるま市石川曙1丁目2-17",
     hours:     "11:00〜18:00（L.O. 17:00）\n※18時以降は予約営業",
     closed:    "不定休",
@@ -291,7 +291,7 @@ const restaurants = [
   },
   {
     name:      "たらの芽",
-    genre:     "居酒屋・和食",
+    genre:     "居酒屋等",
     address:   "沖縄県うるま市石川白浜2丁目3-2",
     hours:     "ランチ 12:00〜14:00\n夜 17:30〜翌1:00",
     closed:    "日曜日",
@@ -310,7 +310,7 @@ const restaurants = [
   },
   {
     name:      "石川 柿兵衛（かきべえ）",
-    genre:     "焼き鳥・居酒屋",
+    genre:     "居酒屋等",
     address:   "沖縄県うるま市石川1丁目14-2",
     hours:     "17:00〜翌2:00",
     closed:    "なし（年中無休）",
@@ -348,7 +348,7 @@ const restaurants = [
   },
   {
     name:      "石川の駅",
-    genre:     "食堂",
+    genre:     "食事処",
     address:   "沖縄県うるま市石川赤崎2丁目2-1",
     hours:     "10:00〜20:00頃（要確認）",
     closed:    "要確認",
@@ -367,7 +367,7 @@ const restaurants = [
   },
   {
     name:      "酒処 金の蔵（きんのくら）",
-    genre:     "居酒屋・食堂",
+    genre:     "居酒屋等",
     address:   "沖縄県うるま市石川1丁目28-9",
     hours:     "ランチ 11:00〜15:00\n夜 18:00〜24:00",
     closed:    "要確認",

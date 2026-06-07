@@ -39,7 +39,8 @@ var TRANSLATIONS = {
     'count.results':       '{n} 件表示中',
     'list.closed':         '定休日：',
     'filter.all':          'すべて',
-    'filter.izakaya':      '居酒屋・食堂',
+    'filter.shokuji':      '食事処',
+    'filter.izakaya':      '居酒屋等',
     'filter.cafe':         'カフェ',
     'filter.yakiniku':     '焼肉',
     'filter.bar':          'バル',
@@ -81,7 +82,8 @@ var TRANSLATIONS = {
     'count.results':       '{n} results',
     'list.closed':         'Closed: ',
     'filter.all':          'All',
-    'filter.izakaya':      'Izakaya / Diner',
+    'filter.shokuji':      'Restaurant',
+    'filter.izakaya':      'Izakaya',
     'filter.cafe':         'Café',
     'filter.yakiniku':     'BBQ',
     'filter.bar':          'Bar',
@@ -135,12 +137,8 @@ function setLanguage(lang) {
 
 // ── ジャンル英語マッピング ────────────────────────────────────────
 var GENRE_EN = {
-  '居酒屋':                    'Izakaya',
-  '居酒屋・食堂':              'Izakaya / Diner',
-  '居酒屋・創作料理':          'Izakaya / Creative',
-  '居酒屋・和食':              'Izakaya / Japanese',
-  '食堂・居酒屋':              'Diner / Izakaya',
-  '食堂':                      'Diner',
+  '食事処':                    'Restaurant',
+  '居酒屋等':                  'Izakaya',
   'バル（中華・和食・バー）':  'Bar (Chinese/Japanese/Bar)',
   '焼肉':                      'BBQ',
   'カフェ':                    'Café',
@@ -148,8 +146,6 @@ var GENRE_EN = {
   'カフェ・バー（ハワイ料理）':'Café / Bar (Hawaiian)',
   'カフェ・パン':              'Café / Bakery',
   'カフェ・八重山そば':        'Café / Yaeyama Soba',
-  '沖縄そば・食堂':            'Okinawa Soba / Diner',
-  '沖縄料理':                  'Okinawan Cuisine',
   'ハンバーガー':              'Burger',
   '焼き鳥・居酒屋':            'Yakitori / Izakaya',
   'ラーメン':                  'Ramen',
@@ -1272,22 +1268,24 @@ function fmtHours(hours) {
 
 // ── フィルター定義 ───────────────────────────────────────────────
 const FILTERS = [
-  { id: 'all',      label: 'すべて',       color: '#546e7a', test: g => g !== 'コンビニ' && g !== 'ガソリン' },
-  { id: 'izakaya',  label: '居酒屋・食堂', color: '#e53935', test: g => g.includes('居酒屋') || g.includes('食堂') },
-  { id: 'cafe',     label: 'カフェ',       color: '#00897b', test: g => g.includes('カフェ') },
-  { id: 'yakiniku', label: '焼肉',         color: '#fb8c00', test: g => g.includes('焼肉') },
-  { id: 'bar',      label: 'バル',         color: '#8e24aa', test: g => g.includes('バル') },
-  { id: 'ramen',    label: 'ラーメン',     color: '#c62828', test: g => g.includes('ラーメン') },
+  { id: 'all',      label: 'すべて',   color: '#546e7a', test: g => g !== 'コンビニ' && g !== 'ガソリン' },
+  { id: 'shokuji',  label: '食事処',   color: '#f57c00', test: g => g === '食事処' },
+  { id: 'izakaya',  label: '居酒屋等', color: '#e53935', test: g => g === '居酒屋等' },
+  { id: 'cafe',     label: 'カフェ',   color: '#00897b', test: g => g.includes('カフェ') },
+  { id: 'yakiniku', label: '焼肉',     color: '#fb8c00', test: g => g.includes('焼肉') },
+  { id: 'bar',      label: 'バル',     color: '#8e24aa', test: g => g.includes('バル') },
+  { id: 'ramen',    label: 'ラーメン', color: '#c62828', test: g => g.includes('ラーメン') },
   // コンビニ・ガソリンはサイドバーには表示しない（歯車メニューから切り替え）
-  { id: 'conbini',  label: 'コンビニ',     color: '#0067CC', test: g => g === 'コンビニ', hidden: true },
-  { id: 'gas',      label: 'ガソリン',     color: '#ff6f00', test: g => g === 'ガソリン', hidden: true },
+  { id: 'conbini',  label: 'コンビニ', color: '#0067CC', test: g => g === 'コンビニ', hidden: true },
+  { id: 'gas',      label: 'ガソリン', color: '#ff6f00', test: g => g === 'ガソリン', hidden: true },
 ];
 
 let currentFilter = 'all';
 let currentSearch  = '';
 
 // ── カテゴリ別マーカーカラー ────────────────────────────────────
-const FOOD_COLOR      = "#e53935"; // 飲食店：赤
+const FOOD_COLOR      = "#e53935"; // 居酒屋等：赤
+const SHOKUJI_COLOR   = "#f57c00"; // 食事処：オレンジ
 const CONBINI_COLOR   = "#fb8c00"; // コンビニ：オレンジ
 const GAS_COLOR       = "#1565c0"; // ガソリン：青
 const STAY_COLOR      = "#7b1fa2"; // 宿泊：紫
@@ -1634,6 +1632,8 @@ const markersData = restaurants.map((r, idx) => {
     color = CONBINI_COLOR;
   } else if (r.genre === 'ガソリン') {
     color = GAS_COLOR;
+  } else if (r.genre === '食事処') {
+    color = SHOKUJI_COLOR;
   } else if (r.genre === '宿泊') {
     color = STAY_COLOR;
   } else if (r.genre === '金融') {
@@ -2044,7 +2044,8 @@ map.on('popupopen', function(e) {
 
 // ── 凡例コントロール ─────────────────────────────────────────────
 const legendItems = [
-  { color: "#e53935", label: "居酒屋・食堂" },
+  { color: "#f57c00", label: "食事処"   },
+  { color: "#e53935", label: "居酒屋等" },
   { color: "#00897b", label: "カフェ"       },
   { color: "#fb8c00", label: "焼肉"         },
   { color: "#8e24aa", label: "バル"         },
