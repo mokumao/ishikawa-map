@@ -1130,25 +1130,27 @@ body.info-open .label-toggle-btn { display: none !important; }
     background: #fff;
     border-top: 1px solid #e0e0e0;
     z-index: 900;
-    padding-bottom: env(safe-area-inset-bottom, 0);
+    padding: 8px 10px env(safe-area-inset-bottom, 8px);
+    gap: 8px;
   }
   .bottom-tab-btn {
     flex: 1;
-    padding: 11px 4px;
+    padding: 9px 4px;
     font-size: .82rem;
     font-weight: 700;
     font-family: inherit;
-    border: none;
-    background: transparent;
-    color: #90a4ae;
+    background: #fff;
+    color: #546e7a;
     cursor: pointer;
-    border-top: 3px solid transparent;
-    transition: color .15s, border-color .15s;
+    border: 2px solid #e53935;
+    border-radius: 7px;
+    transition: background .15s, color .15s;
     -webkit-tap-highlight-color: transparent;
   }
   .bottom-tab-btn.active {
-    color: #2e7d32;
-    border-top-color: #2e7d32;
+    background: #e53935;
+    color: #fff;
+    border-color: #e53935;
   }
 
   /* ── ヘッダー折りたたみアニメーション ── */
