@@ -451,11 +451,12 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   // openedViaPin=false のとき：従来の動作（フィルター変更→一覧へ）
   let openedViaPin  = false;
   let savedPanPixels = 0;   // ピンパネル表示時にずらしたピクセル量（復元用）
-  const catSel      = new Set(); // 'food' | 'conbini' | 'gas'（現在表示中）
+  const catSel      = new Set(); // 'shokuji' | 'izakaya' | 'conbini' | 'gas'（現在表示中）
   const catChipSet  = new Set(); // チップバーに表示するカテゴリ（パネル閉時に記憶）
   const btnAll      = document.getElementById('gearCatAll');
   const btnClear    = document.getElementById('gearCatClear');
-  const btnFood     = document.getElementById('gearCatFood');
+  const btnShokuji  = document.getElementById('gearCatShokuji');
+  const btnIzakaya  = document.getElementById('gearCatIzakaya');
   const btnConbini  = document.getElementById('gearCatConbini');
   const btnGas      = document.getElementById('gearCatGas');
   // ※ map は後で定義されるため、markerPane はイベントハンドラ内で取得する
@@ -463,7 +464,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 
   // 「すべて」ボタンのグレーアウトを catSel の状態に合わせて更新
   function updateAllBtn() {
-    var allSelected = catSel.has('food') && catSel.has('conbini') && catSel.has('gas');
+    var allSelected = catSel.has('shokuji') && catSel.has('izakaya') && catSel.has('conbini') && catSel.has('gas');
     if (allSelected) {
       btnAll.classList.add('cat-all-active');
     } else {
@@ -482,16 +483,19 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 
   // 選択中カテゴリに合わせてマーカーを表示（タップ不可モード）
   function updateCatPreview() {
-    var NON_FOOD = ['コンビニ','ガソリン','宿泊','金融','教育','観光'];
     markersData.forEach(function({ restaurant: r, marker }) {
-      var isFood     = !NON_FOOD.includes(r.genre);
+      var isShokuji  = r.genre === '食事処';
+      var isIzakaya  = r.genre === '居酒屋等';
       var isConbini  = r.genre === 'コンビニ';
       var isGas      = r.genre === 'ガソリン';
       var isStay     = r.genre === '宿泊';
       var isFinance  = r.genre === '金融';
       var isEducation = r.genre === '教育';
       var isTourism  = r.genre === '観光';
-      var show = (catSel.has('food')      && isFood)      ||
+      // 上記以外の飲食系（カフェ・焼肉・バル・ラーメン等）は食事処に含める
+      var isOtherFood = !isShokuji && !isIzakaya && !isConbini && !isGas && !isStay && !isFinance && !isEducation && !isTourism;
+      var show = (catSel.has('shokuji')   && (isShokuji || isOtherFood)) ||
+                 (catSel.has('izakaya')   && isIzakaya)   ||
                  (catSel.has('conbini')   && isConbini)   ||
                  (catSel.has('gas')       && isGas)       ||
                  (catSel.has('stay')      && isStay)      ||
@@ -513,7 +517,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     if (!bar) return;
     if (showAll) {
       catChipSet.clear();
-      ['food','conbini','gas','stay','finance','education','tourism'].forEach(function(k) {
+      ['shokuji','izakaya','conbini','gas','stay','finance','education','tourism'].forEach(function(k) {
         if (catSel.has(k)) catChipSet.add(k);
       });
     }
@@ -524,7 +528,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     }
     // チップ定義（catChipSet の順で表示）
     var defs = [
-      { key: 'food',      label: '飲食店',  cls: 'chip-food'      },
+      { key: 'shokuji',   label: '食事処',  cls: 'chip-food'      },
+      { key: 'izakaya',   label: '居酒屋等', cls: 'chip-izakaya'   },
       { key: 'conbini',   label: 'コンビニ', cls: 'chip-conbini'   },
       { key: 'gas',       label: 'ガソリン', cls: 'chip-gas'       },
       { key: 'stay',      label: '宿泊',    cls: 'chip-stay'      },
@@ -630,16 +635,18 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     openedViaPin = true;
     if (catSel.size === 0) {
       // マーカーが表示中かどうか確認して自動的に catSel へ反映
-      var NON_FOOD2 = ['コンビニ','ガソリン','宿泊','金融','教育','観光'];
-      var hasFood     = markersData.some(function(d) { return !NON_FOOD2.includes(d.restaurant.genre) && map.hasLayer(d.marker); });
+      var hasShokuji  = markersData.some(function(d) { return d.restaurant.genre === '食事処'   && map.hasLayer(d.marker); });
+      var hasIzakaya  = markersData.some(function(d) { return d.restaurant.genre === '居酒屋等'  && map.hasLayer(d.marker); });
+      var hasOtherFood = markersData.some(function(d) { var g = d.restaurant.genre; return !['食事処','居酒屋等','コンビニ','ガソリン','宿泊','金融','教育','観光'].includes(g) && map.hasLayer(d.marker); });
       var hasConbini  = markersData.some(function(d) { return d.restaurant.genre === 'コンビニ' && map.hasLayer(d.marker); });
       var hasGas      = markersData.some(function(d) { return d.restaurant.genre === 'ガソリン' && map.hasLayer(d.marker); });
       var hasStay     = markersData.some(function(d) { return d.restaurant.genre === '宿泊'     && map.hasLayer(d.marker); });
       var hasFinance  = markersData.some(function(d) { return d.restaurant.genre === '金融'     && map.hasLayer(d.marker); });
       var hasEducation = markersData.some(function(d) { return d.restaurant.genre === '教育'    && map.hasLayer(d.marker); });
       var hasTourism  = markersData.some(function(d) { return d.restaurant.genre === '観光'     && map.hasLayer(d.marker); });
-      if (hasFood || hasConbini || hasGas || hasStay || hasFinance || hasEducation || hasTourism) {
-        if (hasFood)      { catSel.add('food');      btnFood.classList.add('cat-selected'); }
+      if (hasShokuji || hasIzakaya || hasOtherFood || hasConbini || hasGas || hasStay || hasFinance || hasEducation || hasTourism) {
+        if (hasShokuji || hasOtherFood) { catSel.add('shokuji');  btnShokuji.classList.add('cat-selected'); }
+        if (hasIzakaya)   { catSel.add('izakaya');   btnIzakaya.classList.add('cat-selected'); }
         if (hasConbini)   { catSel.add('conbini');   btnConbini.classList.add('cat-selected'); }
         if (hasGas)       { catSel.add('gas');        btnGas.classList.add('cat-selected'); }
         if (hasStay)      { catSel.add('stay');       document.getElementById('gearCatStay').classList.add('cat-selected'); }
@@ -715,35 +722,47 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   document.getElementById('gearCloseBtn').addEventListener('click', closeMenu);
 
   // カテゴリサブメニュー
-  // 「すべて」ボタン：飲食店・コンビニ・ガソリンを全選択
+  // 「すべて」ボタン：全カテゴリを選択
   btnAll.addEventListener('click', function () {
     if (!openedViaPin) return;
-    ['food','conbini','gas','stay','finance','education','tourism'].forEach(function(k) { catSel.add(k); });
-    [btnFood, btnConbini, btnGas,
+    ['shokuji','izakaya','conbini','gas','stay','finance','education','tourism'].forEach(function(k) { catSel.add(k); });
+    [btnShokuji, btnIzakaya, btnConbini, btnGas,
      document.getElementById('gearCatStay'), document.getElementById('gearCatFinance'),
      document.getElementById('gearCatEducation'), document.getElementById('gearCatTourism')
     ].forEach(function(b) { if (b) b.classList.add('cat-selected'); });
-    updateCatPreview(); // 内部で updateAllBtn() も呼ばれる
+    updateCatPreview();
   });
   // 「解除」ボタン：全選択を解除
   btnClear.addEventListener('click', function () {
     if (!openedViaPin) return;
     catSel.clear();
-    [btnFood, btnConbini, btnGas,
+    [btnShokuji, btnIzakaya, btnConbini, btnGas,
      document.getElementById('gearCatStay'), document.getElementById('gearCatFinance'),
      document.getElementById('gearCatEducation'), document.getElementById('gearCatTourism')
     ].forEach(function(b) { if (b) b.classList.remove('cat-selected'); });
-    updateCatPreview(); // 内部で updateAllBtn() も呼ばれる
+    updateCatPreview();
   });
 
-  btnFood.addEventListener('click', function () {
+  btnShokuji.addEventListener('click', function () {
     if (openedViaPin) {
-      if (catSel.has('food')) { catSel.delete('food'); btnFood.classList.remove('cat-selected'); }
-      else                    { catSel.add('food');    btnFood.classList.add('cat-selected'); }
+      if (catSel.has('shokuji')) { catSel.delete('shokuji'); btnShokuji.classList.remove('cat-selected'); }
+      else                       { catSel.add('shokuji');    btnShokuji.classList.add('cat-selected'); }
       updateCatPreview();
     } else {
       closeMenu();
-      applyFilter('all');
+      applyFilter('shokuji');
+      switchTab('list');
+    }
+  });
+
+  btnIzakaya.addEventListener('click', function () {
+    if (openedViaPin) {
+      if (catSel.has('izakaya')) { catSel.delete('izakaya'); btnIzakaya.classList.remove('cat-selected'); }
+      else                       { catSel.add('izakaya');    btnIzakaya.classList.add('cat-selected'); }
+      updateCatPreview();
+    } else {
+      closeMenu();
+      applyFilter('izakaya');
       switchTab('list');
     }
   });
