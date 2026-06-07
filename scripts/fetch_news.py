@@ -31,12 +31,40 @@ ISHIKAWA_KEYWORDS = [
 ]
 
 # ── RSSソース一覧 ──────────────────────────────────────────────────
+def gnews(query):
+    """Google News RSS URLを生成"""
+    import urllib.parse
+    return f'https://news.google.com/rss/search?q={urllib.parse.quote(query)}&hl=ja&gl=JP&ceid=JP:ja'
+
 RSS_SOURCES = [
+    # ── 地域全般 ──
     {
         'name': 'Google ニュース（うるま市 石川）',
-        'url': 'https://news.google.com/rss/search?q=%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82+%E7%9F%B3%E5%B7%9D+%E6%B2%96%E7%B8%84&hl=ja&gl=JP&ceid=JP:ja',
-        'filter': False,  # Google News は検索済みなのでフィルタ不要
+        'url': gnews('うるま市 石川 沖縄'),
+        'filter': False,
     },
+    # ── 施設別 ──
+    {
+        'name': '石川ドーム・闘牛',
+        'url': gnews('石川ドーム 闘牛'),
+        'filter': False,
+    },
+    {
+        'name': '石川少年自然の家',
+        'url': gnews('石川少年自然の家'),
+        'filter': False,
+    },
+    {
+        'name': 'ビオスの丘',
+        'url': gnews('ビオスの丘'),
+        'filter': False,
+    },
+    {
+        'name': 'ココガーデンリゾート沖縄',
+        'url': gnews('ココガーデンリゾート沖縄'),
+        'filter': False,
+    },
+    # ── ニュースサイト ──
     {
         'name': '琉球新報',
         'url': 'https://ryukyushimpo.jp/rss/news.xml',
