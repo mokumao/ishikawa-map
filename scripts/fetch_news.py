@@ -1,0 +1,293 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+今日の石川ニュース 自動収集スクリプト
+GitHub Actions で毎日朝6時(JST)に実行される
+"""
+
+import feedparser
+import os
+import re
+import json
+from datetime import datetime, timezone, timedelta
+from html import unescape
+
+# ── 日時設定（日本時間） ──────────────────────────────────────────
+JST = timezone(timedelta(hours=9))
+now_jst = datetime.now(JST)
+today_str  = now_jst.strftime('%Y年%m月%d日')
+today_date = now_jst.strftime('%Y-%m-%d')
+updated_str = now_jst.strftime('%Y年%m月%d日 %H:%M')
+
+# ── 石川関連キーワード ─────────────────────────────────────────────
+ISHIKAWA_KEYWORDS = [
+    'うるま市石川', '石川市', '石川区', '石川岳', '石川IC',
+    '石川インター', '伊波', '嘉手苅', '田場', '東恩納',
+    '高江洲', 'うるま市', '石川',
+]
+
+# ── RSSソース一覧 ──────────────────────────────────────────────────
+RSS_SOURCES = [
+    {
+        'name': 'Google ニュース（うるま市 石川）',
+        'url': 'https://news.google.com/rss/search?q=%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82+%E7%9F%B3%E5%B7%9D+%E6%B2%96%E7%B8%84&hl=ja&gl=JP&ceid=JP:ja',
+        'filter': False,  # Google News は検索済みなのでフィルタ不要
+    },
+    {
+        'name': '琉球新報',
+        'url': 'https://ryukyushimpo.jp/rss/news.xml',
+        'filter': True,
+    },
+    {
+        'name': 'NHK沖縄',
+        'url': 'https://www3.nhk.or.jp/rss/news/cat6.xml',
+        'filter': True,
+    },
+    {
+        'name': 'うるま市公式',
+        'url': 'https://www.city.uruma.lg.jp/rss',
+        'filter': False,
+    },
+]
+
+# ── ユーティリティ関数 ────────────────────────────────────────────
+
+def strip_html(text):
+    """HTMLタグを除去してプレーンテキストを返す"""
+    if not text:
+        return ''
+    text = re.sub(r'<[^>]+>', ' ', text)
+    text = unescape(text)
+    text = re.sub(r'\s+', ' ', text)
+    return text.strip()
+
+def is_ishikawa_related(title, summary=''):
+    """石川関連キーワードが含まれているか判定"""
+    text = title + ' ' + summary
+    return any(kw in text for kw in ISHIKAWA_KEYWORDS)
+
+def truncate(text, length=130):
+    """指定文字数でテキストを切り詰める"""
+    if not text:
+        return ''
+    return text[:length] + '…' if len(text) > length else text
+
+# ── メイン処理 ────────────────────────────────────────────────────
+
+def fetch_articles():
+    """全ソースからニュースを収集・フィルタ・重複除去して返す"""
+    articles = []
+    seen = set()
+
+    for source in RSS_SOURCES:
+        try:
+            print(f"取得中: {source['name']} ...")
+            feed = feedparser.parse(source['url'])
+
+            if not feed.entries:
+                print(f"  → 0件（フィードが空またはアクセス不可）")
+                continue
+
+            count = 0
+            for entry in feed.entries[:30]:
+                title   = strip_html(entry.get('title', ''))
+                summary = strip_html(entry.get('summary', entry.get('description', '')))
+                link    = entry.get('link', '')
+
+                if not title or not link:
+                    continue
+
+                # キーワードフィルタ（必要なソースのみ）
+                if source['filter'] and not is_ishikawa_related(title, summary):
+                    continue
+
+                # 重複除去（タイトル冒頭20文字で判定）
+                key = title[:20]
+                if key in seen:
+                    continue
+                seen.add(key)
+
+                articles.append({
+                    'title':   title,
+                    'summary': truncate(summary),
+                    'link':    link,
+                    'source':  source['name'],
+                })
+                count += 1
+
+            print(f"  → {count}件")
+
+        except Exception as e:
+            print(f"  ⚠️ エラー: {e}")
+
+    return articles
+
+
+def generate_html(articles):
+    """ニュース一覧 HTML を生成して news/index.html に保存"""
+
+    # ── 記事カード HTML ──
+    if articles:
+        cards = ''
+        for a in articles:
+            summary_html = f'<p class="ns">{a["summary"]}</p>' if a['summary'] else ''
+            cards += f'''
+    <article class="ni">
+      <a class="nt" href="{a['link']}" target="_blank" rel="noopener noreferrer">{a['title']}</a>
+      {summary_html}
+      <span class="src">出典：{a['source']}</span>
+    </article>'''
+        body_html = f'<div class="nl">{cards}\n  </div>'
+        count_label = f'{len(articles)}件'
+    else:
+        body_html = '''
+  <div class="empty">
+    <div class="empty-icon">📭</div>
+    <p>本日は石川に関するニュースが<br>見つかりませんでした。</p>
+    <p class="empty-sub">明日また自動更新されます。</p>
+  </div>'''
+        count_label = 'なし'
+
+    # ── HTML テンプレート ──
+    html = f'''<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#e53935">
+  <title>今日の石川ニュース {today_str}</title>
+  <style>
+    *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
+    body {{
+      font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN',
+                   'Noto Sans JP', 'Meiryo', sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      min-height: 100vh;
+    }}
+    /* ── ヘッダー ── */
+    header {{
+      background: #e53935;
+      color: #fff;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }}
+    .back {{
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      color: #fff; font-size: 18px;
+      text-decoration: none; flex-shrink: 0;
+    }}
+    .back:active {{ background: rgba(255,255,255,0.35); }}
+    .hd-text h1 {{ font-size: 1rem; font-weight: bold; }}
+    .hd-text small {{ display: block; font-size: 0.72rem; opacity: 0.85; margin-top: 1px; }}
+    .badge {{
+      margin-left: auto;
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }}
+    /* ── 記事リスト ── */
+    main {{ max-width: 700px; margin: 0 auto; padding: 14px 12px; }}
+    .nl {{ display: flex; flex-direction: column; gap: 10px; }}
+    .ni {{
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      border-left: 4px solid #e53935;
+    }}
+    .nt {{
+      display: block;
+      font-size: 0.93rem;
+      font-weight: bold;
+      color: #1565c0;
+      text-decoration: none;
+      line-height: 1.5;
+      margin-bottom: 5px;
+    }}
+    .nt:hover {{ text-decoration: underline; }}
+    .ns {{
+      font-size: 0.8rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 6px;
+    }}
+    .src {{ font-size: 0.72rem; color: #aaa; }}
+    /* ── 記事なし ── */
+    .empty {{
+      background: #fff;
+      border-radius: 12px;
+      padding: 48px 20px;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }}
+    .empty-icon {{ font-size: 48px; margin-bottom: 16px; }}
+    .empty p {{ font-size: 0.92rem; line-height: 1.9; color: #666; }}
+    .empty-sub {{ font-size: 0.78rem; color: #aaa; margin-top: 8px; }}
+    /* ── フッター ── */
+    footer {{
+      text-align: center;
+      padding: 28px 16px 32px;
+      color: #bbb;
+      font-size: 0.72rem;
+      line-height: 1.8;
+    }}
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../index.html" aria-label="地図に戻る">&#8592;</a>
+    <div class="hd-text">
+      <h1>今日の石川ニュース</h1>
+      <small>{today_str} 更新</small>
+    </div>
+    <span class="badge">{count_label}</span>
+  </header>
+
+  <main>
+    {body_html}
+  </main>
+
+  <footer>
+    <p>情報は各ニュースソースから自動収集しています。</p>
+    <p>内容の正確性は各出典元をご確認ください。</p>
+    <p>自動更新：毎日朝6時（JST） / 最終更新 {updated_str}</p>
+  </footer>
+</body>
+</html>'''
+
+    os.makedirs('news', exist_ok=True)
+    with open('news/index.html', 'w', encoding='utf-8') as f:
+        f.write(html)
+    print(f"\n✅ news/index.html を生成しました（{len(articles)}件）")
+
+    # JSON も保存（将来の活用のため）
+    data = {
+        'date':     today_date,
+        'updated':  now_jst.isoformat(),
+        'count':    len(articles),
+        'articles': articles,
+    }
+    with open('news/today.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    print("✅ news/today.json を生成しました")
+
+
+# ── エントリーポイント ─────────────────────────────────────────────
+if __name__ == '__main__':
+    print(f"=== 今日の石川ニュース収集開始 {today_str} ===\n")
+    articles = fetch_articles()
+    print(f"\n合計: {len(articles)}件\n")
+    generate_html(articles)
+    print("\n=== 完了 ===")

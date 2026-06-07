@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#e53935">
+  <title>今日の石川ニュース</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN',
+                   'Noto Sans JP', 'Meiryo', sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      min-height: 100vh;
+    }
+    header {
+      background: #e53935;
+      color: #fff;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .back {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      color: #fff; font-size: 18px;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .hd-text h1 { font-size: 1rem; font-weight: bold; }
+    .hd-text small { display: block; font-size: 0.72rem; opacity: 0.85; margin-top: 1px; }
+    main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .preparing {
+      background: #fff;
+      border-radius: 12px;
+      padding: 48px 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .preparing-icon { font-size: 48px; margin-bottom: 16px; }
+    .preparing p { font-size: 0.92rem; line-height: 1.9; color: #666; }
+    .preparing small { font-size: 0.78rem; color: #aaa; display: block; margin-top: 10px; }
+    footer {
+      text-align: center;
+      padding: 28px 16px 32px;
+      color: #bbb;
+      font-size: 0.72rem;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../index.html" aria-label="地図に戻る">&#8592;</a>
+    <div class="hd-text">
+      <h1>今日の石川ニュース</h1>
+      <small>準備中</small>
+    </div>
+  </header>
+
+  <main>
+    <div class="preparing">
+      <div class="preparing-icon">🗞️</div>
+      <p>毎日朝6時に自動更新されます。<br>初回更新をお待ちください。</p>
+      <small>GitHub Actions により自動収集・公開</small>
+    </div>
+  </main>
+
+  <footer>
+    <p>情報は各ニュースソースから自動収集しています。</p>
+    <p>自動更新：毎日朝6時（JST）</p>
+  </footer>
+</body>
+</html>

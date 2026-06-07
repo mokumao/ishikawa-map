@@ -1910,11 +1910,20 @@ if ('ontouchstart' in window) {
   map.on('zoomstart', collapseHeaderOnInteraction);
 }
 
-// ── 今日の石川ニュースバナー：×ボタンで閉じる ─────────────────────────
+// ── 今日の石川ニュースバナー：ボタン押下でニュースページへ／×で閉じる ──
 (function() {
+  // ニュースボタン → news/index.html へ遷移
+  var newsBtn = document.getElementById('newsBannerBtn');
+  if (newsBtn) {
+    newsBtn.addEventListener('click', function() {
+      window.location.href = 'news/index.html';
+    });
+  }
+  // ×ボタン → バナーを非表示
   var closeBtn = document.getElementById('newsBannerClose');
   if (closeBtn) {
-    closeBtn.addEventListener('click', function() {
+    closeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
       var banner = document.getElementById('newsBanner');
       if (banner) banner.classList.add('hidden');
     });
