@@ -1449,7 +1449,7 @@ const ISHIKAWA_ZOOM   = window.innerWidth <= 767 ? 13 : 14;
     // ポップアップペインをmap containerの直接の子へ移動
     mapContainer.appendChild(popupPane);
     popupPane.style.position   = 'absolute';
-    popupPane.style.zIndex     = '1100';
+    popupPane.style.zIndex     = '1503'; // ズームコントロール(1502)より前面
     popupPane.style.left       = '0';
     popupPane.style.top        = '0';
     popupPane.style.willChange = 'transform';
