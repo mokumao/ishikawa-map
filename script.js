@@ -1910,6 +1910,17 @@ if ('ontouchstart' in window) {
   map.on('zoomstart', collapseHeaderOnInteraction);
 }
 
+// ── 今日の石川ニュースバナー：×ボタンで閉じる ─────────────────────────
+(function() {
+  var closeBtn = document.getElementById('newsBannerClose');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      var banner = document.getElementById('newsBanner');
+      if (banner) banner.classList.add('hidden');
+    });
+  }
+})();
+
 // ── ポップアップ誤タップ防止：開いた直後 500ms はコンテンツを無効化 ───────
 // 理由：アイコンを押している指がそのままポップアップ上に乗り、
 //       離した瞬間にボタン類が反応してしまう現象を防ぐ。
