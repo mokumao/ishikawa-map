@@ -1878,6 +1878,19 @@ map.on('popupopen', function(e) {
 map.on('popupopen',  function() { document.body.classList.add('popup-open');    });
 map.on('popupclose', function() { document.body.classList.remove('popup-open'); });
 
+// ── 地図操作時にヘッダーを自動非表示（スマホのみ） ─────────────────────
+// ドラッグ・ズーム開始時にヘッダーを折りたたむ
+if ('ontouchstart' in window) {
+  function collapseHeaderOnInteraction() {
+    if (!document.body.classList.contains('header-collapsed')) {
+      document.body.classList.add('header-collapsed');
+      setTimeout(function() { map.invalidateSize(); }, 50);
+    }
+  }
+  map.on('dragstart', collapseHeaderOnInteraction);
+  map.on('zoomstart', collapseHeaderOnInteraction);
+}
+
 // ── ポップアップ誤タップ防止：開いた直後 500ms はコンテンツを無効化 ───────
 // 理由：アイコンを押している指がそのままポップアップ上に乗り、
 //       離した瞬間にボタン類が反応してしまう現象を防ぐ。
