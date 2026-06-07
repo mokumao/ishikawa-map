@@ -1172,6 +1172,21 @@ body.info-open .label-toggle-btn { display: none !important; }
     50%       { opacity: 0.4; }
   }
 
+  /* ── Leaflet帰属表示を一番下に固定 ── */
+  .leaflet-control-attribution {
+    position: fixed !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+    z-index: 850 !important;
+    background: rgba(255,255,255,0.85) !important;
+    font-size: 10px !important;
+    padding: 2px 6px !important;
+    box-sizing: border-box;
+  }
+
   /* ── ボトムタブバー ── */
   .bottom-tabs {
     display: flex;
@@ -1179,8 +1194,9 @@ body.info-open .label-toggle-btn { display: none !important; }
     background: #fff;
     border-top: 1px solid #e0e0e0;
     z-index: 900;
-    padding: 8px 10px env(safe-area-inset-bottom, 8px);
+    padding: 8px 10px 8px;
     gap: 8px;
+    margin-bottom: 18px; /* attribution の高さ分の余白 */
   }
   .bottom-tab-btn {
     flex: 1;
