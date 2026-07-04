@@ -1,6 +1,6 @@
 {
-  "date": "2026-07-04",
-  "updated": "2026-07-04T07:01:27.452424+09:00",
+  "date": "2026-07-05",
+  "updated": "2026-07-05T06:54:19.091594+09:00",
   "count": 11,
   "articles": [
     {
@@ -8,8 +8,16 @@
       "summary": "中継 沖縄県うるま市 神秘の洞窟CAVE OKINAWA QAB 琉球朝日放送",
       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1LN3AzLUlHb0RXaDlkTDNIdURqREZnRllxV3dUQnhycVpYY1o1UnppOWpKclhVNWd5a2hJZFVUNWh0Z2dOZGotNHFaSEtzamJuV3J3NlczUnEzdw?oc=5",
       "source": "Google ニュース（うるま市 石川）",
-      "date_label": "昨日 07/03",
+      "date_label": "07/03",
       "pub_date": "2026-07-03T02:55:33+09:00"
+    },
+    {
+      "title": "戦後の「豚」が繋いだ縁 ハワイ県系人と獅子舞交流 恩返しに豚の丸焼きも うるま市・勝連南風原 - 沖縄タイムス社",
+      "summary": "戦後の「豚」が繋いだ縁 ハワイ県系人と獅子舞交流 恩返しに豚の丸焼きも うるま市・勝連南風原 沖縄タイムス社",
+      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBzTU9YVHJuMlhOV2FGOU1IbEZ1YVFWcTV5U1cteWw4bFVFRVlDN2FDQ296Rldrb3prNExlMURtWmNLYVE0UTlCN0lVdmlkV2M5enJldjJLeWZBQ0toSEE?oc=5",
+      "source": "Google ニュース（うるま市 石川）",
+      "date_label": "07/01",
+      "pub_date": "2026-07-01T11:46:00+09:00"
     },
     {
       "title": "米軍機墜落で児童ら犠牲 沖縄・宮森小事件６７年/「語り継ぐ」 現地で追悼 | しんぶん赤旗 - jcp.or.jp",
@@ -36,12 +44,28 @@
       "pub_date": "2026-06-30T17:13:52+09:00"
     },
     {
+      "title": "「平和の大事さ伝え続けたい」 宮森小米軍機墜落事故から67年 - 琉球新報デジタル",
+      "summary": "「平和の大事さ伝え続けたい」 宮森小米軍機墜落事故から67年 琉球新報デジタル",
+      "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1wR0pWcFR6X3RWd0M4dGZ6M0JwRmtYOHVFS1VhMEp6UTRJU1JEbnVMWGFaVkVpOFJ1RkQ4dDd1RjlfeGlCY05FZkQwQTAwQXJ2eHBBWDFwdzBJMWE0UWt3ag?oc=5",
+      "source": "Google ニュース（うるま市 石川）",
+      "date_label": "06/30",
+      "pub_date": "2026-06-30T12:35:42+09:00"
+    },
+    {
       "title": "米軍機が校舎に激突、児童ら18人犠牲 宮森小事故から67年、遺族ら慰霊祭 - 沖縄タイムス社",
       "summary": "米軍機が校舎に激突、児童ら18人犠牲 宮森小事故から67年、遺族ら慰霊祭 沖縄タイムス社",
       "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5saUNBZVF1eV9oTW5PU3BLa3MyQUVxU3RITWJXbFc3bGU4UWNtcEZCRF96aDdLdkVDeVB0VkhMdVk5cWtTbWVOMEhTVUwwWnlqcnFkclR3alJMMk1PY2c?oc=5",
       "source": "Google ニュース（うるま市 石川）",
       "date_label": "06/30",
       "pub_date": "2026-06-30T12:30:00+09:00"
+    },
+    {
+      "title": "67年前の宮森小ジェット機墜落「過去じゃない」 都内で写真展を開く20代の思い 沖縄 - 琉球新報デジタル",
+      "summary": "67年前の宮森小ジェット機墜落「過去じゃない」 都内で写真展を開く20代の思い 沖縄 琉球新報デジタル",
+      "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1kYUhySkNwaU1keHh5WS1xXzdBOUl6azBYNjAtV3dxNW9lUUVVLUhUVWhXMUV4aVh6eEg1ZE50cHhsSmMtajJpcENqSEgxbDFGSlhmUVlPZm9xWTFLc1hDNg?oc=5",
+      "source": "Google ニュース（うるま市 石川）",
+      "date_label": "06/30",
+      "pub_date": "2026-06-30T05:00:00+09:00"
     },
     {
       "title": "画像2 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - ウォーカープラス",
@@ -66,30 +90,6 @@
       "source": "ココガーデンリゾート沖縄",
       "date_label": "06/28",
       "pub_date": "2026-06-28T19:20:57+09:00"
-    },
-    {
-      "title": "能登少年自然の家が再開 記念式典 知事「防災学びを」 - 中日新聞Web",
-      "summary": "能登少年自然の家が再開 記念式典 知事「防災学びを」 中日新聞Web",
-      "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE8ydEVhWXgyUTludTk1Y2dHNE9FZHJpRzRIOTNmSVZoeGRDY21KSy00Q1dTWnpBb1o0eXdhUGJsZXhBUXl1eUVKZnljcXFIRURuVVhWaA?oc=5",
-      "source": "石川少年自然の家",
-      "date_label": "06/28",
-      "pub_date": "2026-06-28T05:05:00+09:00"
-    },
-    {
-      "title": "石川県能登少年自然の家復旧作業終了 7月から本格再開（2026年6月27日掲載）｜テレ金NEWS NNN - 日テレNEWS NNN",
-      "summary": "石川県能登少年自然の家復旧作業終了 7月から本格再開（2026年6月27日掲載）｜テレ金NEWS NNN 日テレNEWS NNN",
-      "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPZEhxbERRTGxRVE5LeFdGdWFUMjdLbUlzaUtHVGpCNTM2NFpWX3gxZFY2Y2VkQ25PSlJqd2F0Y0UzRE9ELWQybWYtdmVydUZJM3Zsd3ZDaWdvZlo0MU1QRkpNdDIxU05EYXByZlBGOVBSR01hRUpmZW53S3lVdDhqQ0o1VQ?oc=5",
-      "source": "石川少年自然の家",
-      "date_label": "06/27",
-      "pub_date": "2026-06-27T17:05:01+09:00"
-    },
-    {
-      "title": "【画像】石川県能登少年自然の家復旧作業終了 7月から本格再開 - ライブドアニュース",
-      "summary": "【画像】石川県能登少年自然の家復旧作業終了 7月から本格再開 ライブドアニュース",
-      "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9wQjN6dGpPS0VZU00waWVrcWtLWXM4eUpyY0JNVHVodmxXcU5pb2JPQXpyeHBWVGg3RlZtZXdkNHJWS1Bxa0VsNUYwNVpVT0tBSXBkY2RmWjF1MC1WT1lPUW1WM2JPZDlOUHE1RWJrSUJ2MW9sRkVsX2FqbFM?oc=5",
-      "source": "石川少年自然の家",
-      "date_label": "06/27",
-      "pub_date": "2026-06-27T17:05:01+09:00"
     }
   ]
 }
