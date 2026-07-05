@@ -1525,6 +1525,7 @@ setTimeout(() => {
   const miniMap = L.map('minimap', {
     center:             ISHIKAWA_CENTER,
     zoom:               12,
+    zoomSnap:           0.25, // fitBoundsで境界線がぴったり収まるよう細かく調整
     zoomControl:        false,
     attributionControl: false,
     dragging:           false,
@@ -1541,11 +1542,14 @@ setTimeout(() => {
   }).addTo(miniMap);
 
   // 石川エリアの境界（メイン地図と同じ線。海岸線部分は非表示のため開いた線で描画）
-  L.polyline(ISHIKAWA_BOUNDARY, {
+  const miniBoundary = L.polyline(ISHIKAWA_BOUNDARY, {
     color:   '#1976D2',
     weight:   2,
     opacity:  0.9
   }).addTo(miniMap);
+
+  // 境界線全体が収まるようにズームを自動調整
+  miniMap.fitBounds(miniBoundary.getBounds(), { padding: [4, 4] });
 
   // ── CSSオーバーレイ式2重丸（ミニマップ枠端でクランプ表示） ──────
   // Leafletマーカーはoverflowでクリップされ消えてしまうため
@@ -1608,7 +1612,8 @@ setTimeout(() => {
   // ミニマップを正しい位置・サイズに強制リセットする関数
   function resetMinimap() {
     miniMap.invalidateSize();
-    miniMap.setView(ISHIKAWA_CENTER, 12, { animate: false }); // 中心・ズームを強制リセット
+    // 境界線全体が収まる表示に強制リセット
+    miniMap.fitBounds(miniBoundary.getBounds(), { padding: [4, 4], animate: false });
     updateMiniTarget();
   }
 
