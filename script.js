@@ -19,7 +19,6 @@ var TRANSLATIONS = {
     'btn.showNames':       '店名を表示',
     'bottom.map':          '地図',
     'bottom.list':         '一覧',
-    'gear.list':           'リスト',
     'gear.back':           '戻る',
     'lang.ja':             '日本語',
     'lang.en':             '英語',
@@ -62,7 +61,6 @@ var TRANSLATIONS = {
     'btn.showNames':       'Show names',
     'bottom.map':          'Map',
     'bottom.list':         'List',
-    'gear.list':           'List',
     'gear.back':           'Back',
     'lang.ja':             'Japanese',
     'lang.en':             'English',
@@ -751,10 +749,6 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 
   // メインメニュー
   document.getElementById('gearLangBtn').addEventListener('click', showLang);
-  document.getElementById('gearListBtn').addEventListener('click', function () {
-    openedViaPin = false; // 歯車メニューから開いた扱いに
-    showCategory();
-  });
   document.getElementById('gearCloseBtn').addEventListener('click', closeMenu);
 
   // カテゴリサブメニュー
