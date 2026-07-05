@@ -2318,6 +2318,12 @@ function initSearch() {
 buildFilterButtons();
 initSearch();
 
+// ── 店舗詳細ページからの遷移先タブ指定（?tab=map / ?tab=list）────────
+(function () {
+  const tab = new URLSearchParams(location.search).get('tab');
+  if (tab === 'map' || tab === 'list') switchTab(tab);
+})();
+
 // ── スマホ：ダブルタップ＋ドラッグでズーム（グーグルマップ方式）──
 // ドラッグ開始時にタイルをキャンバスへスナップショット → キャンバスをCSSスケール
 // タイル再読み込みが一切発生しないのでグレー化ゼロ

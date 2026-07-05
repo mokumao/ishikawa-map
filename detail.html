@@ -239,6 +239,31 @@
     }
     .gmap-btn:hover { background: #c8e6c9; }
 
+    /* ── 地図／一覧 切り替えボタン ── */
+    .view-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .view-toggle-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 4px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      font-family: inherit;
+      background: #fff;
+      color: #546e7a;
+      border: 2px solid #e53935;
+      border-radius: 7px;
+      text-decoration: none;
+      transition: background .15s, color .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .view-toggle-btn:hover { background: #ffebee; }
+
     /* ── フッター ── */
     .detail-footer {
       text-align: center;
@@ -259,7 +284,7 @@
 <body>
 
   <header class="detail-header">
-    <a class="back-btn" href="index.html">← 地図に戻る</a>
+    <a class="back-btn" href="index.html" aria-label="地図に戻る">←</a>
     <span class="header-title" id="headerTitle">店舗詳細</span>
   </header>
 
@@ -384,6 +409,12 @@
         <a href="${gmapUrl()}" target="_blank" rel="noopener" class="gmap-btn" style="margin-bottom:14px;">
           Googleマップで見る
         </a>
+
+        <!-- 地図／一覧 切り替え -->
+        <div class="view-toggle">
+          <a href="index.html?tab=map" class="view-toggle-btn">🗺 地図</a>
+          <a href="index.html?tab=list" class="view-toggle-btn">📋 一覧</a>
+        </div>
 
         <!-- リンク -->
         ${linksSection}
