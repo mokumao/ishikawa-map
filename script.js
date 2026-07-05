@@ -1907,6 +1907,16 @@ if ('ontouchstart' in window) {
   map.on('zoomstart', collapseHeaderOnInteraction);
 }
 
+// ── ページ表示時はヘッダー（青色バー）を必ず表示 ─────────────────────
+// スマホブラウザのbfcache復元で前回の折りたたみ状態が残るのを防ぐ。
+// pageshow は通常の読み込みでもキャッシュ復元でも発火する
+window.addEventListener('pageshow', function () {
+  document.body.classList.remove('header-collapsed');
+  var h = document.querySelector('header');
+  if (h) h.style.display = '';
+  setTimeout(function () { map.invalidateSize(); }, 50);
+});
+
 // ── 今日の石川ニュースバナー：ボタン押下でニュースページへ／×で閉じる ──
 (function() {
   // ニュースボタン → news/index.html へ遷移
