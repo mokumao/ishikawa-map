@@ -1510,12 +1510,11 @@ setTimeout(() => {
     maxZoom: 18
   }).addTo(miniMap);
 
-  // 石川エリアの境界（メイン地図と同じポリゴン）
-  L.polygon(ISHIKAWA_BOUNDARY, {
+  // 石川エリアの境界（メイン地図と同じ線。海岸線部分は非表示のため開いた線で描画）
+  L.polyline(ISHIKAWA_BOUNDARY, {
     color:   '#1976D2',
     weight:   2,
-    opacity:  0.9,
-    fill:     false
+    opacity:  0.9
   }).addTo(miniMap);
 
   // ── CSSオーバーレイ式2重丸（ミニマップ枠端でクランプ表示） ──────
@@ -1605,13 +1604,11 @@ setTimeout(() => {
 
 // ── 石川エリア境界線 ─────────────────────────────────────────────
 // 旧石川市の行政区域境界（ishikawa-boundary.js のデータを使用）
-// 恩納村・金武町・具志川との正確な境界線
-L.polygon(ISHIKAWA_BOUNDARY, {
+// 恩納村・金武町・具志川との正確な境界線（海岸線部分は非表示のため開いた線で描画）
+L.polyline(ISHIKAWA_BOUNDARY, {
   color:   '#1976D2',
   weight:   3,
-  opacity:  0.85,
-  fill:     false,
-  dashArray: null
+  opacity:  0.85
 }).addTo(map);
 
 // ── マーカー生成・保持 ───────────────────────────────────────────
