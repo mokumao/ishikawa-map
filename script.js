@@ -1510,9 +1510,9 @@ setTimeout(() => {
     maxZoom: 18
   }).addTo(miniMap);
 
-  // 石川エリアの赤線境界（メイン地図と同じポリゴン）
+  // 石川エリアの境界（メイン地図と同じポリゴン）
   L.polygon(ISHIKAWA_BOUNDARY, {
-    color:   '#e53935',
+    color:   '#1976D2',
     weight:   2,
     opacity:  0.9,
     fill:     false
@@ -1607,7 +1607,7 @@ setTimeout(() => {
 // 旧石川市の行政区域境界（ishikawa-boundary.js のデータを使用）
 // 恩納村・金武町・具志川との正確な境界線
 L.polygon(ISHIKAWA_BOUNDARY, {
-  color:   '#e53935',
+  color:   '#1976D2',
   weight:   3,
   opacity:  0.85,
   fill:     false,
