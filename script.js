@@ -707,6 +707,42 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     if (map.tap) map.tap.disable();
   });
 
+  // ── 初期表示：地図下部にカテゴリチップバー（施設アイコン）を常時表示 ──
+  // ページを開いた直後から全カテゴリのチップを並べ、表示中のカテゴリを色付きにする。
+  // markersData 生成・applyFilter('all') 実行後に走らせるため setTimeout(0) を使用
+  setTimeout(function () {
+    if (catChipSet.size > 0) return; // 既に表示済みなら何もしない
+    var checks = {
+      shokuji:   function(g){ return g === '食事処' || !['食事処','居酒屋等','コンビニ','ガソリン','宿泊','金融','教育','観光'].includes(g); },
+      izakaya:   function(g){ return g === '居酒屋等'; },
+      conbini:   function(g){ return g === 'コンビニ'; },
+      gas:       function(g){ return g === 'ガソリン'; },
+      stay:      function(g){ return g === '宿泊'; },
+      finance:   function(g){ return g === '金融'; },
+      education: function(g){ return g === '教育'; },
+      tourism:   function(g){ return g === '観光'; }
+    };
+    var btnIds = {
+      shokuji: 'gearCatShokuji', izakaya: 'gearCatIzakaya', conbini: 'gearCatConbini',
+      gas: 'gearCatGas', stay: 'gearCatStay', finance: 'gearCatFinance',
+      education: 'gearCatEducation', tourism: 'gearCatTourism'
+    };
+    Object.keys(checks).forEach(function (key) {
+      catChipSet.add(key); // チップは全カテゴリ分並べる
+      var visible = markersData.some(function (d) {
+        return checks[key](d.restaurant.genre) && map.hasLayer(d.marker);
+      });
+      if (visible) {
+        catSel.add(key);
+        var b = document.getElementById(btnIds[key]);
+        if (b) b.classList.add('cat-selected');
+      }
+    });
+    updateAllBtn();
+    updateClearBtn();
+    updateCatLabel(); // catChipSet の全チップを描画（表示中カテゴリは色付き）
+  }, 0);
+
   // 歯車ボタン：メニュー開閉トグル
   document.getElementById('gearBtn').addEventListener('click', function (e) {
     L.DomEvent && L.DomEvent.stopPropagation(e);
