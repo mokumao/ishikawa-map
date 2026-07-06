@@ -1924,6 +1924,24 @@ window.addEventListener('pageshow', function () {
 
 // ── 今日の石川ニュースバナー：ボタン押下でニュースページへ／×で閉じる ──
 (function() {
+  var banner = document.getElementById('newsBanner');
+
+  // 表示制御：サイトを最初に開いたときだけ表示する。
+  // 他のページ（ニュース・店舗詳細等）へ行って戻ってきたときは表示しない。
+  // sessionStorage はタブを閉じるまで保持されるため「同一タブでの再訪」を判定できる
+  if (banner) {
+    if (sessionStorage.getItem('newsBannerShown') === '1') {
+      banner.classList.add('hidden');
+    } else {
+      sessionStorage.setItem('newsBannerShown', '1');
+    }
+  }
+  // ブラウザの「戻る」でキャッシュ復元されたときはスクリプトが再実行されないため
+  // pageshow で明示的に隠す
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted && banner) banner.classList.add('hidden');
+  });
+
   // ニュースボタン → news/index.html へ遷移
   var newsBtn = document.getElementById('newsBannerBtn');
   if (newsBtn) {
@@ -1936,7 +1954,6 @@ window.addEventListener('pageshow', function () {
   if (closeBtn) {
     closeBtn.addEventListener('click', function(e) {
       e.stopPropagation();
-      var banner = document.getElementById('newsBanner');
       if (banner) banner.classList.add('hidden');
     });
   }
