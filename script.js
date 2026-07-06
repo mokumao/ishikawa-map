@@ -2006,10 +2006,14 @@ map.on('popupopen', function(e) {
   // ポップアップ外（地図エリア）は Leaflet の通常ドラッグをそのまま使う。
   var _mc = map.getContainer();
   var _pw = popupEl.querySelector('.leaflet-popup-content-wrapper');
-  var _lTX = 0, _lTY = 0, _tDragging = false;
+  var _lTX = 0, _lTY = 0, _tDragging = false, _tActive = false;
 
   function onWrapTouchStart(te) {
     if (te.touches.length !== 1) return;
+    // ボタン・リンク上のタッチはパン処理をせずネイティブのタップ動作を維持
+    // （パンで地図とポップアップが動くとタップがクリックとして成立しなくなるため）
+    if (te.target.closest('a, button, .popup-close-side')) { _tActive = false; return; }
+    _tActive   = true;
     _lTX = te.touches[0].clientX;
     _lTY = te.touches[0].clientY;
     _tDragging = false;
@@ -2017,7 +2021,7 @@ map.on('popupopen', function(e) {
     map.dragging.disable();
   }
   function onWrapTouchMove(te) {
-    if (te.touches.length !== 1) return;
+    if (!_tActive || te.touches.length !== 1) return;
     var dx = te.touches[0].clientX - _lTX;
     var dy = te.touches[0].clientY - _lTY;
     if (!_tDragging && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) _tDragging = true;
@@ -2027,6 +2031,8 @@ map.on('popupopen', function(e) {
     map.panBy([-dx, -dy], { animate: false });
   }
   function onWrapTouchEnd() {
+    if (!_tActive) return;
+    _tActive = false;
     map.dragging.enable();
   }
   if (_pw) {
@@ -2378,6 +2384,14 @@ initSearch();
 
   mapEl.addEventListener('touchstart', function(e) {
     if (e.touches.length !== 1) { dragging = false; return; }
+
+    // ポップアップ内・ボタン・リンク上のタップはダブルタップズームの対象外
+    // （ボタン連打が preventDefault で潰されて遷移しない問題を防ぐ）
+    if (e.target.closest('.leaflet-popup, a, button')) {
+      dragging = false;
+      lastTapTime = 0;
+      return;
+    }
 
     const now   = Date.now();
     const touch = e.touches[0];
