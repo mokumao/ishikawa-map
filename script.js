@@ -901,14 +901,14 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     btn.addEventListener('click', function () {
       if (openedViaPin && savedPanPixels > 0) {
         // カテゴリパネル表示中：石川中心が画面上部に来るようオフセット
-        var zoom = ISHIKAWA_ZOOM;
-        var center = L.latLng(ISHIKAWA_CENTER);
+        var zoom = map.getBoundsZoom(ISHIKAWA_BOUNDS);
+        var center = ISHIKAWA_BOUNDS.getCenter();
         var centerPx = map.project(center, zoom);
         var offsetPx = centerPx.add([0, savedPanPixels]);
         var adjustedCenter = map.unproject(offsetPx, zoom);
         map.flyTo(adjustedCenter, zoom, { duration: 1.0 });
       } else {
-        map.flyTo(ISHIKAWA_CENTER, ISHIKAWA_ZOOM, { duration: 1.0 });
+        map.flyToBounds(ISHIKAWA_BOUNDS, { duration: 1.0 });
       }
     });
   })();
@@ -1044,10 +1044,10 @@ function checkPassword() {
       }
     }, 500); // GoatCounter の非同期読み込み完了を待つ
 
-    // オーバーレイ消去後に石川エリアを中央に表示
+    // オーバーレイ消去後に石川地区全体を表示
     setTimeout(() => {
       if (typeof map !== 'undefined') {
-        map.setView(ISHIKAWA_CENTER, ISHIKAWA_ZOOM, { reset: true, animate: false });
+        map.fitBounds(ISHIKAWA_BOUNDS, { animate: false });
       }
     }, 500);
   } else {
@@ -1484,6 +1484,8 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 // 石川エリアの初期表示位置
 const ISHIKAWA_CENTER = [26.430, 127.828];
 const ISHIKAWA_ZOOM   = window.innerWidth <= 767 ? 13 : 14;
+// 石川地区全体（青線境界）が収まる範囲。初期表示・石川全域ボタンで使用
+const ISHIKAWA_BOUNDS = L.latLngBounds(ISHIKAWA_BOUNDARY).pad(0.03);
 
 // ── ポップアップペインをmap-pane（transformあり）の外へ移動 ─────────────
 // leaflet-map-paneのCSSトランスフォームがz-indexのスタッキングコンテキストを閉じ込めるため
@@ -1511,9 +1513,9 @@ const ISHIKAWA_ZOOM   = window.innerWidth <= 767 ? 13 : 14;
   });
 })();
 
-// 初期表示を石川エリアに固定（invalidateSizeを使わず直接setView）
+// 初期表示は石川地区全体（青線境界）が収まる範囲
 setTimeout(() => {
-  map.setView(ISHIKAWA_CENTER, ISHIKAWA_ZOOM, { reset: true, animate: false });
+  map.fitBounds(ISHIKAWA_BOUNDS, { animate: false });
 }, 500);
 
 // ── ミニマップ（右上の概要図） ─────────────────────────────────────
