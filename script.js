@@ -908,7 +908,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
         var adjustedCenter = map.unproject(offsetPx, zoom);
         map.flyTo(adjustedCenter, zoom, { duration: 1.0 });
       } else {
-        map.flyToBounds(ISHIKAWA_BOUNDS, { duration: 1.0 });
+        fitIshikawaAll(true);
       }
     });
   })();
@@ -1047,7 +1047,7 @@ function checkPassword() {
     // オーバーレイ消去後に石川地区全体を表示
     setTimeout(() => {
       if (typeof map !== 'undefined') {
-        map.fitBounds(ISHIKAWA_BOUNDS, { animate: false });
+        fitIshikawaAll(false);
       }
     }, 500);
   } else {
@@ -1487,6 +1487,31 @@ const ISHIKAWA_ZOOM   = window.innerWidth <= 767 ? 13 : 14;
 // 石川地区全体（青線境界）が収まる範囲。初期表示・石川全域ボタンで使用
 const ISHIKAWA_BOUNDS = L.latLngBounds(ISHIKAWA_BOUNDARY).pad(0.03);
 
+// 石川地区全体を表示する共通処理。
+// 右上ミニマップの下・下部チップバーの上に境界とピンが収まるよう余白を自動計算する
+function fitIshikawaAll(fly) {
+  var mapRect = map.getContainer().getBoundingClientRect();
+  var topPad = 10, bottomPad = 10;
+
+  var mm = document.getElementById('minimap');
+  if (mm) {
+    var mmRect = mm.getBoundingClientRect();
+    if (mmRect.height > 0) topPad = Math.max(topPad, Math.round(mmRect.bottom - mapRect.top) + 8);
+  }
+  var chips = document.getElementById('catLabelWrapper');
+  if (chips && chips.style.display !== 'none') {
+    var chRect = chips.getBoundingClientRect();
+    if (chRect.height > 0) bottomPad = Math.max(bottomPad, Math.round(mapRect.bottom - chRect.top) + 8);
+  }
+
+  var opts = {
+    paddingTopLeft:     L.point(8, topPad),
+    paddingBottomRight: L.point(8, bottomPad)
+  };
+  if (fly) { opts.duration = 1.0; map.flyToBounds(ISHIKAWA_BOUNDS, opts); }
+  else     { opts.animate = false; map.fitBounds(ISHIKAWA_BOUNDS, opts); }
+}
+
 // ── ポップアップペインをmap-pane（transformあり）の外へ移動 ─────────────
 // leaflet-map-paneのCSSトランスフォームがz-indexのスタッキングコンテキストを閉じ込めるため
 // ポップアップペインをmap containerの直接の子に移動し、z-index 1100を有効にする
@@ -1514,8 +1539,9 @@ const ISHIKAWA_BOUNDS = L.latLngBounds(ISHIKAWA_BOUNDARY).pad(0.03);
 })();
 
 // 初期表示は石川地区全体（青線境界）が収まる範囲
+// チップバー生成後に実行するため少し遅らせる
 setTimeout(() => {
-  map.fitBounds(ISHIKAWA_BOUNDS, { animate: false });
+  fitIshikawaAll(false);
 }, 500);
 
 // ── ミニマップ（右上の概要図） ─────────────────────────────────────
