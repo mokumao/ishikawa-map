@@ -296,11 +296,6 @@
 </head>
 <body>
 
-  <header class="detail-header">
-    <a class="back-btn" href="index.html" aria-label="地図に戻る">←</a>
-    <span class="header-title" id="headerTitle">店舗詳細</span>
-  </header>
-
   <main class="detail-card" id="detailCard">
     <div class="error-box"><p>読み込み中…</p></div>
   </main>
@@ -338,7 +333,6 @@
 
       // タイトル更新
       document.title = r.name + ' | うるま市石川 飲食店マップ';
-      document.getElementById('headerTitle').textContent = r.name;
 
       // Google マップ URL
       function gmapUrl() {
