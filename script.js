@@ -2017,6 +2017,33 @@ map.on('popupopen', function(e) {
         map.closePopup();
       }, { once: true, passive: false });
     });
+
+    // ── リンクボタン（Googleマップ・店舗詳細）は touchend で直接遷移 ──
+    // ブラウザの合成クリック頼みだと、自動パン等でポップアップが動いた際に
+    // クリックが成立せず「押しても遷移しない」ことがあるため。
+    popupEl.querySelectorAll('a.popup-btn').forEach(function(a) {
+      var sx = 0, sy = 0, moved = false;
+      a.addEventListener('touchstart', function(ev) {
+        if (ev.touches.length !== 1) { moved = true; return; }
+        sx = ev.touches[0].clientX;
+        sy = ev.touches[0].clientY;
+        moved = false;
+      }, { passive: true });
+      a.addEventListener('touchmove', function(ev) {
+        if (Math.abs(ev.touches[0].clientX - sx) > 10 ||
+            Math.abs(ev.touches[0].clientY - sy) > 10) moved = true;
+      }, { passive: true });
+      a.addEventListener('touchend', function(ev) {
+        if (moved) return; // スクロール操作は遷移しない
+        ev.preventDefault();   // 合成クリックとの二重遷移を防止
+        ev.stopPropagation();
+        if (a.getAttribute('target') === '_blank') {
+          window.open(a.href, '_blank', 'noopener');
+        } else {
+          window.location.href = a.href;
+        }
+      }, { passive: false });
+    });
   }, 0);
 });
 
