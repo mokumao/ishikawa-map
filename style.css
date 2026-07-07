@@ -502,9 +502,8 @@ footer a:hover { text-decoration: underline; }
 .popup-close-side:hover { color: #e53935; background: #ffebee; border-color: #ffcdd2; }
 
 /* ── Leaflet ズームアニメーション ───────────────────────────────── */
-.leaflet-zoom-anim .leaflet-zoom-animated {
-  transition: transform 0.8s cubic-bezier(0, 0, 0.25, 1) !important;
-}
+/* 標準の0.25sを使用（以前の0.8s上書きは境界線・タイルの動きが
+   もたつく原因になっていたため削除） */
 
 /* ── GPU合成層でタイル・マーカーの描画を安定化 ─────────────────────── */
 /* ダブルタップドラッグズーム時の地図の震えを軽減する */
