@@ -2411,9 +2411,16 @@ buildFilterButtons();
 initSearch();
 
 // ── 店舗詳細ページからの遷移先タブ指定（?tab=map / ?tab=list）────────
+// ?shop=N があれば、その店舗のピンを開いた状態（詳細ボタン押下時と同じ表示）に戻す
 (function () {
-  const tab = new URLSearchParams(location.search).get('tab');
-  if (tab === 'map' || tab === 'list') switchTab(tab);
+  const params = new URLSearchParams(location.search);
+  const tab = params.get('tab');
+  const shop = params.get('shop');
+  if (shop !== null && !isNaN(parseInt(shop, 10))) {
+    focusShop(parseInt(shop, 10));
+  } else if (tab === 'map' || tab === 'list') {
+    switchTab(tab);
+  }
 })();
 
 // ── スマホ：ダブルタップ＋ドラッグでズーム（グーグルマップ方式）──

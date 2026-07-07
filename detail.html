@@ -312,7 +312,7 @@
   <!-- 地図／一覧 切り替え（画面下部に固定） -->
   <div class="view-toggle-bar">
     <div class="view-toggle">
-      <a href="index.html?tab=map" class="view-toggle-btn">🗺 地図</a>
+      <a href="index.html?tab=map" class="view-toggle-btn" id="mapToggleBtn">🗺 地図</a>
       <a href="index.html?tab=list" class="view-toggle-btn">📋 一覧</a>
     </div>
   </div>
@@ -325,6 +325,10 @@
       const idx = parseInt(hash, 10);
       const r = restaurants[idx];
       const card = document.getElementById('detailCard');
+
+      // 「地図」ボタン：この店舗のピンを開いた状態の地図へ戻す
+      var mapBtn = document.getElementById('mapToggleBtn');
+      if (mapBtn && !isNaN(idx)) mapBtn.href = 'index.html?tab=map&shop=' + idx;
 
       if (!r) {
         card.innerHTML = `<div class="error-box"><h2>店舗が見つかりません</h2><p><a href="index.html">地図に戻る</a></p></div>`;
