@@ -1434,9 +1434,19 @@ function makePopup(r, idx) {
 }
 
 // ── 地図初期化 ───────────────────────────────────────────────────
+// ?shop=N 指定時（店舗詳細ページからの復帰）は、初期表示から
+// 最初にその店舗の位置・ズームで開始する。
+// こうしないと「まず石川中心の広域表示が一瞬見えてから店舗にジャンプする」
+// フラッシュが発生してしまう（デフォルト中心→店舗中心の切り替えが目に見えてしまう）。
+const _initialShopIdx = (function () {
+  var s = new URLSearchParams(location.search).get('shop');
+  return s !== null ? parseInt(s, 10) : NaN;
+})();
+const _initialShop = !isNaN(_initialShopIdx) ? restaurants[_initialShopIdx] : null;
+
 const map = L.map("map", {
-  center:  [26.430, 127.828],
-  zoom:    14,
+  center:  _initialShop ? [_initialShop.lat, _initialShop.lng] : [26.430, 127.828],
+  zoom:    _initialShop ? 16 : 14,
   maxZoom: 21,
   zoomControl: false,  // デフォルト左上を無効化→左下に再配置
   zoomSnap: 0,         // ズームレベルをスナップしない（指離し時のアニメーションを防止）
