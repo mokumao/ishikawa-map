@@ -1443,6 +1443,8 @@ const _initialShopIdx = (function () {
   return s !== null ? parseInt(s, 10) : NaN;
 })();
 const _initialShop = !isNaN(_initialShopIdx) ? restaurants[_initialShopIdx] : null;
+// 店舗フォーカス時はポップアップを広く見せるため最初からヘッダーを畳んでおく
+if (_initialShop) document.body.classList.add('header-collapsed');
 
 const map = L.map("map", {
   center:  _initialShop ? [_initialShop.lat, _initialShop.lng] : [26.430, 127.828],
@@ -1959,7 +1961,10 @@ if ('ontouchstart' in window) {
 // ── ページ表示時はヘッダー（青色バー）を必ず表示 ─────────────────────
 // スマホブラウザのbfcache復元で前回の折りたたみ状態が残るのを防ぐ。
 // pageshow は通常の読み込みでもキャッシュ復元でも発火する
+// ただし ?shop=N 指定時（店舗詳細ページからの復帰）は、ポップアップを
+// 広く見せるためヘッダーを畳んだままにする
 window.addEventListener('pageshow', function () {
+  if (_initialShop) return;
   document.body.classList.remove('header-collapsed');
   var h = document.querySelector('header');
   if (h) h.style.display = '';
