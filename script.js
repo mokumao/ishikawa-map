@@ -1540,9 +1540,13 @@ function fitIshikawaAll(fly) {
 
 // 初期表示は石川地区全体（青線境界）が収まる範囲
 // チップバー生成後に実行するため少し遅らせる
-setTimeout(() => {
-  fitIshikawaAll(false);
-}, 500);
+// ただし ?shop=N 指定時（店舗詳細ページからの復帰）は、下の focusShop() が
+// 表示を制御するのでこの広域表示は行わない（実行すると focusShop の結果を上書きしてしまう）
+if (new URLSearchParams(location.search).get('shop') === null) {
+  setTimeout(() => {
+    fitIshikawaAll(false);
+  }, 500);
+}
 
 // ── ミニマップ（右上の概要図） ─────────────────────────────────────
 (function () {
@@ -2295,7 +2299,9 @@ function renderShopList() {
 }
 
 // ── 店舗フォーカス（リスト→地図） ───────────────────────────────
-function focusShop(idx) {
+// instant=true の場合はアニメーションなしで即座に表示を切り替える
+// （店舗詳細ページからの復帰時：広域表示を経由するカクカクした動きを避けるため）
+function focusShop(idx, instant) {
   const data = markersData[idx];
   if (!data) return;
 
@@ -2323,16 +2329,24 @@ function focusShop(idx) {
     const centerPoint = L.point(markerPoint.x, markerPoint.y - offsetPx);
     const newCenter   = map.unproject(centerPoint, targetZoom);
 
-    // スムーズなアニメーションで移動
-    map.flyTo(newCenter, targetZoom, { duration: 0.8 });
-
-    // アニメーション完了後にポップアップを開く（重複防止）
-    focusShop._onMoveEnd = function() {
-      focusShop._fromSidebar = true;  // サイドバーから開いたフラグON
+    if (instant) {
+      // 即座に切り替え（アニメーションなし）→ すぐポップアップを開く
+      map.setView(newCenter, targetZoom, { animate: false });
+      focusShop._fromSidebar = true;
       data.marker.openPopup();
-      focusShop._fromSidebar = false; // フラグOFF
-    };
-    map.once('moveend', focusShop._onMoveEnd);
+      focusShop._fromSidebar = false;
+    } else {
+      // スムーズなアニメーションで移動
+      map.flyTo(newCenter, targetZoom, { duration: 0.8 });
+
+      // アニメーション完了後にポップアップを開く（重複防止）
+      focusShop._onMoveEnd = function() {
+        focusShop._fromSidebar = true;  // サイドバーから開いたフラグON
+        data.marker.openPopup();
+        focusShop._fromSidebar = false; // フラグOFF
+      };
+      map.once('moveend', focusShop._onMoveEnd);
+    }
   }, 200);
 }
 
@@ -2417,7 +2431,7 @@ initSearch();
   const tab = params.get('tab');
   const shop = params.get('shop');
   if (shop !== null && !isNaN(parseInt(shop, 10))) {
-    focusShop(parseInt(shop, 10));
+    focusShop(parseInt(shop, 10), true);
   } else if (tab === 'map' || tab === 'list') {
     switchTab(tab);
   }
