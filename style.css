@@ -1053,10 +1053,10 @@ body.info-open .label-toggle-btn { display: none !important; }
   }
   .cat-ctrl-btn {
     flex: 1;
-    padding: 4px 4px;
-    font-size: 0.82rem;
+    padding: 4px 2px !important;
+    font-size: 0.78rem !important;
     text-align: center;
-    white-space: normal;
+    white-space: nowrap !important;
     line-height: 1.2;
   }
   /* カテゴリ3列グリッド（テキストのみ・背景透過で地図透け） */
@@ -1068,9 +1068,9 @@ body.info-open .label-toggle-btn { display: none !important; }
     overflow-y: visible;
     max-height: none;
   }
-  /* 文字のみ・コンパクト表示（パネル全体が画面の約1/3に収まる高さ） */
+  /* 文字のみ・コンパクト表示（パネル全体が画面の約1/4に収まる高さ） */
   .cat-icon-btn {
-    padding: 6px 4px !important;
+    padding: 3px 4px !important;
     font-size: 0.82rem !important;
     white-space: nowrap !important;
     text-align: center !important;
