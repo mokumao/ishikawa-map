@@ -680,24 +680,24 @@ body.info-open .label-toggle-btn { display: none !important; }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 4px;
   pointer-events: auto;
   background: #fff;
   border: 2.5px solid #e53935;
   border-radius: 10px;
-  padding: 10px 12px;
+  padding: 8px 6px;
   box-shadow: 0 3px 12px rgba(0,0,0,0.22);
 }
 .news-banner-btn {
   background: none;
   color: #333;
   border: none;
-  padding: 4px 6px;
-  font-size: 17px;
+  padding: 4px 2px;
+  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
   white-space: nowrap;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
 }
 /* 左右の × ボタン：店舗ポップアップの popup-close-side と同じ見た目 */
 .news-banner-close-side {
