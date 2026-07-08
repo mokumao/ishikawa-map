@@ -679,6 +679,7 @@ body.info-open .label-toggle-btn { display: none !important; }
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   pointer-events: auto;
 }
 .news-banner-btn {
@@ -694,26 +695,30 @@ body.info-open .label-toggle-btn { display: none !important; }
   white-space: nowrap;
   letter-spacing: 0.04em;
 }
-.news-banner-close {
-  position: absolute;
-  top: -12px;
-  right: -12px;
+/* 左右の × ボタン：店舗ポップアップの popup-close-side と同じ見た目 */
+.news-banner-close-side {
+  position: static;
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 50%;
   width: 26px;
   height: 26px;
-  background: #e53935;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
   font-size: 15px;
-  line-height: 1;
+  font-weight: 900;
+  color: #aaa;
   cursor: pointer;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-  z-index: 1;
   padding: 0;
+  line-height: 1;
+  font-family: Tahoma, Verdana, sans-serif;
+  transition: color .12s, background .12s;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: none;
 }
+.news-banner-close-side:hover { color: #e53935; background: #ffebee; border-color: #ffcdd2; }
 .news-banner.hidden {
   display: none !important;
 }

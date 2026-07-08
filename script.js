@@ -1998,14 +1998,13 @@ window.addEventListener('pageshow', function () {
       window.location.href = 'news/index.html';
     });
   }
-  // ×ボタン → バナーを非表示
-  var closeBtn = document.getElementById('newsBannerClose');
-  if (closeBtn) {
+  // ×ボタン（両側）→ バナーを非表示
+  document.querySelectorAll('[data-news-close]').forEach(function(closeBtn) {
     closeBtn.addEventListener('click', function(e) {
       e.stopPropagation();
       if (banner) banner.classList.add('hidden');
     });
-  }
+  });
 })();
 
 // ── ポップアップ誤タップ防止：開いた直後 500ms はコンテンツを無効化 ───────
