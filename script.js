@@ -513,6 +513,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   function updateCatLabel(showAll) {
     var bar = document.getElementById('catLabelBar');
     if (!bar) return;
+    var prevScroll = bar.scrollLeft; // チップタップによる再描画後もスクロール位置を維持
     if (showAll) {
       catChipSet.clear();
       ['shokuji','izakaya','conbini','gas','stay','finance','education','tourism'].forEach(function(k) {
@@ -562,6 +563,9 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 
     // 矢印ボタンをセットアップ
     setupChipScrollBtns();
+    // showAll（パネルを閉じて新規表示）のときだけ先頭から表示。
+    // チップタップによる再描画では元のスクロール位置を復元し、バーが左右に動かないようにする
+    bar.scrollLeft = showAll ? 0 : prevScroll;
   }
 
   function hideCatLabel() {
@@ -623,7 +627,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       updateChipArrows();
     }, { passive: false });
 
-    bar.scrollLeft = 0;
+    // スクロール位置はここでは変更しない（呼び出し元 updateCatLabel が管理）
     setTimeout(updateChipArrows, 50);
   }
 
