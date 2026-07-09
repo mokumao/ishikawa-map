@@ -526,20 +526,20 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     }
     // チップ定義（catChipSet の順で表示）
     var defs = [
-      { key: 'shokuji',   icon: '🍽', label: '食事処',  cls: 'chip-food'      },
-      { key: 'izakaya',   icon: '🍺', label: '居酒屋等', cls: 'chip-izakaya'   },
-      { key: 'conbini',   icon: '🏪', label: 'コンビニ', cls: 'chip-conbini'   },
-      { key: 'gas',       icon: '⛽', label: 'ガソリン', cls: 'chip-gas'       },
-      { key: 'stay',      icon: '🏨', label: '宿泊',    cls: 'chip-stay'      },
-      { key: 'finance',   icon: '🏦', label: '金融',    cls: 'chip-finance'   },
-      { key: 'education', icon: '📚', label: '教育',    cls: 'chip-education' },
-      { key: 'tourism',   icon: '🌴', label: '観光',    cls: 'chip-tourism'   },
+      { key: 'shokuji',   label: '食事処',  cls: 'chip-food'      },
+      { key: 'izakaya',   label: '居酒屋等', cls: 'chip-izakaya'   },
+      { key: 'conbini',   label: 'コンビニ', cls: 'chip-conbini'   },
+      { key: 'gas',       label: 'ガソリン', cls: 'chip-gas'       },
+      { key: 'stay',      label: '宿泊',    cls: 'chip-stay'      },
+      { key: 'finance',   label: '金融',    cls: 'chip-finance'   },
+      { key: 'education', label: '教育',    cls: 'chip-education' },
+      { key: 'tourism',   label: '観光',    cls: 'chip-tourism'   },
     ].filter(function(d) { return catChipSet.has(d.key); });
 
     bar.innerHTML = defs.map(function(d) {
       var active = catSel.has(d.key) ? ' chip-active' : '';
       return '<span class="cat-label-chip ' + d.cls + active + '" data-cat="' + d.key + '">'
-           + d.icon + ' ' + d.label + '</span>';
+           + d.label + '</span>';
     }).join('');
 
     // ラッパーを表示
