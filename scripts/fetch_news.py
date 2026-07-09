@@ -265,15 +265,6 @@ def generate_html(articles):
       z-index: 10;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }}
-    .back {{
-      display: flex; align-items: center; justify-content: center;
-      width: 36px; height: 36px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 50%;
-      color: #fff; font-size: 18px;
-      text-decoration: none; flex-shrink: 0;
-    }}
-    .back:active {{ background: rgba(255,255,255,0.35); }}
     .hd-text h1 {{ font-size: 1rem; font-weight: bold; }}
     .hd-text small {{ display: block; font-size: 0.72rem; opacity: 0.85; margin-top: 1px; }}
     .badge {{
@@ -373,7 +364,6 @@ def generate_html(articles):
 </head>
 <body>
   <header>
-    <a class="back" href="../index.html" aria-label="地図に戻る">&#8592;</a>
     <div class="hd-text">
       <h1>今日の石川ニュース</h1>
       <small>{today_str} 更新</small>
