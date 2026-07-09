@@ -250,6 +250,7 @@ def generate_html(articles):
       background: #f5f5f5;
       color: #333;
       min-height: 100vh;
+      padding-bottom: 70px; /* 下部固定バーの分 */
     }}
     /* ── ヘッダー ── */
     header {{
@@ -344,6 +345,30 @@ def generate_html(articles):
       font-size: 0.72rem;
       line-height: 1.8;
     }}
+    /* ── 下部固定バー：地図へ戻る（メイン画面の下部バーと同じ位置・見た目） ── */
+    .bottom-bar {{
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      background: #fff;
+      border-top: 1px solid #e0e0e0;
+      box-shadow: 0 -2px 8px rgba(0,0,0,.08);
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+      z-index: 100;
+      display: flex;
+    }}
+    .bottom-map-btn {{
+      display: flex; align-items: center; justify-content: center;
+      width: 32%;
+      padding: 9px 4px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      background: #e53935;
+      color: #fff;
+      border: 2px solid #e53935;
+      border-radius: 7px;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }}
   </style>
 </head>
 <body>
@@ -365,6 +390,11 @@ def generate_html(articles):
     <p>内容の正確性は各出典元をご確認ください。</p>
     <p>自動更新：毎日朝6時（JST） / 最終更新 {updated_str}</p>
   </footer>
+
+  <!-- 下部固定バー：地図へ戻る -->
+  <div class="bottom-bar">
+    <a href="../index.html" class="bottom-map-btn">地図</a>
+  </div>
 </body>
 </html>'''
 
