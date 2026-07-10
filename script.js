@@ -981,10 +981,9 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       }
     }
 
-    // 左右どちらの↑ボタンを押しても閉じる
-    document.querySelectorAll('.info-close-btn').forEach(function(btn) {
-      btn.addEventListener('click', closeInfoPanel);
-    });
+    // 「地図」ボタンを押すと地図に戻る
+    const mapBtn = document.getElementById('infoMapBtn');
+    if (mapBtn) mapBtn.addEventListener('click', closeInfoPanel);
 
     // フッターを上にスワイプしても閉じる
     let startY = 0;

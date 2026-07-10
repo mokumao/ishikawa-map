@@ -1348,24 +1348,28 @@ body.info-open .label-toggle-btn { display: none !important; }
     -webkit-tap-highlight-color: transparent;
   }
   .info-menu-btn:active { background: #f5e89a; }
-  /* 情報パネルの下部（⬆ボタン左右） */
+  /* 情報パネルの下部：地図に戻るボタン（ニュースページと同じ配置・見た目） */
   .info-panel-footer {
-    background: #f0f0f0;
-    border-top: none;
+    background: #fff;
+    border-top: 1px solid #e0e0e0;
+    box-shadow: 0 -2px 8px rgba(0,0,0,.08);
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 40px 80px;
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
   }
-  .info-close-btn {
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: #e53935;
+  .info-map-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32%;
+    padding: 9px 4px;
+    font-size: .82rem;
+    font-weight: 700;
+    font-family: inherit;
+    background: #fff;
+    color: #546e7a;
+    border: 2px solid #e53935;
+    border-radius: 7px;
     cursor: pointer;
-    padding: 4px 8px;
-    line-height: 1;
-    border: none;
-    background: none;
     -webkit-tap-highlight-color: transparent;
   }
 
