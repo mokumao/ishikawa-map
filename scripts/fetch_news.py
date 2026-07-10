@@ -244,6 +244,8 @@ def generate_html(articles):
   <title>今日の石川ニュース {today_str}</title>
   <style>
     *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
+    /* 引っ張った時のバウンス（ラバーバンド）で固定要素が一緒にずれるのを防ぐ */
+    html, body {{ overscroll-behavior-y: none; }}
     body {{
       font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN',
                    'Noto Sans JP', 'Meiryo', sans-serif;
