@@ -363,14 +363,15 @@ def generate_html(articles):
       padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
       display: flex;
     }}
+    /* メイン地図画面の下部タブ（未選択状態）と同じ配色に合わせる */
     .bottom-map-btn {{
       display: flex; align-items: center; justify-content: center;
       width: 32%;
       padding: 9px 4px;
       font-size: 0.82rem;
       font-weight: 700;
-      background: #e53935;
-      color: #fff;
+      background: #fff;
+      color: #546e7a;
       border: 2px solid #e53935;
       border-radius: 7px;
       text-decoration: none;
