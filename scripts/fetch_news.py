@@ -253,6 +253,7 @@ def generate_html(articles):
       padding-bottom: 70px; /* 下部固定バーの分 */
     }}
     /* ── ヘッダー ── */
+    /* position:fixed で確実に固定（一部モバイルブラウザでsticky失敗するため） */
     header {{
       background: #e53935;
       color: #fff;
@@ -260,8 +261,10 @@ def generate_html(articles):
       display: flex;
       align-items: center;
       gap: 10px;
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 10;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }}
@@ -275,6 +278,8 @@ def generate_html(articles):
       font-size: 0.75rem;
       white-space: nowrap;
     }}
+    /* ヘッダーの高さぶんの余白（固定ヘッダーに記事が隠れないように） */
+    .header-spacer {{ height: 60px; }}
     /* ── 記事リスト ── */
     main {{ max-width: 700px; margin: 0 auto; padding: 14px 12px; }}
     .nl {{ display: flex; flex-direction: column; gap: 10px; }}
@@ -370,6 +375,7 @@ def generate_html(articles):
     </div>
     <span class="badge">{count_label}</span>
   </header>
+  <div class="header-spacer"></div>
 
   <main>
     {body_html}
