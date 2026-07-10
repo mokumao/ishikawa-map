@@ -192,7 +192,13 @@
     <!-- 左側スワイプコントロール（スマホのみ・地図ビュー時） -->
     <div class="side-swipe-ctrl" id="sideSwipeCtrl">
       <button class="side-swipe-btn" id="sideSwipeUp" aria-label="ヘッダーを表示/非表示">⬆</button>
-      <button class="side-swipe-btn" id="sideSwipeDown" aria-label="情報パネルを開く">⬇</button>
+      <button class="side-swipe-btn" id="sideSwipeDown" aria-label="情報パネルを開く">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+          <circle cx="12" cy="7.5" r="1.3" fill="currentColor"/>
+          <rect x="10.8" y="10.5" width="2.4" height="7" rx="1" fill="currentColor"/>
+        </svg>
+      </button>
       <button class="side-swipe-btn locate-btn" id="locateBtn" aria-label="現在地に移動">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 30" width="22" height="27" fill="currentColor">
           <!-- 下向き矢印 -->
