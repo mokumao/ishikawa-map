@@ -7,18 +7,25 @@
   <title>今日の石川ニュース 2026年07月10日</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* html/body自体はスクロールさせず、中身(.scroll-area)だけをスクロールさせる構造。
+       position:fixed/stickyはWebView環境で描画タイミングの不具合が起きることがあるため、
+       そもそも「動かす必要がない」レイアウト（外枠固定・中身スクロール）に変更した。 */
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
     body {
       font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN',
                    'Noto Sans JP', 'Meiryo', sans-serif;
       background: #f5f5f5;
       color: #333;
-      min-height: 100vh;
-      padding-bottom: 70px; /* 下部固定バーの分 */
+    }
+    .page-wrap {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
     /* ── ヘッダー ── */
-    /* position:fixed で確実に固定（一部モバイルブラウザでsticky失敗するため） */
-    /* iOS Safariは読み込み直後、fixed要素の描画がずれることがあるため
-       GPU合成レイヤーを強制生成して初回から正しく固定されるようにする */
     header {
       background: #e53935;
       color: #fff;
@@ -26,17 +33,10 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 10;
+      flex-shrink: 0;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      -webkit-transform: translateZ(0);
-      transform: translateZ(0);
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      will-change: transform;
+      position: relative;
+      z-index: 10;
     }
     .hd-text h1 { font-size: 1rem; font-weight: bold; }
     .hd-text small { display: block; font-size: 0.72rem; opacity: 0.85; margin-top: 1px; }
@@ -48,8 +48,13 @@
       font-size: 0.75rem;
       white-space: nowrap;
     }
-    /* ヘッダーの高さぶんの余白（固定ヘッダーに記事が隠れないように） */
-    .header-spacer { height: 60px; }
+    /* 記事一覧とフッターだけをスクロールさせる領域 */
+    .scroll-area {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+    }
     /* ── 記事リスト ── */
     main { max-width: 700px; margin: 0 auto; padding: 14px 12px; }
     .nl { display: flex; flex-direction: column; gap: 10px; }
@@ -111,15 +116,14 @@
       font-size: 0.72rem;
       line-height: 1.8;
     }
-    /* ── 下部固定バー：地図へ戻る（メイン画面の下部バーと同じ位置・見た目） ── */
+    /* ── 下部バー：地図へ戻る（メイン画面の下部バーと同じ位置・見た目） ── */
+    /* .page-wrap の flex 末尾に置くだけで、外枠自体が固定なので常に画面下部に留まる */
     .bottom-bar {
-      position: fixed;
-      left: 0; right: 0; bottom: 0;
+      flex-shrink: 0;
       background: #fff;
       border-top: 1px solid #e0e0e0;
       box-shadow: 0 -2px 8px rgba(0,0,0,.08);
       padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
-      z-index: 100;
       display: flex;
     }
     .bottom-map-btn {
@@ -138,6 +142,7 @@
   </style>
 </head>
 <body>
+  <div class="page-wrap">
   <header>
     <div class="hd-text">
       <h1>今日の石川ニュース</h1>
@@ -145,8 +150,8 @@
     </div>
     <span class="badge">8件</span>
   </header>
-  <div class="header-spacer"></div>
 
+  <div class="scroll-area">
   <main>
     <div class="nl">
     <article class="ni">
@@ -221,10 +226,12 @@
     <p>内容の正確性は各出典元をご確認ください。</p>
     <p>自動更新：毎日朝6時（JST） / 最終更新 2026年07月10日 07:17</p>
   </footer>
+  </div>
 
-  <!-- 下部固定バー：地図へ戻る -->
+  <!-- 下部バー：地図へ戻る -->
   <div class="bottom-bar">
     <a href="../index.html" class="bottom-map-btn">地図</a>
+  </div>
   </div>
 </body>
 </html>
