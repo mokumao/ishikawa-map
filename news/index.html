@@ -17,6 +17,8 @@
     }
     /* ── ヘッダー ── */
     /* position:fixed で確実に固定（一部モバイルブラウザでsticky失敗するため） */
+    /* iOS Safariは読み込み直後、fixed要素の描画がずれることがあるため
+       GPU合成レイヤーを強制生成して初回から正しく固定されるようにする */
     header {
       background: #e53935;
       color: #fff;
@@ -30,6 +32,11 @@
       right: 0;
       z-index: 10;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      will-change: transform;
     }
     .hd-text h1 { font-size: 1rem; font-weight: bold; }
     .hd-text small { display: block; font-size: 0.72rem; opacity: 0.85; margin-top: 1px; }
