@@ -1346,13 +1346,12 @@ body.info-open .label-toggle-btn { display: none !important; }
     justify-content: center;
     gap: 14px;
     padding: 24px 20px;
-    /* このエリアだけ独立してスクロール可能にし、指で触れたときの
-       自然な伸縮（ラバーバンド）を許可する。overscroll-behavior:contain
-       で、この中でのバウンスが親（html/body）へ伝わって上下バーが
-       動くのを防ぐ */
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
+    /* ボタンが画面に収まりスクロールの余地が無いため、実スクロールではなく
+       JS（script.js）でドラッグ量に応じてtransformを付け、指を離すと
+       0に戻すことで擬似的なラバーバンド感を出す。ドラッグ中の意図しない
+       テキスト選択を防ぐ */
+    -webkit-user-select: none;
+    user-select: none;
   }
   .info-menu-btn {
     background: #fdf6d8;

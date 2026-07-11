@@ -997,6 +997,44 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   });
 })();
 
+// ── 情報パネル中央エリア：指の動きに追従して伸縮し、離すと元に戻る ────
+// コンテンツが画面に収まりスクロールの余地が無いため、実スクロールでは
+// 動きが出ない。ドラッグ量に応じてtransformを付け、指を離すとバネの
+// ように0へ戻すことで、上下バーは固定したまま中央だけ触感を出す。
+(function () {
+  document.addEventListener('DOMContentLoaded', function () {
+    const inner = document.querySelector('.info-panel-inner');
+    if (!inner) return;
+
+    const DAMP     = 3;   // 抵抗（大きいほど動きが小さい）
+    const MAX_DRAG = 50;  // 最大移動量(px)
+    let startY = 0, dragging = false;
+
+    inner.addEventListener('touchstart', function (e) {
+      if (e.touches.length !== 1) return;
+      startY   = e.touches[0].clientY;
+      dragging = true;
+      inner.style.transition = 'none';
+    }, { passive: true });
+
+    inner.addEventListener('touchmove', function (e) {
+      if (!dragging || e.touches.length !== 1) return;
+      const dy     = e.touches[0].clientY - startY;
+      const damped = Math.max(-MAX_DRAG, Math.min(MAX_DRAG, dy / DAMP));
+      inner.style.transform = 'translateY(' + damped + 'px)';
+    }, { passive: true });
+
+    function endDrag() {
+      if (!dragging) return;
+      dragging = false;
+      inner.style.transition = 'transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      inner.style.transform  = 'translateY(0)';
+    }
+    inner.addEventListener('touchend',    endDrag, { passive: true });
+    inner.addEventListener('touchcancel', endDrag, { passive: true });
+  });
+})();
+
 // ── 情報パネル：各ボタンのセクション表示 ────────────────────────────
 function openInfoSection(section) {
   // 将来コンテンツを追加予定。現在は準備中メッセージを表示。
