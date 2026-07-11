@@ -1001,33 +1001,49 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 // コンテンツが画面に収まりスクロールの余地が無いため、実スクロールでは
 // 動きが出ない。ドラッグ量に応じてtransformを付け、指を離すとバネの
 // ように0へ戻すことで、上下バーは固定したまま中央だけ触感を出す。
-// ドラッグと判定された瞬間はボタンの押下色（.pressed）を消し、
-// 動かさずに離した「本当のタップ」のときだけ色がつくようにする。
+//
+// ボタンの押下色（.pressed）は「一定時間タッチしたまま動かなかったら
+// 押したと判断」する時間差判定＋「一定距離動いたらドラッグと判断」する
+// 距離判定を組み合わせる。すぐ指を離す通常のタップでは色が一瞬も
+// つかず、そのままページへ遷移する（クリック自体はブラウザの
+// 標準動作なので、この処理の影響を受けない）。
 (function () {
   document.addEventListener('DOMContentLoaded', function () {
     const inner = document.querySelector('.info-panel-inner');
     if (!inner) return;
 
-    const DAMP          = 3;   // 抵抗（大きいほど動きが小さい）
-    const MAX_DRAG       = 50;  // 最大移動量(px)
-    const MOVE_THRESHOLD = 8;   // これ以上動いたらドラッグ扱い（タップ色を消す）
-    let startY = 0, dragging = false, pressedBtn = null;
+    const DAMP          = 3;    // 抵抗（大きいほど動きが小さい）
+    const MAX_DRAG       = 50;   // 最大移動量(px)
+    const MOVE_THRESHOLD = 8;    // これ以上動いたらドラッグ扱い
+    const PRESS_DELAY    = 100;  // これだけ動かず待ったら押下色をつける(ms)
+    let startY = 0, dragging = false, pressedBtn = null, pressTimer = null;
+
+    function clearPress() {
+      if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+      if (pressedBtn) { pressedBtn.classList.remove('pressed'); pressedBtn = null; }
+    }
 
     inner.addEventListener('touchstart', function (e) {
       if (e.touches.length !== 1) return;
       startY   = e.touches[0].clientY;
       dragging = true;
       inner.style.transition = 'none';
-      pressedBtn = e.target.closest('.info-menu-btn');
-      if (pressedBtn) pressedBtn.classList.add('pressed');
+
+      const btn = e.target.closest('.info-menu-btn');
+      if (btn) {
+        pressedBtn = btn;
+        pressTimer = setTimeout(function () {
+          if (pressedBtn) pressedBtn.classList.add('pressed');
+          pressTimer = null;
+        }, PRESS_DELAY);
+      }
     }, { passive: true });
 
     inner.addEventListener('touchmove', function (e) {
       if (!dragging || e.touches.length !== 1) return;
       const dy = e.touches[0].clientY - startY;
       if (pressedBtn && Math.abs(dy) > MOVE_THRESHOLD) {
-        pressedBtn.classList.remove('pressed');
-        pressedBtn = null; // ドラッグ確定：以後このタッチではタップ色を出さない
+        clearPress(); // ドラッグ確定：以後このタッチではタップ色を出さない
       }
       const damped = Math.max(-MAX_DRAG, Math.min(MAX_DRAG, dy / DAMP));
       inner.style.transform = 'translateY(' + damped + 'px)';
@@ -1036,7 +1052,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     function endDrag() {
       if (!dragging) return;
       dragging = false;
-      if (pressedBtn) { pressedBtn.classList.remove('pressed'); pressedBtn = null; }
+      clearPress();
       inner.style.transition = 'transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1)';
       inner.style.transform  = 'translateY(0)';
     }
