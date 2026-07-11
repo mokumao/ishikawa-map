@@ -1346,6 +1346,13 @@ body.info-open .label-toggle-btn { display: none !important; }
     justify-content: center;
     gap: 14px;
     padding: 24px 20px;
+    /* このエリアだけ独立してスクロール可能にし、指で触れたときの
+       自然な伸縮（ラバーバンド）を許可する。overscroll-behavior:contain
+       で、この中でのバウンスが親（html/body）へ伝わって上下バーが
+       動くのを防ぐ */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
   }
   .info-menu-btn {
     background: #fdf6d8;
@@ -1363,6 +1370,7 @@ body.info-open .label-toggle-btn { display: none !important; }
   .info-menu-btn:active { background: #f5e89a; }
   /* 情報パネルの下部：地図に戻るボタン（ニュースページと同じ配置・見た目） */
   .info-panel-footer {
+    flex-shrink: 0;
     background: #fff;
     border-top: 1px solid #e0e0e0;
     box-shadow: 0 -2px 8px rgba(0,0,0,.08);
