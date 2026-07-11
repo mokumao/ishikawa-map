@@ -1587,8 +1587,12 @@ function fitIshikawaAll(fly) {
     paddingTopLeft:     L.point(8, topPad),
     paddingBottomRight: L.point(8, bottomPad)
   };
+  // このズームはプログラムによる自動調整であり、ユーザー操作ではないため
+  // 「地図操作でヘッダーを畳む」処理（zoomstartで発火）を一時的に止める
+  window._suppressHeaderCollapse = true;
   if (fly) { opts.duration = 1.0; map.flyToBounds(ISHIKAWA_BOUNDS, opts); }
   else     { opts.animate = false; map.fitBounds(ISHIKAWA_BOUNDS, opts); }
+  setTimeout(function () { window._suppressHeaderCollapse = false; }, 50);
 }
 
 // ── ポップアップペインをmap-pane（transformあり）の外へ移動 ─────────────
@@ -2035,6 +2039,7 @@ map.on('popupclose', function() { document.body.classList.remove('popup-open'); 
 // ドラッグ・ズーム開始時にヘッダーを折りたたむ
 if ('ontouchstart' in window) {
   function collapseHeaderOnInteraction() {
+    if (window._suppressHeaderCollapse) return; // プログラムによる自動ズーム中は無視
     if (!document.body.classList.contains('header-collapsed')) {
       document.body.classList.add('header-collapsed');
       setTimeout(function() { map.invalidateSize(); }, 50);
