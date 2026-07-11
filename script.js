@@ -1012,8 +1012,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     const inner = document.querySelector('.info-panel-inner');
     if (!inner) return;
 
-    const DAMP          = 3;    // 抵抗（大きいほど動きが小さい）
-    const MAX_DRAG       = 50;   // 最大移動量(px)
+    const DAMP          = 2;    // 抵抗（大きいほど動きが小さい）
+    const MAX_DRAG       = 90;   // 最大移動量(px)
     const MOVE_THRESHOLD = 8;    // これ以上動いたらドラッグ扱い
     const PRESS_DELAY    = 100;  // これだけ動かず待ったら押下色をつける(ms)
     let startY = 0, dragging = false, pressedBtn = null, pressTimer = null;
