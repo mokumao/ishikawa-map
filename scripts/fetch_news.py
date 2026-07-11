@@ -17,6 +17,7 @@ JST = timezone(timedelta(hours=9))
 now_jst = datetime.now(JST)
 today_str   = now_jst.strftime('%Y年%m月%d日')
 today_date  = now_jst.strftime('%Y-%m-%d')
+today_md_str = f'{now_jst.month}月{now_jst.day}日'  # 「本日分なし」表示用（例: 7月11日）
 updated_str = now_jst.strftime('%Y年%m月%d日 %H:%M')
 
 # 掲載期間：7日以内（過去）＋ 未来の情報は無制限
@@ -208,7 +209,15 @@ def generate_html(articles):
             return a['pub_date']
         articles.sort(key=sort_key, reverse=True)
 
+        # 本日分の記事が1件も無い場合は、通常の記事カードと同じ見た目で
+        # 「◯月◯日のニュースはありません」を先頭に表示する
+        has_today = any(a['date_label'].startswith('本日') for a in articles)
         cards = ''
+        if not has_today:
+            cards += f'''
+    <article class="ni no-news">
+      <span class="nt no-news-text">{today_md_str}のニュースはありません</span>
+    </article>'''
         for a in articles:
             summary_html   = f'<p class="ns">{a["summary"]}</p>' if a['summary'] else ''
             date_html      = f'<span class="date-label">{a["date_label"]}</span>' if a['date_label'] else ''
@@ -312,6 +321,8 @@ def generate_html(articles):
       margin-bottom: 5px;
     }}
     .nt:hover {{ text-decoration: underline; }}
+    /* 本日分のニュースが無いときのメッセージ（リンクではないので色を落とす） */
+    .no-news-text {{ color: #888; cursor: default; }}
     .ns {{
       font-size: 0.8rem;
       color: #555;
