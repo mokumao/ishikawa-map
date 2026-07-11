@@ -1338,6 +1338,7 @@ body.info-open .label-toggle-btn { display: none !important; }
   .info-panel-header h2 {
     font-size: 1rem;
     font-weight: bold;
+    text-align: center;
   }
   .info-panel-inner {
     flex: 1;
