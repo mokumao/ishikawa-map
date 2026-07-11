@@ -1367,7 +1367,12 @@ body.info-open .label-toggle-btn { display: none !important; }
     width: 100%;
     -webkit-tap-highlight-color: transparent;
   }
-  .info-menu-btn:active { background: #f5e89a; }
+  /* タッチ端末ではブラウザ標準の:activeがドラッグ中も点灯し続けてしまうため、
+     マウス操作（PC等）限定にし、タッチ側はJS制御の.pressedクラスに任せる */
+  @media (hover: hover) and (pointer: fine) {
+    .info-menu-btn:active { background: #f5e89a; }
+  }
+  .info-menu-btn.pressed { background: #f5e89a; }
   /* 情報パネルの下部：地図に戻るボタン（ニュースページと同じ配置・見た目） */
   .info-panel-footer {
     flex-shrink: 0;
