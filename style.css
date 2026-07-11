@@ -1326,6 +1326,18 @@ body.info-open .label-toggle-btn { display: none !important; }
     background: #f0f0f0;
     overflow: hidden;
   }
+  /* 情報パネル上部の「ご案内」バー（ニュースページのヘッダーと同じ見た目） */
+  .info-panel-header {
+    flex-shrink: 0;
+    background: #e53935;
+    color: #fff;
+    padding: 14px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .info-panel-header h2 {
+    font-size: 1rem;
+    font-weight: bold;
+  }
   .info-panel-inner {
     flex: 1;
     display: flex;
