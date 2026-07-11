@@ -2484,6 +2484,12 @@ function switchTab(tab) {
   if (bMap)  bMap.classList.toggle('active',  tab === 'map');
   if (bList) bList.classList.toggle('active', tab === 'list');
 
+  // 一覧画面では「店名を表示/隠す」ボタンは無関係なため非表示に
+  // （#bottomTabsは.app-bodyの外にあるためCSSのdata-view属性セレクタが
+  //   届かず、ここでJSから直接切り替える）
+  const bLabel = document.getElementById('bottomLabelBtn');
+  if (bLabel) bLabel.style.visibility = (tab === 'list') ? 'hidden' : '';
+
   if (tab === 'map') {
     setTimeout(() => map.invalidateSize(), 50);
   }
