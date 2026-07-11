@@ -16,7 +16,7 @@ var TRANSLATIONS = {
     'tab.list':            '一覧',
     'search.placeholder':  '店名・ジャンル・住所・営業時間で検索…',
     'filter.label':        'ジャンルで絞り込み',
-    'btn.showNames':       '店名を表示',
+    'btn.showNames':       '店名',
     'bottom.map':          '地図',
     'bottom.list':         '一覧',
     'gear.back':           '戻る',
@@ -58,7 +58,7 @@ var TRANSLATIONS = {
     'tab.list':            'List',
     'search.placeholder':  'Search by name, genre, address, hours…',
     'filter.label':        'Filter by genre',
-    'btn.showNames':       'Show names',
+    'btn.showNames':       'Names',
     'bottom.map':          'Map',
     'bottom.list':         'List',
     'gear.back':           'Back',
@@ -2496,11 +2496,13 @@ function switchTab(tab) {
 }
 
 // ── 店名ラベルトグル（ボトムバーから呼び出し） ──────────────────
+// 文字は常に「店名」固定。表示中は地図・一覧タブと同じ配色（赤塗り・白文字）に、
+// 非表示中は白背景・グレー文字に切り替える
 function toggleLabels() {
   labelsVisible = !labelsVisible;
   map.getContainer().classList.toggle('labels-hidden', !labelsVisible);
   const btn = document.getElementById('bottomLabelBtn');
-  if (btn) btn.textContent = labelsVisible ? '店名を隠す' : '店名を表示';
+  if (btn) btn.classList.toggle('active', labelsVisible);
 }
 
 // ── 検索ボックス初期化 ──────────────────────────────────────────
