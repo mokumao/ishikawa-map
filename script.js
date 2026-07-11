@@ -28,7 +28,7 @@ var TRANSLATIONS = {
     'info.about-ishikawa': '石川について',
     'info.faq':            'Q & A',
     'info.feedback':       'ご意見・ご要望',
-    'info.today':          '今日の石川情報',
+    'info.today':          '今日の石川ニュース',
     'popup.address':       '住所',
     'popup.hours':         '営業時間',
     'popup.closed':        '定休日',
