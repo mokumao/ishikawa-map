@@ -1648,9 +1648,22 @@ if (new URLSearchParams(location.search).get('shop') === null) {
     tap:                false
   });
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  const miniTileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18
   }).addTo(miniMap);
+
+  // タイル読み込み失敗を自動リトライ（OSMタイルサーバーの一時的な混雑・
+  // レート制限で灰色のまま残ることがあるため。ページ再読込直後は
+  // メイン地図・ミニマップ・ピン画像が一斉にリクエストされるため起きやすい）
+  miniTileLayer.on('tileerror', function (e) {
+    setTimeout(function () {
+      if (!e.tile) return;
+      // src代入が同一文字列だとブラウザが再取得しないため、一旦クリアしてから戻す
+      var src = e.tile.src;
+      e.tile.src = '';
+      e.tile.src = src;
+    }, 1200);
+  });
 
   // 石川エリアの境界（メイン地図と同じ線。海岸線部分は非表示のため開いた線で描画）
   const miniBoundary = L.polyline(ISHIKAWA_BOUNDARY, {
@@ -1726,11 +1739,17 @@ if (new URLSearchParams(location.search).get('shop') === null) {
     // 境界線全体が収まる表示に強制リセット
     miniMap.fitBounds(miniBoundary.getBounds(), { padding: [4, 4], animate: false });
     updateMiniTarget();
+    miniTileLayer.redraw(); // 灰色のまま残ったタイルを再取得
   }
 
   // ① 初期化：十分な時間をとってサイズ再計算（低速端末対策）
   setTimeout(resetMinimap, 300);
   setTimeout(resetMinimap, 800); // 二重保険
+  // ページの全リソース読込完了後にも再チェック（他ページから戻った直後は
+  // 回線混雑でタイル取得が遅れ、800ms時点でも灰色が残ることがあるため）
+  window.addEventListener('load', function () {
+    setTimeout(resetMinimap, 300);
+  });
 
   // ② バックグラウンドから復帰時（iOS/Androidでタブが一時停止→戻るとズレる）
   document.addEventListener('visibilitychange', function () {
