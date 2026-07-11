@@ -1053,7 +1053,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       if (!dragging) return;
       dragging = false;
       clearPress();
-      inner.style.transition = 'transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      inner.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.2, 0.4, 1)';
       inner.style.transform  = 'translateY(0)';
     }
     inner.addEventListener('touchend',    endDrag, { passive: true });
