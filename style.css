@@ -1099,9 +1099,9 @@ body.info-open .label-toggle-btn { display: none !important; }
     transform: translateY(145px);
     opacity: 0;
     pointer-events: none;
-    /* 隠れるときだけ極端にゆっくり（後で調整予定）。
+    /* 隠れるときだけゆっくり（調整中、8s→6s）。
        元に戻るときの速度は基本ルール(1.05s/.82s)のまま変更しない */
-    transition: transform 8s cubic-bezier(0.22, 1, 0.36, 1), opacity 8s ease;
+    transition: transform 6s cubic-bezier(0.22, 1, 0.36, 1), opacity 6s ease;
   }
   .cat-controls-restore-btn {
     position: absolute;
