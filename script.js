@@ -2102,6 +2102,7 @@ if ('ontouchstart' in window) {
 
   let startX = 0;
   let startY = 0;
+  let minY = 0;
   let latestDx = 0;
   let latestDy = 0;
   let draggingControls = false;
@@ -2161,6 +2162,7 @@ if ('ontouchstart' in window) {
     if (!isMapView() || document.body.classList.contains('cat-controls-hidden')) return;
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
+    minY = startY;
     latestDx = 0;
     latestDy = 0;
     draggingControls = false;
@@ -2171,8 +2173,10 @@ if ('ontouchstart' in window) {
     if (!isMapView() || document.body.classList.contains('cat-controls-hidden')) return;
     if (!hasVisibleCategoryControls()) return;
 
+    const currentY = e.touches[0].clientY;
+    minY = Math.min(minY, currentY);
     latestDx = e.touches[0].clientX - startX;
-    latestDy = e.touches[0].clientY - startY;
+    latestDy = currentY - minY;
 
     if (latestDy > 8 && Math.abs(latestDx) < 110) {
       draggingControls = true;
@@ -2188,7 +2192,8 @@ if ('ontouchstart' in window) {
     if (document.body.classList.contains('cat-controls-hidden')) return;
 
     const dx = e.changedTouches[0].clientX - startX;
-    const dy = e.changedTouches[0].clientY - startY;
+    const currentY = e.changedTouches[0].clientY;
+    const dy = currentY - Math.min(minY, currentY);
     const shouldHide = (draggingControls || dy > 18) && dy > HIDE_THRESHOLD && Math.abs(dx) < 110;
 
     if (shouldHide) {
