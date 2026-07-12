@@ -429,7 +429,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     var blocker = document.getElementById('catModeBlocker');
     if (blocker) blocker.parentNode.removeChild(blocker);
     document.getElementById('sideSwipeCtrl').style.zIndex = ''; // z-indexを元に戻す
-    ['sideSwipeUp','sideSwipeDown','locateBtn','categoryPinBtn','gearBtn'].forEach(function(id) {
+    ['sideSwipeDown','locateBtn','categoryPinBtn','gearBtn'].forEach(function(id) {
       var el = document.getElementById(id);
       if (el) { el.style.opacity = ''; el.style.pointerEvents = ''; }
     });
@@ -700,7 +700,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     document.getElementById('map').appendChild(blocker);
     // 石川ボタン以外をグレーアウト＋操作不可に（石川ボタンはオーバーレイより手前で有効のまま）
     document.getElementById('sideSwipeCtrl').style.zIndex = '1501'; // コンテナ全体をオーバーレイより上へ
-    ['sideSwipeUp','sideSwipeDown','locateBtn','categoryPinBtn','gearBtn'].forEach(function(id) {
+    ['sideSwipeDown','locateBtn','categoryPinBtn','gearBtn'].forEach(function(id) {
       var el = document.getElementById(id);
       if (el) { el.style.opacity = '0.35'; el.style.pointerEvents = 'none'; }
     });
@@ -942,18 +942,11 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   }, { passive: true });
 })();
 
-// ── 左側スワイプボタン（⬆⬇）のクリックハンドラ ──────────────────
+// ── 左側スワイプボタン（⬇）のクリックハンドラ ──────────────────
 (function () {
   document.addEventListener('DOMContentLoaded', function () {
-    const upBtn   = document.getElementById('sideSwipeUp');
     const downBtn = document.getElementById('sideSwipeDown');
-    if (!upBtn || !downBtn) return;
-
-    upBtn.addEventListener('click', function () {
-      // ヘッダー表示/非表示トグル
-      document.body.classList.toggle('header-collapsed');
-      if (typeof map !== 'undefined') setTimeout(() => map.invalidateSize(), 50);
-    });
+    if (!downBtn) return;
 
     downBtn.addEventListener('click', function () {
       // 情報パネルを開く
