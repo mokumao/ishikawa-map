@@ -919,8 +919,10 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 })();
 
 // ── スマホ：タブバーのスワイプでヘッダー操作・情報パネル表示 ────────
+// 旧タブバー(.mobile-tabs)はDOM上に残っているがスマホでは display:none で
+// 触れられないため、実際に画面に見えている#bottomTabs（地図/店名/一覧バー）を使う。
 (function () {
-  const tabs = document.querySelector('.mobile-tabs');
+  const tabs = document.getElementById('bottomTabs');
   if (!tabs) return;
   let startY = 0;
 
