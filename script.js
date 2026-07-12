@@ -955,6 +955,20 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   })();
 })();
 
+function openInfoPanel() {
+  const appBody = document.getElementById('appBody');
+  if (!appBody) return;
+  appBody.dataset.view = 'info';
+  document.body.classList.add('info-open');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  if (location.hash === '#info') {
+    openInfoPanel();
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+});
+
 // ── スマホ：タブバーのスワイプでヘッダー操作・情報パネル表示 ────────
 // 旧タブバー(.mobile-tabs)はDOM上に残っているがスマホでは display:none で
 // 触れられないため、実際に画面に見えている#bottomTabs（地図/店名/一覧バー）を使う。
@@ -974,9 +988,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       document.body.classList.remove('header-collapsed');
     } else if (dy > 40) {
       // 下にスワイプ → 情報パネルを表示
-      const appBody = document.getElementById('appBody');
-      if (appBody) appBody.dataset.view = 'info';
-      document.body.classList.add('info-open');
+      openInfoPanel();
     }
   }, { passive: true });
 })();
@@ -989,11 +1001,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 
     downBtn.addEventListener('click', function () {
       // 情報パネルを開く
-      const appBody = document.getElementById('appBody');
-      if (appBody) {
-        appBody.dataset.view = 'info';
-        document.body.classList.add('info-open');
-      }
+      openInfoPanel();
     });
   });
 })();
