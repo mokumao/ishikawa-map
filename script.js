@@ -961,6 +961,7 @@ function openInfoPanel() {
   appBody.dataset.view = 'info';
   document.body.classList.add('info-open');
   document.body.classList.remove('list-open');
+  document.body.classList.remove('cat-controls-hidden');
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -2091,6 +2092,69 @@ if ('ontouchstart' in window) {
   map.on('zoomstart', collapseHeaderOnInteraction);
 }
 
+// ── スマホ：地図を下へスワイプしたら下部カテゴリボタンを隠す ────────
+(function () {
+  if (!('ontouchstart' in window)) return;
+
+  const mapEl = document.getElementById('map');
+  const restoreBtn = document.getElementById('catControlsRestoreBtn');
+  if (!mapEl || !restoreBtn) return;
+
+  let startX = 0;
+  let startY = 0;
+  let restoreStartY = 0;
+
+  function isMapView() {
+    const appBody = document.getElementById('appBody');
+    return appBody && appBody.dataset.view === 'map';
+  }
+
+  function hasVisibleCategoryControls() {
+    const chips = document.getElementById('catLabelWrapper');
+    const controls = document.getElementById('catSelectAllRow');
+    return (chips && chips.style.display !== 'none') ||
+           (controls && controls.style.display !== 'none');
+  }
+
+  function hideCategoryControls() {
+    if (!isMapView() || !hasVisibleCategoryControls()) return;
+    document.body.classList.add('cat-controls-hidden');
+  }
+
+  function showCategoryControls() {
+    document.body.classList.remove('cat-controls-hidden');
+  }
+
+  mapEl.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) return;
+    if (e.target.closest('.leaflet-popup, a, button, .cat-selectall-row, .cat-label-wrapper, .bottom-tabs')) return;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+
+  mapEl.addEventListener('touchend', function (e) {
+    if (!isMapView() || e.changedTouches.length !== 1) return;
+    if (document.body.classList.contains('cat-controls-hidden')) return;
+
+    const dx = e.changedTouches[0].clientX - startX;
+    const dy = e.changedTouches[0].clientY - startY;
+    if (dy > 55 && Math.abs(dx) < 95) {
+      hideCategoryControls();
+    }
+  }, { passive: true });
+
+  restoreBtn.addEventListener('click', showCategoryControls);
+  restoreBtn.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) return;
+    restoreStartY = e.touches[0].clientY;
+  }, { passive: true });
+  restoreBtn.addEventListener('touchend', function (e) {
+    if (e.changedTouches.length !== 1) return;
+    const dy = e.changedTouches[0].clientY - restoreStartY;
+    if (dy < -20) showCategoryControls();
+  }, { passive: true });
+})();
+
 // ── ページ表示時はヘッダー（青色バー）を必ず表示 ─────────────────────
 // スマホブラウザのbfcache復元で前回の折りたたみ状態が残るのを防ぐ。
 // pageshow は通常の読み込みでもキャッシュ復元でも発火する
@@ -2517,6 +2581,7 @@ function switchTab(tab) {
   appBody.dataset.view = tab;
   document.body.classList.toggle('list-open', tab === 'list');
   if (tab !== 'info') document.body.classList.remove('info-open');
+  if (tab !== 'map') document.body.classList.remove('cat-controls-hidden');
 
   // 旧タブバー（DOM上は残存）
   document.getElementById('tabMap').classList.toggle('active',  tab === 'map');
