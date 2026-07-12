@@ -258,8 +258,8 @@ body.about-site-page {
 }
 .about-site-info-btn {
   width: 100%;
-  background: #e53935;
-  color: #fff;
+  background: #fff;
+  color: #111;
   border: 2px solid #e53935;
 }
 
