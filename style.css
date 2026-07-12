@@ -1211,11 +1211,11 @@ body.info-open .label-toggle-btn { display: none !important; }
   .bottom-tab-btn {
     flex: 1;
     padding: 9px 4px;
-    font-size: .82rem;
+    font-size: 1rem;
     font-weight: 700;
     font-family: inherit;
     background: #fff;
-    color: #546e7a;
+    color: #222;
     cursor: pointer;
     border: 2px solid #e53935;
     border-radius: 7px;
