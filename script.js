@@ -457,8 +457,22 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   const btnIzakaya  = document.getElementById('gearCatIzakaya');
   const btnConbini  = document.getElementById('gearCatConbini');
   const btnGas      = document.getElementById('gearCatGas');
+  // 地図下部チップバー上の「すべて選択/すべて解除」ボタン
+  const btnSelectAllChips = document.getElementById('catSelectAllBtn');
+  const btnClearAllChips  = document.getElementById('catClearAllBtn');
   // ※ map は後で定義されるため、markerPane はイベントハンドラ内で取得する
 
+
+  // 「すべて選択/すべて解除」ボタンのグレーアウトを catSel/catChipSet の状態に合わせて更新
+  // 「すべて選択」：表示中の全カテゴリが既に選択済みならグレーアウト
+  // 「すべて解除」：1つも選択されていなければグレーアウト
+  function updateSelectAllChipsBtns() {
+    if (!btnSelectAllChips || !btnClearAllChips) return;
+    var allSelected = catChipSet.size > 0 &&
+      Array.from(catChipSet).every(function(k) { return catSel.has(k); });
+    btnSelectAllChips.classList.toggle('cat-selectall-disabled', allSelected);
+    btnClearAllChips.classList.toggle('cat-selectall-disabled', catSel.size === 0);
+  }
 
   // 「すべて」ボタンのグレーアウトを catSel の状態に合わせて更新
   function updateAllBtn() {
@@ -505,6 +519,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     });
     updateAllBtn();
     updateClearBtn();
+    updateSelectAllChipsBtns();
     updateCatLabel();
   }
 
@@ -521,8 +536,10 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       });
     }
     var wrapper = document.getElementById('catLabelWrapper');
+    var selectAllRow = document.getElementById('catSelectAllRow');
     if (catChipSet.size === 0) {
       if (wrapper) wrapper.style.display = 'none';
+      if (selectAllRow) selectAllRow.style.display = 'none';
       return;
     }
     // チップ定義（catChipSet の順で表示）
@@ -543,8 +560,10 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
            + d.label + '</span>';
     }).join('');
 
-    // ラッパーを表示
+    // ラッパーを表示（一括選択/解除ボタンの行も連動して表示）
     if (wrapper) wrapper.style.display = 'flex';
+    if (selectAllRow) selectAllRow.style.display = 'flex';
+    updateSelectAllChipsBtns();
 
     // チップクリック：ピン表示トグル
     bar.querySelectorAll('.cat-label-chip').forEach(function(chip) {
@@ -571,6 +590,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   function hideCatLabel() {
     var wrapper = document.getElementById('catLabelWrapper');
     if (wrapper) wrapper.style.display = 'none';
+    var selectAllRow = document.getElementById('catSelectAllRow');
+    if (selectAllRow) selectAllRow.style.display = 'none';
     catChipSet.clear();
   }
 
@@ -743,6 +764,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     updateAllBtn();
     updateClearBtn();
     updateCatLabel(); // catChipSet の全チップを描画（表示中カテゴリは色付き）
+    updateSelectAllChipsBtns();
   }, 0);
 
   // 歯車ボタン：メニュー開閉トグル
@@ -776,6 +798,21 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     ].forEach(function(b) { if (b) b.classList.remove('cat-selected'); });
     updateCatPreview();
   });
+
+  // 地図下部チップバー上の「すべて選択」：表示中の全カテゴリを選択状態にする
+  if (btnSelectAllChips) {
+    btnSelectAllChips.addEventListener('click', function () {
+      catChipSet.forEach(function(k) { catSel.add(k); });
+      updateCatPreview();
+    });
+  }
+  // 地図下部チップバー上の「すべて解除」：選択を全て解除する
+  if (btnClearAllChips) {
+    btnClearAllChips.addEventListener('click', function () {
+      catSel.clear();
+      updateCatPreview();
+    });
+  }
 
   btnShokuji.addEventListener('click', function () {
     if (openedViaPin) {
@@ -2349,6 +2386,8 @@ function applyFilter(filterId) {
   // カテゴリラベルバーラッパーを非表示（通常モードに戻るため）
   var catWrapper = document.getElementById('catLabelWrapper');
   if (catWrapper) catWrapper.style.display = 'none';
+  var catSelectAllRow = document.getElementById('catSelectAllRow');
+  if (catSelectAllRow) catSelectAllRow.style.display = 'none';
 
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.filter === filterId);

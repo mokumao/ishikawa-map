@@ -947,6 +947,42 @@ body.info-open .label-toggle-btn { display: none !important; }
     align-items: center !important;
     justify-content: center !important;
   }
+  /* チップの一括選択/解除ボタン（チップバーのすぐ上に配置） */
+  .cat-selectall-row {
+    position: absolute;
+    bottom: 90px; /* cat-label-wrapperのbottom(10px)+高さ(74px)+隙間(6px) */
+    left: 0;
+    right: 0;
+    z-index: 900;
+    display: flex;
+    gap: 8px;
+    padding: 0 6px;
+    pointer-events: auto;
+  }
+  .cat-selectall-btn {
+    flex: 1;
+    padding: 8px 4px;
+    font-size: .85rem;
+    font-weight: 700;
+    font-family: inherit;
+    background: #fff;
+    color: #263238;
+    cursor: pointer;
+    border: 2px solid #1976D2;
+    border-radius: 7px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+    transition: background .15s, color .15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* 「すべて選択」は全カテゴリ選択済み、「すべて解除」は何も選択されていない
+     ときにグレーアウトして押せない見た目にする */
+  .cat-selectall-btn.cat-selectall-disabled {
+    background: #e0e0e0;
+    color: #9e9e9e;
+    border-color: #bdbdbd;
+    cursor: default;
+    pointer-events: none;
+  }
   /* カテゴリ選択中ラベルバー ラッパー（矢印＋スクロールエリア） */
   .cat-label-wrapper {
     position: absolute;
