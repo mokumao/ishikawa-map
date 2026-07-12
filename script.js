@@ -960,6 +960,7 @@ function openInfoPanel() {
   if (!appBody) return;
   appBody.dataset.view = 'info';
   document.body.classList.add('info-open');
+  document.body.classList.remove('list-open');
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -1017,6 +1018,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (appBody) {
         appBody.dataset.view = 'map';
         document.body.classList.remove('info-open');
+        document.body.classList.remove('list-open');
         setTimeout(() => { if (typeof map !== 'undefined') map.invalidateSize(); }, 50);
       }
     }
@@ -2513,6 +2515,8 @@ function setActiveItem(idx) {
 function switchTab(tab) {
   const appBody = document.getElementById('appBody');
   appBody.dataset.view = tab;
+  document.body.classList.toggle('list-open', tab === 'list');
+  if (tab !== 'info') document.body.classList.remove('info-open');
 
   // 旧タブバー（DOM上は残存）
   document.getElementById('tabMap').classList.toggle('active',  tab === 'map');
