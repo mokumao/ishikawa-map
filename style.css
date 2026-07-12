@@ -1210,7 +1210,7 @@ body.info-open .label-toggle-btn { display: none !important; }
   }
   .bottom-tab-btn {
     flex: 1;
-    padding: 6px 4px;
+    padding: 2px 4px;
     font-size: 1.15rem;
     font-weight: 700;
     font-family: inherit;
