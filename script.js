@@ -2102,7 +2102,12 @@ if ('ontouchstart' in window) {
 
   let startX = 0;
   let startY = 0;
+  let latestDx = 0;
+  let latestDy = 0;
+  let draggingControls = false;
   let restoreStartY = 0;
+  const HIDE_THRESHOLD = 74;
+  const MAX_DRAG = 145;
 
   function isMapView() {
     const appBody = document.getElementById('appBody');
@@ -2123,13 +2128,59 @@ if ('ontouchstart' in window) {
 
   function showCategoryControls() {
     document.body.classList.remove('cat-controls-hidden');
+    resetDragState();
+  }
+
+  function setDragOffset(y) {
+    const clamped = Math.max(0, Math.min(MAX_DRAG, y));
+    const opacity = Math.max(0.08, 1 - clamped / MAX_DRAG);
+    document.body.style.setProperty('--cat-controls-drag-y', clamped + 'px');
+    document.body.style.setProperty('--cat-controls-drag-opacity', String(opacity));
+  }
+
+  function resetDragState() {
+    draggingControls = false;
+    document.body.classList.remove('cat-controls-dragging');
+    document.body.style.removeProperty('--cat-controls-drag-y');
+    document.body.style.removeProperty('--cat-controls-drag-opacity');
+  }
+
+  function finishDragToHidden() {
+    draggingControls = false;
+    document.body.classList.remove('cat-controls-dragging');
+    hideCategoryControls();
+    setTimeout(function () {
+      document.body.style.removeProperty('--cat-controls-drag-y');
+      document.body.style.removeProperty('--cat-controls-drag-opacity');
+    }, 450);
   }
 
   mapEl.addEventListener('touchstart', function (e) {
     if (e.touches.length !== 1) return;
     if (e.target.closest('.leaflet-popup, a, button, .cat-selectall-row, .cat-label-wrapper, .bottom-tabs')) return;
+    if (!isMapView() || document.body.classList.contains('cat-controls-hidden')) return;
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
+    latestDx = 0;
+    latestDy = 0;
+    draggingControls = false;
+  }, { passive: true });
+
+  mapEl.addEventListener('touchmove', function (e) {
+    if (e.touches.length !== 1) return;
+    if (!isMapView() || document.body.classList.contains('cat-controls-hidden')) return;
+    if (!hasVisibleCategoryControls()) return;
+
+    latestDx = e.touches[0].clientX - startX;
+    latestDy = e.touches[0].clientY - startY;
+
+    if (latestDy > 8 && Math.abs(latestDx) < 110) {
+      draggingControls = true;
+      document.body.classList.add('cat-controls-dragging');
+      setDragOffset(latestDy);
+    } else if (draggingControls && latestDy <= 0) {
+      resetDragState();
+    }
   }, { passive: true });
 
   mapEl.addEventListener('touchend', function (e) {
@@ -2138,8 +2189,12 @@ if ('ontouchstart' in window) {
 
     const dx = e.changedTouches[0].clientX - startX;
     const dy = e.changedTouches[0].clientY - startY;
-    if (dy > 55 && Math.abs(dx) < 95) {
-      hideCategoryControls();
+    const shouldHide = (draggingControls || dy > 18) && dy > HIDE_THRESHOLD && Math.abs(dx) < 110;
+
+    if (shouldHide) {
+      finishDragToHidden();
+    } else {
+      resetDragState();
     }
   }, { passive: true });
 

@@ -1047,7 +1047,7 @@ body.info-open .label-toggle-btn { display: none !important; }
     gap: 8px;
     padding: 0 6px;
     pointer-events: auto;
-    transition: transform .28s ease, opacity .22s ease;
+    transition: transform .42s cubic-bezier(0.22, 1, 0.36, 1), opacity .32s ease;
   }
   .cat-selectall-btn {
     flex: 1;
@@ -1086,11 +1086,17 @@ body.info-open .label-toggle-btn { display: none !important; }
     padding: 0 6px;
     pointer-events: auto;
     min-height: 74px; /* チップバーの高さを確保 */
-    transition: transform .28s ease, opacity .22s ease;
+    transition: transform .42s cubic-bezier(0.22, 1, 0.36, 1), opacity .32s ease;
+  }
+  body.cat-controls-dragging .cat-selectall-row,
+  body.cat-controls-dragging .cat-label-wrapper {
+    transform: translateY(var(--cat-controls-drag-y, 0px));
+    opacity: var(--cat-controls-drag-opacity, 1);
+    transition: none;
   }
   body.cat-controls-hidden .cat-selectall-row,
   body.cat-controls-hidden .cat-label-wrapper {
-    transform: translateY(135px);
+    transform: translateY(145px);
     opacity: 0;
     pointer-events: none;
   }
