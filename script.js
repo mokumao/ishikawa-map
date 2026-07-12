@@ -2153,7 +2153,7 @@ if ('ontouchstart' in window) {
     setTimeout(function () {
       document.body.style.removeProperty('--cat-controls-drag-y');
       document.body.style.removeProperty('--cat-controls-drag-opacity');
-    }, 760);
+    }, 1100);
   }
 
   mapEl.addEventListener('touchstart', function (e) {
