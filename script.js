@@ -2107,6 +2107,7 @@ if ('ontouchstart' in window) {
   let latestDy = 0;
   let draggingControls = false;
   let restoreStartY = 0;
+  let ignoreGesture = false;
   const HIDE_THRESHOLD = 74;
   const MAX_DRAG = 145;
 
@@ -2158,7 +2159,11 @@ if ('ontouchstart' in window) {
 
   mapEl.addEventListener('touchstart', function (e) {
     if (e.touches.length !== 1) return;
-    if (e.target.closest('.leaflet-popup, a, button, .cat-selectall-row, .cat-label-wrapper, .bottom-tabs')) return;
+    if (e.target.closest('.leaflet-popup, a, button, .cat-selectall-row, .cat-label-wrapper, .bottom-tabs')) {
+      ignoreGesture = true;
+      return;
+    }
+    ignoreGesture = false;
     if (!isMapView() || document.body.classList.contains('cat-controls-hidden')) return;
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
@@ -2170,6 +2175,7 @@ if ('ontouchstart' in window) {
 
   mapEl.addEventListener('touchmove', function (e) {
     if (e.touches.length !== 1) return;
+    if (ignoreGesture) return;
     if (!isMapView() || document.body.classList.contains('cat-controls-hidden')) return;
     if (!hasVisibleCategoryControls()) return;
 
@@ -2188,6 +2194,7 @@ if ('ontouchstart' in window) {
   }, { passive: true });
 
   mapEl.addEventListener('touchend', function (e) {
+    if (ignoreGesture) { ignoreGesture = false; return; }
     if (!isMapView() || e.changedTouches.length !== 1) return;
     if (document.body.classList.contains('cat-controls-hidden')) return;
 
