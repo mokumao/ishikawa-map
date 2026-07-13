@@ -17,12 +17,15 @@ JST = timezone(timedelta(hours=9))
 now_jst = datetime.now(JST)
 today_str   = now_jst.strftime('%Y年%m月%d日')
 today_date  = now_jst.strftime('%Y-%m-%d')
-today_md_str = f'{now_jst.month}月{now_jst.day}日'  # 「本日分なし」表示用（例: 7月11日）
 updated_str = now_jst.strftime('%Y年%m月%d日 %H:%M')
 
 # 掲載期間：7日以内（過去）＋ 未来の情報は無制限
 DAYS_LIMIT  = 7
 cutoff_date = now_jst - timedelta(days=DAYS_LIMIT)
+
+# 「ニュースがなかった日」を記録するファイル（日をまたいでも過去分の
+# 「〇月△日のニュースはありません」表示を消さずに残すための永続化）
+NO_NEWS_FILE = 'news/no_news_dates.json'
 
 # ── 石川関連キーワード ─────────────────────────────────────────────
 ISHIKAWA_KEYWORDS = [
@@ -125,6 +128,22 @@ def is_within_period(pub_date):
         return True  # 日付不明の場合は掲載する（除外しすぎを防ぐ）
     return pub_date >= cutoff_date  # cutoff_date以降（7日前〜未来）
 
+def load_no_news_dates(path=NO_NEWS_FILE):
+    """過去に「ニュースなし」だった日付（YYYY-MM-DD）の集合を読み込む"""
+    if os.path.exists(path):
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                return set(json.load(f))
+        except Exception:
+            return set()
+    return set()
+
+def save_no_news_dates(dates, path=NO_NEWS_FILE):
+    """「ニュースなし」だった日付の集合を保存する"""
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(sorted(dates), f, ensure_ascii=False, indent=2)
+
 def format_date_label(pub_date):
     """表示用の日付ラベルを返す"""
     if pub_date is None:
@@ -197,33 +216,33 @@ def fetch_articles():
     return articles
 
 
-def generate_html(articles):
+def generate_html(articles, no_news_dates=None):
     """ニュース一覧 HTML を生成して news/index.html に保存"""
+    no_news_dates = no_news_dates or set()
 
-    # ── 記事カード HTML ──
-    if articles:
-        # 未来の記事を先頭に、それ以降は新しい順にソート
-        def sort_key(a):
-            if not a['pub_date']:
-                return '0000'
-            return a['pub_date']
-        articles.sort(key=sort_key, reverse=True)
+    # 未来の記事を先頭に、それ以降は新しい順にソート
+    def sort_key(a):
+        if not a['pub_date']:
+            return '0000'
+        return a['pub_date']
+    articles.sort(key=sort_key, reverse=True)
 
-        # 本日分の記事が1件も無い場合は、通常の記事カードと同じ見た目で
-        # 「◯月◯日のニュースはありません」を先頭に表示する
-        has_today = any(a['date_label'].startswith('本日') for a in articles)
-        cards = ''
-        if not has_today:
-            cards += f'''
+    # 「ニュースがなかった日」は日付が新しい順にすべてカード表示する
+    # （1日だけでなく、記録されている日数分すべて残す）
+    cards = ''
+    for d in sorted(no_news_dates, reverse=True):
+        dt = datetime.strptime(d, '%Y-%m-%d')
+        label = f'{dt.month}月{dt.day}日'
+        cards += f'''
     <article class="ni no-news">
-      <span class="nt no-news-text">{today_md_str}のニュースはありません</span>
+      <span class="nt no-news-text">{label}のニュースはありません</span>
     </article>'''
-        for a in articles:
-            summary_html   = f'<p class="ns">{a["summary"]}</p>' if a['summary'] else ''
-            date_html      = f'<span class="date-label">{a["date_label"]}</span>' if a['date_label'] else ''
-            is_future      = a['pub_date'] and a['pub_date'] > now_jst.isoformat()
-            future_class   = ' future' if is_future else ''
-            cards += f'''
+    for a in articles:
+        summary_html   = f'<p class="ns">{a["summary"]}</p>' if a['summary'] else ''
+        date_html      = f'<span class="date-label">{a["date_label"]}</span>' if a['date_label'] else ''
+        is_future      = a['pub_date'] and a['pub_date'] > now_jst.isoformat()
+        future_class   = ' future' if is_future else ''
+        cards += f'''
     <article class="ni{future_class}">
       <div class="ni-header">
         <a class="nt" href="{a['link']}" target="_blank" rel="noopener noreferrer">{a['title']}</a>
@@ -232,6 +251,8 @@ def generate_html(articles):
       {summary_html}
       <span class="src">出典：{a['source']}</span>
     </article>'''
+
+    if cards:
         body_html = f'<div class="nl">{cards}\n  </div>'
         count_label = f'{len(articles)}件'
     else:
@@ -442,5 +463,17 @@ if __name__ == '__main__':
     print(f"=== Ishikawa News Fetch Start: {today_date} ===\n")
     articles = fetch_articles()
     print(f"\nTotal: {len(articles)} articles\n")
-    generate_html(articles)
+
+    # 本日分の記事が1件も無ければ「ニュースなしの日」として記録に追加。
+    # 掲載期間(DAYS_LIMIT日)より古い記録は削除して肥大化を防ぐ。
+    has_today = any(a['date_label'].startswith('本日') for a in articles)
+    no_news_dates = load_no_news_dates()
+    if not has_today:
+        no_news_dates.add(today_date)
+    cutoff_date_str = cutoff_date.strftime('%Y-%m-%d')
+    no_news_dates = {d for d in no_news_dates if d >= cutoff_date_str}
+    save_no_news_dates(no_news_dates)
+    print(f"[OK] no_news_dates.json を更新しました（{len(no_news_dates)}件）")
+
+    generate_html(articles, no_news_dates)
     print("\n=== Done ===")
