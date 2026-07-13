@@ -2157,6 +2157,10 @@ if ('ontouchstart' in window) {
     }, 1100);
   }
 
+  // capture フェーズで登録：#catLabelBar 内のタッチスクロール用ハンドラが
+  // touchstart で stopPropagation() するため、bubble フェーズだと
+  // チップ（食事処 等）タップ時にこのハンドラまでイベントが届かない。
+  // capture は伝播の最上流で発火するため、子要素側の stopPropagation の影響を受けない。
   mapEl.addEventListener('touchstart', function (e) {
     if (e.touches.length !== 1) return;
     if (e.target.closest('.leaflet-popup, a, button, .cat-selectall-row, .cat-label-wrapper, .bottom-tabs')) {
@@ -2171,7 +2175,7 @@ if ('ontouchstart' in window) {
     latestDx = 0;
     latestDy = 0;
     draggingControls = false;
-  }, { passive: true });
+  }, { passive: true, capture: true });
 
   mapEl.addEventListener('touchmove', function (e) {
     if (e.touches.length !== 1) return;
