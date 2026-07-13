@@ -1044,14 +1044,15 @@ body.info-open .label-toggle-btn { display: none !important; }
     right: 0;
     z-index: 900;
     display: flex;
+    justify-content: center;
     gap: 8px;
     padding: 0 6px;
     pointer-events: auto;
     transition: transform 1.05s cubic-bezier(0.22, 1, 0.36, 1), opacity .82s ease;
   }
   .cat-selectall-btn {
-    flex: 1;
-    padding: 3px 4px;
+    flex: 0 0 auto;
+    padding: 3px 10px;
     font-size: .72rem;
     font-weight: 700;
     font-family: inherit;
