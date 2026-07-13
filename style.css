@@ -1051,8 +1051,8 @@ body.info-open .label-toggle-btn { display: none !important; }
   }
   .cat-selectall-btn {
     flex: 1;
-    padding: 8px 4px;
-    font-size: .85rem;
+    padding: 5px 4px;
+    font-size: .78rem;
     font-weight: 700;
     font-family: inherit;
     background: #fff;
