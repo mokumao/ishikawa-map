@@ -1600,7 +1600,11 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
   maxNativeZoom: 19,
   maxZoom: 21,
-  keepBuffer: 4
+  keepBuffer: 4,
+  // スマホの既定(true)だとスクロールが止まるまでタイル読込が始まらず、
+  // 素早いスクロールで灰色領域が目立つ。スクロール中も読込を開始する
+  updateWhenIdle: false,
+  updateInterval: 100
 }).addTo(map);
 
 // 石川エリアの初期表示位置
