@@ -279,24 +279,27 @@ def generate_html(articles, no_news_dates=None):
     """ニュース一覧 HTML を生成して news/index.html に保存"""
     no_news_dates = no_news_dates or set()
 
-    # 未来の記事を先頭に、それ以降は新しい順にソート
-    def sort_key(a):
-        if not a['pub_date']:
-            return '0000'
-        return a['pub_date']
-    articles.sort(key=sort_key, reverse=True)
-
-    # 「ニュースがなかった日」は日付が新しい順にすべてカード表示する
-    # （1日だけでなく、記録されている日数分すべて残す）
-    cards = ''
-    for d in sorted(no_news_dates, reverse=True):
-        dt = datetime.strptime(d, '%Y-%m-%d')
-        label = f'{dt.month}月{dt.day}日'
-        cards += f'''
-    <article class="ni no-news">
-      <span class="nt no-news-text">{label}のニュースはありません</span>
-    </article>'''
+    # 記事と「〇月△日のニュースはありません」カードを、日付順のひとつの
+    # 流れ（新しいものが上）に混ぜて表示する。
+    # ソートキーはISO日時文字列。「ニュースはありません」カードには T99 を
+    # 付けて、同じ日の記事よりも上（その日の先頭）に来るようにする
+    items = []
     for a in articles:
+        items.append((a['pub_date'] or '0000', 'article', a))
+    for d in no_news_dates:
+        items.append((d + 'T99', 'no_news', d))
+    items.sort(key=lambda t: t[0], reverse=True)
+
+    cards = ''
+    for _key, kind, data in items:
+        if kind == 'no_news':
+            dt = datetime.strptime(data, '%Y-%m-%d')
+            cards += f'''
+    <article class="ni no-news">
+      <span class="nt no-news-text">{dt.month}月{dt.day}日のニュースはありません</span>
+    </article>'''
+            continue
+        a = data
         summary_html   = f'<p class="ns">{a["summary"]}</p>' if a['summary'] else ''
         date_html      = f'<span class="date-label">{a["date_label"]}</span>' if a['date_label'] else ''
         is_future      = a['pub_date'] and a['pub_date'] > now_jst.isoformat()
