@@ -10,7 +10,7 @@ import os
 import re
 import json
 from datetime import datetime, timezone, timedelta
-from html import unescape
+from html import unescape, escape
 
 # ── 日時設定（日本時間） ──────────────────────────────────────────
 JST = timezone(timedelta(hours=9))
@@ -26,6 +26,12 @@ cutoff_date = now_jst - timedelta(days=DAYS_LIMIT)
 # 「ニュースがなかった日」を記録するファイル（日をまたいでも過去分の
 # 「〇月△日のニュースはありません」表示を消さずに残すための永続化）
 NO_NEWS_FILE = 'news/no_news_dates.json'
+
+# 管理人投稿フォームの回答スプレッドシート（ウェブに公開したCSV）
+# Googleフォーム「石川ニュース投稿（管理人用）」→ シート「フォームの回答 1」
+ADMIN_POSTS_CSV_URL = ('https://docs.google.com/spreadsheets/d/e/'
+    '2PACX-1vRiRIGgNkKBpeNKMsPOB8UOiwR_9yk7Gix_6LN6F4EG5X6i23K---P4V7JUY6oMuNW0OEQz8gCYM3F4'
+    '/pub?gid=1849219516&single=true&output=csv')
 
 # ── 石川関連キーワード ─────────────────────────────────────────────
 ISHIKAWA_KEYWORDS = [
@@ -158,6 +164,59 @@ def format_date_label(pub_date):
     else:
         return pub_date.strftime('%m/%d')
 
+# ── 管理人投稿の取得 ──────────────────────────────────────────────
+
+def parse_admin_timestamp(ts):
+    """Googleフォームのタイムスタンプ（例: 2026/07/16 0:12:34）をJSTのdatetimeに変換"""
+    for fmt in ('%Y/%m/%d %H:%M:%S', '%Y/%m/%d %H:%M'):
+        try:
+            return datetime.strptime(ts, fmt).replace(tzinfo=JST)
+        except ValueError:
+            continue
+    return None
+
+def fetch_admin_posts():
+    """管理人投稿フォームの回答（公開CSV）を取得して記事リスト形式で返す。
+    取得に失敗してもニュース生成全体は止めない（空リストを返す）"""
+    import csv
+    import io
+    import urllib.request
+    posts = []
+    try:
+        print("取得中: 管理人投稿（Googleフォーム） ...")
+        req = urllib.request.Request(ADMIN_POSTS_CSV_URL,
+                                     headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            text = resp.read().decode('utf-8')
+        reader = csv.DictReader(io.StringIO(text))
+        for row in reader:
+            ts       = (row.get('タイムスタンプ') or '').strip()
+            title    = (row.get('タイトル') or '').strip()
+            body     = (row.get('詳しい内容') or '').strip()
+            category = (row.get('カテゴリ') or '').strip()
+            if not title:
+                continue
+            pub_date = parse_admin_timestamp(ts)
+            if not is_within_period(pub_date):
+                continue  # 掲載期間(7日)を過ぎた投稿は表示しない
+            # フォームは自由入力なのでHTMLとして解釈されないようエスケープする
+            source = '石川マップ管理人'
+            if category:
+                source += f'（{escape(category)}）'
+            posts.append({
+                'title':      escape(title),
+                'summary':    truncate(escape(body)),
+                'link':       '',   # 管理人投稿は外部リンクなし
+                'source':     source,
+                'date_label': format_date_label(pub_date),
+                'pub_date':   pub_date.isoformat() if pub_date else '',
+                'admin':      True,
+            })
+        print(f"  → {len(posts)}件")
+    except Exception as e:
+        print(f"  ⚠️ 管理人投稿の取得エラー: {e}")
+    return posts
+
 # ── メイン処理 ────────────────────────────────────────────────────
 
 def fetch_articles():
@@ -242,10 +301,16 @@ def generate_html(articles, no_news_dates=None):
         date_html      = f'<span class="date-label">{a["date_label"]}</span>' if a['date_label'] else ''
         is_future      = a['pub_date'] and a['pub_date'] > now_jst.isoformat()
         future_class   = ' future' if is_future else ''
+        admin_class    = ' admin' if a.get('admin') else ''
+        # 管理人投稿は外部リンクが無いため、タイトルをリンクではなくテキストで表示
+        if a['link']:
+            title_html = f'<a class="nt" href="{a["link"]}" target="_blank" rel="noopener noreferrer">{a["title"]}</a>'
+        else:
+            title_html = f'<span class="nt nt-noline">{a["title"]}</span>'
         cards += f'''
-    <article class="ni{future_class}">
+    <article class="ni{future_class}{admin_class}">
       <div class="ni-header">
-        <a class="nt" href="{a['link']}" target="_blank" rel="noopener noreferrer">{a['title']}</a>
+        {title_html}
         {date_html}
       </div>
       {summary_html}
@@ -366,6 +431,9 @@ def generate_html(articles, no_news_dates=None):
     }}
     .ni.future {{ border-left-color: #1565c0; }}
     .ni.future .date-label {{ background: #e3f2fd; color: #1565c0; }}
+    /* 管理人投稿：緑の縁取りで区別。タイトルはリンクではないので黒系 */
+    .ni.admin {{ border-left-color: #2e7d32; }}
+    .nt-noline {{ color: #263238; cursor: default; }}
     /* ── 記事なし ── */
     .empty {{
       background: #fff;
@@ -462,6 +530,9 @@ def generate_html(articles, no_news_dates=None):
 if __name__ == '__main__':
     print(f"=== Ishikawa News Fetch Start: {today_date} ===\n")
     articles = fetch_articles()
+    # 管理人投稿もニュース記事として合流させる
+    # （本日の投稿があれば「ニュースはありません」の対象からも外れる）
+    articles += fetch_admin_posts()
     print(f"\nTotal: {len(articles)} articles\n")
 
     # 本日分の記事が1件も無ければ「ニュースなしの日」として記録に追加。
@@ -470,6 +541,10 @@ if __name__ == '__main__':
     no_news_dates = load_no_news_dates()
     if not has_today:
         no_news_dates.add(today_date)
+    else:
+        # 朝の時点で「ニュースなし」と記録された後、同じ日に管理人投稿などで
+        # 記事が増えた場合は「〇月△日のニュースはありません」を取り下げる
+        no_news_dates.discard(today_date)
     cutoff_date_str = cutoff_date.strftime('%Y-%m-%d')
     no_news_dates = {d for d in no_news_dates if d >= cutoff_date_str}
     save_no_news_dates(no_news_dates)
