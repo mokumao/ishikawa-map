@@ -1,7 +1,7 @@
 {
   "date": "2026-07-16",
-  "updated": "2026-07-16T00:52:36.938963+09:00",
-  "count": 6,
+  "updated": "2026-07-16T06:54:35.890987+09:00",
+  "count": 7,
   "articles": [
     {
       "title": "画像1 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - ウォーカープラス",
@@ -12,20 +12,20 @@
       "pub_date": "2026-07-15T04:09:43+09:00"
     },
     {
-      "title": "CoCoキャンドルナイト＆星空Bar - ｄメニューニュース",
-      "summary": "CoCoキャンドルナイト＆星空Bar ｄメニューニュース",
-      "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNMUY0Y0tod0FySWFWT3JCdWxUU0pnVElCUVdQYkhKNEp1VG8yQTVUajAtRjEwWl9pNHFaUE15WW5XWDZkQ1ZKZ216cFdjUEhyNFg0a0poYzZQbmlsbHdTYVJaeUFFNl8wdTdWRG9XYkhrUFEyNHkzSUY1MnNvOHhnUHdYVUg3Z9IBhgFBVV95cUxNMUY0Y0tod0FySWFWT3JCdWxUU0pnVElCUVdQYkhKNEp1VG8yQTVUajAtRjEwWl9pNHFaUE15WW5XWDZkQ1ZKZ216cFdjUEhyNFg0a0poYzZQbmlsbHdTYVJaeUFFNl8wdTdWRG9XYkhrUFEyNHkzSUY1MnNvOHhnUHdYVUg3Zw?oc=5",
-      "source": "ココガーデンリゾート沖縄",
-      "date_label": "07/14",
-      "pub_date": "2026-07-14T10:00:00+09:00"
-    },
-    {
       "title": "画像15 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - ウォーカープラス",
       "summary": "画像15 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート ウォーカープラス",
       "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBFMVAweU1aa2M2SWYwbzlLYjlwRDdMcGFoZzNSQV95SUVhR2stYkhyYnFJZmRHVlFkUmJPYTJLWDAxajdiVTFoZ1d3ZFlkbmlNX1YzSmM5VHpTSXhqakZOZVkzeXRtQ0dhTElSdVB3?oc=5",
       "source": "ココガーデンリゾート沖縄",
       "date_label": "07/11",
       "pub_date": "2026-07-11T23:58:06+09:00"
+    },
+    {
+      "title": "CoCoキャンドルナイト＆星空Bar - ｄメニューニュース",
+      "summary": "CoCoキャンドルナイト＆星空Bar ｄメニューニュース",
+      "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNMUY0Y0tod0FySWFWT3JCdWxUU0pnVElCUVdQYkhKNEp1VG8yQTVUajAtRjEwWl9pNHFaUE15WW5XWDZkQ1ZKZ216cFdjUEhyNFg0a0poYzZQbmlsbHdTYVJaeUFFNl8wdTdWRG9XYkhrUFEyNHkzSUY1MnNvOHhnUHdYVUg3Z9IBhgFBVV95cUxNMUY0Y0tod0FySWFWT3JCdWxUU0pnVElCUVdQYkhKNEp1VG8yQTVUajAtRjEwWl9pNHFaUE15WW5XWDZkQ1ZKZ216cFdjUEhyNFg0a0poYzZQbmlsbHdTYVJaeUFFNl8wdTdWRG9XYkhrUFEyNHkzSUY1MnNvOHhnUHdYVUg3Zw?oc=5",
+      "source": "ココガーデンリゾート沖縄",
+      "date_label": "07/14",
+      "pub_date": "2026-07-14T10:00:00+09:00"
     },
     {
       "title": "画像12 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - ウォーカープラス",
@@ -50,6 +50,15 @@
       "source": "石川マップ管理人（テストです）",
       "date_label": "本日 00:35",
       "pub_date": "2026-07-16T00:35:42+09:00",
+      "admin": true
+    },
+    {
+      "title": "テスト投稿2",
+      "summary": "テスト投稿　7/16 0:59 投稿",
+      "link": "",
+      "source": "石川マップ管理人（イベント）",
+      "date_label": "本日 00:59",
+      "pub_date": "2026-07-16T00:59:58+09:00",
       "admin": true
     }
   ]
