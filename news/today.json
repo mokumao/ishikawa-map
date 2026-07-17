@@ -1,7 +1,7 @@
 {
   "date": "2026-07-18",
-  "updated": "2026-07-18T00:48:59.953394+09:00",
-  "count": 7,
+  "updated": "2026-07-18T01:28:54.930013+09:00",
+  "count": 8,
   "articles": [
     {
       "title": "画像18 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - ウォーカープラス",
@@ -12,12 +12,12 @@
       "pub_date": "2026-07-15T22:33:09+09:00"
     },
     {
-      "title": "画像23 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - ウォーカープラス",
-      "summary": "画像23 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート ウォーカープラス",
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE44RXRzck02cWE1OW9lVTR1enRjR3hmWGpRck1LQmZEdmE1ZS0tWEhYTWpuRHZ3bkg3WUZKa2FMRTktcFhIdHpWaURCNDJsWXF2dlY3ZWdjWlI1N3EtckpvVkxPU29uMGNVVFBMVVdR?oc=5",
+      "title": "画像1 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - ウォーカープラス",
+      "summary": "画像1 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート ウォーカープラス",
+      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5EQ3NHWXdLdzh1Z0wxZC1oYlR4OTdodDJEVnNWSG5tbEQyWTFtLUlXRk1LNWdpNVNvTmQwTlczMTBZS1oyYnQ0VTVOZnhSZXUtUS15eEdWZ3phSmVUM296RjZ4WUR6UlFmMTZmOVV3?oc=5",
       "source": "ココガーデンリゾート沖縄",
-      "date_label": "昨日 07/17",
-      "pub_date": "2026-07-17T02:45:24+09:00"
+      "date_label": "07/15",
+      "pub_date": "2026-07-15T04:09:43+09:00"
     },
     {
       "title": "画像15 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - ウォーカープラス",
@@ -60,6 +60,15 @@
       "source": "石川マップ管理人（お店）",
       "date_label": "07/16",
       "pub_date": "2026-07-16T08:43:36+09:00",
+      "admin": true
+    },
+    {
+      "title": "石川ビーチのボランティアビーチ清掃行います。希望者は8月５朝7時から9時ごろまで行っているので来てください",
+      "summary": "石川ビーチのボランティアビーチ清掃行います。希望者は7/30朝7時から9時ごろまで行っているので来てください（情報提供：Isaoさん）",
+      "link": "",
+      "source": "読者提供",
+      "date_label": "本日 00:55",
+      "pub_date": "2026-07-18T00:55:31+09:00",
       "admin": true
     }
   ]
