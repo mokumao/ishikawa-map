@@ -33,6 +33,16 @@ ADMIN_POSTS_CSV_URL = ('https://docs.google.com/spreadsheets/d/e/'
     '2PACX-1vRiRIGgNkKBpeNKMsPOB8UOiwR_9yk7Gix_6LN6F4EG5X6i23K---P4V7JUY6oMuNW0OEQz8gCYM3F4'
     '/pub?gid=1849219516&single=true&output=csv')
 
+# 読者投稿フォームの回答スプレッドシート（ウェブに公開したCSV）
+# Googleフォーム「石川マップ情報提供」→ シート「フォームの回答 1」
+# 管理人が「承認」列に○を入れた行だけ掲載する（承認制）
+READER_POSTS_CSV_URL = ('https://docs.google.com/spreadsheets/d/e/'
+    '2PACX-1vS9yLstpHSeOF_l2mlwQ8kOvY898Wo7VsVf9sHNmPEcZzGOJoAqAWa1em4jCkAUsXU61lAjW0PLOy0m'
+    '/pub?gid=1599536540&single=true&output=csv')
+
+# 「承認」列でこのいずれかが入力されていたら掲載する
+READER_APPROVED_MARKS = {'○', '〇', '◯', 'OK', 'ok', 'Ok', '済', '掲載'}
+
 # ── 石川関連キーワード ─────────────────────────────────────────────
 ISHIKAWA_KEYWORDS = [
     'うるま市石川', '石川市', '石川区', '石川岳', '石川IC',
@@ -238,6 +248,57 @@ def fetch_admin_posts():
         print(f"  → {len(posts)}件")
     except Exception as e:
         print(f"  ⚠️ 管理人投稿の取得エラー: {e}")
+    return posts
+
+# ── 読者投稿（承認済みのみ）の取得 ────────────────────────────────
+
+def fetch_reader_posts():
+    """読者投稿フォームの回答（公開CSV）のうち、管理人が「承認」列に
+    ○等を入れた行だけを記事リスト形式で返す。承認が無い行は掲載しない。
+    取得に失敗してもニュース生成全体は止めない（空リストを返す）"""
+    import csv
+    import io
+    import urllib.request
+    posts = []
+    try:
+        print("取得中: 読者投稿（承認済みのみ） ...")
+        req = urllib.request.Request(READER_POSTS_CSV_URL,
+                                     headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            text = resp.read().decode('utf-8')
+        reader = csv.DictReader(io.StringIO(text))
+        for row in reader:
+            ts       = (row.get('タイムスタンプ') or '').strip()
+            body     = (row.get('お寄せいただく石川の情報') or '').strip()
+            name     = (row.get('お名前（ニックネーム可・任意）') or '').strip()
+            approved = (row.get('承認') or '').strip()
+            title    = (row.get('掲載タイトル') or '').strip()
+            if approved not in READER_APPROVED_MARKS:
+                continue  # 承認されていない投稿は掲載しない
+            if not body:
+                continue
+            pub_date = parse_admin_timestamp(ts)
+            if not is_within_period(pub_date):
+                continue  # 掲載期間(7日)を過ぎた投稿は表示しない
+            # 掲載タイトルが未入力の場合は本文の先頭から自動生成
+            if not title:
+                title = body[:25] + ('…' if len(body) > 25 else '')
+            # フォームは自由入力なのでHTMLとして解釈されないようエスケープする
+            summary = truncate(escape(body))
+            if name:
+                summary += f'（情報提供：{escape(name)}さん）'
+            posts.append({
+                'title':      escape(title),
+                'summary':    summary,
+                'link':       '',   # 読者投稿は外部リンクなし
+                'source':     '読者提供',
+                'date_label': format_date_label(pub_date),
+                'pub_date':   pub_date.isoformat() if pub_date else '',
+                'admin':      True,   # 管理人投稿と同じ緑縁取りカードで表示
+            })
+        print(f"  → {len(posts)}件")
+    except Exception as e:
+        print(f"  ⚠️ 読者投稿の取得エラー: {e}")
     return posts
 
 # ── メイン処理 ────────────────────────────────────────────────────
@@ -583,9 +644,10 @@ def generate_html(articles, no_news_dates=None):
 if __name__ == '__main__':
     print(f"=== Ishikawa News Fetch Start: {today_date} ===\n")
     articles = fetch_articles()
-    # 管理人投稿もニュース記事として合流させる
+    # 管理人投稿・承認済み読者投稿もニュース記事として合流させる
     # （本日の投稿があれば「ニュースはありません」の対象からも外れる）
     articles += fetch_admin_posts()
+    articles += fetch_reader_posts()
     print(f"\nTotal: {len(articles)} articles\n")
 
     # 本日分の記事が1件も無ければ「ニュースなしの日」として記録に追加。
