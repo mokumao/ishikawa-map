@@ -513,6 +513,22 @@ def generate_html(articles, no_news_dates=None):
       text-decoration: none;
       -webkit-tap-highlight-color: transparent;
     }}
+    /* 読者からの情報提供フォームへの入口（承認制：投稿は管理人確認後に掲載） */
+    .bottom-submit-btn {{
+      display: flex; align-items: center; justify-content: center;
+      flex: 1;
+      margin-left: 8px;
+      padding: 9px 4px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: #fff;
+      color: #546e7a;
+      border: 2px solid #e53935;
+      border-radius: 7px;
+      text-decoration: none;
+      white-space: nowrap;
+      -webkit-tap-highlight-color: transparent;
+    }}
   </style>
 </head>
 <body>
@@ -537,9 +553,10 @@ def generate_html(articles, no_news_dates=None):
   </footer>
   </div>
 
-  <!-- 下部バー：地図へ戻る -->
+  <!-- 下部バー：地図へ戻る＋読者の情報提供フォームへの入口 -->
   <div class="bottom-bar">
     <a href="../index.html" class="bottom-map-btn">地図</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfVfV2ZNg6X9ub5qMNSvmFoCJBHf4rbYV1AOuMOBG6pNAvrcA/viewform" class="bottom-submit-btn">石川の情報をお寄せください</a>
   </div>
   </div>
 </body>
