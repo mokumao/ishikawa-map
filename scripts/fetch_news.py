@@ -37,7 +37,7 @@ ADMIN_POSTS_CSV_URL = ('https://docs.google.com/spreadsheets/d/e/'
 ISHIKAWA_KEYWORDS = [
     'うるま市石川', '石川市', '石川区', '石川岳', '石川IC',
     '石川インター', '伊波', '嘉手苅', '田場', '東恩納',
-    '高江洲', 'うるま市', '石川',
+    '高江洲', 'うるま市', 'うるま', '石川',
 ]
 
 # ── RSSソース一覧 ──────────────────────────────────────────────────
@@ -75,20 +75,27 @@ RSS_SOURCES = [
         'filter': False,
     },
     # ── ニュースサイト ──
+    # ※以前設定していた琉球新報RSS(rss/news.xml)は廃止、うるま市公式RSSは404、
+    #   NHKのURLは国際ニュースのフィードでいずれも機能していなかった(2026-07確認)。
+    #   Googleニュースのサイト内検索RSSに置き換えて再構築。
+    # Googleニュースのsite:検索は該当記事が少ないと無関係な記事で埋めて
+    # くるため、キーワードフィルタ（うるま・石川関連のみ通す）を併用する
+    {
+        'name': '沖縄タイムス',
+        'url': gnews('site:okinawatimes.co.jp うるま'),
+        'filter': True,
+    },
     {
         'name': '琉球新報',
-        'url': 'https://ryukyushimpo.jp/rss/news.xml',
+        'url': gnews('site:ryukyushimpo.jp うるま'),
         'filter': True,
     },
     {
-        'name': 'NHK沖縄',
-        'url': 'https://www3.nhk.or.jp/rss/news/cat6.xml',
-        'filter': True,
-    },
-    {
-        'name': 'うるま市公式',
-        'url': 'https://www.city.uruma.lg.jp/rss',
-        'filter': False,
+        'name': 'うるま市公式サイト',
+        'url': gnews('site:city.uruma.lg.jp'),
+        # 市公式は入札公告など石川地区と無関係な事務情報が多いため、
+        # 「石川」を含むものだけに絞る（石川地区の字名は石川○○で始まる）
+        'filter_strict': True,
     },
 ]
 
@@ -243,7 +250,10 @@ def fetch_articles():
                     continue
 
                 # キーワードフィルタ（必要なソースのみ）
-                if source['filter'] and not is_ishikawa_related(title, summary):
+                if source.get('filter') and not is_ishikawa_related(title, summary):
+                    continue
+                # 石川地区限定フィルタ（市公式など広域情報が多いソース用）
+                if source.get('filter_strict') and '石川' not in (title + summary):
                     continue
 
                 # 日付フィルタ：7日以内の過去 or 未来のみ掲載
@@ -252,7 +262,10 @@ def fetch_articles():
                     continue
 
                 # 重複除去（タイトル冒頭20文字で判定）
-                key = title[:20]
+                # 全角/半角の違い（例: ２０日 と 20日）で同一記事が二重掲載
+                # されないよう、NFKC正規化してから比較する
+                import unicodedata
+                key = unicodedata.normalize('NFKC', title)[:20]
                 if key in seen:
                     continue
                 seen.add(key)
