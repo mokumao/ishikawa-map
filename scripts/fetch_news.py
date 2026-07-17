@@ -51,7 +51,7 @@ RSS_SOURCES = [
     {
         'name': 'Google ニュース（うるま市 石川）',
         'url': gnews('うるま市 石川 沖縄'),
-        'filter': False,
+        'filter_strict': True,   # 石川地区の記事に限定
     },
     # ── 施設別 ──
     {
@@ -78,24 +78,26 @@ RSS_SOURCES = [
     # ※以前設定していた琉球新報RSS(rss/news.xml)は廃止、うるま市公式RSSは404、
     #   NHKのURLは国際ニュースのフィードでいずれも機能していなかった(2026-07確認)。
     #   Googleニュースのサイト内検索RSSに置き換えて再構築。
-    # Googleニュースのsite:検索は該当記事が少ないと無関係な記事で埋めて
-    # くるため、キーワードフィルタ（うるま・石川関連のみ通す）を併用する
+    # 「今日の石川ニュース」の名の通り、うるま市全域ではなく石川地区の
+    # 記事に限定するため、いずれも石川限定フィルタ(filter_strict)を適用する。
+    # 新聞に石川地区の記事が載る頻度は低いため、日によっては0件になる
+    # （その分は管理人投稿で補う設計）
     {
         'name': '沖縄タイムス',
-        'url': gnews('site:okinawatimes.co.jp うるま'),
-        'filter': True,
+        'url': gnews('site:okinawatimes.co.jp うるま 石川'),
+        'filter_strict': True,
     },
     {
         'name': '琉球新報',
-        'url': gnews('site:ryukyushimpo.jp うるま'),
-        'filter': True,
+        'url': gnews('site:ryukyushimpo.jp うるま 石川'),
+        'filter_strict': True,
     },
     {
         'name': 'うるま市公式サイト',
         'url': gnews('site:city.uruma.lg.jp'),
-        # 市公式は入札公告など石川地区と無関係な事務情報が多いため、
-        # 「石川」を含むものだけに絞る（石川地区の字名は石川○○で始まる）
-        'filter_strict': True,
+        # 市公式は入札公告など石川地区と無関係な事務情報も多い。
+        # うるま市の情報しか流れないソースなので「石川」のみで判定
+        'filter_strict': 'ishikawa_only',
     },
 ]
 
@@ -114,6 +116,20 @@ def is_ishikawa_related(title, summary=''):
     """石川関連キーワードが含まれているか判定"""
     text = title + ' ' + summary
     return any(kw in text for kw in ISHIKAWA_KEYWORDS)
+
+def is_ishikawa_district_related(title, summary='', require_uruma=True):
+    """うるま市石川地区に関わる記事かを判定する厳しめのフィルタ。
+    「今日の石川ニュース」の名の通り、うるま市全域ではなく石川地区の
+    記事に限定するために使う。「石川」を含むことが必須。
+    新聞は石川県や石川姓の人物の記事も多いため、原則「うるま」も
+    含む記事に限定する。require_uruma=False はうるま市公式サイトなど、
+    うるま市の情報しか流れないソース用（「うるま」表記が無くても通す）"""
+    text = title + ' ' + summary
+    if '石川' not in text:
+        return False
+    if require_uruma and 'うるま' not in text:
+        return False
+    return True
 
 def truncate(text, length=130):
     """指定文字数でテキストを切り詰める"""
@@ -252,9 +268,13 @@ def fetch_articles():
                 # キーワードフィルタ（必要なソースのみ）
                 if source.get('filter') and not is_ishikawa_related(title, summary):
                     continue
-                # 石川地区限定フィルタ（市公式など広域情報が多いソース用）
-                if source.get('filter_strict') and '石川' not in (title + summary):
-                    continue
+                # 石川地区限定フィルタ（うるま市全域ではなく石川地区に絞る）
+                # 'ishikawa_only' 指定のソースは「うるま」表記が無くても通す
+                strict = source.get('filter_strict')
+                if strict:
+                    require_uruma = (strict != 'ishikawa_only')
+                    if not is_ishikawa_district_related(title, summary, require_uruma):
+                        continue
 
                 # 日付フィルタ：7日以内の過去 or 未来のみ掲載
                 pub_date = get_pub_date(entry)
