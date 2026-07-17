@@ -968,6 +968,22 @@ body.info-open .label-toggle-btn { display: none !important; }
     line-height: 1.3;
     margin: 0;
   }
+  /* 「参照」ボタン：about-site.html（このサイトについて）への入口 */
+  .header-ref-btn {
+    margin-left: 6px;
+    padding: 1px 10px;
+    font-size: .7rem;
+    font-weight: 700;
+    font-family: inherit;
+    background: #fff;
+    color: #1565c0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    vertical-align: middle;
+    box-shadow: 0 1px 3px rgba(0,0,0,.25);
+    -webkit-tap-highlight-color: transparent;
+  }
 
   /* ── 旧タブバーをスマホでは非表示（DOM は残す） ── */
   .mobile-tabs { display: none !important; }
