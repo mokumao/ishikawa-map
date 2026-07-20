@@ -846,6 +846,11 @@ body.info-open .label-toggle-btn { display: none !important; }
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
   overflow: hidden;
 }
+/* 右手操作用：サイドボタンが右側の時、ミニマップは左上へ移動 */
+body.side-swipe-right #minimap {
+  right: auto;
+  left: 10px;
+}
 /* ミニマップ上の2重丸マーク（中心塗りつぶし） */
 .mini-target-icon {
   width: 4px;
