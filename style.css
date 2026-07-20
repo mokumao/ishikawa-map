@@ -1002,6 +1002,11 @@ body.info-open .label-toggle-btn { display: none !important; }
     z-index: 1000;
     pointer-events: auto;
   }
+  /* 右手操作用：ボタン列を右側へ切り替え */
+  .side-swipe-ctrl.side-right {
+    left: auto;
+    right: 10px;
+  }
   .side-swipe-btn {
     width: 44px;
     height: 44px;

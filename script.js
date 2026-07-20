@@ -775,6 +775,34 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     if (menu.style.display === 'none') { showMain(); } else { closeMenu(); }
   });
 
+  // 左右切り替え：右手操作用にサイドボタン列を左右反転
+  (function () {
+    var ctrl      = document.getElementById('sideSwipeCtrl');
+    var rightBtn  = document.getElementById('sideSwitchRightBtn');
+    var leftBtn   = document.getElementById('sideSwitchLeftBtn');
+    if (!ctrl || !rightBtn || !leftBtn) return;
+
+    function applySide(isRight) {
+      ctrl.classList.toggle('side-right', isRight);
+      rightBtn.style.display = isRight ? 'none' : '';
+      leftBtn.style.display  = isRight ? '' : 'none';
+      try { localStorage.setItem('sideSwipeRight', isRight ? '1' : '0'); } catch (e) {}
+    }
+
+    rightBtn.addEventListener('click', function (e) {
+      L.DomEvent && L.DomEvent.stopPropagation(e);
+      applySide(true);
+    });
+    leftBtn.addEventListener('click', function (e) {
+      L.DomEvent && L.DomEvent.stopPropagation(e);
+      applySide(false);
+    });
+
+    try {
+      if (localStorage.getItem('sideSwipeRight') === '1') applySide(true);
+    } catch (e) {}
+  })();
+
   // メインメニュー
   document.getElementById('gearLangBtn').addEventListener('click', showLang);
   document.getElementById('gearCloseBtn').addEventListener('click', closeMenu);
