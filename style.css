@@ -1007,7 +1007,7 @@ body.info-open .label-toggle-btn { display: none !important; }
     height: 44px;
     border-radius: 50%;
     background: rgba(255, 255, 255, .92);
-    border: 2px solid #e0e0e0;
+    border: 2px solid #e53935;
     box-shadow: 0 2px 8px rgba(0,0,0,.28);
     font-size: 1.3rem;
     font-weight: 900;
@@ -1190,11 +1190,11 @@ body.info-open .label-toggle-btn { display: none !important; }
   .cat-label-chip {
     background: rgba(255,255,255,0.95); /* 非表示状態：白 */
     border: 2px solid #e53935;
-    color: #b71c1c;
+    color: #000;
     border-radius: 5px;
     padding: 4px 14px;
     font-size: 13px;
-    font-weight: bold;
+    font-weight: 400;
     letter-spacing: 0.03em;
     white-space: nowrap;
     box-shadow: 0 1px 4px rgba(0,0,0,0.18);
