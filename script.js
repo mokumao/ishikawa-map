@@ -787,7 +787,6 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       document.body.classList.toggle('side-swipe-right', isRight);
       rightBtn.style.display = isRight ? 'none' : '';
       leftBtn.style.display  = isRight ? '' : 'none';
-      try { localStorage.setItem('sideSwipeRight', isRight ? '1' : '0'); } catch (e) {}
     }
 
     rightBtn.addEventListener('click', function (e) {
@@ -798,10 +797,6 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       L.DomEvent && L.DomEvent.stopPropagation(e);
       applySide(false);
     });
-
-    try {
-      if (localStorage.getItem('sideSwipeRight') === '1') applySide(true);
-    } catch (e) {}
   })();
 
   // メインメニュー
