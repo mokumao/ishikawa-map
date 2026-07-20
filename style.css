@@ -1057,6 +1057,12 @@ body.info-open .label-toggle-btn { display: none !important; }
     align-items: center !important;
     justify-content: center !important;
   }
+  .side-arrow-btn {
+    margin-top: 6px;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
   /* チップの一括選択/解除ボタン（チップバーのすぐ上に配置） */
   .cat-selectall-row {
     position: absolute;
@@ -1695,6 +1701,15 @@ body.info-open .label-toggle-btn { display: none !important; }
     height: 40px !important;
     line-height: 40px !important;
     font-size: 22px !important;
+  }
+  /* 右手操作用：ズームコントロールもサイドボタンと一緒に右側へ移動 */
+  body.side-swipe-right .leaflet-bottom.leaflet-left {
+    left: auto !important;
+    right: 0 !important;
+  }
+  body.side-swipe-right .leaflet-bottom.leaflet-left .leaflet-control-zoom {
+    margin-left: 0;
+    margin-right: 10px;
   }
 }
 

@@ -784,6 +784,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 
     function applySide(isRight) {
       ctrl.classList.toggle('side-right', isRight);
+      document.body.classList.toggle('side-swipe-right', isRight);
       rightBtn.style.display = isRight ? 'none' : '';
       leftBtn.style.display  = isRight ? '' : 'none';
       try { localStorage.setItem('sideSwipeRight', isRight ? '1' : '0'); } catch (e) {}
