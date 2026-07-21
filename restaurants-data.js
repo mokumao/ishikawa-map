@@ -428,6 +428,106 @@ const restaurants = [
     lng:       127.826263,
     twitter: "", instagram: "", youtube: "", website: "https://www.sej.co.jp/", detailText: "", photos: []
   },
+  // ※以下4件のファミマ＋3件のローソンは2026-07-21にOpenStreetMap抽出＋
+  //   公式店舗検索等とのウェブ二重照合で追加（座標はOSM、住所・店名は公式等で確認）
+  {
+    name:      "ファミリーマート 石川東山店",
+    genre:     "コンビニ",
+    address:   "沖縄県うるま市石川東山1-22-11",
+    hours:     "24時間",
+    closed:    "年中無休",
+    note:      "",
+    note_en:   "",
+    sourceUrl: "https://store.family.co.jp/points/07258",
+    warn:      false,
+    lat:       26.434764,
+    lng:       127.838129,
+    twitter: "", instagram: "", youtube: "", website: "https://www.family.co.jp/", detailText: "", photos: []
+  },
+  {
+    name:      "ファミリーマート 石川白浜店",
+    genre:     "コンビニ",
+    address:   "沖縄県うるま市石川白浜2-8-26",
+    hours:     "24時間",
+    closed:    "年中無休",
+    note:      "ATM・駐車場あり",
+    note_en:   "ATM and parking available.",
+    sourceUrl: "https://www.family.co.jp/",
+    warn:      false,
+    lat:       26.424311,
+    lng:       127.825500,
+    twitter: "", instagram: "", youtube: "", website: "https://www.family.co.jp/", detailText: "", photos: []
+  },
+  {
+    name:      "ファミリーマート 石川高校前店",
+    genre:     "コンビニ",
+    address:   "沖縄県うるま市石川伊波294-1",
+    hours:     "24時間",
+    closed:    "年中無休",
+    note:      "",
+    note_en:   "",
+    sourceUrl: "https://www.family.co.jp/",
+    warn:      false,
+    lat:       26.415741,
+    lng:       127.821848,
+    twitter: "", instagram: "", youtube: "", website: "https://www.family.co.jp/", detailText: "", photos: []
+  },
+  {
+    name:      "ファミリーマート 石川東恩納店",
+    genre:     "コンビニ",
+    address:   "沖縄県うるま市石川東恩納666-1",
+    hours:     "24時間",
+    closed:    "年中無休",
+    note:      "",
+    note_en:   "",
+    sourceUrl: "https://store.family.co.jp/points/72349",
+    warn:      false,
+    lat:       26.410708,
+    lng:       127.827042,
+    twitter: "", instagram: "", youtube: "", website: "https://www.family.co.jp/", detailText: "", photos: []
+  },
+  {
+    name:      "ローソン 石川バイパス店",
+    genre:     "コンビニ",
+    address:   "沖縄県うるま市石川山城842-3",
+    hours:     "24時間",
+    closed:    "年中無休",
+    note:      "国道329号石川バイパス沿い・駐車場あり",
+    note_en:   "On Route 329 Ishikawa Bypass. Parking available.",
+    sourceUrl: "https://www.e-map.ne.jp/p/lawson/dtl/241123/",
+    warn:      false,
+    lat:       26.412944,
+    lng:       127.817921,
+    twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
+  },
+  {
+    name:      "ローソン うるま石川東恩納店",
+    genre:     "コンビニ",
+    address:   "沖縄県うるま市石川東恩納251-1",
+    hours:     "24時間",
+    closed:    "年中無休",
+    note:      "ATM・駐車場あり",
+    note_en:   "ATM and parking available.",
+    sourceUrl: "https://www.e-map.ne.jp/p/lawson/dtl/374700/",
+    warn:      false,
+    lat:       26.414672,
+    lng:       127.834395,
+    twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
+  },
+  {
+    name:      "ローソン うるま伊波店",
+    genre:     "コンビニ",
+    address:   "沖縄県うるま市石川伊波1512-15",
+    hours:     "24時間",
+    closed:    "年中無休",
+    note:      "ATM・駐車場あり",
+    note_en:   "ATM and parking available.",
+    sourceUrl: "https://www.e-map.ne.jp/p/lawson/dtl/287148/",
+    warn:      false,
+    lat:       26.426880,
+    lng:       127.807813,
+    twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
+  },
 
   // ── ガソリンスタンド ──────────────────────────────────────────────
   {
