@@ -23,6 +23,15 @@
 - `scripts/fetch_news.py` — ニュース自動収集・HTML生成スクリプト
 - `leaflet/` — Leaflet 1.9.4 ローカルコピー（CDNがプレビュー環境でブロックされるため）
 - `.claude/launch.json` — プレビューサーバー設定
+- `.claude/skills/poi-survey/SKILL.md` — **店舗・施設データ（POI）の調査・追加手順書**
+
+## 店舗・施設データの追加ルール
+
+新しい店舗・施設を `restaurants-data.js` に追加するときは、
+**必ず `.claude/skills/poi-survey/SKILL.md` の手順に従うこと。**
+AIの記憶から店舗を列挙するのは禁止（網羅性がなく誤りも混入するため）。
+OSM抽出＋公式店舗検索等との複数照合を行い、出典URLと調査日を記録する。
+Googleマップ・NTTタウンページの自動収集は規約上禁止（人の目視ヒントのみ可）。
 
 ## 作業を始める前に必ずやること
 
