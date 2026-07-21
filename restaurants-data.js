@@ -528,6 +528,64 @@ const restaurants = [
     lng:       127.807813,
     twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
   },
+  // ※以下4件は2026-07-21にサイト管理人の指摘を受けて追加。
+  //   OSM未登録だったためチェーン公式店舗検索・複数地図サービスで存在・住所・座標を照合済み
+  {
+    name:      "ローソン 石川インター店",
+    genre:     "コンビニ",
+    address:   "沖縄県うるま市石川2313-2",
+    hours:     "24時間",
+    closed:    "年中無休",
+    note:      "駐車場あり",
+    note_en:   "Parking available.",
+    sourceUrl: "https://www.e-map.ne.jp/p/lawson/dtl/269914/",
+    warn:      false,
+    lat:       26.435600,
+    lng:       127.827321,
+    twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
+  },
+  {
+    name:      "セブンイレブン 石川白浜1丁目店",
+    genre:     "コンビニ",
+    address:   "沖縄県うるま市石川白浜1-4-17",
+    hours:     "24時間",
+    closed:    "年中無休",
+    note:      "ATMあり",
+    note_en:   "ATM available.",
+    sourceUrl: "https://www.sej.co.jp/",
+    warn:      false,
+    lat:       26.428954,
+    lng:       127.827897,
+    twitter: "", instagram: "", youtube: "", website: "https://www.sej.co.jp/", detailText: "", photos: []
+  },
+  {
+    name:      "セブンイレブン 石川曙2丁目店",
+    genre:     "コンビニ",
+    address:   "沖縄県うるま市石川曙2丁目1-38",
+    hours:     "24時間",
+    closed:    "年中無休",
+    note:      "ATMあり",
+    note_en:   "ATM available.",
+    sourceUrl: "https://www.e-map.ne.jp/p/711map/dtl/507526/",
+    warn:      false,
+    lat:       26.421245,
+    lng:       127.825255,
+    twitter: "", instagram: "", youtube: "", website: "https://www.sej.co.jp/", detailText: "", photos: []
+  },
+  {
+    name:      "ローソン 石川曙三丁目店",
+    genre:     "コンビニ",
+    address:   "沖縄県うるま市石川曙3-12-76",
+    hours:     "24時間",
+    closed:    "年中無休",
+    note:      "店内に郵便ポストあり",
+    note_en:   "Mailbox inside the store.",
+    sourceUrl: "https://www.e-map.ne.jp/p/lawson/dtl/286976/",
+    warn:      false,
+    lat:       26.415945,
+    lng:       127.824158,
+    twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
+  },
 
   // ── ガソリンスタンド ──────────────────────────────────────────────
   {
