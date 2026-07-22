@@ -775,6 +775,8 @@ body.info-open .label-toggle-btn { display: none !important; }
   border-radius: 10px;
   padding: 8px 6px;
   box-shadow: 0 3px 12px rgba(0,0,0,0.22);
+  opacity: 1;
+  transition: opacity .6s ease;
 }
 .news-banner-btn {
   background: none;
@@ -812,7 +814,8 @@ body.info-open .label-toggle-btn { display: none !important; }
 }
 .news-banner-close-side:hover { color: #e53935; background: #ffebee; border-color: #ffcdd2; }
 .news-banner.hidden {
-  display: none !important;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .map-center-star {
