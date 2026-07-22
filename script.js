@@ -2276,17 +2276,27 @@ window.addEventListener('pageshow', function () {
   // 表示制御：サイトを最初に開いたときだけ表示する。
   // 他のページ（ニュース・店舗詳細等）へ行って戻ってきたときは表示しない。
   // sessionStorage はタブを閉じるまで保持されるため「同一タブでの再訪」を判定できる
+  // 表示済み状態を即座に隠す（アニメーションなし）。
+  // フェード用のtransitionは「今まさに表示中のものを閉じる」操作専用で、
+  // ページ読込直後の「最初から隠す」処理に使うと、CSSの初期opacity(1)から
+  // 一瞬表示されたあとフェードして消える、という誤動作になるため無効化する
+  function hideBannerInstant() {
+    if (!banner) return;
+    banner.style.transition = 'none';
+    banner.classList.add('hidden');
+  }
+
   if (banner) {
     if (sessionStorage.getItem('newsBannerShown') === '1') {
-      banner.classList.add('hidden');
+      hideBannerInstant();
     } else {
       sessionStorage.setItem('newsBannerShown', '1');
     }
   }
   // ブラウザの「戻る」でキャッシュ復元されたときはスクリプトが再実行されないため
-  // pageshow で明示的に隠す
+  // pageshow で明示的に隠す（この場合もアニメーションなしでよい）
   window.addEventListener('pageshow', function (e) {
-    if (e.persisted && banner) banner.classList.add('hidden');
+    if (e.persisted) hideBannerInstant();
   });
 
   // ニュースボタン → news/index.html へ遷移
