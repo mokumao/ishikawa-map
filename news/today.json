@@ -1,7 +1,7 @@
 {
-  "date": "2026-07-22",
-  "updated": "2026-07-22T07:00:22.006785+09:00",
-  "count": 10,
+  "date": "2026-07-23",
+  "updated": "2026-07-23T07:00:51.452300+09:00",
+  "count": 7,
   "articles": [
     {
       "title": "地域の伝統芸能 総会で継承議論 うるま 石川部落会 - 沖縄タイムス社",
@@ -28,14 +28,6 @@
       "pub_date": "2026-07-18T10:41:37+09:00"
     },
     {
-      "title": "画像18 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - ウォーカープラス",
-      "summary": "画像18 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート ウォーカープラス",
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE85QlFPa3VfN3cwMnhsUktQY2U3dG5Yc3lMQmVPTXJDWDlWbW4wSXhIU0ZxS1o5aDNGTGRndXJHOW1tMXVGbzB4d3NuWW1NR1FqLXJhdDVnTEZ6c2RRa0FGYVFTbWEzWlFRSkg3RlBR?oc=5",
-      "source": "ココガーデンリゾート沖縄",
-      "date_label": "07/15",
-      "pub_date": "2026-07-15T22:33:09+09:00"
-    },
-    {
       "title": "画像23 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - ウォーカープラス",
       "summary": "画像23 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート ウォーカープラス",
       "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE44RXRzck02cWE1OW9lVTR1enRjR3hmWGpRck1LQmZEdmE1ZS0tWEhYTWpuRHZ3bkg3WUZKa2FMRTktcFhIdHpWaURCNDJsWXF2dlY3ZWdjWlI1N3EtckpvVkxPU29uMGNVVFBMVVdR?oc=5",
@@ -52,24 +44,6 @@
       "pub_date": "2026-07-20T03:57:00+09:00"
     },
     {
-      "title": "テスト投稿です",
-      "summary": "動作確認のテストです",
-      "link": "",
-      "source": "石川マップ管理人（テストです）",
-      "date_label": "07/16",
-      "pub_date": "2026-07-16T00:35:42+09:00",
-      "admin": true
-    },
-    {
-      "title": "テスト投稿2",
-      "summary": "テスト投稿　7/16 0:59 投稿",
-      "link": "",
-      "source": "石川マップ管理人（イベント）",
-      "date_label": "07/16",
-      "pub_date": "2026-07-16T00:59:58+09:00",
-      "admin": true
-    },
-    {
       "title": "テスト5",
       "summary": "あいうえお順描きくけこああsああああaああああああああああっっっっっっっっっっっっっっっっっsdっさあああああああああああああああああああああああああああああああああ",
       "link": "",
@@ -83,7 +57,7 @@
       "summary": "練習9（情報提供：練習９　2026／7／２１　21：４５入力さん）",
       "link": "",
       "source": "読者提供",
-      "date_label": "昨日 07/21",
+      "date_label": "07/21",
       "pub_date": "2026-07-21T21:45:38+09:00",
       "admin": true
     }
