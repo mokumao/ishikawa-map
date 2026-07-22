@@ -2321,6 +2321,10 @@ window.addEventListener('pageshow', function () {
   document.addEventListener('click', function(e) {
     if (banner.classList.contains('hidden')) return;
     if (e.target.closest('#newsBanner')) return; // バナー自身の操作は専用ハンドラに任せる
+    // パスワード認証画面がまだ表示中の場合、その操作（入力欄・確認ボタン等）は
+    // 地図への操作ではないので無視する（無視しないと地図を見る前にバナーが消えてしまう）
+    var pwOverlay = document.getElementById('passwordOverlay');
+    if (pwOverlay && !pwOverlay.classList.contains('hidden')) return;
     hideBanner();
   }, true);
 })();
