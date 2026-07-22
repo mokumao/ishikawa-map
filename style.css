@@ -776,7 +776,7 @@ body.info-open .label-toggle-btn { display: none !important; }
   padding: 8px 6px;
   box-shadow: 0 3px 12px rgba(0,0,0,0.22);
   opacity: 1;
-  transition: opacity .6s ease;
+  transition: opacity 3s ease;
 }
 .news-banner-btn {
   background: none;
