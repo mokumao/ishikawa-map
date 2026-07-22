@@ -2303,6 +2303,26 @@ window.addEventListener('pageshow', function () {
       if (banner) banner.classList.add('hidden');
     });
   });
+
+  // ── バナー以外の操作（他ボタン押下・地図の拡大縮小・スクロール）で自動的に非表示 ──
+  // ニュースに興味がない人が、×を押さなくても他の操作をするだけで消えるようにする
+  if (!banner) return;
+
+  function hideBanner() {
+    if (window._suppressHeaderCollapse) return; // 読込直後のプログラムによる自動ズームは無視
+    banner.classList.add('hidden');
+  }
+
+  // 地図の拡大縮小・ドラッグスクロール（+/-ボタン・ピンチ・ホイールも dragstart/zoomstart 経由で拾える）
+  map.on('dragstart', hideBanner);
+  map.on('zoomstart', hideBanner);
+
+  // バナー以外の場所へのクリック/タップ（他のボタン・チップ・地図上のピン等）
+  document.addEventListener('click', function(e) {
+    if (banner.classList.contains('hidden')) return;
+    if (e.target.closest('#newsBanner')) return; // バナー自身の操作は専用ハンドラに任せる
+    hideBanner();
+  }, true);
 })();
 
 // ── ポップアップ誤タップ防止：開いた直後 500ms はコンテンツを無効化 ───────
