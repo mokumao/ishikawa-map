@@ -1006,7 +1006,9 @@ body.side-swipe-right #minimap {
     gap: 8px;
     position: absolute;
     left: 10px;
-    bottom: 36%;
+    /* ＋－ボタンをこの列に取り込んだ分（約90px）、下端を引き下げて
+       一番上のアイコンが画面外に押し出されないようにする */
+    bottom: calc(36% - 90px);
     z-index: 1000;
     pointer-events: auto;
   }
