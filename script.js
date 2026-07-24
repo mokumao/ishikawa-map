@@ -435,6 +435,9 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       var el = document.getElementById(id);
       if (el) { el.style.opacity = ''; el.style.pointerEvents = ''; }
     });
+    // 「一覧」ボタンを再度押せるように戻す（カテゴリパネル表示中のみ無効化していた）
+    var bTabList = document.getElementById('bottomTabList');
+    if (bTabList) bTabList.style.pointerEvents = '';
     // ピンボタン経由で開いた場合、panByの逆操作で元の位置に戻す
     // ※ enableMap()より前に実行（dragging.enable等のリセットで打ち消されないよう）
     if (openedViaPin && savedPanPixels > 0) {
@@ -728,6 +731,9 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       if (el) { el.style.opacity = '0.35'; el.style.pointerEvents = 'none'; }
     });
     // ishikawaBtnはそのまま（通常表示・クリック可能）
+    // 「一覧」ボタンは押せないようにする（「店名」ボタンは操作可能のまま維持）
+    var bTabListOpen = document.getElementById('bottomTabList');
+    if (bTabListOpen) bTabListOpen.style.pointerEvents = 'none';
     // Leafletのタップ合成クリックも無効化
     if (map.tap) map.tap.disable();
   });
