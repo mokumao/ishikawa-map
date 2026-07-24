@@ -1057,5 +1057,22 @@ const restaurants = [
     lat:       26.41725,
     lng:       127.81932,
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
+  },
+  // ※以下1件はOSM・ウェブ検索いずれでも発見できず、2026-07-24にユーザーが
+  // Googleマップの現地写真で発見。住所・電話番号はウェブ複数照合で確認済みだが、
+  // 店名変更（旧「ヘアープロジェクトサヴァ」）はウェブ上で未確認のため要確認扱い
+  {
+    name:      "セントジェームス石川店",
+    genre:     "美容・理容",
+    address:   "沖縄県うるま市石川2丁目1-7",
+    hours:     "要確認",
+    closed:    "要確認",
+    note:      "旧店名「ヘアープロジェクトサヴァ」。店名変更は現地看板で確認、詳細は要確認",
+    note_en:   "Formerly known as \"Hair Project Sava\". Name change confirmed on-site; please confirm details before visiting.",
+    sourceUrl: "https://www.ekiten.jp/g0202/a47213/",
+    warn:      true,
+    lat:       26.427074,
+    lng:       127.826201,
+    twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   }
 ];
