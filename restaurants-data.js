@@ -622,12 +622,42 @@ const restaurants = [
     address:   "沖縄県うるま市石川嘉手苅141-6",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "営業時間・定休日は要確認",
-    note_en:   "Please confirm hours and holidays before visiting.",
-    sourceUrl: "https://navitime.co.jp/",
+    note:      "カーエネクス系列。電話098-965-5565（営業時間・定休日は要確認）",
+    note_en:   "Carenex brand station. Tel 098-965-5565 (please confirm hours and holidays before visiting).",
+    sourceUrl: "https://oki-ss.or.jp/?page_id=167",
     warn:      true,
     lat:       26.420632,
     lng:       127.813352,
+    twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
+  },
+  // ※以下2件は2026-07-24にOSM抽出＋出光公式SS検索/Yahoo!地図/geocoding.jp等との
+  // ウェブ複数照合で追加（poi-surveyスキル手順）
+  {
+    name:      "アポロステーション石川SS（石川サービス）",
+    genre:     "ガソリン",
+    address:   "沖縄県うるま市石川431",
+    hours:     "7:00〜20:00",
+    closed:    "年中無休",
+    note:      "出光系列アポロステーション。セルフ式。電話098-964-2025",
+    note_en:   "Idemitsu apollostation brand, self-service. Tel 098-964-2025.",
+    sourceUrl: "https://map.idemitsu.com/b/a/info/0000019740/",
+    warn:      false,
+    lat:       26.424717,
+    lng:       127.825160,
+    twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
+  },
+  {
+    name:      "赤崎サービスステーション（瑞穂石油）",
+    genre:     "ガソリン",
+    address:   "沖縄県うるま市石川東山本町2-4-1",
+    hours:     "7:00〜21:00",
+    closed:    "年中無休",
+    note:      "カーエネクス系列。フルサービス（洗車・オイル交換等対応）。電話098-964-2626",
+    note_en:   "Carenex brand, full-service (car wash, oil change, etc.). Tel 098-964-2626.",
+    sourceUrl: "https://map.yahoo.co.jp/v3/place/5mvXtr9ABzU",
+    warn:      false,
+    lat:       26.434840,
+    lng:       127.835272,
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
 
