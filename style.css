@@ -1067,9 +1067,6 @@ body.side-swipe-right #minimap {
   }
   .side-arrow-btn {
     margin-top: 6px;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
   }
   /* チップの一括選択/解除ボタン（チップバーのすぐ上に配置） */
   .cat-selectall-row {
