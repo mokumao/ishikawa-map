@@ -1411,10 +1411,10 @@ body.side-swipe-right #minimap {
     flex-shrink: 0;
     background: #fff;
     border-top: 1px solid #e0e0e0;
-    /* カテゴリパネル表示中のオーバーレイ(z-index:1500)より前面に
-       （ズームコントロールと同じ理由。オーバーレイの下だと「店名」等の
-       白背景ボタンがグレーがかって見えてしまう） */
-    z-index: 1502;
+    /* ここではz-indexを付けない（付けるとスタッキングコンテキストが
+       生成され、子要素にどんなz-indexを与えてもこの要素ごと
+       オーバーレイの下に固定されてしまう。「地図」「一覧」は
+       カテゴリパネル表示中は暗くなったままでよいため、意図的に無指定） */
     padding: 8px 10px 8px;
     gap: 8px;
     margin-bottom: 18px; /* attribution の高さ分の余白 */
@@ -1438,8 +1438,12 @@ body.side-swipe-right #minimap {
     color: #fff;
     border-color: #e53935;
   }
-  /* 「店名」ボタン：非選択時も他の2ボタンと同じ濃さの文字色で表示（グレーアウトさせない） */
+  /* 「店名」ボタンだけ、カテゴリパネル表示中のオーバーレイ(z-index:1500)より
+     前面に出す（「地図」「一覧」は暗いままにする、という要望のため
+     このボタンだけ独自のスタッキングコンテキストを持たせる） */
   #bottomLabelBtn {
+    position: relative;
+    z-index: 1502;
     color: #222 !important;
   }
   #bottomLabelBtn.active {
