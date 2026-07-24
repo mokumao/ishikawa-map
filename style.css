@@ -1435,6 +1435,13 @@ body.side-swipe-right #minimap {
     color: #fff;
     border-color: #e53935;
   }
+  /* 「店名」ボタン：非選択時も他の2ボタンと同じ濃さの文字色で表示（グレーアウトさせない） */
+  #bottomLabelBtn {
+    color: #222 !important;
+  }
+  #bottomLabelBtn.active {
+    color: #fff !important;
+  }
 
   /* ── ヘッダー折りたたみアニメーション ── */
   header, .wip-bar {
