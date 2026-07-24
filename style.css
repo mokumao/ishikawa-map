@@ -1411,7 +1411,10 @@ body.side-swipe-right #minimap {
     flex-shrink: 0;
     background: #fff;
     border-top: 1px solid #e0e0e0;
-    z-index: 900;
+    /* カテゴリパネル表示中のオーバーレイ(z-index:1500)より前面に
+       （ズームコントロールと同じ理由。オーバーレイの下だと「店名」等の
+       白背景ボタンがグレーがかって見えてしまう） */
+    z-index: 1502;
     padding: 8px 10px 8px;
     gap: 8px;
     margin-bottom: 18px; /* attribution の高さ分の余白 */
