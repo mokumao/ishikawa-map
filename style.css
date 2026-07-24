@@ -1233,6 +1233,8 @@ body.side-swipe-right #minimap {
   .cat-label-chip.chip-education.chip-active { background: #b2dfdb; }
   /* 観光チップ：うすシアン */
   .cat-label-chip.chip-tourism.chip-active   { background: #b2ebf2; }
+  /* 美容・理容チップ：うすピンク */
+  .cat-label-chip.chip-beauty.chip-active    { background: #f8bbd0; }
 
   /* カテゴリパネル展開時：白囲みなし・左端アイコンを避けた透明グリッド */
   .gear-menu.cat-mode {
@@ -1320,6 +1322,7 @@ body.side-swipe-right #minimap {
   #gearCatFinance.cat-selected   { background: #c8e6c9 !important; }
   #gearCatEducation.cat-selected { background: #b2dfdb !important; }
   #gearCatTourism.cat-selected   { background: #b2ebf2 !important; }
+  #gearCatBeauty.cat-selected    { background: #f8bbd0 !important; }
   /* 閉じるボタン（青背景・白文字） */
   .gear-menu-btn.close-btn {
     background: #1565c0 !important;
