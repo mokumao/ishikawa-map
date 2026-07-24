@@ -1449,6 +1449,13 @@ body.side-swipe-right #minimap {
   #bottomLabelBtn.active {
     color: #fff !important;
   }
+  /* カテゴリパネル表示中は「地図」ボタンを押せなくしているので、
+     選択中（赤塗り）の見た目もやめて他の非選択ボタンと同じ白背景・黒文字にする */
+  #bottomTabMap.cat-locked {
+    background: #fff !important;
+    color: #222 !important;
+    border-color: #e53935 !important;
+  }
 
   /* ── ヘッダー折りたたみアニメーション ── */
   header, .wip-bar {

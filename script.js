@@ -439,7 +439,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     var bTabList = document.getElementById('bottomTabList');
     if (bTabList) bTabList.style.pointerEvents = '';
     var bTabMap = document.getElementById('bottomTabMap');
-    if (bTabMap) bTabMap.style.pointerEvents = '';
+    if (bTabMap) { bTabMap.style.pointerEvents = ''; bTabMap.classList.remove('cat-locked'); }
     // ピンボタン経由で開いた場合、panByの逆操作で元の位置に戻す
     // ※ enableMap()より前に実行（dragging.enable等のリセットで打ち消されないよう）
     if (openedViaPin && savedPanPixels > 0) {
@@ -737,7 +737,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     var bTabListOpen = document.getElementById('bottomTabList');
     if (bTabListOpen) bTabListOpen.style.pointerEvents = 'none';
     var bTabMapOpen = document.getElementById('bottomTabMap');
-    if (bTabMapOpen) bTabMapOpen.style.pointerEvents = 'none';
+    if (bTabMapOpen) { bTabMapOpen.style.pointerEvents = 'none'; bTabMapOpen.classList.add('cat-locked'); }
     // Leafletのタップ合成クリックも無効化
     if (map.tap) map.tap.disable();
   });
