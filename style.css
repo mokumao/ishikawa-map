@@ -1239,7 +1239,7 @@ body.side-swipe-right #minimap {
     position: fixed !important;
     left: 62px !important;   /* 左端の縦ボタン列を避ける */
     right: 8px !important;
-    bottom: 52px !important; /* ボトムタブバー分 */
+    bottom: 74px !important; /* ボトムタブバー(約51px)+余白分。地図/店名/一覧が隠れないように */
     top: auto !important;
     width: auto !important;
     background: transparent !important;
