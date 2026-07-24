@@ -1621,6 +1621,17 @@ const map = L.map("map", {
 // ＋－ボタン：スマホ→左下、PC→左上
 L.control.zoom({ position: window.innerWidth <= 767 ? 'bottomleft' : 'topleft' }).addTo(map);
 
+// スマホ：＋－ボタンを左側アイコン列（歯車の下）に移動し、矢印ボタンをその下に配置
+// （ユーザー要望：表示順を「歯車→＋－→矢印」に入れ替え）
+if (window.innerWidth <= 767) {
+  var _sideCtrl  = document.getElementById('sideSwipeCtrl');
+  var _zoomCtrl  = document.querySelector('.leaflet-control-zoom');
+  var _arrowBtn1 = document.getElementById('sideSwitchRightBtn');
+  if (_sideCtrl && _zoomCtrl && _arrowBtn1) {
+    _sideCtrl.insertBefore(_zoomCtrl, _arrowBtn1);
+  }
+}
+
 // ダブルクリック/ダブルタップでスムーズズームイン（CSSトランジション使用）
 // flyTo はJSアニメーションのためモバイルでカクつくことがある。
 // setView + CSS トランジション（GPU加速）で滑らかに。
