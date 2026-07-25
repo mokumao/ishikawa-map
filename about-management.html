@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#e53935">
   <title>石川マップの運営について | 石川マップ</title>
-  <link rel="stylesheet" href="style.css?v=20260726b">
+  <link rel="stylesheet" href="style.css?v=20260726c">
 </head>
 <body class="about-site-page">
   <main class="about-site-wrap">
@@ -13,28 +13,30 @@
       <h1>石川マップの運営について</h1>
     </header>
 
-    <section class="about-site-content" aria-label="石川マップの運営について">
-      <ul class="about-site-list">
-        <li>石川マップは現在個人で運営しています。サイトを運営するにあたり、ＡＩを使用しています。ＡＩを使用するにあたり料金が発生しますが、現在はサイト運営者が負担しています。現在は小規模なのでそれほど負担にはなっていませんが、今後サイトを運営していくうえで、より正確な情報を収集したりするためには運営費がこれまで以上にかかる場合も考えられます。何らかの方法で収入を得てそれをこのサイトの運営にあてればとかんがえています。私としてはこのサイトの運営で収入を得ることは考えていません。石川地区の発展や私のＡＩの勉強を行いたくこのサイトを運営したいと考えています。今後運営費についての収支をはっきりさせるためにこのサイトの運営費の収支をここで見れるようにしていきたいとおもいます。透明性を確保するため</li>
-      </ul>
-    </section>
-
-    <section class="finance-section" aria-label="月次収支報告">
-      <h2 class="finance-title">月次収支報告</h2>
+    <div class="mgmt-scroll">
+      <section class="about-site-content mgmt-page" aria-label="石川マップの運営について">
+        <ul class="about-site-list">
+          <li>石川マップは現在個人で運営しています。サイトを運営するにあたり、ＡＩを使用しています。ＡＩを使用するにあたり料金が発生しますが、現在はサイト運営者が負担しています。現在は小規模なのでそれほど負担にはなっていませんが、今後サイトを運営していくうえで、より正確な情報を収集したりするためには運営費がこれまで以上にかかる場合も考えられます。何らかの方法で収入を得てそれをこのサイトの運営にあてればとかんがえています。私としてはこのサイトの運営で収入を得ることは考えていません。石川地区の発展や私のＡＩの勉強を行いたくこのサイトを運営したいと考えています。今後運営費についての収支をはっきりさせるためにこのサイトの運営費の収支をここで見れるようにしていきたいとおもいます。透明性を確保するため</li>
+        </ul>
+        <p class="mgmt-scroll-hint">↑ 上にスワイプすると月次収支報告が見られます</p>
+      </section>
 
       <!-- ここから1か月分。新しい月を追加するときは、この
-           <div class="finance-month">〜</div> のブロックを丸ごとコピーして
-           このコメントのすぐ下に貼り付け、月・収入・支出・コメントを
-           書き換えてください（新しい月が一番上に来るようにするため） -->
-      <div class="finance-month">
-        <h3 class="finance-month-title">2026年7月</h3>
-        <table class="finance-table">
-          <tr><th>収入</th><td>0円</td></tr>
-          <tr><th>支出</th><td>22ドル（約３５００円）</td></tr>
-        </table>
-        <p class="finance-comment">（支出はクロードコードの契約料。実際は石川マップ以外のこともＡＩで行っているので実質は支出はすくないです）</p>
-      </div>
-    </section>
+           <section class="mgmt-page finance-page">〜</section> のブロックを
+           丸ごとコピーして、このコメントのすぐ下に貼り付け、月・収入・支出・
+           コメントを書き換えてください（新しい月が一番上＝先に来るようにするため） -->
+      <section class="mgmt-page finance-page" aria-label="2026年7月の収支">
+        <h2 class="finance-title">月次収支報告</h2>
+        <div class="finance-month">
+          <h3 class="finance-month-title">2026年7月</h3>
+          <table class="finance-table">
+            <tr><th>収入</th><td>0円</td></tr>
+            <tr><th>支出</th><td>22ドル（約３５００円）</td></tr>
+          </table>
+          <p class="finance-comment">（支出はクロードコードの契約料。実際は石川マップ以外のこともＡＩで行っているので実質は支出はすくないです）</p>
+        </div>
+      </section>
+    </div>
 
     <nav class="about-site-footer" aria-label="ページ移動">
       <button class="about-site-map-btn" onclick="window.location.href='index.html'">地図</button>

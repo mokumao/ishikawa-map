@@ -254,11 +254,31 @@ body.about-site-page {
 .about-site-list li:has(.about-site-link-btn):active {
   background: #fdeceb;
 }
-/* ── 月次収支報告（about-management.html） ──────────────────── */
-.finance-section {
-  margin-top: 22px;
-  padding-top: 18px;
-  border-top: 1px solid #e0e0e0;
+/* ── 運営についてページ：説明文＋月次収支報告をフルスクリーンの
+   スワイプページとして表示（about-management.html専用） ──────── */
+.mgmt-scroll {
+  flex: 1;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.mgmt-page {
+  min-height: 100%;
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.mgmt-scroll-hint {
+  margin-top: 18px;
+  font-size: .8rem;
+  color: #90a4ae;
+  text-align: center;
+}
+.finance-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px 22px;
 }
 .finance-title {
   font-size: .95rem;
