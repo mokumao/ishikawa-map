@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#e53935">
   <title>石川マップの運営について | 石川マップ</title>
-  <link rel="stylesheet" href="style.css?v=20260726c">
+  <link rel="stylesheet" href="style.css?v=20260726d">
 </head>
 <body class="about-site-page">
   <main class="about-site-wrap">
@@ -13,29 +13,36 @@
       <h1>石川マップの運営について</h1>
     </header>
 
-    <div class="mgmt-scroll">
-      <section class="about-site-content mgmt-page" aria-label="石川マップの運営について">
+    <div class="mgmt-body" id="mgmtBody">
+      <section class="about-site-content mgmt-text" aria-label="石川マップの運営について">
         <ul class="about-site-list">
           <li>石川マップは現在個人で運営しています。サイトを運営するにあたり、ＡＩを使用しています。ＡＩを使用するにあたり料金が発生しますが、現在はサイト運営者が負担しています。現在は小規模なのでそれほど負担にはなっていませんが、今後サイトを運営していくうえで、より正確な情報を収集したりするためには運営費がこれまで以上にかかる場合も考えられます。何らかの方法で収入を得てそれをこのサイトの運営にあてればとかんがえています。私としてはこのサイトの運営で収入を得ることは考えていません。石川地区の発展や私のＡＩの勉強を行いたくこのサイトを運営したいと考えています。今後運営費についての収支をはっきりさせるためにこのサイトの運営費の収支をここで見れるようにしていきたいとおもいます。透明性を確保するため</li>
         </ul>
-        <p class="mgmt-scroll-hint">↑ 上にスワイプすると月次収支報告が見られます</p>
       </section>
 
-      <!-- ここから1か月分。新しい月を追加するときは、この
-           <section class="mgmt-page finance-page">〜</section> のブロックを
-           丸ごとコピーして、このコメントのすぐ下に貼り付け、月・収入・支出・
-           コメントを書き換えてください（新しい月が一番上＝先に来るようにするため） -->
-      <section class="mgmt-page finance-page" aria-label="2026年7月の収支">
-        <h2 class="finance-title">月次収支報告</h2>
-        <div class="finance-month">
-          <h3 class="finance-month-title">2026年7月</h3>
-          <table class="finance-table">
-            <tr><th>収入</th><td>0円</td></tr>
-            <tr><th>支出</th><td>22ドル（約３５００円）</td></tr>
-          </table>
-          <p class="finance-comment">（支出はクロードコードの契約料。実際は石川マップ以外のこともＡＩで行っているので実質は支出はすくないです）</p>
+      <div class="mgmt-sheet" id="mgmtSheet">
+        <div class="mgmt-sheet-handle" id="mgmtSheetHandle">
+          <span class="mgmt-sheet-grip" aria-hidden="true"></span>
+          <div class="mgmt-sheet-head">
+            <h2 class="finance-title">月次収支報告</h2>
+            <span class="mgmt-sheet-arrow" id="mgmtSheetArrow" aria-hidden="true">↑</span>
+          </div>
         </div>
-      </section>
+        <div class="mgmt-sheet-body">
+          <!-- ここから1か月分。新しい月を追加するときは、この
+               <div class="finance-month">〜</div> のブロックを丸ごとコピーして
+               このコメントのすぐ下に貼り付け、月・収入・支出・コメントを
+               書き換えてください（新しい月が一番上に来るようにするため） -->
+          <div class="finance-month">
+            <h3 class="finance-month-title">2026年7月</h3>
+            <table class="finance-table">
+              <tr><th>収入</th><td>0円</td></tr>
+              <tr><th>支出</th><td>22ドル（約３５００円）</td></tr>
+            </table>
+            <p class="finance-comment">（支出はクロードコードの契約料。実際は石川マップ以外のこともＡＩで行っているので実質は支出はすくないです）</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <nav class="about-site-footer" aria-label="ページ移動">
@@ -44,5 +51,63 @@
       <span class="about-site-footer-spacer" aria-hidden="true"></span>
     </nav>
   </main>
+
+  <script>
+    (function () {
+      var body   = document.getElementById('mgmtBody');
+      var sheet  = document.getElementById('mgmtSheet');
+      var handle = document.getElementById('mgmtSheetHandle');
+      var arrow  = document.getElementById('mgmtSheetArrow');
+      var PEEK   = 84; // 畳んだ高さ（style.cssの.mgmt-sheetと合わせる）
+
+      var startY = null;
+      var startHeight = PEEK;
+      var expanded = false;
+
+      function maxHeight() {
+        return body.clientHeight;
+      }
+      function setHeight(px, animate) {
+        sheet.style.transition = animate ? 'height .25s ease' : 'none';
+        sheet.style.height = px + 'px';
+      }
+      function setExpanded(value, animate) {
+        expanded = value;
+        setHeight(expanded ? maxHeight() : PEEK, animate !== false);
+        arrow.textContent = expanded ? '↓' : '↑';
+      }
+
+      handle.addEventListener('touchstart', function (e) {
+        startY = e.touches[0].clientY;
+        startHeight = sheet.getBoundingClientRect().height;
+        sheet.style.transition = 'none';
+      }, { passive: true });
+
+      handle.addEventListener('touchmove', function (e) {
+        if (startY === null) return;
+        var dy = startY - e.touches[0].clientY; // 上に引っ張ると正の値
+        var h = Math.min(maxHeight(), Math.max(PEEK, startHeight + dy));
+        sheet.style.height = h + 'px';
+      }, { passive: true });
+
+      handle.addEventListener('touchend', function () {
+        if (startY === null) return;
+        var h = sheet.getBoundingClientRect().height;
+        var mid = (PEEK + maxHeight()) / 2;
+        setExpanded(h > mid, true);
+        startY = null;
+      });
+
+      // タップだけでも開閉できるように（PC操作時の保険）
+      handle.addEventListener('click', function () {
+        if (startY !== null) return; // ドラッグ直後のクリック誤爆を防止
+        setExpanded(!expanded, true);
+      });
+
+      window.addEventListener('resize', function () {
+        if (expanded) setHeight(maxHeight(), false);
+      });
+    })();
+  </script>
 </body>
 </html>

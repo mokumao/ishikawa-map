@@ -254,31 +254,69 @@ body.about-site-page {
 .about-site-list li:has(.about-site-link-btn):active {
   background: #fdeceb;
 }
-/* ── 運営についてページ：説明文＋月次収支報告をフルスクリーンの
-   スワイプページとして表示（about-management.html専用） ──────── */
-.mgmt-scroll {
+/* ── 運営についてページ：説明文の上に、月次収支報告を「ボトムシート」
+   （下からつまんで引き上げるパネル）として重ねて表示
+   （about-management.html専用） ─────────────────────────────── */
+.mgmt-body {
   flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+.mgmt-text {
+  position: absolute;
+  inset: 0;
   overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  -webkit-overflow-scrolling: touch;
+  padding-bottom: 110px; /* シートが畳んであるときに文末が隠れないように余白 */
 }
-.mgmt-page {
-  min-height: 100%;
-  box-sizing: border-box;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+.mgmt-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 84px; /* 畳んだ状態（つまみ+タイトルだけ見える高さ） */
+  max-height: 100%;
+  background: #f0f0f0;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.18);
+  overflow: hidden;
+  z-index: 2;
 }
-.mgmt-scroll-hint {
-  margin-top: 18px;
-  font-size: .8rem;
-  color: #90a4ae;
-  text-align: center;
-}
-.finance-page {
+.mgmt-sheet-handle {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 28px 22px;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 22px 8px;
+  cursor: grab;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.mgmt-sheet-grip {
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  background: #cfd8dc;
+}
+.mgmt-sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.mgmt-sheet-head .finance-title {
+  margin-bottom: 0;
+}
+.mgmt-sheet-arrow {
+  color: #e53935;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.mgmt-sheet-body {
+  height: calc(100% - 62px);
+  overflow-y: auto;
+  padding: 4px 22px 28px;
 }
 .finance-title {
   font-size: .95rem;
