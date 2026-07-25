@@ -1255,6 +1255,11 @@ body.side-swipe-right #minimap {
     padding: 0 !important;
     z-index: 1501 !important;
   }
+  /* 右手操作用：縦ボタン列が右側にあるときは逆に右端を避ける */
+  body.side-swipe-right .gear-menu.cat-mode {
+    left: 8px !important;
+    right: 62px !important;
+  }
   /* 操作ボタン行（すべて・解除・閉じる） */
   .cat-ctrl-row {
     display: flex;
@@ -1358,6 +1363,11 @@ body.side-swipe-right #minimap {
     top: 38%;
     z-index: 1501;   /* オーバーレイより前面 */
     pointer-events: auto;
+  }
+  /* 右手操作用：アイコン列が右側にあるときはパネルも左右反転して重なりを防ぐ */
+  body.side-swipe-right .gear-menu {
+    left: auto;
+    right: 70px;
   }
   .gear-panel {
     display: flex;
