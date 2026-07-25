@@ -340,12 +340,13 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
             }, 500); // 広域で約0.5秒停止
           });
         } else {
-          // ── 以降：マーカーを新しい位置に移動するだけ（地図は動かさない） ──
+          // ── 以降：マーカーを新しい位置に移動し、地図も現在地を中心に追従させる ──
           if (locationMarker) {
             locationMarker.setLatLng([lat, lng]);
           } else {
             createMarker(lat, lng);
           }
+          map.panTo([lat, lng], { animate: true, duration: 0.5 });
         }
       },
       function (err) {
