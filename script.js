@@ -1782,15 +1782,15 @@ if (new URLSearchParams(location.search).get('shop') === null) {
     }, 1200);
   });
 
-  // 石川エリアの境界（メイン地図と同じ線。海岸線部分は非表示のため開いた線で描画）
-  const miniBoundary = L.polyline(ISHIKAWA_BOUNDARY, {
-    color:   '#1976D2',
-    weight:   2,
-    opacity:  0.9
-  }).addTo(miniMap);
+  // 石川エリアの境界（メイン地図と同じ線。海岸線部分は非表示のため陸側区間ごとに描画）
+  const miniBoundary = L.layerGroup(
+    ISHIKAWA_BOUNDARY_SEGMENTS.map(function (seg) {
+      return L.polyline(seg, { color: '#1976D2', weight: 2, opacity: 0.9 });
+    })
+  ).addTo(miniMap);
 
-  // 境界線全体が収まるようにズームを自動調整
-  miniMap.fitBounds(miniBoundary.getBounds(), { padding: [4, 4] });
+  // 境界線全体（海岸線含む）が収まるようにズームを自動調整
+  miniMap.fitBounds(L.latLngBounds(ISHIKAWA_BOUNDARY), { padding: [4, 4] });
 
   // ── CSSオーバーレイ式2重丸（ミニマップ枠端でクランプ表示） ──────
   // Leafletマーカーはoverflowでクリップされ消えてしまうため
@@ -1854,7 +1854,7 @@ if (new URLSearchParams(location.search).get('shop') === null) {
   function resetMinimap() {
     miniMap.invalidateSize();
     // 境界線全体が収まる表示に強制リセット
-    miniMap.fitBounds(miniBoundary.getBounds(), { padding: [4, 4], animate: false });
+    miniMap.fitBounds(L.latLngBounds(ISHIKAWA_BOUNDARY), { padding: [4, 4], animate: false });
     updateMiniTarget();
     miniTileLayer.redraw(); // 灰色のまま残ったタイルを再取得
   }
@@ -1888,12 +1888,14 @@ if (new URLSearchParams(location.search).get('shop') === null) {
 // 旧石川市の行政区域境界（ishikawa-boundary.js のデータを使用）
 // 恩納村・金武町・具志川との正確な境界線（海岸線部分は非表示のため開いた線で描画）
 // padding:1 で画面外まで先に描画しておき、ズーム・パン時の再描画の遅れを見えなくする
-L.polyline(ISHIKAWA_BOUNDARY, {
-  color:   '#1976D2',
-  weight:   3,
-  opacity:  0.85,
-  renderer: L.svg({ padding: 1 })
-}).addTo(map);
+ISHIKAWA_BOUNDARY_SEGMENTS.forEach(function (seg) {
+  L.polyline(seg, {
+    color:   '#1976D2',
+    weight:   3,
+    opacity:  0.85,
+    renderer: L.svg({ padding: 1 })
+  }).addTo(map);
+});
 
 // ── マーカー生成・保持 ───────────────────────────────────────────
 const markersData = restaurants.map((r, idx) => {
