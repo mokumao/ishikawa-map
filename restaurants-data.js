@@ -2,6 +2,11 @@
 // detail.html と script.js の両方から読み込む共通データファイル
 const restaurants = [
   {
+    id:          0,
+    code:        "47213-IS-0001",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "酒楽場うまし家",
     genre:     "居酒屋等",
     address:   "沖縄県うるま市石川1丁目28-18",
@@ -22,6 +27,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          1,
+    code:        "47213-IS-0002",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "クリームソーダ",
     genre:     "バル（中華・和食・バー）",
     address:   "沖縄県うるま市石川白浜1-2-1 2F",
@@ -41,6 +51,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          2,
+    code:        "47213-IS-0003",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "杏屋 石川店",
     genre:     "居酒屋等",
     address:   "沖縄県うるま市石川白浜1-4-7",
@@ -60,6 +75,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          3,
+    code:        "47213-IS-0004",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "牛角 うるま石川店",
     genre:     "焼肉",
     address:   "沖縄県うるま市石川1-16-18",
@@ -79,6 +99,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          4,
+    code:        "47213-IS-0005",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "Capful（キャプフル）",
     genre:     "カフェ",
     address:   "沖縄県うるま市石川曙1丁目6-1",
@@ -98,6 +123,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          5,
+    code:        "47213-IS-0006",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "HINA CAFE（ヒナカフェ）",
     genre:     "カフェ・イタリアン",
     address:   "沖縄県うるま市石川白浜1-1-1 2F",
@@ -117,6 +147,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          6,
+    code:        "47213-IS-0007",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "GENCO（ジェンコ）",
     genre:     "カフェ・バー（ハワイ料理）",
     address:   "沖縄県うるま市石川伊波1515-32",
@@ -136,6 +171,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          7,
+    code:        "47213-IS-0008",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "Cafe Ajyute（カフェアジュテ）",
     genre:     "カフェ・パン",
     address:   "沖縄県うるま市石川2140-5",
@@ -155,6 +195,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          8,
+    code:        "47213-IS-0009",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "喜食てんてん",
     genre:     "居酒屋等",
     address:   "沖縄県うるま市石川山城1706-6",
@@ -174,6 +219,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          9,
+    code:        "47213-IS-0010",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "居酒屋パラダイス",
     genre:     "居酒屋等",
     address:   "沖縄県うるま市石川2丁目39-15",
@@ -195,6 +245,11 @@ const restaurants = [
 
   // ── 追加10店舗（2026-05-08） ─────────────────────────────────────
   {
+    id:          10,
+    code:        "47213-IS-0011",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "まるみつ食堂",
     genre:     "食事処",
     address:   "沖縄県うるま市石川東山1丁目22-11",
@@ -214,6 +269,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          11,
+    code:        "47213-IS-0012",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "和カフェ Agariyama（アガリヤマ）",
     genre:     "カフェ・八重山そば",
     address:   "沖縄県うるま市石川東山1-8-3",
@@ -233,6 +293,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          12,
+    code:        "47213-IS-0013",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "大衆酒場 照らす家 石川店",
     genre:     "居酒屋等",
     address:   "沖縄県うるま市石川白浜1丁目3-5",
@@ -252,6 +317,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          13,
+    code:        "47213-IS-0014",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "榮料理店（さかえりょうりてん）",
     genre:     "食事処",
     address:   "沖縄県うるま市石川伊波1553-463",
@@ -271,6 +341,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          14,
+    code:        "47213-IS-0015",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "パーラー K's Pit（ケーズピット）",
     genre:     "食事処",
     address:   "沖縄県うるま市石川曙1丁目2-17",
@@ -290,6 +365,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          15,
+    code:        "47213-IS-0016",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "たらの芽",
     genre:     "居酒屋等",
     address:   "沖縄県うるま市石川白浜2丁目3-2",
@@ -309,6 +389,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          16,
+    code:        "47213-IS-0017",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "石川 柿兵衛（かきべえ）",
     genre:     "居酒屋等",
     address:   "沖縄県うるま市石川1丁目14-2",
@@ -328,6 +413,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          17,
+    code:        "47213-IS-0018",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "麺や KEIJIRO 石川店",
     genre:     "ラーメン",
     address:   "沖縄県うるま市石川1丁目28-19",
@@ -347,6 +437,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          18,
+    code:        "47213-IS-0019",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "石川の駅",
     genre:     "食事処",
     address:   "沖縄県うるま市石川赤崎2丁目2-1",
@@ -366,6 +461,11 @@ const restaurants = [
     photos:     []
   },
   {
+    id:          19,
+    code:        "47213-IS-0020",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "酒処 金の蔵（きんのくら）",
     genre:     "居酒屋等",
     address:   "沖縄県うるま市石川1丁目28-9",
@@ -387,6 +487,11 @@ const restaurants = [
 
   // ── コンビニエンスストア ──────────────────────────────────────────
   {
+    id:          20,
+    code:        "47213-IS-0021",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ローソン うるま石川店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川2-24-9",
@@ -401,6 +506,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
   },
   {
+    id:          21,
+    code:        "47213-IS-0022",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ファミリーマート 石川一丁目店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川1-27-41",
@@ -415,6 +525,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://www.family.co.jp/", detailText: "", photos: []
   },
   {
+    id:          22,
+    code:        "47213-IS-0023",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "セブンイレブン 石川インター店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川2337",
@@ -431,6 +546,11 @@ const restaurants = [
   // ※以下4件のファミマ＋3件のローソンは2026-07-21にOpenStreetMap抽出＋
   //   公式店舗検索等とのウェブ二重照合で追加（座標はOSM、住所・店名は公式等で確認）
   {
+    id:          23,
+    code:        "47213-IS-0024",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ファミリーマート 石川東山店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川東山1-22-11",
@@ -445,6 +565,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://www.family.co.jp/", detailText: "", photos: []
   },
   {
+    id:          24,
+    code:        "47213-IS-0025",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ファミリーマート 石川白浜店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川白浜2-8-26",
@@ -459,6 +584,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://www.family.co.jp/", detailText: "", photos: []
   },
   {
+    id:          25,
+    code:        "47213-IS-0026",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ファミリーマート 石川高校前店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川伊波294-1",
@@ -473,6 +603,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://www.family.co.jp/", detailText: "", photos: []
   },
   {
+    id:          26,
+    code:        "47213-IS-0027",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ファミリーマート 石川東恩納店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川東恩納666-1",
@@ -487,6 +622,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://www.family.co.jp/", detailText: "", photos: []
   },
   {
+    id:          27,
+    code:        "47213-IS-0028",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ローソン 石川バイパス店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川山城842-3",
@@ -501,6 +641,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
   },
   {
+    id:          28,
+    code:        "47213-IS-0029",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ローソン うるま石川東恩納店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川東恩納251-1",
@@ -515,6 +660,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
   },
   {
+    id:          29,
+    code:        "47213-IS-0030",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ローソン うるま伊波店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川伊波1512-15",
@@ -531,6 +681,11 @@ const restaurants = [
   // ※以下4件は2026-07-21にサイト管理人の指摘を受けて追加。
   //   OSM未登録だったためチェーン公式店舗検索・複数地図サービスで存在・住所・座標を照合済み
   {
+    id:          30,
+    code:        "47213-IS-0031",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ローソン 石川インター店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川2313-2",
@@ -545,6 +700,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
   },
   {
+    id:          31,
+    code:        "47213-IS-0032",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "セブンイレブン 石川白浜1丁目店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川白浜1-4-17",
@@ -559,6 +719,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://www.sej.co.jp/", detailText: "", photos: []
   },
   {
+    id:          32,
+    code:        "47213-IS-0033",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "セブンイレブン 石川曙2丁目店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川曙2丁目1-38",
@@ -573,6 +738,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://www.sej.co.jp/", detailText: "", photos: []
   },
   {
+    id:          33,
+    code:        "47213-IS-0034",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ローソン 石川曙三丁目店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川曙3-12-76",
@@ -589,6 +759,11 @@ const restaurants = [
 
   // ── ガソリンスタンド ──────────────────────────────────────────────
   {
+    id:          34,
+    code:        "47213-IS-0035",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ENEOSサンセール石川インターSS",
     genre:     "ガソリン",
     address:   "沖縄県うるま市石川2337",
@@ -603,6 +778,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
+    id:          35,
+    code:        "47213-IS-0036",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "伊波SS（神谷石油）",
     genre:     "ガソリン",
     address:   "沖縄県うるま市石川伊波309",
@@ -617,6 +797,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
+    id:          36,
+    code:        "47213-IS-0037",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "嘉手苅SS（くだか石油）",
     genre:     "ガソリン",
     address:   "沖縄県うるま市石川嘉手苅141-6",
@@ -633,6 +818,11 @@ const restaurants = [
   // ※以下2件は2026-07-24にOSM抽出＋出光公式SS検索/Yahoo!地図/geocoding.jp等との
   // ウェブ複数照合で追加（poi-surveyスキル手順）
   {
+    id:          37,
+    code:        "47213-IS-0038",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "アポロステーション石川SS（石川サービス）",
     genre:     "ガソリン",
     address:   "沖縄県うるま市石川431",
@@ -647,6 +837,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
+    id:          38,
+    code:        "47213-IS-0039",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "赤崎サービスステーション（瑞穂石油）",
     genre:     "ガソリン",
     address:   "沖縄県うるま市石川東山本町2-4-1",
@@ -663,6 +858,11 @@ const restaurants = [
 
   // ── テスト用店舗（石川ビーチ沖合・動作確認専用） ─────────────────
   {
+    id:          39,
+    code:        "47213-IS-0040",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "【テスト】石川ビーチ海上店",
     genre:     "テスト用",
     address:   "石川ビーチ沖合（テスト用・実在しません）",
@@ -684,6 +884,11 @@ const restaurants = [
   },
   // ── 宿泊施設 ───────────────────────────────────────────────────
   {
+    id:          40,
+    code:        "47213-IS-0041",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ココ ガーデンリゾート オキナワ",
     genre:     "宿泊",
     address:   "沖縄県うるま市石川伊波501",
@@ -696,6 +901,11 @@ const restaurants = [
     lng:       127.81988
   },
   {
+    id:          41,
+    code:        "47213-IS-0042",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "アンサ沖縄リゾート",
     genre:     "宿泊",
     address:   "沖縄県うるま市石川山城1468",
@@ -708,6 +918,11 @@ const restaurants = [
     lng:       127.79255
   },
   {
+    id:          42,
+    code:        "47213-IS-0043",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "民宿レキオ",
     genre:     "宿泊",
     address:   "沖縄県うるま市石川2-26-4",
@@ -720,6 +935,11 @@ const restaurants = [
     lng:       127.82483
   },
   {
+    id:          43,
+    code:        "47213-IS-0044",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "民宿やすま",
     genre:     "宿泊",
     address:   "沖縄県うるま市石川曙2丁目3-1",
@@ -733,6 +953,11 @@ const restaurants = [
   },
   // ── 金融機関 ───────────────────────────────────────────────────
   {
+    id:          44,
+    code:        "47213-IS-0045",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "琉球銀行 石川支店",
     genre:     "金融",
     address:   "沖縄県うるま市石川2-23-6",
@@ -745,6 +970,11 @@ const restaurants = [
     lng:       127.82578
   },
   {
+    id:          45,
+    code:        "47213-IS-0046",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "沖縄銀行 石川支店",
     genre:     "金融",
     address:   "沖縄県うるま市石川2丁目24-1",
@@ -757,6 +987,11 @@ const restaurants = [
     lng:       127.82557
   },
   {
+    id:          46,
+    code:        "47213-IS-0047",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "石川郵便局",
     genre:     "金融",
     address:   "沖縄県うるま市石川東山本町1-1-2",
@@ -770,6 +1005,11 @@ const restaurants = [
   },
   // ── 教育施設 ───────────────────────────────────────────────────
   {
+    id:          47,
+    code:        "47213-IS-0048",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "うるま市立宮森小学校",
     genre:     "教育",
     address:   "沖縄県うるま市石川1丁目46-1",
@@ -782,6 +1022,11 @@ const restaurants = [
     lng:       127.82759
   },
   {
+    id:          48,
+    code:        "47213-IS-0049",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "うるま市立石川中学校",
     genre:     "教育",
     address:   "沖縄県うるま市石川440番地1",
@@ -794,6 +1039,11 @@ const restaurants = [
     lng:       127.82429
   },
   {
+    id:          49,
+    code:        "47213-IS-0050",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "沖縄県立石川高等学校",
     genre:     "教育",
     address:   "沖縄県うるま市石川伊波861",
@@ -807,6 +1057,11 @@ const restaurants = [
   },
   // ── 観光スポット ───────────────────────────────────────────────
   {
+    id:          50,
+    code:        "47213-IS-0051",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "石川ビーチ（石川公園）",
     genre:     "観光",
     address:   "沖縄県うるま市石川曙",
@@ -819,6 +1074,11 @@ const restaurants = [
     lng:       127.82849
   },
   {
+    id:          51,
+    code:        "47213-IS-0052",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "石川岳（市民の森公園）",
     genre:     "観光",
     address:   "沖縄県うるま市石川",
@@ -835,6 +1095,11 @@ const restaurants = [
   // ※以下16件は2026-07-24にOSM抽出＋公式サイト/Yahoo!地図/エキテン等との
   // ウェブ複数照合（Agentツールによる並行検証）で追加
   {
+    id:          52,
+    code:        "47213-IS-0053",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "エステサロンDOUBLE（ダブル）",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川830-10",
@@ -849,6 +1114,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "http://double-esthetic.com/", detailText: "", photos: []
   },
   {
+    id:          53,
+    code:        "47213-IS-0054",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "IWASAKI沖縄石川店",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川1-16-1 マックスバリュ石川店1階",
@@ -863,6 +1133,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://hkbn.co.jp/iwasaki/", detailText: "", photos: []
   },
   {
+    id:          54,
+    code:        "47213-IS-0055",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "IWASAKI沖縄赤崎店",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川赤崎2-1-1 サンエー赤崎店1階",
@@ -877,6 +1152,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://hkbn.co.jp/iwasaki/", detailText: "", photos: []
   },
   {
+    id:          55,
+    code:        "47213-IS-0056",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "でいご理容館",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川1-52-36",
@@ -891,6 +1171,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
+    id:          56,
+    code:        "47213-IS-0057",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ヘアークラブイシトコ",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川1-27-25",
@@ -905,6 +1190,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
+    id:          57,
+    code:        "47213-IS-0058",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "クイン美容室",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川2丁目20-1",
@@ -919,6 +1209,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
+    id:          58,
+    code:        "47213-IS-0059",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ごとう美容室",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川2丁目9-1",
@@ -933,6 +1228,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
+    id:          59,
+    code:        "47213-IS-0060",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ヘアーサロンジピー（ZiPPi）",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川白浜1丁目3-7",
@@ -947,6 +1247,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
+    id:          60,
+    code:        "47213-IS-0061",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "カッティングハウスニューバニー3",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川白浜1丁目3-1",
@@ -961,6 +1266,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://newbunny3.com/", detailText: "", photos: []
   },
   {
+    id:          61,
+    code:        "47213-IS-0062",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "シルバー美容室",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川白浜1丁目2-7",
@@ -975,6 +1285,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://silver-hairmake.com/", detailText: "", photos: []
   },
   {
+    id:          62,
+    code:        "47213-IS-0063",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "ゆたか美容室",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川2丁目22-9",
@@ -989,6 +1304,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
+    id:          63,
+    code:        "47213-IS-0064",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "スィートハンズ石川店",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川2丁目39-8",
@@ -1003,6 +1323,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
+    id:          64,
+    code:        "47213-IS-0065",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "夢咲美容室",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川東山1丁目12-11",
@@ -1017,6 +1342,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
+    id:          65,
+    code:        "47213-IS-0066",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "美容室さえら",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川東恩納44-1",
@@ -1031,6 +1361,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
+    id:          66,
+    code:        "47213-IS-0067",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "グランディール",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川東恩納721-2",
@@ -1045,6 +1380,11 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
+    id:          67,
+    code:        "47213-IS-0068",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "カットハウスIN",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川伊波810",
@@ -1062,6 +1402,11 @@ const restaurants = [
   // Googleマップの現地写真で発見。住所・電話番号はウェブ複数照合で確認済みだが、
   // 店名変更（旧「ヘアープロジェクトサヴァ」）はウェブ上で未確認のため要確認扱い
   {
+    id:          68,
+    code:        "47213-IS-0069",
+    status:      "published",
+    tel:         "",
+    lastChecked: "",
     name:      "セントジェームス石川店",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川2丁目1-7",
