@@ -860,7 +860,7 @@ const restaurants = [
   {
     id:          39,
     code:        "47213-IS-0040",
-    status:      "published",
+    status:      "test",
     tel:         "",
     lastChecked: "",
     name:      "【テスト】石川ビーチ海上店",
