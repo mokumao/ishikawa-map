@@ -317,18 +317,31 @@
     </div>
   </div>
 
-  <script src="restaurants-data.js?v=20260724c"></script>
+  <script src="restaurants-data.js?v=20260727a"></script>
   <script>
     (function () {
-      // IDパラメータ取得（ハッシュ #N 形式）
-      const hash = location.hash.replace('#', '');
-      const idx = parseInt(hash, 10);
-      const r = restaurants[idx];
+      // IDパラメータ取得（クエリ文字列 ?id=N 形式）
+      // 旧URL（detail.html#N ハッシュ形式）でアクセスされた場合は、
+      // 同じ番号をidとみなし、履歴を汚さない方法（replaceState）で
+      // ?id=N 形式のURLに置き換えてから続行する。
+      var params = new URLSearchParams(location.search);
+      var idParam = params.get('id');
+      if (idParam === null && location.hash) {
+        var hashVal = location.hash.replace('#', '');
+        if (hashVal !== '') {
+          idParam = hashVal;
+          var newUrl = location.pathname + '?id=' + encodeURIComponent(hashVal);
+          history.replaceState(null, '', newUrl);
+        }
+      }
+
+      const id = parseInt(idParam, 10);
+      const r = restaurants.find(function (x) { return x.id === id; });
       const card = document.getElementById('detailCard');
 
       // 「地図」ボタン：この店舗のピンを開いた状態の地図へ戻す
       var mapBtn = document.getElementById('mapToggleBtn');
-      if (mapBtn && !isNaN(idx)) mapBtn.href = 'index.html?tab=map&shop=' + idx;
+      if (mapBtn && r) mapBtn.href = 'index.html?tab=map&shop=' + r.id;
 
       if (!r) {
         card.innerHTML = `<div class="error-box"><h2>店舗が見つかりません</h2><p><a href="index.html">地図に戻る</a></p></div>`;

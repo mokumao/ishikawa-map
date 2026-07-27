@@ -1553,7 +1553,7 @@ function gmapUrl(name, address) {
 }
 
 // ── ポップアップ HTML 生成 ────────────────────────────────────────
-function makePopup(r, idx) {
+function makePopup(r) {
   const hoursHtml  = rHours(r).replace(/\n/g, "<br>");
   const closedVal  = rClosed(r);
   const closedHtml = (r.closed.includes("要確認"))
@@ -1593,7 +1593,7 @@ function makePopup(r, idx) {
           <a href="${gmapUrl(r.name, r.address)}"
              target="_blank" rel="noopener noreferrer"
              class="popup-btn gmap">${t('popup.gmap')}</a>
-          <a href="detail.html#${idx}"
+          <a href="detail.html?id=${r.id}"
              class="popup-btn source">${t('popup.detail')}</a>
         </div>
         <button class="popup-close-side" onclick="map.closePopup()">×</button>
@@ -1606,11 +1606,13 @@ function makePopup(r, idx) {
 // 最初にその店舗の位置・ズームで開始する。
 // こうしないと「まず石川中心の広域表示が一瞬見えてから店舗にジャンプする」
 // フラッシュが発生してしまう（デフォルト中心→店舗中心の切り替えが目に見えてしまう）。
-const _initialShopIdx = (function () {
+const _initialShopId = (function () {
   var s = new URLSearchParams(location.search).get('shop');
   return s !== null ? parseInt(s, 10) : NaN;
 })();
-const _initialShop = !isNaN(_initialShopIdx) ? restaurants[_initialShopIdx] : null;
+const _initialShop = !isNaN(_initialShopId)
+  ? restaurants.find(function (r) { return r.id === _initialShopId; })
+  : null;
 // 店舗フォーカス時はポップアップを広く見せるため最初からヘッダーを畳んでおく
 if (_initialShop) document.body.classList.add('header-collapsed');
 
@@ -1925,7 +1927,7 @@ const markersData = restaurants.map((r, idx) => {
     icon:  makePinIcon(color, r.warn, pinLabel),
     title: r.name
   });
-  marker.bindPopup(makePopup(r, idx), { maxWidth: 300, autoPan: false });
+  marker.bindPopup(makePopup(r), { maxWidth: 300, autoPan: false });
   marker.bindTooltip(r.name, {
     permanent:  true,
     direction:  'top',
@@ -2694,12 +2696,12 @@ function renderShopList() {
 // ── 店舗フォーカス（リスト→地図） ───────────────────────────────
 // instant=true の場合はアニメーションなしで即座に表示を切り替える
 // （店舗詳細ページからの復帰時：広域表示を経由するカクカクした動きを避けるため）
-function focusShop(idx, instant) {
-  const data = markersData[idx];
+function focusShop(id, instant) {
+  const data = markersData.find(function (d) { return d.restaurant.id === id; });
   if (!data) return;
 
   switchTab('map');
-  setActiveItem(idx);
+  setActiveItem(id);
 
   const lat = data.restaurant.lat;
   const lng = data.restaurant.lng;
