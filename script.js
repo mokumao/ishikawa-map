@@ -523,7 +523,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
                  (catSel.has('education') && isEducation) ||
                  (catSel.has('tourism')   && isTourism)   ||
                  (catSel.has('beauty')    && isBeauty);
-      if (show) { if (!map.hasLayer(marker)) marker.addTo(map); }
+      if (show && isStatusVisible(r)) { if (!map.hasLayer(marker)) marker.addTo(map); }
       else       { if (map.hasLayer(marker))  map.removeLayer(marker); }
     });
     updateAllBtn();
@@ -2617,8 +2617,26 @@ function buildFilterButtons() {
   });
 }
 
+// ── プレビュー環境判定 ───────────────────────────────────────────
+// localhost / 127.0.0.1 / file://（hostname空文字）、または ?preview=1 付きなら
+// プレビュー環境とみなす（公開環境ではstatusが"published"以外の店舗を隠すため）
+function isPreviewEnv() {
+  var isLocal = ['localhost', '127.0.0.1', ''].indexOf(location.hostname) !== -1;
+  var hasPreviewParam = new URLSearchParams(location.search).get('preview') === '1';
+  return isLocal || hasPreviewParam;
+}
+
+// ── statusに基づく表示判定 ───────────────────────────────────────
+// status未指定 or "published" → 常に表示。それ以外（"test"等）はプレビュー環境限定。
+// ※restaurants配列自体は一切変更せず、表示可否だけをここで判定する。
+function isStatusVisible(r) {
+  if (!r.status || r.status === 'published') return true;
+  return isPreviewEnv();
+}
+
 // ── 表示判定（フィルター＋検索の両方を満たすか） ────────────────
 function isVisible(r) {
+  if (!isStatusVisible(r)) return false;
   // alwaysShow フラグがある店舗はフィルターに関わらず常時表示
   if (!r.alwaysShow) {
     const filterObj = FILTERS.find(f => f.id === currentFilter);
@@ -2950,7 +2968,9 @@ initSearch();
 })();
 applyFilter('all'); // サイドバー・フィルターボタンの初期化
 // 初期表示：飲食店に加えてコンビニ・ガソリンも最初から表示する
+// （ただしstatusが非公開の店舗はisStatusVisible()で除外する）
 markersData.forEach(function({ restaurant: r, marker }) {
+  if (!isStatusVisible(r)) return;
   if (!map.hasLayer(marker)) marker.addTo(map);
 });
 applyLangToDOM();

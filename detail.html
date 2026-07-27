@@ -335,8 +335,19 @@
         }
       }
 
+      // プレビュー環境判定（script.jsを読み込まないため同じロジックをここに複製）
+      function isPreviewEnv() {
+        var isLocal = ['localhost', '127.0.0.1', ''].indexOf(location.hostname) !== -1;
+        var hasPreviewParam = new URLSearchParams(location.search).get('preview') === '1';
+        return isLocal || hasPreviewParam;
+      }
+
       const id = parseInt(idParam, 10);
-      const r = restaurants.find(function (x) { return x.id === id; });
+      const found = restaurants.find(function (x) { return x.id === id; });
+      // status が published 以外（test等）の店舗は、プレビュー環境以外では
+      // 「見つからない」扱いにする（restaurants配列自体は変更しない）
+      const isHidden = !!(found && found.status && found.status !== 'published' && !isPreviewEnv());
+      const r = isHidden ? null : found;
       const card = document.getElementById('detailCard');
 
       // 「地図」ボタン：この店舗のピンを開いた状態の地図へ戻す
