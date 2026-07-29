@@ -125,6 +125,7 @@
       white-space: nowrap;
     }
     .warn-text { color: #e65100; }
+    .source-note { font-size: 0.72rem; color: #999; font-weight: 400; margin-left: 4px; }
 
     /* ── 警告ボックス ── */
     .warn-box {
@@ -368,13 +369,46 @@
              + encodeURIComponent(r.name + ' ' + r.address);
       }
 
+      // sourceUrlのドメインから第三者サイト名を判定（一致しなければ公式サイト等とみなし注記なし）
+      const THIRD_PARTY_SITE_LABELS = [
+        { domain: 'tabelog.com',    label: '食べログ' },
+        { domain: 'ekiten.jp',      label: 'エキテン' },
+        { domain: 'yahoo.co.jp',    label: 'Yahoo!地図' },
+        { domain: 'navitime.co.jp', label: 'NAVITIME' },
+        { domain: 'hotpepper.jp',   label: 'ホットペッパー' },
+        { domain: 'hitosara.com',   label: 'ヒトサラ' },
+        { domain: 'yelp.com',       label: 'Yelp' }
+      ];
+      function hostOf(url) {
+        try { return new URL(url).hostname.replace(/^www\./, ''); }
+        catch (e) { return ''; }
+      }
+      function sourceSiteLabel(url) {
+        const host = hostOf(url);
+        if (!host) return '';
+        const hit = THIRD_PARTY_SITE_LABELS.find(function (site) {
+          return host === site.domain || host.endsWith('.' + site.domain);
+        });
+        return hit ? hit.label : '';
+      }
+      // 営業時間・定休日の共通整形：
+      // 「要確認」はwarn-textでそのまま表示（未確認であることを隠さない）。
+      // 確認済みの値は、出典が既知の第三者サイトの場合のみ小さく出典を併記する
+      // （店舗独自ドメイン等、リストにないsourceUrlは公式情報とみなし注記しない）。
+      function fieldWithSource(value, sourceUrl) {
+        const html = String(value).replace(/\n/g, '<br>');
+        if (String(value).trim() === '要確認') {
+          return `<span class="warn-text">⚠️ ${html}</span>`;
+        }
+        const label = sourceSiteLabel(sourceUrl);
+        return label ? `${html}<span class="source-note">（情報源：${label}）</span>` : html;
+      }
+
       // 営業時間整形
-      const hoursHtml = r.hours.replace(/\n/g, '<br>');
+      const hoursHtml = fieldWithSource(r.hours, r.sourceUrl);
 
       // 定休日整形
-      const closedHtml = r.closed.includes('要確認')
-        ? `<span class="warn-text">${r.closed}</span>`
-        : r.closed;
+      const closedHtml = fieldWithSource(r.closed, r.sourceUrl);
 
       // SNS・リンクボタン
       const links = [];
