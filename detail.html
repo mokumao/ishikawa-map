@@ -126,6 +126,7 @@
     }
     .warn-text { color: #e65100; }
     .source-note { font-size: 0.72rem; color: #999; font-weight: 400; margin-left: 4px; }
+    .info-note { margin-top: 10px; font-size: 0.78rem; color: #999; line-height: 1.5; }
 
     /* ── 警告ボックス ── */
     .warn-box {
@@ -369,6 +370,10 @@
              + encodeURIComponent(r.name + ' ' + r.address);
       }
 
+      // 公開用「店舗番号」：idベース（id+1を6桁ゼロ埋め）。
+      // 地名・行政コードを含まない固定書式のため、地域が増えても不変・重複なし。
+      const storeNo = 'No.' + String(r.id + 1).padStart(6, '0');
+
       // sourceUrlのドメインから第三者サイト名を判定（一致しなければ公式サイト等とみなし注記なし）
       const THIRD_PARTY_SITE_LABELS = [
         { domain: 'tabelog.com',    label: '食べログ' },
@@ -476,7 +481,12 @@
               <td>${closedHtml}</td>
             </tr>
             ${!r.warn ? `<tr><td class="lbl">備考</td><td>${r.note}</td></tr>` : ''}
+            <tr>
+              <td class="lbl">店舗番号</td>
+              <td>${storeNo}</td>
+            </tr>
           </table>
+          <p class="info-note">掲載内容の修正・お問い合わせの際は、この店舗番号をお知らせください。</p>
         </div>
 
         <!-- 警告 -->
