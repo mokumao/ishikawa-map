@@ -1325,13 +1325,16 @@ body.side-swipe-right #minimap {
     opacity: 1;
     pointer-events: auto;
     filter: drop-shadow(0 2px 2px rgba(255,255,255,.9));
-    transition: transform .38s ease, opacity .38s ease;
+    transition: opacity .38s ease;
     -webkit-tap-highlight-color: transparent;
   }
   body.cat-controls-hidden .app-body[data-view="map"] .cat-controls-hide-btn {
     opacity: 0;
     pointer-events: none;
-    transform: translateX(-50%) translateY(-20px);
+    /* 位置は動かさず、下のボタン類が隠れきるのに合わせて同じ6秒でゆっくり
+       薄くなって消える（.cat-selectall-row/.cat-label-wrapperの
+       hide用transitionと同じ長さに揃える） */
+    transition: opacity 6s ease;
   }
   /* 左右スクロール矢印ボタン */
   .cat-scroll-btn {
