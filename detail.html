@@ -4,8 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#2e7d32">
-  <meta name="description" content="沖縄県うるま市石川エリアの店舗情報ページ。飲食店・コンビニ・ガソリンスタンドなど、うるま市石川マップに掲載中の店舗詳細です。">
+  <meta name="description" content="沖縄県うるま市石川エリアの店舗情報ページ。飲食店・コンビニ・ガソリンスタンドなど、うるま市石川マップに掲載中の店舗詳細です。" id="metaDescription">
+  <link rel="canonical" href="https://mokumao.github.io/ishikawa-map/detail.html" id="canonicalLink">
+  <meta property="og:type" content="website" id="ogType">
+  <meta property="og:site_name" content="うるま市石川 飲食店マップ">
+  <meta property="og:title" content="店舗詳細 | うるま市石川 飲食店マップ" id="ogTitle">
+  <meta property="og:description" content="沖縄県うるま市石川エリアの店舗情報ページ。飲食店・コンビニ・ガソリンスタンドなど、うるま市石川マップに掲載中の店舗詳細です。" id="ogDescription">
+  <meta property="og:url" content="https://mokumao.github.io/ishikawa-map/detail.html" id="ogUrl">
+  <meta property="og:locale" content="ja_JP">
   <title>店舗詳細 | うるま市石川 飲食店マップ</title>
+  <script type="application/ld+json" id="ldJson"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -359,20 +367,66 @@
 
       if (!r) {
         card.innerHTML = `<div class="error-box"><h2>店舗が見つかりません</h2><p><a href="index.html">地図に戻る</a></p></div>`;
+        // 店舗が見つからない/非公開ページはGoogleにインデックスさせない
+        var robotsMeta = document.createElement('meta');
+        robotsMeta.setAttribute('name', 'robots');
+        robotsMeta.setAttribute('content', 'noindex');
+        document.head.appendChild(robotsMeta);
         return;
       }
 
       // タイトル更新
-      document.title = r.name + ' | うるま市石川 飲食店マップ';
+      const pageTitle = r.name + ' | うるま市石川 飲食店マップ';
+      document.title = pageTitle;
 
       // meta description も店舗ごとの内容に更新
+      const descText = r.name + '（' + r.genre + '）沖縄県うるま市石川エリアの店舗情報。住所：' + r.address;
       var metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.setAttribute(
-          'content',
-          r.name + '（' + r.genre + '）沖縄県うるま市石川エリアの店舗情報。住所：' + r.address
-        );
+      if (metaDesc) metaDesc.setAttribute('content', descText);
+
+      // canonical / OGP タグを店舗ごとの内容に更新
+      const pageUrl = 'https://mokumao.github.io/ishikawa-map/detail.html?id=' + r.id;
+      var canonicalLink = document.getElementById('canonicalLink');
+      if (canonicalLink) canonicalLink.setAttribute('href', pageUrl);
+      var ogTitle = document.getElementById('ogTitle');
+      if (ogTitle) ogTitle.setAttribute('content', pageTitle);
+      var ogDescription = document.getElementById('ogDescription');
+      if (ogDescription) ogDescription.setAttribute('content', descText);
+      var ogUrl = document.getElementById('ogUrl');
+      if (ogUrl) ogUrl.setAttribute('content', pageUrl);
+
+      // 構造化データ（JSON-LD）：ジャンルをおおまかにSchema.orgの型へ対応させる
+      function genreToSchemaType(genre) {
+        if (!genre) return 'LocalBusiness';
+        if (genre.indexOf('コンビニ') !== -1) return 'ConvenienceStore';
+        if (genre.indexOf('ガソリン') !== -1) return 'GasStation';
+        if (genre.indexOf('宿泊') !== -1) return 'LodgingBusiness';
+        if (genre.indexOf('金融') !== -1) return 'BankOrCreditUnion';
+        if (genre.indexOf('教育') !== -1) return 'EducationalOrganization';
+        if (genre.indexOf('観光') !== -1) return 'TouristAttraction';
+        if (genre.indexOf('美容') !== -1 || genre.indexOf('理容') !== -1) return 'HairSalon';
+        if (genre.indexOf('カフェ') !== -1) return 'CafeOrCoffeeShop';
+        if (genre.indexOf('居酒屋') !== -1 || genre.indexOf('バル') !== -1 || genre.indexOf('バー') !== -1) return 'BarOrPub';
+        if (genre.indexOf('食事処') !== -1 || genre.indexOf('ラーメン') !== -1 || genre.indexOf('焼肉') !== -1 || genre.indexOf('そば') !== -1) return 'Restaurant';
+        return 'LocalBusiness';
       }
+      var ldData = {
+        '@context': 'https://schema.org',
+        '@type': genreToSchemaType(r.genre),
+        'name': r.name,
+        'address': {
+          '@type': 'PostalAddress',
+          'streetAddress': r.address,
+          'addressCountry': 'JP'
+        },
+        'url': pageUrl
+      };
+      if (r.lat && r.lng) {
+        ldData.geo = { '@type': 'GeoCoordinates', 'latitude': r.lat, 'longitude': r.lng };
+      }
+      if (r.tel) ldData.telephone = r.tel;
+      var ldScript = document.getElementById('ldJson');
+      if (ldScript) ldScript.textContent = JSON.stringify(ldData);
 
       // Google マップ URL
       function gmapUrl() {
