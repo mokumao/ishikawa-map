@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#2e7d32">
+  <meta name="description" content="沖縄県うるま市石川エリアの店舗情報ページ。飲食店・コンビニ・ガソリンスタンドなど、うるま市石川マップに掲載中の店舗詳細です。">
   <title>店舗詳細 | うるま市石川 飲食店マップ</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -363,6 +364,15 @@
 
       // タイトル更新
       document.title = r.name + ' | うるま市石川 飲食店マップ';
+
+      // meta description も店舗ごとの内容に更新
+      var metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute(
+          'content',
+          r.name + '（' + r.genre + '）沖縄県うるま市石川エリアの店舗情報。住所：' + r.address
+        );
+      }
 
       // Google マップ URL
       function gmapUrl() {
