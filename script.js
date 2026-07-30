@@ -2175,6 +2175,7 @@ if ('ontouchstart' in window) {
 
   const mapEl = document.getElementById('map');
   const restoreBtn = document.getElementById('catControlsRestoreBtn');
+  const hideBtn = document.getElementById('catControlsHideBtn');
   if (!mapEl || !restoreBtn) return;
 
   let startX = 0;
@@ -2292,6 +2293,7 @@ if ('ontouchstart' in window) {
   }, { passive: true });
 
   restoreBtn.addEventListener('click', showCategoryControls);
+  if (hideBtn) hideBtn.addEventListener('click', hideCategoryControls);
   restoreBtn.addEventListener('touchstart', function (e) {
     if (e.touches.length !== 1) return;
     restoreStartY = e.touches[0].clientY;

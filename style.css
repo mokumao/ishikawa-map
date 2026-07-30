@@ -1305,6 +1305,34 @@ body.side-swipe-right #minimap {
     pointer-events: auto;
     transform: translateX(-50%) translateY(0);
   }
+  /* カテゴリボタンを隠すボタン（下矢印）：restore-btn(上矢印)と対になる存在。
+     地図中央よりやや下、カテゴリパネルの上に常時表示し、押すとスワイプで
+     隠すのと同じ動作（hideCategoryControls）を行う */
+  .cat-controls-hide-btn {
+    position: absolute;
+    left: 50%;
+    bottom: 140px;
+    transform: translateX(-50%);
+    z-index: 901;
+    width: 46px;
+    height: 38px;
+    border: none;
+    background: transparent;
+    color: #e53935;
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1;
+    opacity: 1;
+    pointer-events: auto;
+    filter: drop-shadow(0 2px 2px rgba(255,255,255,.9));
+    transition: transform .38s ease, opacity .38s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body.cat-controls-hidden .app-body[data-view="map"] .cat-controls-hide-btn {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(-20px);
+  }
   /* 左右スクロール矢印ボタン */
   .cat-scroll-btn {
     flex-shrink: 0;
