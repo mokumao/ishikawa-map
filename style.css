@@ -1304,9 +1304,8 @@ body.side-swipe-right #minimap {
     opacity: 1;
     pointer-events: auto;
     transform: translateX(-50%) translateY(0);
-    /* 下矢印・ボタン類が消え切る3秒を待ってから表示し始める
-       （店舗アイコンが下に消えた後に上向き矢印が現れるようにする） */
-    transition: transform .38s ease 3s, opacity .38s ease 3s;
+    /* 下矢印・ボタン類が消えていく途中、2秒経過したあたりから表示し始める */
+    transition: transform .38s ease 2s, opacity .38s ease 2s;
   }
   /* カテゴリボタンを隠すボタン（下矢印）：restore-btn(上矢印)と対になる存在。
      地図中央よりやや下、カテゴリパネルの上に常時表示し、押すとスワイプで
