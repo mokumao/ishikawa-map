@@ -1331,10 +1331,10 @@ body.side-swipe-right #minimap {
   body.cat-controls-hidden .app-body[data-view="map"] .cat-controls-hide-btn {
     opacity: 0;
     pointer-events: none;
-    /* 位置は動かさず、下のボタン類が隠れきるのに合わせて同じ6秒でゆっくり
-       薄くなって消える（.cat-selectall-row/.cat-label-wrapperの
-       hide用transitionと同じ長さに揃える） */
-    transition: opacity 6s ease;
+    /* 下のボタン類（.cat-selectall-row/.cat-label-wrapper）と同じ距離・同じ6秒で
+       下方向へ移動しながら薄くなる（隠れていくボタン類を追いかけるように消える） */
+    transform: translateX(-50%) translateY(145px);
+    transition: transform 6s cubic-bezier(0.22, 1, 0.36, 1), opacity 6s ease;
   }
   /* 左右スクロール矢印ボタン */
   .cat-scroll-btn {
