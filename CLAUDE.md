@@ -41,6 +41,9 @@ Googleマップ・NTTタウンページの自動収集は規約上禁止（人�
 - 店舗詳細ページのURLは `detail.html?id=N` 形式（`N`は`id`の値）。
   旧形式の `detail.html#N`（配列インデックスをハッシュで指定）でアクセスされた
   場合は、自動的に `?id=N` へ転送する。
+- `id`は地域をまたぐ通し番号（削除されても再利用しない）。`code`の連番部分も
+  同じ通し番号を使う。詳細は `.claude/skills/poi-survey/SKILL.md` の
+  「id・codeの採番ルール」参照。
 
 ## statusによる表示制御
 
