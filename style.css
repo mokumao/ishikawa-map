@@ -965,6 +965,8 @@ body.info-open .label-toggle-btn { display: none !important; }
   align-items: center;
   justify-content: center;
   gap: 4px;
+  width: max-content;
+  max-width: 94vw;
   pointer-events: auto;
   background: #fff;
   border: 2.5px solid #e53935;
@@ -981,9 +983,10 @@ body.info-open .label-toggle-btn { display: none !important; }
 .no-shop-notice-text {
   color: #333;
   padding: 4px 2px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
-  white-space: nowrap;
+  text-align: center;
+  line-height: 1.5;
 }
 .no-shop-notice-close {
   position: static;
