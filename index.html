@@ -15,7 +15,7 @@
   <meta property="og:locale" content="ja_JP">
   <title>うるま市石川 飲食店マップ</title>
   <link rel="stylesheet" href="leaflet/leaflet.css"/>
-  <link rel="stylesheet" href="style.css?v=20260801g">
+  <link rel="stylesheet" href="style.css?v=20260801h">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -113,6 +113,13 @@
         <button class="news-banner-close news-banner-close-side" data-news-close aria-label="閉じる">×</button>
         <button class="news-banner-btn" id="newsBannerBtn">今日の石川ニュース</button>
         <button class="news-banner-close news-banner-close-side" data-news-close aria-label="閉じる">×</button>
+      </div>
+
+      <!-- 表示中の店舗が0件のとき「店名」ボタンを押した際の案内ポップ -->
+      <div id="noShopNotice" class="no-shop-notice hidden" role="status">
+        <button class="no-shop-notice-close" data-noshop-close aria-label="閉じる">×</button>
+        <span class="no-shop-notice-text">店舗を指定してください</span>
+        <button class="no-shop-notice-close" data-noshop-close aria-label="閉じる">×</button>
       </div>
 
       <!-- チップの一括選択/解除ボタン -->
@@ -297,7 +304,7 @@
   <script src="leaflet/leaflet.js"></script>
   <script src="restaurants-data.js?v=20260730a"></script>
   <script src="ishikawa-boundary.js?v=20260709b"></script>
-  <script src="script.js?v=20260801c"></script>
+  <script src="script.js?v=20260801d"></script>
   <!-- GoatCounter アクセス解析 -->
   <script data-goatcounter="https://ishikawamap.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>

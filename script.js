@@ -2844,7 +2844,30 @@ function switchTab(tab) {
 // ── 店名ラベルトグル（ボトムバーから呼び出し） ──────────────────
 // 文字は常に「店名」固定。表示中は地図・一覧タブと同じ配色（赤塗り・白文字）に、
 // 非表示中は白背景・グレー文字に切り替える
+function hasAnyVisibleMarker() {
+  return markersData.some(function (d) { return map.hasLayer(d.marker); });
+}
+function showNoShopNotice() {
+  var el = document.getElementById('noShopNotice');
+  if (el) el.classList.remove('hidden');
+}
+function hideNoShopNotice() {
+  var el = document.getElementById('noShopNotice');
+  if (el) el.classList.add('hidden');
+}
+document.querySelectorAll('[data-noshop-close]').forEach(function (btn) {
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    hideNoShopNotice();
+  });
+});
 function toggleLabels() {
+  // 表示中の店舗ピンが1件も無いときは、ボタンの見た目は変えずに
+  // 「店舗を指定してください」ポップを地図中央に出すだけにする
+  if (!hasAnyVisibleMarker()) {
+    showNoShopNotice();
+    return;
+  }
   labelsVisible = !labelsVisible;
   map.getContainer().classList.toggle('labels-hidden', !labelsVisible);
   const btn = document.getElementById('bottomLabelBtn');
