@@ -1634,7 +1634,7 @@ body.side-swipe-right #minimap {
     border-color: #e53935;
   }
   /* 「店名」ボタンだけ、カテゴリパネル表示中のオーバーレイ(z-index:1500)より
-     前面に出す（「地図」「一覧」は暗いままにする、という要望のため
+     前面に出す（「一覧」は暗いままにする、という要望のため
      このボタンだけ独自のスタッキングコンテキストを持たせる） */
   #bottomLabelBtn {
     position: relative;
@@ -1644,9 +1644,12 @@ body.side-swipe-right #minimap {
   #bottomLabelBtn.active {
     color: #fff !important;
   }
-  /* カテゴリパネル表示中は「地図」ボタンを押せなくしているので、
-     選択中（赤塗り）の見た目もやめて他の非選択ボタンと同じ白背景・黒文字にする */
+  /* カテゴリパネル表示中の「地図」ボタン：押せるようにした上で、
+     オーバーレイ(黒半透明)の下だと暗く見えてしまうため「店名」ボタンと同様に
+     前面表示＋選択中（赤塗り）の見た目をやめて白背景・黒文字にする */
   #bottomTabMap.cat-locked {
+    position: relative;
+    z-index: 1502;
     background: #fff !important;
     color: #222 !important;
     border-color: #e53935 !important;

@@ -742,6 +742,10 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     // 「地図」は押すとパネルを閉じてメイン地図に戻る = handleMapTabClick()）
     var bTabListOpen = document.getElementById('bottomTabList');
     if (bTabListOpen) bTabListOpen.style.pointerEvents = 'none';
+    // 「地図」ボタンは押せるが、オーバーレイ(黒半透明)の下にあると暗く見えてしまうため
+    // 「店名」ボタンと同じく白背景・黒文字＋前面表示にする（cat-lockedクラスで対応）
+    var bTabMapOpen = document.getElementById('bottomTabMap');
+    if (bTabMapOpen) bTabMapOpen.classList.add('cat-locked');
     // Leafletのタップ合成クリックも無効化
     if (map.tap) map.tap.disable();
   });
