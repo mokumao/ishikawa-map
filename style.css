@@ -1271,6 +1271,13 @@ body.side-swipe-right #minimap {
     opacity: var(--cat-controls-drag-opacity, 1);
     transition: none;
   }
+  /* 指で下に引っ張るドラッグ中は、下矢印もボタン類と同じ量だけ
+     リアルタイムで追従させる（ボタン操作時の「追いかけて消える」動きと揃える） */
+  body.cat-controls-dragging .cat-controls-hide-btn {
+    transform: translateX(-50%) translateY(var(--cat-controls-drag-y, 0px));
+    opacity: var(--cat-controls-drag-opacity, 1);
+    transition: none;
+  }
   body.cat-controls-hidden .cat-selectall-row,
   body.cat-controls-hidden .cat-label-wrapper {
     transform: translateY(145px);
