@@ -738,11 +738,10 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       if (el) { el.style.opacity = '0.35'; el.style.pointerEvents = 'none'; }
     });
     // ishikawaBtnはそのまま（通常表示・クリック可能）
-    // 「地図」「一覧」ボタンは押せないようにする（「店名」ボタンは操作可能のまま維持）
+    // 「一覧」ボタンは押せないようにする（「地図」「店名」ボタンは操作可能のまま維持。
+    // 「地図」は押すとパネルを閉じてメイン地図に戻る = handleMapTabClick()）
     var bTabListOpen = document.getElementById('bottomTabList');
     if (bTabListOpen) bTabListOpen.style.pointerEvents = 'none';
-    var bTabMapOpen = document.getElementById('bottomTabMap');
-    if (bTabMapOpen) { bTabMapOpen.style.pointerEvents = 'none'; bTabMapOpen.classList.add('cat-locked'); }
     // Leafletのタップ合成クリックも無効化
     if (map.tap) map.tap.disable();
   });
@@ -947,8 +946,11 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       updateCatPreview();
     } else { closeMenu(); }
   });
-  // 閉じるボタン：選択モード終了→通常の地図に戻る
-  document.getElementById('gearCatBack').addEventListener('click', function () {
+  // 選択モード終了→通常の地図に戻る（旧「閉じる」ボタンの処理。
+  // 今は下部の「地図」タブ押下時に handleMapTabClick() から呼ばれる。
+  // このIIFEの外（グローバル）から呼べるよう window に公開する）
+  window._categoryPanelOpenViaPin = function () { return openedViaPin; };
+  window._closeCategoryPanelFromMapTab = function () {
     if (openedViaPin) {
       // openedViaPin = false はcloseMenu()内で行う（地図復元チェックのため）
       map.getPane('markerPane').style.pointerEvents = ''; // タップを元に戻す
@@ -967,7 +969,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       }
     }
     closeMenu();
-  });
+  };
 
   // 言語サブメニュー
   document.getElementById('gearLangJa').addEventListener('click', function () {
@@ -2792,6 +2794,16 @@ function setActiveItem(idx) {
   if (activeEl) {
     activeEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
+}
+
+// ── 下部「地図」タブ押下時の処理 ────────────────────────────────
+// カテゴリパネル（ピンボタン経由）表示中に押された場合は、選択内容を確定して
+// パネルを閉じる（旧「閉じる」ボタンの役割）。それ以外は通常のタブ切替のみ。
+function handleMapTabClick() {
+  if (window._categoryPanelOpenViaPin && window._categoryPanelOpenViaPin()) {
+    window._closeCategoryPanelFromMapTab();
+  }
+  switchTab('map');
 }
 
 // ── タブ切り替え（スマホ） ───────────────────────────────────────
