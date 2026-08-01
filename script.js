@@ -1616,6 +1616,19 @@ const _initialShop = !isNaN(_initialShopId)
 // 店舗フォーカス時はポップアップを広く見せるため最初からヘッダーを畳んでおく
 if (_initialShop) document.body.classList.add('header-collapsed');
 
+// 青いヘッダーバーは「サイトを最初に開いたとき」だけ自動表示する。
+// 「このサイトについて」等の他ページから「地図」ボタンで戻ってきたときは
+// index.htmlが毎回まっさらに読み込まれるため、sessionStorageで
+// 「このタブで既に表示済みか」を判定する（タブを閉じるまで保持される）
+const _headerAlreadyShown = sessionStorage.getItem('siteHeaderShown') === '1';
+if (!_initialShop) {
+  if (_headerAlreadyShown) {
+    document.body.classList.add('header-collapsed');
+  } else {
+    sessionStorage.setItem('siteHeaderShown', '1');
+  }
+}
+
 const map = L.map("map", {
   center:  _initialShop ? [_initialShop.lat, _initialShop.lng] : [26.430, 127.828],
   zoom:    _initialShop ? 16 : 14,
@@ -2305,13 +2318,17 @@ if ('ontouchstart' in window) {
   }, { passive: true });
 })();
 
-// ── ページ表示時はヘッダー（青色バー）を必ず表示 ─────────────────────
+// ── ページ表示時、bfcache復元による意図しない畳み状態を解消 ────────────
 // スマホブラウザのbfcache復元で前回の折りたたみ状態が残るのを防ぐ。
 // pageshow は通常の読み込みでもキャッシュ復元でも発火する
-// ただし ?shop=N 指定時（店舗詳細ページからの復帰）は、ポップアップを
-// 広く見せるためヘッダーを畳んだままにする
+// ただし以下の場合はヘッダーを畳んだままにする：
+// ・?shop=N 指定時（店舗詳細ページからの復帰、ポップアップを広く見せるため）
+// ・このタブで既にヘッダーを表示済み（サイト初回起動時のみ自動表示するため）
 window.addEventListener('pageshow', function () {
-  if (_initialShop) return;
+  if (_initialShop || _headerAlreadyShown) {
+    setTimeout(function () { map.invalidateSize(); }, 50);
+    return;
+  }
   document.body.classList.remove('header-collapsed');
   var h = document.querySelector('header');
   if (h) h.style.display = '';
