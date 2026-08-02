@@ -530,6 +530,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     updateClearBtn();
     updateSelectAllChipsBtns();
     updateCatLabel();
+    syncLabelBtnWithMarkers();
   }
 
   // カテゴリラベルバーを更新（catChipSet のチップを表示、catSel で色決定）
@@ -966,6 +967,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
           if (map.hasLayer(marker)) map.removeLayer(marker);
         });
         hideCatLabel();
+        syncLabelBtnWithMarkers();
       } else {
         // 選択中のカテゴリをラベルバーに表示
         // catSel・ボタン状態はそのまま保持（涙目アイコンで戻れるように）
@@ -2846,6 +2848,16 @@ function switchTab(tab) {
 // 非表示中は白背景・グレー文字に切り替える
 function hasAnyVisibleMarker() {
   return markersData.some(function (d) { return map.hasLayer(d.marker); });
+}
+// 表示中の店舗ピンが0件になったら「店名」ボタンを非アクティブ（白背景・黒文字）に戻す。
+// カテゴリ選択の変更経路が複数あるため（チップバー・カテゴリパネル等）、
+// マーカー表示を更新するタイミングで都度呼び出す想定
+function syncLabelBtnWithMarkers() {
+  if (hasAnyVisibleMarker()) return;
+  labelsVisible = false;
+  map.getContainer().classList.add('labels-hidden');
+  var btn = document.getElementById('bottomLabelBtn');
+  if (btn) btn.classList.remove('active');
 }
 function showNoShopNotice() {
   var el = document.getElementById('noShopNotice');
