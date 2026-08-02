@@ -1419,5 +1419,30 @@ const restaurants = [
     lat:       26.427074,
     lng:       127.826201,
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
+  },
+
+  // ── 観光（追加分）─────────────────────────────────────────────
+  // ※以下1件は2026-08-02に追加。「石川について」ページ作成中に発見。
+  // 実在・住所・電話・開館時間はうるま市公式サイトと沖縄観光情報WEBサイト
+  // 「おきなわ物語」（沖縄観光コンベンションビューロー）で一致を確認。
+  // 座標はOSM(node/1068017752)を採用し、国土地理院の住所検索と31m以内で一致。
+  {
+    id:          69,
+    code:        "47213-IS-0070",
+    status:      "published",
+    tel:         "098-965-3866",
+    lastChecked: "2026-08-02",
+    name:      "うるま市立石川歴史民俗資料館",
+    genre:     "観光",
+    address:   "沖縄県うるま市石川曙2丁目1-55",
+    hours:     "9:00〜17:00（最終入館16:30）",
+    closed:    "月曜（祝祭日と重なる場合は翌日）、祝祭日の翌日、年末年始（12月29日〜1月3日）",
+    note:      "入館無料。石川図書館の2階。戦争・収容所関係資料、復元した規格住宅、宮森ジェット機墜落事故の関連資料などを展示。駐車場20台",
+    note_en:   "Free admission. On the 2nd floor of Ishikawa Library. Exhibits cover the postwar civilian camp, a restored standard house, and the 1959 Miyamori jet crash.",
+    sourceUrl: "https://www.city.uruma.lg.jp/bunka/1282.html",
+    warn:      false,
+    lat:       26.421856,
+    lng:       127.825245,
+    twitter: "", instagram: "", youtube: "", website: "https://www.city.uruma.lg.jp/bunka/1282.html", detailText: "", photos: []
   }
 ];
