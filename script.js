@@ -972,6 +972,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
         // 選択中のカテゴリをラベルバーに表示
         // catSel・ボタン状態はそのまま保持（涙目アイコンで戻れるように）
         updateCatLabel(true); // catSel を catChipSet にコピーしてバー生成
+        syncLabelBtnWithMarkers();
       }
     }
     closeMenu();
@@ -2849,11 +2850,15 @@ function switchTab(tab) {
 function hasAnyVisibleMarker() {
   return markersData.some(function (d) { return map.hasLayer(d.marker); });
 }
-// 表示中の店舗ピンが0件になったら「店名」ボタンを非アクティブ（白背景・黒文字）に戻す。
+// 表示中の店舗ピンの有無に応じて「店名」ボタン・案内ポップの状態を同期する。
 // カテゴリ選択の変更経路が複数あるため（チップバー・カテゴリパネル等）、
 // マーカー表示を更新するタイミングで都度呼び出す想定
 function syncLabelBtnWithMarkers() {
-  if (hasAnyVisibleMarker()) return;
+  if (hasAnyVisibleMarker()) {
+    // 店舗ピンが表示されたら「店舗を選択してください」ポップは不要なので閉じる
+    hideNoShopNotice();
+    return;
+  }
   labelsVisible = false;
   map.getContainer().classList.add('labels-hidden');
   var btn = document.getElementById('bottomLabelBtn');
