@@ -2856,15 +2856,19 @@ function hasAnyVisibleMarker() {
 // カテゴリ選択の変更経路が複数あるため（チップバー・カテゴリパネル等）、
 // マーカー表示を更新するタイミングで都度呼び出す想定
 function syncLabelBtnWithMarkers() {
+  var hideBtn = document.getElementById('catControlsHideBtn');
   if (hasAnyVisibleMarker()) {
     // 店舗ピンが表示されたら「店舗を選択してください」ポップは不要なので閉じる
     hideNoShopNotice();
+    if (hideBtn) hideBtn.style.display = '';
     return;
   }
   labelsVisible = false;
   map.getContainer().classList.add('labels-hidden');
   var btn = document.getElementById('bottomLabelBtn');
   if (btn) btn.classList.remove('active');
+  // 隠すボタン類が既に非表示（表示するものが無い）なので、下矢印自体も出さない
+  if (hideBtn) hideBtn.style.display = 'none';
 }
 function showNoShopNotice() {
   var el = document.getElementById('noShopNotice');
