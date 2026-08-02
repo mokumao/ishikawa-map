@@ -254,6 +254,95 @@ body.about-site-page {
 .about-site-list li:has(.about-site-link-btn):active {
   background: #fdeceb;
 }
+/* ── 地区紹介ページ（about-ishikawa.html 等）：見出し＋本文カード
+   area-profile スキルで作成・更新する。他地区に展開しても同じ構成を使う ── */
+/* 本文の前に置く注意書き（AIがまとめた文章であることの明示） */
+.area-disclaimer {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 10px;
+  padding: 11px 13px;
+  margin-bottom: 14px;
+  font-size: .78rem;
+  line-height: 1.75;
+  color: #6d4c41;
+}
+.area-sec {
+  background: #fff;
+  border-left: 5px solid #e53935;
+  border-radius: 12px;
+  padding: 14px 16px 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.area-sec-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #c62828;
+  margin-bottom: 8px;
+}
+.area-sec p {
+  font-size: .92rem;
+  line-height: 1.85;
+  color: #333;
+}
+.area-sec p + p { margin-top: 10px; }
+.area-sec ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.area-sec ul li {
+  font-size: .92rem;
+  line-height: 1.8;
+  color: #333;
+  padding-left: 14px;
+  position: relative;
+}
+.area-sec ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .72em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e53935;
+}
+.area-sec .area-term { font-weight: 700; }
+/* 出典・注記：本文より一段控えめに */
+.area-note {
+  font-size: .78rem;
+  line-height: 1.7;
+  color: #777;
+  margin-top: 10px;
+}
+.area-sources {
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 14px 16px 16px;
+}
+.area-sources .area-sec-title { color: #666; }
+.area-sources ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.area-sources a {
+  font-size: .82rem;
+  line-height: 1.6;
+  color: #1565c0;
+  word-break: break-all;
+}
+.area-updated {
+  font-size: .78rem;
+  color: #999;
+  margin-top: 12px;
+  text-align: right;
+}
 /* ── 運営についてページ：説明文の上に、月次収支報告を「ボトムシート」
    （下からつまんで引き上げるパネル）として重ねて表示
    （about-management.html専用） ─────────────────────────────── */
