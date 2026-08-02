@@ -968,6 +968,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
         });
         hideCatLabel();
         syncLabelBtnWithMarkers();
+        // 何も選択せずに閉じたことが分かるよう、地図中央に案内ポップを直接表示する
+        showNoShopNotice();
       } else {
         // 選択中のカテゴリをラベルバーに表示
         // catSel・ボタン状態はそのまま保持（涙目アイコンで戻れるように）
