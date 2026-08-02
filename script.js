@@ -968,6 +968,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
         });
         hideCatLabel();
         syncLabelBtnWithMarkers();
+        // 何も選択せずに閉じたことが分かるよう、地図中央に案内ポップを直接表示する
+        showNoShopNotice();
       } else {
         // 選択中のカテゴリをラベルバーに表示
         // catSel・ボタン状態はそのまま保持（涙目アイコンで戻れるように）
@@ -2231,9 +2233,6 @@ if ('ontouchstart' in window) {
   function showCategoryControls() {
     document.body.classList.remove('cat-controls-hidden');
     resetDragState();
-    // 隠れているボタン類を戻しても、店舗ピンが0件なら表示するものが無いため、
-    // 代わりに「店舗を選択してください」ポップを地図中央に出す
-    if (!hasAnyVisibleMarker()) showNoShopNotice();
   }
 
   function setDragOffset(y) {
