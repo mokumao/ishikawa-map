@@ -134,8 +134,8 @@
       white-space: nowrap;
     }
     .warn-text { color: #e65100; }
-    .source-note { font-size: 0.72rem; color: #999; font-weight: 400; margin-left: 4px; }
-    .info-note { margin-top: 10px; font-size: 0.78rem; color: #999; line-height: 1.5; }
+    .source-note { font-size: 0.72rem; color: #1565c0; font-weight: 400; margin-left: 4px; }
+    .info-note { margin-top: 10px; font-size: 0.78rem; color: #1565c0; line-height: 1.5; }
 
     /* ── 警告ボックス ── */
     .warn-box {
@@ -438,7 +438,11 @@
       // 地名・行政コードを含まない固定書式のため、地域が増えても不変・重複なし。
       const storeNo = 'No.' + String(r.id + 1).padStart(6, '0');
 
-      // sourceUrlのドメインから第三者サイト名を判定（一致しなければ公式サイト等とみなし注記なし）
+      // sourceUrlのドメインから出典名を判定する。
+      // 食べログ等の第三者サイトは固有名、うるま市公式サイトは名称で表示する。
+      // それ以外は「公式サイト」と決めつけず、ドメイン名をそのまま出典として示す
+      // （機械的にsourceUrlのドメインを見ているだけで、実際に公式か確認したわけ
+      //   ではないため。誤って「公式」と断定表示しないための方針）
       const THIRD_PARTY_SITE_LABELS = [
         { domain: 'tabelog.com',    label: '食べログ' },
         { domain: 'ekiten.jp',      label: 'エキテン' },
@@ -448,6 +452,9 @@
         { domain: 'hitosara.com',   label: 'ヒトサラ' },
         { domain: 'yelp.com',       label: 'Yelp' }
       ];
+      const OFFICIAL_SITE_LABELS = [
+        { domain: 'city.uruma.lg.jp', label: 'うるま市公式サイト' }
+      ];
       function hostOf(url) {
         try { return new URL(url).hostname.replace(/^www\./, ''); }
         catch (e) { return ''; }
@@ -455,15 +462,15 @@
       function sourceSiteLabel(url) {
         const host = hostOf(url);
         if (!host) return '';
-        const hit = THIRD_PARTY_SITE_LABELS.find(function (site) {
-          return host === site.domain || host.endsWith('.' + site.domain);
-        });
-        return hit ? hit.label : '';
+        const findIn = function (list) {
+          return list.find(function (site) { return host === site.domain || host.endsWith('.' + site.domain); });
+        };
+        const hit = findIn(THIRD_PARTY_SITE_LABELS) || findIn(OFFICIAL_SITE_LABELS);
+        return hit ? hit.label : host;
       }
-      // 営業時間・定休日の共通整形：
-      // 「要確認」はwarn-textでそのまま表示（未確認であることを隠さない）。
-      // 確認済みの値は、出典が既知の第三者サイトの場合のみ小さく出典を併記する
-      // （店舗独自ドメイン等、リストにないsourceUrlは公式情報とみなし注記しない）。
+      // 営業時間・定休日・備考の共通整形：
+      // 「要確認」はwarn-textでそのまま表示（未確認であることを隠さない。出典も付けない）。
+      // 確認済みの値には、必ず出典を小さく併記する。
       function fieldWithSource(value, sourceUrl) {
         const html = String(value).replace(/\n/g, '<br>');
         if (String(value).trim() === '要確認') {
@@ -478,6 +485,9 @@
 
       // 定休日整形
       const closedHtml = fieldWithSource(r.closed, r.sourceUrl);
+
+      // 備考整形（従来は出典表示が無かった）
+      const noteHtml = r.note ? fieldWithSource(r.note, r.sourceUrl) : r.note;
 
       // SNS・リンクボタン
       const links = [];
@@ -516,7 +526,7 @@
 
       // 警告ボックス
       const warnSection = r.warn
-        ? `<div class="section"><div class="warn-box">⚠️ ${r.note}</div></div>`
+        ? `<div class="section"><div class="warn-box">⚠️ ${noteHtml}</div></div>`
         : '';
 
       // HTML構築
@@ -544,13 +554,11 @@
               <td class="lbl">定休日</td>
               <td>${closedHtml}</td>
             </tr>
-            ${!r.warn ? `<tr><td class="lbl">備考</td><td>${r.note}</td></tr>` : ''}
-            <tr>
-              <td class="lbl">店舗番号</td>
-              <td>${storeNo}</td>
-            </tr>
+            ${!r.warn ? `<tr><td class="lbl">備考</td><td>${noteHtml}</td></tr>` : ''}
           </table>
-          <p class="info-note">掲載内容の修正・お問い合わせの際は、この店舗番号をお知らせください。</p>
+          <p class="info-note">営業時間・定休日・備考は、AIが情報源をもとに自動収集したものです。詳細は情報源、または各店舗に直接ご確認ください。</p>
+          <p class="info-note">店舗番号：${storeNo}</p>
+          <p class="info-note">掲載内容の修正・お問い合わせの際は、店舗番号をお知らせください。</p>
         </div>
 
         <!-- 警告 -->

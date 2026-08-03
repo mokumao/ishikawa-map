@@ -35,7 +35,7 @@ var TRANSLATIONS = {
     'popup.closed':        '定休日',
     'popup.note':          '備考',
     'popup.gmap':          'Googleマップで見る',
-    'popup.detail':        '店舗詳細を見る',
+    'popup.detail':        '詳細を見る',
     'count.results':       '{n} 件表示中',
     'list.closed':         '定休日：',
     'filter.all':          'すべて',
@@ -1563,14 +1563,50 @@ function gmapUrl(name, address) {
        + encodeURIComponent(name + " " + address);
 }
 
+// ── 出典ラベル判定（ポップアップ・店舗詳細ページ共通の考え方） ──────────
+// 食べログ等の第三者サイトは固有名、うるま市公式サイトは名称で表示する。
+// それ以外は「公式サイト」と決めつけず、ドメイン名をそのまま出典として示す
+// （機械的にsourceUrlのドメインを見ているだけで、実際に公式か確認したわけ
+//   ではないため。誤って「公式」と断定表示しないための方針）
+const THIRD_PARTY_SITE_LABELS = [
+  { domain: 'tabelog.com',    label: '食べログ' },
+  { domain: 'ekiten.jp',      label: 'エキテン' },
+  { domain: 'yahoo.co.jp',    label: 'Yahoo!地図' },
+  { domain: 'navitime.co.jp', label: 'NAVITIME' },
+  { domain: 'hotpepper.jp',   label: 'ホットペッパー' },
+  { domain: 'hitosara.com',   label: 'ヒトサラ' },
+  { domain: 'yelp.com',       label: 'Yelp' }
+];
+const OFFICIAL_SITE_LABELS = [
+  { domain: 'city.uruma.lg.jp', label: 'うるま市公式サイト' }
+];
+function sourceHostOf(url) {
+  try { return new URL(url).hostname.replace(/^www\./, ''); }
+  catch (e) { return ''; }
+}
+function sourceSiteLabel(url) {
+  const host = sourceHostOf(url);
+  if (!host) return '';
+  const findIn = function (list) {
+    return list.find(function (s) { return host === s.domain || host.endsWith('.' + s.domain); });
+  };
+  const hit = findIn(THIRD_PARTY_SITE_LABELS) || findIn(OFFICIAL_SITE_LABELS);
+  return hit ? hit.label : host;
+}
+function sourceNoteHtml(url) {
+  const label = sourceSiteLabel(url);
+  return label ? `<span class="source-note">（情報源：${label}）</span>` : '';
+}
+
 // ── ポップアップ HTML 生成 ────────────────────────────────────────
 function makePopup(r) {
-  const hoursHtml  = rHours(r).replace(/\n/g, "<br>");
-  const closedVal  = rClosed(r);
+  const srcNote    = sourceNoteHtml(r.sourceUrl);
+  const hoursHtml  = rHours(r).replace(/\n/g, "<br>") + (r.hours.includes("要確認") ? "" : srcNote);
+  const closedVal  = rClosed(r) + (r.closed.includes("要確認") ? "" : srcNote);
   const closedHtml = (r.closed.includes("要確認"))
     ? `<span style="color:#e65100">${closedVal}</span>`
     : closedVal;
-  const noteVal  = rNote(r);
+  const noteVal  = rNote(r) + (r.note ? srcNote : "");
   const noteHtml = r.warn
     ? `<div class="popup-warning">⚠️ ${noteVal}</div>`
     : `<tr>
