@@ -1444,5 +1444,90 @@ const restaurants = [
     lat:       26.421856,
     lng:       127.825245,
     twitter: "", instagram: "", youtube: "", website: "https://www.city.uruma.lg.jp/bunka/1282.html", detailText: "", photos: []
+  },
+
+  // ── 観光・教育（追加分）───────────────────────────────────────
+  // ※以下4件は2026-08-03に追加。「石川について」ページ作成時のarea-profile調査
+  // （うるま市教育委員会リーフレット・市公式サイト）で見つかった候補をOSM抽出＋
+  // ウェブ複数照合で検証。座標は国土地理院の住所検索とOSMを突合（詳細は各note参照）。
+  // 同時に見つかった以下は住所・座標の確証が取れず今回は保留：
+  // 伊波貝塚（国指定史跡、大字レベルの住所のみで特定不可）、
+  // 沖縄諮詢会堂跡・石川部落事務所（市指定文化財、住所情報が見つからず/一部で
+  // 資料館と同一住所という疑わしい情報のみ）、エナジックスタジアム石川
+  // （住所表記がサイトごとに揺れ、国土地理院とOSMの座標が232m離れ不一致）。
+  {
+    id:          70,
+    code:        "47213-IS-0071",
+    status:      "published",
+    tel:         "098-964-4888",
+    lastChecked: "2026-08-03",
+    name:      "CAVE OKINAWA",
+    genre:     "観光",
+    address:   "沖縄県うるま市石川嘉手苅479-1",
+    hours:     "9:00〜17:30（最終入場17:00）。夏季延長期間は18:30まで（最終入場18:00）",
+    closed:    "年中無休",
+    note:      "全長200mの鍾乳洞。大人1,200円・子供600円・幼児無料。無料駐車場70台。石川ICから車で約5分",
+    note_en:   "A 200m limestone cave. Adults ¥1,200, children ¥600, infants free. Free parking (70 spaces).",
+    sourceUrl: "https://www.cave.okinawa/",
+    warn:      false,
+    lat:       26.422075,
+    lng:       127.807503,
+    twitter: "", instagram: "", youtube: "", website: "https://www.cave.okinawa/", detailText: "", photos: []
+  },
+  {
+    id:          71,
+    code:        "47213-IS-0072",
+    status:      "published",
+    tel:         "",
+    lastChecked: "2026-08-03",
+    name:      "伊波城跡",
+    genre:     "観光",
+    address:   "沖縄県うるま市石川伊波",
+    hours:     "見学自由",
+    closed:    "なし",
+    note:      "県指定史跡。標高87mの伊波丘陵にあるグスク跡。座標はOSM登録のみで住所ベースの裏取りは大字レベルまで（要確認の範囲は数十m程度）",
+    note_en:   "A prefecturally designated historic castle site atop the 87m Iha hill.",
+    sourceUrl: "https://www.okinawastory.jp/spot/30000101",
+    warn:      true,
+    lat:       26.421474,
+    lng:       127.817138,
+    twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
+  },
+  {
+    id:          72,
+    code:        "47213-IS-0073",
+    status:      "published",
+    tel:         "098-923-7612",
+    lastChecked: "2026-08-03",
+    name:      "石川多目的ドーム",
+    genre:     "観光",
+    address:   "沖縄県うるま市石川2298-1",
+    hours:     "見学自由（闘牛大会は年25回ほど開催、日程は公式サイト参照）",
+    closed:    "なし",
+    note:      "県内唯一の全天候型闘牛場。2007年完成。うるま市は全国で初めて「闘牛のまち」を宣言。座標は市公式サイト記載値とOSMが7m以内で一致",
+    note_en:   "Okinawa's only all-weather bullfighting arena, completed in 2007.",
+    sourceUrl: "https://www.city.uruma.lg.jp/1007003000/shisetsu/p000260.html",
+    warn:      false,
+    lat:       26.436185,
+    lng:       127.825552,
+    twitter: "", instagram: "", youtube: "", website: "https://www.city.uruma.lg.jp/1007003000/shisetsu/p000260.html", detailText: "", photos: []
+  },
+  {
+    id:          73,
+    code:        "47213-IS-0074",
+    status:      "published",
+    tel:         "098-964-2086",
+    lastChecked: "2026-08-03",
+    name:      "うるま市立城前小学校",
+    genre:     "教育",
+    address:   "沖縄県うるま市石川400",
+    hours:     "平日 8:00〜17:00（登校日）",
+    closed:    "土・日・祝日・長期休暇",
+    note:      "戦後最初の学校「石川学園」の流れをくむ学校。校内に「戦後教育発祥之地」の碑がある",
+    sourceUrl: "https://www.city.uruma.lg.jp/3001002000/shisetsu/p000050.html",
+    warn:      false,
+    lat:       26.424265,
+    lng:       127.822790,
+    twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   }
 ];
