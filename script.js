@@ -1596,7 +1596,7 @@ function sourceSiteLabel(url) {
 function sourceNoteHtml(url) {
   const label = sourceSiteLabel(url);
   if (!label) return '';
-  return `<span class="source-note">（情報源：<a href="${url}" target="_blank" rel="noopener">${label}</a>）</span>`;
+  return `<span class="source-note"><a href="${url}" target="_blank" rel="noopener">（情報源：${label}）</a></span>`;
 }
 
 // ── ポップアップ HTML 生成 ────────────────────────────────────────
