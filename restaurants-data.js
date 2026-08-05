@@ -1119,10 +1119,11 @@ const restaurants = [
     address:   "沖縄県うるま市石川白浜2丁目11-1",
     hours:     "年中無休（自由）",
     closed:    "なし",
-    note:      "ウィンドサーフィンで有名な市民ビーチ。遊泳の際は現地の掲示・気象情報をご確認のうえご注意ください",
+    note:      "地元市民に親しまれている市民ビーチ。遊泳の際は現地の掲示・気象情報をご確認のうえご注意ください",
     revisionHistory: [
       { date: "2026-08-05", type: "manager", note: "住所を「沖縄県うるま市石川曙」から「沖縄県うるま市石川白浜2丁目11-1」に修正（出典自体とも不一致だったため。うるま市公式サイト・おきなわ物語で確認。座標付近は字境をまたぎ「石川石崎」表記の情報源もある）" },
-      { date: "2026-08-05", type: "manager", note: "備考「リーフ内は砂地で安全」を削除。出典（okinawastory.jp）に該当記載がなく、別サイトの類似文言との混同が疑われるため。海は条件によらず危険を伴うため「安全」の断定表現を避け、注意喚起の文言に変更" }
+      { date: "2026-08-05", type: "manager", note: "備考「リーフ内は砂地で安全」を削除。出典（okinawastory.jp）に該当記載がなく、別サイトの類似文言との混同が疑われるため。海は条件によらず危険を伴うため「安全」の断定表現を避け、注意喚起の文言に変更" },
+      { date: "2026-08-05", type: "manager", note: "備考「ウィンドサーフィンで有名な」を削除。okinawastory.jp・tagoo.jp・沖縄県公式・churatown.comの4件を実際に確認したがいずれにも記載がなく、実態とも合わないとの指摘があったため。okinawastory.jpで確認できた「地元市民に親しまれている」に基づく表現に変更" }
     ],
     sourceUrl: "https://www.okinawastory.jp/spot/600006184",
     sourceUrls: ["https://www.okinawastory.jp/spot/600006184", "https://www.city.uruma.lg.jp/1009007000/shisetsu/p000141.html"],
