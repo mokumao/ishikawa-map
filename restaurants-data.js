@@ -950,13 +950,14 @@ const restaurants = [
     address:   "沖縄県うるま市石川山城1468",
     hours:     "チェックイン 15:00〜 / チェックアウト 〜11:00",
     closed:    "年中無休",
-    note:      "旧「アンサ沖縄リゾート」。2024年12月にIHG・ANAホールディングスが運営受託契約を締結し、2025年初頭にリブランド（住所・電話番号098-963-0123は変更前と一致）。情報源②③（うるま市公式・おきなわ物語）は本改訂時点でリブランド前の情報のまま",
-    note_en:   "Formerly \"ANSA Okinawa Resort\". Rebranded in early 2025 after IHG and ANA Holdings signed a hotel management agreement in December 2024 (address and phone number unchanged). Sources 2-3 (city of Uruma, Okinawastory) still show the pre-rebrand name as of this update.",
+    note:      "旧「アンサ沖縄リゾート」。2024年12月にIHG・ANAホールディングスが運営受託契約を締結し、2025年初頭にリブランド（住所・電話番号098-963-0123は変更前と一致）。営業時間・定休日の出典（うるま市公式サイト）はリブランド前の情報のまま",
+    note_en:   "Formerly \"ANSA Okinawa Resort\". Rebranded in early 2025 after IHG and ANA Holdings signed a hotel management agreement in December 2024 (address and phone number unchanged). The source for hours/closed (city of Uruma) still shows the pre-rebrand name as of this update.",
     sourceUrl: "https://www.city.uruma.lg.jp/sportscamp/21522/index.html",
-    sourceUrls: ["https://www.sports-commission.okinawa/en/hotel/h-51403/", "https://www.city.uruma.lg.jp/sportscamp/21522/index.html", "https://www.okinawastory.jp/stay/600011975"],
+    sourceUrls: ["https://www.sports-commission.okinawa/en/hotel/h-51403/"],
     warn:      false,
     lat:       26.41774,
-    lng:       127.79255
+    lng:       127.79255,
+    website:   "https://www.ihg.com/crowneplaza/hotels/jp/ja/okinawa/okaou/hoteldetail"
   },
   {
     id:          42,
