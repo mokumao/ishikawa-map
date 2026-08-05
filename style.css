@@ -749,6 +749,7 @@ footer a:hover { text-decoration: underline; }
 .popup-table td.value { color: #37474f; }
 /* 営業時間・定休日・備考の出典表示（detail.htmlの.source-noteと同じ考え方） */
 .source-note { font-size: .68rem; color: #1565c0; font-weight: 400; margin-left: 4px; }
+.source-note a { color: inherit; text-decoration: underline; }
 .popup-warning {
   background: #fff8e1;
   border-left: 3px solid #ffa000;
