@@ -552,6 +552,7 @@
 
       // 修正履歴・最終確認日
       // revisionHistory: [{date:"YYYY-MM-DD", type:"ai"|"manager"|"owner", note:"..."}]
+      // データは古い順（配列末尾に追記）で保持し、表示のみ新しい順（reverse）にする
       // lastChecked と履歴の最新日付が一致する回だけ「前回より修正あり」として扱う
       const REVISION_TYPE_LABELS = { ai: 'AIによる自動修正', manager: '管理者による修正', owner: '店舗主による修正' };
       const revisionHistory = Array.isArray(r.revisionHistory) ? r.revisionHistory : [];
@@ -564,7 +565,7 @@
         ? `<div class="section">
              <div class="section-title">修正履歴</div>
              <ul class="revision-list">
-               ${revisionHistory.map(function (h) {
+               ${revisionHistory.slice().reverse().map(function (h) {
                  return `<li><span class="rev-date">(${h.date})</span><span class="rev-type">${REVISION_TYPE_LABELS[h.type] || h.type}</span>${h.note}</li>`;
                }).join('')}
              </ul>
