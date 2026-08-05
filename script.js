@@ -2234,6 +2234,13 @@ map.on('popupclose', function() { document.body.classList.remove('popup-open'); 
     pinching = true;
     startDist = touchDist(e.touches[0], e.touches[1]);
     startScale = scale;
+    // 2本指の中間点（＝つまんでいる場所）を拡大縮小の基準点にする
+    if (wrapperEl) {
+      var rect = wrapperEl.getBoundingClientRect();
+      var mx = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
+      var my = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
+      wrapperEl.style.transformOrigin = mx + 'px ' + my + 'px';
+    }
     e.stopPropagation();
   }
   function onTouchMove(e) {
@@ -2256,7 +2263,7 @@ map.on('popupclose', function() { document.body.classList.remove('popup-open'); 
     scale = 1;
     pinching = false;
     wrapperEl.style.transform = 'scale(1)';
-    wrapperEl.style.transformOrigin = 'center bottom';
+    wrapperEl.style.transformOrigin = 'center center';
     wrapperEl.addEventListener('touchstart', onTouchStart, { passive: true });
     wrapperEl.addEventListener('touchmove', onTouchMove, { passive: false });
     wrapperEl.addEventListener('touchend', onTouchEnd, { passive: true });
