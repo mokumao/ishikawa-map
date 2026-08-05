@@ -2220,27 +2220,40 @@ map.on('popupclose', function() { document.body.classList.remove('popup-open'); 
 // そこにscaleを足すと位置がズレる（マーカーアイコンの拡大演出と同じ理由）。
 // 内側の .leaflet-popup-content-wrapper（Leafletが位置制御に使わない要素）を
 // スケールし、ピンチ中はstopPropagationで地図本体のズームに伝播させない。
+//
+// transform-origin をジェスチャーのたびに書き換える方式は、複数回ピンチを
+// 繰り返すと基準点のズレが蓄積して画面外に飛ぶ不具合があった。
+// そのため transform-origin は常に固定(0 0)にし、代わりに
+// 「translate(tx,ty) scale(s)」の tx/ty を毎フレーム計算し直す方式に変更。
+// これは「つまんだ場所を常に指の下に保つ」という標準的なピンチズームの計算式で、
+// 誤差が蓄積しない。
 (function () {
   var MIN_SCALE = 0.7, MAX_SCALE = 2.5;
-  var scale = 1, startDist = 0, startScale = 1, pinching = false;
+  var scale = 1, tx = 0, ty = 0;
+  var startScale = 1, startTx = 0, startTy = 0, startDist = 0;
+  var localPinchX = 0, localPinchY = 0; // つまんだ点の「無変形時」の座標
+  var baseLeft = 0, baseTop = 0;        // 無変形時のラッパーの画面上位置
+  var pinching = false;
   var wrapperEl = null;
 
   function touchDist(t0, t1) {
     var dx = t0.clientX - t1.clientX, dy = t0.clientY - t1.clientY;
     return Math.sqrt(dx * dx + dy * dy);
   }
+  function applyTransform() {
+    if (wrapperEl) wrapperEl.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+  }
   function onTouchStart(e) {
-    if (e.touches.length !== 2) return;
+    if (e.touches.length !== 2 || !wrapperEl) return;
     pinching = true;
     startDist = touchDist(e.touches[0], e.touches[1]);
     startScale = scale;
-    // 2本指の中間点（＝つまんでいる場所）を拡大縮小の基準点にする
-    if (wrapperEl) {
-      var rect = wrapperEl.getBoundingClientRect();
-      var mx = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
-      var my = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
-      wrapperEl.style.transformOrigin = mx + 'px ' + my + 'px';
-    }
+    startTx = tx;
+    startTy = ty;
+    var midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+    var midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    localPinchX = (midX - baseLeft - startTx) / startScale;
+    localPinchY = (midY - baseTop - startTy) / startScale;
     e.stopPropagation();
   }
   function onTouchMove(e) {
@@ -2248,9 +2261,13 @@ map.on('popupclose', function() { document.body.classList.remove('popup-open'); 
     e.preventDefault();
     e.stopPropagation();
     var d = touchDist(e.touches[0], e.touches[1]);
-    var next = startScale * (d / startDist);
-    scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, next));
-    if (wrapperEl) wrapperEl.style.transform = 'scale(' + scale + ')';
+    var newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, startScale * (d / startDist)));
+    var midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+    var midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    scale = newScale;
+    tx = midX - baseLeft - newScale * localPinchX;
+    ty = midY - baseTop - newScale * localPinchY;
+    applyTransform();
   }
   function onTouchEnd(e) {
     if (e.touches.length < 2) pinching = false;
@@ -2260,10 +2277,13 @@ map.on('popupclose', function() { document.body.classList.remove('popup-open'); 
     var popupEl = e.popup.getElement();
     wrapperEl = popupEl && popupEl.querySelector('.leaflet-popup-content-wrapper');
     if (!wrapperEl) return;
-    scale = 1;
+    scale = 1; tx = 0; ty = 0;
     pinching = false;
-    wrapperEl.style.transform = 'scale(1)';
-    wrapperEl.style.transformOrigin = 'center center';
+    wrapperEl.style.transformOrigin = '0 0';
+    wrapperEl.style.transform = 'translate(0px,0px) scale(1)';
+    var rect = wrapperEl.getBoundingClientRect();
+    baseLeft = rect.left;
+    baseTop = rect.top;
     wrapperEl.addEventListener('touchstart', onTouchStart, { passive: true });
     wrapperEl.addEventListener('touchmove', onTouchMove, { passive: false });
     wrapperEl.addEventListener('touchend', onTouchEnd, { passive: true });
