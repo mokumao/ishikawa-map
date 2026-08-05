@@ -135,6 +135,7 @@
     }
     .warn-text { color: #e65100; }
     .source-note { font-size: 0.72rem; color: #1565c0; font-weight: 400; margin-left: 4px; }
+    .source-note a { color: inherit; text-decoration: underline; }
     .info-note { margin-top: 10px; font-size: 0.78rem; color: #1565c0; line-height: 1.5; }
 
     /* ── 警告ボックス ── */
@@ -477,7 +478,7 @@
           return `<span class="warn-text">⚠️ ${html}</span>`;
         }
         const label = sourceSiteLabel(sourceUrl);
-        return label ? `${html}<span class="source-note">（情報源：${label}）</span>` : html;
+        return label ? `${html}<span class="source-note"><a href="${sourceUrl}" target="_blank" rel="noopener">（情報源：${label}）</a></span>` : html;
       }
 
       // 営業時間整形
