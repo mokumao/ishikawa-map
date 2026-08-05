@@ -233,6 +233,32 @@
       font-style: italic;
     }
 
+    /* ── 修正履歴 ── */
+    .revision-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .revision-list li {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: #444;
+      border-left: 3px solid #cfd8dc;
+      padding-left: 10px;
+    }
+    .rev-date { color: #888; font-weight: 700; margin-right: 4px; }
+    .rev-type {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #1565c0;
+      background: #e3f2fd;
+      border-radius: 4px;
+      padding: 1px 6px;
+      margin-right: 4px;
+    }
+
     /* ── Googleマップボタン ── */
     .gmap-btn {
       display: flex;
@@ -329,7 +355,7 @@
     </div>
   </div>
 
-  <script src="restaurants-data.js?v=20260805f"></script>
+  <script src="restaurants-data.js?v=20260805g"></script>
   <script>
     (function () {
       // IDパラメータ取得（クエリ文字列 ?id=N 形式）
@@ -524,6 +550,27 @@
           : `<p class="empty-note">現在、詳細情報は準備中です。</p>`}
       </div>`;
 
+      // 修正履歴・最終確認日
+      // revisionHistory: [{date:"YYYY-MM-DD", type:"ai"|"manager"|"owner", note:"..."}]
+      // lastChecked と履歴の最新日付が一致する回だけ「前回より修正あり」として扱う
+      const REVISION_TYPE_LABELS = { ai: 'AIによる自動修正', manager: '管理者による修正', owner: '店舗主による修正' };
+      const revisionHistory = Array.isArray(r.revisionHistory) ? r.revisionHistory : [];
+      const lastRevision = revisionHistory.length > 0 ? revisionHistory[revisionHistory.length - 1] : null;
+      const hasChangeThisCheck = !!(lastRevision && r.lastChecked && lastRevision.date === r.lastChecked);
+      const lastCheckedNote = r.lastChecked
+        ? `<p class="info-note">最終情報確認または修正日：${r.lastChecked}（前回より${hasChangeThisCheck ? '修正あり' : '修正なし'}）</p>`
+        : '';
+      const historySection = revisionHistory.length > 0
+        ? `<div class="section">
+             <div class="section-title">修正履歴</div>
+             <ul class="revision-list">
+               ${revisionHistory.map(function (h) {
+                 return `<li><span class="rev-date">(${h.date})</span><span class="rev-type">${REVISION_TYPE_LABELS[h.type] || h.type}</span>${h.note}</li>`;
+               }).join('')}
+             </ul>
+           </div>`
+        : '';
+
       // 写真セクション
       let photosSection = '';
       if (r.photos && r.photos.length > 0) {
@@ -568,6 +615,7 @@
             </tr>
             ${!r.warn ? `<tr><td class="lbl">備考</td><td>${noteHtml}</td></tr>` : ''}
           </table>
+          ${lastCheckedNote}
           <p class="info-note">営業時間・定休日・備考は、AIが情報源をもとに自動収集したものです。詳細は情報源、または各店舗に直接ご確認ください。</p>
           <p class="info-note">店舗番号：${storeNo}</p>
           <p class="info-note">掲載内容の修正・お問い合わせの際は、店舗番号をお知らせください。</p>
@@ -589,6 +637,9 @@
 
         <!-- 写真 -->
         ${photosSection}
+
+        <!-- 修正履歴 -->
+        ${historySection}
       `;
     })();
 
