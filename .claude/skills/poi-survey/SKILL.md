@@ -261,6 +261,23 @@ likely → 内容次第で掲載（noteは控えめに）。uncertain/not_found 
 表示時に`detail.html`内で計算している（`code`とは別物）。新規追加時に`code`さえ正しく振れば、
 表示用番号は自動的に正しくなる。
 
+**情報源が複数ある場合（`sourceUrls`、任意）**
+通常は`sourceUrl`（単一）だけでよいが、ある店舗について食べログ・個人サイト等
+**複数の情報源を読者に案内したい場合**は、`sourceUrls`（配列）を追加すると
+`detail.html`のリンク欄に「情報源①：食べログ」「情報源②：〇〇」のように
+番号付きで自動的に並べて表示される（2026-08-05導入。1件なら`sourceUrl`のまま
+でよく、`sourceUrls`は無くて構わない）。
+
+```javascript
+sourceUrls: ["https://tabelog.com/...", "https://個人サイトのURL/..."],
+```
+
+- サイト名（①②の後ろの文言）は`sourceUrl`と同じくドメインから自動判定される
+  （`THIRD_PARTY_SITE_LABELS`等に無いドメインはホスト名がそのまま出る）
+- `sourceUrl`と`sourceUrls`を両方書いた場合は`sourceUrls`が優先される
+- Step 3.5（営業時間・定休日の出典）で使う`sourceUrl`は従来通り単一のまま
+  （本文中の出典表示は変更なし。`sourceUrls`はリンク欄の情報源ボタンのみに影響）
+
 ```javascript
 // ※以下N件は YYYY-MM-DD にOSM抽出＋公式店舗検索等とのウェブ二重照合で追加
 {
