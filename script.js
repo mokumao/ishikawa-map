@@ -2215,6 +2215,59 @@ map.on('popupopen', function(e) {
 map.on('popupopen',  function() { document.body.classList.add('popup-open');    });
 map.on('popupclose', function() { document.body.classList.remove('popup-open'); });
 
+// ── 店舗ポップアップを2本指ピンチで拡大縮小 ─────────────────────────
+// Leafletは .leaflet-popup 自体にtransform:translate3d()で位置を設定しているため、
+// そこにscaleを足すと位置がズレる（マーカーアイコンの拡大演出と同じ理由）。
+// 内側の .leaflet-popup-content-wrapper（Leafletが位置制御に使わない要素）を
+// スケールし、ピンチ中はstopPropagationで地図本体のズームに伝播させない。
+(function () {
+  var MIN_SCALE = 0.7, MAX_SCALE = 2.5;
+  var scale = 1, startDist = 0, startScale = 1, pinching = false;
+  var wrapperEl = null;
+
+  function touchDist(t0, t1) {
+    var dx = t0.clientX - t1.clientX, dy = t0.clientY - t1.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+  function onTouchStart(e) {
+    if (e.touches.length !== 2) return;
+    pinching = true;
+    startDist = touchDist(e.touches[0], e.touches[1]);
+    startScale = scale;
+    e.stopPropagation();
+  }
+  function onTouchMove(e) {
+    if (!pinching || e.touches.length !== 2) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var d = touchDist(e.touches[0], e.touches[1]);
+    var next = startScale * (d / startDist);
+    scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, next));
+    if (wrapperEl) wrapperEl.style.transform = 'scale(' + scale + ')';
+  }
+  function onTouchEnd(e) {
+    if (e.touches.length < 2) pinching = false;
+  }
+
+  map.on('popupopen', function (e) {
+    var popupEl = e.popup.getElement();
+    wrapperEl = popupEl && popupEl.querySelector('.leaflet-popup-content-wrapper');
+    if (!wrapperEl) return;
+    scale = 1;
+    pinching = false;
+    wrapperEl.style.transform = 'scale(1)';
+    wrapperEl.style.transformOrigin = 'center bottom';
+    wrapperEl.addEventListener('touchstart', onTouchStart, { passive: true });
+    wrapperEl.addEventListener('touchmove', onTouchMove, { passive: false });
+    wrapperEl.addEventListener('touchend', onTouchEnd, { passive: true });
+    wrapperEl.addEventListener('touchcancel', onTouchEnd, { passive: true });
+  });
+  map.on('popupclose', function () {
+    wrapperEl = null;
+    pinching = false;
+  });
+})();
+
 // ── 地図操作時にヘッダーを自動非表示（スマホのみ） ─────────────────────
 // ドラッグ・ズーム開始時にヘッダーを折りたたむ
 if ('ontouchstart' in window) {
