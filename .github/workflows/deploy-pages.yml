@@ -35,3 +35,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          # デフォルトは10分でタイムアウトし強制キャンセルされる。
+          # このサイトはデプロイが完了までに時間がかかる状態が続いているため、
+          # 早すぎる打ち切りを避けて30分まで待つように延長する（2026-08-07）
+          timeout: 1800000
