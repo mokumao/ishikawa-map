@@ -34,6 +34,7 @@ var TRANSLATIONS = {
     'popup.hours':         '営業時間',
     'popup.closed':        '定休日',
     'popup.note':          '備考',
+    'popup.noteEmpty':     'Googleマップや詳細を参照',
     'popup.gmap':          'Googleマップで見る',
     'popup.detail':        '詳細を見る',
     'count.results':       '{n} 件表示中',
@@ -77,6 +78,7 @@ var TRANSLATIONS = {
     'popup.hours':         'Hours',
     'popup.closed':        'Closed',
     'popup.note':          'Note',
+    'popup.noteEmpty':     'See Google Maps or the details page',
     'popup.gmap':          'Open in Google Maps',
     'popup.detail':        'View Details',
     'count.results':       '{n} results',
@@ -1607,7 +1609,7 @@ function makePopup(r) {
   const closedHtml = (r.closed.includes("要確認"))
     ? `<span style="color:#e65100">${closedVal}</span>`
     : closedVal;
-  const noteVal  = rNote(r) + (r.note ? srcNote : "");
+  const noteVal  = r.note ? (rNote(r) + srcNote) : t('popup.noteEmpty');
   const noteHtml = r.warn
     ? `<div class="popup-warning">⚠️ ${noteVal}</div>`
     : `<tr>

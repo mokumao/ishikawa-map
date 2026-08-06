@@ -355,7 +355,7 @@
     </div>
   </div>
 
-  <script src="restaurants-data.js?v=20260806d"></script>
+  <script src="restaurants-data.js?v=20260806e"></script>
   <script>
     (function () {
       // IDパラメータ取得（クエリ文字列 ?id=N 形式）
@@ -514,7 +514,8 @@
       const closedHtml = fieldWithSource(r.closed, r.sourceUrl);
 
       // 備考整形（従来は出典表示が無かった）
-      const noteHtml = r.note ? fieldWithSource(r.note, r.sourceUrl) : r.note;
+      // 備考が空の場合は「情報なし」に見えないよう、Googleマップ等への案内を表示する
+      const noteHtml = r.note ? fieldWithSource(r.note, r.sourceUrl) : 'Googleマップや公式サイト、情報源をご確認ください';
 
       // SNS・リンクボタン
       const links = [];
