@@ -118,12 +118,24 @@ Googleマップ・NTTタウンページの自動収集は規約上禁止（人�
 
 ## GitHub Pagesのデプロイについて
 
+- **配信方式（2026-08-06変更）：** 以前は「ブランチから直接デプロイ（legacy／Jekyllベース）」
+  方式だったが、このサイト固有のデプロイキューがGitHub側で詰まり続ける不具合が発生
+  （buildは毎回成功するが、deployが"deployment_queued"のままタイムアウト。複数回の
+  リトライ・Pages設定リセットでも解消せず）。
+  `.github/workflows/deploy-pages.yml`（`actions/upload-pages-artifact` +
+  `actions/deploy-pages` を使用）を新設し、GitHub側の設定（Settings → Pages → Source）
+  も「GitHub Actions」に変更して解決した。以後はこのワークフロー経由でデプロイされる
+  （配信内容・URLは従来と同じ。サイト訪問者への影響はない）。
 - **デプロイが原因不明で失敗することがある**（ビルドは成功、デプロイのみ失敗）。
   その場合は空コミットで再トリガーする：
   ```bash
   git commit --allow-empty -m "chore: re-trigger pages deployment"
   git push origin main
   ```
+  それでも解決しない場合は、GitHub Pages API（`gh api repos/mokumao/ishikawa-map/pages`）で
+  `status`が`errored`になっていないか確認する。`.github/workflows/`配下のワークフロー
+  ファイルをpushするには、通常のgit認証（PAT）に`workflow`スコープが必要な点に注意
+  （無い場合は`gh auth token`を使って一時的にpushする）。
 - 反映確認は以下で行う（該当ファイルの `?v=` が新しい値になっているか確認）：
   ```bash
   curl -s "https://mokumao.github.io/ishikawa-map/index.html" | grep -o 'script.js?v=[0-9a-z]*'
