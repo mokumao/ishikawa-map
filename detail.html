@@ -301,12 +301,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 9px 4px;
-      font-size: 0.82rem;
+      padding: 2px 4px;
+      font-size: 1.15rem;
       font-weight: 700;
       font-family: inherit;
       background: #fff;
-      color: #546e7a;
+      color: #222;
       border: 2px solid #e53935;
       border-radius: 7px;
       text-decoration: none;
@@ -314,6 +314,11 @@
       -webkit-tap-highlight-color: transparent;
     }
     .view-toggle-btn:hover { background: #ffebee; }
+    .view-toggle-btn.active {
+      background: #e53935;
+      color: #fff;
+    }
+    .view-toggle-spacer { flex: 1; }
 
     /* ── フッター ── */
     .detail-footer {
@@ -350,8 +355,9 @@
   <!-- 地図／一覧 切り替え（画面下部に固定） -->
   <div class="view-toggle-bar">
     <div class="view-toggle">
-      <a href="index.html?tab=map" class="view-toggle-btn" id="mapToggleBtn">🗺 地図</a>
-      <a href="index.html?tab=list" class="view-toggle-btn">📋 一覧</a>
+      <a href="index.html?tab=map" class="view-toggle-btn" id="mapToggleBtn">地図</a>
+      <span class="view-toggle-spacer"></span>
+      <a href="index.html?tab=list" class="view-toggle-btn">一覧</a>
     </div>
   </div>
 
