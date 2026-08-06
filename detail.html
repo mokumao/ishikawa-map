@@ -515,14 +515,16 @@
 
       // 備考整形（従来は出典表示が無かった）
       // 備考が空の場合は「情報なし」に見えないよう、Googleマップ等への案内を表示する
-      const noteHtml = r.note ? fieldWithSource(r.note, r.sourceUrl) : 'Googleマップや公式サイト、情報源をご確認ください';
+      const noteHtml = r.note ? fieldWithSource(r.note, r.sourceUrl) : 'Googleマップやウェブサイト、情報源をご確認ください';
 
       // SNS・リンクボタン
       const links = [];
       if (r.twitter)   links.push(`<a href="${r.twitter}"   class="link-btn link-x"   target="_blank" rel="noopener"><span class="icon">𝕏</span> X（Twitter）</a>`);
       if (r.instagram) links.push(`<a href="${r.instagram}" class="link-btn link-ig"  target="_blank" rel="noopener"><span class="icon">📸</span> Instagram</a>`);
       if (r.youtube)   links.push(`<a href="${r.youtube}"   class="link-btn link-yt"  target="_blank" rel="noopener"><span class="icon">▶</span> YouTube</a>`);
-      if (r.website)   links.push(`<a href="${r.website}"   class="link-btn link-web" target="_blank" rel="noopener">公式サイト</a>`);
+      // 「公式サイト」と断定表示しない（運営者本人による公開等で確認が取れていない
+      // 限り、中立的な「ウェブサイト」と表示する。sourceNoteの方針と統一）
+      if (r.website)   links.push(`<a href="${r.website}"   class="link-btn link-web" target="_blank" rel="noopener">ウェブサイト</a>`);
       // 情報源ボタン：通常は sourceUrl（単一）のみだが、複数の情報源がある店舗は
       // sourceUrls（配列）を使うと「情報源①：〇〇」「情報源②：〇〇」と番号付きで並べて表示する
       const sourceList = Array.isArray(r.sourceUrls) && r.sourceUrls.length > 0
