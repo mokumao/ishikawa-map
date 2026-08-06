@@ -124,10 +124,14 @@ Googleマップ・NTTタウンページの自動収集は規約上禁止（人�
   リトライ・Pages設定リセットでも解消せず）。
   `.github/workflows/deploy-pages.yml`（`actions/upload-pages-artifact` +
   `actions/deploy-pages` を使用）を新設し、GitHub側の設定（Settings → Pages → Source）
-  も「GitHub Actions」に変更して解決した。以後はこのワークフロー経由でデプロイされる
+  も「GitHub Actions」に変更した。以後はこのワークフロー経由でデプロイされる
   （配信内容・URLは従来と同じ。サイト訪問者への影響はない）。
-- **デプロイが原因不明で失敗することがある**（ビルドは成功、デプロイのみ失敗）。
-  その場合は空コミットで再トリガーする：
+- **デプロイ自体に時間がかかることがある（原因不明・2026-08-06〜）。**
+  `deploy-pages`のデフォルトタイムアウト（10分）内に完了せず、強制キャンセルされて
+  失敗扱いになるケースが頻発したため、`deploy-pages.yml`の`timeout`を30分
+  （`1800000`ミリ秒）に延長済み。単に待てば成功することが多いので、失敗したら
+  まずAction実行画面で「deployment_in_progress」のまま時間切れになっていないか
+  確認し、空コミットで再トリガーする：
   ```bash
   git commit --allow-empty -m "chore: re-trigger pages deployment"
   git push origin main
