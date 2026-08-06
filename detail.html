@@ -522,7 +522,7 @@
       if (r.twitter)   links.push(`<a href="${r.twitter}"   class="link-btn link-x"   target="_blank" rel="noopener"><span class="icon">𝕏</span> X（Twitter）</a>`);
       if (r.instagram) links.push(`<a href="${r.instagram}" class="link-btn link-ig"  target="_blank" rel="noopener"><span class="icon">📸</span> Instagram</a>`);
       if (r.youtube)   links.push(`<a href="${r.youtube}"   class="link-btn link-yt"  target="_blank" rel="noopener"><span class="icon">▶</span> YouTube</a>`);
-      if (r.website)   links.push(`<a href="${r.website}"   class="link-btn link-web" target="_blank" rel="noopener"><span class="icon">🌐</span> 公式サイト</a>`);
+      if (r.website)   links.push(`<a href="${r.website}"   class="link-btn link-web" target="_blank" rel="noopener">公式サイト</a>`);
       // 情報源ボタン：通常は sourceUrl（単一）のみだが、複数の情報源がある店舗は
       // sourceUrls（配列）を使うと「情報源①：〇〇」「情報源②：〇〇」と番号付きで並べて表示する
       const sourceList = Array.isArray(r.sourceUrls) && r.sourceUrls.length > 0
@@ -533,7 +533,7 @@
         const text = sourceList.length > 1
           ? `情報源${CIRCLED_NUMS[i] || (i + 1)}：${sourceSiteLabel(url)}`
           : '情報源';
-        links.push(`<a href="${url}" class="link-btn link-source" target="_blank" rel="noopener"><span class="icon">🔗</span> ${text}</a>`);
+        links.push(`<a href="${url}" class="link-btn link-source" target="_blank" rel="noopener">${text}</a>`);
       });
 
       const linksSection = links.length > 0
