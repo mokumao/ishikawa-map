@@ -290,6 +290,11 @@
       box-shadow: 0 -2px 8px rgba(0,0,0,.08);
       padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
       z-index: 200;
+      /* iOS Safari等でスクロール中にfixed要素がわずかに追従して見える問題への対策。
+         独立した合成レイヤーを強制し、スクロールに巻き込まれず正しく固定させる */
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      will-change: transform;
     }
     .view-toggle {
       display: flex;
