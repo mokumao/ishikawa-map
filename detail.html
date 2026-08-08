@@ -377,7 +377,7 @@
     </div>
   </div>
 
-  <script src="restaurants-data.js?v=20260806e"></script>
+  <script src="restaurants-data.js?v=20260808a"></script>
   <script>
     (function () {
       // IDパラメータ取得（クエリ文字列 ?id=N 形式）
@@ -585,7 +585,7 @@
       const hasChangeThisCheck = !!(lastRevision && r.lastChecked && lastRevision.date === r.lastChecked);
       const lastCheckedNote = r.lastChecked
         ? `<p class="info-note last-checked">最終情報確認または修正日：${r.lastChecked}（前回より${hasChangeThisCheck ? '修正あり' : '修正なし'}）</p>`
-        : '';
+        : `<p class="info-note last-checked">最終情報確認または修正日：未確認</p>`;
       const historySection = revisionHistory.length > 0
         ? `<div class="section">
              <div class="section-title">修正履歴</div>
