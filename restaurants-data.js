@@ -172,10 +172,13 @@ const restaurants = [
     address:   "沖縄県うるま市石川伊波1515-32",
     hours:     "11:11〜15:00 / 17:00〜23:00",
     closed:    "火曜日",
-    note:      "食べログに営業状況「未確認」の記載あり。訪問前に電話確認を推奨（098-988-5863）",
-    note_en:   "Listed as 'unconfirmed' on Tabelog. Recommended to call ahead before visiting (098-988-5863).",
+    note:      "食べログに営業状況「未確認」の記載あり",
+    note_en:   "Listed as 'unconfirmed' on Tabelog.",
     sourceUrl: "https://tabelog.com/okinawa/A4703/A470302/47031510/",
     sourceUrls: ["https://tabelog.com/okinawa/A4703/A470302/47031510/", "https://ryukyushimpo.jp/style/gourmet/entry-2823371.html"],
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "備考「訪問前に電話確認を推奨（098-988-5863）」を削除（読者への行動の呼びかけ・変更されうる電話番号の転記は行わない方針としたため）" }
+    ],
     warn:      true,
     lat:       26.433345,
     lng:       127.808541,
@@ -336,12 +339,13 @@ const restaurants = [
     address:   "沖縄県うるま市石川白浜1丁目3-5",
     hours:     "17:00〜翌3:00",
     closed:    "要確認",
-    note:      "飲み放題プランあり。訪問前に営業時間を確認推奨",
-    note_en:   "All-you-can-drink plans available. Check hours before visiting.",
+    note:      "飲み放題プランあり",
+    note_en:   "All-you-can-drink plans available.",
     sourceUrl: "https://tabelog.com/okinawa/A4703/A470302/47033173/",
     sourceUrls: ["https://tabelog.com/okinawa/A4703/A470302/47033173/", "https://hitosara.com/0031728796/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "ai", note: "備考「セルフスタイルの」「（990円〜）」「が人気」を削除（出典2件のいずれにも確認できず、口コミでは980円という近いが不一致な金額のみ見つかったため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「セルフスタイルの」「（990円〜）」「が人気」を削除（出典2件のいずれにも確認できず、口コミでは980円という近いが不一致な金額のみ見つかったため）" },
+      { date: "2026-08-08", type: "ai", note: "備考「訪問前に営業時間を確認推奨」を削除（読者への行動の呼びかけは書かない方針としたため）" }
     ],
     warn:      true,
     lat:       26.427654,
@@ -905,10 +909,13 @@ const restaurants = [
     address:   "沖縄県うるま市石川嘉手苅141-6",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "カーエネクス系列。電話098-965-5565（営業時間・定休日は要確認）",
-    note_en:   "Carenex brand station. Tel 098-965-5565 (please confirm hours and holidays before visiting).",
+    note:      "カーエネクス系列（営業時間・定休日は要確認）",
+    note_en:   "Carenex brand station (please confirm hours and holidays before visiting).",
     sourceUrl: "https://oki-ss.or.jp/?page_id=167",
     sourceUrls: ["https://oki-ss.or.jp/?page_id=167", "https://e-nenpi.com/gs/shop/47141/", "https://gasoline-gift.zensekiren.or.jp/station/4700007001"],
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "備考から電話番号「098-965-5565」を削除（変更されうる個別の連絡先情報は転記しない方針としたため）" }
+    ],
     warn:      true,
     lat:       26.420632,
     lng:       127.813352,
@@ -927,10 +934,13 @@ const restaurants = [
     address:   "沖縄県うるま市石川431",
     hours:     "7:00〜20:00",
     closed:    "年中無休",
-    note:      "出光系列アポロステーション。セルフ式。電話098-964-2025",
-    note_en:   "Idemitsu apollostation brand, self-service. Tel 098-964-2025.",
+    note:      "出光系列アポロステーション。セルフ式",
+    note_en:   "Idemitsu apollostation brand, self-service.",
     sourceUrl: "https://map.idemitsu.com/b/a/info/0000019740/",
     sourceUrls: ["https://map.idemitsu.com/b/a/info/0000019740/", "https://e-nenpi.com/gs/map/47033", "https://oki-ss.or.jp/?page_id=167"],
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "備考から電話番号「098-964-2025」を削除（変更されうる個別の連絡先情報は転記しない方針としたため）" }
+    ],
     warn:      false,
     lat:       26.424717,
     lng:       127.825160,
@@ -947,12 +957,13 @@ const restaurants = [
     address:   "沖縄県うるま市石川東山本町2-4-1",
     hours:     "平日 7:00〜21:00 / 日・祝 8:00〜20:00",
     closed:    "年中無休",
-    note:      "カーエネクス系列。フルサービス（洗車・オイル交換等対応）。電話098-964-2626",
-    note_en:   "Carenex brand, full-service (car wash, oil change, etc.). Tel 098-964-2626.",
+    note:      "カーエネクス系列。フルサービス（洗車・オイル交換等対応）",
+    note_en:   "Carenex brand, full-service (car wash, oil change, etc.).",
     sourceUrl: "https://map.yahoo.co.jp/v3/place/5mvXtr9ABzU",
     sourceUrls: ["https://map.yahoo.co.jp/v3/place/5mvXtr9ABzU", "https://e-nenpi.com/gs/shop/47016/", "https://oki-ss.or.jp/?page_id=167"],
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "営業時間を「7:00〜21:00」から「平日 7:00〜21:00 / 日・祝 8:00〜20:00」に修正（出典e-nenpi.comに日曜・祝日は時間が異なる旨の記載があったため）" }
+      { date: "2026-08-08", type: "ai", note: "営業時間を「7:00〜21:00」から「平日 7:00〜21:00 / 日・祝 8:00〜20:00」に修正（出典e-nenpi.comに日曜・祝日は時間が異なる旨の記載があったため）" },
+      { date: "2026-08-08", type: "ai", note: "備考から電話番号「098-964-2626」を削除（変更されうる個別の連絡先情報は転記しない方針としたため）" }
     ],
     warn:      false,
     lat:       26.434840,
