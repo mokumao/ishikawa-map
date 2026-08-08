@@ -17,13 +17,26 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* body自体はスクロールさせず、中の.page-scrollだけを内部スクロールさせる
+       構造にする（index.htmlと同じ方式）。position:fixedの下部バーを
+       モバイルでスクロールに追従して動かなくするための根本対策
+       （2026-08-08。100dvh単体・GPU合成レイヤー指定では解決しなかったため） */
+    html { height: 100%; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif;
       background: #f5f5f5;
       color: #222;
-      min-height: 100vh;
-      min-height: 100dvh; /* モバイルでアドレスバー開閉時に下部固定バーが動くのを防ぐ */
-      padding-bottom: 76px;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .page-scroll {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* ── ヘッダー ── */
@@ -279,22 +292,16 @@
     }
     .gmap-btn:hover { background: #c8e6c9; }
 
-    /* ── 地図／一覧 切り替えボタン（画面下部に固定） ── */
+    /* ── 地図／一覧 切り替えボタン（画面下部） ──
+       position:fixedをやめ、body（flex-column）の最後の子要素として
+       常時配置する。中身は.page-scrollが内部スクロールするので、
+       このバー自体はスクロールの影響を受けず、モバイルでもズレない */
     .view-toggle-bar {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      flex-shrink: 0;
       background: #fff;
       border-top: 1px solid #e0e0e0;
       box-shadow: 0 -2px 8px rgba(0,0,0,.08);
       padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
-      z-index: 200;
-      /* iOS Safari等でスクロール中にfixed要素がわずかに追従して見える問題への対策。
-         独立した合成レイヤーを強制し、スクロールに巻き込まれず正しく固定させる */
-      transform: translateZ(0);
-      -webkit-transform: translateZ(0);
-      will-change: transform;
     }
     .view-toggle {
       display: flex;
@@ -345,20 +352,22 @@
 </head>
 <body>
 
-  <main class="detail-card" id="detailCard">
-    <div class="error-box"><p>読み込み中…</p></div>
-  </main>
+  <div class="page-scroll">
+    <main class="detail-card" id="detailCard">
+      <div class="error-box"><p>読み込み中…</p></div>
+    </main>
+
+    <footer class="detail-footer">
+      🌊 うるま市石川 飲食店マップ &nbsp;|&nbsp; 掲載情報は調査時点のものです
+    </footer>
+  </div>
 
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightboxClose">✕</button>
     <img src="" alt="" id="lightboxImg">
   </div>
 
-  <footer class="detail-footer">
-    🌊 うるま市石川 飲食店マップ &nbsp;|&nbsp; 掲載情報は調査時点のものです
-  </footer>
-
-  <!-- 地図／一覧 切り替え（画面下部に固定） -->
+  <!-- 地図／一覧 切り替え（画面下部） -->
   <div class="view-toggle-bar">
     <div class="view-toggle">
       <a href="index.html?tab=map" class="view-toggle-btn" id="mapToggleBtn">地図</a>
