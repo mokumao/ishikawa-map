@@ -584,7 +584,7 @@
       const lastRevision = revisionHistory.length > 0 ? revisionHistory[revisionHistory.length - 1] : null;
       const hasChangeThisCheck = !!(lastRevision && r.lastChecked && lastRevision.date === r.lastChecked);
       const lastCheckedNote = r.lastChecked
-        ? `<p class="info-note last-checked">最終情報確認または修正日：${r.lastChecked}（前回より${hasChangeThisCheck ? '修正あり' : '修正なし'}）</p>`
+        ? `<p class="info-note last-checked">最終情報確認または修正日：${r.lastChecked}（前回より${hasChangeThisCheck ? '修正あり。ページ下を参照。' : '修正なし'}）</p>`
         : `<p class="info-note last-checked">最終情報確認または修正日：未確認</p>`;
       const historySection = revisionHistory.length > 0
         ? `<div class="section">
