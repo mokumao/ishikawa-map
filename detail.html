@@ -152,6 +152,7 @@
     .source-note a { color: inherit; text-decoration: underline; }
     .info-note { margin-top: 10px; font-size: 0.78rem; color: #1565c0; line-height: 1.5; }
     .info-note.last-checked { color: #c62828; }
+    .info-note.store-no { color: #2e7d32; }
 
     /* ── 警告ボックス ── */
     .warn-box {
@@ -643,8 +644,8 @@
           </table>
           ${lastCheckedNote}
           <p class="info-note">営業時間・定休日・備考は、AIが情報源をもとに自動収集したものです。詳細は情報源、または各店舗に直接ご確認ください。</p>
-          <p class="info-note">店舗番号：${storeNo}</p>
-          <p class="info-note">掲載内容の修正・お問い合わせの際は、店舗番号をお知らせください。</p>
+          <p class="info-note store-no">店舗番号：${storeNo}</p>
+          <p class="info-note store-no">掲載内容の修正・お問い合わせの際は、店舗番号をお知らせください。</p>
         </div>
 
         <!-- 警告 -->
