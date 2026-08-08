@@ -889,10 +889,13 @@ const restaurants = [
     address:   "沖縄県うるま市石川伊波309",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "営業時間・定休日は要確認",
-    note_en:   "Please confirm hours and holidays before visiting.",
+    note:      "",
+    note_en:   "",
     sourceUrl: "https://navitime.co.jp/",
     sourceUrls: ["https://navitime.co.jp/", "https://e-nenpi.com/gs/shop/47331/", "https://oki-ss.or.jp/?page_id=167"],
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+    ],
     warn:      true,
     lat:       26.414359,
     lng:       127.823418,
@@ -909,12 +912,13 @@ const restaurants = [
     address:   "沖縄県うるま市石川嘉手苅141-6",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "カーエネクス系列（営業時間・定休日は要確認）",
-    note_en:   "Carenex brand station (please confirm hours and holidays before visiting).",
+    note:      "カーエネクス系列",
+    note_en:   "Carenex brand station.",
     sourceUrl: "https://oki-ss.or.jp/?page_id=167",
     sourceUrls: ["https://oki-ss.or.jp/?page_id=167", "https://e-nenpi.com/gs/shop/47141/", "https://gasoline-gift.zensekiren.or.jp/station/4700007001"],
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考から電話番号「098-965-5565」を削除（変更されうる個別の連絡先情報は転記しない方針としたため）" }
+      { date: "2026-08-08", type: "ai", note: "備考から電話番号「098-965-5565」を削除（変更されうる個別の連絡先情報は転記しない方針としたため）" },
+      { date: "2026-08-08", type: "ai", note: "備考「（営業時間・定休日は要確認）」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
     ],
     warn:      true,
     lat:       26.420632,
@@ -1195,11 +1199,12 @@ const restaurants = [
     address:   "沖縄県うるま市石川伊波861",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "普通科。営業時間・定休日は要確認",
+    note:      "普通科",
     sourceUrl: "https://www.ishikawa-h.open.ed.jp/",
     sourceUrls: ["https://www.ishikawa-h.open.ed.jp/", "https://ja.wikipedia.org/wiki/沖縄県立石川高等学校"],
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "開庁時間「平日8:00〜17:00」を「要確認」に変更（登録している出典（学校公式サイト・Wikipedia・県教育委員会ページ）のいずれにも記載がなく、他の市立校で同じ値が誤りだった前例があるため、裏付けのないまま掲載を続けるのは避けた）。noteの「普通科」は出典で確認済みのため維持" }
+      { date: "2026-08-08", type: "ai", note: "開庁時間「平日8:00〜17:00」を「要確認」に変更（登録している出典（学校公式サイト・Wikipedia・県教育委員会ページ）のいずれにも記載がなく、他の市立校で同じ値が誤りだった前例があるため、裏付けのないまま掲載を続けるのは避けた）。noteの「普通科」は出典で確認済みのため維持" },
+      { date: "2026-08-08", type: "ai", note: "備考「。営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
     ],
     warn:      true,
     lat:       26.41535,
@@ -1323,9 +1328,12 @@ const restaurants = [
     address:   "沖縄県うるま市石川1-52-36",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "営業時間・定休日は要確認",
-    note_en:   "Please confirm hours and holidays before visiting.",
+    note:      "",
+    note_en:   "",
     sourceUrl: "https://www.navitime.co.jp/category/0402003/47213/",
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+    ],
     warn:      true,
     lat:       26.431154,
     lng:       127.829367,
@@ -1342,9 +1350,12 @@ const restaurants = [
     address:   "沖縄県うるま市石川1-27-25",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "営業時間・定休日は要確認",
-    note_en:   "Please confirm hours and holidays before visiting.",
+    note:      "",
+    note_en:   "",
     sourceUrl: "https://www.navitime.co.jp/category/0402003/47213/",
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+    ],
     warn:      true,
     lat:       26.429498,
     lng:       127.827762,
@@ -1361,9 +1372,12 @@ const restaurants = [
     address:   "沖縄県うるま市石川2丁目20-1",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "営業時間・定休日は要確認",
-    note_en:   "Please confirm hours and holidays before visiting.",
+    note:      "",
+    note_en:   "",
     sourceUrl: "https://map.yahoo.co.jp/v3/place/Xu8xLHpHHrw",
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+    ],
     warn:      true,
     lat:       26.427057,
     lng:       127.825151,
@@ -1380,11 +1394,12 @@ const restaurants = [
     address:   "沖縄県うるま市石川2丁目9-1",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "個人経営の美容室。営業時間・定休日は要確認",
-    note_en:   "Independently run hair salon. Please confirm hours and holidays before visiting.",
+    note:      "個人経営の美容室",
+    note_en:   "Independently run hair salon.",
     sourceUrl: "https://map.yahoo.co.jp/v3/place/iocOXHLAbSY",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「老舗」を削除（登録している出典に該当する記載がなかったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「老舗」を削除（登録している出典に該当する記載がなかったため）" },
+      { date: "2026-08-08", type: "ai", note: "備考「。営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
     ],
     warn:      true,
     lat:       26.428814,
@@ -1464,9 +1479,12 @@ const restaurants = [
     address:   "沖縄県うるま市石川2丁目22-9",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "営業時間・定休日は要確認",
-    note_en:   "Please confirm hours and holidays before visiting.",
+    note:      "",
+    note_en:   "",
     sourceUrl: "https://www.yelp.com/biz/%E3%82%86%E3%81%9F%E3%81%8B%E7%BE%8E%E5%AE%B9%E5%AE%A4-%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82",
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+    ],
     warn:      true,
     lat:       26.426258,
     lng:       127.825554,
@@ -1477,16 +1495,17 @@ const restaurants = [
     code:        "47213-IS-0064",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-05",
+    lastChecked: "2026-08-08",
     name:      "pono 石川店（ポノ）",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川2丁目39-8",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "旧店名「スィートハンズ石川店」。営業時間・定休日は要確認",
-    note_en:   "Formerly known as \"Sweet Hands Ishikawa\". Please confirm hours and holidays before visiting.",
+    note:      "旧店名「スィートハンズ石川店」",
+    note_en:   "Formerly known as \"Sweet Hands Ishikawa\".",
     revisionHistory: [
-      { date: "2026-08-05", type: "ai", note: "店名を「スィートハンズ石川店」から「pono 石川店」に変更（公式サイト・ホットペッパービューティー・Instagramで確認。住所・電話番号098-964-7717は変更前と一致）" }
+      { date: "2026-08-05", type: "ai", note: "店名を「スィートハンズ石川店」から「pono 石川店」に変更（公式サイト・ホットペッパービューティー・Instagramで確認。住所・電話番号098-964-7717は変更前と一致）" },
+      { date: "2026-08-08", type: "ai", note: "備考「。営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
     ],
     sourceUrl: "https://www.ekiten.jp/shop_2456829/",
     sourceUrls: ["https://www.ekiten.jp/shop_2456829/", "https://www.sweethands.net/salon/ishikawa/"],
@@ -1506,9 +1525,12 @@ const restaurants = [
     address:   "沖縄県うるま市石川東山1丁目12-11",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "営業時間・定休日は要確認",
-    note_en:   "Please confirm hours and holidays before visiting.",
+    note:      "",
+    note_en:   "",
     sourceUrl: "https://www.ekiten.jp/shop_3616835/",
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+    ],
     warn:      true,
     lat:       26.435215,
     lng:       127.831579,
@@ -1525,9 +1547,12 @@ const restaurants = [
     address:   "沖縄県うるま市石川東恩納44-1",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "営業時間・定休日は要確認",
-    note_en:   "Please confirm hours and holidays before visiting.",
+    note:      "",
+    note_en:   "",
     sourceUrl: "https://www.ekiten.jp/shop_2457849/",
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+    ],
     warn:      true,
     lat:       26.409203,
     lng:       127.828656,
@@ -1564,9 +1589,12 @@ const restaurants = [
     address:   "沖縄県うるま市石川伊波810",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "営業時間・定休日は要確認",
-    note_en:   "Please confirm hours and holidays before visiting.",
+    note:      "",
+    note_en:   "",
     sourceUrl: "https://map.yahoo.co.jp/v3/place/gor1YPjRz3M",
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+    ],
     warn:      true,
     lat:       26.41725,
     lng:       127.81932,
@@ -1586,9 +1614,12 @@ const restaurants = [
     address:   "沖縄県うるま市石川2丁目1-7",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "旧店名「ヘアープロジェクトサヴァ」。店名変更は現地看板で確認、詳細は要確認",
-    note_en:   "Formerly known as \"Hair Project Sava\". Name change confirmed on-site; please confirm details before visiting.",
+    note:      "旧店名「ヘアープロジェクトサヴァ」。店名変更は現地看板で確認",
+    note_en:   "Formerly known as \"Hair Project Sava\". Name change confirmed on-site.",
     sourceUrl: "https://www.ekiten.jp/g0202/a47213/",
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "備考「、詳細は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+    ],
     warn:      true,
     lat:       26.427074,
     lng:       127.826201,
