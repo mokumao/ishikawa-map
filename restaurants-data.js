@@ -17,7 +17,7 @@ const restaurants = [
     sourceUrl: "https://umashiya.com/",
     sourceUrls: ["https://umashiya.com/", "https://www.ekiten.jp/shop_2457951/", "https://map.yahoo.co.jp/v3/place/X0m4ICbJzsI"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "sourceUrlを下層ページ（/about/）からトップページ（umashiya.com/）に修正（備考の内容自体はトップページで確認できるため、内容変更なし）" }
+      { date: "2026-08-06", type: "ai", note: "sourceUrlを下層ページ（/about/）からトップページ（umashiya.com/）に修正（備考の内容自体はトップページで確認できるため、内容変更なし）" }
     ],
     warn:      false,
     lat:       26.430443,
@@ -46,7 +46,7 @@ const restaurants = [
     sourceUrl: "https://balcreamsoda.com/",
     sourceUrls: ["https://balcreamsoda.com/", "https://okinawaly.com/living/post-1103/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "備考「営業スタイルが複雑。訪問前に公式サイトで要確認」を削除。事実（曜日ごとに業態が異なること）自体はhours欄に記載済みで正確だったが、「複雑」「要確認」という評価・要約の言葉自体は出典に存在せず、AIが自分の言葉で書いていたため" }
+      { date: "2026-08-06", type: "ai", note: "備考「営業スタイルが複雑。訪問前に公式サイトで要確認」を削除。事実（曜日ごとに業態が異なること）自体はhours欄に記載済みで正確だったが、「複雑」「要確認」という評価・要約の言葉自体は出典に存在せず、AIが自分の言葉で書いていたため" }
     ],
     warn:      false,
     lat:       26.427302,
@@ -124,7 +124,7 @@ const restaurants = [
     sourceUrl: "https://www.instagram.com/okinawa_capful/",
     sourceUrls: ["https://www.instagram.com/okinawa_capful/", "https://okinawatravel.jp/capful"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "備考「元外国人住宅を改装。」を削除（登録している出典2件のいずれにも該当する記載がなく確認できなかったため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「元外国人住宅を改装。」を削除（登録している出典2件のいずれにも該当する記載がなく確認できなかったため）" }
     ],
     warn:      false,
     lat:       26.420088,
@@ -202,7 +202,7 @@ const restaurants = [
     sourceUrl: "https://www.instagram.com/cafeajyute/",
     sourceUrls: ["https://www.instagram.com/cafeajyute/", "https://snabi.jp/facility/18262"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "公式サイト（ajyute.com）が閉鎖済みのため、sourceUrl・websiteをInstagram公式アカウントに変更。備考の料金（1時間1,000円）は最新の複数情報源と一致することを確認、内容自体の変更なし" }
+      { date: "2026-08-06", type: "ai", note: "公式サイト（ajyute.com）が閉鎖済みのため、sourceUrl・websiteをInstagram公式アカウントに変更。備考の料金（1時間1,000円）は最新の複数情報源と一致することを確認、内容自体の変更なし" }
     ],
     warn:      false,
     lat:       26.416168,
@@ -230,7 +230,7 @@ const restaurants = [
     sourceUrl: "https://tabelog.com/okinawa/A4703/A470302/47013479/",
     sourceUrls: ["https://tabelog.com/okinawa/A4703/A470302/47013479/", "https://www.ekiten.jp/shop_71083176/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "備考「（もも肉1.5枚分のボリューム）」を削除（出典2件のいずれにも該当する記載がなかったため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「（もも肉1.5枚分のボリューム）」を削除（出典2件のいずれにも該当する記載がなかったため）" }
     ],
     warn:      false,
     lat:       26.412381,
@@ -258,7 +258,7 @@ const restaurants = [
     sourceUrl: "https://tabelog.com/okinawa/A4703/A470302/47007823/",
     sourceUrls: ["https://tabelog.com/okinawa/A4703/A470302/47007823/", "https://www.ekiten.jp/shop_7136480/", "https://hitosara.com/0031479619/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "備考「・カツチャーハン」「地元客に人気」を削除（登録している出典3件のいずれにも該当する記載がなかったため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「・カツチャーハン」「地元客に人気」を削除（登録している出典3件のいずれにも該当する記載がなかったため）" }
     ],
     warn:      true,
     lat:       26.427576,
@@ -288,7 +288,7 @@ const restaurants = [
     sourceUrl: "https://ryukyu-entertainment.com/marumitu/",
     sourceUrls: ["https://ryukyu-entertainment.com/marumitu/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "備考「1949年創業」「てびちそば・三枚肉そばが名物」「昭和の食堂」を削除し、出典の実際の記載「創業60年以上」「地元民から愛される」に基づく表現に修正。リンク切れの情報源（retty.me、404）を削除" }
+      { date: "2026-08-06", type: "ai", note: "備考「1949年創業」「てびちそば・三枚肉そばが名物」「昭和の食堂」を削除し、出典の実際の記載「創業60年以上」「地元民から愛される」に基づく表現に修正。リンク切れの情報源（retty.me、404）を削除" }
     ],
     warn:      false,
     lat:       26.4347222,
@@ -341,7 +341,7 @@ const restaurants = [
     sourceUrl: "https://tabelog.com/okinawa/A4703/A470302/47033173/",
     sourceUrls: ["https://tabelog.com/okinawa/A4703/A470302/47033173/", "https://hitosara.com/0031728796/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "備考「セルフスタイルの」「（990円〜）」「が人気」を削除（出典2件のいずれにも確認できず、口コミでは980円という近いが不一致な金額のみ見つかったため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「セルフスタイルの」「（990円〜）」「が人気」を削除（出典2件のいずれにも確認できず、口コミでは980円という近いが不一致な金額のみ見つかったため）" }
     ],
     warn:      true,
     lat:       26.427654,
@@ -369,7 +369,7 @@ const restaurants = [
     sourceUrl: "https://tabelog.com/okinawa/A4703/A470303/47028280/",
     sourceUrls: ["https://tabelog.com/okinawa/A4703/A470303/47028280/", "https://www.hotpepper.jp/strJ000659979/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "公式サイト（niraicuisine.com）がSSL証明書エラーでアクセス不能、副情報源も404のため、sourceUrl・websiteを食べログに変更。備考「地元・米軍関係者にも人気の名店」を削除（複数の出典・口コミのいずれにも米軍関係者への言及がなく根拠不明のため）。「コース料理のみ」は食べログで確認できたため維持" }
+      { date: "2026-08-06", type: "ai", note: "公式サイト（niraicuisine.com）がSSL証明書エラーでアクセス不能、副情報源も404のため、sourceUrl・websiteを食べログに変更。備考「地元・米軍関係者にも人気の名店」を削除（複数の出典・口コミのいずれにも米軍関係者への言及がなく根拠不明のため）。「コース料理のみ」は食べログで確認できたため維持" }
     ],
     warn:      false,
     lat:       26.4341514,
@@ -397,7 +397,7 @@ const restaurants = [
     sourceUrl: "https://www.otv.co.jp/okitive/article/23464/",
     sourceUrls: ["https://www.otv.co.jp/okitive/article/23464/", "https://map.yahoo.co.jp/v3/place/9Rk9gUCDTcM", "https://tabelog.com/en/okinawa/A4703/A470302/47029035/"],
     revisionHistory: [
-      { date: "2026-08-08", type: "manager", note: "備考「本格アメリカンバーガー専門店」を「本格アメリカンバーガーやスイーツを提供」に修正（出典の実際の記載は「ハンバーガーやスイーツを提供しているお店」で、専門店と言い切るのはやや誇張だったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「本格アメリカンバーガー専門店」を「本格アメリカンバーガーやスイーツを提供」に修正（出典の実際の記載は「ハンバーガーやスイーツを提供しているお店」で、専門店と言い切るのはやや誇張だったため）" }
     ],
     warn:      false,
     lat:       26.421304,
@@ -425,7 +425,7 @@ const restaurants = [
     sourceUrl: "https://tabelog.com/okinawa/A4703/A470302/47006947/",
     sourceUrls: ["https://tabelog.com/okinawa/A4703/A470302/47006947/", "https://map.yahoo.co.jp/v3/place/4fz4CWfNo66", "https://okinawa-tabearuki.com/archives/666"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "備考「地元民に愛される老舗の和食居酒屋。刺身定食・天ぷらが名物」を削除（出典3件（食べログ・okinawa-tabearuki.com・Yahoo地図）のいずれにも該当する記載がなく、実態不明のため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「地元民に愛される老舗の和食居酒屋。刺身定食・天ぷらが名物」を削除（出典3件（食べログ・okinawa-tabearuki.com・Yahoo地図）のいずれにも該当する記載がなく、実態不明のため）" }
     ],
     warn:      false,
     lat:       26.4272451,
@@ -478,7 +478,7 @@ const restaurants = [
     sourceUrl: "https://www.otv.co.jp/okitive/article/95697/",
     sourceUrls: ["https://www.otv.co.jp/okitive/article/95697/", "https://retty.me/area/PRE47/ARE267/SUB26705/100001577229/", "https://map.yahoo.co.jp/v3/place/zJvRtaWsHsg"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "備考「濃厚鶏白湯スープが特徴」を「骨汁（700円）が名物」に修正（出典に「濃厚鶏白湯スープ」の記載はなく、石川店限定と紹介されているのは実際には骨汁だったため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「濃厚鶏白湯スープが特徴」を「骨汁（700円）が名物」に修正（出典に「濃厚鶏白湯スープ」の記載はなく、石川店限定と紹介されているのは実際には骨汁だったため）" }
     ],
     warn:      false,
     lat:       26.4303538,
@@ -506,7 +506,7 @@ const restaurants = [
     sourceUrl: "https://tabelog.com/okinawa/A4703/A470302/47011395/",
     sourceUrls: ["https://tabelog.com/okinawa/A4703/A470302/47011395/", "https://map.yahoo.co.jp/v3/place/HTcEb_rP_d6", "https://retty.me/area/PRE47/ARE267/SUB26705/100001045603/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "備考「ステーキ定食」を「ステーキサンド」に修正（出典に「ステーキ定食」の記載はなく、実際の名物は「ステーキサンド」だったため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「ステーキ定食」を「ステーキサンド」に修正（出典に「ステーキ定食」の記載はなく、実際の名物は「ステーキサンド」だったため）" }
     ],
     warn:      false,
     lat:       26.4342224,
@@ -534,7 +534,7 @@ const restaurants = [
     sourceUrl: "https://r.goope.jp/kinnokura/",
     sourceUrls: ["https://r.goope.jp/kinnokura/", "https://r.goope.jp/kinnokura/about", "https://tabelog.com/okinawa/A4703/A470302/47026871/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "sourceUrlをFacebook（内容確認不能）から公式サイトに変更（公式サイトのトップページに「金の蔵・Kinkura Burgerからのお知らせ」の記載があり、備考の内容を確認できたため）" }
+      { date: "2026-08-06", type: "ai", note: "sourceUrlをFacebook（内容確認不能）から公式サイトに変更（公式サイトのトップページに「金の蔵・Kinkura Burgerからのお知らせ」の記載があり、備考の内容を確認できたため）" }
     ],
     warn:      false,
     lat:       26.430094,
@@ -564,7 +564,7 @@ const restaurants = [
     sourceUrl: "https://store.lawson.co.jp/",
     sourceUrls: ["https://store.lawson.co.jp/", "https://www.mapion.co.jp/phonebook/M02005/47213/ILSP0000504812_ipclm/"],
     revisionHistory: [
-      { date: "2026-08-08", type: "manager", note: "備考「ATM・コピー機あり」を削除（登録している出典のいずれにも設備情報の記載がなかったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「ATM・コピー機あり」を削除（登録している出典のいずれにも設備情報の記載がなかったため）" }
     ],
     warn:      false,
     lat:       26.42517,
@@ -587,7 +587,7 @@ const restaurants = [
     sourceUrl: "https://www.family.co.jp/",
     sourceUrls: ["https://www.family.co.jp/", "https://store.family.co.jp/points/72085"],
     revisionHistory: [
-      { date: "2026-08-08", type: "manager", note: "備考「ATM・イートインスペースあり」を削除（登録している出典のいずれにも設備情報の記載がなかったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「ATM・イートインスペースあり」を削除（登録している出典のいずれにも設備情報の記載がなかったため）" }
     ],
     warn:      false,
     lat:       26.428554,
@@ -610,7 +610,7 @@ const restaurants = [
     sourceUrl: "https://www.sej.co.jp/",
     sourceUrls: ["https://www.sej.co.jp/", "https://map.yahoo.co.jp/v3/place/qUlcR4hcJro"],
     revisionHistory: [
-      { date: "2026-08-08", type: "manager", note: "備考「ATM・コピー機あり」を削除（登録している出典のいずれにも設備情報の記載がなかったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「ATM・コピー機あり」を削除（登録している出典のいずれにも設備情報の記載がなかったため）" }
     ],
     warn:      false,
     lat:       26.434586,
@@ -714,7 +714,7 @@ const restaurants = [
     sourceUrl: "https://www.e-map.ne.jp/p/lawson/dtl/241123/",
     sourceUrls: ["https://www.e-map.ne.jp/p/lawson/dtl/241123/", "https://www.navitime.co.jp/poi?spot=01150-241123"],
     revisionHistory: [
-      { date: "2026-08-08", type: "manager", note: "備考「国道329号石川バイパス沿い・」を削除（出典で確認できたのは駐車場情報のみだったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「国道329号石川バイパス沿い・」を削除（出典で確認できたのは駐車場情報のみだったため）" }
     ],
     warn:      false,
     lat:       26.412944,
@@ -779,7 +779,7 @@ const restaurants = [
     sourceUrl: "https://www.e-map.ne.jp/p/lawson/dtl/269914/",
     sourceUrls: ["https://www.e-map.ne.jp/p/lawson/dtl/269914/", "https://map.yahoo.co.jp/v3/place/nmE6aFXR3u6"],
     revisionHistory: [
-      { date: "2026-08-08", type: "manager", note: "備考「駐車場あり」を削除（登録している出典に公式な記載がなく、口コミでの言及のみだったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「駐車場あり」を削除（登録している出典に公式な記載がなく、口コミでの言及のみだったため）" }
     ],
     warn:      false,
     lat:       26.435600,
@@ -822,7 +822,7 @@ const restaurants = [
     sourceUrl: "https://map.yahoo.co.jp/v3/place/RMuEhynq_dk",
     sourceUrls: ["https://map.yahoo.co.jp/v3/place/RMuEhynq_dk"],
     revisionHistory: [
-      { date: "2026-08-08", type: "manager", note: "sourceUrlのe-map.ne.jpがリンク切れ（パラメータエラー）だったためYahoo!地図に差し替え。備考「ATMあり」を削除（登録している出典のいずれにも記載がなかったため）" }
+      { date: "2026-08-08", type: "ai", note: "sourceUrlのe-map.ne.jpがリンク切れ（パラメータエラー）だったためYahoo!地図に差し替え。備考「ATMあり」を削除（登録している出典のいずれにも記載がなかったため）" }
     ],
     warn:      false,
     lat:       26.421245,
@@ -845,7 +845,7 @@ const restaurants = [
     sourceUrl: "https://www.e-map.ne.jp/p/lawson/dtl/286976/",
     sourceUrls: ["https://www.e-map.ne.jp/p/lawson/dtl/286976/", "https://map.yahoo.co.jp/v3/place/V-u7-SiSiYc"],
     revisionHistory: [
-      { date: "2026-08-08", type: "manager", note: "備考「店内に郵便ポストあり」を削除（登録している出典のいずれにも記載がなかったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「店内に郵便ポストあり」を削除（登録している出典のいずれにも記載がなかったため）" }
     ],
     warn:      false,
     lat:       26.415945,
@@ -952,7 +952,7 @@ const restaurants = [
     sourceUrl: "https://map.yahoo.co.jp/v3/place/5mvXtr9ABzU",
     sourceUrls: ["https://map.yahoo.co.jp/v3/place/5mvXtr9ABzU", "https://e-nenpi.com/gs/shop/47016/", "https://oki-ss.or.jp/?page_id=167"],
     revisionHistory: [
-      { date: "2026-08-08", type: "manager", note: "営業時間を「7:00〜21:00」から「平日 7:00〜21:00 / 日・祝 8:00〜20:00」に修正（出典e-nenpi.comに日曜・祝日は時間が異なる旨の記載があったため）" }
+      { date: "2026-08-08", type: "ai", note: "営業時間を「7:00〜21:00」から「平日 7:00〜21:00 / 日・祝 8:00〜20:00」に修正（出典e-nenpi.comに日曜・祝日は時間が異なる旨の記載があったため）" }
     ],
     warn:      false,
     lat:       26.434840,
@@ -1002,7 +1002,7 @@ const restaurants = [
     sourceUrl: "https://cocogarden.com/",
     sourceUrls: ["https://cocogarden.com/", "https://www.jalan.net/yad339494/", "https://www.okinawastory.jp/stay/1241"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "チェックイン時刻を15:00から14:00に修正、備考の「石川海岸沿いの」を「石川の高台に建つ」に修正（一休.com・Yahoo!トラベル・じゃらんnet等の複数の予約サイトで確認。ビーチは姉妹ホテルへの無料シャトルバスで利用する提携形式）" }
+      { date: "2026-08-06", type: "ai", note: "チェックイン時刻を15:00から14:00に修正、備考の「石川海岸沿いの」を「石川の高台に建つ」に修正（一休.com・Yahoo!トラベル・じゃらんnet等の複数の予約サイトで確認。ビーチは姉妹ホテルへの無料シャトルバスで利用する提携形式）" }
     ],
     warn:      false,
     lat:       26.42030,
@@ -1024,7 +1024,7 @@ const restaurants = [
     sourceUrl: "https://uruma-ru.jp/member/anacrownepl/",
     sourceUrls: ["https://uruma-ru.jp/member/anacrownepl/", "https://www.sports-commission.okinawa/en/hotel/h-51403/"],
     revisionHistory: [
-      { date: "2026-08-05", type: "manager", note: "店名を「アンサ沖縄リゾート」から「ANAクラウンプラザリゾート沖縄うるまヒルズ」に変更、チェックアウト時刻を11:00から12:00に修正（住所・電話番号098-963-0123は変更前と一致、複数ソースで確認）" }
+      { date: "2026-08-05", type: "ai", note: "店名を「アンサ沖縄リゾート」から「ANAクラウンプラザリゾート沖縄うるまヒルズ」に変更、チェックアウト時刻を11:00から12:00に修正（住所・電話番号098-963-0123は変更前と一致、複数ソースで確認）" }
     ],
     warn:      false,
     lat:       26.41774,
@@ -1064,7 +1064,7 @@ const restaurants = [
     sourceUrl: "https://www.ekiten.jp/shop_2457905/",
     sourceUrls: ["https://www.ekiten.jp/shop_2457905/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "情報源のうち「https://uruma-ru.jp/stay/」を削除（掲載されている宿泊施設一覧に「民宿やすま」が含まれていないことを確認したため）" }
+      { date: "2026-08-06", type: "ai", note: "情報源のうち「https://uruma-ru.jp/stay/」を削除（掲載されている宿泊施設一覧に「民宿やすま」が含まれていないことを確認したため）" }
     ],
     warn:      true,
     lat:       26.42059,
@@ -1103,7 +1103,7 @@ const restaurants = [
     sourceUrl: "https://www.okinawa-bank.co.jp/shop_atm/2014061100881/",
     sourceUrls: ["https://www.okinawa-bank.co.jp/shop_atm/2014061100881/", "https://gincode.com/branch_0188_315"],
     revisionHistory: [
-      { date: "2026-08-08", type: "manager", note: "営業時間を「平日9:00〜15:00」から「平日9:00〜11:30、12:30〜15:00（昼休みを除く）」に修正（出典の公式サイトに昼休み11:30〜12:30は窓口が閉まる旨の記載があったため）。sourceUrlを情報の薄いgincode.comから公式サイトに変更" }
+      { date: "2026-08-08", type: "ai", note: "営業時間を「平日9:00〜15:00」から「平日9:00〜11:30、12:30〜15:00（昼休みを除く）」に修正（出典の公式サイトに昼休み11:30〜12:30は窓口が閉まる旨の記載があったため）。sourceUrlを情報の薄いgincode.comから公式サイトに変更" }
     ],
     warn:      false,
     lat:       26.42580,
@@ -1124,7 +1124,7 @@ const restaurants = [
     sourceUrl: "https://map.japanpost.jp/p/search/dtl/300170031000/",
     sourceUrls: ["https://map.japanpost.jp/p/search/dtl/300170031000/", "https://map.yahoo.co.jp/v3/place/ls1CxYp0fJM"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "備考「ATMあり（土日も利用可）」を削除（登録している出典2件のいずれにもATM稼働時間・土日利用可否の記載が確認できなかったため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「ATMあり（土日も利用可）」を削除（登録している出典2件のいずれにもATM稼働時間・土日利用可否の記載が確認できなかったため）" }
     ],
     warn:      false,
     lat:       26.43363,
@@ -1146,7 +1146,7 @@ const restaurants = [
     sourceUrl: "https://www.city.uruma.lg.jp/3001002000/shisetsu/p000051.html",
     sourceUrls: ["https://www.city.uruma.lg.jp/3001002000/shisetsu/p000051.html", "https://www.city.uruma.lg.jp/", "https://www.mapion.co.jp/phonebook/M11006/47213/ILSP0000077493_ipclm/"],
     revisionHistory: [
-      { date: "2026-08-08", type: "manager", note: "営業時間を「8:00〜17:00」から「8:15〜16:45」に修正、定休日から出典に記載のない「・長期休暇」を削除（うるま市公式サイトの個別ページp000051.htmlの記載に合わせ、sourceUrlにも同ページを追加）" }
+      { date: "2026-08-08", type: "ai", note: "営業時間を「8:00〜17:00」から「8:15〜16:45」に修正、定休日から出典に記載のない「・長期休暇」を削除（うるま市公式サイトの個別ページp000051.htmlの記載に合わせ、sourceUrlにも同ページを追加）" }
     ],
     warn:      false,
     lat:       26.43175,
@@ -1167,7 +1167,7 @@ const restaurants = [
     sourceUrl: "https://j-ishikawa.edu.city.uruma.okinawa.jp/",
     sourceUrls: ["https://j-ishikawa.edu.city.uruma.okinawa.jp/", "https://www.city.uruma.lg.jp/3001002000/shisetsu/p000066.html"],
     revisionHistory: [
-      { date: "2026-08-06", type: "manager", note: "営業時間を「8:00〜17:00」から「8:15〜16:45」に修正（うるま市公式サイトの記載に合わせた）" }
+      { date: "2026-08-06", type: "ai", note: "営業時間を「8:00〜17:00」から「8:15〜16:45」に修正（うるま市公式サイトの記載に合わせた）" }
     ],
     warn:      false,
     lat:       26.42399,
@@ -1188,7 +1188,7 @@ const restaurants = [
     sourceUrl: "https://www.ishikawa-h.open.ed.jp/",
     sourceUrls: ["https://www.ishikawa-h.open.ed.jp/", "https://ja.wikipedia.org/wiki/沖縄県立石川高等学校"],
     revisionHistory: [
-      { date: "2026-08-08", type: "manager", note: "開庁時間「平日8:00〜17:00」を「要確認」に変更（登録している出典（学校公式サイト・Wikipedia・県教育委員会ページ）のいずれにも記載がなく、他の市立校で同じ値が誤りだった前例があるため、裏付けのないまま掲載を続けるのは避けた）。noteの「普通科」は出典で確認済みのため維持" }
+      { date: "2026-08-08", type: "ai", note: "開庁時間「平日8:00〜17:00」を「要確認」に変更（登録している出典（学校公式サイト・Wikipedia・県教育委員会ページ）のいずれにも記載がなく、他の市立校で同じ値が誤りだった前例があるため、裏付けのないまま掲載を続けるのは避けた）。noteの「普通科」は出典で確認済みのため維持" }
     ],
     warn:      true,
     lat:       26.41535,
@@ -1208,10 +1208,10 @@ const restaurants = [
     closed:    "なし",
     note:      "地元市民に親しまれている市民ビーチ。管理団体がいないため遊泳等の利用は自己責任。監視員・クラゲ防止ネットの有無など現地の状況をご確認のうえご利用ください",
     revisionHistory: [
-      { date: "2026-08-05", type: "manager", note: "住所を「沖縄県うるま市石川曙」から「沖縄県うるま市石川白浜2丁目11-1」に修正（出典自体とも不一致だったため。うるま市公式サイト・おきなわ物語で確認。座標付近は字境をまたぎ「石川石崎」表記の情報源もある）" },
-      { date: "2026-08-05", type: "manager", note: "備考「リーフ内は砂地で安全」を削除。出典（okinawastory.jp）に該当記載がなく、別サイトの類似文言との混同が疑われるため。海は条件によらず危険を伴うため「安全」の断定表現を避け、注意喚起の文言に変更" },
-      { date: "2026-08-05", type: "manager", note: "備考「ウィンドサーフィンで有名な」を削除。okinawastory.jp・tagoo.jp・沖縄県公式・churatown.comの4件を実際に確認したがいずれにも記載がなく、実態とも合わないとの指摘があったため。okinawastory.jpで確認できた「地元市民に親しまれている」に基づく表現に変更" },
-      { date: "2026-08-06", type: "manager", note: "備考「遊泳の際は現地の掲示・気象情報をご確認のうえご注意ください」を削除。この文言は出典（okinawastory.jp）に存在せず、AIが独自に言い換えた注意喚起文だったため、出典に実際に記載されている注意事項（「管理している団体等がいないため、遊泳等の利用については自己責任。監視員およびクラゲ防止ネットの有無など、現地の状況をご確認の上、ご利用の際は安全にご注意ください」）に基づく表現に修正" }
+      { date: "2026-08-05", type: "ai", note: "住所を「沖縄県うるま市石川曙」から「沖縄県うるま市石川白浜2丁目11-1」に修正（出典自体とも不一致だったため。うるま市公式サイト・おきなわ物語で確認。座標付近は字境をまたぎ「石川石崎」表記の情報源もある）" },
+      { date: "2026-08-05", type: "ai", note: "備考「リーフ内は砂地で安全」を削除。出典（okinawastory.jp）に該当記載がなく、別サイトの類似文言との混同が疑われるため。海は条件によらず危険を伴うため「安全」の断定表現を避け、注意喚起の文言に変更" },
+      { date: "2026-08-05", type: "ai", note: "備考「ウィンドサーフィンで有名な」を削除。okinawastory.jp・tagoo.jp・沖縄県公式・churatown.comの4件を実際に確認したがいずれにも記載がなく、実態とも合わないとの指摘があったため。okinawastory.jpで確認できた「地元市民に親しまれている」に基づく表現に変更" },
+      { date: "2026-08-06", type: "ai", note: "備考「遊泳の際は現地の掲示・気象情報をご確認のうえご注意ください」を削除。この文言は出典（okinawastory.jp）に存在せず、AIが独自に言い換えた注意喚起文だったため、出典に実際に記載されている注意事項（「管理している団体等がいないため、遊泳等の利用については自己責任。監視員およびクラゲ防止ネットの有無など、現地の状況をご確認の上、ご利用の際は安全にご注意ください」）に基づく表現に修正" }
     ],
     sourceUrl: "https://www.okinawastory.jp/spot/600006184",
     sourceUrls: ["https://www.okinawastory.jp/spot/600006184", "https://www.city.uruma.lg.jp/1009007000/shisetsu/p000141.html"],
@@ -1373,7 +1373,7 @@ const restaurants = [
     note_en:   "Independently run hair salon. Please confirm hours and holidays before visiting.",
     sourceUrl: "https://map.yahoo.co.jp/v3/place/iocOXHLAbSY",
     revisionHistory: [
-      { date: "2026-08-08", type: "manager", note: "備考「老舗」を削除（登録している出典に該当する記載がなかったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「老舗」を削除（登録している出典に該当する記載がなかったため）" }
     ],
     warn:      true,
     lat:       26.428814,
@@ -1415,7 +1415,7 @@ const restaurants = [
     sourceUrl: "https://newbunny3.com/about/",
     sourceUrls: ["https://newbunny3.com/about/", "https://map.yahoo.co.jp/v3/place/5mC8cHKH_sc"],
     revisionHistory: [
-      { date: "2026-08-08", type: "manager", note: "営業時間「要確認」を「11:00〜17:00（完全予約制）」に、定休日「要確認」を「火曜日」に更新（登録済みの公式サイトsourceUrlに既に記載があった）" }
+      { date: "2026-08-08", type: "ai", note: "営業時間「要確認」を「11:00〜17:00（完全予約制）」に、定休日「要確認」を「火曜日」に更新（登録済みの公式サイトsourceUrlに既に記載があった）" }
     ],
     warn:      false,
     lat:       26.427557,
@@ -1475,7 +1475,7 @@ const restaurants = [
     note:      "旧店名「スィートハンズ石川店」。営業時間・定休日は要確認",
     note_en:   "Formerly known as \"Sweet Hands Ishikawa\". Please confirm hours and holidays before visiting.",
     revisionHistory: [
-      { date: "2026-08-05", type: "manager", note: "店名を「スィートハンズ石川店」から「pono 石川店」に変更（公式サイト・ホットペッパービューティー・Instagramで確認。住所・電話番号098-964-7717は変更前と一致）" }
+      { date: "2026-08-05", type: "ai", note: "店名を「スィートハンズ石川店」から「pono 石川店」に変更（公式サイト・ホットペッパービューティー・Instagramで確認。住所・電話番号098-964-7717は変更前と一致）" }
     ],
     sourceUrl: "https://www.ekiten.jp/shop_2456829/",
     sourceUrls: ["https://www.ekiten.jp/shop_2456829/", "https://www.sweethands.net/salon/ishikawa/"],
