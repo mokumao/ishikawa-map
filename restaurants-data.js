@@ -68,11 +68,14 @@ const restaurants = [
     genre:     "居酒屋等",
     address:   "沖縄県うるま市石川白浜1-4-7",
     hours:     "18:00〜翌3:00（料理L.O. 翌1:45）",
-    closed:    "なし（年中無休）",
+    closed:    "不定休",
     note:      "深夜営業。個室あり。飲み放題コースあり",
     note_en:   "Late-night hours. Private rooms available. All-you-can-drink courses offered.",
-    sourceUrl: "https://www.hotpepper.jp/strJ001017974/",
-    sourceUrls: ["https://www.hotpepper.jp/strJ001017974/", "https://map.yahoo.co.jp/v3/place/pSf9Gj702gc"],
+    sourceUrl: "https://www.instagram.com/anzuya.ishikawa/",
+    sourceUrls: ["https://www.instagram.com/anzuya.ishikawa/"],
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "sourceUrlを公式Instagramに変更（従来のホットペッパー・Yahoo!地図は複製・転載を禁止する規約があるため転記元から除外）。定休日「なし（年中無休）」を公式Instagramの記載「不定休」に修正" }
+    ],
     warn:      false,
     lat:       26.428326,
     lng:       127.827701,
@@ -145,12 +148,15 @@ const restaurants = [
     name:      "HINA CAFE（ヒナカフェ）",
     genre:     "カフェ・イタリアン",
     address:   "沖縄県うるま市石川白浜1-1-1 2F",
-    hours:     "ランチ 11:30〜15:30\nディナー（金〜日）16:00〜22:00",
-    closed:    "月〜水曜日",
+    hours:     "月〜金 11:30〜15:00（L.O.14:00）\n土・日 11:30〜15:30（L.O.15:00）",
+    closed:    "水曜日",
     note:      "2023年6月オープン。本格イタリアン",
     note_en:   "Opened June 2023. Authentic Italian cuisine.",
-    sourceUrl: "https://hitosara.com/0004038163/",
-    sourceUrls: ["https://hitosara.com/0004038163/", "https://tabelog.com/en/okinawa/A4703/A470302/47030276/"],
+    sourceUrl: "https://hinacafe-ishikawa-urumacity.jimdofree.com/",
+    sourceUrls: ["https://hinacafe-ishikawa-urumacity.jimdofree.com/"],
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "sourceUrlを公式サイトに変更（従来のひとさら・食べログは複製・転載を禁止する規約があるため転記元から除外）。営業時間・定休日を公式サイトの記載に修正（従来のディナー営業〈金〜日16:00〜22:00〉・定休日「月〜水」の記載は公式サイトで確認できず、ランチ営業のみ・水曜定休が正しい内容だった）" }
+    ],
     warn:      false,
     lat:       26.427231,
     lng:       127.827883,
@@ -170,14 +176,15 @@ const restaurants = [
     name:      "GENCO（ジェンコ）",
     genre:     "カフェ・バー（ハワイ料理）",
     address:   "沖縄県うるま市石川伊波1515-32",
-    hours:     "11:11〜15:00 / 17:00〜23:00",
+    hours:     "11:11〜24:00（L.O.22:00）",
     closed:    "火曜日",
-    note:      "食べログに営業状況「未確認」の記載あり",
-    note_en:   "Listed as 'unconfirmed' on Tabelog.",
-    sourceUrl: "https://tabelog.com/okinawa/A4703/A470302/47031510/",
-    sourceUrls: ["https://tabelog.com/okinawa/A4703/A470302/47031510/", "https://ryukyushimpo.jp/style/gourmet/entry-2823371.html"],
+    note:      "",
+    note_en:   "",
+    sourceUrl: "https://www.instagram.com/okinawa_cafebar_genco/",
+    sourceUrls: ["https://www.instagram.com/okinawa_cafebar_genco/", "https://ryukyushimpo.jp/style/gourmet/entry-2823371.html"],
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「訪問前に電話確認を推奨（098-988-5863）」を削除（読者への行動の呼びかけ・変更されうる電話番号の転記は行わない方針としたため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「訪問前に電話確認を推奨（098-988-5863）」を削除（読者への行動の呼びかけ・変更されうる電話番号の転記は行わない方針としたため）" },
+      { date: "2026-08-08", type: "ai", note: "sourceUrlを公式Instagramに変更（従来の食べログは複製・転載を禁止する規約があるため転記元から除外）。営業時間を公式Instagramの記載「11:11〜24:00（L.O.22:00）」に修正（従来は分割2部制だったが通し営業が正しい）。備考「食べログに営業状況『未確認』の記載あり」を削除（食べログを出典として扱わない方針としたため）" }
     ],
     warn:      true,
     lat:       26.433345,
@@ -222,20 +229,21 @@ const restaurants = [
     code:        "47213-IS-0009",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-06",
+    lastChecked: "2026-08-08",
     name:      "喜食てんてん",
     genre:     "居酒屋等",
     address:   "沖縄県うるま市石川山城1706-6",
-    hours:     "ランチ 11:00〜13:30\n居酒屋 18:00〜24:00",
-    closed:    "日曜日",
-    note:      "チキンカツ定食が名物。地元の人気食堂",
-    note_en:   "Famous for the chicken katsu set. A popular local diner.",
+    hours:     "要確認",
+    closed:    "要確認",
+    note:      "",
+    note_en:   "",
     sourceUrl: "https://tabelog.com/okinawa/A4703/A470302/47013479/",
     sourceUrls: ["https://tabelog.com/okinawa/A4703/A470302/47013479/", "https://www.ekiten.jp/shop_71083176/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "ai", note: "備考「（もも肉1.5枚分のボリューム）」を削除（出典2件のいずれにも該当する記載がなかったため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「（もも肉1.5枚分のボリューム）」を削除（出典2件のいずれにも該当する記載がなかったため）" },
+      { date: "2026-08-08", type: "ai", note: "食べログ・エキテンは複製・転載を禁止する規約があるため転記元から除外することとし、両サイトのみに依存していた営業時間・定休日・備考を「要確認」／空欄に変更。代替の公式サイト・公式SNSは調査したが見つからなかった。リンク自体は発見の手がかりとして残置" }
     ],
-    warn:      false,
+    warn:      true,
     lat:       26.412381,
     lng:       127.820619,
     twitter:    "",
@@ -250,18 +258,19 @@ const restaurants = [
     code:        "47213-IS-0010",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-06",
+    lastChecked: "2026-08-08",
     name:      "居酒屋パラダイス",
     genre:     "居酒屋等",
     address:   "沖縄県うるま市石川2丁目39-15",
-    hours:     "ランチ 11:30〜15:00\n居酒屋 18:00〜24:00",
-    closed:    "要確認（月・木、または水・第5日曜という情報あり）",
-    note:      "ランチの骨汁が名物",
-    note_en:   "Lunch specialty: bone soup (骨汁).",
+    hours:     "要確認",
+    closed:    "要確認",
+    note:      "",
+    note_en:   "",
     sourceUrl: "https://tabelog.com/okinawa/A4703/A470302/47007823/",
     sourceUrls: ["https://tabelog.com/okinawa/A4703/A470302/47007823/", "https://www.ekiten.jp/shop_7136480/", "https://hitosara.com/0031479619/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "ai", note: "備考「・カツチャーハン」「地元客に人気」を削除（登録している出典3件のいずれにも該当する記載がなかったため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「・カツチャーハン」「地元客に人気」を削除（登録している出典3件のいずれにも該当する記載がなかったため）" },
+      { date: "2026-08-08", type: "ai", note: "食べログ・エキテン・ひとさらは複製・転載を禁止する規約があるため転記元から除外することとし、これらのみに依存していた営業時間・定休日・備考を「要確認」／空欄に変更。代替の公式サイト・公式SNSは調査したが見つからなかった。リンク自体は発見の手がかりとして残置" }
     ],
     warn:      true,
     lat:       26.427576,
@@ -312,13 +321,16 @@ const restaurants = [
     name:      "和カフェ Agariyama（アガリヤマ）",
     genre:     "カフェ・八重山そば",
     address:   "沖縄県うるま市石川東山1-8-3",
-    hours:     "水〜金 10:00〜15:00 / 17:00〜22:00\n土 10:00〜22:00 / 日 10:00〜19:00",
-    closed:    "月・火曜日",
+    hours:     "水〜金 10:00〜15:00 / 17:00〜22:00\n土・日は要確認",
+    closed:    "要確認",
     note:      "2024年5月オープン。石垣島出身オーナーのログハウス風隠れ家カフェ。八重山そばも提供",
     note_en:   "Opened May 2024. Hidden log-cabin café by an owner from Ishigaki Island. Also serves Yaeyama soba.",
-    sourceUrl: "https://omalblog.com/2024/12/08/uruma-gariyama/",
-    sourceUrls: ["https://omalblog.com/2024/12/08/uruma-gariyama/", "https://map.yahoo.co.jp/v3/place/rX-1n8b3hFo"],
-    warn:      false,
+    sourceUrl: "https://www.instagram.com/wa_cafe_agariyama/",
+    sourceUrls: ["https://www.instagram.com/wa_cafe_agariyama/", "https://omalblog.com/2024/12/08/uruma-gariyama/"],
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "sourceUrlを公式Instagramに変更（従来のYahoo!地図は複製・転載を禁止する規約があるため転記元から除外）。公式Instagramで平日（水〜金）の営業時間・住所は確認できたが、土日の詳細時間・定休日（月・火）は確認できなかったため「要確認」に変更" }
+    ],
+    warn:      true,
     lat:       26.4373232,
     lng:       127.8354213,
     twitter:    "",
@@ -337,15 +349,16 @@ const restaurants = [
     name:      "大衆酒場 照らす家 石川店",
     genre:     "居酒屋等",
     address:   "沖縄県うるま市石川白浜1丁目3-5",
-    hours:     "17:00〜翌3:00",
+    hours:     "日〜木 17:00〜0:00\n金・土・祝前日 17:00〜翌3:00",
     closed:    "要確認",
     note:      "飲み放題プランあり",
     note_en:   "All-you-can-drink plans available.",
-    sourceUrl: "https://tabelog.com/okinawa/A4703/A470302/47033173/",
-    sourceUrls: ["https://tabelog.com/okinawa/A4703/A470302/47033173/", "https://hitosara.com/0031728796/"],
+    sourceUrl: "https://www.instagram.com/ishikawaterasuya/",
+    sourceUrls: ["https://www.instagram.com/ishikawaterasuya/"],
     revisionHistory: [
       { date: "2026-08-06", type: "ai", note: "備考「セルフスタイルの」「（990円〜）」「が人気」を削除（出典2件のいずれにも確認できず、口コミでは980円という近いが不一致な金額のみ見つかったため）" },
-      { date: "2026-08-08", type: "ai", note: "備考「訪問前に営業時間を確認推奨」を削除（読者への行動の呼びかけは書かない方針としたため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「訪問前に営業時間を確認推奨」を削除（読者への行動の呼びかけは書かない方針としたため）" },
+      { date: "2026-08-08", type: "ai", note: "sourceUrlを公式Instagramに変更（従来の食べログ・ひとさらは複製・転載を禁止する規約があるため転記元から除外）。営業時間を公式Instagramの記載に修正（従来「17:00〜翌3:00」は金・土・祝前日のみで、日〜木は0:00閉店が正しい）" }
     ],
     warn:      true,
     lat:       26.427654,
@@ -370,18 +383,19 @@ const restaurants = [
     closed:    "日曜日・不定休",
     note:      "予約必須のコース料理専門店（2種から選択）",
     note_en:   "Reservation required. Course-only menu (choice of 2 courses).",
-    sourceUrl: "https://tabelog.com/okinawa/A4703/A470303/47028280/",
-    sourceUrls: ["https://tabelog.com/okinawa/A4703/A470303/47028280/", "https://www.hotpepper.jp/strJ000659979/"],
+    sourceUrl: "http://niraicuisine.com/gaiyou.html",
+    sourceUrls: ["http://niraicuisine.com/gaiyou.html", "https://www.instagram.com/sakae.niraicuisine/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "ai", note: "公式サイト（niraicuisine.com）がSSL証明書エラーでアクセス不能、副情報源も404のため、sourceUrl・websiteを食べログに変更。備考「地元・米軍関係者にも人気の名店」を削除（複数の出典・口コミのいずれにも米軍関係者への言及がなく根拠不明のため）。「コース料理のみ」は食べログで確認できたため維持" }
+      { date: "2026-08-06", type: "ai", note: "公式サイト（niraicuisine.com）がSSL証明書エラーでアクセス不能、副情報源も404のため、sourceUrl・websiteを食べログに変更。備考「地元・米軍関係者にも人気の名店」を削除（複数の出典・口コミのいずれにも米軍関係者への言及がなく根拠不明のため）。「コース料理のみ」は食べログで確認できたため維持" },
+      { date: "2026-08-08", type: "ai", note: "公式サイト（niraicuisine.com）に再度アクセスしたところ復旧しており、営業時間・定休日とも会社概要ページの記載と完全一致することを確認。sourceUrl・websiteを公式サイトに変更（従来の食べログ・ホットペッパーは複製・転載を禁止する規約があるため転記元から除外）" }
     ],
     warn:      false,
     lat:       26.4341514,
     lng:       127.8112099,
     twitter:    "",
-    instagram:  "",
+    instagram:  "https://www.instagram.com/sakae.niraicuisine/",
     youtube:    "",
-    website:    "",
+    website:    "http://niraicuisine.com/",
     detailText: "",
     photos:     []
   },
@@ -394,16 +408,17 @@ const restaurants = [
     name:      "パーラー K's Pit（ケーズピット）",
     genre:     "食事処",
     address:   "沖縄県うるま市石川曙1丁目2-17",
-    hours:     "11:00〜18:00（L.O. 17:00）\n※18時以降は予約営業",
+    hours:     "要確認",
     closed:    "不定休",
     note:      "2022年オープン。本格アメリカンバーガーやスイーツを提供。屋上にオーシャンビューテラス席あり",
     note_en:   "Opened 2022. Serves authentic American-style burgers and sweets. Rooftop ocean-view terrace available.",
-    sourceUrl: "https://www.otv.co.jp/okitive/article/23464/",
-    sourceUrls: ["https://www.otv.co.jp/okitive/article/23464/", "https://map.yahoo.co.jp/v3/place/9Rk9gUCDTcM", "https://tabelog.com/en/okinawa/A4703/A470302/47029035/"],
+    sourceUrl: "http://kspit.jp/",
+    sourceUrls: ["http://kspit.jp/", "https://www.instagram.com/kspit_parlor_okinawa/", "https://www.otv.co.jp/okitive/article/23464/"],
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「本格アメリカンバーガー専門店」を「本格アメリカンバーガーやスイーツを提供」に修正（出典の実際の記載は「ハンバーガーやスイーツを提供しているお店」で、専門店と言い切るのはやや誇張だったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「本格アメリカンバーガー専門店」を「本格アメリカンバーガーやスイーツを提供」に修正（出典の実際の記載は「ハンバーガーやスイーツを提供しているお店」で、専門店と言い切るのはやや誇張だったため）" },
+      { date: "2026-08-08", type: "ai", note: "sourceUrlを公式サイト・公式Instagramに変更（従来のYahoo!地図・食べログは複製・転載を禁止する規約があるため転記元から除外）。営業時間は公式サイト・報道記事（OTV）・公式Instagramの3者で開店/閉店時刻が食い違っており（10時/11時、18時/20時）一意に確定できないため「要確認」に変更" }
     ],
-    warn:      false,
+    warn:      true,
     lat:       26.421304,
     lng:       127.826424,
     twitter:    "",
@@ -422,14 +437,15 @@ const restaurants = [
     name:      "たらの芽",
     genre:     "居酒屋等",
     address:   "沖縄県うるま市石川白浜2丁目3-2",
-    hours:     "ランチ 12:00〜14:00\n夜 17:30〜翌1:00",
-    closed:    "日曜日",
+    hours:     "ランチ 12:00〜14:00\n居酒屋 17:30〜24:00",
+    closed:    "要確認",
     note:      "",
     note_en:   "",
-    sourceUrl: "https://tabelog.com/okinawa/A4703/A470302/47006947/",
-    sourceUrls: ["https://tabelog.com/okinawa/A4703/A470302/47006947/", "https://map.yahoo.co.jp/v3/place/4fz4CWfNo66", "https://okinawa-tabearuki.com/archives/666"],
+    sourceUrl: "https://www.instagram.com/taranome0319/",
+    sourceUrls: ["https://www.instagram.com/taranome0319/", "https://okinawa-tabearuki.com/archives/666"],
     revisionHistory: [
-      { date: "2026-08-06", type: "ai", note: "備考「地元民に愛される老舗の和食居酒屋。刺身定食・天ぷらが名物」を削除（出典3件（食べログ・okinawa-tabearuki.com・Yahoo地図）のいずれにも該当する記載がなく、実態不明のため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「地元民に愛される老舗の和食居酒屋。刺身定食・天ぷらが名物」を削除（出典3件（食べログ・okinawa-tabearuki.com・Yahoo地図）のいずれにも該当する記載がなく、実態不明のため）" },
+      { date: "2026-08-08", type: "ai", note: "sourceUrlを公式Instagramに変更（従来の食べログ・Yahoo!地図は複製・転載を禁止する規約があるため転記元から除外）。ランチ時間は公式Instagramで一致確認。夜の営業時間を公式Instagramの記載「17:30〜24:00」に修正（従来「翌1:00」の裏付けなし）。定休日「日曜日」は裏付けが取れず「要確認」に変更" }
     ],
     warn:      false,
     lat:       26.4272451,
@@ -450,13 +466,16 @@ const restaurants = [
     name:      "石川 柿兵衛（かきべえ）",
     genre:     "居酒屋等",
     address:   "沖縄県うるま市石川1丁目14-2",
-    hours:     "17:00〜翌2:00",
-    closed:    "なし（年中無休）",
-    note:      "備長炭で焼く本格焼き鳥居酒屋。飲み放題コースあり",
-    note_en:   "Authentic yakitori izakaya using binchotan charcoal. All-you-can-drink courses available.",
-    sourceUrl: "https://www.hotpepper.jp/strJ001017977/",
-    sourceUrls: ["https://www.hotpepper.jp/strJ001017977/", "https://retty.me/area/PRE47/ARE267/SUB26705/100001152816/"],
-    warn:      false,
+    hours:     "要確認",
+    closed:    "要確認",
+    note:      "",
+    note_en:   "",
+    sourceUrl: "https://www.instagram.com/kakibei_ishikawaten/",
+    sourceUrls: ["https://www.instagram.com/kakibei_ishikawaten/"],
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "ホットペッパー・Rettyは複製・転載を禁止する規約があるため転記元から除外することとし、これらのみに依存していた営業時間・定休日・備考を「要確認」／空欄に変更。sourceUrlは存在確認できた公式Instagramに変更したが、営業時間の記載はなく裏付けにはならない" }
+    ],
+    warn:      true,
     lat:       26.4298734,
     lng:       127.822802,
     twitter:    "",
@@ -480,9 +499,10 @@ const restaurants = [
     note:      "石川店限定の骨汁（700円）が名物。深夜4時まで営業",
     note_en:   "Famous for the Ishikawa-branch-exclusive bone soup (¥700). Open until 4am.",
     sourceUrl: "https://www.otv.co.jp/okitive/article/95697/",
-    sourceUrls: ["https://www.otv.co.jp/okitive/article/95697/", "https://retty.me/area/PRE47/ARE267/SUB26705/100001577229/", "https://map.yahoo.co.jp/v3/place/zJvRtaWsHsg"],
+    sourceUrls: ["https://www.otv.co.jp/okitive/article/95697/", "https://www.instagram.com/keijiro.ishikawa/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "ai", note: "備考「濃厚鶏白湯スープが特徴」を「骨汁（700円）が名物」に修正（出典に「濃厚鶏白湯スープ」の記載はなく、石川店限定と紹介されているのは実際には骨汁だったため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「濃厚鶏白湯スープが特徴」を「骨汁（700円）が名物」に修正（出典に「濃厚鶏白湯スープ」の記載はなく、石川店限定と紹介されているのは実際には骨汁だったため）" },
+      { date: "2026-08-08", type: "ai", note: "sourceUrlsから規約違反サイト（Retty・Yahoo!地図）を除去し、公式Instagramを追加。報道記事（OTV）は営業時間・定休日とも現行データと完全一致することを再確認済み" }
     ],
     warn:      false,
     lat:       26.4303538,
@@ -499,20 +519,21 @@ const restaurants = [
     code:        "47213-IS-0019",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-06",
+    lastChecked: "2026-08-08",
     name:      "石川の駅",
     genre:     "食事処",
     address:   "沖縄県うるま市石川赤崎2丁目2-1",
-    hours:     "10:00〜20:30",
-    closed:    "年中無休(お盆・1月1日のみ休み)",
-    note:      "ホームセンタータバタ石川店内の食堂。ステーキサンド・沖縄そばなどメニュー豊富",
-    note_en:   "Diner inside Tabata Home Center Ishikawa. Wide menu: steak sandwich, Okinawa soba & more.",
-    sourceUrl: "https://tabelog.com/okinawa/A4703/A470302/47011395/",
-    sourceUrls: ["https://tabelog.com/okinawa/A4703/A470302/47011395/", "https://map.yahoo.co.jp/v3/place/HTcEb_rP_d6", "https://retty.me/area/PRE47/ARE267/SUB26705/100001045603/"],
+    hours:     "要確認",
+    closed:    "要確認",
+    note:      "ホームセンタータバタ石川店内の食堂",
+    note_en:   "Diner inside Tabata Home Center Ishikawa.",
+    sourceUrl: "http://batabata.jp/shop/",
+    sourceUrls: ["http://batabata.jp/shop/", "https://www.facebook.com/hc.tabata/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "ai", note: "備考「ステーキ定食」を「ステーキサンド」に修正（出典に「ステーキ定食」の記載はなく、実際の名物は「ステーキサンド」だったため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「ステーキ定食」を「ステーキサンド」に修正（出典に「ステーキ定食」の記載はなく、実際の名物は「ステーキサンド」だったため）" },
+      { date: "2026-08-08", type: "ai", note: "食べログ・Yahoo!地図・Rettyは複製・転載を禁止する規約があるため転記元から除外。運営会社（ホームセンタータバタ）の公式サイト・公式Facebookでは店舗の実在は確認できたが「石川の駅」固有の営業時間・定休日の記載は見つからず「要確認」に変更。備考のメニュー詳細（ステーキサンド等）も裏付けが取れないため削除し、位置づけの記載のみ残した" }
     ],
-    warn:      false,
+    warn:      true,
     lat:       26.4342224,
     lng:       127.8353657,
     twitter:    "",
@@ -871,8 +892,11 @@ const restaurants = [
     closed:    "年中無休",
     note:      "石川インター近く。株式会社山城石油が運営",
     note_en:   "Near Ishikawa interchange. Operated by Yamashiro Oil.",
-    sourceUrl: "https://navitime.co.jp/",
-    sourceUrls: ["https://navitime.co.jp/", "https://eneos-ss.com/search/ss/pc/detail.php?SCODE=987654"],
+    sourceUrl: "https://eneos-ss.com/search/ss/pc/detail.php?SCODE=987654",
+    sourceUrls: ["https://eneos-ss.com/search/ss/pc/detail.php?SCODE=987654"],
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "sourceUrlをENEOS公式店舗検索（eneos-ss.com）に変更し、規約上安全とは言えないNAVITIMEを除去。営業時間・定休日・運営会社名はENEOS公式ページの記載と完全一致することを確認" }
+    ],
     warn:      false,
     lat:       26.434555,
     lng:       127.826689,
@@ -1129,7 +1153,7 @@ const restaurants = [
     code:        "47213-IS-0047",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-06",
+    lastChecked: "2026-08-08",
     name:      "石川郵便局",
     genre:     "金融",
     address:   "沖縄県うるま市石川東山本町1-1-2",
@@ -1137,9 +1161,10 @@ const restaurants = [
     closed:    "土・日・祝日",
     note:      "",
     sourceUrl: "https://map.japanpost.jp/p/search/dtl/300170031000/",
-    sourceUrls: ["https://map.japanpost.jp/p/search/dtl/300170031000/", "https://map.yahoo.co.jp/v3/place/ls1CxYp0fJM"],
+    sourceUrls: ["https://map.japanpost.jp/p/search/dtl/300170031000/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "ai", note: "備考「ATMあり（土日も利用可）」を削除（登録している出典2件のいずれにもATM稼働時間・土日利用可否の記載が確認できなかったため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「ATMあり（土日も利用可）」を削除（登録している出典2件のいずれにもATM稼働時間・土日利用可否の記載が確認できなかったため）" },
+      { date: "2026-08-08", type: "ai", note: "sourceUrlsから規約違反サイト（Yahoo!地図）を除去。日本郵便公式サイト（map.japanpost.jp）に改めてアクセスし、営業時間・定休日とも現行データと一致することを再確認" }
     ],
     warn:      false,
     lat:       26.43363,
@@ -1332,7 +1357,8 @@ const restaurants = [
     note_en:   "",
     sourceUrl: "https://www.navitime.co.jp/category/0402003/47213/",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" },
+      { date: "2026-08-08", type: "ai", note: "代替の公式サイト・公式SNSを調査したが見つからなかった。既に営業時間・定休日は「要確認」のため内容の変更なし。sourceUrl（NAVITIME）は複製・転載を禁止する規約があるため出典としては扱わず、実在確認の手がかりとしてのみ残置" }
     ],
     warn:      true,
     lat:       26.431154,
@@ -1354,7 +1380,8 @@ const restaurants = [
     note_en:   "",
     sourceUrl: "https://www.navitime.co.jp/category/0402003/47213/",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" },
+      { date: "2026-08-08", type: "ai", note: "代替の公式サイト・公式SNSを調査したが見つからなかった。既に営業時間・定休日は「要確認」のため内容の変更なし。sourceUrl（NAVITIME）は複製・転載を禁止する規約があるため出典としては扱わず、実在確認の手がかりとしてのみ残置" }
     ],
     warn:      true,
     lat:       26.429498,
@@ -1376,7 +1403,8 @@ const restaurants = [
     note_en:   "",
     sourceUrl: "https://map.yahoo.co.jp/v3/place/Xu8xLHpHHrw",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" },
+      { date: "2026-08-08", type: "ai", note: "代替の公式サイト・公式SNSを調査したが見つからなかった。既に営業時間・定休日は「要確認」のため内容の変更なし。sourceUrl（Yahoo!地図）は複製・転載を禁止する規約があるため出典としては扱わず、実在確認の手がかりとしてのみ残置" }
     ],
     warn:      true,
     lat:       26.427057,
@@ -1394,12 +1422,13 @@ const restaurants = [
     address:   "沖縄県うるま市石川2丁目9-1",
     hours:     "要確認",
     closed:    "要確認",
-    note:      "個人経営の美容室",
-    note_en:   "Independently run hair salon.",
+    note:      "",
+    note_en:   "",
     sourceUrl: "https://map.yahoo.co.jp/v3/place/iocOXHLAbSY",
     revisionHistory: [
       { date: "2026-08-08", type: "ai", note: "備考「老舗」を削除（登録している出典に該当する記載がなかったため）" },
-      { date: "2026-08-08", type: "ai", note: "備考「。営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「。営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" },
+      { date: "2026-08-08", type: "ai", note: "代替の公式サイト・公式SNSを調査したが見つからなかった。備考「個人経営の美容室」はYahoo!地図由来で裏付けが取れないため削除（同サイトは複製・転載を禁止する規約があり出典として扱わない方針としたため）" }
     ],
     warn:      true,
     lat:       26.428814,
@@ -1415,12 +1444,15 @@ const restaurants = [
     name:      "ヘアーサロンジピー（ZiPPi）",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川白浜1丁目3-7",
-    hours:     "10:00〜20:00",
-    closed:    "月曜日",
+    hours:     "要確認",
+    closed:    "要確認",
     note:      "",
     note_en:   "",
     sourceUrl: "https://www.ekiten.jp/shop_2457063/",
-    warn:      false,
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "エキテンは複製・転載を禁止する規約があるため転記元から除外することとし、同サイトのみに依存していた営業時間・定休日を「要確認」に変更。代替の公式サイト・公式SNSは調査したが見つからなかった。リンク自体は発見の手がかりとして残置" }
+    ],
+    warn:      true,
     lat:       26.427888,
     lng:       127.827134,
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
@@ -1529,7 +1561,8 @@ const restaurants = [
     note_en:   "",
     sourceUrl: "https://www.ekiten.jp/shop_3616835/",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" },
+      { date: "2026-08-08", type: "ai", note: "代替の公式サイト・公式SNSを調査したが見つからなかった（同名のFacebookページはヒットしたが住所等の関連性を確認できず不採用）。既に営業時間・定休日は「要確認」のため内容の変更なし。sourceUrl（エキテン）は複製・転載を禁止する規約があるため出典としては扱わず、実在確認の手がかりとしてのみ残置" }
     ],
     warn:      true,
     lat:       26.435215,
@@ -1551,7 +1584,8 @@ const restaurants = [
     note_en:   "",
     sourceUrl: "https://www.ekiten.jp/shop_2457849/",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" },
+      { date: "2026-08-08", type: "ai", note: "代替の公式サイト・公式SNSを調査したが見つからなかった。既に営業時間・定休日は「要確認」のため内容の変更なし。sourceUrl（エキテン）は複製・転載を禁止する規約があるため出典としては扱わず、実在確認の手がかりとしてのみ残置" }
     ],
     warn:      true,
     lat:       26.409203,
@@ -1567,13 +1601,16 @@ const restaurants = [
     name:      "グランディール",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川東恩納721-2",
-    hours:     "9:00〜18:00",
-    closed:    "火曜日",
+    hours:     "要確認",
+    closed:    "要確認",
     note:      "",
     note_en:   "",
     sourceUrl: "https://map.yahoo.co.jp/v3/place/NSvKcDoNksY",
     sourceUrls: ["https://map.yahoo.co.jp/v3/place/NSvKcDoNksY", "https://www.ekiten.jp/shop_7003915/"],
-    warn:      false,
+    revisionHistory: [
+      { date: "2026-08-08", type: "ai", note: "Yahoo!地図・エキテンは複製・転載を禁止する規約があるため転記元から除外することとし、両サイトのみに依存していた営業時間・定休日を「要確認」に変更。代替の公式サイト・公式SNSは調査したが見つからなかった（同名別法人〈静岡県富士宮市〉のInstagramはヒットしたが無関係と判断し除外）" }
+    ],
+    warn:      true,
     lat:       26.413455,
     lng:       127.823629,
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
@@ -1593,7 +1630,8 @@ const restaurants = [
     note_en:   "",
     sourceUrl: "https://map.yahoo.co.jp/v3/place/gor1YPjRz3M",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" },
+      { date: "2026-08-08", type: "ai", note: "代替の公式サイト・公式SNSを調査したが見つからなかった。既に営業時間・定休日は「要確認」のため内容の変更なし。sourceUrl（Yahoo!地図）は複製・転載を禁止する規約があるため出典としては扱わず、実在確認の手がかりとしてのみ残置" }
     ],
     warn:      true,
     lat:       26.41725,
@@ -1618,7 +1656,8 @@ const restaurants = [
     note_en:   "Formerly known as \"Hair Project Sava\". Name change confirmed on-site.",
     sourceUrl: "https://www.ekiten.jp/g0202/a47213/",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「、詳細は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「、詳細は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" },
+      { date: "2026-08-08", type: "ai", note: "チェーンとしての実在は確認できたが（沖縄県内に複数店舗）、石川店固有の公式サイト・公式SNSは見つからなかった。既に営業時間・定休日は「要確認」のため内容の変更なし。sourceUrl（エキテン）は複製・転載を禁止する規約があるため出典としては扱わず、実在確認の手がかりとしてのみ残置" }
     ],
     warn:      true,
     lat:       26.427074,
