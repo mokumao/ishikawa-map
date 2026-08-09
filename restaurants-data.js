@@ -91,7 +91,7 @@ const restaurants = [
     code:        "47213-IS-0004",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-09",
     name:      "牛角 うるま石川店",
     genre:     "焼肉",
     address:   "沖縄県うるま市石川1-16-18",
@@ -100,7 +100,10 @@ const restaurants = [
     note:      "チェーン店（牛角グループ）",
     note_en:   "Chain restaurant (Gyukaku group).",
     sourceUrl: "https://map.reins.co.jp/gyukaku/detail/989653529",
-    sourceUrls: ["https://map.reins.co.jp/gyukaku/detail/989653529", "https://r.gnavi.co.jp/420y0ukw0000/"],
+    sourceUrls: ["https://map.reins.co.jp/gyukaku/detail/989653529"],
+    revisionHistory: [
+      { date: "2026-08-09", type: "ai", note: "sourceUrlsからぐるなび（r.gnavi.co.jp）を除去（利用規約に転載・複製禁止条項を確認したため）。sourceUrl（map.reins.co.jp）は牛角の運営会社「株式会社レインズインターナショナル」自身の公式サイトと判明し、安全な情報源として引き続き採用。営業時間・定休日・備考は同公式サイトの記載と一致することを確認" }
+    ],
     warn:      false,
     lat:       26.431203,
     lng:       127.825063,
@@ -289,20 +292,21 @@ const restaurants = [
     code:        "47213-IS-0011",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-06",
+    lastChecked: "2026-08-09",
     name:      "まるみつ食堂",
     genre:     "食事処",
     address:   "沖縄県うるま市石川東山1丁目22-11",
-    hours:     "10:30〜14:30頃（売り切れ次第終了）",
-    closed:    "水曜日（年末年始・旧盆休あり）",
-    note:      "創業60年以上の老舗食堂。地元民に愛されている",
-    note_en:   "A long-established diner in business for over 60 years, loved by locals.",
+    hours:     "要確認",
+    closed:    "要確認",
+    note:      "",
+    note_en:   "",
     sourceUrl: "https://ryukyu-entertainment.com/marumitu/",
     sourceUrls: ["https://ryukyu-entertainment.com/marumitu/"],
     revisionHistory: [
-      { date: "2026-08-06", type: "ai", note: "備考「1949年創業」「てびちそば・三枚肉そばが名物」「昭和の食堂」を削除し、出典の実際の記載「創業60年以上」「地元民から愛される」に基づく表現に修正。リンク切れの情報源（retty.me、404）を削除" }
+      { date: "2026-08-06", type: "ai", note: "備考「1949年創業」「てびちそば・三枚肉そばが名物」「昭和の食堂」を削除し、出典の実際の記載「創業60年以上」「地元民から愛される」に基づく表現に修正。リンク切れの情報源（retty.me、404）を削除" },
+      { date: "2026-08-09", type: "ai", note: "唯一の情報源（ryukyu-entertainment.com）が、まるみつ食堂とは無関係な第三者の観光・エンタメ会社サイトと判明（運営会社ではない）。明文の転載禁止規約は見つからなかったが、店舗公式でも公的機関でもないため、営業時間・定休日・備考を「要確認」／空欄に変更。リンク自体は発見の手がかりとして残置" }
     ],
-    warn:      false,
+    warn:      true,
     lat:       26.4347222,
     lng:       127.8380556,
     twitter:    "",
@@ -1505,7 +1509,7 @@ const restaurants = [
     code:        "47213-IS-0063",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-09",
     name:      "ゆたか美容室",
     genre:     "美容・理容",
     address:   "沖縄県うるま市石川2丁目22-9",
@@ -1515,7 +1519,8 @@ const restaurants = [
     note_en:   "",
     sourceUrl: "https://www.yelp.com/biz/%E3%82%86%E3%81%9F%E3%81%8B%E7%BE%8E%E5%AE%B9%E5%AE%A4-%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" },
+      { date: "2026-08-09", type: "ai", note: "sourceUrl（Yelp）の利用規約にスクレイピング・自動収集を禁止する条項を確認（規約違反サイトと確定）。既に営業時間・定休日は「要確認」のため内容の変更なし。代替の公式サイト・公式SNSも調査したが見つからなかった。リンク自体は発見の手がかりとして残置" }
     ],
     warn:      true,
     lat:       26.426258,
