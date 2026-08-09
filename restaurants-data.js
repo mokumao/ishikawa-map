@@ -119,18 +119,19 @@ const restaurants = [
     code:        "47213-IS-0005",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-06",
+    lastChecked: "2026-08-09",
     name:      "Capful（キャプフル）",
     genre:     "カフェ",
     address:   "沖縄県うるま市石川曙1丁目6-1",
-    hours:     "7:30〜15:30（月〜木）\n7:30〜21:00（金・土・日）",
+    hours:     "8:00〜15:30（L.O.15:00）",
     closed:    "水曜日",
     note:      "海が見えるテラス席。朝食営業あり",
     note_en:   "Terrace seating with ocean view. Breakfast available.",
     sourceUrl: "https://www.instagram.com/okinawa_capful/",
     sourceUrls: ["https://www.instagram.com/okinawa_capful/", "https://okinawatravel.jp/capful"],
     revisionHistory: [
-      { date: "2026-08-06", type: "ai", note: "備考「元外国人住宅を改装。」を削除（登録している出典2件のいずれにも該当する記載がなく確認できなかったため）" }
+      { date: "2026-08-06", type: "ai", note: "備考「元外国人住宅を改装。」を削除（登録している出典2件のいずれにも該当する記載がなく確認できなかったため）" },
+      { date: "2026-08-09", type: "ai", note: "営業時間「7:30〜15:30（月〜木）／7:30〜21:00（金・土・日）」を「8:00〜15:30（L.O.15:00）」に修正（公式Instagramのプロフィール記載「Mon-Sun 8:00am-3:30pm（L.O3:00）」と一致させた。金土日の夜間延長営業〈〜21:00〉は公式Instagram・第三者サイトのいずれにも裏付けがなく削除）。定休日「水曜日」は公式Instagramの記載と一致確認" }
     ],
     warn:      false,
     lat:       26.420088,
