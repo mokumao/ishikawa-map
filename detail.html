@@ -549,10 +549,13 @@
       // 限り、中立的な「ウェブサイト」と表示する。sourceNoteの方針と統一）
       if (r.website)   links.push(`<a href="${r.website}"   class="link-btn link-web" target="_blank" rel="noopener">ウェブサイト</a>`);
       // 情報源ボタン：通常は sourceUrl（単一）のみだが、複数の情報源がある店舗は
-      // sourceUrls（配列）を使うと「情報源①：〇〇」「情報源②：〇〇」と番号付きで並べて表示する
-      const sourceList = Array.isArray(r.sourceUrls) && r.sourceUrls.length > 0
+      // sourceUrls（配列）を使うと「情報源①：〇〇」「情報源②：〇〇」と番号付きで並べて表示する。
+      // ただし上のSNS・リンク欄と同じURLは、ボタンが2つ並んで重複表示になるため除外する
+      const socialUrls = [r.twitter, r.instagram, r.youtube, r.website].filter(Boolean);
+      const sourceList = (Array.isArray(r.sourceUrls) && r.sourceUrls.length > 0
         ? r.sourceUrls
-        : (r.sourceUrl ? [r.sourceUrl] : []);
+        : (r.sourceUrl ? [r.sourceUrl] : [])
+      ).filter(function (url) { return socialUrls.indexOf(url) === -1; });
       const CIRCLED_NUMS = ['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩'];
       sourceList.forEach(function (url, i) {
         const text = sourceList.length > 1
