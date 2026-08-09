@@ -582,6 +582,15 @@ body.about-site-page {
   flex-wrap: wrap;
   gap: 5px;
 }
+.filter-sub-buttons {
+  margin-top: 5px;
+  padding-left: 10px;
+  border-left: 2px solid #eceff1;
+}
+.filter-sub-btn {
+  padding: 3px 9px;
+  font-size: .68rem;
+}
 .filter-btn {
   padding: 4px 11px;
   border-radius: 100px;
@@ -1554,20 +1563,10 @@ body.side-swipe-right #minimap {
     user-select: none;
     -webkit-tap-highlight-color: transparent;
   }
-  /* 表示中（active）のチップ：カテゴリ色 */
-  .cat-label-chip.chip-food.chip-active    { background: #ffcdd2; }
-  .cat-label-chip.chip-conbini.chip-active { background: #ffe0b2; }
-  .cat-label-chip.chip-gas.chip-active     { background: #bbdefb; }
-  /* 宿泊チップ：うす紫 */
-  .cat-label-chip.chip-stay.chip-active      { background: #e1bee7; }
-  /* 金融チップ：うす緑 */
-  .cat-label-chip.chip-finance.chip-active   { background: #c8e6c9; }
-  /* 教育チップ：うすティール */
-  .cat-label-chip.chip-education.chip-active { background: #b2dfdb; }
-  /* 観光チップ：うすシアン */
-  .cat-label-chip.chip-tourism.chip-active   { background: #b2ebf2; }
-  /* 美容・理容チップ：うすピンク */
-  .cat-label-chip.chip-beauty.chip-active    { background: #f8bbd0; }
+  /* 表示中（active）のチップ：カテゴリごとの薄色背景はJSがインライン変数
+     --fc-tint で注入する（script.jsのCATEGORIES/autoTint参照）。
+     新カテゴリ追加時にここを編集する必要はない */
+  .cat-label-chip.chip-active { background: var(--fc-tint, #ffcdd2); }
 
   /* カテゴリパネル展開時：白囲みなし・左端アイコンを避けた透明グリッド */
   .gear-menu.cat-mode {
@@ -1641,26 +1640,14 @@ body.side-swipe-right #minimap {
     color: #777777 !important;
   }
 
-  /* カテゴリ選択モード：選択済みボタン（飲食店=うす赤・デフォルト） */
+  /* カテゴリ選択モード：選択済みボタン。カテゴリごとの薄色背景はJSが
+     インライン変数 --fc-tint で注入する（script.jsのCATEGORIES/autoTint参照）。
+     新カテゴリ追加時にここを編集する必要はない */
   .gear-menu-btn.cat-selected {
-    background: #ffcdd2 !important;
+    background: var(--fc-tint, #ffcdd2) !important;
     border-color: #e53935 !important;
     color: #b71c1c !important;
   }
-  /* コンビニ選択済み：うすオレンジ */
-  #gearCatConbini.cat-selected {
-    background: #ffe0b2 !important;
-  }
-  /* ガソリン選択済み：うす青 */
-  #gearCatGas.cat-selected {
-    background: #bbdefb !important;
-  }
-  /* 新カテゴリボタンの選択色 */
-  #gearCatStay.cat-selected      { background: #e1bee7 !important; }
-  #gearCatFinance.cat-selected   { background: #c8e6c9 !important; }
-  #gearCatEducation.cat-selected { background: #b2dfdb !important; }
-  #gearCatTourism.cat-selected   { background: #b2ebf2 !important; }
-  #gearCatBeauty.cat-selected    { background: #f8bbd0 !important; }
   /* 閉じるボタン（青背景・白文字） */
   .gear-menu-btn.close-btn {
     background: #1565c0 !important;

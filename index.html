@@ -15,7 +15,7 @@
   <meta property="og:locale" content="ja_JP">
   <title>うるま市石川 飲食店マップ</title>
   <link rel="stylesheet" href="leaflet/leaflet.css"/>
-  <link rel="stylesheet" href="style.css?v=20260805a">
+  <link rel="stylesheet" href="style.css?v=20260809a">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -99,6 +99,7 @@
       <div class="filter-section">
         <p class="filter-label" data-i18n="filter.label">ジャンルで絞り込み</p>
         <div class="filter-buttons" id="filterButtons"></div>
+        <div class="filter-buttons filter-sub-buttons" id="filterSubButtons" style="display:none;"></div>
       </div>
       <p class="shop-count" id="shopCount"></p>
       <div class="shop-list" id="shopList" role="list"></div>
@@ -183,25 +184,8 @@
             <button class="gear-menu-btn cat-ctrl-btn" id="gearCatAll">すべて選択</button>
             <button class="gear-menu-btn cat-ctrl-btn" id="gearCatClear">すべて解除</button>
           </div>
-          <!-- カテゴリグリッド（テキストのみ） -->
-          <div class="cat-icon-grid">
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatShokuji">食事処</button>
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatIzakaya">居酒屋等</button>
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatConbini">コンビニ</button>
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatGas">ガソリン</button>
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatStay">宿泊</button>
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatShop">買い物</button>
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatTransport">交通</button>
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatMedical">医療</button>
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatEducation">教育</button>
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatPublic">公共</button>
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatFinance">金融</button>
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatEntertain">娯楽</button>
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatTourism">観光</button>
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatChild">子育て</button>
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatOther">その他</button>
-            <button class="gear-menu-btn cat-icon-btn" id="gearCatBeauty">美容・理容</button>
-          </div>
+          <!-- カテゴリグリッド（CATEGORIESからJSで動的生成。script.jsのbuildGearCategoryGrid()参照） -->
+          <div class="cat-icon-grid" id="gearCatGrid"></div>
         </div>
       </div>
     </div>
@@ -304,7 +288,7 @@
   <script src="leaflet/leaflet.js"></script>
   <script src="restaurants-data.js?v=20260809b"></script>
   <script src="ishikawa-boundary.js?v=20260709b"></script>
-  <script src="script.js?v=20260806a"></script>
+  <script src="script.js?v=20260809a"></script>
   <!-- GoatCounter アクセス解析 -->
   <script data-goatcounter="https://ishikawamap.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>

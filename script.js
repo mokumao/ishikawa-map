@@ -40,13 +40,7 @@ var TRANSLATIONS = {
     'count.results':       '{n} 件表示中',
     'list.closed':         '定休日：',
     'filter.all':          'すべて',
-    'filter.shokuji':      '食事処',
-    'filter.izakaya':      '居酒屋等',
-    'filter.cafe':         'カフェ',
-    'filter.yakiniku':     '焼肉',
-    'filter.bar':          'バル',
-    'filter.ramen':        'ラーメン',
-    'filter.conbini':      'コンビニ',
+    // filter.<カテゴリキー> はCATEGORIES（下部で定義）から自動注入される
     'footer.main':         '🌊 うるま市石川 飲食店マップ  |  掲載情報は調査時点のものです',
     'visitor.today':       '本日の訪問者 {n} 人',
     'visitor.total':       '累計訪問者 {n} 人',
@@ -84,13 +78,7 @@ var TRANSLATIONS = {
     'count.results':       '{n} results',
     'list.closed':         'Closed: ',
     'filter.all':          'All',
-    'filter.shokuji':      'Restaurant',
-    'filter.izakaya':      'Izakaya',
-    'filter.cafe':         'Café',
-    'filter.yakiniku':     'BBQ',
-    'filter.bar':          'Bar',
-    'filter.ramen':        'Ramen',
-    'filter.conbini':      'Convenience Store',
+    // filter.<category key> is auto-injected from CATEGORIES (defined below)
     'footer.main':         '🌊 Ishikawa, Uruma City  |  Info as of survey date',
     'visitor.today':       "Today's visitors: {n}",
     'visitor.total':       'Total visitors: {n}',
@@ -125,6 +113,8 @@ function setLanguage(lang) {
   applyLangToDOM();
   // フィルターボタン再描画
   if (typeof buildFilterButtons === 'function') buildFilterButtons();
+  // 歯車パネルのカテゴリボタン再描画（ラベルの言語切替に追従させる）
+  if (typeof window._buildGearCategoryGrid === 'function') window._buildGearCategoryGrid();
   // 店舗リスト再描画
   if (typeof renderShopList    === 'function') renderShopList();
   // 開いているポップアップを閉じる（古い言語のまま残らないように）
@@ -153,6 +143,84 @@ var GENRE_EN = {
   'ラーメン':                  'Ramen',
   'テスト用':                  'Test',
 };
+
+// ── カテゴリ中央設定リスト ──────────────────────────────────────
+// 大分類＝マーカー色・チップ・歯車ボタン・凡例を持つ層
+// 小分類（sub）＝一覧の絞り込みのみに使う。マーカー色は大分類を継承
+// 新しいカテゴリ・業種を追加するときは、この配列に1エントリ足すだけでよい
+// （地図のピン色・チップバー・歯車パネル・一覧の絞り込み・凡例・多言語表記に自動反映される）
+// ※このファイル内の複数のIIFEが即時実行時に参照するため、必ずファイルの
+//   早い位置（他のコードより前）で定義すること
+const CATEGORIES = [
+  {
+    key: 'shokuji',
+    label: { ja: '食事処', en: 'Restaurant' },
+    color: '#f57c00',
+    tint: '#ffcdd2',   // 選択時の薄色背景（歯車ボタン・チップ共通。従来のデフォルト色を維持）
+    isDefault: true,   // 他のどの大分類にも一致しないジャンルはここに落ちる
+    sub: [
+      { key: 'cafe',     label: { ja: 'カフェ',   en: 'Café'  }, match: g => g.includes('カフェ') },
+      { key: 'yakiniku', label: { ja: '焼肉',     en: 'BBQ'   }, match: g => g.includes('焼肉') },
+      { key: 'bar',      label: { ja: 'バル',     en: 'Bar'   }, match: g => g.includes('バル') },
+      { key: 'ramen',    label: { ja: 'ラーメン', en: 'Ramen' }, match: g => g.includes('ラーメン') },
+    ],
+  },
+  { key: 'izakaya',   label: { ja: '居酒屋等',   en: 'Izakaya' },           color: '#e53935', match: g => g === '居酒屋等', tint: '#ffcdd2' },
+  { key: 'conbini',   label: { ja: 'コンビニ',   en: 'Convenience Store' }, color: '#fb8c00', match: g => g === 'コンビニ', sidebarHidden: true, tint: '#ffe0b2' },
+  { key: 'gas',       label: { ja: 'ガソリン',   en: 'Gas Station' },       color: '#1565c0', match: g => g === 'ガソリン', sidebarHidden: true, tint: '#bbdefb' },
+  { key: 'stay',      label: { ja: '宿泊',       en: 'Accommodation' },     color: '#7b1fa2', match: g => g === '宿泊', tint: '#e1bee7' },
+  { key: 'finance',   label: { ja: '金融',       en: 'Finance' },           color: '#2e7d32', match: g => g === '金融', tint: '#c8e6c9' },
+  { key: 'education', label: { ja: '教育',       en: 'Education' },         color: '#00695c', match: g => g === '教育', tint: '#b2dfdb' },
+  { key: 'tourism',   label: { ja: '観光',       en: 'Tourism' },           color: '#0097a7', match: g => g === '観光', tint: '#b2ebf2' },
+  { key: 'beauty',    label: { ja: '美容・理容', en: 'Beauty & Barber' },   color: '#d81b60', match: g => g === '美容・理容', chipLabel: '美容', tint: '#f8bbd0' },
+  // 将来、鍵屋・水道屋・自転車屋のような細かい業種を追加する場合は、
+  // 既存または新設の大分類の sub にエントリを足す（飲食店のcafe/yakiniku等と同じパターン）。
+  // 例：
+  // {
+  //   key: 'lifeservice', label: { ja: '生活サービス', en: 'Local Services' }, color: '#5d4037',
+  //   match: g => ['鍵屋','水道屋','自転車屋'].includes(g),
+  //   sub: [
+  //     { key: 'locksmith', label: { ja: '鍵屋',     en: 'Locksmith' }, match: g => g === '鍵屋' },
+  //     { key: 'plumber',   label: { ja: '水道屋',   en: 'Plumber' },   match: g => g === '水道屋' },
+  //     { key: 'bike',      label: { ja: '自転車屋', en: 'Bike Shop' }, match: g => g === '自転車屋' },
+  //   ],
+  // },
+];
+
+// ジャンル文字列 → 大分類オブジェクトを解決する（isDefault大分類にキャッチオールで落ちる）
+function macroOf(genre) {
+  const hit = CATEGORIES.find(c => !c.isDefault && c.match(genre));
+  return hit || CATEGORIES.find(c => c.isDefault);
+}
+
+// 大分類の色(#rrggbb)から、選択中UI用の薄い背景色を自動生成する
+// （tintフィールドを個別指定しなければ、この関数が自動計算する）
+function autoTint(hex, ratio = 0.82) {
+  const n = parseInt(hex.slice(1), 16);
+  const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  const mix = c => Math.round(c + (255 - c) * ratio);
+  return `rgb(${mix(r)}, ${mix(g)}, ${mix(b)})`;
+}
+
+// CATEGORIESの多言語ラベルを翻訳テーブル(filter.<key>)・GENRE_ENに自動注入する。
+// 既存のキーがあれば上書きしない（個別に手を加えたい場合はそちらを優先する）。
+// これにより新カテゴリ追加時、TRANSLATIONS/GENRE_ENの手動編集が不要になる
+(function injectCategoryTranslations() {
+  function inject(key, label) {
+    if (!(('filter.' + key) in TRANSLATIONS.ja)) TRANSLATIONS.ja['filter.' + key] = label.ja;
+    if (!(('filter.' + key) in TRANSLATIONS.en)) TRANSLATIONS.en['filter.' + key] = label.en;
+  }
+  CATEGORIES.forEach(function(c) {
+    inject(c.key, c.label);
+    (c.sub || []).forEach(function(s) { inject(s.key, s.label); });
+    // 単純一致の大分類（genre === 大分類名）は、そのままGENRE_ENにも自動登録する。
+    // includesベースの複合ジャンル文字列（カフェ・イタリアン等）は対象外
+    // （isDefault大分類=食事処のキャッチオールも対象外。既存の個別エントリを維持）
+    if (!c.isDefault && !GENRE_EN[c.label.ja]) {
+      GENRE_EN[c.label.ja] = c.label.en;
+    }
+  });
+})();
 
 // 曜日・共通語句を英語に変換（hours / closed フィールド用）
 function translateDays(str) {
@@ -462,10 +530,6 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   const catChipSet  = new Set(); // チップバーに表示するカテゴリ（パネル閉時に記憶）
   const btnAll      = document.getElementById('gearCatAll');
   const btnClear    = document.getElementById('gearCatClear');
-  const btnShokuji  = document.getElementById('gearCatShokuji');
-  const btnIzakaya  = document.getElementById('gearCatIzakaya');
-  const btnConbini  = document.getElementById('gearCatConbini');
-  const btnGas      = document.getElementById('gearCatGas');
   // 地図下部チップバー上の「すべて選択/すべて解除」ボタン
   const btnSelectAllChips = document.getElementById('catSelectAllBtn');
   const btnClearAllChips  = document.getElementById('catClearAllBtn');
@@ -485,7 +549,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 
   // 「すべて」ボタンのグレーアウトを catSel の状態に合わせて更新
   function updateAllBtn() {
-    var allSelected = catSel.has('shokuji') && catSel.has('izakaya') && catSel.has('conbini') && catSel.has('gas');
+    var allSelected = CATEGORIES.every(function(c) { return catSel.has(c.key); });
     if (allSelected) {
       btnAll.classList.add('cat-all-active');
     } else {
@@ -502,29 +566,16 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     }
   }
 
+  // カテゴリキー(shokuji等)から対応する歯車パネルのボタン要素を取得
+  // （既存のDOM id命名規則 "gearCat" + キー先頭大文字化 に合わせている）
+  function gearBtnEl(key) {
+    return document.getElementById('gearCat' + key.charAt(0).toUpperCase() + key.slice(1));
+  }
+
   // 選択中カテゴリに合わせてマーカーを表示（タップ不可モード）
   function updateCatPreview() {
     markersData.forEach(function({ restaurant: r, marker }) {
-      var isShokuji  = r.genre === '食事処';
-      var isIzakaya  = r.genre === '居酒屋等';
-      var isConbini  = r.genre === 'コンビニ';
-      var isGas      = r.genre === 'ガソリン';
-      var isStay     = r.genre === '宿泊';
-      var isFinance  = r.genre === '金融';
-      var isEducation = r.genre === '教育';
-      var isTourism  = r.genre === '観光';
-      var isBeauty   = r.genre === '美容・理容';
-      // 上記以外の飲食系（カフェ・焼肉・バル・ラーメン等）は食事処に含める
-      var isOtherFood = !isShokuji && !isIzakaya && !isConbini && !isGas && !isStay && !isFinance && !isEducation && !isTourism && !isBeauty;
-      var show = (catSel.has('shokuji')   && (isShokuji || isOtherFood)) ||
-                 (catSel.has('izakaya')   && isIzakaya)   ||
-                 (catSel.has('conbini')   && isConbini)   ||
-                 (catSel.has('gas')       && isGas)       ||
-                 (catSel.has('stay')      && isStay)      ||
-                 (catSel.has('finance')   && isFinance)   ||
-                 (catSel.has('education') && isEducation) ||
-                 (catSel.has('tourism')   && isTourism)   ||
-                 (catSel.has('beauty')    && isBeauty);
+      var show = catSel.has(macroOf(r.genre).key);
       if (show && isStatusVisible(r)) { if (!map.hasLayer(marker)) marker.addTo(map); }
       else       { if (map.hasLayer(marker))  map.removeLayer(marker); }
     });
@@ -543,8 +594,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     var prevScroll = bar.scrollLeft; // チップタップによる再描画後もスクロール位置を維持
     if (showAll) {
       catChipSet.clear();
-      ['shokuji','izakaya','conbini','gas','stay','finance','education','tourism','beauty'].forEach(function(k) {
-        if (catSel.has(k)) catChipSet.add(k);
+      CATEGORIES.forEach(function(c) {
+        if (catSel.has(c.key)) catChipSet.add(c.key);
       });
     }
     var wrapper = document.getElementById('catLabelWrapper');
@@ -555,21 +606,13 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       return;
     }
     // チップ定義（catChipSet の順で表示）
-    var defs = [
-      { key: 'shokuji',   label: '食事処',  cls: 'chip-food'      },
-      { key: 'izakaya',   label: '居酒屋等', cls: 'chip-izakaya'   },
-      { key: 'conbini',   label: 'コンビニ', cls: 'chip-conbini'   },
-      { key: 'gas',       label: 'ガソリン', cls: 'chip-gas'       },
-      { key: 'stay',      label: '宿泊',    cls: 'chip-stay'      },
-      { key: 'finance',   label: '金融',    cls: 'chip-finance'   },
-      { key: 'education', label: '教育',    cls: 'chip-education' },
-      { key: 'tourism',   label: '観光',    cls: 'chip-tourism'   },
-      { key: 'beauty',    label: '美容',    cls: 'chip-beauty'    },
-    ].filter(function(d) { return catChipSet.has(d.key); });
+    var defs = CATEGORIES.map(function(c) {
+      return { key: c.key, label: c.chipLabel || c.label.ja, tint: c.tint || autoTint(c.color) };
+    }).filter(function(d) { return catChipSet.has(d.key); });
 
     bar.innerHTML = defs.map(function(d) {
       var active = catSel.has(d.key) ? ' chip-active' : '';
-      return '<span class="cat-label-chip ' + d.cls + active + '" data-cat="' + d.key + '">'
+      return '<span class="cat-label-chip' + active + '" data-cat="' + d.key + '" style="--fc-tint:' + d.tint + '">'
            + d.label + '</span>';
     }).join('');
 
@@ -671,26 +714,17 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     openedViaPin = true;
     if (catSel.size === 0) {
       // マーカーが表示中かどうか確認して自動的に catSel へ反映
-      var hasShokuji  = markersData.some(function(d) { return d.restaurant.genre === '食事処'   && map.hasLayer(d.marker); });
-      var hasIzakaya  = markersData.some(function(d) { return d.restaurant.genre === '居酒屋等'  && map.hasLayer(d.marker); });
-      var hasOtherFood = markersData.some(function(d) { var g = d.restaurant.genre; return !['食事処','居酒屋等','コンビニ','ガソリン','宿泊','金融','教育','観光','美容・理容'].includes(g) && map.hasLayer(d.marker); });
-      var hasConbini  = markersData.some(function(d) { return d.restaurant.genre === 'コンビニ' && map.hasLayer(d.marker); });
-      var hasGas      = markersData.some(function(d) { return d.restaurant.genre === 'ガソリン' && map.hasLayer(d.marker); });
-      var hasStay     = markersData.some(function(d) { return d.restaurant.genre === '宿泊'     && map.hasLayer(d.marker); });
-      var hasFinance  = markersData.some(function(d) { return d.restaurant.genre === '金融'     && map.hasLayer(d.marker); });
-      var hasEducation = markersData.some(function(d) { return d.restaurant.genre === '教育'    && map.hasLayer(d.marker); });
-      var hasTourism  = markersData.some(function(d) { return d.restaurant.genre === '観光'     && map.hasLayer(d.marker); });
-      var hasBeauty   = markersData.some(function(d) { return d.restaurant.genre === '美容・理容' && map.hasLayer(d.marker); });
-      if (hasShokuji || hasIzakaya || hasOtherFood || hasConbini || hasGas || hasStay || hasFinance || hasEducation || hasTourism || hasBeauty) {
-        if (hasShokuji || hasOtherFood) { catSel.add('shokuji');  btnShokuji.classList.add('cat-selected'); }
-        if (hasIzakaya)   { catSel.add('izakaya');   btnIzakaya.classList.add('cat-selected'); }
-        if (hasConbini)   { catSel.add('conbini');   btnConbini.classList.add('cat-selected'); }
-        if (hasGas)       { catSel.add('gas');        btnGas.classList.add('cat-selected'); }
-        if (hasStay)      { catSel.add('stay');       document.getElementById('gearCatStay').classList.add('cat-selected'); }
-        if (hasFinance)   { catSel.add('finance');    document.getElementById('gearCatFinance').classList.add('cat-selected'); }
-        if (hasEducation) { catSel.add('education');  document.getElementById('gearCatEducation').classList.add('cat-selected'); }
-        if (hasTourism)   { catSel.add('tourism');    document.getElementById('gearCatTourism').classList.add('cat-selected'); }
-        if (hasBeauty)    { catSel.add('beauty');     document.getElementById('gearCatBeauty').classList.add('cat-selected'); }
+      var hasAnyVisible = false;
+      CATEGORIES.forEach(function(c) {
+        var hasThis = markersData.some(function(d) { return macroOf(d.restaurant.genre).key === c.key && map.hasLayer(d.marker); });
+        if (hasThis) {
+          hasAnyVisible = true;
+          catSel.add(c.key);
+          var b = gearBtnEl(c.key);
+          if (b) b.classList.add('cat-selected');
+        }
+      });
+      if (hasAnyVisible) {
         updateAllBtn();   // 全選択状態ならすべてボタンをグレーアウト
         updateClearBtn(); // 選択があれば解除ボタンをアクティブに
         // マーカーはそのまま維持
@@ -758,30 +792,14 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   // markersData 生成・applyFilter('all') 実行後に走らせるため setTimeout(0) を使用
   setTimeout(function () {
     if (catChipSet.size > 0) return; // 既に表示済みなら何もしない
-    var checks = {
-      shokuji:   function(g){ return g === '食事処' || !['食事処','居酒屋等','コンビニ','ガソリン','宿泊','金融','教育','観光','美容・理容'].includes(g); },
-      izakaya:   function(g){ return g === '居酒屋等'; },
-      conbini:   function(g){ return g === 'コンビニ'; },
-      gas:       function(g){ return g === 'ガソリン'; },
-      stay:      function(g){ return g === '宿泊'; },
-      finance:   function(g){ return g === '金融'; },
-      education: function(g){ return g === '教育'; },
-      tourism:   function(g){ return g === '観光'; },
-      beauty:    function(g){ return g === '美容・理容'; }
-    };
-    var btnIds = {
-      shokuji: 'gearCatShokuji', izakaya: 'gearCatIzakaya', conbini: 'gearCatConbini',
-      gas: 'gearCatGas', stay: 'gearCatStay', finance: 'gearCatFinance',
-      education: 'gearCatEducation', tourism: 'gearCatTourism', beauty: 'gearCatBeauty'
-    };
-    Object.keys(checks).forEach(function (key) {
-      catChipSet.add(key); // チップは全カテゴリ分並べる
+    CATEGORIES.forEach(function (c) {
+      catChipSet.add(c.key); // チップは全カテゴリ分並べる
       var visible = markersData.some(function (d) {
-        return checks[key](d.restaurant.genre) && map.hasLayer(d.marker);
+        return macroOf(d.restaurant.genre).key === c.key && map.hasLayer(d.marker);
       });
       if (visible) {
-        catSel.add(key);
-        var b = document.getElementById(btnIds[key]);
+        catSel.add(c.key);
+        var b = gearBtnEl(c.key);
         if (b) b.classList.add('cat-selected');
       }
     });
@@ -829,23 +847,21 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   // 「すべて」ボタン：全カテゴリを選択
   btnAll.addEventListener('click', function () {
     if (!openedViaPin) return;
-    ['shokuji','izakaya','conbini','gas','stay','finance','education','tourism','beauty'].forEach(function(k) { catSel.add(k); });
-    [btnShokuji, btnIzakaya, btnConbini, btnGas,
-     document.getElementById('gearCatStay'), document.getElementById('gearCatFinance'),
-     document.getElementById('gearCatEducation'), document.getElementById('gearCatTourism'),
-     document.getElementById('gearCatBeauty')
-    ].forEach(function(b) { if (b) b.classList.add('cat-selected'); });
+    CATEGORIES.forEach(function(c) {
+      catSel.add(c.key);
+      var b = gearBtnEl(c.key);
+      if (b) b.classList.add('cat-selected');
+    });
     updateCatPreview();
   });
   // 「解除」ボタン：全選択を解除
   btnClear.addEventListener('click', function () {
     if (!openedViaPin) return;
     catSel.clear();
-    [btnShokuji, btnIzakaya, btnConbini, btnGas,
-     document.getElementById('gearCatStay'), document.getElementById('gearCatFinance'),
-     document.getElementById('gearCatEducation'), document.getElementById('gearCatTourism'),
-     document.getElementById('gearCatBeauty')
-    ].forEach(function(b) { if (b) b.classList.remove('cat-selected'); });
+    CATEGORIES.forEach(function(c) {
+      var b = gearBtnEl(c.key);
+      if (b) b.classList.remove('cat-selected');
+    });
     updateCatPreview();
   });
 
@@ -864,99 +880,53 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     });
   }
 
-  btnShokuji.addEventListener('click', function () {
-    if (openedViaPin) {
-      if (catSel.has('shokuji')) { catSel.delete('shokuji'); btnShokuji.classList.remove('cat-selected'); }
-      else                       { catSel.add('shokuji');    btnShokuji.classList.add('cat-selected'); }
-      updateCatPreview();
-    } else {
-      closeMenu();
-      applyFilter('shokuji');
-      switchTab('list');
-    }
-  });
+  // カテゴリボタン1つ分のトグル処理（ピンモード中：地図プレビュー用の選択切替）
+  function toggleGearCategory(key) {
+    var btn = gearBtnEl(key);
+    if (catSel.has(key)) { catSel.delete(key); if (btn) btn.classList.remove('cat-selected'); }
+    else                 { catSel.add(key);    if (btn) btn.classList.add('cat-selected'); }
+    updateCatPreview();
+  }
 
-  btnIzakaya.addEventListener('click', function () {
+  // 大分類ボタン群（歯車パネル）をCATEGORIESから動的生成する
+  // （新カテゴリ追加時にindex.html側の編集が不要になる）
+  function buildGearCategoryGrid() {
+    var grid = document.getElementById('gearCatGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    CATEGORIES.forEach(function(c) {
+      var btn = document.createElement('button');
+      btn.className = 'gear-menu-btn cat-icon-btn';
+      btn.id = 'gearCat' + c.key.charAt(0).toUpperCase() + c.key.slice(1);
+      btn.dataset.cat = c.key;
+      btn.textContent = t('filter.' + c.key);
+      btn.style.setProperty('--fc-tint', c.tint || autoTint(c.color));
+      grid.appendChild(btn);
+    });
+  }
+  buildGearCategoryGrid();
+
+  // 大分類ボタン群：ピンモード中はカテゴリのトグル選択、
+  // 通常モード（メニューから開いた場合）は一覧画面へ遷移してそのカテゴリで絞り込む
+  // （1つの委譲リスナーで全カテゴリボタンを処理。ボタンはJSで動的生成されるため）
+  document.getElementById('gearCatGrid').addEventListener('click', function (e) {
+    var btn = e.target.closest('.cat-icon-btn');
+    if (!btn) return;
+    var key = btn.dataset.cat;
     if (openedViaPin) {
-      if (catSel.has('izakaya')) { catSel.delete('izakaya'); btnIzakaya.classList.remove('cat-selected'); }
-      else                       { catSel.add('izakaya');    btnIzakaya.classList.add('cat-selected'); }
-      updateCatPreview();
+      toggleGearCategory(key);
     } else {
       closeMenu();
-      applyFilter('izakaya');
+      applyFilter(key);
       switchTab('list');
     }
-  });
-  btnConbini.addEventListener('click', function () {
-    if (openedViaPin) {
-      if (catSel.has('conbini')) { catSel.delete('conbini'); btnConbini.classList.remove('cat-selected'); }
-      else                       { catSel.add('conbini');    btnConbini.classList.add('cat-selected'); }
-      updateCatPreview();
-    } else {
-      closeMenu();
-      applyFilter('conbini');
-      switchTab('list');
-    }
-  });
-  btnGas.addEventListener('click', function () {
-    if (openedViaPin) {
-      if (catSel.has('gas')) { catSel.delete('gas'); btnGas.classList.remove('cat-selected'); }
-      else                   { catSel.add('gas');    btnGas.classList.add('cat-selected'); }
-      updateCatPreview();
-    } else {
-      closeMenu();
-      applyFilter('all');
-    }
-  });
-  // 宿泊ボタン
-  document.getElementById('gearCatStay').addEventListener('click', function () {
-    if (openedViaPin) {
-      var b = document.getElementById('gearCatStay');
-      if (catSel.has('stay')) { catSel.delete('stay'); b.classList.remove('cat-selected'); }
-      else                    { catSel.add('stay');    b.classList.add('cat-selected'); }
-      updateCatPreview();
-    } else { closeMenu(); }
-  });
-  // 金融ボタン
-  document.getElementById('gearCatFinance').addEventListener('click', function () {
-    if (openedViaPin) {
-      var b = document.getElementById('gearCatFinance');
-      if (catSel.has('finance')) { catSel.delete('finance'); b.classList.remove('cat-selected'); }
-      else                       { catSel.add('finance');    b.classList.add('cat-selected'); }
-      updateCatPreview();
-    } else { closeMenu(); }
-  });
-  // 教育ボタン
-  document.getElementById('gearCatEducation').addEventListener('click', function () {
-    if (openedViaPin) {
-      var b = document.getElementById('gearCatEducation');
-      if (catSel.has('education')) { catSel.delete('education'); b.classList.remove('cat-selected'); }
-      else                         { catSel.add('education');    b.classList.add('cat-selected'); }
-      updateCatPreview();
-    } else { closeMenu(); }
-  });
-  // 観光ボタン
-  document.getElementById('gearCatTourism').addEventListener('click', function () {
-    if (openedViaPin) {
-      var b = document.getElementById('gearCatTourism');
-      if (catSel.has('tourism')) { catSel.delete('tourism'); b.classList.remove('cat-selected'); }
-      else                       { catSel.add('tourism');    b.classList.add('cat-selected'); }
-      updateCatPreview();
-    } else { closeMenu(); }
-  });
-  // 美容・理容ボタン
-  document.getElementById('gearCatBeauty').addEventListener('click', function () {
-    if (openedViaPin) {
-      var b = document.getElementById('gearCatBeauty');
-      if (catSel.has('beauty')) { catSel.delete('beauty'); b.classList.remove('cat-selected'); }
-      else                      { catSel.add('beauty');    b.classList.add('cat-selected'); }
-      updateCatPreview();
-    } else { closeMenu(); }
   });
   // 選択モード終了→通常の地図に戻る（旧「閉じる」ボタンの処理。
   // 今は下部の「地図」タブ押下時に handleMapTabClick() から呼ばれる。
   // このIIFEの外（グローバル）から呼べるよう window に公開する）
   window._categoryPanelOpenViaPin = function () { return openedViaPin; };
+  // 言語切替時にsetLanguage()から呼べるよう公開（歯車パネルのボタンラベル再生成用）
+  window._buildGearCategoryGrid = buildGearCategoryGrid;
   window._closeCategoryPanelFromMapTab = function () {
     if (openedViaPin) {
       // openedViaPin = false はcloseMenu()内で行う（地図復元チェックのため）
@@ -1495,21 +1465,9 @@ function fmtHours(hours) {
   return more ? first + '…' : first;
 }
 
-// ── フィルター定義 ───────────────────────────────────────────────
-const FILTERS = [
-  { id: 'all',      label: 'すべて',   color: '#546e7a', test: g => g !== 'コンビニ' && g !== 'ガソリン' },
-  { id: 'shokuji',  label: '食事処',   color: '#f57c00', test: g => g === '食事処' },
-  { id: 'izakaya',  label: '居酒屋等', color: '#e53935', test: g => g === '居酒屋等' },
-  { id: 'cafe',     label: 'カフェ',   color: '#00897b', test: g => g.includes('カフェ') },
-  { id: 'yakiniku', label: '焼肉',     color: '#fb8c00', test: g => g.includes('焼肉') },
-  { id: 'bar',      label: 'バル',     color: '#8e24aa', test: g => g.includes('バル') },
-  { id: 'ramen',    label: 'ラーメン', color: '#c62828', test: g => g.includes('ラーメン') },
-  // コンビニ・ガソリンはサイドバーには表示しない（歯車メニューから切り替え）
-  { id: 'conbini',  label: 'コンビニ', color: '#0067CC', test: g => g === 'コンビニ', hidden: true },
-  { id: 'gas',      label: 'ガソリン', color: '#ff6f00', test: g => g === 'ガソリン', hidden: true },
-];
-
-let currentFilter = 'all';
+// 一覧画面の絞り込み状態（大分類＋小分類の2階層。'all'は大分類未選択＝全件）
+let currentMacro = 'all';
+let currentSub   = null;
 let currentSearch  = '';
 
 // ── カテゴリ別マーカーカラー ────────────────────────────────────
@@ -1526,7 +1484,7 @@ const DEFAULT_COLOR   = FOOD_COLOR;
 const WARN_COLOR      = "#f57c00";
 
 function genreColor(genre) {
-  return FOOD_COLOR; // 飲食店はすべて赤
+  return macroOf(genre).color;
 }
 
 // ── コンビニブランド情報（アイコン色） ────────────────────────────
@@ -2720,14 +2678,8 @@ map.on('popupopen', function(e) {
 });
 
 // ── 凡例コントロール ─────────────────────────────────────────────
-const legendItems = [
-  { color: "#f57c00", label: "食事処"   },
-  { color: "#e53935", label: "居酒屋等" },
-  { color: "#00897b", label: "カフェ"       },
-  { color: "#fb8c00", label: "焼肉"         },
-  { color: "#8e24aa", label: "バル"         },
-  { color: "#1565c0", label: "その他"       },
-];
+// CATEGORIESから自動生成（新カテゴリ追加時にここを編集する必要はない）
+const legendItems = CATEGORIES.map(c => ({ color: c.color, label: c.label.ja }));
 
 const LegendControl = L.Control.extend({
   options: { position: "bottomleft" },
@@ -2750,19 +2702,60 @@ const LegendControl = L.Control.extend({
 });
 new LegendControl().addTo(map);
 
-// ── フィルターボタン生成 ─────────────────────────────────────────
+// ── フィルターボタン生成（大分類＋小分類の2階層） ──────────────────
 function buildFilterButtons() {
   const container = document.getElementById('filterButtons');
   container.innerHTML = ''; // 再描画時にリセット
-  FILTERS.forEach(f => {
-    if (f.hidden) return; // コンビニなどサイドバー非表示フィルターはスキップ
+
+  const allBtn = document.createElement('button');
+  allBtn.className   = 'filter-btn' + (currentMacro === 'all' ? ' active' : '');
+  allBtn.textContent = t('filter.all');
+  allBtn.style.setProperty('--fc', '#546e7a');
+  allBtn.setAttribute('data-filter', 'all');
+  allBtn.addEventListener('click', () => applyFilter('all'));
+  container.appendChild(allBtn);
+
+  CATEGORIES.forEach(c => {
+    if (c.sidebarHidden) return; // コンビニ・ガソリンはサイドバー非表示（歯車メニュー専用）
     const btn = document.createElement('button');
-    btn.className   = 'filter-btn' + (f.id === currentFilter ? ' active' : '');
-    btn.textContent = t('filter.' + f.id); // 翻訳対応
-    btn.style.setProperty('--fc', f.color);
-    btn.setAttribute('data-filter', f.id);
-    btn.addEventListener('click', () => applyFilter(f.id));
+    btn.className   = 'filter-btn' + (c.key === currentMacro ? ' active' : '');
+    btn.textContent = t('filter.' + c.key); // 翻訳対応
+    btn.style.setProperty('--fc', c.color);
+    btn.setAttribute('data-filter', c.key);
+    btn.addEventListener('click', () => applyFilter(c.key));
     container.appendChild(btn);
+  });
+
+  buildSubFilterButtons();
+}
+
+// ── 小分類ボタン生成（選択中の大分類が sub を持つ場合のみ表示） ──────
+function buildSubFilterButtons() {
+  const subContainer = document.getElementById('filterSubButtons');
+  if (!subContainer) return;
+  subContainer.innerHTML = '';
+
+  const macro = currentMacro !== 'all' ? CATEGORIES.find(c => c.key === currentMacro) : null;
+  if (!macro || !macro.sub || !macro.sub.length) {
+    subContainer.style.display = 'none';
+    return;
+  }
+  subContainer.style.display = '';
+
+  const allSubBtn = document.createElement('button');
+  allSubBtn.className   = 'filter-btn filter-sub-btn' + (!currentSub ? ' active' : '');
+  allSubBtn.textContent = t('filter.all');
+  allSubBtn.style.setProperty('--fc', macro.color);
+  allSubBtn.addEventListener('click', () => applyFilter(currentMacro, null));
+  subContainer.appendChild(allSubBtn);
+
+  macro.sub.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className   = 'filter-btn filter-sub-btn' + (s.key === currentSub ? ' active' : '');
+    btn.textContent = t('filter.' + s.key);
+    btn.style.setProperty('--fc', macro.color);
+    btn.addEventListener('click', () => applyFilter(currentMacro, s.key));
+    subContainer.appendChild(btn);
   });
 }
 
@@ -2788,8 +2781,13 @@ function isVisible(r) {
   if (!isStatusVisible(r)) return false;
   // alwaysShow フラグがある店舗はフィルターに関わらず常時表示
   if (!r.alwaysShow) {
-    const filterObj = FILTERS.find(f => f.id === currentFilter);
-    if (!filterObj.test(r.genre)) return false;
+    const macro = macroOf(r.genre);
+    if (currentMacro !== 'all' && macro.key !== currentMacro) return false;
+    if (currentMacro === 'all' && macro.sidebarHidden) return false;
+    if (currentMacro !== 'all' && currentSub) {
+      const subDef = macro.sub && macro.sub.find(s => s.key === currentSub);
+      if (subDef && !subDef.match(r.genre)) return false;
+    }
   }
   if (!currentSearch) return true;
   const q = currentSearch.toLowerCase();
@@ -2802,9 +2800,10 @@ function isVisible(r) {
   );
 }
 
-// ── フィルター適用 ───────────────────────────────────────────────
-function applyFilter(filterId) {
-  currentFilter = filterId;
+// ── フィルター適用（大分類＋任意で小分類） ─────────────────────────
+function applyFilter(macroKey, subKey) {
+  currentMacro = macroKey;
+  currentSub   = subKey || null;
 
   // カテゴリラベルバーラッパーを非表示（通常モードに戻るため）
   var catWrapper = document.getElementById('catLabelWrapper');
@@ -2812,9 +2811,7 @@ function applyFilter(filterId) {
   var catSelectAllRow = document.getElementById('catSelectAllRow');
   if (catSelectAllRow) catSelectAllRow.style.display = 'none';
 
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.filter === filterId);
-  });
+  buildFilterButtons(); // 大分類・小分類ボタンの選択状態を再描画
 
   markersData.forEach(({ restaurant: r, marker }) => {
     if (isVisible(r)) {
