@@ -606,7 +606,7 @@ const restaurants = [
     code:        "47213-IS-0022",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-11",
     name:      "ファミリーマート 石川一丁目店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川1-27-41",
@@ -614,10 +614,10 @@ const restaurants = [
     closed:    "年中無休",
     note:      "",
     note_en:   "",
-    sourceUrl: "https://www.family.co.jp/",
-    sourceUrls: ["https://www.family.co.jp/", "https://store.family.co.jp/points/72085"],
+    sourceUrl: "https://store.family.co.jp/points/72085",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「ATM・イートインスペースあり」を削除（登録している出典のいずれにも設備情報の記載がなかったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「ATM・イートインスペースあり」を削除（登録している出典のいずれにも設備情報の記載がなかったため）" },
+      { date: "2026-08-11", type: "ai", note: "sourceUrlを本部の汎用トップページから、この店舗固有の店舗検索ページ（store.family.co.jp/points/72085）に変更（住所の記載が一致することを確認）。石川白浜店での同様の指摘を受け、他のファミマ店舗も一括対応" }
     ],
     warn:      false,
     lat:       26.428554,
@@ -695,7 +695,7 @@ const restaurants = [
     code:        "47213-IS-0026",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-11",
     name:      "ファミリーマート 石川高校前店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川伊波294-1",
@@ -703,8 +703,10 @@ const restaurants = [
     closed:    "年中無休",
     note:      "",
     note_en:   "",
-    sourceUrl: "https://www.family.co.jp/",
-    sourceUrls: ["https://www.family.co.jp/", "https://www.navitime.co.jp/poi?spot=01155-ofm00000131"],
+    sourceUrl: "https://store.family.co.jp/points/72133",
+    revisionHistory: [
+      { date: "2026-08-11", type: "ai", note: "sourceUrlを本部の汎用トップページから、この店舗固有の店舗検索ページ（store.family.co.jp/points/72133）に変更（住所の記載が一致することを確認）。sourceUrls内のNAVITIMEは複製・転載を禁止する規約があるため除去（石川白浜店での同様の指摘を受け、他のファミマ店舗も一括対応）" }
+    ],
     warn:      false,
     lat:       26.415741,
     lng:       127.821848,
