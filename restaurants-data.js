@@ -583,7 +583,7 @@ const restaurants = [
     code:        "47213-IS-0021",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-11",
     name:      "ローソン うるま石川店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川2-24-9",
@@ -591,10 +591,10 @@ const restaurants = [
     closed:    "年中無休",
     note:      "",
     note_en:   "",
-    sourceUrl: "https://store.lawson.co.jp/",
-    sourceUrls: ["https://store.lawson.co.jp/", "https://www.mapion.co.jp/phonebook/M02005/47213/ILSP0000504812_ipclm/"],
+    sourceUrl: "https://www.areamarker.com/lawson/info/212096?addresscode=47213&shopid=212096",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「ATM・コピー機あり」を削除（登録している出典のいずれにも設備情報の記載がなかったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「ATM・コピー機あり」を削除（登録している出典のいずれにも設備情報の記載がなかったため）" },
+      { date: "2026-08-11", type: "ai", note: "sourceUrlを本部の汎用トップページから、ローソン公式店舗検索（areamarker.com）の店舗固有ページに変更（住所・営業時間の記載が一致することを確認、ユーザーが実際のブラウザ画面で表示を確認）。sourceUrlsのマピオンは除去" }
     ],
     warn:      false,
     lat:       26.42517,
@@ -629,7 +629,7 @@ const restaurants = [
     code:        "47213-IS-0023",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-11",
     name:      "セブンイレブン 石川インター店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川2337",
@@ -637,10 +637,10 @@ const restaurants = [
     closed:    "年中無休",
     note:      "",
     note_en:   "",
-    sourceUrl: "https://www.sej.co.jp/",
-    sourceUrls: ["https://www.sej.co.jp/", "https://map.yahoo.co.jp/v3/place/qUlcR4hcJro"],
+    sourceUrl: "https://seven-eleven.areamarker.com/711map/info/484222?addresscode=47213&shopid=484222",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「ATM・コピー機あり」を削除（登録している出典のいずれにも設備情報の記載がなかったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「ATM・コピー機あり」を削除（登録している出典のいずれにも設備情報の記載がなかったため）" },
+      { date: "2026-08-11", type: "ai", note: "sourceUrlを本部の汎用トップページから、セブン-イレブン公式店舗検索（areamarker.com）の店舗固有ページに変更（住所・営業時間の記載が一致することを確認、ユーザーが実際のブラウザ画面で表示を確認）。sourceUrlsのYahoo!地図は除去" }
     ],
     warn:      false,
     lat:       26.434586,
@@ -737,7 +737,7 @@ const restaurants = [
     code:        "47213-IS-0028",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-11",
     name:      "ローソン 石川バイパス店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川山城842-3",
@@ -745,10 +745,10 @@ const restaurants = [
     closed:    "年中無休",
     note:      "駐車場あり",
     note_en:   "Parking available.",
-    sourceUrl: "https://www.e-map.ne.jp/p/lawson/dtl/241123/",
-    sourceUrls: ["https://www.e-map.ne.jp/p/lawson/dtl/241123/", "https://www.navitime.co.jp/poi?spot=01150-241123"],
+    sourceUrl: "https://www.areamarker.com/lawson/info/241123?addresscode=47213&shopid=241123",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「国道329号石川バイパス沿い・」を削除（出典で確認できたのは駐車場情報のみだったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「国道329号石川バイパス沿い・」を削除（出典で確認できたのは駐車場情報のみだったため）" },
+      { date: "2026-08-11", type: "ai", note: "sourceUrlを規約違反サイト（e-map.ne.jp）から、ローソン公式店舗検索（areamarker.com）の店舗固有ページに変更（住所・営業時間の記載が一致することを確認）。sourceUrlsのNAVITIMEは除去" }
     ],
     warn:      false,
     lat:       26.412944,
@@ -760,7 +760,7 @@ const restaurants = [
     code:        "47213-IS-0029",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-11",
     name:      "ローソン うるま石川東恩納店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川東恩納251-1",
@@ -768,8 +768,10 @@ const restaurants = [
     closed:    "年中無休",
     note:      "ATM・駐車場あり",
     note_en:   "ATM and parking available.",
-    sourceUrl: "https://www.e-map.ne.jp/p/lawson/dtl/374700/",
-    sourceUrls: ["https://www.e-map.ne.jp/p/lawson/dtl/374700/", "https://www.navitime.co.jp/poi?spot=01150-374700"],
+    sourceUrl: "https://www.areamarker.com/lawson/info/374700?addresscode=47213&shopid=374700",
+    revisionHistory: [
+      { date: "2026-08-11", type: "ai", note: "sourceUrlを規約違反サイト（e-map.ne.jp）から、ローソン公式店舗検索（areamarker.com）の店舗固有ページに変更（住所・営業時間の記載が一致することを確認）。sourceUrlsのNAVITIMEは除去" }
+    ],
     warn:      false,
     lat:       26.414672,
     lng:       127.834395,
@@ -780,7 +782,7 @@ const restaurants = [
     code:        "47213-IS-0030",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-11",
     name:      "ローソン うるま伊波店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川伊波1512-15",
@@ -788,8 +790,10 @@ const restaurants = [
     closed:    "年中無休",
     note:      "ATM・駐車場あり",
     note_en:   "ATM and parking available.",
-    sourceUrl: "https://www.e-map.ne.jp/p/lawson/dtl/287148/",
-    sourceUrls: ["https://www.e-map.ne.jp/p/lawson/dtl/287148/", "https://www.navitime.co.jp/poi?spot=01150-287148"],
+    sourceUrl: "https://www.areamarker.com/lawson/info/287148?addresscode=47213&shopid=287148",
+    revisionHistory: [
+      { date: "2026-08-11", type: "ai", note: "sourceUrlを規約違反サイト（e-map.ne.jp）から、ローソン公式店舗検索（areamarker.com）の店舗固有ページに変更（住所・営業時間の記載が一致することを確認）。sourceUrlsのNAVITIMEは除去" }
+    ],
     warn:      false,
     lat:       26.426880,
     lng:       127.807813,
@@ -802,7 +806,7 @@ const restaurants = [
     code:        "47213-IS-0031",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-11",
     name:      "ローソン 石川インター店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川2313-2",
@@ -810,10 +814,10 @@ const restaurants = [
     closed:    "年中無休",
     note:      "",
     note_en:   "",
-    sourceUrl: "https://www.e-map.ne.jp/p/lawson/dtl/269914/",
-    sourceUrls: ["https://www.e-map.ne.jp/p/lawson/dtl/269914/", "https://map.yahoo.co.jp/v3/place/nmE6aFXR3u6"],
+    sourceUrl: "https://www.areamarker.com/lawson/info/269914?addresscode=47213&shopid=269914",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「駐車場あり」を削除（登録している出典に公式な記載がなく、口コミでの言及のみだったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「駐車場あり」を削除（登録している出典に公式な記載がなく、口コミでの言及のみだったため）" },
+      { date: "2026-08-11", type: "ai", note: "sourceUrlを規約違反サイト（e-map.ne.jp）から、ローソン公式店舗検索（areamarker.com）の店舗固有ページに変更（住所・営業時間の記載が一致することを確認）。sourceUrlsのYahoo!地図は除去" }
     ],
     warn:      false,
     lat:       26.435600,
@@ -825,7 +829,7 @@ const restaurants = [
     code:        "47213-IS-0032",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-11",
     name:      "セブンイレブン 石川白浜1丁目店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川白浜1-4-17",
@@ -833,8 +837,10 @@ const restaurants = [
     closed:    "年中無休",
     note:      "ATMあり",
     note_en:   "ATM available.",
-    sourceUrl: "https://www.sej.co.jp/",
-    sourceUrls: ["https://www.sej.co.jp/", "https://location.sevenbank.co.jp/sevenbank/spot/detail?code=0000032573"],
+    sourceUrl: "https://seven-eleven.areamarker.com/711map/info/510965?addresscode=47213&shopid=510965",
+    revisionHistory: [
+      { date: "2026-08-11", type: "ai", note: "sourceUrlを本部の汎用トップページから、セブン-イレブン公式店舗検索（areamarker.com）の店舗固有ページに変更（住所・営業時間の記載が一致することを確認）" }
+    ],
     warn:      false,
     lat:       26.428954,
     lng:       127.827897,
@@ -845,7 +851,7 @@ const restaurants = [
     code:        "47213-IS-0033",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-11",
     name:      "セブンイレブン 石川曙2丁目店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川曙2丁目1-38",
@@ -853,10 +859,10 @@ const restaurants = [
     closed:    "年中無休",
     note:      "",
     note_en:   "",
-    sourceUrl: "https://map.yahoo.co.jp/v3/place/RMuEhynq_dk",
-    sourceUrls: ["https://map.yahoo.co.jp/v3/place/RMuEhynq_dk"],
+    sourceUrl: "https://seven-eleven.areamarker.com/711map/info/507526?addresscode=47213&shopid=507526",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "sourceUrlのe-map.ne.jpがリンク切れ（パラメータエラー）だったためYahoo!地図に差し替え。備考「ATMあり」を削除（登録している出典のいずれにも記載がなかったため）" }
+      { date: "2026-08-08", type: "ai", note: "sourceUrlのe-map.ne.jpがリンク切れ（パラメータエラー）だったためYahoo!地図に差し替え。備考「ATMあり」を削除（登録している出典のいずれにも記載がなかったため）" },
+      { date: "2026-08-11", type: "ai", note: "sourceUrlを規約違反サイト（Yahoo!地図）から、セブン-イレブン公式店舗検索（areamarker.com）の店舗固有ページに変更（住所・営業時間の記載が一致することを確認）" }
     ],
     warn:      false,
     lat:       26.421245,
@@ -868,7 +874,7 @@ const restaurants = [
     code:        "47213-IS-0034",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-11",
     name:      "ローソン 石川曙三丁目店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川曙3-12-76",
@@ -876,10 +882,10 @@ const restaurants = [
     closed:    "年中無休",
     note:      "",
     note_en:   "",
-    sourceUrl: "https://www.e-map.ne.jp/p/lawson/dtl/286976/",
-    sourceUrls: ["https://www.e-map.ne.jp/p/lawson/dtl/286976/", "https://map.yahoo.co.jp/v3/place/V-u7-SiSiYc"],
+    sourceUrl: "https://www.areamarker.com/lawson/info/286976?addresscode=47213&shopid=286976",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「店内に郵便ポストあり」を削除（登録している出典のいずれにも記載がなかったため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「店内に郵便ポストあり」を削除（登録している出典のいずれにも記載がなかったため）" },
+      { date: "2026-08-11", type: "ai", note: "sourceUrlを規約違反サイト（e-map.ne.jp）から、ローソン公式店舗検索（areamarker.com）の店舗固有ページに変更（住所・営業時間の記載が一致することを確認）。sourceUrlsのYahoo!地図は除去" }
     ],
     warn:      false,
     lat:       26.415945,
