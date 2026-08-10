@@ -673,7 +673,7 @@ const restaurants = [
     code:        "47213-IS-0025",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-11",
     name:      "ファミリーマート 石川白浜店",
     genre:     "コンビニ",
     address:   "沖縄県うるま市石川白浜2-8-26",
@@ -681,8 +681,10 @@ const restaurants = [
     closed:    "年中無休",
     note:      "ATM・駐車場あり",
     note_en:   "ATM and parking available.",
-    sourceUrl: "https://www.family.co.jp/",
-    sourceUrls: ["https://www.family.co.jp/", "https://www.homemate-research-convenience-store.com/dtl/00000000000000551354/"],
+    sourceUrl: "https://store.family.co.jp/points/72137",
+    revisionHistory: [
+      { date: "2026-08-11", type: "ai", note: "sourceUrlをファミリーマート本部の汎用トップページから、この店舗固有の店舗検索ページ（store.family.co.jp/points/72137）に変更（ユーザー指摘。住所・営業時間・ATM/駐車場の記載が一致することを確認）。第三者サイト（homemate-research）はsourceUrlsから除去" }
+    ],
     warn:      false,
     lat:       26.424311,
     lng:       127.825500,
