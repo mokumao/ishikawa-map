@@ -922,7 +922,7 @@ const restaurants = [
     code:        "47213-IS-0036",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-11",
     name:      "伊波SS（神谷石油）",
     genre:     "ガソリン",
     address:   "沖縄県うるま市石川伊波309",
@@ -930,10 +930,10 @@ const restaurants = [
     closed:    "要確認",
     note:      "",
     note_en:   "",
-    sourceUrl: "https://navitime.co.jp/",
-    sourceUrls: ["https://navitime.co.jp/", "https://e-nenpi.com/gs/shop/47331/", "https://oki-ss.or.jp/?page_id=167"],
+    sourceUrl: "https://oki-ss.or.jp/?page_id=167",
     revisionHistory: [
-      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「営業時間・定休日は要確認」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" },
+      { date: "2026-08-11", type: "ai", note: "sourceUrlを規約違反サイト（NAVITIME）から、沖縄県石油商業組合公式サイト（oki-ss.or.jp、住所・系列・運営会社名の記載を確認済み）に変更。sourceUrlsのe-nenpi.comは規約違反サイトのため除去" }
     ],
     warn:      true,
     lat:       26.414359,
@@ -945,7 +945,7 @@ const restaurants = [
     code:        "47213-IS-0037",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-11",
     name:      "嘉手苅SS（くだか石油）",
     genre:     "ガソリン",
     address:   "沖縄県うるま市石川嘉手苅141-6",
@@ -954,10 +954,11 @@ const restaurants = [
     note:      "カーエネクス系列",
     note_en:   "Carenex brand station.",
     sourceUrl: "https://oki-ss.or.jp/?page_id=167",
-    sourceUrls: ["https://oki-ss.or.jp/?page_id=167", "https://e-nenpi.com/gs/shop/47141/", "https://gasoline-gift.zensekiren.or.jp/station/4700007001"],
+    sourceUrls: ["https://oki-ss.or.jp/?page_id=167", "https://gasoline-gift.zensekiren.or.jp/station/4700007001"],
     revisionHistory: [
       { date: "2026-08-08", type: "ai", note: "備考から電話番号「098-965-5565」を削除（変更されうる個別の連絡先情報は転記しない方針としたため）" },
-      { date: "2026-08-08", type: "ai", note: "備考「（営業時間・定休日は要確認）」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" }
+      { date: "2026-08-08", type: "ai", note: "備考「（営業時間・定休日は要確認）」を削除（hours/closedフィールド自体が自動で⚠️表示されるため、noteでの重複記載をやめる方針としたため）" },
+      { date: "2026-08-11", type: "ai", note: "sourceUrlsから規約違反サイト（e-nenpi.com）を除去" }
     ],
     warn:      true,
     lat:       26.420632,
@@ -994,21 +995,21 @@ const restaurants = [
     code:        "47213-IS-0039",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-08",
+    lastChecked: "2026-08-11",
     name:      "赤崎サービスステーション（瑞穂石油）",
     genre:     "ガソリン",
     address:   "沖縄県うるま市石川東山本町2-4-1",
-    hours:     "平日 7:00〜21:00 / 日・祝 8:00〜20:00",
-    closed:    "年中無休",
-    note:      "カーエネクス系列。フルサービス（洗車・オイル交換等対応）",
-    note_en:   "Carenex brand, full-service (car wash, oil change, etc.).",
-    sourceUrl: "https://map.yahoo.co.jp/v3/place/5mvXtr9ABzU",
-    sourceUrls: ["https://map.yahoo.co.jp/v3/place/5mvXtr9ABzU", "https://e-nenpi.com/gs/shop/47016/", "https://oki-ss.or.jp/?page_id=167"],
+    hours:     "要確認",
+    closed:    "要確認",
+    note:      "カーエネクス系列",
+    note_en:   "Carenex brand station.",
+    sourceUrl: "https://oki-ss.or.jp/?page_id=167",
     revisionHistory: [
       { date: "2026-08-08", type: "ai", note: "営業時間を「7:00〜21:00」から「平日 7:00〜21:00 / 日・祝 8:00〜20:00」に修正（出典e-nenpi.comに日曜・祝日は時間が異なる旨の記載があったため）" },
-      { date: "2026-08-08", type: "ai", note: "備考から電話番号「098-964-2626」を削除（変更されうる個別の連絡先情報は転記しない方針としたため）" }
+      { date: "2026-08-08", type: "ai", note: "備考から電話番号「098-964-2626」を削除（変更されうる個別の連絡先情報は転記しない方針としたため）" },
+      { date: "2026-08-11", type: "ai", note: "sourceUrlを規約違反サイト（Yahoo!地図）から沖縄県石油商業組合公式サイト（oki-ss.or.jp）に変更。同サイトには営業時間の記載がなく、現行の営業時間はe-nenpi.com（規約違反サイト）のみが出典だったため「要確認」に変更。備考「フルサービス（洗車・オイル交換等対応）」も同様に裏付けが取れないため削除、系列情報（カーエネクス）はoki-ss.or.jpで確認できるため維持" }
     ],
-    warn:      false,
+    warn:      true,
     lat:       26.434840,
     lng:       127.835272,
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
