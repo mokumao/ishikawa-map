@@ -1331,11 +1331,11 @@ body.side-swipe-right #minimap {
     margin-top: 1em;
   }
   .header-mobile-sub-lg {
-    font-size: 1.05rem;
+    font-size: .92rem;
     font-weight: 700;
   }
   .header-mobile-sub-md {
-    font-size: .88rem;
+    font-size: .78rem;
     font-weight: 700;
   }
   /* 「参照」ボタン：about-site.html（このサイトについて）への入口 */
