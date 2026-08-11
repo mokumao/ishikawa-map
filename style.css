@@ -1335,14 +1335,14 @@ body.side-swipe-right #minimap {
     font-weight: 700;
   }
   .header-mobile-sub-md {
-    font-size: .78rem;
+    font-size: .68rem;
     font-weight: 700;
   }
   /* 「参照」ボタン：about-site.html（このサイトについて）への入口 */
   .header-ref-btn {
-    margin-left: 6px;
-    padding: 1px 10px;
-    font-size: .7rem;
+    margin-left: 4px;
+    padding: 1px 8px;
+    font-size: .65rem;
     font-weight: 700;
     font-family: inherit;
     background: #fff;
