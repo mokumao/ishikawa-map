@@ -1811,6 +1811,8 @@ if (new URLSearchParams(location.search).get('shop') === null && !_savedMapView)
 (function () {
   const miniMapEl = document.getElementById('minimap');
   if (!miniMapEl) return;
+  miniMapEl.classList.add('minimap-loading');
+  let _miniMapReadyForDisplay = false;
 
   // ミニマップ中心 = 石川エリア中心（主地図の初期位置と同じ）
   const miniMap = L.map('minimap', {
@@ -1880,6 +1882,13 @@ if (new URLSearchParams(location.search).get('shop') === null && !_savedMapView)
     miniTargetEl.style.top  = y + 'px';
   }
 
+  function revealMinimap() {
+    if (_miniMapReadyForDisplay) return;
+    _miniMapReadyForDisplay = true;
+    updateMiniTarget();
+    miniMapEl.classList.remove('minimap-loading');
+  }
+
   // メイン地図のパン・ズームで追従（ポップアップ表示中はスキップ）
   function syncMinimap() {
     if (!_popupOpen) {
@@ -1919,12 +1928,15 @@ if (new URLSearchParams(location.search).get('shop') === null && !_savedMapView)
     // 境界線全体が収まる表示に強制リセット
     miniMap.fitBounds(miniBoundary.getBounds(), { padding: [4, 4], animate: false });
     updateMiniTarget();
-    miniTileLayer.redraw(); // 灰色のまま残ったタイルを再取得
+    if (!_miniMapReadyForDisplay) {
+      miniTileLayer.redraw(); // 初期表示前だけタイルを再取得（表示後のチカチカ防止）
+    }
   }
 
   // ① 初期化：十分な時間をとってサイズ再計算（低速端末対策）
   setTimeout(resetMinimap, 300);
   setTimeout(resetMinimap, 800); // 二重保険
+  setTimeout(revealMinimap, 1100);
   // ページの全リソース読込完了後にも再チェック（他ページから戻った直後は
   // 回線混雑でタイル取得が遅れ、800ms時点でも灰色が残ることがあるため）
   window.addEventListener('load', function () {
