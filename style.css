@@ -2035,12 +2035,12 @@ body.side-swipe-right #minimap {
   }
   .info-menu-svg {
     display: block;
-    width: 28px;
-    height: 28px;
+    width: 35px;
+    height: 35px;
   }
   .info-menu-svg-text {
-    width: 34px;
-    height: 20px;
+    width: 38px;
+    height: 23px;
   }
   .info-menu-icon-blue   { background: #e3f2fd; }
   .info-menu-icon-green  { background: #e8f5e9; }
