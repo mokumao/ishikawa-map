@@ -2099,18 +2099,25 @@ const markersData = restaurants.map((r, idx) => {
 });
 
 // ── ポップアップ表示中のマーカーをソナー点滅させる ──────────────
+// 点滅中のマーカーが他マーカーの後ろに隠れないよう、開いている間だけ
+// zIndexOffsetを引き上げて最前面に表示する（閉じたら元に戻す）。
 map.on('popupopen', function(e) {
   var src = e.popup._source;
   // 現在地マーカーは除外・店舗マーカーのみ対象
   if (src && src.getElement && !src._isLocationMarker) {
     var el = src.getElement();
     if (el) el.classList.add('marker-active-pulse');
+    if (src.setZIndexOffset) src.setZIndexOffset(10000);
   }
 });
-map.on('popupclose', function() {
+map.on('popupclose', function(e) {
   document.querySelectorAll('.marker-active-pulse').forEach(function(el) {
     el.classList.remove('marker-active-pulse');
   });
+  var src = e.popup._source;
+  if (src && src.setZIndexOffset && !src._isLocationMarker) {
+    src.setZIndexOffset(0);
+  }
 });
 
 // ── 店名ラベル 表示/非表示トグルボタン ─────────────────────────────
