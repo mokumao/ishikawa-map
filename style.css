@@ -1862,16 +1862,16 @@ body.side-swipe-right #minimap {
 
   /* ── ヘッダー折りたたみアニメーション ── */
   header, .wip-bar {
-    transition: max-height 0.55s cubic-bezier(.22, .61, .36, 1),
-                opacity 0.45s ease,
-                padding 0.55s cubic-bezier(.22, .61, .36, 1),
-                transform 0.55s cubic-bezier(.22, .61, .36, 1);
+    transition: max-height 1.8s cubic-bezier(.22, .61, .36, 1),
+                opacity 1.6s ease,
+                padding 1.8s cubic-bezier(.22, .61, .36, 1),
+                transform 1.8s cubic-bezier(.22, .61, .36, 1);
     overflow: hidden;
     will-change: max-height, opacity, padding, transform;
   }
   header {
     transform: translateY(0);
-    max-height: 96px;
+    max-height: 140px;
   }
   body.header-collapsed header {
     max-height: 0 !important;
