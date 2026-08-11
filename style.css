@@ -279,8 +279,51 @@ body.about-site-page {
   font-size: 1rem;
   font-weight: 700;
   color: #c62828;
-  margin-bottom: 8px;
+  flex: 1;
+  min-width: 0;
 }
+/* 各セクションの見出しをボタン化し、タップで本文の開閉ができるようにする */
+.area-sec-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.area-sec-icon {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+.area-sec-icon-1 { background: #e8f5e9; } /* 位置と地形 */
+.area-sec-icon-2 { background: #fff3e0; } /* 戦前の石川 */
+.area-sec-icon-3 { background: #f3e5f5; } /* 戦後復興の出発点となったまち */
+.area-sec-icon-4 { background: #e3f2fd; } /* 宮森ジェット機墜落事故 */
+.area-sec-icon-5 { background: #e0f7fa; } /* 人口 */
+.area-sec-icon-6 { background: #fce4ec; } /* まちに残る戦後の面影 */
+.area-sec-icon-7 { background: #ede7f6; } /* 芸能のまち */
+.area-sec-icon-8 { background: #e0f2f1; } /* 文化と見どころ */
+.area-sec-arrow {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  color: #b0bec5;
+  transition: transform .2s ease;
+}
+.area-sec.open .area-sec-arrow { transform: rotate(90deg); }
+.area-sec-body { display: none; margin-top: 10px; }
+.area-sec.open .area-sec-body { display: block; }
 .area-sec p {
   font-size: .92rem;
   line-height: 1.85;
@@ -324,7 +367,16 @@ body.about-site-page {
   border-radius: 12px;
   padding: 14px 16px 16px;
 }
-.area-sources .area-sec-title { color: #666; }
+.area-sources .area-sec-title { color: #666; margin-bottom: 8px; }
+
+/* ── 石川についてページ専用：青テーマ（2026-08-11、他のabout系ページは赤のまま） ── */
+body.area-blue-theme .about-site-header {
+  background: linear-gradient(135deg, #1e88e5, #1257a3);
+}
+body.area-blue-theme .area-sec { border-left-color: #1e88e5; }
+body.area-blue-theme .area-sec-title { color: #1257a3; }
+body.area-blue-theme .area-sec ul li::before { background: #1e88e5; }
+body.area-blue-theme .area-sources .area-sec-title { color: #666; }
 .area-sources ul {
   list-style: none;
   display: flex;
