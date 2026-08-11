@@ -465,11 +465,11 @@ body.about-site-page {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 36px;
-  padding: 9px 4px;
-  font-size: 1.15rem;
+  min-height: 34px;
+  padding: 6px 4px;
   font-weight: 700;
   font-family: inherit;
+  line-height: 1.2;
   border-radius: 7px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -479,12 +479,15 @@ body.about-site-page {
   background: #fff;
   color: #222;
   border: 2px solid #e53935;
+  font-size: 1.15rem;
 }
 .about-site-info-btn {
   width: 100%;
   background: #fff;
   color: #111;
   border: 2px solid #e53935;
+  font-size: .68rem;
+  white-space: nowrap;
 }
 
 /* ── App body layout ──────────────────────────────────────── */
