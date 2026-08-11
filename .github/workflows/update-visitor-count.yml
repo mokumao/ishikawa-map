@@ -30,12 +30,18 @@ jobs:
           cutoff = now - timedelta(hours=49)   # 49時間以内だけ保持
 
           # GoatCounter 公開カウンターAPIから累計取得
+          # ※2026-08-09頃からAPIが件数を「1 056」のように桁区切り
+          #   （U+202F等の空白文字）付き文字列で返すようになり、int()が
+          #   失敗して以降ログが更新されなくなっていた。区切り文字を
+          #   除去してから数値化する。
           try:
               url = 'https://ishikawamap.goatcounter.com/counter//ishikawa-map/.json'
               with urllib.request.urlopen(url, timeout=15) as resp:
                   response = json.loads(resp.read())
-              count = int(response.get('count_unique') or response.get('count') or 0)
-              print(f'Fetched count: {count}')
+              raw = str(response.get('count_unique') or response.get('count') or 0)
+              digits = ''.join(ch for ch in raw if ch.isdigit())
+              count = int(digits) if digits else 0
+              print(f'Fetched count: {count} (raw: {raw!r})')
           except Exception as e:
               print(f'Failed to fetch count: {e}')
               sys.exit(0)   # 失敗時はコミットしない

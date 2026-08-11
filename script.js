@@ -323,8 +323,11 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
       fetch('https://ishikawamap.goatcounter.com/counter//ishikawa-map/.json')
         .then(function (r) { return r.json(); })
         .then(function (d) {
-          var count = d.count_unique || d.count || '?';
-          el.textContent = t('visitor.total', { n: count });
+          // GoatCounter APIが件数を「1 056」のように桁区切り文字付きで
+          // 返すことがあるため、数字だけ抜き出してから表示する
+          var raw = String(d.count_unique || d.count || '');
+          var digits = raw.replace(/[^\d]/g, '');
+          el.textContent = t('visitor.total', { n: digits || '?' });
         })
         .catch(function () { el.textContent = ''; });
     });
