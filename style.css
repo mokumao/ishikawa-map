@@ -1862,9 +1862,9 @@ body.side-swipe-right #minimap {
 
   /* ── ヘッダー折りたたみアニメーション ── */
   header, .wip-bar {
-    transition: max-height 0.85s cubic-bezier(.22, .61, .36, 1),
+    transition: max-height 0.5s cubic-bezier(.22, .61, .36, 1),
                 opacity 1.6s ease,
-                padding 0.85s cubic-bezier(.22, .61, .36, 1),
+                padding 0.5s cubic-bezier(.22, .61, .36, 1),
                 transform 1.8s cubic-bezier(.22, .61, .36, 1);
     overflow: hidden;
     will-change: max-height, opacity, padding, transform;
