@@ -1637,12 +1637,34 @@ if (!_initialShop) {
   }
 }
 
+// 「このサイトについて」等の他ページから「地図」ボタンで戻ってきたときに
+// 直前の表示位置・ズームを復元する（?shop=N指定時はそちらを優先、
+// 初回アクセス等で保存が無ければデフォルトの石川全域表示のまま）。
+function _readSavedMapView() {
+  try {
+    var v = JSON.parse(sessionStorage.getItem('lastMapView'));
+    if (v && typeof v.lat === 'number' && typeof v.lng === 'number' && typeof v.zoom === 'number') return v;
+  } catch (e) {}
+  return null;
+}
+const _savedMapView = _initialShop ? null : _readSavedMapView();
+
 const map = L.map("map", {
-  center:  _initialShop ? [_initialShop.lat, _initialShop.lng] : [26.430, 127.828],
-  zoom:    _initialShop ? 16 : 14,
+  center:  _initialShop   ? [_initialShop.lat, _initialShop.lng]
+          : _savedMapView ? [_savedMapView.lat, _savedMapView.lng]
+          : [26.430, 127.828],
+  zoom:    _initialShop ? 16 : (_savedMapView ? _savedMapView.zoom : 14),
   maxZoom: 21,
   zoomControl: false,  // デフォルト左上を無効化→左下に再配置
   zoomSnap: 0,         // ズームレベルをスナップしない（指離し時のアニメーションを防止）
+});
+
+// 地図を動かす／ズームするたびに現在の表示位置を保存
+map.on('moveend', function () {
+  try {
+    var c = map.getCenter();
+    sessionStorage.setItem('lastMapView', JSON.stringify({ lat: c.lat, lng: c.lng, zoom: map.getZoom() }));
+  } catch (e) {}
 });
 
 // ＋－ボタン：スマホ→左下、PC→左上
@@ -1763,8 +1785,10 @@ function fitIshikawaAll(fly) {
 // 初期表示は石川地区全体（青線境界）が収まる範囲
 // チップバー生成後に実行するため少し遅らせる
 // ただし ?shop=N 指定時（店舗詳細ページからの復帰）は、下の focusShop() が
-// 表示を制御するのでこの広域表示は行わない（実行すると focusShop の結果を上書きしてしまう）
-if (new URLSearchParams(location.search).get('shop') === null) {
+// 表示を制御するのでこの広域表示は行わない（実行すると focusShop の結果を上書きしてしまう）。
+// 同様に、直前の表示位置を復元した場合（_savedMapView）もこの自動フィットで
+// 上書きしない（実行すると復元した位置がリセットされてしまう）。
+if (new URLSearchParams(location.search).get('shop') === null && !_savedMapView) {
   setTimeout(() => {
     fitIshikawaAll(false);
   }, 500);
