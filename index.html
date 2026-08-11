@@ -15,7 +15,7 @@
   <meta property="og:locale" content="ja_JP">
   <title>うるま市石川 飲食店マップ</title>
   <link rel="stylesheet" href="leaflet/leaflet.css"/>
-  <link rel="stylesheet" href="style.css?v=20260809a">
+  <link rel="stylesheet" href="style.css?v=20260811b">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -196,13 +196,49 @@
     <div class="info-panel" id="infoPanel">
       <div class="info-panel-header">
         <h2>石川マップのご案内</h2>
+        <p class="info-panel-header-sub">— Ishikawa Map Guide —</p>
       </div>
       <div class="info-panel-inner">
-        <button class="info-menu-btn" onclick="window.location.href='about-site.html'" data-i18n="info.about-site">このサイトについて</button>
-        <button class="info-menu-btn" onclick="window.location.href='about-ishikawa.html'" data-i18n="info.about-ishikawa">石川について</button>
-        <button class="info-menu-btn" onclick="openInfoSection('faq')" data-i18n="info.faq">Q &amp; A</button>
-        <button class="info-menu-btn" onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSdcgkoWavuTIU8DNaqynWRssQI-KjcJzRlaru3MH9Z2pDGnaQ/viewform'" data-i18n="info.feedback">ご意見・ご要望</button>
-        <button class="info-menu-btn" onclick="window.location.href='news/index.html'" data-i18n="info.today">今日の石川ニュース</button>
+        <button class="info-menu-btn" onclick="window.location.href='about-site.html'">
+          <span class="info-menu-icon info-menu-icon-blue">ℹ️</span>
+          <span class="info-menu-text">
+            <span class="info-menu-title" data-i18n="info.about-site">このサイトについて</span>
+            <span class="info-menu-desc" data-i18n="info.about-site.desc">石川マップの目的や使い方をご紹介します</span>
+          </span>
+          <span class="info-menu-chevron">›</span>
+        </button>
+        <button class="info-menu-btn" onclick="window.location.href='about-ishikawa.html'">
+          <span class="info-menu-icon info-menu-icon-green">📍</span>
+          <span class="info-menu-text">
+            <span class="info-menu-title" data-i18n="info.about-ishikawa">石川について</span>
+            <span class="info-menu-desc" data-i18n="info.about-ishikawa.desc">石川エリアの魅力や基本情報をお届けします</span>
+          </span>
+          <span class="info-menu-chevron">›</span>
+        </button>
+        <button class="info-menu-btn" onclick="openInfoSection('faq')">
+          <span class="info-menu-icon info-menu-icon-purple">Q&amp;A</span>
+          <span class="info-menu-text">
+            <span class="info-menu-title" data-i18n="info.faq">Q &amp; A</span>
+            <span class="info-menu-desc" data-i18n="info.faq.desc">よくある質問とその回答をまとめました</span>
+          </span>
+          <span class="info-menu-chevron">›</span>
+        </button>
+        <button class="info-menu-btn" onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSdcgkoWavuTIU8DNaqynWRssQI-KjcJzRlaru3MH9Z2pDGnaQ/viewform'">
+          <span class="info-menu-icon info-menu-icon-orange">✏️</span>
+          <span class="info-menu-text">
+            <span class="info-menu-title" data-i18n="info.feedback">ご意見・ご要望</span>
+            <span class="info-menu-desc" data-i18n="info.feedback.desc">皆さまの声をお聞かせください</span>
+          </span>
+          <span class="info-menu-chevron">›</span>
+        </button>
+        <button class="info-menu-btn" onclick="window.location.href='news/index.html'">
+          <span class="info-menu-icon info-menu-icon-cyan">📰</span>
+          <span class="info-menu-text">
+            <span class="info-menu-title" data-i18n="info.today">今日の石川ニュース</span>
+            <span class="info-menu-desc" data-i18n="info.today.desc">石川の最新情報をお届けします</span>
+          </span>
+          <span class="info-menu-chevron">›</span>
+        </button>
       </div>
       <div class="info-panel-footer" id="infoPanelFooter">
         <button class="info-map-btn" id="infoMapBtn">地図</button>
@@ -288,7 +324,7 @@
   <script src="leaflet/leaflet.js"></script>
   <script src="restaurants-data.js?v=20260811f"></script>
   <script src="ishikawa-boundary.js?v=20260709b"></script>
-  <script src="script.js?v=20260811c"></script>
+  <script src="script.js?v=20260811d"></script>
   <!-- GoatCounter アクセス解析 -->
   <script data-goatcounter="https://ishikawamap.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>

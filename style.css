@@ -1889,29 +1889,36 @@ body.side-swipe-right #minimap {
     flex: 1;
     display: flex;
     flex-direction: column;
-    background: #f0f0f0;
+    background: #eef1f4;
     overflow: hidden;
   }
-  /* 情報パネル上部の「ご案内」バー（ニュースページのヘッダーと同じ見た目） */
+  /* 情報パネル上部の「ご案内」バー（2026-08-11・青グラデーション+アイコン+サブタイトルに変更） */
   .info-panel-header {
     flex-shrink: 0;
-    background: #e53935;
+    background: linear-gradient(135deg, #1e88e5, #1257a3);
     color: #fff;
-    padding: 14px 16px;
+    padding: 22px 16px 20px;
+    text-align: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   }
   .info-panel-header h2 {
-    font-size: 1rem;
+    font-size: 1.45rem;
     font-weight: bold;
     text-align: center;
+  }
+  .info-panel-header-sub {
+    margin-top: 4px;
+    font-size: .68rem;
+    letter-spacing: .04em;
+    color: rgba(255,255,255,.85);
   }
   .info-panel-inner {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 14px;
-    padding: 24px 20px;
+    gap: 12px;
+    padding: 18px 16px;
     /* ボタンが画面に収まりスクロールの余地が無いため、実スクロールではなく
        JS（script.js）でドラッグ量に応じてtransformを付け、指を離すと
        0に戻すことで擬似的なラバーバンド感を出す。ドラッグ中の意図しない
@@ -1920,24 +1927,62 @@ body.side-swipe-right #minimap {
     user-select: none;
   }
   .info-menu-btn {
-    background: #fdf6d8;
-    border: 1px solid #d4c97a;
-    border-radius: 28px;
-    padding: 18px 16px;
-    font-size: 1rem;
-    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    background: #fff;
+    border: 1px solid #eceff1;
+    border-radius: 16px;
+    padding: 12px 14px;
     font-family: inherit;
-    text-align: center;
+    text-align: left;
     cursor: pointer;
     width: 100%;
+    box-shadow: 0 2px 6px rgba(0,0,0,.06);
     -webkit-tap-highlight-color: transparent;
+  }
+  .info-menu-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+  }
+  .info-menu-icon-blue   { background: #e3f2fd; }
+  .info-menu-icon-green  { background: #e8f5e9; }
+  .info-menu-icon-purple { background: #f3e5f5; color: #8e24aa; font-size: .78rem; font-weight: 800; }
+  .info-menu-icon-orange { background: #fff3e0; }
+  .info-menu-icon-cyan   { background: #e0f7fa; }
+  .info-menu-text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .info-menu-title {
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: #263238;
+  }
+  .info-menu-desc {
+    font-size: .7rem;
+    color: #90a4ae;
+  }
+  .info-menu-chevron {
+    flex-shrink: 0;
+    font-size: 1.3rem;
+    color: #b0bec5;
   }
   /* タッチ端末ではブラウザ標準の:activeがドラッグ中も点灯し続けてしまうため、
      マウス操作（PC等）限定にし、タッチ側はJS制御の.pressedクラスに任せる */
   @media (hover: hover) and (pointer: fine) {
-    .info-menu-btn:active { background: #f5e89a; }
+    .info-menu-btn:active { background: #f5f8fb; }
   }
-  .info-menu-btn.pressed { background: #f5e89a; }
+  .info-menu-btn.pressed { background: #f5f8fb; }
   /* 情報パネルの下部：地図に戻るボタン（ニュースページと同じ配置・見た目） */
   .info-panel-footer {
     flex-shrink: 0;
