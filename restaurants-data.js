@@ -1055,10 +1055,11 @@ const restaurants = [
     closed:    "年中無休",
     note:      "石川の高台に建つリゾートホテル",
     sourceUrl: "https://cocogarden.com/",
-    sourceUrls: ["https://cocogarden.com/", "https://www.jalan.net/yad339494/", "https://www.okinawastory.jp/stay/1241"],
+    sourceUrls: ["https://cocogarden.com/", "https://www.okinawastory.jp/stay/1241"],
     revisionHistory: [
       { date: "2026-08-06", type: "ai", note: "チェックイン時刻を15:00から14:00に修正、備考の「石川海岸沿いの」を「石川の高台に建つ」に修正（一休.com・Yahoo!トラベル・じゃらんnet等の複数の予約サイトで確認。ビーチは姉妹ホテルへの無料シャトルバスで利用する提携形式）" },
-      { date: "2026-08-11", type: "ai", note: "公式サイト（cocogarden.com）にSSL証明書エラーが発生しており直接アクセスできなかったため、検索エンジンのインデックス・スニペット経由で間接的に再確認。チェックイン14:00・チェックアウト11:00は公式サイトのFAQページ（cocogarden.com/faq/）のスニペットと、「石川の高台に建つ」は「伊波城跡の敷地・石川高台に位置」という記述と、それぞれ一致することを確認。年中無休の直接的な裏付けは今回見つからず（既存記載を維持）" }
+      { date: "2026-08-11", type: "ai", note: "公式サイト（cocogarden.com）にSSL証明書エラーが発生しており直接アクセスできなかったため、検索エンジンのインデックス・スニペット経由で間接的に再確認。チェックイン14:00・チェックアウト11:00は公式サイトのFAQページ（cocogarden.com/faq/）のスニペットと、「石川の高台に建つ」は「伊波城跡の敷地・石川高台に位置」という記述と、それぞれ一致することを確認。年中無休の直接的な裏付けは今回見つからず（既存記載を維持）" },
+      { date: "2026-08-11", type: "ai", note: "sourceUrlsから規約違反サイト（じゃらんnet）を除去（利用規約に複製・転載禁止条項を確認したため）" }
     ],
     warn:      false,
     lat:       26.42030,
@@ -1705,7 +1706,10 @@ const restaurants = [
     note:      "入館無料。石川図書館の2階。戦争・収容所関係資料、復元した規格住宅、宮森ジェット機墜落事故の関連資料などを展示。駐車場20台",
     note_en:   "Free admission. On the 2nd floor of Ishikawa Library. Exhibits cover the postwar civilian camp, a restored standard house, and the 1959 Miyamori jet crash.",
     sourceUrl: "https://www.city.uruma.lg.jp/bunka/1282.html",
-    sourceUrls: ["https://www.city.uruma.lg.jp/bunka/1282.html", "https://www.okinawastory.jp/spot/20100300", "https://www.jalan.net/kankou/spt_guide000000168873/"],
+    sourceUrls: ["https://www.city.uruma.lg.jp/bunka/1282.html", "https://www.okinawastory.jp/spot/20100300"],
+    revisionHistory: [
+      { date: "2026-08-11", type: "ai", note: "sourceUrlsから規約違反サイト（じゃらんnet）を除去（利用規約に複製・転載禁止条項を確認したため）" }
+    ],
     warn:      false,
     lat:       26.421856,
     lng:       127.825245,

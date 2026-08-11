@@ -37,14 +37,15 @@ description: 石川マップの店舗・施設データ（POI）を複数情報�
 - **以下の第三者サイトも、自動取得したデータを`restaurants-data.js`に転記・保管
   することは禁止**（2026-08-08、各サイトの利用規約を実際に確認したところ、
   食べログ以下すべてに「複製・転載・保管の禁止」条項があることが判明した。
-  2026-08-09にぐるなび・Yelpの2件を追加確認）：
+  2026-08-09にぐるなび・Yelpの2件、2026-08-11にじゃらんnetを追加確認）：
   食べログ（tabelog.com）、エキテン（ekiten.jp）、Yahoo!地図（map.yahoo.co.jp）、
   e-map.ne.jp（いつもNAVI）、NAVITIME（navitime.co.jp）、
   ホットペッパー／ホットペッパービューティー（hotpepper.jp）、
   ひとさら（hitosara.com）、Retty（retty.me）、e燃費（e-nenpi.com）、
   マピオン（mapion.co.jp）、ぐるなび（r.gnavi.co.jp／gnavi.co.jp、第7条13号で
   無断転載・蓄積・複製を禁止）、Yelp（yelp.com、Business Terms等でスクレイピング・
-  自動収集を禁止）
+  自動収集を禁止）、じゃらんnet（jalan.net、宿泊施設等予約サービスご利用規約
+  第5条1項で「私的利用以外の目的での複製・送信」「第三者による利用」を禁止）
   - これらのサイトは、GoogleマップやNTTタウンページと**同じ扱い**にする：
     実在確認・発見の手がかり（「このサイトにこの名前・住所で載っている」）
     としてのみ使い、`hours`/`closed`/`note`等に転記する出典にはしない
