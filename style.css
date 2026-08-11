@@ -2029,7 +2029,7 @@ body.side-swipe-right #minimap {
   }
   .info-menu-chevron {
     flex-shrink: 0;
-    font-size: 1.3rem;
+    font-size: 3rem;
     color: #b0bec5;
   }
   /* タッチ端末ではブラウザ標準の:activeがドラッグ中も点灯し続けてしまうため、
