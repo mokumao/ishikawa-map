@@ -2025,8 +2025,8 @@ body.side-swipe-right #minimap {
   }
   .info-menu-icon {
     flex-shrink: 0;
-    width: 40px;
-    height: 40px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -2035,12 +2035,12 @@ body.side-swipe-right #minimap {
   }
   .info-menu-svg {
     display: block;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
   }
   .info-menu-svg-text {
-    width: 38px;
-    height: 23px;
+    width: 48px;
+    height: 29px;
   }
   .info-menu-icon-blue   { background: #e3f2fd; }
   .info-menu-icon-green  { background: #e8f5e9; }
