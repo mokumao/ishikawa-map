@@ -9,7 +9,7 @@ var _currentLang = 'ja';
 var TRANSLATIONS = {
   ja: {
     'header.title':        '石川マップ',
-    'header.sub1':         'この情報は不正確な場合もあります',
+    'header.sub1':         '石川マップの情報は不正確な場合もあります',
     'header.refbtn':       '詳細',
     'header.sub2':         'あなたの知らない石川が見つかるかも',
     'wip.text':            'このサイトは現在作成中です。掲載情報が間違っている場合があります。正式公開前の確認用ページです。',

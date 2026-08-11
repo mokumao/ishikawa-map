@@ -1303,7 +1303,7 @@ body.side-swipe-right #minimap {
     gap: 8px;
   }
   .visitor-badge {
-    font-size: .72rem;
+    font-size: .84rem;
     font-weight: 700;
     color: #fff;
     background: rgba(255,255,255,.18);
@@ -1313,7 +1313,7 @@ body.side-swipe-right #minimap {
     letter-spacing: .01em;
   }
   .header-mobile-h1 {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 800;
     color: #fff;
     letter-spacing: .01em;
@@ -1329,6 +1329,14 @@ body.side-swipe-right #minimap {
   }
   .header-mobile-sub-spaced {
     margin-top: 1em;
+  }
+  .header-mobile-sub-lg {
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .header-mobile-sub-md {
+    font-size: .88rem;
+    font-weight: 700;
   }
   /* 「参照」ボタン：about-site.html（このサイトについて）への入口 */
   .header-ref-btn {
