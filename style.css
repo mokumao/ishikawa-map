@@ -2088,7 +2088,7 @@ body.side-swipe-right #minimap {
     align-items: center;
     justify-content: center;
     width: 32%;
-    padding: 9px 4px;
+    padding: 2px 4px;
     font-size: 1.15rem;
     font-weight: 700;
     font-family: inherit;
