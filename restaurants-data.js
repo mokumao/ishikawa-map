@@ -1047,7 +1047,7 @@ const restaurants = [
     code:        "47213-IS-0041",
     status:      "published",
     tel:         "",
-    lastChecked: "2026-08-06",
+    lastChecked: "2026-08-11",
     name:      "ココ ガーデンリゾート オキナワ",
     genre:     "宿泊",
     address:   "沖縄県うるま市石川伊波501",
@@ -1057,7 +1057,8 @@ const restaurants = [
     sourceUrl: "https://cocogarden.com/",
     sourceUrls: ["https://cocogarden.com/", "https://www.jalan.net/yad339494/", "https://www.okinawastory.jp/stay/1241"],
     revisionHistory: [
-      { date: "2026-08-06", type: "ai", note: "チェックイン時刻を15:00から14:00に修正、備考の「石川海岸沿いの」を「石川の高台に建つ」に修正（一休.com・Yahoo!トラベル・じゃらんnet等の複数の予約サイトで確認。ビーチは姉妹ホテルへの無料シャトルバスで利用する提携形式）" }
+      { date: "2026-08-06", type: "ai", note: "チェックイン時刻を15:00から14:00に修正、備考の「石川海岸沿いの」を「石川の高台に建つ」に修正（一休.com・Yahoo!トラベル・じゃらんnet等の複数の予約サイトで確認。ビーチは姉妹ホテルへの無料シャトルバスで利用する提携形式）" },
+      { date: "2026-08-11", type: "ai", note: "公式サイト（cocogarden.com）にSSL証明書エラーが発生しており直接アクセスできなかったため、検索エンジンのインデックス・スニペット経由で間接的に再確認。チェックイン14:00・チェックアウト11:00は公式サイトのFAQページ（cocogarden.com/faq/）のスニペットと、「石川の高台に建つ」は「伊波城跡の敷地・石川高台に位置」という記述と、それぞれ一致することを確認。年中無休の直接的な裏付けは今回見つからず（既存記載を維持）" }
     ],
     warn:      false,
     lat:       26.42030,
