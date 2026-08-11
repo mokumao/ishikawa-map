@@ -2033,9 +2033,18 @@ body.side-swipe-right #minimap {
     justify-content: center;
     font-size: 1.12rem;
   }
+  .info-menu-svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+  .info-menu-svg-text {
+    width: 31px;
+    height: 18px;
+  }
   .info-menu-icon-blue   { background: #e3f2fd; }
   .info-menu-icon-green  { background: #e8f5e9; }
-  .info-menu-icon-purple { background: #f3e5f5; color: #8e24aa; font-size: .7rem; font-weight: 800; }
+  .info-menu-icon-purple { background: #f3e5f5; }
   .info-menu-icon-orange { background: #fff3e0; }
   .info-menu-icon-cyan   { background: #e0f7fa; }
   .info-menu-text {

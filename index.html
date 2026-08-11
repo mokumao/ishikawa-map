@@ -15,7 +15,7 @@
   <meta property="og:locale" content="ja_JP">
   <title>うるま市石川 飲食店マップ</title>
   <link rel="stylesheet" href="leaflet/leaflet.css"/>
-  <link rel="stylesheet" href="style.css?v=20260811x">
+  <link rel="stylesheet" href="style.css?v=20260811y">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -200,7 +200,13 @@
       </div>
       <div class="info-panel-inner">
         <button class="info-menu-btn" onclick="window.location.href='about-site.html'">
-          <span class="info-menu-icon info-menu-icon-blue">ℹ️</span>
+          <span class="info-menu-icon info-menu-icon-blue" aria-hidden="true">
+            <svg class="info-menu-svg" viewBox="0 0 32 32" focusable="false">
+              <rect x="7" y="5" width="18" height="22" rx="4" fill="#64aef7"/>
+              <circle cx="16" cy="10.5" r="1.7" fill="#ffffff"/>
+              <rect x="14.6" y="14" width="2.8" height="9" rx="1.4" fill="#ffffff"/>
+            </svg>
+          </span>
           <span class="info-menu-text">
             <span class="info-menu-title" data-i18n="info.about-site">このサイトについて</span>
             <span class="info-menu-desc" data-i18n="info.about-site.desc">石川マップの目的や使い方をご紹介します</span>
@@ -208,7 +214,14 @@
           <span class="info-menu-chevron">›</span>
         </button>
         <button class="info-menu-btn" onclick="window.location.href='about-ishikawa.html'">
-          <span class="info-menu-icon info-menu-icon-green">📍</span>
+          <span class="info-menu-icon info-menu-icon-green" aria-hidden="true">
+            <svg class="info-menu-svg" viewBox="0 0 32 32" focusable="false">
+              <line x1="16" y1="17.5" x2="16" y2="27" stroke="#4caf50" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M16 5.5c-4.2 0-7.5 3.2-7.5 7.1 0 5.3 7.5 11.5 7.5 11.5s7.5-6.2 7.5-11.5c0-3.9-3.3-7.1-7.5-7.1z" fill="#ec407a"/>
+              <circle cx="16" cy="12.5" r="3.1" fill="#ffb3c7"/>
+              <circle cx="14.8" cy="11.3" r="1.1" fill="#ffffff" opacity=".8"/>
+            </svg>
+          </span>
           <span class="info-menu-text">
             <span class="info-menu-title" data-i18n="info.about-ishikawa">石川について</span>
             <span class="info-menu-desc" data-i18n="info.about-ishikawa.desc">石川エリアの魅力や基本情報をお届けします</span>
@@ -216,7 +229,11 @@
           <span class="info-menu-chevron">›</span>
         </button>
         <button class="info-menu-btn" onclick="openInfoSection('faq')">
-          <span class="info-menu-icon info-menu-icon-purple">Q&amp;A</span>
+          <span class="info-menu-icon info-menu-icon-purple" aria-hidden="true">
+            <svg class="info-menu-svg info-menu-svg-text" viewBox="0 0 44 24" focusable="false">
+              <text x="22" y="16" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="800" fill="#9c27b0">Q&amp;A</text>
+            </svg>
+          </span>
           <span class="info-menu-text">
             <span class="info-menu-title" data-i18n="info.faq">Q &amp; A</span>
             <span class="info-menu-desc" data-i18n="info.faq.desc">よくある質問とその回答をまとめました</span>
@@ -224,7 +241,17 @@
           <span class="info-menu-chevron">›</span>
         </button>
         <button class="info-menu-btn" onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSdcgkoWavuTIU8DNaqynWRssQI-KjcJzRlaru3MH9Z2pDGnaQ/viewform'">
-          <span class="info-menu-icon info-menu-icon-orange">✏️</span>
+          <span class="info-menu-icon info-menu-icon-orange" aria-hidden="true">
+            <svg class="info-menu-svg" viewBox="0 0 32 32" focusable="false">
+              <g transform="rotate(-42 16 16)">
+                <rect x="9" y="13" width="14" height="6" rx="1.2" fill="#ff8a3d"/>
+                <rect x="20.5" y="13" width="4.5" height="6" rx="1" fill="#ffb6c1"/>
+                <path d="M7 13l-5 3 5 3z" fill="#ffe0a3"/>
+                <path d="M3.2 16L7 14v4z" fill="#455a64"/>
+                <rect x="11.5" y="13" width="2.2" height="6" fill="#ffd54f" opacity=".95"/>
+              </g>
+            </svg>
+          </span>
           <span class="info-menu-text">
             <span class="info-menu-title" data-i18n="info.feedback">ご意見・ご要望</span>
             <span class="info-menu-desc" data-i18n="info.feedback.desc">皆さまの声をお聞かせください</span>
@@ -232,7 +259,16 @@
           <span class="info-menu-chevron">›</span>
         </button>
         <button class="info-menu-btn" onclick="window.location.href='news/index.html'">
-          <span class="info-menu-icon info-menu-icon-cyan">📰</span>
+          <span class="info-menu-icon info-menu-icon-cyan" aria-hidden="true">
+            <svg class="info-menu-svg" viewBox="0 0 32 32" focusable="false">
+              <rect x="7" y="8" width="18" height="16" rx="1.8" fill="#b0bec5"/>
+              <rect x="10" y="11" width="6" height="5" rx=".8" fill="#eceff1"/>
+              <rect x="18" y="11" width="5" height="1.7" rx=".8" fill="#78909c"/>
+              <rect x="18" y="15" width="5" height="1.7" rx=".8" fill="#78909c"/>
+              <rect x="10" y="19" width="13" height="1.6" rx=".8" fill="#78909c"/>
+              <rect x="10" y="22" width="10" height="1.4" rx=".7" fill="#78909c"/>
+            </svg>
+          </span>
           <span class="info-menu-text">
             <span class="info-menu-title" data-i18n="info.today">今日の石川ニュース</span>
             <span class="info-menu-desc" data-i18n="info.today.desc">石川の最新情報をお届けします</span>
