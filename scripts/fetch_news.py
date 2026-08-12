@@ -563,8 +563,9 @@ def generate_html(articles, no_news_dates=None):
     /* メイン地図画面の下部タブ（未選択状態）と同じ配色に合わせる */
     .bottom-map-btn {{
       display: flex; align-items: center; justify-content: center;
-      width: 32%;
-      padding: 9px 4px;
+      /* 隣のボタン数に関わらず常に113px固定（.claude/skills/footer-map-button/SKILL.md参照） */
+      flex: 0 0 113px;
+      padding: 2px 4px;
       font-size: 1.15rem;
       font-weight: 700;
       background: #fff;
@@ -579,7 +580,7 @@ def generate_html(articles, no_news_dates=None):
       display: flex; align-items: center; justify-content: center;
       flex: 1;
       margin-left: 8px;
-      padding: 9px 4px;
+      padding: 2px 4px;
       font-size: 0.78rem;
       font-weight: 700;
       background: #fff;

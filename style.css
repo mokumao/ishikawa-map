@@ -508,7 +508,9 @@ body.area-blue-theme .area-sources .area-sec-title { color: #666; }
   border-top: 1px solid #e0e0e0;
   box-shadow: 0 -2px 8px rgba(0,0,0,.08);
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  /* 「地図」ボタン（1列目）は隣のボタン数に関わらず常に113px固定
+     （.claude/skills/footer-map-button/SKILL.md 参照）。残りの列は可変幅 */
+  grid-template-columns: 113px 1fr 1fr;
   gap: 8px;
   padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
 }
@@ -518,7 +520,7 @@ body.area-blue-theme .area-sources .area-sec-title { color: #666; }
   align-items: center;
   justify-content: center;
   min-height: 34px;
-  padding: 6px 4px;
+  padding: 2px 4px;
   font-weight: 700;
   font-family: inherit;
   line-height: 1.2;
@@ -1839,6 +1841,12 @@ body.side-swipe-right #minimap {
     transition: background .15s, color .15s;
     -webkit-tap-highlight-color: transparent;
   }
+  /* 「地図」ボタンは、隣に並ぶボタンの数に関わらず常に同じ幅（基準実測値
+     113px＝ .claude/skills/footer-map-button/SKILL.md 参照）で固定する。
+     隣接ボタン（店名・一覧など）はflex:1のまま残りの幅を分け合う */
+  #bottomTabMap {
+    flex: 0 0 113px;
+  }
   .bottom-tab-btn.active {
     background: #e53935;
     color: #fff;
@@ -2088,7 +2096,8 @@ body.side-swipe-right #minimap {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32%;
+    /* 隣のボタン数に関わらず常に113px固定（.claude/skills/footer-map-button/SKILL.md参照） */
+    flex: 0 0 113px;
     padding: 2px 4px;
     font-size: 1.15rem;
     font-weight: 700;
