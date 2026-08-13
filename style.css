@@ -806,10 +806,13 @@ footer a:hover { text-decoration: underline; }
 .popup-name {
   font-size: 1rem;
   font-weight: 700;
-  color: #1b5e20;
-  padding-bottom: 5px;
-  margin-bottom: 7px;
-  border-bottom: 2px solid #2e7d32;
+  color: #fff;
+  background: linear-gradient(135deg, #1e88e5, #1257a3);
+  /* .leaflet-popup-content の margin(14px 14px 12px)を打ち消して
+     ポップアップ上部の角丸に沿って帯を端まで届かせる */
+  margin: -14px -14px 8px;
+  padding: 10px 14px 8px;
+  border-radius: 7.5px 7.5px 0 0;
 }
 .popup-genre {
   display: inline-block;
@@ -932,12 +935,20 @@ footer a:hover { text-decoration: underline; }
 /* ── Leaflet popup overrides ──────────────────────────────── */
 .leaflet-popup-content-wrapper {
   border-radius: 10px !important;
+  border: 2.5px solid #1976d2 !important;
   box-shadow: 0 4px 16px rgba(0,0,0,.2) !important;
   padding: 0 !important;
+  overflow: hidden !important; /* .popup-nameの帯を角丸に沿って正確にクリップする */
   user-select: none;        /* テキスト選択を無効化（ドラッグ中の誤選択防止） */
   -webkit-user-select: none;
 }
-.leaflet-popup-content { margin: 14px 14px 12px !important; }
+.leaflet-popup-content {
+  margin: 14px 14px 12px !important;
+  /* .popup-nameが負のmarginで帯を左右にはみ出させているため、
+     Leafletデフォルトのoverflow:autoのままだと横スクロールバーが
+     表示されてしまう。クリップはwrapper側のoverflow:hiddenに任せる */
+  overflow: visible !important;
+}
 .leaflet-popup-tip-container { margin-top: -1px; }
 
 /* ポップアップの下向き赤矢印を非表示 */
@@ -2033,6 +2044,11 @@ body.side-swipe-right #minimap {
   }
   .leaflet-popup-content {
     overflow-y: auto !important;
+    /* overflow-yがautoの状態でoverflow-xがvisibleのままだと、
+       ブラウザ仕様によりoverflow-xも自動的にautoへ格上げされてしまい、
+       .popup-nameの帯（負のmarginで左右にはみ出す）を検知して不要な
+       横スクロールバーが表示される。明示的にhiddenにして防止する */
+    overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch;
     max-height: calc(100svh - 200px);
     margin: 8px 11px !important;
