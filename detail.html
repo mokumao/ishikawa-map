@@ -304,15 +304,19 @@
       border-top: 1px solid #e0e0e0;
       box-shadow: 0 -2px 8px rgba(0,0,0,.08);
       padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+      /* メイン地図画面の下部バー（.bottom-tabs）が持つattribution分の
+         余白と、下部の見た目の高さを揃える（.claude/skills/footer-map-button/SKILL.md参照） */
+      margin-bottom: 18px;
     }
     .view-toggle {
       display: flex;
+      justify-content: space-between;
       gap: 8px;
       max-width: 640px;
       margin: 0 auto;
     }
     .view-toggle-btn {
-      flex: 1;
+      flex: 0 0 113px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -328,12 +332,13 @@
       transition: background .15s, color .15s;
       -webkit-tap-highlight-color: transparent;
     }
+    /* 隣のボタン数に関わらず常に113px固定（.claude/skills/footer-map-button/SKILL.md参照） */
+    #mapToggleBtn { flex: 0 0 113px; }
     .view-toggle-btn:hover { background: #ffebee; }
     .view-toggle-btn.active {
       background: #e53935;
       color: #fff;
     }
-    .view-toggle-spacer { flex: 1; }
 
     /* ── フッター ── */
     .detail-footer {
@@ -373,8 +378,7 @@
   <div class="view-toggle-bar">
     <div class="view-toggle">
       <a href="index.html?tab=map" class="view-toggle-btn" id="mapToggleBtn">地図</a>
-      <span class="view-toggle-spacer"></span>
-      <a href="index.html?tab=list" class="view-toggle-btn">一覧</a>
+      <a href="index.html?tab=list" class="view-toggle-btn" id="listToggleBtn">一覧</a>
     </div>
   </div>
 

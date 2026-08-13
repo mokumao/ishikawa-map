@@ -73,6 +73,7 @@ description: 石川マップの各ページ左下にある「地図」ボタン�
 | `index.html`（情報パネル「石川マップのご案内」下部） | `style.css` | `.info-panel-footer` / `.info-map-btn` | `.info-map-btn { flex: 0 0 113px; }` | 高さは2026-08-12時点で基準と完全一致（Codex実装）。幅は2026-08-13にflex:0 0 113pxへ変更 |
 | `about-site.html` / `about-ishikawa.html` / `about-recruit.html` / `about-management.html` / `about-purpose.html` / `about-accuracy.html` | `style.css` | `.about-site-footer` / `.about-site-map-btn` / `.about-site-info-btn` | `.about-site-footer { grid-template-columns: 113px 1fr 1fr; margin-bottom: 18px; }`（1列目=地図列を固定、margin-bottomで下の余白も統一） | 6ページ共通のクラスなので1箇所直せば全部直る |
 | `news/index.html` | `news/index.html`内の`<style>`（**自動生成物**） | `.bottom-bar` / `.bottom-map-btn` / `.bottom-submit-btn` | `.bottom-map-btn { flex: 0 0 113px; }` ／ `.bottom-bar { margin-bottom: 18px; }` | **重要：`news/index.html`を直接編集しても翌朝の自動更新で消える。`scripts/fetch_news.py`のf-stringテンプレート内、同じCSSブロックにも必ず同じ修正を入れること**（CLAUDE.mdの既存ルール通り） |
+| `detail.html`（店舗詳細ページ） | `detail.html`内の`<style>` | `.view-toggle-bar` / `.view-toggle-btn` / `#mapToggleBtn` | `#mapToggleBtn { flex: 0 0 113px; }` ／ `.view-toggle-bar { margin-bottom: 18px; }` | 2026-08-13にユーザーが実機で発見（高さ51px・幅113pxは元々一致していたが`margin-bottom`が抜けていたため下の余白が無く「バーが低い」ように見えていた）。修正時に不要になった`.view-toggle-spacer`要素・CSSは削除済み |
 
 ## 手順
 
