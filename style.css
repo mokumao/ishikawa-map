@@ -1193,6 +1193,69 @@ body.info-open .label-toggle-btn { display: none !important; }
 }
 .no-shop-notice-close:hover { color: #e53935; background: #ffebee; border-color: #ffcdd2; }
 
+/* ── 情報の正確性についてのポップアップ（ヘッダー「詳細」ボタン） ── */
+.accuracy-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2000;
+  width: max-content;
+  max-width: 88vw;
+  opacity: 1;
+  transition: opacity .2s ease;
+}
+.accuracy-popup.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.accuracy-popup-box {
+  background: #fff;
+  border: 2.5px solid #1976d2;
+  border-radius: 12px;
+  padding: 16px 16px 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.28);
+}
+.accuracy-popup-text {
+  color: #333;
+  font-size: .84rem;
+  font-weight: 600;
+  line-height: 1.7;
+  text-align: left;
+}
+.accuracy-popup-link {
+  color: #1976d2;
+  font-weight: 700;
+  text-decoration: underline;
+}
+.accuracy-popup-close-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+.accuracy-popup-close {
+  position: static;
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  font-size: 15px;
+  font-weight: 900;
+  color: #aaa;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+  font-family: Tahoma, Verdana, sans-serif;
+  transition: color .12s, background .12s;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: none;
+}
+.accuracy-popup-close:hover { color: #e53935; background: #ffebee; border-color: #ffcdd2; }
+
 .map-center-star {
   position: absolute;
   left: 50%;

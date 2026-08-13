@@ -15,7 +15,7 @@
   <meta property="og:locale" content="ja_JP">
   <title>うるま市石川 飲食店マップ</title>
   <link rel="stylesheet" href="leaflet/leaflet.css"/>
-  <link rel="stylesheet" href="style.css?v=20260813q">
+  <link rel="stylesheet" href="style.css?v=20260813r">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -63,9 +63,20 @@
       </div>
       <span class="visitor-badge" id="visitorCount">👁 ...</span>
       <p class="header-mobile-sub header-mobile-sub-lg" data-i18n="header.sub2">あなたの知らない石川が見つかるかも</p>
-      <p class="header-mobile-sub header-mobile-sub-md header-mobile-sub-spaced"><span data-i18n="header.sub1">石川マップの情報は不正確な場合もあります</span><button class="header-ref-btn" data-i18n="header.refbtn" onclick="window.location.href='about-accuracy.html'">詳細</button></p>
+      <p class="header-mobile-sub header-mobile-sub-md header-mobile-sub-spaced"><span data-i18n="header.sub1">石川マップの情報は不正確な場合もあります</span><button class="header-ref-btn" data-i18n="header.refbtn" onclick="openAccuracyPopup()">詳細</button></p>
     </div>
   </header>
+
+  <!-- 情報の正確性についてのポップアップ -->
+  <div id="accuracyPopup" class="accuracy-popup hidden">
+    <div class="accuracy-popup-box">
+      <p class="accuracy-popup-text">石川マップの情報はAIによる自動収集を基本としています。そのため情報の収集が不完全な場合や、内容が不正確な場合があります。修正などのご指摘は<a href="https://docs.google.com/forms/d/e/1FAIpQLSdcgkoWavuTIU8DNaqynWRssQI-KjcJzRlaru3MH9Z2pDGnaQ/viewform" class="accuracy-popup-link" target="_blank" rel="noopener">ご意見はこちらから</a>お願いいたします。</p>
+      <div class="accuracy-popup-close-row">
+        <button class="accuracy-popup-close" onclick="closeAccuracyPopup()" aria-label="閉じる">×</button>
+        <button class="accuracy-popup-close" onclick="closeAccuracyPopup()" aria-label="閉じる">×</button>
+      </div>
+    </div>
+  </div>
 
   <!-- 作成中バナー -->
   <div class="wip-bar">
@@ -360,7 +371,7 @@
   <script src="leaflet/leaflet.js"></script>
   <script src="restaurants-data.js?v=20260811f"></script>
   <script src="ishikawa-boundary.js?v=20260709b"></script>
-  <script src="script.js?v=20260813b"></script>
+  <script src="script.js?v=20260813d"></script>
   <!-- GoatCounter アクセス解析 -->
   <script data-goatcounter="https://ishikawamap.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>

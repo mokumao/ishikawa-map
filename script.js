@@ -3056,6 +3056,30 @@ document.querySelectorAll('[data-noshop-close]').forEach(function (btn) {
     hideNoShopNotice();
   });
 });
+
+// ── 情報の正確性についてのポップアップ（ヘッダー「詳細」ボタン） ──────────
+function openAccuracyPopup() {
+  var el = document.getElementById('accuracyPopup');
+  if (el) el.classList.remove('hidden');
+}
+function closeAccuracyPopup() {
+  var el = document.getElementById('accuracyPopup');
+  if (el) el.classList.add('hidden');
+}
+(function () {
+  var popup = document.getElementById('accuracyPopup');
+  if (!popup) return;
+  var box = popup.querySelector('.accuracy-popup-box');
+  // ポップアップ表示中、ポップアップ以外へのタッチ・クリック・スクロールで閉じる
+  document.addEventListener('pointerdown', function (e) {
+    if (popup.classList.contains('hidden')) return;
+    if (box.contains(e.target)) return;
+    closeAccuracyPopup();
+  }, true);
+  document.addEventListener('wheel', function () {
+    if (!popup.classList.contains('hidden')) closeAccuracyPopup();
+  }, { capture: true, passive: true });
+})();
 function toggleLabels() {
   // 表示中の店舗ピンが1件も無いときは、ボタンの見た目は変えずに
   // 「店舗を指定してください」ポップを地図中央に出すだけにする
