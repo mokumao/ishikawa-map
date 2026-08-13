@@ -1,8 +1,16 @@
 {
-  "date": "2026-08-13",
-  "updated": "2026-08-13T06:39:40.645332+09:00",
-  "count": 6,
+  "date": "2026-08-14",
+  "updated": "2026-08-14T06:39:16.399474+09:00",
+  "count": 8,
   "articles": [
+    {
+      "title": "豊昇龍・大の里ら力士がうるま市に 大相撲冬巡業、12月19・20日に石川多目的ドームで開催へ - 47NEWS",
+      "summary": "豊昇龍・大の里ら力士がうるま市に 大相撲冬巡業、12月19・20日に石川多目的ドームで開催へ 47NEWS",
+      "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5yWDRibHpUNG1pS282SnREeGdSNWxVaWxfdmZCR1ZjMXBRa05EVmhYeWFlekp3WUZqR1ZaTVRKOUJja0R4V2R2ODZMdw?oc=5",
+      "source": "Google ニュース（うるま市 石川）",
+      "date_label": "昨日 08/13",
+      "pub_date": "2026-08-13T09:52:00+09:00"
+    },
     {
       "title": "画像1 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - ウォーカープラス",
       "summary": "画像1 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート ウォーカープラス",
@@ -50,6 +58,14 @@
       "source": "ココガーデンリゾート沖縄",
       "date_label": "08/07",
       "pub_date": "2026-08-07T08:34:10+09:00"
+    },
+    {
+      "title": "写真：豊昇龍・大の里ら力士がうるま市に 大相撲冬巡業、12月19・20日に石川多目的ドームで開催へ - 沖縄タイムス社",
+      "summary": "写真：豊昇龍・大の里ら力士がうるま市に 大相撲冬巡業、12月19・20日に石川多目的ドームで開催へ 沖縄タイムス社",
+      "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE44VVh0TXkwd1NQTEZiSEllcjRSRmZ4QnBzUWN4dkN6OGRNRGZBUWp0REVjWDBFRHk2a1pTcV9WMENWWUpfX3poV2tEc0ZaVFJiUUJ6TEIwWDRGajBYU1Zxa01BLTdmdw?oc=5",
+      "source": "沖縄タイムス",
+      "date_label": "昨日 08/13",
+      "pub_date": "2026-08-13T09:52:00+09:00"
     }
   ]
 }
