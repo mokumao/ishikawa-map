@@ -47,8 +47,8 @@ var TRANSLATIONS = {
     'filter.all':          'すべて',
     // filter.<カテゴリキー> はCATEGORIES（下部で定義）から自動注入される
     'footer.main':         '🌊 うるま市石川 飲食店マップ  |  掲載情報は調査時点のものです',
-    'visitor.today':       '本日の訪問者 {n} 人',
-    'visitor.total':       '累計訪問者 {n} 人',
+    'visitor.today':       '本日 {n}人',
+    'visitor.total':       '累計 {n}人',
   },
   en: {
     'header.title':        'Ishikawa Map',
