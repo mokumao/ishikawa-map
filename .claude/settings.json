@@ -10,6 +10,18 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "mcp__Claude_Browser__preview_start",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '%s' '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"石川マップのプレビューを開いた直後です。必ずmcp__Claude_Browser__resize_windowをmobileプリセットで呼び出し、その後ページをnavigateで再読み込みしてから作業を続けてください。パソコン用の広い画面のまま作業しないでください。\"}}'",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   }
 }

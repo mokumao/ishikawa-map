@@ -126,6 +126,16 @@ Googleマップ・NTTタウンページの自動収集は規約上禁止（人�
 - プレビューサーバー起動: `.claude/launch.json` の `ishikawa-map` 設定を使う
   （`npx serve -l 3456 .` を `cmd /c` 経由で実行）。
 - Claude Code では `Claude_Preview` MCPツール（preview_start等）を使う。
+- **プレビューは常にスマホ幅（375×812px、mobile preset）で確認する。**
+  ブラウザプレビューの表示サイズは実行時の指定にすぎずコード側には保存されないため、
+  新規チャット・新規プレビュータブを開くたびにパソコン用の広い画面（デフォルト）に
+  戻ってしまう（2026-08-13に発覚。この現象自体は不具合ではなく仕様）。
+  Claude Codeでは`.claude/settings.json`の`PostToolUse`フック
+  （`mcp__Claude_Browser__preview_start`呼び出し後に発火）が、
+  「`resize_window`をmobileプリセットで呼び出し、ページをnavigateで再読み込みすること」
+  という指示を自動でClaudeに注入する仕組みで機械的にカバーしている（2026-08-13導入）。
+  このフックはCodex等の他ツールには効かないため、他ツールでの動作確認時は
+  本ルールをテキストとして守ること。
 
 ## GitHub Pagesのデプロイについて
 
