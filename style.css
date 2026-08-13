@@ -269,18 +269,26 @@ body.about-site-page {
 }
 .area-sec {
   background: #fff;
-  border-left: 5px solid #e53935;
   border-radius: 12px;
-  padding: 14px 16px 16px;
+  padding: 18px 12px;
   margin-bottom: 14px;
   box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.area-sec-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 .area-sec-title {
   font-size: 1rem;
   font-weight: 700;
-  color: #c62828;
-  flex: 1;
-  min-width: 0;
+  color: #263238;
+}
+.area-sec-desc {
+  font-size: .72rem;
+  color: #90a4ae;
 }
 /* 各セクションの見出しをボタン化し、タップで本文の開閉ができるようにする */
 .area-sec-toggle {
@@ -323,6 +331,7 @@ body.about-site-page {
 .area-sec-arrow {
   flex-shrink: 0;
   font-size: 3rem;
+  line-height: 38px;
   color: #b0bec5;
   transition: transform .2s ease;
 }
@@ -378,8 +387,7 @@ body.about-site-page {
 body.area-blue-theme .about-site-header {
   background: linear-gradient(135deg, #1e88e5, #1257a3);
 }
-body.area-blue-theme .area-sec { border-left-color: #1e88e5; }
-body.area-blue-theme .area-sec-title { color: #1257a3; }
+body.area-blue-theme .area-sec-title { color: #263238; }
 body.area-blue-theme .area-sec ul li::before { background: #1e88e5; }
 body.area-blue-theme .area-sources .area-sec-title { color: #666; }
 .area-sources ul {
