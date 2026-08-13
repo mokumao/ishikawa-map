@@ -23,7 +23,7 @@ body {
 
 /* ── Header ───────────────────────────────────────────────── */
 header {
-  background: #1976d2;
+  background: linear-gradient(135deg, #1e88e5, #1257a3);
   color: #fff;
   padding: 10px 8px 8px 8px;
   flex-shrink: 0;
@@ -1919,7 +1919,7 @@ body.side-swipe-right #minimap {
   }
   header {
     transform: translateY(0);
-    max-height: 140px;
+    max-height: 180px;
   }
   body.header-collapsed header {
     max-height: 0 !important;
