@@ -809,10 +809,11 @@ footer a:hover { text-decoration: underline; }
   color: #fff;
   background: linear-gradient(135deg, #1e88e5, #1257a3);
   /* .leaflet-popup-content の margin(14px 14px 12px)を打ち消して
-     ポップアップ上部の角丸に沿って帯を端まで届かせる */
+     ポップアップ上部の角丸に沿って帯を端まで届かせる
+     （角の丸めはwrapper側のoverflow:hidden+maskに任せるため、
+     このボタン自身には角丸を付けない） */
   margin: -14px -14px 8px;
   padding: 10px 14px 8px;
-  border-radius: 7.5px 7.5px 0 0;
 }
 .popup-genre {
   display: inline-block;
@@ -939,6 +940,11 @@ footer a:hover { text-decoration: underline; }
   box-shadow: 0 4px 16px rgba(0,0,0,.2) !important;
   padding: 0 !important;
   overflow: hidden !important; /* .popup-nameの帯を角丸に沿って正確にクリップする */
+  /* SafariはCSS transformが付いた要素でoverflow:hidden+border-radiusの
+     クリップを正しく適用しないバグがあり（Leafletが位置決めにtransformを
+     使うため該当）、Chromeのプレビューでは正常に見えても実機のSafariでは
+     角に隙間が出ていた。-webkit-mask-imageで強制的にクリップさせる */
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
   user-select: none;        /* テキスト選択を無効化（ドラッグ中の誤選択防止） */
   -webkit-user-select: none;
 }
@@ -2052,6 +2058,12 @@ body.side-swipe-right #minimap {
     -webkit-overflow-scrolling: touch;
     max-height: calc(100svh - 200px);
     margin: 8px 11px !important;
+  }
+  /* .popup-nameの負のmarginも、このブレークポイントでの実際の
+     margin(8px 11px)に合わせて上書きする（基準値の-14pxのままだと
+     ずれが大きくなりすぎるため） */
+  .popup-name {
+    margin: -8px -11px 8px;
   }
 
   /* × 閉じるボタン（右上）：グローバルで統一済み・モバイル追加指定なし */
