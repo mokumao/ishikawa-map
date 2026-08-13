@@ -559,6 +559,9 @@ def generate_html(articles, no_news_dates=None):
       box-shadow: 0 -2px 8px rgba(0,0,0,.08);
       padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
       display: flex;
+      /* メイン地図画面の下部バー（.bottom-tabs）が持つattribution分の
+         余白と、下部の見た目の高さを揃える（2026-08-13） */
+      margin-bottom: 18px;
     }}
     /* メイン地図画面の下部タブ（未選択状態）と同じ配色に合わせる */
     .bottom-map-btn {{

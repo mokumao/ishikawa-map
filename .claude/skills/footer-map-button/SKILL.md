@@ -25,6 +25,7 @@ description: 石川マップの各ページ左下にある「地図」ボタン�
 |---|---|
 | バー（`.bottom-tabs`相当）の高さ | **51px** |
 | バーのpadding | `8px 10px`（横幅はページのレイアウトに応じて調整してよい。**縦8px**が高さを決める） |
+| バーの下の余白（margin-bottom） | **18px**（元は地図の著作権表示スペース用だが、他ページも下部の見た目の高さを揃えるため同じ値を入れる。2026-08-13追加） |
 | 「地図」ボタンの高さ | **34px** |
 | 「地図」ボタンの幅 | **113px（固定。隣に並ぶボタンの数に関わらず常にこの幅）** |
 | ボタンのpadding | `2px 4px` |
@@ -70,8 +71,8 @@ description: 石川マップの各ページ左下にある「地図」ボタン�
 |---|---|---|---|---|
 | `index.html`（地図画面下部タブ） | `style.css` | `.bottom-tabs` / `#bottomTabMap`（幅）／`.bottom-tab-btn`（高さ等） | `#bottomTabMap { flex: 0 0 113px; }` | **基準そのもの**。店名・一覧は`.bottom-tab-btn`の`flex:1`のまま可変（狭い端末では地図より小さくなるが意図的な仕様） |
 | `index.html`（情報パネル「石川マップのご案内」下部） | `style.css` | `.info-panel-footer` / `.info-map-btn` | `.info-map-btn { flex: 0 0 113px; }` | 高さは2026-08-12時点で基準と完全一致（Codex実装）。幅は2026-08-13にflex:0 0 113pxへ変更 |
-| `about-site.html` / `about-ishikawa.html` / `about-recruit.html` / `about-management.html` / `about-purpose.html` / `about-accuracy.html` | `style.css` | `.about-site-footer` / `.about-site-map-btn` / `.about-site-info-btn` | `.about-site-footer { grid-template-columns: 113px 1fr 1fr; }`（1列目=地図列を固定） | 6ページ共通のクラスなので1箇所直せば全部直る |
-| `news/index.html` | `news/index.html`内の`<style>`（**自動生成物**） | `.bottom-bar` / `.bottom-map-btn` / `.bottom-submit-btn` | `.bottom-map-btn { flex: 0 0 113px; }` | **重要：`news/index.html`を直接編集しても翌朝の自動更新で消える。`scripts/fetch_news.py`のf-stringテンプレート内、同じCSSブロックにも必ず同じ修正を入れること**（CLAUDE.mdの既存ルール通り） |
+| `about-site.html` / `about-ishikawa.html` / `about-recruit.html` / `about-management.html` / `about-purpose.html` / `about-accuracy.html` | `style.css` | `.about-site-footer` / `.about-site-map-btn` / `.about-site-info-btn` | `.about-site-footer { grid-template-columns: 113px 1fr 1fr; margin-bottom: 18px; }`（1列目=地図列を固定、margin-bottomで下の余白も統一） | 6ページ共通のクラスなので1箇所直せば全部直る |
+| `news/index.html` | `news/index.html`内の`<style>`（**自動生成物**） | `.bottom-bar` / `.bottom-map-btn` / `.bottom-submit-btn` | `.bottom-map-btn { flex: 0 0 113px; }` ／ `.bottom-bar { margin-bottom: 18px; }` | **重要：`news/index.html`を直接編集しても翌朝の自動更新で消える。`scripts/fetch_news.py`のf-stringテンプレート内、同じCSSブロックにも必ず同じ修正を入れること**（CLAUDE.mdの既存ルール通り） |
 
 ## 手順
 
@@ -85,10 +86,13 @@ description: 石川マップの各ページ左下にある「地図」ボタン�
    JSON.stringify({
      barHeight: bar.getBoundingClientRect().height,
      btnHeight: btn.getBoundingClientRect().height,
-     btnWidth:  btn.getBoundingClientRect().width
+     btnWidth:  btn.getBoundingClientRect().width,
+     // バー要素自体の高さだけでなく、下の余白（margin-bottom）も含めた
+     // 「視覚的な占有領域」を必ず比較する（2026-08-13の教訓）
+     bottomGap: window.innerHeight - bar.getBoundingClientRect().bottom
    });
    ```
-3. 上の「基準となる値」表（バー高さ51px・ボタン高さ34px・ボタン幅113px固定）と比較する
+3. 上の「基準となる値」表（バー高さ51px・下余白18px・ボタン高さ34px・ボタン幅113px固定）と比較する
 4. ずれていたら、該当CSSを基準値に合わせて修正する
    - 高さのズレ → 多くの場合`padding`が原因
    - 幅のズレ・画面幅で幅が変わる → `width:%`や素の`flex:1`ではなく
@@ -151,3 +155,19 @@ description: 石川マップの各ページ左下にある「地図」ボタン�
 - 教訓：見た目の統一ルールを一部のページ・条件だけ例外にすると、その例外自体が
   新たな不一致を生むことがある。例外を作る場合は、それによって発生しうる
   「別の観点からの不一致」まで検討してから適用すること
+
+**2026-08-13さらに追記：バー下のmargin-bottom（18px）も統一対象に追加**
+- 「地図」ボタンの大きさが全ページで揃った後、ユーザーから改めて
+  「各ページ下の白いバーの高さがメイン画面より短い」との指摘
+- 実測するとバー自体の高さ（51px）は既に一致していたが、メイン画面の
+  `.bottom-tabs`だけが地図の著作権表示（Leaflet attribution）用に
+  `margin-bottom: 18px`を持っており、バーの下に追加の余白があった。
+  他ページにはこの余白が無かったため、下部全体の見た目の高さがメイン画面
+  より短く見えていた
+- 対応：`.about-site-footer`と`news/index.html`の`.bottom-bar`にも同じ
+  `margin-bottom: 18px`を追加。`.info-panel-footer`は元々この値を
+  持っていたため変更不要だった
+- 教訓：「バーの高さ」を実測するときは、バー要素自体の`height`だけでなく、
+  `margin`等の周辺の余白も含めた「視覚的な占有領域」で比較すること。
+  要素単体のCSSプロパティが一致していても、周辺の余白が違えば
+  見た目の印象は変わる
