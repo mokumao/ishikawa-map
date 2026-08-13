@@ -1841,12 +1841,12 @@ body.side-swipe-right #minimap {
     transition: background .15s, color .15s;
     -webkit-tap-highlight-color: transparent;
   }
-  /* 「地図」ボタンは、隣に並ぶボタンの数に関わらず常に同じ幅（基準実測値
-     113px＝ .claude/skills/footer-map-button/SKILL.md 参照）で固定する。
-     隣接ボタン（店名・一覧など）はflex:1のまま残りの幅を分け合う */
-  #bottomTabMap {
-    flex: 0 0 113px;
-  }
+  /* index.htmlの「地図・店名・一覧」3ボタンは、他ページの「地図」ボタンとは
+     扱いを分ける（2026-08-13変更）。狭い画面幅で「地図」だけ固定113pxのまま
+     だと店名・一覧が押し出されて縮み、3ボタンの大きさが不揃いに見える不具合が
+     出たため、この3ボタンに限っては全て.bottom-tab-btnのflex:1のまま均等割りに
+     戻す（＝固定幅にしない）。他ページ（about-site等）の「地図」ボタン単体の
+     固定113px幅はそのまま維持する。 */
   .bottom-tab-btn.active {
     background: #e53935;
     color: #fff;
