@@ -620,8 +620,8 @@ body.area-blue-theme .area-sources .area-sec-title { color: #666; }
   flex: 1;
   border: none;
   background: transparent;
-  padding: 7px 0;
-  font-size: .82rem;
+  padding: 13px 0;
+  font-size: 1rem;
   font-family: inherit;
   color: #263238;
   outline: none;
@@ -672,12 +672,12 @@ body.area-blue-theme .area-sources .area-sec-title { color: #666; }
   font-size: .68rem;
 }
 .filter-btn {
-  padding: 4px 11px;
+  padding: 7px 15px;
   border-radius: 100px;
   border: 2px solid var(--fc, #546e7a);
   background: #fff;
   color: var(--fc, #546e7a);
-  font-size: .72rem;
+  font-size: .86rem;
   font-weight: 700;
   cursor: pointer;
   transition: background .15s, color .15s, transform .1s;
@@ -729,9 +729,9 @@ body.area-blue-theme .area-sources .area-sec-title { color: #666; }
   border-left-color: #2e7d32;
 }
 .shop-item-name {
-  font-size: .88rem;
+  font-size: 1.02rem;
   font-weight: 700;
-  color: #1b5e20;
+  color: #222;
   margin-bottom: 4px;
   line-height: 1.3;
 }
@@ -765,7 +765,7 @@ body.area-blue-theme .area-sources .area-sec-title { color: #666; }
 .shop-item-hours,
 .shop-item-closed {
   font-size: .72rem;
-  color: #78909c;
+  color: #1976d2;
   line-height: 1.35;
 }
 .shop-item-hours {
@@ -774,7 +774,7 @@ body.area-blue-theme .area-sources .area-sec-title { color: #666; }
   text-overflow: ellipsis;
   max-width: 100%;
 }
-.shop-item-closed { color: #90a4ae; }
+.shop-item-closed { color: #1976d2; }
 
 /* ── Map ──────────────────────────────────────────────────── */
 #map {
