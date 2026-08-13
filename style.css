@@ -1203,7 +1203,7 @@ body.info-open .label-toggle-btn { display: none !important; }
   width: max-content;
   max-width: 88vw;
   opacity: 1;
-  transition: opacity .2s ease;
+  transition: opacity 3s ease;
 }
 .accuracy-popup.hidden {
   opacity: 0;

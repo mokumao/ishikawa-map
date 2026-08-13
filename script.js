@@ -3058,9 +3058,19 @@ document.querySelectorAll('[data-noshop-close]').forEach(function (btn) {
 });
 
 // ── 情報の正確性についてのポップアップ（ヘッダー「詳細」ボタン） ──────────
+// 開くときは即座にパッと表示し、閉じるときだけCSSのopacity 3sフェードを効かせる
+// （閉じる用のtransitionが開く動作にも適用されてしまわないよう、開く瞬間だけ
+//   一時的にtransition:noneにし、表示が確定してから元に戻す）
 function openAccuracyPopup() {
   var el = document.getElementById('accuracyPopup');
-  if (el) el.classList.remove('hidden');
+  if (!el) return;
+  el.style.transition = 'none';
+  el.classList.remove('hidden');
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      el.style.transition = '';
+    });
+  });
 }
 function closeAccuracyPopup() {
   var el = document.getElementById('accuracyPopup');
