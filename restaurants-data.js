@@ -191,6 +191,7 @@ const restaurants = [
       { date: "2026-08-08", type: "ai", note: "sourceUrlを公式Instagramに変更（従来の食べログは複製・転載を禁止する規約があるため転記元から除外）。営業時間を公式Instagramの記載「11:11〜24:00（L.O.22:00）」に修正（従来は分割2部制だったが通し営業が正しい）。備考「食べログに営業状況『未確認』の記載あり」を削除（食べログを出典として扱わない方針としたため）" }
     ],
     warn:      true,
+    warnReason: "continuity",
     lat:       26.433345,
     lng:       127.808541,
     twitter:    "",
@@ -1760,6 +1761,7 @@ const restaurants = [
     note_en:   "A prefecturally designated historic castle site atop the 87m Iha hill.",
     sourceUrl: "https://www.okinawastory.jp/spot/30000101",
     warn:      true,
+    warnReason: "coords",
     lat:       26.421474,
     lng:       127.817138,
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []

@@ -117,6 +117,12 @@
       margin-top: 6px;
       margin-left: 6px;
     }
+    .warn-reason {
+      display: block;
+      color: #e65100;
+      font-size: 0.76rem;
+      margin-top: 3px;
+    }
 
     /* ── セクション共通 ── */
     .section {
@@ -382,7 +388,7 @@
     </div>
   </div>
 
-  <script src="restaurants-data.js?v=20260811f"></script>
+  <script src="restaurants-data.js?v=20260814a"></script>
   <script>
     (function () {
       // IDパラメータ取得（クエリ文字列 ?id=N 形式）
@@ -522,6 +528,18 @@
         const hit = findIn(THIRD_PARTY_SITE_LABELS) || findIn(OFFICIAL_SITE_LABELS);
         return hit ? hit.label : host;
       }
+      // 「⚠️要確認」バッジの理由を短く表示する（warnReasonが未設定の場合は
+      // hours/closedが「要確認」であることを理由として自動判定する）。
+      const WARN_REASON_TEXT = {
+        continuity: '情報源で営業継続に疑義があります',
+        unverified: '店名変更など未確認の情報が残っています',
+        coords: '座標の位置精度が粗い可能性があります'
+      };
+      function warnReasonText(r) {
+        if (r.warnReason && WARN_REASON_TEXT[r.warnReason]) return WARN_REASON_TEXT[r.warnReason];
+        if (r.hours === '要確認' || r.closed === '要確認') return '営業時間・定休日が出典で確認できていません';
+        return '';
+      }
       // 営業時間・定休日・備考の共通整形：
       // 「要確認」はwarn-textでそのまま表示（未確認であることを隠さない。出典も付けない）。
       // 確認済みの値には、必ず出典を小さく併記する。
@@ -635,7 +653,7 @@
         <div class="shop-hero">
           <div class="shop-name">${r.name}</div>
           <span class="shop-genre-badge">${r.genre}</span>
-          ${r.warn ? '<span class="warn-badge">⚠️ 要確認</span>' : ''}
+          ${r.warn ? `<span class="warn-badge">⚠️ 要確認</span><span class="warn-reason">${warnReasonText(r)}</span>` : ''}
         </div>
 
         <!-- 基本情報 -->
