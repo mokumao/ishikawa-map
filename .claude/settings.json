@@ -21,6 +21,16 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "matcher": "mcp__Claude_Browser__navigate",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '%s' '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"石川マップのプレビューでnavigateを実行しました。長時間プレビューに触れていなかった場合など、表示幅がスマホサイズ(375px)からズレていることがあります。現在のビューポート幅が375pxでない場合は、mcp__Claude_Browser__resize_windowをmobileプリセットで呼び出して直してください（既に375pxで問題なければ何もしなくてよく、再度navigateする必要もありません）。\"}}'",
+            "timeout": 10
+          }
+        ]
       }
     ]
   }
