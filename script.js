@@ -273,13 +273,16 @@ function rHours(r)  { return _currentLang !== 'ja' ? translateDays(r.hours)  : r
 function rClosed(r) { return _currentLang !== 'ja' ? translateDays(r.closed) : r.closed; }
 function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : r.note;  }
 
-// ── 本日の訪問者数を表示（JST 0:00〜現在の差分） ─────────────────
-// gh-dataブランチのvisitor-log.jsonから1時間ごとのスナップショットを読み取り、
-// 今日JST0時の累計との差分で「今日の訪問者数」を計算する。
+// ── 本日の訪問者数を表示（JST 0:00〜現在） ────────────────────
+// メインの集計源はGoogleアナリティクス(GA4)。gh-dataブランチの
+// ga4-today.json（1時間ごとに自動更新）から「今日のアクティブユーザー数」を
+// そのまま表示する。GA4側に問題があった場合は、従来のGoatCounter集計
+// （visitor-log.jsonの差分計算→ダメなら累計API）に自動フォールバックする。
 (function () {
   var el = document.getElementById('visitorCount');
   if (!el) return;
 
+  var GA4_URL = 'https://raw.githubusercontent.com/mokumao/ishikawa-map/gh-data/ga4-today.json';
   var LOG_URL = 'https://raw.githubusercontent.com/mokumao/ishikawa-map/gh-data/visitor-log.json';
 
   // JST今日0時のUTCタイムスタンプ（ミリ秒）を返す
@@ -291,45 +294,70 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
            - 9 * 60 * 60 * 1000;
   }
 
-  fetch(LOG_URL + '?_=' + Date.now())  // キャッシュ回避
+  // JST今日の日付文字列（YYYY-MM-DD）を返す（ga4-today.jsonのdateと比較用）
+  function todayStrJST() {
+    var jst = new Date(Date.now() + 9 * 60 * 60 * 1000);
+    return jst.toISOString().slice(0, 10);
+  }
+
+  function fallbackToGoatCounter() {
+    fetch(LOG_URL + '?_=' + Date.now())  // キャッシュ回避
+      .then(function (r) {
+        if (!r.ok) throw new Error('status ' + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        if (!data || data.length === 0) throw new Error('empty');
+
+        var midnight = todayMidnightJST();
+
+        // 最新エントリの累計
+        var latestCount = data[data.length - 1].count;
+
+        // 今日0時以前の最後のエントリを探す（その時点の累計が「今日の起点」）
+        var baseCount = null;
+        for (var i = data.length - 1; i >= 0; i--) {
+          if (new Date(data[i].ts).getTime() <= midnight) {
+            baseCount = data[i].count;
+            break;
+          }
+        }
+        // 0時前のデータがなければ最も古いエントリを起点とする
+        if (baseCount === null) baseCount = data[0].count;
+
+        var todayCount = Math.max(0, latestCount - baseCount);
+        el.textContent = t('visitor.today', { n: todayCount });
+      })
+      .catch(function () {
+        // visitor-log.jsonが未整備の間は累計APIにフォールバック
+        fetch('https://ishikawamap.goatcounter.com/counter//ishikawa-map/.json')
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            // GoatCounter APIが件数を「1 056」のように桁区切り文字付きで
+            // 返すことがあるため、数字だけ抜き出してから表示する
+            var raw = String(d.count_unique || d.count || '');
+            var digits = raw.replace(/[^\d]/g, '');
+            el.textContent = t('visitor.total', { n: digits || '?' });
+          })
+          .catch(function () { el.textContent = ''; });
+      });
+  }
+
+  fetch(GA4_URL + '?_=' + Date.now())  // キャッシュ回避
     .then(function (r) {
       if (!r.ok) throw new Error('status ' + r.status);
       return r.json();
     })
     .then(function (data) {
-      if (!data || data.length === 0) throw new Error('empty');
-
-      var midnight = todayMidnightJST();
-
-      // 最新エントリの累計
-      var latestCount = data[data.length - 1].count;
-
-      // 今日0時以前の最後のエントリを探す（その時点の累計が「今日の起点」）
-      var baseCount = null;
-      for (var i = data.length - 1; i >= 0; i--) {
-        if (new Date(data[i].ts).getTime() <= midnight) {
-          baseCount = data[i].count;
-          break;
-        }
+      // dateが今日のJST日付と一致しない場合（更新が止まっている等）は
+      // 古いデータを表示しないようフォールバックする
+      if (!data || data.date !== todayStrJST() || typeof data.count !== 'number') {
+        throw new Error('stale or invalid ga4 data');
       }
-      // 0時前のデータがなければ最も古いエントリを起点とする
-      if (baseCount === null) baseCount = data[0].count;
-
-      var todayCount = Math.max(0, latestCount - baseCount);
-      el.textContent = t('visitor.today', { n: todayCount });
+      el.textContent = t('visitor.today', { n: data.count });
     })
     .catch(function () {
-      // visitor-log.jsonが未整備の間は累計APIにフォールバック
-      fetch('https://ishikawamap.goatcounter.com/counter//ishikawa-map/.json')
-        .then(function (r) { return r.json(); })
-        .then(function (d) {
-          // GoatCounter APIが件数を「1 056」のように桁区切り文字付きで
-          // 返すことがあるため、数字だけ抜き出してから表示する
-          var raw = String(d.count_unique || d.count || '');
-          var digits = raw.replace(/[^\d]/g, '');
-          el.textContent = t('visitor.total', { n: digits || '?' });
-        })
-        .catch(function () { el.textContent = ''; });
+      fallbackToGoatCounter();
     });
 })();
 

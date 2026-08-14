@@ -19,6 +19,58 @@ jobs:
           ref: gh-data
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install GA4 API dependencies
+        continue-on-error: true   # GA4側の不具合でGoatCounter更新を止めないため
+        run: pip install --quiet google-auth requests
+
+      - name: Fetch GA4 today's active users and update ga4-today.json
+        continue-on-error: true   # 同上
+        env:
+          GA4_KEY: ${{ secrets.GA4_SERVICE_ACCOUNT_KEY }}
+        run: |
+          python3 << 'PYEOF'
+          import json, os, sys
+          from datetime import datetime, timezone, timedelta
+          from google.oauth2 import service_account
+          from google.auth.transport.requests import Request
+          import requests
+
+          JST = timezone(timedelta(hours=9))
+          now = datetime.now(JST)
+          today_str = now.strftime('%Y-%m-%d')
+
+          # GA4プロパティID（石川マップ、ishikawamap2026アカウント配下）
+          PROPERTY_ID = '549916210'
+
+          try:
+              creds_info = json.loads(os.environ['GA4_KEY'])
+              creds = service_account.Credentials.from_service_account_info(
+                  creds_info, scopes=['https://www.googleapis.com/auth/analytics.readonly'])
+              creds.refresh(Request())
+
+              r = requests.post(
+                  f'https://analyticsdata.googleapis.com/v1beta/properties/{PROPERTY_ID}:runReport',
+                  headers={'Authorization': f'Bearer {creds.token}', 'Content-Type': 'application/json'},
+                  json={
+                      'dateRanges': [{'startDate': 'today', 'endDate': 'today'}],
+                      'metrics': [{'name': 'activeUsers'}]
+                  },
+                  timeout=15
+              )
+              r.raise_for_status()
+              rows = r.json().get('rows', [])
+              count = int(rows[0]['metricValues'][0]['value']) if rows else 0
+              print(f'GA4 today count: {count}')
+          except Exception as e:
+              print(f'Failed to fetch GA4 count: {e}')
+              sys.exit(0)   # 失敗時はコミットしない（既存ファイルを維持）
+
+          with open('ga4-today.json', 'w') as f:
+              json.dump({'date': today_str, 'count': count, 'ts': now.isoformat()}, f, ensure_ascii=False)
+
+          print(f'Saved ga4-today.json: {count} at {now.isoformat()}')
+          PYEOF
+
       - name: Fetch GoatCounter count and update visitor-log.json
         run: |
           python3 << 'PYEOF'
@@ -69,7 +121,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add visitor-log.json
+          git add visitor-log.json ga4-today.json
           if ! git diff --staged --quiet; then
             git commit -m "🤖 visitor-log $(TZ='Asia/Tokyo' date '+%Y-%m-%d %H:%M') JST"
             git push origin gh-data
