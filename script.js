@@ -350,9 +350,13 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     })
     .then(function (data) {
       // dateが今日のJST日付と一致しない場合（更新が止まっている等）は
-      // 古いデータを表示しないようフォールバックする
-      if (!data || data.date !== todayStrJST() || typeof data.count !== 'number') {
-        throw new Error('stale or invalid ga4 data');
+      // 古いデータを表示しないようフォールバックする。
+      // countが0の場合も、GA4の標準レポートには反映まで数時間のタイム
+      // ラグがあり「実際は訪問があるのに0と表示される」ことがあるため、
+      // 信頼せずGoatCounter側にフォールバックする（本当に0人の場合も
+      // GoatCounter側がほぼ同じ0を返すだけなので実害はない）。
+      if (!data || data.date !== todayStrJST() || typeof data.count !== 'number' || data.count === 0) {
+        throw new Error('stale, invalid, or zero ga4 data');
       }
       el.textContent = t('visitor.today', { n: data.count });
     })
