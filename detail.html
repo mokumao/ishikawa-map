@@ -133,11 +133,12 @@
       margin-bottom: 14px;
     }
     .section-title {
-      font-size: 0.8rem;
+      font-size: 1.05rem;
       font-weight: 700;
-      color: #888;
+      color: #222;
       letter-spacing: .06em;
       text-transform: uppercase;
+      text-align: center;
       margin-bottom: 12px;
       padding-bottom: 8px;
       border-bottom: 1px solid #f0f0f0;
@@ -149,7 +150,7 @@
     .info-table tr:last-child { border-bottom: none; }
     .info-table td { padding: 9px 0; vertical-align: top; font-size: 0.9rem; line-height: 1.55; }
     .info-table .lbl {
-      color: #888; font-size: 0.78rem; font-weight: 700;
+      color: #222; font-size: 0.92rem; font-weight: 700;
       width: 72px; padding-right: 10px; padding-top: 11px;
       white-space: nowrap;
     }
@@ -675,7 +676,7 @@
             ${!r.warn ? `<tr><td class="lbl">備考</td><td>${noteHtml}</td></tr>` : ''}
           </table>
           ${lastCheckedNote}
-          <p class="info-note">営業時間・定休日・備考は、AIが情報源をもとに自動収集したものです。詳細は情報源をご確認ください。</p>
+          <p class="info-note">基本情報はAIが情報源をもとに自動収集したものです。詳細は情報源をご確認ください。</p>
           <p class="info-note store-no">店舗番号：${storeNo}</p>
           <p class="info-note store-no">掲載内容の修正・お問い合わせの際は、店舗番号をお知らせください。</p>
         </div>
