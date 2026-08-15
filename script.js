@@ -47,8 +47,8 @@ var TRANSLATIONS = {
     'filter.all':          'すべて',
     // filter.<カテゴリキー> はCATEGORIES（下部で定義）から自動注入される
     'footer.main':         '🌊 うるま市石川 飲食店マップ  |  掲載情報は調査時点のものです',
-    'visitor.today':       '本日の訪問者 {n} 人',
-    'visitor.total':       '累計訪問者 {n} 人',
+    'visitor.today':       '本日のアクセス数 {n} 回',
+    'visitor.total':       '累計アクセス数 {n} 回',
   },
   en: {
     'header.title':        'Ishikawa Map',
@@ -90,8 +90,8 @@ var TRANSLATIONS = {
     'filter.all':          'All',
     // filter.<category key> is auto-injected from CATEGORIES (defined below)
     'footer.main':         '🌊 Ishikawa, Uruma City  |  Info as of survey date',
-    'visitor.today':       "Today's visitors: {n}",
-    'visitor.total':       'Total visitors: {n}',
+    'visitor.today':       "Today's visits: {n}",
+    'visitor.total':       'Total visits: {n}',
   }
 };
 
@@ -273,10 +273,11 @@ function rHours(r)  { return _currentLang !== 'ja' ? translateDays(r.hours)  : r
 function rClosed(r) { return _currentLang !== 'ja' ? translateDays(r.closed) : r.closed; }
 function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : r.note;  }
 
-// ── 本日の訪問者数を表示（JST 0:00〜現在） ────────────────────
+// ── 本日のアクセス数（訪問回数）を表示（JST 0:00〜現在） ────────
 // メインの集計源はGoogleアナリティクス(GA4)。gh-dataブランチの
-// ga4-today.json（1時間ごとに自動更新）から「今日のアクティブユーザー数」を
-// そのまま表示する。GA4側に問題があった場合は、従来のGoatCounter集計
+// ga4-today.json（1時間ごとに自動更新）から「今日のセッション数（＝訪問回数。
+// 同じ人が複数回訪れれば複数回とカウントする）」をそのまま表示する。
+// GA4側に問題があった場合は、従来のGoatCounter集計
 // （visitor-log.jsonの差分計算→ダメなら累計API）に自動フォールバックする。
 (function () {
   var el = document.getElementById('visitorCount');
@@ -335,7 +336,8 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
           .then(function (d) {
             // GoatCounter APIが件数を「1 056」のように桁区切り文字付きで
             // 返すことがあるため、数字だけ抜き出してから表示する
-            var raw = String(d.count_unique || d.count || '');
+            // アクセス数（総訪問回数）を表示するため count を優先する
+            var raw = String(d.count || d.count_unique || '');
             var digits = raw.replace(/[^\d]/g, '');
             el.textContent = t('visitor.total', { n: digits || '?' });
           })

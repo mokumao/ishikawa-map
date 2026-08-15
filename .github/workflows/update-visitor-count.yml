@@ -23,7 +23,7 @@ jobs:
         continue-on-error: true   # GA4側の不具合でGoatCounter更新を止めないため
         run: pip install --quiet google-auth requests
 
-      - name: Fetch GA4 today's active users and update ga4-today.json
+      - name: Fetch GA4 today's session count and update ga4-today.json
         continue-on-error: true   # 同上
         env:
           GA4_KEY: ${{ secrets.GA4_SERVICE_ACCOUNT_KEY }}
@@ -53,14 +53,16 @@ jobs:
                   headers={'Authorization': f'Bearer {creds.token}', 'Content-Type': 'application/json'},
                   json={
                       'dateRanges': [{'startDate': 'today', 'endDate': 'today'}],
-                      'metrics': [{'name': 'activeUsers'}]
+                      # sessions = 訪問回数（同じ人の再訪も別カウント）。
+                      # ユニーク訪問者数を出したい場合は activeUsers に戻す。
+                      'metrics': [{'name': 'sessions'}]
                   },
                   timeout=15
               )
               r.raise_for_status()
               rows = r.json().get('rows', [])
               count = int(rows[0]['metricValues'][0]['value']) if rows else 0
-              print(f'GA4 today count: {count}')
+              print(f'GA4 today session count: {count}')
           except Exception as e:
               print(f'Failed to fetch GA4 count: {e}')
               sys.exit(0)   # 失敗時はコミットしない（既存ファイルを維持）
@@ -90,7 +92,8 @@ jobs:
               url = 'https://ishikawamap.goatcounter.com/counter//ishikawa-map/.json'
               with urllib.request.urlopen(url, timeout=15) as resp:
                   response = json.loads(resp.read())
-              raw = str(response.get('count_unique') or response.get('count') or 0)
+              # アクセス数（総訪問回数）を表示するため count を優先する
+              raw = str(response.get('count') or response.get('count_unique') or 0)
               digits = ''.join(ch for ch in raw if ch.isdigit())
               count = int(digits) if digits else 0
               print(f'Fetched count: {count} (raw: {raw!r})')
