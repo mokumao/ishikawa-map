@@ -24,6 +24,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # /admin は管理者専用ページ（Cloudflare Pages + Cloudflare Access で別途保護）。
+      # GitHub Pages（石川マップ本体・認証なしの公開サイト）には絶対に含めない。
+      - name: Exclude admin page from public deployment
+        run: rm -rf admin
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

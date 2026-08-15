@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>石川マップ 管理者ページ</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: #eceff1;
+    color: #263238;
+    font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Meiryo', sans-serif;
+  }
+  header {
+    background: linear-gradient(135deg, #1e88e5, #1257a3);
+    color: #fff;
+    padding: 20px 16px;
+  }
+  header h1 { font-size: 1.25rem; }
+  header p { font-size: 0.8rem; opacity: 0.85; margin-top: 4px; }
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  }
+  .card h2 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    border-left: 4px solid #1e88e5;
+    padding-left: 8px;
+  }
+  .stat-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .stat-box {
+    flex: 1;
+    min-width: 130px;
+    background: #f5f8fc;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+  .stat-box .num { font-size: 1.6rem; font-weight: bold; color: #1257a3; }
+  .stat-box .label { font-size: 0.75rem; color: #607d8b; margin-top: 2px; }
+  .stat-updated { font-size: 0.7rem; color: #90a4ae; margin-top: 8px; }
+  .ga4-link { display: inline-block; margin-top: 10px; font-size: 0.8rem; color: #1257a3; }
+
+  .toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .toolbar select, .toolbar input {
+    font: inherit;
+    padding: 6px 10px;
+    border: 1px solid #cfd8dc;
+    border-radius: 6px;
+  }
+  .toolbar input[type=search] { flex: 1; min-width: 150px; }
+  .status-summary { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .status-chip {
+    font-size: 0.72rem;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: #eceff1;
+    color: #455a64;
+  }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid #eceff1; white-space: nowrap; }
+  th { color: #607d8b; font-weight: 600; position: sticky; top: 0; background: #fff; }
+  tr:hover td { background: #f5f8fc; }
+  .badge {
+    font-size: 0.7rem;
+    padding: 2px 7px;
+    border-radius: 999px;
+    color: #fff;
+  }
+  .badge-published { background: #43a047; }
+  .badge-hidden    { background: #78909c; }
+  .badge-pending   { background: #fb8c00; }
+  .badge-refused   { background: #e53935; }
+  .badge-test      { background: #8e24aa; }
+  td a { color: #1257a3; }
+
+  .contact-note {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #455a64;
+    margin-bottom: 10px;
+  }
+  .contact-links a {
+    display: inline-block;
+    margin-right: 14px;
+    font-size: 0.85rem;
+    color: #1257a3;
+  }
+  .loading, .error {
+    font-size: 0.85rem;
+    color: #90a4ae;
+    padding: 8px 0;
+  }
+  .error { color: #e53935; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>石川マップ 管理者ページ</h1>
+  <p>このページは管理者専用です。公開サイト（石川マップ本体）とは別に管理されています。</p>
+</header>
+
+<main>
+
+  <section class="card">
+    <h2>本日のアクセス状況</h2>
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="num" id="statToday">–</div>
+        <div class="label">本日のアクセス数（回）</div>
+      </div>
+      <div class="stat-box">
+        <div class="num" id="statTotal">–</div>
+        <div class="label">累計アクセス数（回）</div>
+      </div>
+    </div>
+    <div class="stat-updated" id="statUpdated"></div>
+    <a class="ga4-link" href="https://analytics.google.com/analytics/web/#/p549916210/reports/intelligenthome" target="_blank" rel="noopener">→ Googleアナリティクス(GA4)で詳しく見る</a>
+  </section>
+
+  <section class="card">
+    <h2>店舗・施設一覧</h2>
+    <div class="status-summary" id="statusSummary"></div>
+    <div class="toolbar">
+      <select id="statusFilter">
+        <option value="">すべてのstatus</option>
+        <option value="published">published（公開中）</option>
+        <option value="hidden">hidden（非表示）</option>
+        <option value="pending">pending（確認中）</option>
+        <option value="refused">refused（掲載拒否）</option>
+        <option value="test">test（動作確認用）</option>
+      </select>
+      <input type="search" id="searchBox" placeholder="店名・住所・カテゴリで検索">
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>店名</th>
+            <th>カテゴリ</th>
+            <th>status</th>
+            <th>最終確認日</th>
+            <th>要確認</th>
+            <th>詳細</th>
+          </tr>
+        </thead>
+        <tbody id="storeTableBody">
+          <tr><td colspan="7" class="loading">読み込み中…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>お問い合わせ</h2>
+    <p class="contact-note">
+      サイトからのご意見・修正依頼はGoogleフォームで受け付けています。
+      新着があった際にメールで通知を受け取りたい場合は、フォームの「回答」タブ→右上の点メニュー→
+      「新しい回答についてのメール通知を受け取る」をONにしてください（フォーム側の設定なので、この管理者ページからは操作できません）。
+    </p>
+    <div class="contact-links">
+      <a href="https://docs.google.com/forms/" target="_blank" rel="noopener">→ Googleフォームの回答一覧を見る</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdcgkoWavuTIU8DNaqynWRssQI-KjcJzRlaru3MH9Z2pDGnaQ/viewform" target="_blank" rel="noopener">→ 公開中のフォーム（訪問者向け）を見る</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  var SITE_ORIGIN = 'https://mokumao.github.io/ishikawa-map';
+
+  var STATUS_LABEL = {
+    published: '公開中',
+    hidden:    '非表示',
+    pending:   '確認中',
+    refused:   '掲載拒否',
+    test:      'テスト用'
+  };
+
+  // ── 本日/累計アクセス数（script.js と同じデータソースを利用） ──────
+  (function () {
+    var GA4_URL = 'https://raw.githubusercontent.com/mokumao/ishikawa-map/gh-data/ga4-today.json';
+    var LOG_URL = 'https://raw.githubusercontent.com/mokumao/ishikawa-map/gh-data/visitor-log.json';
+
+    function todayStrJST() {
+      var jst = new Date(Date.now() + 9 * 60 * 60 * 1000);
+      return jst.toISOString().slice(0, 10);
+    }
+
+    fetch(GA4_URL + '?_=' + Date.now())
+      .then(function (r) { if (!r.ok) throw new Error('status ' + r.status); return r.json(); })
+      .then(function (data) {
+        if (!data || data.date !== todayStrJST() || typeof data.count !== 'number') {
+          throw new Error('stale or invalid');
+        }
+        document.getElementById('statToday').textContent = data.count;
+        document.getElementById('statUpdated').textContent =
+          '最終更新: ' + new Date(data.ts).toLocaleString('ja-JP');
+      })
+      .catch(function () {
+        document.getElementById('statToday').textContent = '?';
+      });
+
+    fetch('https://ishikawamap.goatcounter.com/counter//ishikawa-map/.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var raw = String(d.count || d.count_unique || '');
+        var digits = raw.replace(/[^\d]/g, '');
+        document.getElementById('statTotal').textContent = digits || '?';
+      })
+      .catch(function () {
+        document.getElementById('statTotal').textContent = '?';
+      });
+  })();
+
+  // ── 店舗一覧（本体サイトの restaurants-data.js をそのまま読み込む） ──
+  (function () {
+    var tbody   = document.getElementById('storeTableBody');
+    var summary = document.getElementById('statusSummary');
+    var statusFilter = document.getElementById('statusFilter');
+    var searchBox     = document.getElementById('searchBox');
+    var allStores = [];
+
+    function render() {
+      var status = statusFilter.value;
+      var q = searchBox.value.trim().toLowerCase();
+
+      var filtered = allStores.filter(function (r) {
+        var st = r.status || 'published';
+        if (status && st !== status) return false;
+        if (!q) return true;
+        return (r.name || '').toLowerCase().indexOf(q) !== -1 ||
+               (r.address || '').toLowerCase().indexOf(q) !== -1 ||
+               (r.genre || '').toLowerCase().indexOf(q) !== -1;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="loading">該当する店舗がありません</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(function (r) {
+        var st = r.status || 'published';
+        var label = STATUS_LABEL[st] || st;
+        return '<tr>' +
+          '<td>' + r.id + '</td>' +
+          '<td>' + escapeHtml(r.name || '') + '</td>' +
+          '<td>' + escapeHtml(r.genre || '') + '</td>' +
+          '<td><span class="badge badge-' + st + '">' + label + '</span></td>' +
+          '<td>' + (r.lastChecked || '') + '</td>' +
+          '<td>' + (r.warn ? '⚠️' : '') + '</td>' +
+          '<td><a href="' + SITE_ORIGIN + '/detail.html?id=' + r.id + '" target="_blank" rel="noopener">開く</a></td>' +
+          '</tr>';
+      }).join('');
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+      });
+    }
+
+    function renderSummary() {
+      var counts = {};
+      allStores.forEach(function (r) {
+        var st = r.status || 'published';
+        counts[st] = (counts[st] || 0) + 1;
+      });
+      summary.innerHTML = Object.keys(counts).map(function (st) {
+        var label = STATUS_LABEL[st] || st;
+        return '<span class="status-chip">' + label + ': ' + counts[st] + '件</span>';
+      }).join('') + '<span class="status-chip">合計: ' + allStores.length + '件</span>';
+    }
+
+    statusFilter.addEventListener('change', render);
+    searchBox.addEventListener('input', render);
+
+    var script = document.createElement('script');
+    script.src = SITE_ORIGIN + '/restaurants-data.js?_=' + Date.now();
+    script.onload = function () {
+      if (typeof restaurants === 'undefined') {
+        tbody.innerHTML = '<tr><td colspan="7" class="error">店舗データの読み込みに失敗しました</td></tr>';
+        return;
+      }
+      allStores = restaurants;
+      renderSummary();
+      render();
+    };
+    script.onerror = function () {
+      tbody.innerHTML = '<tr><td colspan="7" class="error">店舗データの読み込みに失敗しました（ネットワークエラー）</td></tr>';
+    };
+    document.head.appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
