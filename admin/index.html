@@ -191,6 +191,9 @@
           <option value="refused">refused（掲載拒否）</option>
           <option value="test">test（動作確認用）</option>
         </select>
+        <select id="genreFilter">
+          <option value="">すべてのカテゴリ</option>
+        </select>
         <input type="search" id="searchBox" placeholder="店名・住所・カテゴリで検索">
       </div>
       <p class="table-scroll-hint">→ 列が多いため、表を左右にスワイプ（横スクロール）すると「履歴」列まで見られます</p>
@@ -285,6 +288,7 @@
     var tbody   = document.getElementById('storeTableBody');
     var summary = document.getElementById('statusSummary');
     var statusFilter = document.getElementById('statusFilter');
+    var genreFilter   = document.getElementById('genreFilter');
     var searchBox     = document.getElementById('searchBox');
     var tableWrap      = document.getElementById('tableWrap');
     var topScroll      = document.getElementById('tableScrollTop');
@@ -300,11 +304,13 @@
 
     function render() {
       var status = statusFilter.value;
+      var genre  = genreFilter.value;
       var q = searchBox.value.trim().toLowerCase();
 
       var filtered = allStores.filter(function (r) {
         var st = r.status || 'published';
         if (status && st !== status) return false;
+        if (genre && r.genre !== genre) return false;
         if (!q) return true;
         return (r.name || '').toLowerCase().indexOf(q) !== -1 ||
                (r.address || '').toLowerCase().indexOf(q) !== -1 ||
@@ -358,6 +364,18 @@
       });
     }
 
+    function populateGenreFilter() {
+      var genres = [];
+      allStores.forEach(function (r) {
+        if (r.genre && genres.indexOf(r.genre) === -1) genres.push(r.genre);
+      });
+      genres.sort(function (a, b) { return a.localeCompare(b, 'ja'); });
+      genreFilter.innerHTML = '<option value="">すべてのカテゴリ</option>' +
+        genres.map(function (g) {
+          return '<option value="' + escapeHtml(g) + '">' + escapeHtml(g) + '</option>';
+        }).join('');
+    }
+
     function renderSummary() {
       var counts = {};
       allStores.forEach(function (r) {
@@ -371,6 +389,7 @@
     }
 
     statusFilter.addEventListener('change', render);
+    genreFilter.addEventListener('change', render);
     searchBox.addEventListener('input', render);
 
     tbody.addEventListener('click', function (e) {
@@ -392,6 +411,7 @@
       }
       allStores = restaurants;
       renderSummary();
+      populateGenreFilter();
       render();
     };
     script.onerror = function () {
