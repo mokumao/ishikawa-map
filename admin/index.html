@@ -44,7 +44,14 @@
   @media (min-width: 1000px) {
     main { max-width: 1500px; }
     .layout { flex-direction: row; align-items: flex-start; }
-    .sidebar { width: 300px; flex-shrink: 0; }
+    .sidebar {
+      width: 300px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 16px;
+      max-height: calc(100vh - 32px);
+      overflow-y: auto;
+    }
     .main-content { flex: 1; }
   }
   .card {
