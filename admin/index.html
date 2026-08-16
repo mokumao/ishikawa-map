@@ -33,6 +33,16 @@
     padding: 16px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12);
   }
+  .card-list { overflow: visible; }
+  .list-sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: #fff;
+    margin: -16px -16px 4px -16px;
+    padding: 16px 16px 4px 16px;
+    border-radius: 12px 12px 0 0;
+  }
   .card h2 {
     font-size: 1rem;
     margin-bottom: 12px;
@@ -93,7 +103,7 @@
   .table-scroll-top > div { height: 1px; }
   table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
   th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid #eceff1; white-space: nowrap; }
-  th { color: #607d8b; font-weight: 600; position: sticky; top: 0; background: #fff; }
+  th { color: #607d8b; font-weight: 600; position: sticky; top: var(--thead-top, 0px); background: #fff; z-index: 15; }
   tr:hover td { background: #f5f8fc; }
   .badge {
     font-size: 0.7rem;
@@ -173,22 +183,24 @@
     <a class="ga4-link" href="https://analytics.google.com/analytics/web/#/p549916210/reports/intelligenthome" target="_blank" rel="noopener">→ Googleアナリティクス(GA4)で詳しく見る</a>
   </section>
 
-  <section class="card">
-    <h2>店舗・施設一覧</h2>
-    <div class="status-summary" id="statusSummary"></div>
-    <div class="toolbar">
-      <select id="statusFilter">
-        <option value="">すべてのstatus</option>
-        <option value="published">published（公開中）</option>
-        <option value="hidden">hidden（非表示）</option>
-        <option value="pending">pending（確認中）</option>
-        <option value="refused">refused（掲載拒否）</option>
-        <option value="test">test（動作確認用）</option>
-      </select>
-      <input type="search" id="searchBox" placeholder="店名・住所・カテゴリで検索">
+  <section class="card card-list">
+    <div class="list-sticky-header" id="listStickyHeader">
+      <h2>店舗・施設一覧</h2>
+      <div class="status-summary" id="statusSummary"></div>
+      <div class="toolbar">
+        <select id="statusFilter">
+          <option value="">すべてのstatus</option>
+          <option value="published">published（公開中）</option>
+          <option value="hidden">hidden（非表示）</option>
+          <option value="pending">pending（確認中）</option>
+          <option value="refused">refused（掲載拒否）</option>
+          <option value="test">test（動作確認用）</option>
+        </select>
+        <input type="search" id="searchBox" placeholder="店名・住所・カテゴリで検索">
+      </div>
+      <p class="table-scroll-hint">→ 列が多いため、表を左右にスワイプ（横スクロール）すると「履歴」列まで見られます</p>
+      <div class="table-scroll-top" id="tableScrollTop"><div id="tableScrollTopInner"></div></div>
     </div>
-    <p class="table-scroll-hint">→ 列が多いため、表を左右にスワイプ（横スクロール）すると「履歴」列まで見られます</p>
-    <div class="table-scroll-top" id="tableScrollTop"><div id="tableScrollTopInner"></div></div>
     <div class="table-wrap" id="tableWrap">
       <table>
         <thead>
@@ -282,14 +294,18 @@
     var tableWrap      = document.getElementById('tableWrap');
     var topScroll      = document.getElementById('tableScrollTop');
     var topScrollInner = document.getElementById('tableScrollTopInner');
+    var stickyHeader = document.getElementById('listStickyHeader');
     var allStores = [];
 
     function syncTopScrollWidth() {
       topScrollInner.style.width = tableWrap.scrollWidth + 'px';
     }
+    function syncStickyOffset() {
+      document.documentElement.style.setProperty('--thead-top', stickyHeader.offsetHeight + 'px');
+    }
     topScroll.addEventListener('scroll', function () { tableWrap.scrollLeft = topScroll.scrollLeft; });
     tableWrap.addEventListener('scroll', function () { topScroll.scrollLeft = tableWrap.scrollLeft; });
-    window.addEventListener('resize', syncTopScrollWidth);
+    window.addEventListener('resize', function () { syncTopScrollWidth(); syncStickyOffset(); });
 
     function render() {
       var status = statusFilter.value;
@@ -329,6 +345,7 @@
       }).join('');
 
       syncTopScrollWidth();
+      syncStickyOffset();
     }
 
     function renderHistory(r) {
