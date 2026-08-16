@@ -69,7 +69,19 @@
     background: #eceff1;
     color: #455a64;
   }
-  .table-wrap { overflow-x: auto; }
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid #e0e6ea;
+    border-radius: 8px;
+    scrollbar-width: auto;
+  }
+  .table-wrap::-webkit-scrollbar { height: 10px; }
+  .table-wrap::-webkit-scrollbar-thumb { background: #b0bec5; border-radius: 5px; }
+  .table-scroll-hint {
+    font-size: 0.72rem;
+    color: #90a4ae;
+    margin-bottom: 6px;
+  }
   table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
   th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid #eceff1; white-space: nowrap; }
   th { color: #607d8b; font-weight: 600; position: sticky; top: 0; background: #fff; }
@@ -166,6 +178,7 @@
       </select>
       <input type="search" id="searchBox" placeholder="店名・住所・カテゴリで検索">
     </div>
+    <p class="table-scroll-hint">→ 列が多いため、表を左右にスワイプ（横スクロール）すると「履歴」列まで見られます</p>
     <div class="table-wrap">
       <table>
         <thead>
