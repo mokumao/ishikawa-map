@@ -186,6 +186,7 @@
     .info-note { margin-top: 10px; font-size: 0.78rem; color: #1565c0; line-height: 1.5; }
     .info-note.last-checked { color: #c62828; }
     .info-note.store-no { color: #2e7d32; }
+    .store-no-hint { margin-left: 16px; }
 
     /* ── 警告ボックス ── */
     .warn-box {
@@ -706,7 +707,7 @@
           </table>
           ${lastCheckedNote}
           <p class="info-note">基本情報はAIが情報源をもとに自動収集したものです。詳細は情報源をご確認ください。</p>
-          <p class="info-note store-no">店舗番号：${storeNo}（サイト通し番号）</p>
+          <p class="info-note store-no">店舗番号：${storeNo}<span class="store-no-hint">（サイト通し番号）</span></p>
           <p class="info-note store-no">掲載内容の修正・お問い合わせの際は、店舗番号をお知らせください。</p>
         </div>
 
