@@ -20,6 +20,19 @@
   }
   header h1 { font-size: 1.25rem; }
   header p { font-size: 0.8rem; opacity: 0.85; margin-top: 4px; }
+  .sidebar-sticky-top { display: flex; flex-direction: column; gap: 16px; }
+  .site-link-btn {
+    display: block;
+    text-align: center;
+    background: #fff;
+    color: #1257a3;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    border: 1px solid #cfd8dc;
+  }
   main {
     max-width: 960px;
     margin: 0 auto;
@@ -55,10 +68,12 @@
       max-height: calc(100vh - 32px);
       overflow-y: auto;
     }
-    .sidebar header {
+    .sidebar-sticky-top {
       position: sticky;
       top: 0;
       z-index: 25;
+      background: #eceff1;
+      padding-bottom: 4px;
     }
     .main-content {
       min-height: calc(100vh + 400px);
@@ -222,10 +237,13 @@
 <div class="layout">
 
   <aside class="sidebar">
-  <header>
-    <h1>石川マップ 管理者ページ</h1>
-    <p>このページは管理者専用です。公開サイト（石川マップ本体）とは別に管理されています。</p>
-  </header>
+  <div class="sidebar-sticky-top">
+    <header>
+      <h1>石川マップ 管理者ページ</h1>
+      <p>このページは管理者専用です。公開サイト（石川マップ本体）とは別に管理されています。</p>
+    </header>
+    <a class="site-link-btn" href="https://mokumao.github.io/ishikawa-map/" target="_blank" rel="noopener">🗺 石川マップを開く</a>
+  </div>
 
   <section class="card">
     <h2>本日のアクセス状況</h2>
