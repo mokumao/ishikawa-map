@@ -43,16 +43,22 @@
   }
   @media (min-width: 1000px) {
     main { max-width: 1500px; }
-    .layout { flex-direction: row; align-items: flex-start; }
+    .layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      align-items: start;
+      gap: 16px;
+    }
     .sidebar {
-      width: 300px;
-      flex-shrink: 0;
+      grid-column: 1;
+      grid-row: 1;
       position: sticky;
       top: 16px;
       max-height: calc(100vh - 32px);
       overflow-y: auto;
     }
-    .main-content { flex: 1; }
+    .contact-card { grid-column: 1; grid-row: 2; }
+    .main-content { grid-column: 2; grid-row: 1 / span 2; }
   }
   .card {
     background: #fff;
@@ -86,14 +92,23 @@
   .toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
   .list-header-row {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 8px 16px;
+    gap: 8px;
     margin-bottom: 4px;
   }
-  .list-header-row h2 { padding-top: 8px; }
   .list-header-row h2 { margin-bottom: 0; flex-shrink: 0; }
-  .list-header-row .toolbar { margin-bottom: 0; flex: 1; min-width: 0; }
+  .list-header-row .toolbar { margin-bottom: 0; width: 100%; }
+  @media (min-width: 1000px) {
+    .list-header-row {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 8px 16px;
+    }
+    .list-header-row h2 { padding-top: 8px; }
+    .list-header-row .toolbar { flex: 1; min-width: 0; width: auto; }
+  }
   .toolbar select, .toolbar input {
     font: inherit;
     padding: 6px 10px;
@@ -225,18 +240,6 @@
     </div>
   </section>
 
-  <section class="card">
-    <h2>お問い合わせ</h2>
-    <p class="contact-note">
-      サイトからのご意見・修正依頼はGoogleフォームで受け付けています。
-      新着があった際にメールで通知を受け取りたい場合は、フォームの「回答」タブ→右上の点メニュー→
-      「新しい回答についてのメール通知を受け取る」をONにしてください（フォーム側の設定なので、この管理者ページからは操作できません）。
-    </p>
-    <div class="contact-links">
-      <a href="https://docs.google.com/forms/" target="_blank" rel="noopener">→ Googleフォームの回答一覧を見る</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdcgkoWavuTIU8DNaqynWRssQI-KjcJzRlaru3MH9Z2pDGnaQ/viewform" target="_blank" rel="noopener">→ 公開中のフォーム（訪問者向け）を見る</a>
-    </div>
-  </section>
   </aside>
 
   <div class="main-content">
@@ -283,6 +286,19 @@
     </div>
   </section>
   </div>
+
+  <section class="card contact-card">
+    <h2>お問い合わせ</h2>
+    <p class="contact-note">
+      サイトからのご意見・修正依頼はGoogleフォームで受け付けています。
+      新着があった際にメールで通知を受け取りたい場合は、フォームの「回答」タブ→右上の点メニュー→
+      「新しい回答についてのメール通知を受け取る」をONにしてください（フォーム側の設定なので、この管理者ページからは操作できません）。
+    </p>
+    <div class="contact-links">
+      <a href="https://docs.google.com/forms/" target="_blank" rel="noopener">→ Googleフォームの回答一覧を見る</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdcgkoWavuTIU8DNaqynWRssQI-KjcJzRlaru3MH9Z2pDGnaQ/viewform" target="_blank" rel="noopener">→ 公開中のフォーム（訪問者向け）を見る</a>
+    </div>
+  </section>
 
 </div>
 </main>
