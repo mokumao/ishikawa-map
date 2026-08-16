@@ -209,6 +209,7 @@
             <th>店名</th>
             <th>カテゴリ</th>
             <th>状態</th>
+            <th>掲載開始日</th>
             <th>最終確認日</th>
             <th>要確認</th>
             <th>詳細</th>
@@ -216,7 +217,7 @@
           </tr>
         </thead>
         <tbody id="storeTableBody">
-          <tr><td colspan="9" class="loading">読み込み中…</td></tr>
+          <tr><td colspan="10" class="loading">読み込み中…</td></tr>
         </tbody>
       </table>
     </div>
@@ -319,7 +320,7 @@
       });
 
       if (filtered.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" class="loading">該当する店舗がありません</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="10" class="loading">該当する店舗がありません</td></tr>';
         return;
       }
 
@@ -332,13 +333,14 @@
           '<td>' + escapeHtml(r.name || '') + '</td>' +
           '<td>' + escapeHtml(r.genre || '') + '</td>' +
           '<td><span class="badge badge-' + st + '">' + label + '</span></td>' +
+          '<td>' + (r.listedDate || '') + '</td>' +
           '<td>' + (r.lastChecked || '') + '</td>' +
           '<td>' + (r.warn ? '⚠️' : '') + '</td>' +
           '<td><a href="' + SITE_ORIGIN + '/detail.html?id=' + r.id + '" target="_blank" rel="noopener">開く</a></td>' +
           '<td><button type="button" class="hist-btn" data-id="' + r.id + '">履歴</button></td>' +
           '</tr>' +
           '<tr class="hist-row" id="hist-' + r.id + '" style="display:none">' +
-          '<td colspan="9">' + renderHistory(r) + '</td>' +
+          '<td colspan="10">' + renderHistory(r) + '</td>' +
           '</tr>';
       }).join('');
 
@@ -408,7 +410,7 @@
     script.src = SITE_ORIGIN + '/restaurants-data.js?_=' + Date.now();
     script.onload = function () {
       if (typeof restaurants === 'undefined') {
-        tbody.innerHTML = '<tr><td colspan="9" class="error">店舗データの読み込みに失敗しました</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="10" class="error">店舗データの読み込みに失敗しました</td></tr>';
         return;
       }
       allStores = restaurants;
@@ -417,7 +419,7 @@
       render();
     };
     script.onerror = function () {
-      tbody.innerHTML = '<tr><td colspan="9" class="error">店舗データの読み込みに失敗しました（ネットワークエラー）</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="10" class="error">店舗データの読み込みに失敗しました（ネットワークエラー）</td></tr>';
     };
     document.head.appendChild(script);
   })();
