@@ -82,6 +82,15 @@
     color: #90a4ae;
     margin-bottom: 6px;
   }
+  .table-scroll-top {
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 14px;
+    margin-bottom: 2px;
+  }
+  .table-scroll-top::-webkit-scrollbar { height: 10px; }
+  .table-scroll-top::-webkit-scrollbar-thumb { background: #b0bec5; border-radius: 5px; }
+  .table-scroll-top > div { height: 1px; }
   table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
   th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid #eceff1; white-space: nowrap; }
   th { color: #607d8b; font-weight: 600; position: sticky; top: 0; background: #fff; }
@@ -179,7 +188,8 @@
       <input type="search" id="searchBox" placeholder="店名・住所・カテゴリで検索">
     </div>
     <p class="table-scroll-hint">→ 列が多いため、表を左右にスワイプ（横スクロール）すると「履歴」列まで見られます</p>
-    <div class="table-wrap">
+    <div class="table-scroll-top" id="tableScrollTop"><div id="tableScrollTopInner"></div></div>
+    <div class="table-wrap" id="tableWrap">
       <table>
         <thead>
           <tr>
@@ -269,7 +279,17 @@
     var summary = document.getElementById('statusSummary');
     var statusFilter = document.getElementById('statusFilter');
     var searchBox     = document.getElementById('searchBox');
+    var tableWrap      = document.getElementById('tableWrap');
+    var topScroll      = document.getElementById('tableScrollTop');
+    var topScrollInner = document.getElementById('tableScrollTopInner');
     var allStores = [];
+
+    function syncTopScrollWidth() {
+      topScrollInner.style.width = tableWrap.scrollWidth + 'px';
+    }
+    topScroll.addEventListener('scroll', function () { tableWrap.scrollLeft = topScroll.scrollLeft; });
+    tableWrap.addEventListener('scroll', function () { topScroll.scrollLeft = tableWrap.scrollLeft; });
+    window.addEventListener('resize', syncTopScrollWidth);
 
     function render() {
       var status = statusFilter.value;
@@ -307,6 +327,8 @@
           '<td colspan="9">' + renderHistory(r) + '</td>' +
           '</tr>';
       }).join('');
+
+      syncTopScrollWidth();
     }
 
     function renderHistory(r) {
