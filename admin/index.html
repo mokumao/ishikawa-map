@@ -194,28 +194,30 @@
     <div class="stat-updated" id="statUpdated"></div>
     <a class="ga4-link" href="https://analytics.google.com/analytics/web/#/p549916210/reports/intelligenthome" target="_blank" rel="noopener">→ Googleアナリティクス(GA4)で詳しく見る</a>
   </section>
+
+  <section class="card">
+    <div class="status-summary" id="statusSummary"></div>
+    <div class="toolbar">
+      <select id="statusFilter">
+        <option value="">すべての状態</option>
+        <option value="published">published（公開中）</option>
+        <option value="hidden">hidden（非表示）</option>
+        <option value="pending">pending（確認中）</option>
+        <option value="refused">refused（掲載拒否）</option>
+        <option value="test">test（動作確認用）</option>
+      </select>
+      <select class="genreFilter"><option value="">すべてのカテゴリ</option></select>
+      <select class="genreFilter"><option value="">すべてのカテゴリ</option></select>
+      <select class="genreFilter"><option value="">すべてのカテゴリ</option></select>
+      <input type="search" id="searchBox" placeholder="店名・住所・カテゴリで検索">
+    </div>
+  </section>
   </aside>
 
   <div class="main-content">
   <section class="card card-list">
     <div class="list-sticky-header" id="listStickyHeader">
       <h2>店舗・施設一覧</h2>
-      <div class="status-summary" id="statusSummary"></div>
-      <div class="toolbar">
-        <select id="statusFilter">
-          <option value="">すべての状態</option>
-          <option value="published">published（公開中）</option>
-          <option value="hidden">hidden（非表示）</option>
-          <option value="pending">pending（確認中）</option>
-          <option value="refused">refused（掲載拒否）</option>
-          <option value="test">test（動作確認用）</option>
-        </select>
-        <select class="genreFilter"><option value="">すべてのカテゴリ</option></select>
-        <select class="genreFilter"><option value="">すべてのカテゴリ</option></select>
-        <select class="genreFilter"><option value="">すべてのカテゴリ</option></select>
-        <input type="search" id="searchBox" placeholder="店名・住所・カテゴリで検索">
-      </div>
-      <p class="table-scroll-hint">→ 列が多いため、表を左右にスワイプ（横スクロール）すると「履歴」列まで見られます</p>
       <div class="table-scroll-top" id="tableScrollTop"><div id="tableScrollTopInner"></div></div>
     </div>
     <div class="table-wrap" id="tableWrap">
