@@ -68,6 +68,27 @@ Googleマップ・NTTタウンページの自動収集は規約上禁止（人�
 - `test` — 動作確認用（プレビュー環境のみ表示）
 - `status` 未指定は `published` とみなす
 
+### status変更履歴（`statusHistory`）
+
+`status`を変更したとき（掲載開始・非表示化・掲載拒否・再登録等）は、
+`restaurants-data.js`の該当店舗に`statusHistory`フィールドを追記すること
+（2026-08-16導入・管理者ページの履歴表示機能のため）。
+
+```javascript
+statusHistory: [
+  { date: "2026-08-16", from: "published", to: "hidden", note: "店主より削除依頼" }
+],
+```
+
+- **`revisionHistory`（店名・住所等の読者向け修正履歴）とは全くの別物。混同禁止。**
+  `revisionHistory`は`detail.html`に「修正履歴」として**公開表示される**が、
+  `statusHistory`はどのページにも表示しない、**管理者ページ専用の非公開記録**。
+  そのため`note`に削除理由等の内部事情を書いても公開される心配がない。
+- 配列末尾に追記する（古い順で保持）
+- `from`/`to`には変更前後の`status`値を入れる（新規追加時の初回登録は
+  `from: null, to: "published"`のように書く）
+- `note`には理由を簡潔に記載する（個人情報や店主のプライバシーに踏み込みすぎない範囲で）
+
 ## 店舗紹介文の方針
 
 - AIによる紹介文の自動生成は禁止（事実確認ができないため）。
