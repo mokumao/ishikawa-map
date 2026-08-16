@@ -23,12 +23,23 @@
     max-width: 960px;
     margin: 0 auto;
     padding: 16px;
+  }
+  .layout {
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+  }
   @media (min-width: 1000px) {
     main { max-width: 1500px; }
+    .layout { flex-direction: row; align-items: flex-start; }
+    .sidebar { width: 300px; flex-shrink: 0; }
+    .main-content { flex: 1; }
   }
   .card {
     background: #fff;
@@ -165,7 +176,9 @@
 </header>
 
 <main>
+<div class="layout">
 
+  <aside class="sidebar">
   <section class="card">
     <h2>本日のアクセス状況</h2>
     <div class="stat-row">
@@ -181,7 +194,9 @@
     <div class="stat-updated" id="statUpdated"></div>
     <a class="ga4-link" href="https://analytics.google.com/analytics/web/#/p549916210/reports/intelligenthome" target="_blank" rel="noopener">→ Googleアナリティクス(GA4)で詳しく見る</a>
   </section>
+  </aside>
 
+  <div class="main-content">
   <section class="card card-list">
     <div class="list-sticky-header" id="listStickyHeader">
       <h2>店舗・施設一覧</h2>
@@ -238,7 +253,9 @@
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSdcgkoWavuTIU8DNaqynWRssQI-KjcJzRlaru3MH9Z2pDGnaQ/viewform" target="_blank" rel="noopener">→ 公開中のフォーム（訪問者向け）を見る</a>
     </div>
   </section>
+  </div>
 
+</div>
 </main>
 
 <script>
