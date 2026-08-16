@@ -50,49 +50,6 @@ var TRANSLATIONS = {
     'visitor.today':       '本日のアクセス数 {n} 回',
     'visitor.total':       '累計アクセス数 {n} 回',
   },
-  en: {
-    'header.title':        'Ishikawa Map',
-    'header.sub1':         'Info may be inaccurate.',
-    'header.refbtn':       'More info',
-    'header.sub2':         'Discover hidden gems in Ishikawa!',
-    'wip.text':            'This site is under construction. Some info may be incorrect.',
-    'tab.map':             'Map',
-    'tab.list':            'List',
-    'search.placeholder':  'Search by name, genre, address, hours…',
-    'filter.label':        'Filter by genre',
-    'btn.showNames':       'Names',
-    'bottom.map':          'Map',
-    'bottom.list':         'List',
-    'gear.back':           'Back',
-    'lang.ja':             'Japanese',
-    'lang.en':             'English',
-    'lang.zh':             'Chinese',
-    'lang.back':           'Back',
-    'info.about-site':     'About this site',
-    'info.about-site.desc': 'What Ishikawa Map is for and how to use it',
-    'info.about-ishikawa': 'About Ishikawa',
-    'info.about-ishikawa.desc': 'Highlights and basic info about the Ishikawa area',
-    'info.faq':            'Q & A',
-    'info.faq.desc':       'Frequently asked questions and answers',
-    'info.feedback':       'Feedback',
-    'info.feedback.desc':  "We'd love to hear from you",
-    'info.today':          'Ishikawa Today',
-    'info.today.desc':     'The latest news from Ishikawa',
-    'popup.address':       'Address',
-    'popup.hours':         'Hours',
-    'popup.closed':        'Closed',
-    'popup.note':          'Note',
-    'popup.noteEmpty':     'See Google Maps or the details page',
-    'popup.gmap':          'Open in Google Maps',
-    'popup.detail':        'View Details',
-    'count.results':       '{n} results',
-    'list.closed':         'Closed: ',
-    'filter.all':          'All',
-    // filter.<category key> is auto-injected from CATEGORIES (defined below)
-    'footer.main':         '🌊 Ishikawa, Uruma City  |  Info as of survey date',
-    'visitor.today':       "Today's visits: {n}",
-    'visitor.total':       'Total visits: {n}',
-  }
 };
 
 // 翻訳キーから文字列を返す
@@ -116,43 +73,6 @@ function applyLangToDOM() {
     el.placeholder = t(el.getAttribute('data-i18n-ph'));
   });
 }
-
-// 言語を切り替えてUIを再描画
-function setLanguage(lang) {
-  _currentLang = lang;
-  applyLangToDOM();
-  // フィルターボタン再描画
-  if (typeof buildFilterButtons === 'function') buildFilterButtons();
-  // 歯車パネルのカテゴリボタン再描画（ラベルの言語切替に追従させる）
-  if (typeof window._buildGearCategoryGrid === 'function') window._buildGearCategoryGrid();
-  // 店舗リスト再描画
-  if (typeof renderShopList    === 'function') renderShopList();
-  // 開いているポップアップを閉じる（古い言語のまま残らないように）
-  if (typeof map !== 'undefined' && map) map.closePopup();
-  // 全マーカーのポップアップを新言語で再バインド
-  if (typeof markersData !== 'undefined') {
-    markersData.forEach(function(d) {
-      d.marker.bindPopup(makePopup(d.restaurant, d.idx), { maxWidth: 300, autoPan: false });
-    });
-  }
-}
-
-// ── ジャンル英語マッピング ────────────────────────────────────────
-var GENRE_EN = {
-  '食事処':                    'Restaurant',
-  '居酒屋等':                  'Izakaya',
-  'バル（中華・和食・バー）':  'Bar (Chinese/Japanese/Bar)',
-  '焼肉':                      'BBQ',
-  'カフェ':                    'Café',
-  'カフェ・イタリアン':        'Café / Italian',
-  'カフェ・バー（ハワイ料理）':'Café / Bar (Hawaiian)',
-  'カフェ・パン':              'Café / Bakery',
-  'カフェ・八重山そば':        'Café / Yaeyama Soba',
-  'ハンバーガー':              'Burger',
-  '焼き鳥・居酒屋':            'Yakitori / Izakaya',
-  'ラーメン':                  'Ramen',
-  'テスト用':                  'Test',
-};
 
 // ── カテゴリ中央設定リスト ──────────────────────────────────────
 // 大分類＝マーカー色・チップ・歯車ボタン・凡例を持つ層
@@ -212,66 +132,24 @@ function autoTint(hex, ratio = 0.82) {
   return `rgb(${mix(r)}, ${mix(g)}, ${mix(b)})`;
 }
 
-// CATEGORIESの多言語ラベルを翻訳テーブル(filter.<key>)・GENRE_ENに自動注入する。
+// CATEGORIESのラベルを翻訳テーブル(filter.<key>)に自動注入する（日本語のみ）。
 // 既存のキーがあれば上書きしない（個別に手を加えたい場合はそちらを優先する）。
-// これにより新カテゴリ追加時、TRANSLATIONS/GENRE_ENの手動編集が不要になる
+// これにより新カテゴリ追加時、TRANSLATIONSの手動編集が不要になる
 (function injectCategoryTranslations() {
   function inject(key, label) {
     if (!(('filter.' + key) in TRANSLATIONS.ja)) TRANSLATIONS.ja['filter.' + key] = label.ja;
-    if (!(('filter.' + key) in TRANSLATIONS.en)) TRANSLATIONS.en['filter.' + key] = label.en;
   }
   CATEGORIES.forEach(function(c) {
     inject(c.key, c.label);
     (c.sub || []).forEach(function(s) { inject(s.key, s.label); });
-    // 単純一致の大分類（genre === 大分類名）は、そのままGENRE_ENにも自動登録する。
-    // includesベースの複合ジャンル文字列（カフェ・イタリアン等）は対象外
-    // （isDefault大分類=食事処のキャッチオールも対象外。既存の個別エントリを維持）
-    if (!c.isDefault && !GENRE_EN[c.label.ja]) {
-      GENRE_EN[c.label.ja] = c.label.en;
-    }
   });
 })();
 
-// 曜日・共通語句を英語に変換（hours / closed フィールド用）
-function translateDays(str) {
-  if (!str) return str;
-  var d = { 月:'Mon', 火:'Tue', 水:'Wed', 木:'Thu', 金:'Fri', 土:'Sat', 日:'Sun' };
-  return str
-    // フル曜日名（長いほうから先に）
-    .replace(/月曜日/g,'Monday').replace(/火曜日/g,'Tuesday')
-    .replace(/水曜日/g,'Wednesday').replace(/木曜日/g,'Thursday')
-    .replace(/金曜日/g,'Friday').replace(/土曜日/g,'Saturday')
-    .replace(/日曜日/g,'Sunday')
-    // 複合: 土・日・祝日 など
-    .replace(/土・日・祝日/g,'Sat, Sun & Holidays')
-    // 範囲: 月〜金 など
-    .replace(/([月火水木金土日])〜([月火水木金土日])/g, function(_,a,b){ return d[a]+'–'+d[b]; })
-    // 共通語句
-    .replace(/年中無休/g,'Open year-round')
-    .replace(/不定休/g,'Irregular')
-    .replace(/要確認/g,'Please check')
-    .replace(/祝日/g,'Holidays')
-    .replace(/翌/g,'(next day) ')
-    .replace(/ランチ/g,'Lunch')
-    .replace(/ディナー/g,'Dinner')
-    .replace(/夜/g,'Evening')
-    .replace(/頃/g,' approx.')
-    .replace(/売り切れ次第終了/g,'until sold out')
-    .replace(/年末年始/g,'year-end/new year')
-    .replace(/旧盆休あり/g,'incl. Obon holiday')
-    .replace(/昼営業なし/g,'no lunch service')
-    .replace(/なし/g,'None')
-    // 残りの単体曜日略字
-    .replace(/([月火水木金土日])/g, function(_,c){ return d[c]; })
-    // 残った「・」区切りを「, 」に
-    .replace(/・/g, ', ');
-}
-
-// 言語別フィールド取得ヘルパー
-function rGenre(r)  { return (_currentLang !== 'ja' && GENRE_EN[r.genre]) ? GENRE_EN[r.genre] : r.genre; }
-function rHours(r)  { return _currentLang !== 'ja' ? translateDays(r.hours)  : r.hours;  }
-function rClosed(r) { return _currentLang !== 'ja' ? translateDays(r.closed) : r.closed; }
-function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : r.note;  }
+// フィールド取得ヘルパー（日本語専用。多言語表示は2026-08-16に廃止）
+function rGenre(r)  { return r.genre;  }
+function rHours(r)  { return r.hours;  }
+function rClosed(r) { return r.closed; }
+function rNote(r)   { return r.note;   }
 
 // ── 本日のアクセス数（訪問回数）を表示（JST 0:00〜現在） ────────
 // メインの集計源はGoogleアナリティクス(GA4)。gh-dataブランチの
@@ -492,7 +370,6 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
 (function () {
   var menu         = document.getElementById('gearMenu');
   var panelMain    = document.getElementById('gearMenuMain');
-  var panelLang    = document.getElementById('gearMenuLang');
   var panelCategory= document.getElementById('gearMenuCategory');
   var overlay      = document.getElementById('gearOverlay');
 
@@ -517,21 +394,13 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     menu.classList.remove('cat-mode');
     menu.style.display = 'block';
     panelMain.style.display     = 'flex';
-    panelLang.style.display     = 'none';
     panelCategory.style.display = 'none';
     overlay.classList.add('active');    // 背景をグレーオーバーレイで封鎖
     disableMap();                       // 地図操作を停止
   }
-  function showLang() {
-    menu.classList.remove('cat-mode');
-    panelMain.style.display     = 'none';
-    panelLang.style.display     = 'flex';
-    panelCategory.style.display = 'none';
-  }
   function showCategory() {
     menu.classList.add('cat-mode');  // 画面下2/3シートに展開
     panelMain.style.display     = 'none';
-    panelLang.style.display     = 'none';
     panelCategory.style.display = 'flex';
     document.getElementById('minimap').style.display = 'none'; // ミニマップ非表示
   }
@@ -539,7 +408,6 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     menu.classList.remove('cat-mode');
     menu.style.display = 'none';
     panelMain.style.display     = 'flex';
-    panelLang.style.display     = 'none';
     panelCategory.style.display = 'none';
     document.getElementById('minimap').style.display = ''; // ミニマップ再表示
     setTimeout(function () { if (window._resetMinimap) window._resetMinimap(); }, 50); // サイズ再計算
@@ -887,7 +755,6 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   })();
 
   // メインメニュー
-  document.getElementById('gearLangBtn').addEventListener('click', showLang);
   document.getElementById('gearCloseBtn').addEventListener('click', closeMenu);
 
   // カテゴリサブメニュー
@@ -972,7 +839,7 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
   // 今は下部の「地図」タブ押下時に handleMapTabClick() から呼ばれる。
   // このIIFEの外（グローバル）から呼べるよう window に公開する）
   window._categoryPanelOpenViaPin = function () { return openedViaPin; };
-  // 言語切替時にsetLanguage()から呼べるよう公開（歯車パネルのボタンラベル再生成用）
+  // 歯車パネルのカテゴリボタンを外部から再生成できるよう公開
   window._buildGearCategoryGrid = buildGearCategoryGrid;
   window._closeCategoryPanelFromMapTab = function () {
     if (openedViaPin) {
@@ -998,20 +865,6 @@ function rNote(r)   { return (_currentLang !== 'ja' && r.note_en) ? r.note_en : 
     }
     closeMenu();
   };
-
-  // 言語サブメニュー
-  document.getElementById('gearLangJa').addEventListener('click', function () {
-    setLanguage('ja');
-    closeMenu();
-  });
-  document.getElementById('gearLangEn').addEventListener('click', function () {
-    setLanguage('en');
-    closeMenu();
-  });
-  document.getElementById('gearLangZh').addEventListener('click', function () {
-    alert('中国語対応は準備中です。');
-  });
-  document.getElementById('gearLangBack').addEventListener('click', showMain);
 
   // メニュー内のクリックが地図に伝播しないようにブロック
   menu.addEventListener('click', function (e) { e.stopPropagation(); });
