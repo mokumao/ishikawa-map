@@ -84,6 +84,16 @@
   .ga4-link { display: inline-block; margin-top: 10px; font-size: 0.8rem; color: #1257a3; }
 
   .toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .list-header-row {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin-bottom: 4px;
+  }
+  .list-header-row h2 { padding-top: 8px; }
+  .list-header-row h2 { margin-bottom: 0; flex-shrink: 0; }
+  .list-header-row .toolbar { margin-bottom: 0; flex: 1; min-width: 0; }
   .toolbar select, .toolbar input {
     font: inherit;
     padding: 6px 10px;
@@ -211,17 +221,6 @@
   <section class="card">
     <div class="status-summary" id="statusSummary"></div>
     <div class="toolbar">
-      <select id="statusFilter">
-        <option value="">すべての状態</option>
-        <option value="published">published（公開中）</option>
-        <option value="hidden">hidden（非表示）</option>
-        <option value="pending">pending（確認中）</option>
-        <option value="refused">refused（掲載拒否）</option>
-        <option value="test">test（動作確認用）</option>
-      </select>
-      <select class="genreFilter"><option value="">すべてのカテゴリ</option></select>
-      <select class="genreFilter"><option value="">すべてのカテゴリ</option></select>
-      <select class="genreFilter"><option value="">すべてのカテゴリ</option></select>
       <input type="search" id="searchBox" placeholder="店名・住所・カテゴリで検索">
     </div>
   </section>
@@ -230,7 +229,22 @@
   <div class="main-content">
   <section class="card card-list">
     <div class="list-sticky-header" id="listStickyHeader">
-      <h2>店舗・施設一覧</h2>
+      <div class="list-header-row">
+        <h2>店舗・施設一覧</h2>
+        <div class="toolbar">
+          <select id="statusFilter">
+            <option value="">すべての状態</option>
+            <option value="published">published（公開中）</option>
+            <option value="hidden">hidden（非表示）</option>
+            <option value="pending">pending（確認中）</option>
+            <option value="refused">refused（掲載拒否）</option>
+            <option value="test">test（動作確認用）</option>
+          </select>
+          <select class="genreFilter"><option value="">すべてのカテゴリ</option></select>
+          <select class="genreFilter"><option value="">すべてのカテゴリ</option></select>
+          <select class="genreFilter"><option value="">すべてのカテゴリ</option></select>
+        </div>
+      </div>
       <div class="table-scroll-top" id="tableScrollTop"><div id="tableScrollTopInner"></div></div>
     </div>
     <div class="table-wrap" id="tableWrap">
