@@ -144,6 +144,25 @@
       padding-bottom: 8px;
       border-bottom: 1px solid #f0f0f0;
     }
+    .section-title-row {
+      position: relative;
+    }
+    .owner-btn {
+      position: absolute;
+      right: 0;
+      top: calc(50% - 4px);
+      transform: translateY(-50%);
+      display: inline-block;
+      background: #fff;
+      color: #1976d2;
+      border: 1.5px solid #1976d2;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
 
     /* ── 基本情報テーブル ── */
     .info-table { width: 100%; border-collapse: collapse; }
@@ -660,7 +679,10 @@
 
         <!-- 基本情報 -->
         <div class="section">
-          <div class="section-title">基本情報</div>
+          <div class="section-title-row">
+            <div class="section-title">基本情報</div>
+            <button type="button" class="owner-btn">店舗主様へ</button>
+          </div>
           <table class="info-table">
             <tr>
               <td class="lbl">住所</td>
