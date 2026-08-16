@@ -120,9 +120,15 @@
     }
     .warn-reason {
       display: block;
+      width: fit-content;
+      max-width: 100%;
+      margin: 12px auto 0;
+      background: #fff;
       color: #e65100;
       font-size: 0.76rem;
-      margin-top: 3px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
     }
 
     /* ── セクション共通 ── */
@@ -674,7 +680,7 @@
         <div class="shop-hero">
           <div class="shop-name">${r.name}</div>
           <span class="shop-genre-badge">${r.genre}</span>
-          ${r.warn ? `<span class="warn-badge">⚠️ 要確認</span><span class="warn-reason">${warnReasonText(r)}</span>` : ''}
+          ${r.warn ? `<span class="warn-badge">⚠️ 要確認</span><span class="warn-reason">⚠️ ${warnReasonText(r)}</span>` : ''}
         </div>
 
         <!-- 基本情報 -->
