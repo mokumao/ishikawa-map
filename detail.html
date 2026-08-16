@@ -521,9 +521,9 @@
              + encodeURIComponent(r.name + ' ' + r.address);
       }
 
-      // 公開用「店舗番号」：idベース（id+1を6桁ゼロ埋め）。
+      // 公開用「店舗番号」：idベース（id+1、ゼロ埋めなし）。
       // 地名・行政コードを含まない固定書式のため、地域が増えても不変・重複なし。
-      const storeNo = 'No.' + String(r.id + 1).padStart(6, '0');
+      const storeNo = 'No.' + String(r.id + 1);
 
       // sourceUrlのドメインから出典名を判定する。
       // 食べログ等の第三者サイトは固有名、うるま市公式サイトは名称で表示する。
@@ -644,8 +644,8 @@
       const lastRevision = revisionHistory.length > 0 ? revisionHistory[revisionHistory.length - 1] : null;
       const hasChangeThisCheck = !!(lastRevision && r.lastChecked && lastRevision.date === r.lastChecked);
       const lastCheckedNote = r.lastChecked
-        ? `<p class="info-note last-checked">最終情報確認または修正日：${r.lastChecked}（前回より${hasChangeThisCheck ? '修正あり。ページ下を参照。' : '修正なし'}）</p>`
-        : `<p class="info-note last-checked">最終情報確認または修正日：未確認</p>`;
+        ? `<p class="info-note last-checked">最終情報確認日または修正日：${r.lastChecked}（前回より${hasChangeThisCheck ? '修正あり。ページ下を参照。' : '修正なし'}）</p>`
+        : `<p class="info-note last-checked">最終情報確認日または修正日：未確認</p>`;
       const historySection = revisionHistory.length > 0
         ? `<div class="section">
              <div class="section-title">修正履歴</div>
@@ -706,7 +706,7 @@
           </table>
           ${lastCheckedNote}
           <p class="info-note">基本情報はAIが情報源をもとに自動収集したものです。詳細は情報源をご確認ください。</p>
-          <p class="info-note store-no">店舗番号：${storeNo}</p>
+          <p class="info-note store-no">店舗番号：${storeNo}（サイト通し番号）</p>
           <p class="info-note store-no">掲載内容の修正・お問い合わせの際は、店舗番号をお知らせください。</p>
         </div>
 
