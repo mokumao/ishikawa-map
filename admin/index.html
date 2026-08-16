@@ -81,6 +81,8 @@
   }
   .table-wrap {
     overflow-x: auto;
+    overflow-y: auto;
+    max-height: 60vh;
     border: 1px solid #e0e6ea;
     border-radius: 8px;
     scrollbar-width: auto;
@@ -103,7 +105,7 @@
   .table-scroll-top > div { height: 1px; }
   table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
   th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid #eceff1; white-space: nowrap; }
-  th { color: #607d8b; font-weight: 600; position: sticky; top: var(--thead-top, 0px); background: #fff; z-index: 15; }
+  th { color: #607d8b; font-weight: 600; position: sticky; top: 0; background: #fff; z-index: 15; }
   tr:hover td { background: #f5f8fc; }
   .badge {
     font-size: 0.7rem;
@@ -294,18 +296,14 @@
     var tableWrap      = document.getElementById('tableWrap');
     var topScroll      = document.getElementById('tableScrollTop');
     var topScrollInner = document.getElementById('tableScrollTopInner');
-    var stickyHeader = document.getElementById('listStickyHeader');
     var allStores = [];
 
     function syncTopScrollWidth() {
       topScrollInner.style.width = tableWrap.scrollWidth + 'px';
     }
-    function syncStickyOffset() {
-      document.documentElement.style.setProperty('--thead-top', stickyHeader.offsetHeight + 'px');
-    }
     topScroll.addEventListener('scroll', function () { tableWrap.scrollLeft = topScroll.scrollLeft; });
     tableWrap.addEventListener('scroll', function () { topScroll.scrollLeft = tableWrap.scrollLeft; });
-    window.addEventListener('resize', function () { syncTopScrollWidth(); syncStickyOffset(); });
+    window.addEventListener('resize', syncTopScrollWidth);
 
     function render() {
       var status = statusFilter.value;
@@ -345,7 +343,6 @@
       }).join('');
 
       syncTopScrollWidth();
-      syncStickyOffset();
     }
 
     function renderHistory(r) {
