@@ -443,6 +443,11 @@ function rNote(r)   { return r.note;   }
       savedPanPixels = 0;
       map.panBy([0, -_px], { animate: true, duration: 0.7 });
     }
+    // ピンモードに入る前にチップバーが表示されていた場合は、閉じたときに
+    // 元の表示状態へ戻す（通常のトランジションで滑らかに戻ってよい）
+    if (openedViaPin && chipBarWasVisibleBeforePin) {
+      document.body.classList.remove('cat-controls-hidden');
+    }
     openedViaPin = false;
     enableMap();                        // 地図操作を再開（map.tap.enable含む）
   }
@@ -452,6 +457,7 @@ function rNote(r)   { return r.note;   }
   // openedViaPin=false のとき：従来の動作（フィルター変更→一覧へ）
   let openedViaPin  = false;
   let savedPanPixels = 0;   // ピンパネル表示時にずらしたピクセル量（復元用）
+  let chipBarWasVisibleBeforePin = false; // ピンモードに入る前、下部チップバーが表示中だったか（閉時の復元用）
   const catSel      = new Set(); // 'shokuji' | 'izakaya' | 'conbini' | 'gas'（現在表示中）
   const catChipSet  = new Set(); // チップバーに表示するカテゴリ（パネル閉時に記憶）
   const btnAll      = document.getElementById('gearCatAll');
@@ -638,6 +644,28 @@ function rNote(r)   { return r.note;   }
   document.getElementById('categoryPinBtn').addEventListener('click', function (e) {
     L.DomEvent && L.DomEvent.stopPropagation(e);
     openedViaPin = true;
+    // 地図下部チップバーが表示中の状態からピンモードに入ると、新しいカテゴリ
+    // パネルの裏にチップバーが残って重なって見える不具合があったため、
+    // ピンモードに入る瞬間にチップバーを非表示にする（閉じるときは元の状態に復元）。
+    // cat-controls-hiddenは「隠すときは3秒かけてゆっくり」演出用のtransitionを
+    // 持つため、そのまま付与すると新パネルと重なって見える時間が長引く。
+    // 他の初期非表示処理と同じ要領でtransitionを一時的に無効化してから隠す。
+    chipBarWasVisibleBeforePin = !document.body.classList.contains('cat-controls-hidden');
+    if (chipBarWasVisibleBeforePin) {
+      var chipBarEls = [
+        document.getElementById('catSelectAllRow'),
+        document.getElementById('catLabelWrapper'),
+        document.getElementById('catControlsRestoreBtn'),
+        document.getElementById('catControlsHideBtn')
+      ];
+      chipBarEls.forEach(function (el) { if (el) el.style.transition = 'none'; });
+      document.body.classList.add('cat-controls-hidden');
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          chipBarEls.forEach(function (el) { if (el) el.style.transition = ''; });
+        });
+      });
+    }
     if (catSel.size === 0) {
       // マーカーが表示中かどうか確認して自動的に catSel へ反映
       var hasAnyVisible = false;
