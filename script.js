@@ -602,11 +602,43 @@ function rNote(r)   { return r.note;   }
     var right = document.getElementById('catScrollRight');
     if (!bar || !left || !right) return;
 
-    // 矢印ボタン：クリックでスクロール（滑らかに移動。タッチで割り込むと
-    // touchstartハンドラ側でアニメーションを止める＝下記参照）
+    // 矢印ボタン：クリックでスクロール。ネイティブのbehavior:'smooth'は
+    // 速度をこちらで調整できない（ブラウザ任せで比較的速い）ため、
+    // requestAnimationFrameで自前アニメーションし、速度を指定できるようにする。
     var scrollAmt = 90;
-    left.onclick  = function() { bar.scrollBy({ left: -scrollAmt * 3, behavior: 'smooth' }); setTimeout(updateChipArrows, 500); };
-    right.onclick = function() { bar.scrollBy({ left:  scrollAmt * 3, behavior: 'smooth' }); setTimeout(updateChipArrows, 500); };
+    var cancelChipScroll = null;
+    function animateChipScroll(deltaX, duration) {
+      if (cancelChipScroll) { cancelChipScroll(); cancelChipScroll = null; }
+      // OS側の「視差効果を減らす」設定は尊重し、アニメーションさせず即座に移動する
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var maxX0 = bar.scrollWidth - bar.clientWidth;
+        bar.scrollLeft = Math.max(0, Math.min(maxX0, bar.scrollLeft + deltaX));
+        updateChipArrows();
+        return;
+      }
+      var startX    = bar.scrollLeft;
+      var maxX      = bar.scrollWidth - bar.clientWidth;
+      var targetX   = Math.max(0, Math.min(maxX, startX + deltaX));
+      var startTime = null;
+      var cancelled = false;
+      cancelChipScroll = function () { cancelled = true; };
+      function step(ts) {
+        if (cancelled) return;
+        if (!startTime) startTime = ts;
+        var t = Math.min(1, (ts - startTime) / duration);
+        var eased = 1 - Math.pow(1 - t, 3); // ease-out cubic：滑り出しは速く、最後にゆっくり止まる
+        bar.scrollLeft = startX + (targetX - startX) * eased;
+        updateChipArrows();
+        if (t < 1) {
+          requestAnimationFrame(step);
+        } else {
+          cancelChipScroll = null;
+        }
+      }
+      requestAnimationFrame(step);
+    }
+    left.onclick  = function() { animateChipScroll(-scrollAmt * 3, 700); };
+    right.onclick = function() { animateChipScroll( scrollAmt * 3, 700); };
 
     // スクロールイベントで矢印更新
     bar.addEventListener('scroll', updateChipArrows, { passive: true });
@@ -614,9 +646,8 @@ function rNote(r)   { return r.note;   }
     // タッチでの横スクロール（差分方式・即時反応）
     var _lastX = 0, _dragging = false;
     bar.addEventListener('touchstart', function(e) {
-      // 矢印ボタンによるスムーズスクロール中にアイコンへ触れた場合、
-      // 同じ位置へbehavior:'auto'で指示することでアニメーションを即座に止める
-      bar.scrollTo({ left: bar.scrollLeft, behavior: 'auto' });
+      // 矢印ボタンによるアニメーション中にアイコンへ触れた場合は即座に止める
+      if (cancelChipScroll) { cancelChipScroll(); cancelChipScroll = null; }
       _lastX = e.touches[0].clientX;
       _dragging = false;
       e.stopPropagation();
