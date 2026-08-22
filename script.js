@@ -3001,17 +3001,15 @@ function closeAccuracyPopup() {
 (function () {
   var popup = document.getElementById('accuracyPopup');
   if (!popup) return;
-  var box = popup.querySelector('.accuracy-popup-box');
-  // ポップアップ表示中、ポップアップ以外へのタッチ・クリック・スクロールで閉じる
-  // ※ポップアップ本体はpointer-events:noneにして背後の地図を操作できるようにしているため、
-  //   e.targetは常にポップアップの外（地図側）になる。box.contains(e.target)では
-  //   ポップアップの内側を触っても「外側」と誤判定してしまうため、座標がbox表示範囲の
-  //   内側かどうかで判定する（×ボタン・リンクはpointer-events:autoで個別にクリック可能）
+  // ポップアップ表示中は、×ボタン・リンク以外のどこを触っても閉じる
+  // （ポップアップの上を触って地図を動かした場合も含む）。
+  // ポップアップ本体はpointer-events:noneで地図へタッチを通しているため、
+  // ×ボタン・リンク以外を触るとe.targetは常に地図側になる＝閉じてよい。
+  // ×ボタン・リンクだけpointer-events:autoにしてあるので、そこを触った
+  // ときだけe.targetが正しくその要素になり、この判定で除外できる。
   document.addEventListener('pointerdown', function (e) {
     if (popup.classList.contains('hidden')) return;
-    var r = box.getBoundingClientRect();
-    var inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
-    if (inside) return;
+    if (e.target.closest && e.target.closest('.accuracy-popup-close, .accuracy-popup-link')) return;
     closeAccuracyPopup();
   }, true);
   document.addEventListener('wheel', function () {
