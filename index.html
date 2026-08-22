@@ -23,7 +23,7 @@
   <meta property="og:locale" content="ja_JP">
   <title>うるま市石川 飲食店マップ</title>
   <link rel="stylesheet" href="leaflet/leaflet.css"/>
-  <link rel="stylesheet" href="style.css?v=20260822b">
+  <link rel="stylesheet" href="style.css?v=20260822c">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -154,8 +154,16 @@
         <div id="catLabelBar" class="cat-label-bar" aria-live="polite"></div>
         <button class="cat-scroll-btn" id="catScrollRight" aria-label="右へスクロール">▶</button>
       </div>
-      <button id="catControlsRestoreBtn" class="cat-controls-restore-btn" aria-label="カテゴリボタンを表示">⬆</button>
-      <button id="catControlsHideBtn" class="cat-controls-hide-btn" aria-label="カテゴリボタンを隠す">⬇</button>
+      <button id="catControlsRestoreBtn" class="cat-controls-restore-btn" aria-label="カテゴリボタンを表示">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 32" width="26" height="32">
+          <path d="M13 27 L13 5 M5 13 L13 5 L21 13" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button id="catControlsHideBtn" class="cat-controls-hide-btn" aria-label="カテゴリボタンを隠す">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 32" width="26" height="32">
+          <path d="M13 5 L13 27 M5 19 L13 27 L21 19" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
 
       <!-- 歯車メニュー（スマホのみ） -->
       <div id="gearMenu" class="gear-menu" style="display:none;">
