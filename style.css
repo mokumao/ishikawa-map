@@ -1855,9 +1855,14 @@ body.side-swipe-right #minimap {
     inset: 0;
     background: rgba(0, 0, 0, 0.38);
     z-index: 1500;   /* 歯車メニュー(1501)より下・他全要素より上 */
+    opacity: 0;
+    transition: opacity .15s ease;
   }
   .gear-overlay.active {
     display: block;
+  }
+  .gear-overlay.active.gear-visible {
+    opacity: 1;
   }
   /* カテゴリ選択モード：ビジュアルのみ・タッチを地図に通す */
   .gear-overlay.map-interactive {
@@ -1871,7 +1876,10 @@ body.side-swipe-right #minimap {
     top: 38%;
     z-index: 1501;   /* オーバーレイより前面 */
     pointer-events: auto;
+    opacity: 0;
+    transition: opacity .15s ease;
   }
+  .gear-menu.gear-visible { opacity: 1; }
   /* 右手操作用：アイコン列が右側にあるときはパネルも左右反転して重なりを防ぐ */
   body.side-swipe-right .gear-menu {
     left: auto;

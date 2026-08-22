@@ -396,6 +396,13 @@ function rNote(r)   { return r.note;   }
     panelMain.style.display     = 'flex';
     panelCategory.style.display = 'none';
     overlay.classList.add('active');    // 背景をグレーオーバーレイで封鎖
+    // display:none→blockの直後だと稀にフェードが発火しない端末があるため二重rAFで確実に次の描画後に切り替える
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        menu.classList.add('gear-visible');
+        overlay.classList.add('gear-visible');
+      });
+    });
     disableMap();                       // 地図操作を停止
   }
   function showCategory() {
@@ -405,13 +412,17 @@ function rNote(r)   { return r.note;   }
     document.getElementById('minimap').style.display = 'none'; // ミニマップ非表示
   }
   function closeMenu() {
-    menu.classList.remove('cat-mode');
-    menu.style.display = 'none';
+    menu.classList.remove('cat-mode', 'gear-visible');
+    overlay.classList.remove('gear-visible');
+    // フェードアウト(.15s)が終わってからdisplay:noneにする（即座に消すと透明化が見えない）
+    setTimeout(function () {
+      menu.style.display = 'none';
+      overlay.classList.remove('active', 'map-interactive'); // オーバーレイ解除
+    }, 150);
     panelMain.style.display     = 'flex';
     panelCategory.style.display = 'none';
     document.getElementById('minimap').style.display = ''; // ミニマップ再表示
     setTimeout(function () { if (window._resetMinimap) window._resetMinimap(); }, 50); // サイズ再計算
-    overlay.classList.remove('active', 'map-interactive'); // オーバーレイ解除
     // ブロッキングdiv・サイドボタンを復元
     var blocker = document.getElementById('catModeBlocker');
     if (blocker) blocker.parentNode.removeChild(blocker);
@@ -666,6 +677,8 @@ function rNote(r)   { return r.note;   }
     overlay.classList.add('active', 'map-interactive'); // pointer-events:none で地図操作を通す
     // パネルが描画されてから地図を上にシフト（panByで確実に移動）
     requestAnimationFrame(function () {
+      menu.classList.add('gear-visible');
+      overlay.classList.add('gear-visible');
       var panelTop  = menu.getBoundingClientRect().top;
       var px        = Math.round((window.innerHeight - panelTop) / 2);
       if (px > 0) {
