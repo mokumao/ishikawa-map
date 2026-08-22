@@ -1745,7 +1745,10 @@ body.side-swipe-right #minimap {
     pointer-events: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    scroll-behavior: auto;
+    /* scroll-behaviorは指定しない（デフォルトauto）。矢印ボタンでのスクロールだけ
+       JS側でbehavior:'smooth'を指定して滑らかにする。ここでCSSからautoを明示指定
+       すると環境によってJS側のsmooth指定を上書きしてしまうため削除した
+       （タッチでの差分スクロールはscrollLeftへの直接代入のため、この変更による影響はない） */
   }
   .cat-label-bar::-webkit-scrollbar { display: none; }
   .cat-label-chip {

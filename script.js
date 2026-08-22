@@ -602,10 +602,11 @@ function rNote(r)   { return r.note;   }
     var right = document.getElementById('catScrollRight');
     if (!bar || !left || !right) return;
 
-    // 矢印ボタン：クリックでスクロール
+    // 矢印ボタン：クリックでスクロール（滑らかに移動。タッチで割り込むと
+    // touchstartハンドラ側でアニメーションを止める＝下記参照）
     var scrollAmt = 90;
-    left.onclick  = function() { bar.scrollLeft -= scrollAmt * 3; setTimeout(updateChipArrows, 350); };
-    right.onclick = function() { bar.scrollLeft += scrollAmt * 3; setTimeout(updateChipArrows, 350); };
+    left.onclick  = function() { bar.scrollBy({ left: -scrollAmt * 3, behavior: 'smooth' }); setTimeout(updateChipArrows, 500); };
+    right.onclick = function() { bar.scrollBy({ left:  scrollAmt * 3, behavior: 'smooth' }); setTimeout(updateChipArrows, 500); };
 
     // スクロールイベントで矢印更新
     bar.addEventListener('scroll', updateChipArrows, { passive: true });
@@ -613,6 +614,9 @@ function rNote(r)   { return r.note;   }
     // タッチでの横スクロール（差分方式・即時反応）
     var _lastX = 0, _dragging = false;
     bar.addEventListener('touchstart', function(e) {
+      // 矢印ボタンによるスムーズスクロール中にアイコンへ触れた場合、
+      // 同じ位置へbehavior:'auto'で指示することでアニメーションを即座に止める
+      bar.scrollTo({ left: bar.scrollLeft, behavior: 'auto' });
       _lastX = e.touches[0].clientX;
       _dragging = false;
       e.stopPropagation();
