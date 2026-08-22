@@ -735,6 +735,26 @@ function rNote(r)   { return r.note;   }
     updateClearBtn();
     updateCatLabel(); // catChipSet の全チップを描画（表示中カテゴリは色付き）
     updateSelectAllChipsBtns();
+
+    // サイトを開いた直後は、下部カテゴリチップバーを最初から畳んだ状態
+    // （⬆ボタンのみ表示）にする。cat-controls-hiddenのCSSは「表示中のものを
+    // ユーザー操作で隠す」演出用に3秒かけてゆっくりフェードアウトする設計のため、
+    // そのまま付与すると一瞬表示されてからフェードして消える誤動作になる。
+    // 今日の石川ニュースバナーのhideBannerInstant()と同じ要領で、対象要素の
+    // transitionを一時的に無効化してから最初から隠れた状態にする。
+    var catCtrlEls = [
+      document.getElementById('catSelectAllRow'),
+      document.getElementById('catLabelWrapper'),
+      document.getElementById('catControlsRestoreBtn'),
+      document.getElementById('catControlsHideBtn')
+    ];
+    catCtrlEls.forEach(function (el) { if (el) el.style.transition = 'none'; });
+    document.body.classList.add('cat-controls-hidden');
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        catCtrlEls.forEach(function (el) { if (el) el.style.transition = ''; });
+      });
+    });
   }, 0);
 
   // 歯車ボタン：メニュー開閉トグル
