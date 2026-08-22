@@ -257,8 +257,11 @@
       z-index: 999;
       align-items: center;
       justify-content: center;
+      opacity: 0;
+      transition: opacity .15s ease;
     }
     .lightbox.open { display: flex; }
+    .lightbox.open.lightbox-visible { opacity: 1; }
     .lightbox img {
       max-width: 92vw;
       max-height: 88vh;
@@ -735,14 +738,25 @@
 
     // ライトボックス
     function openLightbox(src) {
+      var lb = document.getElementById('lightbox');
       document.getElementById('lightboxImg').src = src;
-      document.getElementById('lightbox').classList.add('open');
+      lb.classList.add('open');
+      // display:none→flexの直後だと稀にフェードが発火しない端末があるため二重rAFで確実に次の描画後に切り替える
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          lb.classList.add('lightbox-visible');
+        });
+      });
     }
-    document.getElementById('lightboxClose').addEventListener('click', function () {
-      document.getElementById('lightbox').classList.remove('open');
-    });
+    function closeLightbox() {
+      var lb = document.getElementById('lightbox');
+      lb.classList.remove('lightbox-visible');
+      // フェードアウト(.15s)が終わってからdisplay:noneにする（即座に消すと透明化が見えない）
+      setTimeout(function () { lb.classList.remove('open'); }, 150);
+    }
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
     document.getElementById('lightbox').addEventListener('click', function (e) {
-      if (e.target === this) this.classList.remove('open');
+      if (e.target === this) closeLightbox();
     });
   </script>
 </body>
