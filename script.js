@@ -609,13 +609,9 @@ function rNote(r)   { return r.note;   }
     var cancelChipScroll = null;
     function animateChipScroll(deltaX, duration) {
       if (cancelChipScroll) { cancelChipScroll(); cancelChipScroll = null; }
-      // OS側の「視差効果を減らす」設定は尊重し、アニメーションさせず即座に移動する
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        var maxX0 = bar.scrollWidth - bar.clientWidth;
-        bar.scrollLeft = Math.max(0, Math.min(maxX0, bar.scrollLeft + deltaX));
-        updateChipArrows();
-        return;
-      }
+      // OS側の「視差効果を減らす」設定に関わらず、常にアニメーションさせる方針
+      // （2026-08-23、ユーザーの明示的な判断により決定。一般的なアクセシビリティ
+      // 推奨とは異なる選択だが、石川マップではこの見た目の一貫性を優先する）
       var startX    = bar.scrollLeft;
       var maxX      = bar.scrollWidth - bar.clientWidth;
       var targetX   = Math.max(0, Math.min(maxX, startX + deltaX));
