@@ -1230,6 +1230,9 @@ body.info-open .label-toggle-btn { display: none !important; }
   max-width: 88vw;
   opacity: 1;
   transition: opacity 3s ease;
+  /* ポップアップに触れても背後の地図が操作できるよう、本体はタッチを素通りさせる。
+     ×ボタン・リンクだけ個別にpointer-events:autoで操作可能に戻す */
+  pointer-events: none;
 }
 .accuracy-popup.hidden {
   opacity: 0;
@@ -1253,6 +1256,7 @@ body.info-open .label-toggle-btn { display: none !important; }
   color: #1976d2;
   font-weight: 700;
   text-decoration: underline;
+  pointer-events: auto;
 }
 .accuracy-popup-close-row {
   display: flex;
@@ -1279,6 +1283,7 @@ body.info-open .label-toggle-btn { display: none !important; }
   transition: color .12s, background .12s;
   -webkit-tap-highlight-color: transparent;
   box-shadow: none;
+  pointer-events: auto;
 }
 .accuracy-popup-close:hover { color: #e53935; background: #ffebee; border-color: #ffcdd2; }
 

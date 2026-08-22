@@ -3003,9 +3003,15 @@ function closeAccuracyPopup() {
   if (!popup) return;
   var box = popup.querySelector('.accuracy-popup-box');
   // ポップアップ表示中、ポップアップ以外へのタッチ・クリック・スクロールで閉じる
+  // ※ポップアップ本体はpointer-events:noneにして背後の地図を操作できるようにしているため、
+  //   e.targetは常にポップアップの外（地図側）になる。box.contains(e.target)では
+  //   ポップアップの内側を触っても「外側」と誤判定してしまうため、座標がbox表示範囲の
+  //   内側かどうかで判定する（×ボタン・リンクはpointer-events:autoで個別にクリック可能）
   document.addEventListener('pointerdown', function (e) {
     if (popup.classList.contains('hidden')) return;
-    if (box.contains(e.target)) return;
+    var r = box.getBoundingClientRect();
+    var inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+    if (inside) return;
     closeAccuracyPopup();
   }, true);
   document.addEventListener('wheel', function () {
