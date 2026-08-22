@@ -2385,9 +2385,17 @@ if ('ontouchstart' in window) {
 
   function resetDragState() {
     draggingControls = false;
-    document.body.classList.remove('cat-controls-dragging');
-    document.body.style.removeProperty('--cat-controls-drag-y');
-    document.body.style.removeProperty('--cat-controls-drag-opacity');
+    // cat-controls-draggingクラスの除去とカスタムプロパティの除去を同じ
+    // タイミングで行うと、端末（特にiOS Safari）によってはtransition
+    // （戻り速度用の1.05s/.82s）が発火せず、一瞬で元の位置に戻ってしまう
+    // ことがあるため、二重rAFで1フレーム分ずらしてから最終状態にする。
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        document.body.classList.remove('cat-controls-dragging');
+        document.body.style.removeProperty('--cat-controls-drag-y');
+        document.body.style.removeProperty('--cat-controls-drag-opacity');
+      });
+    });
   }
 
   function finishDragToHidden() {
