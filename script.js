@@ -1850,9 +1850,11 @@ if (new URLSearchParams(location.search).get('shop') === null && !_savedMapView)
     }
   });
 
-  // ③ 画面回転・リサイズ時
+  // ③ 画面回転・リサイズ時（連続発火中は前回分をキャンセルし、収まってから1回だけ実行＝デバウンス）
+  var resizeMinimapTimer = null;
   window.addEventListener('resize', function () {
-    setTimeout(resetMinimap, 150);
+    if (resizeMinimapTimer) clearTimeout(resizeMinimapTimer);
+    resizeMinimapTimer = setTimeout(resetMinimap, 150);
   });
 
   // ④ カテゴリパネルで非表示→再表示されたときに呼べるよう外部公開
