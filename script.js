@@ -1582,8 +1582,31 @@ const _initialShopId = (function () {
 const _initialShop = !isNaN(_initialShopId)
   ? restaurants.find(function (r) { return r.id === _initialShopId; })
   : null;
+// ページ初期化時にヘッダーを畳んだ状態で開始する場合の共通処理。
+// header要素には折りたたみアニメーション用のtransition（max-height等、
+// 最大1.8s）が定義されているため、classList.addした直後はまだアニメーション
+// 開始直後（ヘッダーがほぼ元の高さのまま）の状態が続く。この直後に地図
+// （L.map、このすぐ後で初期化される）を作ると、Leafletは「ヘッダーがある
+// 狭い状態」のサイズで初期化されてしまい、その後アニメーションでヘッダーが
+// 消えてもinvalidateSize()を呼ぶ処理がどこにも無いため、Leaflet内部の
+// サイズキャッシュだけが古い（狭い）まま固定される。結果、画面中央固定の
+// 二重丸マーカー（CSSで#map要素の中央に固定）とLeafletが認識する地図の
+// 中心（map.getCenter()）が大きくズレ、ミニマップ上の対応マーカーの位置も
+// ズレる不具合が起きていた。ニュースバナー等と同じ要領でtransitionを
+// 一時的に無効化し、瞬時に最終状態（ヘッダー無し）にしてから地図を初期化する。
+function collapseHeaderInstant() {
+  var els = [document.querySelector('header'), document.querySelector('.wip-bar')].filter(Boolean);
+  els.forEach(function (el) { el.style.transition = 'none'; });
+  document.body.classList.add('header-collapsed');
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      els.forEach(function (el) { el.style.transition = ''; });
+    });
+  });
+}
+
 // 店舗フォーカス時はポップアップを広く見せるため最初からヘッダーを畳んでおく
-if (_initialShop) document.body.classList.add('header-collapsed');
+if (_initialShop) collapseHeaderInstant();
 
 // 青いヘッダーバーは「サイトを最初に開いたとき」だけ自動表示する。
 // 「このサイトについて」等の他ページから「地図」ボタンで戻ってきたときは
@@ -1592,7 +1615,7 @@ if (_initialShop) document.body.classList.add('header-collapsed');
 const _headerAlreadyShown = sessionStorage.getItem('siteHeaderShown') === '1';
 if (!_initialShop) {
   if (_headerAlreadyShown) {
-    document.body.classList.add('header-collapsed');
+    collapseHeaderInstant();
   } else {
     sessionStorage.setItem('siteHeaderShown', '1');
   }
