@@ -2808,27 +2808,41 @@ const LegendControl = L.Control.extend({
 });
 new LegendControl().addTo(map);
 
-// ── ピンチズーム中は店名ラベル（ツールチップ）だけ一時非表示 ─────────────
-// ピンの数が多いと、ズーム中に全ピン＋常時表示ラベルを毎フレーム再配置する
-// 負荷でピンがブルブルと震って見える。2026-06-01にピン・ラベルの両方を
-// 隠す方式を一度採用したが「ピンチズーム中もピンが見えない」という理由で
-// 同日中に廃止した経緯がある（コミット2cf137a）。今回はピン自体は常に表示
-// したまま、再描画負荷の主因と考えられるラベルだけに絞って隠す。
+// ── ズーム中は店名ラベル（ツールチップ）の更新を一時停止 ───────────────
+// opacity:0 だけではツールチップのDOMとLeafletのzoomイベント購読が残るため、
+// 非表示中も全ラベルの座標計算とstyle更新が毎フレーム続いてしまう。
+// ズーム開始時に開いている永続ツールチップだけを一度閉じ、終了後に戻すことで、
+// ピン本体は常に表示したままラベル分のDOM更新を止める。
 (function () {
-  var tooltipPane = map.getPane('tooltipPane');
-  if (!tooltipPane) return;
-  var hideTimer = null;
-  function hideLabels() { tooltipPane.style.opacity = '0'; }
-  function showLabels() { tooltipPane.style.opacity = ''; }
-  map.on('zoom', function () {
-    hideLabels();
-    clearTimeout(hideTimer);
-    hideTimer = setTimeout(showLabels, 200);
-  });
-  map.on('zoomend', function () {
-    clearTimeout(hideTimer);
-    hideTimer = setTimeout(showLabels, 50);
-  });
+  var restoreTimer = null;
+  var suspendedMarkers = [];
+
+  function suspendLabels() {
+    clearTimeout(restoreTimer);
+    if (suspendedMarkers.length) return;
+
+    markersData.forEach(function (data) {
+      var marker = data.marker;
+      var tooltip = marker.getTooltip();
+      if (map.hasLayer(marker) && tooltip && map.hasLayer(tooltip)) {
+        suspendedMarkers.push(marker);
+        marker.closeTooltip();
+      }
+    });
+  }
+
+  function restoreLabels() {
+    clearTimeout(restoreTimer);
+    restoreTimer = setTimeout(function () {
+      suspendedMarkers.forEach(function (marker) {
+        if (map.hasLayer(marker) && marker.getTooltip()) marker.openTooltip();
+      });
+      suspendedMarkers = [];
+    }, 50);
+  }
+
+  map.on('zoomstart', suspendLabels);
+  map.on('zoomend', restoreLabels);
 })();
 
 // ── フィルターボタン生成（大分類＋小分類の2階層） ──────────────────
