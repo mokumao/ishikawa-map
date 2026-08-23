@@ -2302,8 +2302,19 @@ body.side-swipe-right #minimap {
   .popup-name  { font-size: .88rem; }
   .popup-btn   { font-size: .71rem; padding: 5px 5px; }
   .popup-genre { font-size: .68rem; margin-bottom: 7px; }
-  .popup-table { font-size: .74rem; }
+  .popup-table {
+    max-width: 100%;
+    table-layout: fixed;
+    font-size: .74rem;
+  }
   .popup-table td.label { font-size: .68rem; }
+  /* 長い住所・URL・情報源ドメインで表が横に広がり、
+     overflow-x:hiddenにより各行の右端が切れるのを防ぐ */
+  .popup-table td.value,
+  .source-note a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
 
   /* スマホ：フッターを非表示（PCも同様 — 下記グローバルルール参照） */
   footer { display: none !important; }
