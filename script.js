@@ -2069,6 +2069,14 @@ const markersData = restaurants.map((r, idx) => {
       if (L.Draggable && L.Draggable._dragging) {
         L.Draggable._dragging.finishDrag(true); // noInertia=true でドリフトなし
       }
+      // 正確性ポップアップを閉じるためのタップだった場合はここで打ち切る。
+      // このタップ処理はtouchendを直接見ているため、popup側のclickイベント
+      // 抑制（suppressNextClick）が効かない。window._suppressAccuracyPopupTap
+      // フラグで直接連携する。
+      if (window._suppressAccuracyPopupTap) {
+        window._suppressAccuracyPopupTap = false;
+        return;
+      }
       if (_tapTimer) {
         // 300ms以内に2回目 → ダブルタップ：ポップアップをキャンセルして現在中心のままズームイン
         // ※ setView(latlng) だと店舗位置が中心になるため zoomIn() で中心を変えずにズーム
@@ -3101,10 +3109,14 @@ function closeAccuracyPopup() {
   // ×ボタン・リンク以外を触るとe.targetは常に地図側になる＝閉じてよい。
   // ×ボタン・リンクだけpointer-events:autoにしてあるので、そこを触った
   // ときだけe.targetが正しくその要素になり、この判定で除外できる。
+  function isClosingTap(e) {
+    if (popup.classList.contains('hidden')) return false;
+    if (e.target.closest && e.target.closest('.accuracy-popup-close, .accuracy-popup-link')) return false;
+    return true;
+  }
   var suppressNextClick = false;
   document.addEventListener('pointerdown', function (e) {
-    if (popup.classList.contains('hidden')) return;
-    if (e.target.closest && e.target.closest('.accuracy-popup-close, .accuracy-popup-link')) return;
+    if (!isClosingTap(e)) return;
     // ポップアップを閉じるためのタップは、pointer-events:noneにより
     // 背後の地図・店舗マーカーへのタップとしても扱われてしまい、
     // 意図せず店舗の詳細ポップアップが開いてしまう不具合があった。
@@ -3113,6 +3125,17 @@ function closeAccuracyPopup() {
     // 続く合成clickイベントを1回だけ握りつぶして背後への反応を防ぐ。
     suppressNextClick = true;
     setTimeout(function () { suppressNextClick = false; }, 400); // clickが来なかった場合の保険
+    // スマホの店舗マーカーはclickイベントを使わず、touchendを直接見る自前の
+    // タップ判定（setupTap内）でポップアップを開くため、上のclick抑制だけでは
+    // 効かない。setupTap側と共有するフラグで直接連携し、touchend側で
+    // ポップアップを開く処理自体を打ち切ってもらう。
+    // ※ pointerdownはtouchstartより必ず先に発火するため、ここで
+    //   closeAccuracyPopup()する前（＝popupがまだ閉じる前）に判定した
+    //   isClosingTap(e)の結果をそのまま使う。touchstart側で改めて
+    //   isClosingTap()を判定すると、その時点では既にpointerdownで
+    //   popupが閉じられた後になっており、正しく判定できない。
+    window._suppressAccuracyPopupTap = true;
+    setTimeout(function () { window._suppressAccuracyPopupTap = false; }, 400);
     closeAccuracyPopup();
   }, true);
   document.addEventListener('click', function (e) {
