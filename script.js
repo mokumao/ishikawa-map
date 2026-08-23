@@ -3101,10 +3101,25 @@ function closeAccuracyPopup() {
   // ×ボタン・リンク以外を触るとe.targetは常に地図側になる＝閉じてよい。
   // ×ボタン・リンクだけpointer-events:autoにしてあるので、そこを触った
   // ときだけe.targetが正しくその要素になり、この判定で除外できる。
+  var suppressNextClick = false;
   document.addEventListener('pointerdown', function (e) {
     if (popup.classList.contains('hidden')) return;
     if (e.target.closest && e.target.closest('.accuracy-popup-close, .accuracy-popup-link')) return;
+    // ポップアップを閉じるためのタップは、pointer-events:noneにより
+    // 背後の地図・店舗マーカーへのタップとしても扱われてしまい、
+    // 意図せず店舗の詳細ポップアップが開いてしまう不具合があった。
+    // ドラッグ（地図を動かす操作）の場合、指を動かすとブラウザは合成clickを
+    // 発生させないためこのガードの影響を受けない。タップの場合だけ、
+    // 続く合成clickイベントを1回だけ握りつぶして背後への反応を防ぐ。
+    suppressNextClick = true;
+    setTimeout(function () { suppressNextClick = false; }, 400); // clickが来なかった場合の保険
     closeAccuracyPopup();
+  }, true);
+  document.addEventListener('click', function (e) {
+    if (!suppressNextClick) return;
+    suppressNextClick = false;
+    e.preventDefault();
+    e.stopPropagation();
   }, true);
   document.addEventListener('wheel', function () {
     if (!popup.classList.contains('hidden')) closeAccuracyPopup();
