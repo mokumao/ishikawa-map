@@ -654,6 +654,10 @@ function rNote(r)   { return r.note;   }
       var delta = _lastX - currentX;
       if (!_dragging && Math.abs(delta) > 1) _dragging = true;
       if (_dragging) {
+        // ネイティブの横スクロール・バウンス処理を無効化し、JSの差分方式に
+        // 一本化する（両方が同時に効くと、指を離したときの戻り方が
+        // タイミングによって不安定になるため）
+        e.preventDefault();
         e.stopPropagation();
         bar.scrollLeft += delta;
         _lastX = currentX;

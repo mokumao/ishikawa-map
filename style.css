@@ -1743,7 +1743,12 @@ body.side-swipe-right #minimap {
     overflow-x: auto;
     overflow-y: hidden;
     pointer-events: auto;
-    -webkit-overflow-scrolling: touch;
+    /* -webkit-overflow-scrolling:touch（ネイティブの慣性・バウンス）は
+       あえて指定しない。JS側の差分方式ドラッグ処理と同時に有効だと、
+       どちらが主導権を握るかがタイミング次第になり、指を離したときに
+       「スムーズに戻る／一瞬で戻る」が不安定になっていたため、JSでの
+       制御に一本化する（touch-action・touchmoveのpreventDefaultと対）。 */
+    touch-action: pan-y;
     scrollbar-width: none;
     /* scroll-behaviorは指定しない（デフォルトauto）。矢印ボタンでのスクロールだけ
        JS側でbehavior:'smooth'を指定して滑らかにする。ここでCSSからautoを明示指定
