@@ -2289,7 +2289,6 @@ map.on('popupclose', function() { document.body.classList.remove('popup-open'); 
   var startScale = 1, startDist = 0;
   var pinching = false;
   var wrapperEl = null;
-  var restoreDragging = false, restoreTouchZoom = false;
 
   function touchDist(t0, t1) {
     var dx = t0.clientX - t1.clientX, dy = t0.clientY - t1.clientY;
@@ -2298,24 +2297,11 @@ map.on('popupclose', function() { document.body.classList.remove('popup-open'); 
   function applyTransform() {
     if (wrapperEl) wrapperEl.style.transform = 'scale(' + scale + ')';
   }
-  function lockMapGesture() {
-    restoreDragging = !!(map.dragging && map.dragging.enabled());
-    restoreTouchZoom = !!(map.touchZoom && map.touchZoom.enabled());
-    if (restoreDragging) map.dragging.disable();
-    if (restoreTouchZoom) map.touchZoom.disable();
-  }
-  function unlockMapGesture() {
-    if (restoreDragging && map.dragging) map.dragging.enable();
-    if (restoreTouchZoom && map.touchZoom) map.touchZoom.enable();
-    restoreDragging = false;
-    restoreTouchZoom = false;
-  }
   function onTouchStart(e) {
     if (e.touches.length !== 2 || !wrapperEl) return;
     pinching = true;
     startDist = touchDist(e.touches[0], e.touches[1]);
     startScale = scale;
-    lockMapGesture();
     e.preventDefault();
     e.stopPropagation();
   }
@@ -2333,7 +2319,6 @@ map.on('popupclose', function() { document.body.classList.remove('popup-open'); 
     e.preventDefault();
     e.stopPropagation();
     pinching = false;
-    unlockMapGesture();
   }
 
   map.on('popupopen', function (e) {
@@ -2344,13 +2329,14 @@ map.on('popupclose', function() { document.body.classList.remove('popup-open'); 
     pinching = false;
     wrapperEl.style.transformOrigin = '50% 100%';
     wrapperEl.style.transform = 'scale(1)';
-    wrapperEl.addEventListener('touchstart', onTouchStart, { passive: false });
-    wrapperEl.addEventListener('touchmove', onTouchMove, { passive: false });
-    wrapperEl.addEventListener('touchend', onTouchEnd, { passive: false });
-    wrapperEl.addEventListener('touchcancel', onTouchEnd, { passive: false });
+    // capture段階で二本指イベントを止め、Leafletの地図ジェスチャーへ渡さない。
+    // map.touchZoom自体は無効化しないため、ポップアップを閉じた直後も地図側で使える。
+    wrapperEl.addEventListener('touchstart', onTouchStart, { capture: true, passive: false });
+    wrapperEl.addEventListener('touchmove', onTouchMove, { capture: true, passive: false });
+    wrapperEl.addEventListener('touchend', onTouchEnd, { capture: true, passive: false });
+    wrapperEl.addEventListener('touchcancel', onTouchEnd, { capture: true, passive: false });
   });
   map.on('popupclose', function () {
-    unlockMapGesture();
     wrapperEl = null;
     pinching = false;
   });
