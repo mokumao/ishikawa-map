@@ -2667,13 +2667,21 @@ map.on('popupopen', function(e) {
   const popupEl = e.popup.getElement();
   if (!popupEl) return;
 
-  // ── スマホ：ポップアップを触っても地図をスクロールできるよう手動パン実装 ──────
-  // Leaflet の disableClickPropagation が touchstart のバブルを止めるが、
-  // 同一要素の後続リスナーは呼ばれるため、ここで手動 panBy を実装する。
-  // ポップアップ外（地図エリア）は Leaflet の通常ドラッグをそのまま使う。
+  // ── スマホ：ポップアップ内部スクロールと地図パンの境界制御 ──────────────
+  // Leaflet の disableClickPropagation が touchstart のバブルを止めるため、
+  // ポップアップ上から地図を動かす場合だけ、ここで手動 panBy を行う。
+  // 縦長ポップアップの途中ではネイティブの内部スクロールを優先し、上端・下端
+  // から外向きに始まった「次のジェスチャー」だけを地図パンへ引き渡す。
+  // ジェスチャー途中で端へ到達してもモードは切り替えず、地図との同時移動を防ぐ。
   var _mc = map.getContainer();
   var _pw = popupEl.querySelector('.leaflet-popup-content-wrapper');
-  var _lTX = 0, _lTY = 0, _tDragging = false, _tActive = false;
+  var _ps = popupEl.querySelector('.leaflet-popup-content');
+  var _startTX = 0, _startTY = 0, _lTX = 0, _lTY = 0;
+  var _startScrollTop = 0, _startScrollMax = 0;
+  var _gestureMode = 'idle'; // idle | pending | popup-scroll | map-pan
+  var _tActive = false;
+  var SCROLL_EDGE_EPSILON = 1;
+  var DRAG_THRESHOLD = 4;
 
   function onWrapTouchStart(te) {
     if (te.touches.length !== 1) return;
@@ -2681,30 +2689,61 @@ map.on('popupopen', function(e) {
     // （パンで地図とポップアップが動くとタップがクリックとして成立しなくなるため）
     if (te.target.closest('a, button, .popup-close-side')) { _tActive = false; return; }
     _tActive   = true;
-    _lTX = te.touches[0].clientX;
-    _lTY = te.touches[0].clientY;
-    _tDragging = false;
+    _startTX = _lTX = te.touches[0].clientX;
+    _startTY = _lTY = te.touches[0].clientY;
+    _startScrollTop = _ps ? _ps.scrollTop : 0;
+    _startScrollMax = _ps ? Math.max(0, _ps.scrollHeight - _ps.clientHeight) : 0;
+    _gestureMode = 'pending';
     // Leaflet のドラッグが干渉しないよう一時無効化
     map.dragging.disable();
   }
   function onWrapTouchMove(te) {
     if (!_tActive || te.touches.length !== 1) return;
-    var dx = te.touches[0].clientX - _lTX;
-    var dy = te.touches[0].clientY - _lTY;
-    if (!_tDragging && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) _tDragging = true;
-    if (!_tDragging) return;
-    _lTX = te.touches[0].clientX;
-    _lTY = te.touches[0].clientY;
+    var x = te.touches[0].clientX;
+    var y = te.touches[0].clientY;
+    var totalDx = x - _startTX;
+    var totalDy = y - _startTY;
+
+    if (_gestureMode === 'pending') {
+      if (Math.max(Math.abs(totalDx), Math.abs(totalDy)) <= DRAG_THRESHOLD) return;
+
+      // 縦方向が主成分で、ジェスチャー開始時点にその方向へまだ読める内容が
+      // ある場合だけ、指を離すまでポップアップ内部スクロールへ固定する。
+      var isVertical = Math.abs(totalDy) >= Math.abs(totalDx);
+      var canScrollDown = totalDy < 0 &&
+        _startScrollTop < _startScrollMax - SCROLL_EDGE_EPSILON;
+      var canScrollUp = totalDy > 0 &&
+        _startScrollTop > SCROLL_EDGE_EPSILON;
+      _gestureMode = isVertical && (canScrollDown || canScrollUp)
+        ? 'popup-scroll'
+        : 'map-pan';
+    }
+
+    if (_gestureMode === 'popup-scroll') {
+      // preventDefault は呼ばず、overflow-y:auto のネイティブスクロールを許可する。
+      // 地図側へは伝播させないため、同じジェスチャー中に地図は動かない。
+      te.stopPropagation();
+      return;
+    }
+
+    if (_gestureMode !== 'map-pan') return;
+    te.preventDefault(); // 端でのSafariのバウンスと内部スクロールを止める
+    te.stopPropagation();
+    var dx = x - _lTX;
+    var dy = y - _lTY;
+    _lTX = x;
+    _lTY = y;
     map.panBy([-dx, -dy], { animate: false });
   }
   function onWrapTouchEnd() {
     if (!_tActive) return;
     _tActive = false;
+    _gestureMode = 'idle';
     map.dragging.enable();
   }
   if (_pw) {
     _pw.addEventListener('touchstart', onWrapTouchStart, { passive: true });
-    _pw.addEventListener('touchmove',  onWrapTouchMove,  { passive: true });
+    _pw.addEventListener('touchmove',  onWrapTouchMove,  { passive: false });
     _pw.addEventListener('touchend',   onWrapTouchEnd,   { passive: true });
     _pw.addEventListener('touchcancel',onWrapTouchEnd,   { passive: true });
   }
