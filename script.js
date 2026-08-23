@@ -1640,6 +1640,32 @@ function collapseHeaderInstant() {
   });
 }
 
+// ヘッダーを畳むアニメーション（見た目は残したまま）が既に始まっている状態から、
+// 実際にレイアウト高さが変わり終わるタイミングでコールバックを呼ぶ。
+// headerのmax-height transitionは0.5sだが、ここを固定のsetTimeout値（50ms/380ms等）で
+// 決め打ちすると、環境によってはアニメーション完了前にinvalidateSize()が走ってしまい、
+// 画面中央固定の二重丸マーカーとミニマップの位置がズレる不具合が起きていた
+// （collapseHeaderInstant()と同種の原因・別の発生箇所）。
+// transitionendを見て正確なタイミングを取り、万一発火しない場合の保険として
+// タイムアウトも用意する。
+function onHeaderCollapseSettled(cb) {
+  var header = document.querySelector('header');
+  if (!header) { cb(); return; }
+  var done = false;
+  function finish() {
+    if (done) return;
+    done = true;
+    header.removeEventListener('transitionend', onEnd);
+    clearTimeout(fallback);
+    cb();
+  }
+  function onEnd(e) {
+    if (e.propertyName === 'max-height') finish();
+  }
+  header.addEventListener('transitionend', onEnd);
+  var fallback = setTimeout(finish, 700); // 0.5sのtransitionに余裕を持たせた保険
+}
+
 // 店舗フォーカス時はポップアップを広く見せるため最初からヘッダーを畳んでおく
 if (_initialShop) collapseHeaderInstant();
 
@@ -2022,10 +2048,10 @@ const markersData = restaurants.map((r, idx) => {
       marker.closePopup();
       _isReopening = false;
       document.body.classList.add('header-collapsed');
-      setTimeout(function() {
+      onHeaderCollapseSettled(function() {
         map.invalidateSize();
         marker.openPopup();
-      }, 380);
+      });
     } else {
       marker.openPopup();
     }
@@ -2335,7 +2361,7 @@ if ('ontouchstart' in window) {
     if (window._suppressHeaderCollapse) return; // プログラムによる自動ズーム中は無視
     if (!document.body.classList.contains('header-collapsed')) {
       document.body.classList.add('header-collapsed');
-      setTimeout(function() { map.invalidateSize(); }, 50);
+      onHeaderCollapseSettled(function() { map.invalidateSize(); });
     }
   }
   map.on('dragstart', collapseHeaderOnInteraction);
