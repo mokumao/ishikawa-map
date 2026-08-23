@@ -3085,9 +3085,16 @@ document.querySelectorAll('[data-noshop-close]').forEach(function (btn) {
 // 開くときは即座にパッと表示し、閉じるときだけCSSのopacity 3sフェードを効かせる
 // （閉じる用のtransitionが開く動作にも適用されてしまわないよう、開く瞬間だけ
 //   一時的にtransition:noneにし、表示が確定してから元に戻す）
+// ※ .hiddenはopacity:0のみでdisplay:noneにしていないため、×ボタン・リンクは
+//   pointer-events:autoのまま画面中央（z-index:2000）に残り続け、閉じた後も
+//   他のUI（ニュースバナーの×・店舗ポップアップの×等）へのタップを透明に
+//   奪ってしまう不具合があった。フェード完了後にdisplay:noneも適用して防ぐ。
+var accuracyHideTimer = null;
 function openAccuracyPopup() {
   var el = document.getElementById('accuracyPopup');
   if (!el) return;
+  if (accuracyHideTimer) { clearTimeout(accuracyHideTimer); accuracyHideTimer = null; }
+  el.style.display = '';
   el.style.transition = 'none';
   el.classList.remove('hidden');
   requestAnimationFrame(function () {
@@ -3098,7 +3105,13 @@ function openAccuracyPopup() {
 }
 function closeAccuracyPopup() {
   var el = document.getElementById('accuracyPopup');
-  if (el) el.classList.add('hidden');
+  if (!el) return;
+  el.classList.add('hidden');
+  if (accuracyHideTimer) clearTimeout(accuracyHideTimer);
+  accuracyHideTimer = setTimeout(function () {
+    el.style.display = 'none';
+    accuracyHideTimer = null;
+  }, 3000); // CSSのopacity 3sフェード（.accuracy-popup）に合わせる
 }
 (function () {
   var popup = document.getElementById('accuracyPopup');
