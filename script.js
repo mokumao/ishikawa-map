@@ -2280,39 +2280,43 @@ map.on('popupclose', function() { document.body.classList.remove('popup-open'); 
 // 内側の .leaflet-popup-content-wrapper（Leafletが位置制御に使わない要素）を
 // スケールし、ピンチ中はstopPropagationで地図本体のズームに伝播させない。
 //
-// transform-origin をジェスチャーのたびに書き換える方式は、複数回ピンチを
-// 繰り返すと基準点のズレが蓄積して画面外に飛ぶ不具合があった。
-// そのため transform-origin は常に固定(0 0)にし、代わりに
-// 「translate(tx,ty) scale(s)」の tx/ty を毎フレーム計算し直す方式に変更。
-// これは「つまんだ場所を常に指の下に保つ」という標準的なピンチズームの計算式で、
-// 誤差が蓄積しない。
+// ポップアップは店舗ピンに紐づく情報なので、2本指を平行移動しても画面上を
+// 自由に移動させない。支点を店舗ピン側の下中央へ固定し、指の間隔によるscaleだけを
+// 反映する。固定支点なので、複数回ピンチしても基準点のズレは蓄積しない。
 (function () {
   var MIN_SCALE = 0.7, MAX_SCALE = 2.5;
-  var scale = 1, tx = 0, ty = 0;
-  var startScale = 1, startTx = 0, startTy = 0, startDist = 0;
-  var localPinchX = 0, localPinchY = 0; // つまんだ点の「無変形時」の座標
-  var baseLeft = 0, baseTop = 0;        // 無変形時のラッパーの画面上位置
+  var scale = 1;
+  var startScale = 1, startDist = 0;
   var pinching = false;
   var wrapperEl = null;
+  var restoreDragging = false, restoreTouchZoom = false;
 
   function touchDist(t0, t1) {
     var dx = t0.clientX - t1.clientX, dy = t0.clientY - t1.clientY;
     return Math.sqrt(dx * dx + dy * dy);
   }
   function applyTransform() {
-    if (wrapperEl) wrapperEl.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+    if (wrapperEl) wrapperEl.style.transform = 'scale(' + scale + ')';
+  }
+  function lockMapGesture() {
+    restoreDragging = !!(map.dragging && map.dragging.enabled());
+    restoreTouchZoom = !!(map.touchZoom && map.touchZoom.enabled());
+    if (restoreDragging) map.dragging.disable();
+    if (restoreTouchZoom) map.touchZoom.disable();
+  }
+  function unlockMapGesture() {
+    if (restoreDragging && map.dragging) map.dragging.enable();
+    if (restoreTouchZoom && map.touchZoom) map.touchZoom.enable();
+    restoreDragging = false;
+    restoreTouchZoom = false;
   }
   function onTouchStart(e) {
     if (e.touches.length !== 2 || !wrapperEl) return;
     pinching = true;
     startDist = touchDist(e.touches[0], e.touches[1]);
     startScale = scale;
-    startTx = tx;
-    startTy = ty;
-    var midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-    var midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-    localPinchX = (midX - baseLeft - startTx) / startScale;
-    localPinchY = (midY - baseTop - startTy) / startScale;
+    lockMapGesture();
+    e.preventDefault();
     e.stopPropagation();
   }
   function onTouchMove(e) {
@@ -2321,34 +2325,32 @@ map.on('popupclose', function() { document.body.classList.remove('popup-open'); 
     e.stopPropagation();
     var d = touchDist(e.touches[0], e.touches[1]);
     var newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, startScale * (d / startDist)));
-    var midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-    var midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
     scale = newScale;
-    tx = midX - baseLeft - newScale * localPinchX;
-    ty = midY - baseTop - newScale * localPinchY;
     applyTransform();
   }
   function onTouchEnd(e) {
-    if (e.touches.length < 2) pinching = false;
+    if (!pinching || e.touches.length >= 2) return;
+    e.preventDefault();
+    e.stopPropagation();
+    pinching = false;
+    unlockMapGesture();
   }
 
   map.on('popupopen', function (e) {
     var popupEl = e.popup.getElement();
     wrapperEl = popupEl && popupEl.querySelector('.leaflet-popup-content-wrapper');
     if (!wrapperEl) return;
-    scale = 1; tx = 0; ty = 0;
+    scale = 1;
     pinching = false;
-    wrapperEl.style.transformOrigin = '0 0';
-    wrapperEl.style.transform = 'translate(0px,0px) scale(1)';
-    var rect = wrapperEl.getBoundingClientRect();
-    baseLeft = rect.left;
-    baseTop = rect.top;
-    wrapperEl.addEventListener('touchstart', onTouchStart, { passive: true });
+    wrapperEl.style.transformOrigin = '50% 100%';
+    wrapperEl.style.transform = 'scale(1)';
+    wrapperEl.addEventListener('touchstart', onTouchStart, { passive: false });
     wrapperEl.addEventListener('touchmove', onTouchMove, { passive: false });
-    wrapperEl.addEventListener('touchend', onTouchEnd, { passive: true });
-    wrapperEl.addEventListener('touchcancel', onTouchEnd, { passive: true });
+    wrapperEl.addEventListener('touchend', onTouchEnd, { passive: false });
+    wrapperEl.addEventListener('touchcancel', onTouchEnd, { passive: false });
   });
   map.on('popupclose', function () {
+    unlockMapGesture();
     wrapperEl = null;
     pinching = false;
   });
