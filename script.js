@@ -2618,14 +2618,27 @@ map.on('popupopen', function(e) {
       wrap.style.userSelect   = '';
     }, 500);
 
-    // × ボタンに直接 touchend を付けてポップアップを閉じる（二重保険）
+    // × ボタンに直接 touchend を付けてポップアップを閉じる（二重保険）。
+    // ボタン上からスワイプした場合は閉じず、下の境界ジェスチャー制御へ渡す。
     var closeBtns = popupEl.querySelectorAll('.popup-close-side');
     closeBtns.forEach(function(btn) {
+      var sx = 0, sy = 0, moved = false;
+      btn.addEventListener('touchstart', function(ev) {
+        if (ev.touches.length !== 1) { moved = true; return; }
+        sx = ev.touches[0].clientX;
+        sy = ev.touches[0].clientY;
+        moved = false;
+      }, { passive: true });
+      btn.addEventListener('touchmove', function(ev) {
+        if (Math.abs(ev.touches[0].clientX - sx) > 10 ||
+            Math.abs(ev.touches[0].clientY - sy) > 10) moved = true;
+      }, { passive: true });
       btn.addEventListener('touchend', function(ev) {
+        if (moved) return;
         ev.preventDefault();
         ev.stopPropagation();
         map.closePopup();
-      }, { once: true, passive: false });
+      }, { passive: false });
     });
 
     // ── リンクボタン（Googleマップ・店舗詳細）は touchend で直接遷移 ──
@@ -2670,30 +2683,55 @@ map.on('popupopen', function(e) {
   // ── スマホ：ポップアップ内部スクロールと地図パンの境界制御 ──────────────
   // Leaflet の disableClickPropagation が touchstart のバブルを止めるため、
   // ポップアップ上から地図を動かす場合だけ、ここで手動 panBy を行う。
-  // 縦長ポップアップの途中ではネイティブの内部スクロールを優先し、上端・下端
-  // から外向きに始まった「次のジェスチャー」だけを地図パンへ引き渡す。
-  // ジェスチャー途中で端へ到達してもモードは切り替えず、地図との同時移動を防ぐ。
+  // 縦長ポップアップの途中ではネイティブの内部スクロールを優先する。上端・下端
+  // から外向きに始まったジェスチャーは地図へ渡し、内部スクロール中に端へ達した
+  // 場合も、端の先へ一定距離引いた時点で初めて地図パンへ切り替える。
   var _mc = map.getContainer();
   var _pw = popupEl.querySelector('.leaflet-popup-content-wrapper');
   var _ps = popupEl.querySelector('.leaflet-popup-content');
   var _startTX = 0, _startTY = 0, _lTX = 0, _lTY = 0;
-  var _startScrollTop = 0, _startScrollMax = 0;
   var _gestureMode = 'idle'; // idle | pending | popup-scroll | map-pan
   var _tActive = false;
-  var SCROLL_EDGE_EPSILON = 1;
+  var _startedOnInteractive = false;
+  var _edgeDirection = 0; // -1: 下端から上へ、1: 上端から下へ
+  var _edgeDistance = 0;
+  var _lockedScrollTop = null;
+  var SCROLL_EDGE_EPSILON = 2;
   var DRAG_THRESHOLD = 4;
+  var INTERACTIVE_DRAG_THRESHOLD = 10;
+  var EDGE_HANDOFF_THRESHOLD = 18;
+
+  function getScrollState() {
+    var max = _ps ? Math.max(0, _ps.scrollHeight - _ps.clientHeight) : 0;
+    var rawTop = _ps ? Number(_ps.scrollTop) : 0;
+    if (!Number.isFinite(rawTop)) rawTop = 0;
+    // iOS Safariのラバーバンド中は負値や最大値超過を返すことがあるため、
+    // 判定用の値だけ0〜maxへ正規化する（実際のスクロール位置はここで変えない）。
+    var top = Math.min(max, Math.max(0, rawTop));
+    var scrollable = max > SCROLL_EDGE_EPSILON;
+    return {
+      top: top,
+      max: max,
+      scrollable: scrollable,
+      atTop: !scrollable || top <= SCROLL_EDGE_EPSILON,
+      atBottom: !scrollable || top >= max - SCROLL_EDGE_EPSILON
+    };
+  }
+
+  function resetEdgeHandoff() {
+    _edgeDirection = 0;
+    _edgeDistance = 0;
+    _lockedScrollTop = null;
+  }
 
   function onWrapTouchStart(te) {
     if (te.touches.length !== 1) return;
-    // ボタン・リンク上のタッチはパン処理をせずネイティブのタップ動作を維持
-    // （パンで地図とポップアップが動くとタップがクリックとして成立しなくなるため）
-    if (te.target.closest('a, button, .popup-close-side')) { _tActive = false; return; }
     _tActive   = true;
+    _startedOnInteractive = !!te.target.closest('a, button, .popup-close-side');
     _startTX = _lTX = te.touches[0].clientX;
     _startTY = _lTY = te.touches[0].clientY;
-    _startScrollTop = _ps ? _ps.scrollTop : 0;
-    _startScrollMax = _ps ? Math.max(0, _ps.scrollHeight - _ps.clientHeight) : 0;
     _gestureMode = 'pending';
+    resetEdgeHandoff();
     // Leaflet のドラッグが干渉しないよう一時無効化
     map.dragging.disable();
   }
@@ -2703,34 +2741,75 @@ map.on('popupopen', function(e) {
     var y = te.touches[0].clientY;
     var totalDx = x - _startTX;
     var totalDy = y - _startTY;
+    var stepDx = x - _lTX;
+    var stepDy = y - _lTY;
 
     if (_gestureMode === 'pending') {
-      if (Math.max(Math.abs(totalDx), Math.abs(totalDy)) <= DRAG_THRESHOLD) return;
+      // リンク・ボタン上はタップとの区別を確実にするため、既存の誤タップ防止と
+      // 同じ10pxを超えるまでジェスチャーとして確定しない。
+      var threshold = _startedOnInteractive ? INTERACTIVE_DRAG_THRESHOLD : DRAG_THRESHOLD;
+      if (Math.max(Math.abs(totalDx), Math.abs(totalDy)) <= threshold) return;
 
-      // 縦方向が主成分で、ジェスチャー開始時点にその方向へまだ読める内容が
-      // ある場合だけ、指を離すまでポップアップ内部スクロールへ固定する。
+      // touchstart時のスナップショットではなく、方向が確定した時点の実値で判定する。
+      // これによりSafariの慣性スクロールの停止・端での小数値の戻りを取り込む。
+      var scrollState = getScrollState();
       var isVertical = Math.abs(totalDy) >= Math.abs(totalDx);
       var canScrollDown = totalDy < 0 &&
-        _startScrollTop < _startScrollMax - SCROLL_EDGE_EPSILON;
+        scrollState.scrollable && !scrollState.atBottom;
       var canScrollUp = totalDy > 0 &&
-        _startScrollTop > SCROLL_EDGE_EPSILON;
+        scrollState.scrollable && !scrollState.atTop;
       _gestureMode = isVertical && (canScrollDown || canScrollUp)
         ? 'popup-scroll'
         : 'map-pan';
+      if (_gestureMode === 'map-pan' && isVertical) {
+        if (totalDy < 0 && scrollState.atBottom) _lockedScrollTop = scrollState.max;
+        if (totalDy > 0 && scrollState.atTop) _lockedScrollTop = 0;
+      }
     }
 
     if (_gestureMode === 'popup-scroll') {
+      var liveState = getScrollState();
+      var outwardDirection = liveState.atBottom && stepDy < 0 ? -1
+        : liveState.atTop && stepDy > 0 ? 1 : 0;
+
+      if (outwardDirection) {
+        if (_edgeDirection !== outwardDirection) {
+          _edgeDirection = outwardDirection;
+          _edgeDistance = 0;
+        }
+        _edgeDistance += Math.abs(stepDy);
+      } else {
+        resetEdgeHandoff();
+      }
+
+      if (_edgeDistance >= EDGE_HANDOFF_THRESHOLD) {
+        // 内容が端に達してからさらに18px引かれた場合だけ切り替える。
+        // 端へ到達するまで地図は一切動かないため、元の同時移動は再発しない。
+        _gestureMode = 'map-pan';
+        _lockedScrollTop = _edgeDirection < 0 ? liveState.max : 0;
+        if (_ps) _ps.scrollTop = _lockedScrollTop;
+        if (te.cancelable) te.preventDefault();
+        te.stopPropagation();
+        _lTX = x;
+        _lTY = y;
+        return;
+      }
+
       // preventDefault は呼ばず、overflow-y:auto のネイティブスクロールを許可する。
-      // 地図側へは伝播させないため、同じジェスチャー中に地図は動かない。
+      // 地図側へは伝播させないため、端へ達するまでは地図が同時に動かない。
       te.stopPropagation();
+      _lTX = x;
+      _lTY = y;
       return;
     }
 
     if (_gestureMode !== 'map-pan') return;
-    te.preventDefault(); // 端でのSafariのバウンスと内部スクロールを止める
+    if (te.cancelable) te.preventDefault(); // 端でのSafariのバウンスと内部スクロールを止める
     te.stopPropagation();
-    var dx = x - _lTX;
-    var dy = y - _lTY;
+    // Safariがラバーバンド値を保持していても、地図パン中は境界へ固定する。
+    if (_ps && _lockedScrollTop !== null) _ps.scrollTop = _lockedScrollTop;
+    var dx = stepDx;
+    var dy = stepDy;
     _lTX = x;
     _lTY = y;
     map.panBy([-dx, -dy], { animate: false });
@@ -2739,13 +2818,15 @@ map.on('popupopen', function(e) {
     if (!_tActive) return;
     _tActive = false;
     _gestureMode = 'idle';
+    resetEdgeHandoff();
     map.dragging.enable();
   }
   if (_pw) {
     _pw.addEventListener('touchstart', onWrapTouchStart, { passive: true });
     _pw.addEventListener('touchmove',  onWrapTouchMove,  { passive: false });
-    _pw.addEventListener('touchend',   onWrapTouchEnd,   { passive: true });
-    _pw.addEventListener('touchcancel',onWrapTouchEnd,   { passive: true });
+    // リンク側のtouchendがstopPropagationしても必ずドラッグを復元できるようcaptureで受ける。
+    _pw.addEventListener('touchend',   onWrapTouchEnd,   { capture: true, passive: true });
+    _pw.addEventListener('touchcancel',onWrapTouchEnd,   { capture: true, passive: true });
   }
 
   // ── PC：マウスでポップアップをつかんで地図をパン ─────────────
@@ -2811,8 +2892,8 @@ map.on('popupopen', function(e) {
     if (_pw) {
       _pw.removeEventListener('touchstart', onWrapTouchStart);
       _pw.removeEventListener('touchmove',  onWrapTouchMove);
-      _pw.removeEventListener('touchend',   onWrapTouchEnd);
-      _pw.removeEventListener('touchcancel',onWrapTouchEnd);
+      _pw.removeEventListener('touchend',   onWrapTouchEnd, true);
+      _pw.removeEventListener('touchcancel',onWrapTouchEnd, true);
     }
     popupEl.removeEventListener('mousedown',  onMouseDown);
     mapContainer.removeEventListener('wheel', onWheelCapture, { capture: true });

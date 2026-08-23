@@ -2088,9 +2088,9 @@ body.side-swipe-right #minimap {
        ここでhiddenにしても帯が巻き込まれてクリップされることはない */
     overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch;
-    /* 内部スクロールの端でページ側へスクロール連鎖させない。
+    /* 内部スクロールの端でページ側への連鎖とSafariの引っ張り表示を止める。
        地図への引き渡しはscript.jsのジェスチャー境界判定で明示的に行う。 */
-    overscroll-behavior-y: contain;
+    overscroll-behavior-y: none;
     max-height: calc(100svh - 200px);
   }
   /* .popup-wrapの内側余白を、このブレークポイントでの実際の見た目
