@@ -1707,7 +1707,7 @@ body.side-swipe-right #minimap {
     pointer-events: none;
   }
   body.cat-controls-revealing .app-body[data-view="map"] .cat-controls-hide-btn {
-    transition: transform .38s ease, opacity .38s ease;
+    transition: transform .45s ease, opacity .38s ease;
   }
   body.cat-controls-hidden .app-body[data-view="map"] .cat-controls-hide-btn {
     opacity: 0;
