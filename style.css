@@ -1699,6 +1699,13 @@ body.side-swipe-right #minimap {
     transition: transform 1.05s cubic-bezier(0.22, 1, 0.36, 1), opacity .82s ease;
     -webkit-tap-highlight-color: transparent;
   }
+  /* 上矢印でカテゴリボタンを戻している間は下矢印をまだ表示しない。
+     カテゴリボタンの上昇完了後、JSでこの一時クラスを外して表示する。 */
+  body.cat-controls-restoring .app-body[data-view="map"] .cat-controls-hide-btn {
+    transform: translateX(-50%) translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+  }
   body.cat-controls-hidden .app-body[data-view="map"] .cat-controls-hide-btn {
     opacity: 0;
     pointer-events: none;

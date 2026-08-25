@@ -2358,7 +2358,7 @@ if ('ontouchstart' in window) {
 
 // ── スマホ：地図を下へスワイプしたら下部カテゴリボタンを隠す ────────
 (function () {
-  if (!('ontouchstart' in window)) return;
+  const supportsTouch = 'ontouchstart' in window;
 
   const mapEl = document.getElementById('map');
   const restoreBtn = document.getElementById('catControlsRestoreBtn');
@@ -2373,8 +2373,10 @@ if ('ontouchstart' in window) {
   let draggingControls = false;
   let restoreStartY = 0;
   let ignoreGesture = false;
+  let restoreRevealTimer = null;
   const HIDE_THRESHOLD = 74;
   const MAX_DRAG = 145;
+  const RESTORE_DURATION = 1050;
 
   function isMapView() {
     const appBody = document.getElementById('appBody');
@@ -2390,12 +2392,39 @@ if ('ontouchstart' in window) {
 
   function hideCategoryControls() {
     if (!isMapView() || !hasVisibleCategoryControls()) return;
+    if (restoreRevealTimer) {
+      clearTimeout(restoreRevealTimer);
+      restoreRevealTimer = null;
+    }
+    document.body.classList.remove('cat-controls-restoring');
     document.body.classList.add('cat-controls-hidden');
   }
 
   function showCategoryControls() {
+    if (!document.body.classList.contains('cat-controls-hidden')) return;
+    document.body.classList.add('cat-controls-restoring');
     document.body.classList.remove('cat-controls-hidden');
     resetDragState();
+
+    // カテゴリボタンの上昇が終わってから下矢印を表示する。
+    // transitionendが発火しない場合にも表示されるよう、同じ時間のタイマーを併用する。
+    const labelWrapper = document.getElementById('catLabelWrapper');
+    let revealCompleted = false;
+    function revealHideButton() {
+      if (revealCompleted) return;
+      revealCompleted = true;
+      if (restoreRevealTimer) {
+        clearTimeout(restoreRevealTimer);
+        restoreRevealTimer = null;
+      }
+      if (labelWrapper) labelWrapper.removeEventListener('transitionend', onRestoreTransitionEnd);
+      document.body.classList.remove('cat-controls-restoring');
+    }
+    function onRestoreTransitionEnd(e) {
+      if (e.propertyName === 'transform') revealHideButton();
+    }
+    if (labelWrapper) labelWrapper.addEventListener('transitionend', onRestoreTransitionEnd);
+    restoreRevealTimer = setTimeout(revealHideButton, RESTORE_DURATION + 80);
   }
 
   function setDragOffset(y) {
@@ -2430,6 +2459,7 @@ if ('ontouchstart' in window) {
     }, 1100);
   }
 
+  if (supportsTouch) {
   // capture フェーズで登録：#catLabelBar 内のタッチスクロール用ハンドラが
   // touchstart で stopPropagation() するため、bubble フェーズだと
   // チップ（食事処 等）タップ時にこのハンドラまでイベントが届かない。
@@ -2487,8 +2517,6 @@ if ('ontouchstart' in window) {
     }
   }, { passive: true });
 
-  restoreBtn.addEventListener('click', showCategoryControls);
-  if (hideBtn) hideBtn.addEventListener('click', hideCategoryControls);
   restoreBtn.addEventListener('touchstart', function (e) {
     if (e.touches.length !== 1) return;
     restoreStartY = e.touches[0].clientY;
@@ -2498,6 +2526,12 @@ if ('ontouchstart' in window) {
     const dy = e.changedTouches[0].clientY - restoreStartY;
     if (dy < -20) showCategoryControls();
   }, { passive: true });
+  }
+
+  // 幅の狭いPCブラウザーでも表示された矢印を操作できるよう、
+  // クリック処理はタッチ対応の有無にかかわらず登録する。
+  restoreBtn.addEventListener('click', showCategoryControls);
+  if (hideBtn) hideBtn.addEventListener('click', hideCategoryControls);
 })();
 
 // ── ページ表示時、bfcache復元による意図しない畳み状態を解消 ────────────
