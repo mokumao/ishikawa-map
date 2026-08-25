@@ -1982,14 +1982,30 @@ if (new URLSearchParams(location.search).get('shop') === null && !_savedMapView)
     }
   });
 
-  // ③ 画面回転・リサイズ時（連続発火中は前回分をキャンセルし、収まってから1回だけ実行＝デバウンス）
+  // ③ ブラウザの「戻る」でbfcacheから復元されたとき。
+  // この経路ではスクリプトの初期化が再実行されず、visibilitychangeやresizeも
+  // 必ず発火するとは限らないため、古いサイズ・タイル位置が残ることがある。
+  // DOMの表示状態が戻るのを二重rAFで待ってから再計算し、レイアウト安定後にも
+  // もう一度合わせることで、復帰タイミングによるずれを防ぐ。
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        resetMinimap();
+        miniTileLayer.redraw();
+        setTimeout(resetMinimap, 250);
+      });
+    });
+  });
+
+  // ④ 画面回転・リサイズ時（連続発火中は前回分をキャンセルし、収まってから1回だけ実行＝デバウンス）
   var resizeMinimapTimer = null;
   window.addEventListener('resize', function () {
     if (resizeMinimapTimer) clearTimeout(resizeMinimapTimer);
     resizeMinimapTimer = setTimeout(resetMinimap, 150);
   });
 
-  // ④ カテゴリパネルで非表示→再表示されたときに呼べるよう外部公開
+  // ⑤ カテゴリパネルで非表示→再表示されたときに呼べるよう外部公開
   window._resetMinimap = resetMinimap;
 })();
 
