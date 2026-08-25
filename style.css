@@ -1766,6 +1766,13 @@ body.side-swipe-right #minimap {
        （タッチでの差分スクロールはscrollLeftへの直接代入のため、この変更による影響はない） */
   }
   .cat-label-bar::-webkit-scrollbar { display: none; }
+  .cat-label-bar.cat-overscroll-returning .cat-label-chip {
+    transition: transform .38s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .cat-label-bar.cat-mouse-dragging,
+  .cat-label-bar.cat-mouse-dragging .cat-label-chip {
+    cursor: grabbing;
+  }
   .cat-label-chip {
     background: rgba(255,255,255,0.95); /* 非表示状態：白 */
     border: 2px solid #e53935;
@@ -1780,6 +1787,7 @@ body.side-swipe-right #minimap {
     cursor: pointer;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    transform: translateX(var(--cat-overscroll-x, 0px));
   }
   /* 表示中（active）のチップ：カテゴリごとの薄色背景はJSがインライン変数
      --fc-tint で注入する（script.jsのCATEGORIES/autoTint参照）。

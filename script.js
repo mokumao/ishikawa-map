@@ -602,6 +602,13 @@ function rNote(r)   { return r.note;   }
     var right = document.getElementById('catScrollRight');
     if (!bar || !left || !right) return;
 
+    // updateCatLabelの再描画ごとに同じタッチリスナーを重ねない
+    if (bar._chipScrollSetup) {
+      setTimeout(updateChipArrows, 50);
+      return;
+    }
+    bar._chipScrollSetup = true;
+
     // 矢印ボタン：クリックでスクロール。ネイティブのbehavior:'smooth'は
     // 速度をこちらで調整できない（ブラウザ任せで比較的速い）ため、
     // requestAnimationFrameで自前アニメーションし、速度を指定できるようにする。
@@ -639,37 +646,155 @@ function rNote(r)   { return r.note;   }
     // スクロールイベントで矢印更新
     bar.addEventListener('scroll', updateChipArrows, { passive: true });
 
-    // タッチでの横スクロール（差分方式・即時反応）
-    var _lastX = 0, _dragging = false;
-    bar.addEventListener('touchstart', function(e) {
+    // タッチ／マウスドラッグでの横スクロール（差分方式・即時反応）。左右端では実際の
+    // scrollLeftを端に保ち、見た目だけ抵抗付きで動かしてラバーバンド感を出す。
+    var _lastX = 0, _dragging = false, _overscrollRaw = 0;
+    var _overscrollReturnTimer = null;
+    var _overscrollCleanup = null;
+    var _mouseActive = false;
+    var _suppressChipClick = false;
+    var _lastTouchTime = 0;
+    function setChipOverscroll(rawOffset) {
+      _overscrollRaw = rawOffset;
+      var maxOffset = Math.min(window.innerWidth / 3, 140);
+      var resisted = Math.sign(rawOffset) * maxOffset *
+        (1 - Math.exp(-Math.abs(rawOffset) / (maxOffset * 0.58)));
+      bar.style.setProperty('--cat-overscroll-x', resisted + 'px');
+    }
+    function resetChipOverscroll() {
+      if (!_overscrollRaw) return;
+      _overscrollRaw = 0;
+      bar.classList.add('cat-overscroll-returning');
+      bar.style.setProperty('--cat-overscroll-x', '0px');
+      var cleanup = function(e) {
+        if (e && !e.target.classList.contains('cat-label-chip')) return;
+        clearTimeout(_overscrollReturnTimer);
+        _overscrollReturnTimer = null;
+        _overscrollCleanup = null;
+        bar.classList.remove('cat-overscroll-returning');
+        bar.style.removeProperty('--cat-overscroll-x');
+        bar.removeEventListener('transitionend', cleanup);
+      };
+      _overscrollCleanup = cleanup;
+      bar.addEventListener('transitionend', cleanup);
+      _overscrollReturnTimer = setTimeout(cleanup, 450);
+    }
+    function startChipDrag(clientX) {
       // 矢印ボタンによるアニメーション中にアイコンへ触れた場合は即座に止める
       if (cancelChipScroll) { cancelChipScroll(); cancelChipScroll = null; }
-      _lastX = e.touches[0].clientX;
+      clearTimeout(_overscrollReturnTimer);
+      _overscrollReturnTimer = null;
+      if (_overscrollCleanup) {
+        bar.removeEventListener('transitionend', _overscrollCleanup);
+        _overscrollCleanup = null;
+      }
+      bar.classList.remove('cat-overscroll-returning');
+      bar.style.removeProperty('--cat-overscroll-x');
+      _overscrollRaw = 0;
+      _lastX = clientX;
       _dragging = false;
+    }
+    function moveChipDrag(currentX) {
+      var movement = currentX - _lastX;
+      if (!_dragging && Math.abs(movement) > 1) _dragging = true;
+      if (!_dragging) return;
+
+      var maxScroll = Math.max(0, bar.scrollWidth - bar.clientWidth);
+      var proposedScroll;
+      if (_overscrollRaw) {
+        var previousSign = Math.sign(_overscrollRaw);
+        var nextRaw = _overscrollRaw + movement;
+        if (!nextRaw || Math.sign(nextRaw) === previousSign) {
+          setChipOverscroll(nextRaw);
+        } else {
+          // 引っ張った向きを反転して端を越えた分は、通常スクロールへ戻す
+          _overscrollRaw = 0;
+          bar.style.removeProperty('--cat-overscroll-x');
+          proposedScroll = bar.scrollLeft - nextRaw;
+          bar.scrollLeft = Math.max(0, Math.min(maxScroll, proposedScroll));
+        }
+      } else {
+        proposedScroll = bar.scrollLeft - movement;
+        if (proposedScroll < 0) {
+          bar.scrollLeft = 0;
+          setChipOverscroll(-proposedScroll);
+        } else if (proposedScroll > maxScroll) {
+          bar.scrollLeft = maxScroll;
+          setChipOverscroll(maxScroll - proposedScroll);
+        } else {
+          bar.scrollLeft = proposedScroll;
+        }
+      }
+      _lastX = currentX;
+      updateChipArrows();
+    }
+    function finishChipDrag() {
+      var wasDragging = _dragging;
+      _dragging = false;
+      resetChipOverscroll();
+      updateChipArrows();
+      return wasDragging;
+    }
+
+    bar.addEventListener('touchstart', function(e) {
+      _lastTouchTime = Date.now();
+      startChipDrag(e.touches[0].clientX);
       e.stopPropagation();
     }, { passive: false });
 
     bar.addEventListener('touchmove', function(e) {
-      var currentX = e.touches[0].clientX;
-      var delta = _lastX - currentX;
-      if (!_dragging && Math.abs(delta) > 1) _dragging = true;
+      moveChipDrag(e.touches[0].clientX);
       if (_dragging) {
         // ネイティブの横スクロール・バウンス処理を無効化し、JSの差分方式に
         // 一本化する（両方が同時に効くと、指を離したときの戻り方が
         // タイミングによって不安定になるため）
         e.preventDefault();
         e.stopPropagation();
-        bar.scrollLeft += delta;
-        _lastX = currentX;
-        updateChipArrows();
       }
     }, { passive: false });
 
     bar.addEventListener('touchend', function(e) {
-      if (_dragging) e.stopPropagation();
-      _dragging = false;
-      updateChipArrows();
+      if (finishChipDrag()) e.stopPropagation();
     }, { passive: false });
+
+    bar.addEventListener('touchcancel', function() {
+      finishChipDrag();
+    }, { passive: true });
+
+    // パソコンでもカテゴリー欄を掴んで左右へ動かせるようにする。
+    // barでmousedownを止めることで、背面のLeaflet地図へドラッグを伝えない。
+    bar.addEventListener('mousedown', function(e) {
+      if (e.button !== 0 || Date.now() - _lastTouchTime < 700) return;
+      _mouseActive = true;
+      _suppressChipClick = false;
+      bar.classList.add('cat-mouse-dragging');
+      startChipDrag(e.clientX);
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    document.addEventListener('mousemove', function(e) {
+      if (!_mouseActive) return;
+      moveChipDrag(e.clientX);
+      e.preventDefault();
+      e.stopPropagation();
+    }, { passive: false });
+    document.addEventListener('mouseup', function(e) {
+      if (!_mouseActive) return;
+      _mouseActive = false;
+      bar.classList.remove('cat-mouse-dragging');
+      _suppressChipClick = finishChipDrag();
+      if (_suppressChipClick) {
+        setTimeout(function() { _suppressChipClick = false; }, 0);
+      }
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    bar.addEventListener('click', function(e) {
+      if (!_suppressChipClick) return;
+      _suppressChipClick = false;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+    }, true);
 
     // スクロール位置はここでは変更しない（呼び出し元 updateCatLabel が管理）
     setTimeout(updateChipArrows, 50);
