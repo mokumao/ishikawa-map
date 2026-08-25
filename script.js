@@ -2374,9 +2374,10 @@ if ('ontouchstart' in window) {
   let restoreStartY = 0;
   let ignoreGesture = false;
   let restoreRevealTimer = null;
+  let revealMotionTimer = null;
   const HIDE_THRESHOLD = 74;
   const MAX_DRAG = 145;
-  const RESTORE_DURATION = 1050;
+  const RESTORE_REVEAL_DELAY = 820;
 
   function isMapView() {
     const appBody = document.getElementById('appBody');
@@ -2396,17 +2397,27 @@ if ('ontouchstart' in window) {
       clearTimeout(restoreRevealTimer);
       restoreRevealTimer = null;
     }
+    if (revealMotionTimer) {
+      clearTimeout(revealMotionTimer);
+      revealMotionTimer = null;
+    }
     document.body.classList.remove('cat-controls-restoring');
+    document.body.classList.remove('cat-controls-revealing');
     document.body.classList.add('cat-controls-hidden');
   }
 
   function showCategoryControls() {
     if (!document.body.classList.contains('cat-controls-hidden')) return;
+    if (revealMotionTimer) {
+      clearTimeout(revealMotionTimer);
+      revealMotionTimer = null;
+    }
+    document.body.classList.remove('cat-controls-revealing');
     document.body.classList.add('cat-controls-restoring');
     document.body.classList.remove('cat-controls-hidden');
     resetDragState();
 
-    // カテゴリボタンの上昇が終わってから下矢印を表示する。
+    // カテゴリボタンが見た目上そろうopacity遷移の完了直後に下矢印を表示する。
     // transitionendが発火しない場合にも表示されるよう、同じ時間のタイマーを併用する。
     const labelWrapper = document.getElementById('catLabelWrapper');
     let revealCompleted = false;
@@ -2418,13 +2429,18 @@ if ('ontouchstart' in window) {
         restoreRevealTimer = null;
       }
       if (labelWrapper) labelWrapper.removeEventListener('transitionend', onRestoreTransitionEnd);
+      document.body.classList.add('cat-controls-revealing');
       document.body.classList.remove('cat-controls-restoring');
+      revealMotionTimer = setTimeout(function () {
+        document.body.classList.remove('cat-controls-revealing');
+        revealMotionTimer = null;
+      }, 460);
     }
     function onRestoreTransitionEnd(e) {
-      if (e.propertyName === 'transform') revealHideButton();
+      if (e.propertyName === 'opacity') revealHideButton();
     }
     if (labelWrapper) labelWrapper.addEventListener('transitionend', onRestoreTransitionEnd);
-    restoreRevealTimer = setTimeout(revealHideButton, RESTORE_DURATION + 80);
+    restoreRevealTimer = setTimeout(revealHideButton, RESTORE_REVEAL_DELAY + 80);
   }
 
   function setDragOffset(y) {
