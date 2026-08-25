@@ -614,8 +614,10 @@ function rNote(r)   { return r.note;   }
     // requestAnimationFrameで自前アニメーションし、速度を指定できるようにする。
     var scrollAmt = 90;
     var cancelChipScroll = null;
+    var cancelChipInertia = null;
     function animateChipScroll(deltaX, duration) {
       if (cancelChipScroll) { cancelChipScroll(); cancelChipScroll = null; }
+      if (cancelChipInertia) { cancelChipInertia(); cancelChipInertia = null; }
       // OS側の「視差効果を減らす」設定に関わらず、常にアニメーションさせる方針
       // （2026-08-23、ユーザーの明示的な判断により決定。一般的なアクセシビリティ
       // 推奨とは異なる選択だが、石川マップではこの見た目の一貫性を優先する）
@@ -654,6 +656,9 @@ function rNote(r)   { return r.note;   }
     var _mouseActive = false;
     var _suppressChipClick = false;
     var _lastTouchTime = 0;
+    var _lastMoveTime = 0;
+    var _velocityX = 0;
+    var _dragDistance = 0;
     function setChipOverscroll(rawOffset) {
       _overscrollRaw = rawOffset;
       var maxOffset = Math.min(window.innerWidth / 3, 140);
@@ -682,6 +687,7 @@ function rNote(r)   { return r.note;   }
     function startChipDrag(clientX) {
       // 矢印ボタンによるアニメーション中にアイコンへ触れた場合は即座に止める
       if (cancelChipScroll) { cancelChipScroll(); cancelChipScroll = null; }
+      if (cancelChipInertia) { cancelChipInertia(); cancelChipInertia = null; }
       clearTimeout(_overscrollReturnTimer);
       _overscrollReturnTimer = null;
       if (_overscrollCleanup) {
@@ -692,12 +698,22 @@ function rNote(r)   { return r.note;   }
       bar.style.removeProperty('--cat-overscroll-x');
       _overscrollRaw = 0;
       _lastX = clientX;
+      _lastMoveTime = performance.now();
+      _velocityX = 0;
+      _dragDistance = 0;
       _dragging = false;
     }
     function moveChipDrag(currentX) {
+      var now = performance.now();
       var movement = currentX - _lastX;
+      var elapsed = Math.max(1, now - _lastMoveTime);
       if (!_dragging && Math.abs(movement) > 1) _dragging = true;
       if (!_dragging) return;
+
+      // 直近の指／マウス速度を少し平滑化し、離した後の慣性へ引き継ぐ
+      var instantVelocity = movement / elapsed;
+      _velocityX = _velocityX * 0.35 + instantVelocity * 0.65;
+      _dragDistance += Math.abs(movement);
 
       var maxScroll = Math.max(0, bar.scrollWidth - bar.clientWidth);
       var proposedScroll;
@@ -726,12 +742,56 @@ function rNote(r)   { return r.note;   }
         }
       }
       _lastX = currentX;
+      _lastMoveTime = now;
       updateChipArrows();
     }
-    function finishChipDrag() {
+    function startChipInertia() {
+      var velocity = Math.max(-1.4, Math.min(1.4, _velocityX));
+      if (Math.abs(velocity) < 0.06) return;
+      // 短いスワイプだけで端まで飛ばないよう、慣性距離は実際に払った距離に連動させる
+      var maxInertiaDistance = Math.min(140, _dragDistance * 2.2);
+      var inertiaDistance = 0;
+      var previousTime = null;
+      var cancelled = false;
+      cancelChipInertia = function() { cancelled = true; };
+      function step(now) {
+        if (cancelled) return;
+        if (previousTime === null) previousTime = now;
+        var elapsed = Math.min(32, now - previousTime);
+        previousTime = now;
+        var maxScroll = Math.max(0, bar.scrollWidth - bar.clientWidth);
+        var frameDistance = -velocity * elapsed;
+        var remainingDistance = maxInertiaDistance - inertiaDistance;
+        if (Math.abs(frameDistance) > remainingDistance) {
+          frameDistance = Math.sign(frameDistance) * remainingDistance;
+        }
+        inertiaDistance += Math.abs(frameDistance);
+        var nextScroll = bar.scrollLeft + frameDistance;
+        if (nextScroll <= 0 || nextScroll >= maxScroll) {
+          bar.scrollLeft = Math.max(0, Math.min(maxScroll, nextScroll));
+          cancelChipInertia = null;
+          updateChipArrows();
+          return;
+        }
+        bar.scrollLeft = nextScroll;
+        velocity *= Math.pow(0.88, elapsed / 16.67);
+        updateChipArrows();
+        if (Math.abs(velocity) >= 0.025 && inertiaDistance < maxInertiaDistance) {
+          requestAnimationFrame(step);
+        } else {
+          cancelChipInertia = null;
+        }
+      }
+      requestAnimationFrame(step);
+    }
+    function finishChipDrag(useInertia) {
       var wasDragging = _dragging;
       _dragging = false;
-      resetChipOverscroll();
+      if (_overscrollRaw) {
+        resetChipOverscroll();
+      } else if (wasDragging && useInertia) {
+        startChipInertia();
+      }
       updateChipArrows();
       return wasDragging;
     }
@@ -754,11 +814,11 @@ function rNote(r)   { return r.note;   }
     }, { passive: false });
 
     bar.addEventListener('touchend', function(e) {
-      if (finishChipDrag()) e.stopPropagation();
+      if (finishChipDrag(true)) e.stopPropagation();
     }, { passive: false });
 
     bar.addEventListener('touchcancel', function() {
-      finishChipDrag();
+      finishChipDrag(false);
     }, { passive: true });
 
     // パソコンでもカテゴリー欄を掴んで左右へ動かせるようにする。
@@ -782,7 +842,7 @@ function rNote(r)   { return r.note;   }
       if (!_mouseActive) return;
       _mouseActive = false;
       bar.classList.remove('cat-mouse-dragging');
-      _suppressChipClick = finishChipDrag();
+      _suppressChipClick = finishChipDrag(true);
       if (_suppressChipClick) {
         setTimeout(function() { _suppressChipClick = false; }, 0);
       }
