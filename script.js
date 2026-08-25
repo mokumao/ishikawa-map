@@ -659,6 +659,7 @@ function rNote(r)   { return r.note;   }
     var _lastMoveTime = 0;
     var _velocityX = 0;
     var _dragDistance = 0;
+    var CHIP_OVERSCROLL_RETURN_MS = 600;
     function setChipOverscroll(rawOffset) {
       _overscrollRaw = rawOffset;
       var maxOffset = Math.min(window.innerWidth / 3, 140);
@@ -682,7 +683,7 @@ function rNote(r)   { return r.note;   }
       };
       _overscrollCleanup = cleanup;
       bar.addEventListener('transitionend', cleanup);
-      _overscrollReturnTimer = setTimeout(cleanup, 450);
+      _overscrollReturnTimer = setTimeout(cleanup, CHIP_OVERSCROLL_RETURN_MS + 80);
     }
     function startChipDrag(clientX) {
       // 矢印ボタンによるアニメーション中にアイコンへ触れた場合は即座に止める

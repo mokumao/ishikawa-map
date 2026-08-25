@@ -1767,7 +1767,7 @@ body.side-swipe-right #minimap {
   }
   .cat-label-bar::-webkit-scrollbar { display: none; }
   .cat-label-bar.cat-overscroll-returning .cat-label-chip {
-    transition: transform .38s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform .6s ease-in-out;
   }
   .cat-label-bar.cat-mouse-dragging,
   .cat-label-bar.cat-mouse-dragging .cat-label-chip {
