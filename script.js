@@ -2610,13 +2610,21 @@ if ('ontouchstart' in window) {
 
   // 店舗ポップアップを開いたときは、ポップアップとマーカーを隠さないよう
   // 画面下のカテゴリーボタンを既存の下方向アニメーションで自動収納する。
+  // popupopenと同時にレイアウトを動かすと実機のタップ確定処理と競合するため、
+  // ポップアップを先に描画し、同じポップアップが開いていることを確認してから収納する。
   // 現在地など店舗以外のポップアップは対象にしない。
   map.on('popupopen', function(e) {
-    const source = e.popup && e.popup._source;
+    const popup = e.popup;
+    const source = popup && popup._source;
     const isShopPopup = source && markersData.some(function(data) {
       return data.marker === source;
     });
-    if (isShopPopup) hideCategoryControls();
+    if (!isShopPopup) return;
+    setTimeout(function() {
+      if (map._popup === popup && (!popup.isOpen || popup.isOpen())) {
+        hideCategoryControls();
+      }
+    }, 120);
   });
 
   function showCategoryControls() {
