@@ -2608,6 +2608,17 @@ if ('ontouchstart' in window) {
     document.body.classList.add('cat-controls-hidden');
   }
 
+  // 店舗ポップアップを開いたときは、ポップアップとマーカーを隠さないよう
+  // 画面下のカテゴリーボタンを既存の下方向アニメーションで自動収納する。
+  // 現在地など店舗以外のポップアップは対象にしない。
+  map.on('popupopen', function(e) {
+    const source = e.popup && e.popup._source;
+    const isShopPopup = source && markersData.some(function(data) {
+      return data.marker === source;
+    });
+    if (isShopPopup) hideCategoryControls();
+  });
+
   function showCategoryControls() {
     if (!document.body.classList.contains('cat-controls-hidden')) return;
     if (revealMotionTimer) {
