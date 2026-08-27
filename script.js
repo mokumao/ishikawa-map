@@ -2567,6 +2567,11 @@ if ('ontouchstart' in window) {
   const hideBtn = document.getElementById('catControlsHideBtn');
   if (!mapEl || !restoreBtn) return;
 
+  // Leafletにもこのボタンを地図操作の対象外として認識させる。
+  // スマホの合成クリックやPCのpointer/mouseイベントも地図へ渡さない。
+  L.DomEvent.disableClickPropagation(restoreBtn);
+  L.DomEvent.disableScrollPropagation(restoreBtn);
+
   let startX = 0;
   let startY = 0;
   let minY = 0;
@@ -2577,9 +2582,13 @@ if ('ontouchstart' in window) {
   let ignoreGesture = false;
   let restoreRevealTimer = null;
   let revealMotionTimer = null;
+  let categoryPopupPanPixels = 0;
+  let categoryPopupPan = null;
+  let keepingPopupDuringRestore = false;
   const HIDE_THRESHOLD = 74;
   const MAX_DRAG = 145;
   const RESTORE_REVEAL_DELAY = 820;
+  const CATEGORY_POPUP_PAN_DURATION = 1.05;
 
   function isMapView() {
     const appBody = document.getElementById('appBody');
@@ -2593,8 +2602,53 @@ if ('ontouchstart' in window) {
            (controls && controls.style.display !== 'none');
   }
 
+  function isShopPopup(popup) {
+    const source = popup && popup._source;
+    return !!(source && markersData.some(function(data) {
+      return data.marker === source;
+    }));
+  }
+
+  // カテゴリーボタンが下から戻るとき、開いている店舗ポップアップとマーカーも
+  // 同じ距離だけ上へ動かし、両者が重ならないようにする。
+  function panOpenShopPopupAboveCategories() {
+    const popup = map._popup;
+    if (!isShopPopup(popup) || categoryPopupPanPixels > 0) return;
+    const popupEl = popup.getElement && popup.getElement();
+    if (!popupEl) return;
+
+    // 画面上端からはみ出さない範囲で、カテゴリーボタンの移動量（145px）と
+    // 同じ距離を使う。地図ごと動かすためポップアップと店舗マーカーが一緒に移動する。
+    const mapRect = mapEl.getBoundingClientRect();
+    const popupRect = popupEl.getBoundingClientRect();
+    const availableTopSpace = Math.max(0, Math.floor(popupRect.top - mapRect.top - 10));
+    const panPixels = Math.min(MAX_DRAG, availableTopSpace);
+    if (panPixels <= 0) return;
+
+    categoryPopupPanPixels = panPixels;
+    categoryPopupPan = popup;
+    map.panBy([0, panPixels], {
+      animate: true,
+      duration: CATEGORY_POPUP_PAN_DURATION,
+      easeLinearity: 0.25
+    });
+  }
+
+  function restoreCategoryPopupPan() {
+    if (categoryPopupPanPixels <= 0) return;
+    const panPixels = categoryPopupPanPixels;
+    categoryPopupPanPixels = 0;
+    categoryPopupPan = null;
+    map.panBy([0, -panPixels], {
+      animate: true,
+      duration: CATEGORY_POPUP_PAN_DURATION,
+      easeLinearity: 0.25
+    });
+  }
+
   function hideCategoryControls() {
     if (!isMapView() || !hasVisibleCategoryControls()) return;
+    restoreCategoryPopupPan();
     if (restoreRevealTimer) {
       clearTimeout(restoreRevealTimer);
       restoreRevealTimer = null;
@@ -2615,11 +2669,8 @@ if ('ontouchstart' in window) {
   // 現在地など店舗以外のポップアップは対象にしない。
   map.on('popupopen', function(e) {
     const popup = e.popup;
-    const source = popup && popup._source;
-    const isShopPopup = source && markersData.some(function(data) {
-      return data.marker === source;
-    });
-    if (!isShopPopup) return;
+    if (!isShopPopup(popup)) return;
+    if (keepingPopupDuringRestore) return;
     setTimeout(function() {
       if (map._popup === popup && (!popup.isOpen || popup.isOpen())) {
         hideCategoryControls();
@@ -2629,6 +2680,13 @@ if ('ontouchstart' in window) {
 
   function showCategoryControls() {
     if (!document.body.classList.contains('cat-controls-hidden')) return;
+    const popupToKeep = isShopPopup(map._popup) ? map._popup : null;
+    const popupSource = popupToKeep && popupToKeep._source;
+    const previousClosePopupOnClick = map.options.closePopupOnClick;
+    if (popupToKeep) {
+      keepingPopupDuringRestore = true;
+      map.options.closePopupOnClick = false;
+    }
     if (revealMotionTimer) {
       clearTimeout(revealMotionTimer);
       revealMotionTimer = null;
@@ -2637,6 +2695,25 @@ if ('ontouchstart' in window) {
     document.body.classList.add('cat-controls-restoring');
     document.body.classList.remove('cat-controls-hidden');
     resetDragState();
+    panOpenShopPopupAboveCategories();
+
+    // PCのクリックとスマホのタッチでは後続イベントの順序が異なる。
+    // どちらかの経路が同じ操作を地図クリックとして処理しても、押下時に開いていた
+    // 店舗ポップアップを保持する。再表示時はpopupopenによるカテゴリー自動収納を抑える。
+    if (popupToKeep && popupSource && popupSource.openPopup) {
+      function keepPopupOpen() {
+        if (map._popup !== popupToKeep || (popupToKeep.isOpen && !popupToKeep.isOpen())) {
+          popupSource.openPopup();
+        }
+      }
+      setTimeout(keepPopupOpen, 0);
+      setTimeout(keepPopupOpen, 80);
+      setTimeout(function() {
+        keepPopupOpen();
+        keepingPopupDuringRestore = false;
+        map.options.closePopupOnClick = previousClosePopupOnClick;
+      }, 240);
+    }
 
     // カテゴリボタンが見た目上そろうopacity遷移の完了直後に下矢印を表示する。
     // transitionendが発火しない場合にも表示されるよう、同じ時間のタイマーを併用する。
@@ -2663,6 +2740,12 @@ if ('ontouchstart' in window) {
     if (labelWrapper) labelWrapper.addEventListener('transitionend', onRestoreTransitionEnd);
     restoreRevealTimer = setTimeout(revealHideButton, RESTORE_REVEAL_DELAY + 80);
   }
+
+  map.on('popupclose', function(e) {
+    if (categoryPopupPan === e.popup && !keepingPopupDuringRestore) {
+      restoreCategoryPopupPan();
+    }
+  });
 
   function setDragOffset(y) {
     const clamped = Math.max(0, Math.min(MAX_DRAG, y));
@@ -2756,18 +2839,35 @@ if ('ontouchstart' in window) {
 
   restoreBtn.addEventListener('touchstart', function (e) {
     if (e.touches.length !== 1) return;
+    e.stopPropagation();
     restoreStartY = e.touches[0].clientY;
   }, { passive: true });
   restoreBtn.addEventListener('touchend', function (e) {
     if (e.changedTouches.length !== 1) return;
+    e.preventDefault();
+    e.stopPropagation();
     const dy = e.changedTouches[0].clientY - restoreStartY;
-    if (dy < -20) showCategoryControls();
-  }, { passive: true });
+    // タップ、または従来どおりの上スワイプで表示する。touchendで直接処理し、
+    // 後から生成されるclickが地図へ届く経路をなくす。
+    if (Math.abs(dy) < 12 || dy < -20) showCategoryControls();
+  }, { passive: false });
   }
+
+  ['pointerdown', 'pointerup', 'mousedown', 'mouseup'].forEach(function(type) {
+    restoreBtn.addEventListener(type, function(e) {
+      e.stopPropagation();
+    });
+  });
 
   // 幅の狭いPCブラウザーでも表示された矢印を操作できるよう、
   // クリック処理はタッチ対応の有無にかかわらず登録する。
-  restoreBtn.addEventListener('click', showCategoryControls);
+  restoreBtn.addEventListener('click', function(e) {
+    // 上矢印のクリックが地図へ伝わると、背景クリック扱いで店舗ポップアップが
+    // 閉じてしまうため、ボタン自身でイベントを止めてからカテゴリーを表示する。
+    e.preventDefault();
+    e.stopPropagation();
+    showCategoryControls();
+  });
   if (hideBtn) hideBtn.addEventListener('click', hideCategoryControls);
 })();
 
