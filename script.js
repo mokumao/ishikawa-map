@@ -2583,6 +2583,7 @@ if ('ontouchstart' in window) {
   let restoreRevealTimer = null;
   let revealMotionTimer = null;
   let restoreReadyTimer = null;
+  let restoreReadyFrame = null;
   let categoryPopupPanPixels = 0;
   let categoryPopupPan = null;
   let keepingPopupDuringRestore = false;
@@ -2662,27 +2663,36 @@ if ('ontouchstart' in window) {
     document.body.classList.remove('cat-controls-revealing');
     document.body.classList.remove('cat-controls-restore-ready');
 
-    // 上矢印は固定時間では出さず、収納用の下矢印が実際に消え終わった時点で表示する。
-    // 地図をゆっくり／速く動かした場合でも、見た目の完了と表示開始が一致する。
+    // 上矢印は固定時間では出さず、収納用の下矢印が半分ほど見えなくなった
+    // （opacityが50%以下になった）時点で表示する。地図をゆっくり／速く
+    // 動かした場合でも、見た目の進み具合と表示開始が一致する。
     let hideCompleted = false;
     function revealRestoreButton() {
       if (hideCompleted) return;
       hideCompleted = true;
+      if (restoreReadyFrame) {
+        cancelAnimationFrame(restoreReadyFrame);
+        restoreReadyFrame = null;
+      }
       if (restoreReadyTimer) {
         clearTimeout(restoreReadyTimer);
         restoreReadyTimer = null;
       }
-      if (hideBtn) hideBtn.removeEventListener('transitionend', onHideTransitionEnd);
       if (document.body.classList.contains('cat-controls-hidden')) {
         document.body.classList.add('cat-controls-restore-ready');
       }
     }
-    function onHideTransitionEnd(e) {
-      if (e.propertyName === 'opacity') revealRestoreButton();
+    function watchHideProgress() {
+      if (!document.body.classList.contains('cat-controls-hidden')) return;
+      if (!hideBtn || parseFloat(getComputedStyle(hideBtn).opacity) <= 0.5) {
+        revealRestoreButton();
+        return;
+      }
+      restoreReadyFrame = requestAnimationFrame(watchHideProgress);
     }
-    if (hideBtn) hideBtn.addEventListener('transitionend', onHideTransitionEnd);
     document.body.classList.add('cat-controls-hidden');
-    // transitionendが発火しない環境向けの保険。通常は上のイベントで先に完了する。
+    restoreReadyFrame = requestAnimationFrame(watchHideProgress);
+    // 描画状態を取得できない環境向けの保険。通常は上の監視で先に完了する。
     restoreReadyTimer = setTimeout(revealRestoreButton, 3200);
   }
 
@@ -2704,6 +2714,10 @@ if ('ontouchstart' in window) {
 
   function showCategoryControls() {
     if (!document.body.classList.contains('cat-controls-hidden')) return;
+    if (restoreReadyFrame) {
+      cancelAnimationFrame(restoreReadyFrame);
+      restoreReadyFrame = null;
+    }
     if (restoreReadyTimer) {
       clearTimeout(restoreReadyTimer);
       restoreReadyTimer = null;
