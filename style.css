@@ -1666,11 +1666,11 @@ body.side-swipe-right #minimap {
     transition: transform .38s ease, opacity .38s ease;
     -webkit-tap-highlight-color: transparent;
   }
-  body.cat-controls-hidden .app-body[data-view="map"] .cat-controls-restore-btn {
+  body.cat-controls-hidden.cat-controls-restore-ready .app-body[data-view="map"] .cat-controls-restore-btn {
     opacity: 1;
     pointer-events: auto;
     transform: translateX(-50%) translateY(0);
-    /* ドラッグでカテゴリーボタンが画面外へ消えたら、待たずに表示を始める */
+    /* カテゴリーと下矢印が実際に消え終わった後、JSから表示を開始する */
     transition: transform .38s ease, opacity .38s ease;
   }
   /* カテゴリボタンを隠すボタン（下矢印）：restore-btn(上矢印)と対になる存在。
