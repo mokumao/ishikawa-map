@@ -1670,7 +1670,7 @@ body.side-swipe-right #minimap {
     opacity: 1;
     pointer-events: auto;
     transform: translateX(-50%) translateY(0);
-    /* カテゴリーと下矢印が実際に消え終わった後、JSから表示を開始する */
+    /* 下矢印が半分ほど見えなくなった後、JSから表示を開始する */
     transition: transform .38s ease, opacity .38s ease;
   }
   /* カテゴリボタンを隠すボタン（下矢印）：restore-btn(上矢印)と対になる存在。
