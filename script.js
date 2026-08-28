@@ -2613,7 +2613,7 @@ if ('ontouchstart' in window) {
   // 同じ距離だけ上へ動かし、両者が重ならないようにする。
   function panOpenShopPopupAboveCategories() {
     const popup = map._popup;
-    if (!isShopPopup(popup) || categoryPopupPanPixels > 0) return;
+    if (!isShopPopup(popup) || (popup.isOpen && !popup.isOpen()) || categoryPopupPanPixels > 0) return;
     const popupEl = popup.getElement && popup.getElement();
     if (!popupEl) return;
 
@@ -2680,7 +2680,9 @@ if ('ontouchstart' in window) {
 
   function showCategoryControls() {
     if (!document.body.classList.contains('cat-controls-hidden')) return;
-    const popupToKeep = isShopPopup(map._popup) ? map._popup : null;
+    const currentPopup = map._popup;
+    const popupToKeep = isShopPopup(currentPopup) &&
+      (!currentPopup.isOpen || currentPopup.isOpen()) ? currentPopup : null;
     const popupSource = popupToKeep && popupToKeep._source;
     const previousClosePopupOnClick = map.options.closePopupOnClick;
     if (popupToKeep) {
