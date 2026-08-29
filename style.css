@@ -295,6 +295,7 @@ body.about-site-page {
   justify-content: center;
   padding: 20px;
   opacity: 1;
+  pointer-events: none;
 }
 .area-accuracy-popup[hidden] {
   display: none;
@@ -303,13 +304,6 @@ body.about-site-page {
   opacity: 0;
   pointer-events: none;
   transition: opacity 3s ease;
-}
-.area-accuracy-backdrop {
-  position: absolute;
-  inset: 0;
-  border: 0;
-  background: rgba(38,50,56,.28);
-  cursor: pointer;
 }
 .area-accuracy-popup-box {
   position: relative;
@@ -323,6 +317,7 @@ body.about-site-page {
   font-weight: 600;
   line-height: 1.7;
   box-shadow: 0 4px 16px rgba(0,0,0,.28);
+  pointer-events: none;
 }
 .area-accuracy-close-row {
   display: flex;
@@ -342,6 +337,7 @@ body.about-site-page {
   color: #aaa;
   font: 900 15px/1 Tahoma, Verdana, sans-serif;
   cursor: pointer;
+  pointer-events: auto;
   transition: color .12s ease, background-color .12s ease, border-color .12s ease;
   -webkit-tap-highlight-color: transparent;
 }

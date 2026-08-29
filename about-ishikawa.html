@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#1257a3">
   <meta name="description" content="沖縄県うるま市石川地区（旧石川市）の位置・歴史・人口・文化をまとめたページ。うるま市教育委員会の資料や沖縄県公文書館などの公開情報をもとにしています。">
   <title>石川について | 石川マップ</title>
-  <link rel="stylesheet" href="style.css?v=20260829h">
+  <link rel="stylesheet" href="style.css?v=20260829i">
 </head>
 <body class="about-site-page area-blue-theme">
   <main class="about-site-wrap">
@@ -230,8 +230,7 @@
 
     </section>
 
-    <div class="area-accuracy-popup hidden" id="areaAccuracyPopup" role="dialog" aria-modal="true" aria-labelledby="areaAccuracyText" hidden>
-      <button class="area-accuracy-backdrop" type="button" aria-label="閉じる"></button>
+    <div class="area-accuracy-popup hidden" id="areaAccuracyPopup" role="dialog" aria-labelledby="areaAccuracyText" hidden>
       <div class="area-accuracy-popup-box">
         <p id="areaAccuracyText">以下の文章はＡＩで情報を自動収集してまとめた文章です。内容に情報の間違いがあるかもしれません。情報源は一番下に記載してあるので必要時はそちらも確認してください。</p>
         <div class="area-accuracy-close-row">
@@ -269,9 +268,15 @@
       }
 
       accuracyOpen.addEventListener('click', openAccuracyPopup);
-      accuracyPopup.querySelectorAll('.area-accuracy-close, .area-accuracy-backdrop').forEach(function (btn) {
+      accuracyPopup.querySelectorAll('.area-accuracy-close').forEach(function (btn) {
         btn.addEventListener('click', closeAccuracyPopup);
       });
+
+      document.addEventListener('pointerdown', function (event) {
+        if (accuracyPopup.hidden || accuracyPopup.classList.contains('hidden')) return;
+        if (event.target.closest && event.target.closest('.area-accuracy-close, #areaAccuracyOpen')) return;
+        closeAccuracyPopup();
+      }, true);
 
       document.querySelectorAll('.area-sec-toggle').forEach(function (btn) {
         btn.addEventListener('click', function () {
