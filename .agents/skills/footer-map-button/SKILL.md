@@ -55,6 +55,7 @@ description: 石川マップの各ページ左下にある「地図」ボタン�
 | `index.html`の情報パネル下部 | `style.css` | `.info-panel-footer`／`.info-map-btn` | `.info-map-btn { flex: 0 0 113px; }` |
 | `about-site.html`、`about-ishikawa.html`、`about-recruit.html`、`about-management.html`、`about-purpose.html`、`about-accuracy.html` | `style.css` | `.about-site-footer`／`.about-site-map-btn`／`.about-site-info-btn` | `grid-template-columns: 113px 1fr 1fr`と`margin-bottom: 18px`。共通クラスなので変更影響は全対象ページへ及ぶ |
 | `news/index.html` | `news/index.html`内のCSSと`scripts/fetch_news.py` | `.bottom-bar`／`.bottom-map-btn`／`.bottom-submit-btn` | `flex: 0 0 113px`と`margin-bottom: 18px`。生成物と生成元を一致させる |
+| `updates/index.html` | `updates/index.html`内のCSS | `.updates-footer`／`.updates-map-btn` | 地図ボタン113px固定、バー51px、`margin-bottom: 18px` |
 | `detail.html` | `detail.html`内のCSS | `.view-toggle-bar`／`.view-toggle-btn`／`#mapToggleBtn` | `#mapToggleBtn { flex: 0 0 113px; }`と`margin-bottom: 18px` |
 
 ## 既存ページを確認する

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1565c0">
+  <meta name="description" content="うるま市石川のニュース、店舗主からのお知らせ、石川マップ管理者からのお知らせを確認できます。">
+  <title>石川マップのお知らせ</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Meiryo', sans-serif;
+      background: #eceff1;
+      color: #263238;
+    }
+    button, a { font-family: inherit; }
+    .page-wrap {
+      width: 100%;
+      max-width: 430px;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      background: #f5f5f5;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+    }
+    .updates-header {
+      flex-shrink: 0;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, #1e88e5, #1257a3);
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
+    .updates-header h1 { font-size: 1rem; font-weight: 700; }
+    .updates-header p { margin-top: 4px; font-size: .72rem; color: rgba(255,255,255,.88); }
+    .updates-tabs {
+      flex-shrink: 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 4px;
+      padding: 8px;
+      background: #fff;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .updates-tab {
+      min-width: 0;
+      min-height: 44px;
+      padding: 6px 4px;
+      border: 1px solid #cfd8dc;
+      border-radius: 8px;
+      background: #fff;
+      color: #455a64;
+      font-size: .72rem;
+      font-weight: 700;
+      line-height: 1.25;
+      cursor: pointer;
+      transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .updates-tab[aria-selected="true"] {
+      border-color: #1565c0;
+      background: #1565c0;
+      color: #fff;
+    }
+    .updates-tab-count { display: block; margin-top: 2px; font-size: .65rem; opacity: .85; }
+    .updates-content {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 12px;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+    }
+    .updates-panel[hidden] { display: none; }
+    .updates-list { display: flex; flex-direction: column; gap: 10px; }
+    .update-card {
+      padding: 14px 16px;
+      border-left: 4px solid #e53935;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+    .update-card.shop { border-left-color: #2e7d32; }
+    .update-card.admin { border-left-color: #1565c0; }
+    .update-title {
+      display: block;
+      color: #1565c0;
+      font-size: .92rem;
+      font-weight: 700;
+      line-height: 1.5;
+      text-decoration: none;
+    }
+    .update-card.shop .update-title { color: #2e7d32; }
+    .update-card.admin .update-title { color: #1257a3; }
+    .update-body { margin-top: 6px; color: #546e7a; font-size: .8rem; line-height: 1.65; }
+    .update-meta { margin-top: 8px; color: #90a4ae; font-size: .7rem; line-height: 1.5; }
+    .update-store { margin-bottom: 4px; color: #455a64; font-size: .72rem; font-weight: 700; }
+    .updates-message {
+      margin-top: 16px;
+      padding: 32px 16px;
+      border-radius: 12px;
+      background: #fff;
+      color: #78909c;
+      font-size: .86rem;
+      line-height: 1.7;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+    .updates-message strong { display: block; margin-bottom: 6px; color: #455a64; font-size: .95rem; }
+    .updates-footer {
+      flex-shrink: 0;
+      display: flex;
+      height: 51px;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border-top: 1px solid #e0e0e0;
+      background: #fff;
+      box-shadow: 0 -2px 8px rgba(0,0,0,.08);
+    }
+    .updates-map-btn {
+      flex: 0 0 113px;
+      height: 34px;
+      padding: 2px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #e53935;
+      border-radius: 7px;
+      background: #fff;
+      color: #222;
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.2;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <header class="updates-header">
+      <h1>石川マップのお知らせ</h1>
+      <p>地域と石川マップの新しい情報</p>
+    </header>
+
+    <nav class="updates-tabs" aria-label="お知らせの種類" role="tablist">
+      <button class="updates-tab" type="button" role="tab" aria-selected="true" aria-controls="panel-news" data-tab="news">
+        今日のニュース<span class="updates-tab-count" data-count="news">読込中</span>
+      </button>
+      <button class="updates-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-shops" data-tab="shops">
+        店舗主から<span class="updates-tab-count" data-count="shops">0件</span>
+      </button>
+      <button class="updates-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-admin" data-tab="admin">
+        管理者から<span class="updates-tab-count" data-count="admin">0件</span>
+      </button>
+    </nav>
+
+    <main class="updates-content">
+      <section class="updates-panel" id="panel-news" role="tabpanel" data-panel="news">
+        <div class="updates-list" data-list="news"></div>
+      </section>
+      <section class="updates-panel" id="panel-shops" role="tabpanel" data-panel="shops" hidden>
+        <div class="updates-list" data-list="shops"></div>
+      </section>
+      <section class="updates-panel" id="panel-admin" role="tabpanel" data-panel="admin" hidden>
+        <div class="updates-list" data-list="admin"></div>
+      </section>
+    </main>
+
+    <nav class="updates-footer" aria-label="ページ移動">
+      <a class="updates-map-btn" href="../index.html">地図</a>
+    </nav>
+  </div>
+
+  <script>
+    (function () {
+      var allowedTabs = ['news', 'shops', 'admin'];
+      var requestedTab = new URLSearchParams(window.location.search).get('tab');
+      var activeTab = allowedTabs.indexOf(requestedTab) >= 0 ? requestedTab : 'news';
+
+      function setActiveTab(tab, updateUrl) {
+        activeTab = allowedTabs.indexOf(tab) >= 0 ? tab : 'news';
+        document.querySelectorAll('[data-tab]').forEach(function (button) {
+          button.setAttribute('aria-selected', button.dataset.tab === activeTab ? 'true' : 'false');
+        });
+        document.querySelectorAll('[data-panel]').forEach(function (panel) {
+          panel.hidden = panel.dataset.panel !== activeTab;
+        });
+        if (updateUrl) {
+          var url = new URL(window.location.href);
+          url.searchParams.set('tab', activeTab);
+          window.history.replaceState(null, '', url);
+        }
+      }
+
+      function setCount(tab, count) {
+        var el = document.querySelector('[data-count="' + tab + '"]');
+        if (el) el.textContent = count + '件';
+      }
+
+      function showMessage(tab, title, body) {
+        var list = document.querySelector('[data-list="' + tab + '"]');
+        list.replaceChildren();
+        var message = document.createElement('div');
+        message.className = 'updates-message';
+        var heading = document.createElement('strong');
+        heading.textContent = title;
+        var text = document.createElement('span');
+        text.textContent = body;
+        message.append(heading, text);
+        list.appendChild(message);
+      }
+
+      function appendText(parent, className, text) {
+        if (!text) return null;
+        var el = document.createElement('p');
+        el.className = className;
+        el.textContent = text;
+        parent.appendChild(el);
+        return el;
+      }
+
+      function renderNews(data) {
+        var articles = data && Array.isArray(data.articles) ? data.articles : [];
+        setCount('news', articles.length);
+        var list = document.querySelector('[data-list="news"]');
+        list.replaceChildren();
+        if (!articles.length) {
+          showMessage('news', 'ニュースはありません', '新しい情報が見つかると、ここに表示されます。');
+          return;
+        }
+        articles.forEach(function (article) {
+          var card = document.createElement('article');
+          card.className = 'update-card';
+          var title;
+          if (article.link && /^https?:\/\//i.test(article.link)) {
+            title = document.createElement('a');
+            title.href = article.link;
+            title.target = '_blank';
+            title.rel = 'noopener noreferrer';
+          } else {
+            title = document.createElement('span');
+          }
+          title.className = 'update-title';
+          title.textContent = article.title || '名称未設定';
+          card.appendChild(title);
+          appendText(card, 'update-body', article.summary || '');
+          appendText(card, 'update-meta', [article.date_label, article.source ? '出典：' + article.source : ''].filter(Boolean).join(' / '));
+          list.appendChild(card);
+        });
+      }
+
+      function isCurrent(item) {
+        if (!item || item.status !== 'published') return false;
+        var now = Date.now();
+        if (item.startsAt && Date.parse(item.startsAt) > now) return false;
+        if (item.endsAt && Date.parse(item.endsAt) < now) return false;
+        return true;
+      }
+
+      function renderNotices(tab, data) {
+        var items = data && Array.isArray(data.items) ? data.items.filter(isCurrent) : [];
+        setCount(tab, items.length);
+        var list = document.querySelector('[data-list="' + tab + '"]');
+        list.replaceChildren();
+        if (!items.length) {
+          var emptyTitle = tab === 'shops' ? '店舗主からのお知らせはありません' : '管理者からのお知らせはありません';
+          showMessage(tab, emptyTitle, '新しいお知らせが投稿されると、ここに表示されます。');
+          return;
+        }
+        items.forEach(function (item) {
+          var card = document.createElement('article');
+          card.className = 'update-card ' + (tab === 'shops' ? 'shop' : 'admin');
+          if (tab === 'shops') appendText(card, 'update-store', item.storeName || '店舗名未設定');
+          var title = document.createElement('span');
+          title.className = 'update-title';
+          title.textContent = item.title || 'お知らせ';
+          card.appendChild(title);
+          appendText(card, 'update-body', item.body || '');
+          appendText(card, 'update-meta', item.publishedAt ? '投稿日：' + item.publishedAt.slice(0, 10) : '');
+          list.appendChild(card);
+        });
+      }
+
+      function loadJson(url, onSuccess, tab) {
+        fetch(url + '?_=' + Date.now())
+          .then(function (response) {
+            if (!response.ok) throw new Error('status ' + response.status);
+            return response.json();
+          })
+          .then(onSuccess)
+          .catch(function () {
+            setCount(tab, 0);
+            showMessage(tab, '読み込めませんでした', '時間をおいて、もう一度お試しください。');
+          });
+      }
+
+      document.querySelectorAll('[data-tab]').forEach(function (button) {
+        button.addEventListener('click', function () { setActiveTab(button.dataset.tab, true); });
+      });
+
+      setActiveTab(activeTab, false);
+      loadJson('../news/today.json', renderNews, 'news');
+      loadJson('shop-updates.json', function (data) { renderNotices('shops', data); }, 'shops');
+      loadJson('admin-notices.json', function (data) { renderNotices('admin', data); }, 'admin');
+    })();
+  </script>
+</body>
+</html>

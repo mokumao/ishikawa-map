@@ -23,7 +23,7 @@
   <meta property="og:locale" content="ja_JP">
   <title>うるま市石川 飲食店マップ</title>
   <link rel="stylesheet" href="leaflet/leaflet.css"/>
-  <link rel="stylesheet" href="style.css?v=20260829d">
+  <link rel="stylesheet" href="style.css?v=20260829e">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -128,10 +128,14 @@
       <!-- 地図中央固定★（スクロールしても動かない） -->
       <div class="map-center-star" aria-hidden="true"></div>
 
-      <!-- 今日の石川ニュースバナー -->
-      <div id="newsBanner" class="news-banner">
+      <!-- 石川マップのお知らせ入口（初回表示） -->
+      <div id="newsBanner" class="news-banner" aria-label="石川マップのお知らせ">
         <button class="news-banner-close news-banner-close-side" data-news-close aria-label="閉じる">×</button>
-        <button class="news-banner-btn" id="newsBannerBtn">今日の石川ニュース</button>
+        <div class="news-banner-actions">
+          <button class="news-banner-btn" data-updates-tab="news">今日の石川ニュース</button>
+          <button class="news-banner-btn" data-updates-tab="shops">店舗主からのお知らせ</button>
+          <button class="news-banner-btn" data-updates-tab="admin">管理者からのお知らせ</button>
+        </div>
         <button class="news-banner-close news-banner-close-side" data-news-close aria-label="閉じる">×</button>
       </div>
 
@@ -358,7 +362,7 @@
   <script src="leaflet/leaflet.js"></script>
   <script src="restaurants-data.js?v=20260816a"></script>
   <script src="ishikawa-boundary.js?v=20260709b"></script>
-  <script src="script.js?v=20260829c"></script>
+  <script src="script.js?v=20260829e"></script>
   <!-- GoatCounter アクセス解析 -->
   <script data-goatcounter="https://ishikawamap.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>
