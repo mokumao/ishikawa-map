@@ -295,7 +295,7 @@ body.about-site-page {
   justify-content: center;
   padding: 20px;
   opacity: 1;
-  transition: opacity .18s ease-out;
+  transition: opacity 3s ease;
 }
 .area-accuracy-popup[hidden] {
   display: none;
