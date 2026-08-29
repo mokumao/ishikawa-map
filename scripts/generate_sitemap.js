@@ -73,6 +73,9 @@ staticPages.forEach((p) => {
 // 「今日の石川ニュース」
 xml += urlEntry(`${BASE_URL}/news/index.html`, { changefreq: 'daily', priority: 0.6 });
 
+// ニュース・店舗主・管理者のお知らせをまとめたページ
+xml += urlEntry(`${BASE_URL}/updates/index.html`, { changefreq: 'daily', priority: 0.6 });
+
 // 店舗詳細ページ（公開中のみ、id昇順）
 published
   .slice()
@@ -85,9 +88,10 @@ xml += '</urlset>\n';
 
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml, 'utf8');
 
-const totalUrls = 1 + staticPages.length + 1 + published.length;
+const totalUrls = 1 + staticPages.length + 2 + published.length;
 console.log(`sitemap.xml generated: total ${totalUrls} URLs`);
 console.log(`  - top page: 1`);
 console.log(`  - static pages: ${staticPages.length}`);
 console.log(`  - news: 1`);
+console.log(`  - updates: 1`);
 console.log(`  - shop pages (published): ${published.length} / ${restaurants.length} total`);

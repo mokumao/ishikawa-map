@@ -1177,8 +1177,8 @@ body.info-open .label-toggle-btn { display: none !important; }
   80%  { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
   100% { transform: translate(-50%, -50%) scale(1);   opacity: 0; }
 }
-/* ── 今日の石川ニュースバナー ── */
-/* 赤枠はコンテナ側に付け、× ボタンも赤枠の内側に収める */
+/* ── 石川マップのお知らせ入口 ── */
+/* 3つの入口を1つの枠にまとめ、地図を隠す面積を抑える */
 .news-banner {
   position: absolute;
   top: 50%;
@@ -1198,16 +1198,37 @@ body.info-open .label-toggle-btn { display: none !important; }
   opacity: 1;
   transition: opacity 3s ease;
 }
+.news-banner-actions {
+  display: flex;
+  flex-direction: column;
+  width: min(210px, calc(100vw - 100px));
+}
 .news-banner-btn {
-  background: none;
+  background: #fff;
   color: #333;
   border: none;
-  padding: 4px 2px;
-  font-size: 15px;
+  border-bottom: 1px solid #eceff1;
+  padding: 8px 6px;
+  font-size: 14px;
   font-weight: bold;
+  font-family: inherit;
   cursor: pointer;
   white-space: nowrap;
   letter-spacing: 0;
+  transition: background-color .15s ease, color .15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.news-banner-btn:first-child {
+  border-radius: 6px 6px 0 0;
+}
+.news-banner-btn:last-child {
+  border-bottom: 0;
+  border-radius: 0 0 6px 6px;
+}
+.news-banner-btn:hover,
+.news-banner-btn:focus-visible {
+  background: #ffebee;
+  color: #c62828;
 }
 /* 左右の × ボタン：店舗ポップアップの popup-close-side と同じ見た目 */
 .news-banner-close-side {

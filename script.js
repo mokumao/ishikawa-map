@@ -2935,7 +2935,7 @@ window.addEventListener('pageshow', function () {
   setTimeout(function () { map.invalidateSize(); }, 50);
 });
 
-// ── 今日の石川ニュースバナー：ボタン押下でニュースページへ／×で閉じる ──
+// ── 石川マップのお知らせ入口：各ボタンで対応タブへ／×で閉じる ──
 (function() {
   var banner = document.getElementById('newsBanner');
 
@@ -2965,13 +2965,13 @@ window.addEventListener('pageshow', function () {
     if (e.persisted) hideBannerInstant();
   });
 
-  // ニュースボタン → news/index.html へ遷移
-  var newsBtn = document.getElementById('newsBannerBtn');
-  if (newsBtn) {
-    newsBtn.addEventListener('click', function() {
-      window.location.href = 'news/index.html';
+  // 3つのお知らせボタン → 共通ページの対応タブへ遷移
+  document.querySelectorAll('[data-updates-tab]').forEach(function(updatesBtn) {
+    updatesBtn.addEventListener('click', function() {
+      var tab = updatesBtn.getAttribute('data-updates-tab');
+      window.location.href = 'updates/index.html?tab=' + encodeURIComponent(tab);
     });
-  }
+  });
   // ×ボタン（両側）→ バナーを非表示
   document.querySelectorAll('[data-news-close]').forEach(function(closeBtn) {
     closeBtn.addEventListener('click', function(e) {
