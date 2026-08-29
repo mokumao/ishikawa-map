@@ -2479,6 +2479,15 @@ body.side-swipe-right #minimap {
   }
 }
 
+/* ── 高さのあるスマホ（iPhone 16e等） ─────────────────────── */
+@media (max-width: 767px) and (min-height: 701px) {
+  /* 高い画面では従来の36%基準だと操作列が上がりすぎるため、
+     指が届きやすい位置へ約50px下げる。短い画面の配置には影響しない。 */
+  .side-swipe-ctrl {
+    bottom: calc(30% - 90px);
+  }
+}
+
 /* ── PC：左上コントロールを横並び（＋－ ＋ 店名ボタン） ──── */
 @media (min-width: 768px) {
   .leaflet-top.leaflet-left {
