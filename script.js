@@ -33,7 +33,7 @@ var TRANSLATIONS = {
     'info.faq.desc':       'よくある質問とその回答をまとめました',
     'info.feedback':       'ご意見・ご要望',
     'info.feedback.desc':  '皆さまの声をお聞かせください',
-    'info.today':          '今日の石川ニュース',
+    'info.today':          '石川マップのお知らせ',
     'info.today.desc':     '石川の最新情報をお届けします',
     'popup.address':       '住所',
     'popup.hours':         '営業時間',
