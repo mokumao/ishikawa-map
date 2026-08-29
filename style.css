@@ -612,7 +612,7 @@ body.area-blue-theme .area-sources .area-sec-title { color: #666; }
   margin-bottom: 18px;
 }
 .about-guide-page .about-site-footer {
-  grid-template-columns: 100px 1fr 1fr;
+  grid-template-columns: calc((100% - 10px) / 3) 1fr 1fr;
 }
 .about-site-map-btn,
 .about-site-info-btn {
