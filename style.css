@@ -1902,6 +1902,17 @@ body.side-swipe-right #minimap {
     pointer-events: none !important;
   }
 
+  /* カテゴリ選択中は、地図と同様に店舗ポップアップもオーバーレイの背面へ置く。
+     ポップアップ内部には個別のpointer-events:auto指定があるため、子要素も含めて
+     操作を止め、カテゴリ選択が終わるまでリンクやボタンを押せないようにする。 */
+  body.category-selection-open .leaflet-popup-pane {
+    z-index: 1499 !important;
+    pointer-events: none !important;
+  }
+  body.category-selection-open .leaflet-popup-pane * {
+    pointer-events: none !important;
+  }
+
   /* ── 歯車メニュー ── */
   .gear-menu {
     position: absolute;
