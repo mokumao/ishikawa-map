@@ -36,7 +36,7 @@ description: 石川マップの各ページ左下にある「地図」ボタン�
 ### 幅のルール
 
 - `index.html`の地図画面下部にある「地図・店名・一覧」は3ボタンを均等幅にする。`.bottom-tab-btn { flex: 1; }`を基準とし、`#bottomTabMap`も`flex: 1 1 0`にする。
-- `about-site.html`では、メイン画面と同じ端末上で同じ幅になるよう、外枠と余白の差を補正した`calc((100% - 10px) / 3)`を使う。
+- `about-site.html`では、メイン画面と同じ端末上で同じ幅になるよう、外枠と余白の差を補正した`calc(33.333333% - 3.333333px)`を使う。CSSの除算を含む式は一部のiPhone Safariで無効になるため使用しない。
 - 上記以外のページでは、左端の「地図」ボタンを113px固定にする。flexでは`flex: 0 0 113px`、gridでは地図ボタンの列を`113px`固定にする。
 - 2026-08-27のユーザー確認により、メイン地図画面の3ボタンの均等さを、他ページとの地図ボタン単体の幅統一より優先する方針へ変更した。
 
@@ -54,7 +54,7 @@ description: 石川マップの各ページ左下にある「地図」ボタン�
 |---|---|---|---|
 | `index.html`の地図画面下部タブ | `style.css` | `.bottom-tabs`／`#bottomTabMap`／`.bottom-tab-btn` | 3ボタン均等。`#bottomTabMap { flex: 1 1 0; }` |
 | `index.html`の情報パネル下部 | `style.css` | `.info-panel-footer`／`.info-map-btn` | `.info-map-btn { flex: 0 0 113px; }` |
-| `about-site.html` | `style.css` | `.about-guide-page .about-site-footer`／`.about-site-map-btn` | `calc((100% - 10px) / 3)`でメイン画面の均等幅と一致。高さ34px、バー51px、`margin-bottom: 18px`は基準を維持 |
+| `about-site.html` | `style.css` | `.about-guide-page .about-site-footer`／`.about-site-map-btn` | Safari互換の`calc(33.333333% - 3.333333px)`でメイン画面の均等幅と一致。高さ34px、バー51px、`margin-bottom: 18px`は基準を維持 |
 | `about-ishikawa.html`、`about-recruit.html`、`about-management.html`、`about-purpose.html`、`about-accuracy.html` | `style.css` | `.about-site-footer`／`.about-site-map-btn`／`.about-site-info-btn` | `grid-template-columns: 113px 1fr 1fr`と`margin-bottom: 18px`。共通クラスなので変更影響は全対象ページへ及ぶ |
 | `news/index.html` | `news/index.html`内のCSSと`scripts/fetch_news.py` | `.bottom-bar`／`.bottom-map-btn`／`.bottom-submit-btn` | `flex: 0 0 113px`と`margin-bottom: 18px`。生成物と生成元を一致させる |
 | `updates/index.html` | `updates/index.html`内のCSS | `.updates-footer`／`.updates-map-btn` | 地図ボタン113px固定、バー51px、`margin-bottom: 18px` |
@@ -97,7 +97,7 @@ JSON.stringify({
 ### 3. 原因を特定して修正する
 
 - 高さのずれ：padding、border、box-sizing、継承値を確認する。
-- 幅のずれ：`index.html`の地図画面では3ボタンが同幅か確認する。`about-site.html`は`calc((100% - 10px) / 3)`、その他のページでは`flex: 0 0 113px`またはgrid列113px固定を確認する。
+- 幅のずれ：`index.html`の地図画面では3ボタンが同幅か確認する。`about-site.html`は`calc(33.333333% - 3.333333px)`、その他のページでは`flex: 0 0 113px`またはgrid列113px固定を確認する。
 - 見た目の下端のずれ：バー単体のheightだけでなく、marginと周辺要素を確認する。
 - 共通CSSを変更する場合は、影響する全ページを確認する。
 - ユーザーが依頼していない周辺レイアウト改善を混ぜない。
