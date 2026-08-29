@@ -413,6 +413,7 @@ function rNote(r)   { return r.note;   }
   }
   function closeMenu() {
     menu.classList.remove('cat-mode', 'gear-visible');
+    document.body.classList.remove('category-selection-open');
     overlay.classList.remove('gear-visible');
     // フェードアウト(.15s)が終わってからdisplay:noneにする（即座に消すと透明化が見えない）
     setTimeout(function () {
@@ -865,6 +866,7 @@ function rNote(r)   { return r.note;   }
   document.getElementById('categoryPinBtn').addEventListener('click', function (e) {
     L.DomEvent && L.DomEvent.stopPropagation(e);
     openedViaPin = true;
+    document.body.classList.add('category-selection-open');
     // 地図下部チップバーが表示中の状態からピンモードに入ると、新しいカテゴリ
     // パネルの裏にチップバーが残って重なって見える不具合があったため、
     // ピンモードに入る瞬間にチップバーを非表示にする（閉じるときは元の状態に復元）。
