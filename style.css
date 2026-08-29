@@ -10,6 +10,7 @@ html {
 
 body {
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   overscroll-behavior-y: none;
   display: flex;
@@ -2445,6 +2446,37 @@ body.side-swipe-right #minimap {
 
 @media (max-width: 360px) {
   .popup-btn { font-size: .68rem; }
+}
+
+/* ── 高さの短いスマホ（iPhone SE等） ──────────────────────── */
+@media (max-width: 767px) and (max-height: 700px) {
+  /* 固定高さのボタン列を上端基準にし、二重になっていたgapとmarginを
+     整理して全ボタンを地図領域内へ収める。ボタン自体の寸法は維持する。 */
+  .side-swipe-ctrl {
+    top: 8px;
+    bottom: auto;
+    gap: 4px;
+  }
+  #sideSwipeCtrl .locate-btn,
+  #sideSwipeCtrl .ishikawa-btn,
+  #sideSwipeCtrl .category-pin-btn,
+  #sideSwipeCtrl .gear-btn,
+  #sideSwipeCtrl .side-arrow-btn,
+  #sideSwipeCtrl .leaflet-control-zoom {
+    margin-top: 0 !important;
+  }
+
+  /* 青いヘッダーと下部バーは常に表示し、5つの案内項目だけを
+     必要に応じてスクロールできるようにする。 */
+  .info-panel-inner {
+    min-height: 0;
+    justify-content: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .info-menu-btn {
+    flex-shrink: 0;
+  }
 }
 
 /* ── PC：左上コントロールを横並び（＋－ ＋ 店名ボタン） ──── */
