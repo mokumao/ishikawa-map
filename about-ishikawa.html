@@ -6,17 +6,19 @@
   <meta name="theme-color" content="#1257a3">
   <meta name="description" content="沖縄県うるま市石川地区（旧石川市）の位置・歴史・人口・文化をまとめたページ。うるま市教育委員会の資料や沖縄県公文書館などの公開情報をもとにしています。">
   <title>石川について | 石川マップ</title>
-  <link rel="stylesheet" href="style.css?v=20260823a">
+  <link rel="stylesheet" href="style.css?v=20260829d">
 </head>
 <body class="about-site-page area-blue-theme">
   <main class="about-site-wrap">
     <header class="about-site-header">
       <h1>石川について</h1>
+      <p class="area-header-notice">
+        以下の文章は不正確な場合があります
+        <button class="area-header-detail-btn" type="button" id="areaAccuracyOpen">詳細</button>
+      </p>
     </header>
 
     <section class="about-site-content" aria-label="石川について">
-
-      <p class="area-disclaimer">以下の文章はＡＩで情報を自動収集してまとめた文章です。内容に情報の間違いがあるかもしれません。情報源は一番下に記載してあるので必要時はそちらも確認してください。</p>
 
       <div class="area-sec">
         <button class="area-sec-toggle" type="button" aria-expanded="false">
@@ -228,6 +230,17 @@
 
     </section>
 
+    <div class="area-accuracy-popup hidden" id="areaAccuracyPopup" role="dialog" aria-modal="true" aria-labelledby="areaAccuracyText" hidden>
+      <button class="area-accuracy-backdrop" type="button" aria-label="閉じる"></button>
+      <div class="area-accuracy-popup-box">
+        <p id="areaAccuracyText">以下の文章はＡＩで情報を自動収集してまとめた文章です。内容に情報の間違いがあるかもしれません。情報源は一番下に記載してあるので必要時はそちらも確認してください。</p>
+        <div class="area-accuracy-close-row">
+          <button class="area-accuracy-close" type="button" aria-label="閉じる">×</button>
+          <button class="area-accuracy-close" type="button" aria-label="閉じる">×</button>
+        </div>
+      </div>
+    </div>
+
     <nav class="about-site-footer" aria-label="ページ移動">
       <button class="about-site-map-btn" onclick="window.location.href='index.html'">地図</button>
       <button class="about-site-info-btn" onclick="window.location.href='index.html#info'">石川マップのご案内</button>
@@ -236,6 +249,30 @@
 
   <script>
     (function () {
+      var accuracyPopup = document.getElementById('areaAccuracyPopup');
+      var accuracyOpen = document.getElementById('areaAccuracyOpen');
+
+      function openAccuracyPopup() {
+        accuracyPopup.hidden = false;
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            accuracyPopup.classList.remove('hidden');
+          });
+        });
+      }
+
+      function closeAccuracyPopup() {
+        accuracyPopup.classList.add('hidden');
+        setTimeout(function () {
+          if (accuracyPopup.classList.contains('hidden')) accuracyPopup.hidden = true;
+        }, 180);
+      }
+
+      accuracyOpen.addEventListener('click', openAccuracyPopup);
+      accuracyPopup.querySelectorAll('.area-accuracy-close, .area-accuracy-backdrop').forEach(function (btn) {
+        btn.addEventListener('click', closeAccuracyPopup);
+      });
+
       document.querySelectorAll('.area-sec-toggle').forEach(function (btn) {
         btn.addEventListener('click', function () {
           var sec = btn.closest('.area-sec');
