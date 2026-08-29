@@ -295,7 +295,6 @@ body.about-site-page {
   justify-content: center;
   padding: 20px;
   opacity: 1;
-  transition: opacity 3s ease;
 }
 .area-accuracy-popup[hidden] {
   display: none;
@@ -303,6 +302,7 @@ body.about-site-page {
 .area-accuracy-popup.hidden {
   opacity: 0;
   pointer-events: none;
+  transition: opacity 3s ease;
 }
 .area-accuracy-backdrop {
   position: absolute;
