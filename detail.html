@@ -90,6 +90,21 @@
       margin-bottom: 14px;
       text-align: center;
     }
+    .shop-hero.demo-hero {
+      background: linear-gradient(135deg, #00a6c8, #006f86);
+    }
+    .demo-notice {
+      margin-bottom: 14px;
+      padding: 16px 18px;
+      border: 3px solid #00a6c8;
+      border-radius: 14px;
+      background: #e8f8fc;
+      color: #004d5c;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      text-align: center;
+    }
+    .demo-notice strong { display: block; margin-bottom: 5px; font-size: 1.08rem; }
+    .demo-notice p { margin: 0; line-height: 1.65; }
 
     .shop-name {
       font-size: 1.5rem;
@@ -419,7 +434,7 @@
     </div>
   </div>
 
-  <script src="restaurants-data.js?v=20260816a"></script>
+  <script src="restaurants-data.js?v=20260831a"></script>
   <script>
     (function () {
       // IDパラメータ取得（クエリ文字列 ?id=N 形式）
@@ -448,7 +463,8 @@
       const found = restaurants.find(function (x) { return x.id === id; });
       // status が published 以外（test等）の店舗は、プレビュー環境以外では
       // 「見つからない」扱いにする（restaurants配列自体は変更しない）
-      const isHidden = !!(found && found.status && found.status !== 'published' && !isPreviewEnv());
+      const isPublicDemo = !!(found && found.status === 'test' && found.publicDemo);
+      const isHidden = !!(found && found.status && found.status !== 'published' && !isPublicDemo && !isPreviewEnv());
       const r = isHidden ? null : found;
       const card = document.getElementById('detailCard');
 
@@ -474,6 +490,12 @@
       const descText = r.name + '（' + r.genre + '）沖縄県うるま市石川エリアの店舗情報。住所：' + r.address;
       var metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) metaDesc.setAttribute('content', descText);
+      if (r.publicDemo) {
+        var demoRobotsMeta = document.createElement('meta');
+        demoRobotsMeta.setAttribute('name', 'robots');
+        demoRobotsMeta.setAttribute('content', 'noindex, nofollow');
+        document.head.appendChild(demoRobotsMeta);
+      }
 
       // canonical / OGP タグを店舗ごとの内容に更新
       const pageUrl = 'https://mokumao.github.io/ishikawa-map/detail.html?id=' + r.id;
@@ -517,7 +539,7 @@
       }
       if (r.tel) ldData.telephone = r.tel;
       var ldScript = document.getElementById('ldJson');
-      if (ldScript) ldScript.textContent = JSON.stringify(ldData);
+      if (ldScript) ldScript.textContent = r.publicDemo ? '' : JSON.stringify(ldData);
 
       // Google マップ URL
       function gmapUrl() {
@@ -525,9 +547,9 @@
              + encodeURIComponent(r.name + ' ' + r.address);
       }
 
-      // 公開用「店舗番号」：idベース（id+1、ゼロ埋めなし）。
+      // 公開用「店舗番号」：idそのもの（ゼロ埋めなし）。
       // 地名・行政コードを含まない固定書式のため、地域が増えても不変・重複なし。
-      const storeNo = 'No.' + String(r.id + 1);
+      const storeNo = 'No.' + String(r.id);
 
       // sourceUrlのドメインから出典名を判定する。
       // 食べログ等の第三者サイトは固有名、うるま市公式サイトは名称で表示する。
@@ -680,8 +702,13 @@
 
       // HTML構築
       card.innerHTML = `
+        ${r.publicDemo ? `
+          <div class="demo-notice" role="note">
+            <strong>これは動作確認用のテスト店舗です</strong>
+            <p>実在する店舗ではなく、実際の営業・商品販売は行っていません。石川マップの店舗情報・履歴・修正機能を確認するために公開しています。</p>
+          </div>` : ''}
         <!-- ショップヒーロー -->
-        <div class="shop-hero">
+        <div class="shop-hero${r.publicDemo ? ' demo-hero' : ''}">
           <div class="shop-name">${r.name}</div>
           <span class="shop-genre-badge">${r.genre}</span>
           ${r.warn ? `<span class="warn-badge">⚠️ 要確認</span><span class="warn-reason">⚠️ ${warnReasonText(r)}</span>` : ''}

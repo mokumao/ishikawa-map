@@ -12,6 +12,7 @@
 - [ideas.md](ideas.md) — まだ採用を決めていない案や相談事項
 - [regional-expansion.md](regional-expansion.md) — 具志川・勝連・与那城などへの展開方針の検討記録
 - [okinawa-skill-roadmap.md](okinawa-skill-roadmap.md) — 沖縄県全体を見据えたSkill体系の長期方針
+- [store-id-migration-20260831.md](store-id-migration-20260831.md) — 店舗id・管理番号の移行ルールと旧新対応表
 
 ## 関連資料
 
@@ -29,4 +30,4 @@
 - 完了した項目は削除せず、状態を「完了」にして完了日と反映先を残す。
 - 個人の電話番号、メールアドレス、申請内容など、公開すべきでない個人情報は記録しない。
 
-最終更新：2026-08-30
+最終更新：2026-08-31
