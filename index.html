@@ -363,6 +363,56 @@
   <script src="restaurants-data.js?v=20260816a"></script>
   <script src="ishikawa-boundary.js?v=20260709b"></script>
   <script src="script.js?v=20260829g"></script>
+  <script>
+    // 実機表示の診断用。通常のURLでは何も追加しない。
+    if (new URLSearchParams(window.location.search).get('screen-debug') === '1') {
+      const debugPanel = document.createElement('pre');
+      debugPanel.id = 'screenDebugPanel';
+      debugPanel.setAttribute('aria-live', 'polite');
+      Object.assign(debugPanel.style, {
+        position: 'fixed',
+        zIndex: '100000',
+        left: '8px',
+        right: '8px',
+        top: '8px',
+        margin: '0',
+        padding: '10px',
+        border: '2px solid #e53935',
+        borderRadius: '8px',
+        background: 'rgba(255,255,255,.96)',
+        color: '#111',
+        font: '12px/1.45 monospace',
+        whiteSpace: 'pre-wrap',
+        pointerEvents: 'none'
+      });
+
+      const updateScreenDebug = () => {
+        const controls = document.getElementById('sideSwipeCtrl');
+        const controlsStyle = controls ? getComputedStyle(controls) : null;
+        const viewport = window.visualViewport;
+        debugPanel.textContent = [
+          `inner: ${window.innerWidth} x ${window.innerHeight}`,
+          `screen: ${window.screen.width} x ${window.screen.height}`,
+          `avail: ${window.screen.availWidth} x ${window.screen.availHeight}`,
+          `visual: ${viewport ? viewport.width.toFixed(1) : '-'} x ${viewport ? viewport.height.toFixed(1) : '-'}`,
+          `dpr: ${window.devicePixelRatio}`,
+          `short-height: ${matchMedia('(max-height: 700px)').matches}`,
+          `se-width: ${matchMedia('(max-width: 379px)').matches}`,
+          `controls: top ${controlsStyle ? controlsStyle.top : '-'} / bottom ${controlsStyle ? controlsStyle.bottom : '-'}`,
+          `body: ${document.body.className || '(none)'}`
+        ].join('\n');
+      };
+
+      document.body.appendChild(debugPanel);
+      updateScreenDebug();
+      window.addEventListener('resize', updateScreenDebug);
+      window.visualViewport?.addEventListener('resize', updateScreenDebug);
+      new MutationObserver(updateScreenDebug).observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+    }
+  </script>
   <!-- GoatCounter アクセス解析 -->
   <script data-goatcounter="https://ishikawamap.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>
