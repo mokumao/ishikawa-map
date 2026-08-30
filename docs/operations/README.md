@@ -10,6 +10,7 @@
 - [decisions.md](decisions.md) — 運営について決定した方針と理由
 - [recurring-tasks.md](recurring-tasks.md) — 定期的に行う作業と自動化の状態
 - [ideas.md](ideas.md) — まだ採用を決めていない案や相談事項
+- [regional-expansion.md](regional-expansion.md) — 具志川・勝連・与那城などへの展開方針の検討記録
 
 ## 関連資料
 
