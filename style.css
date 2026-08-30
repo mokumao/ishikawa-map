@@ -2492,7 +2492,7 @@ body.side-swipe-right #minimap {
   }
   html.tall-phone-screen body.header-collapsed .side-swipe-ctrl {
     top: auto;
-    bottom: 24px;
+    bottom: 104px;
   }
 }
 
