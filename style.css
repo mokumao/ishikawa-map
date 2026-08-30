@@ -2448,8 +2448,23 @@ body.side-swipe-right #minimap {
   .popup-btn { font-size: .68rem; }
 }
 
-/* ── 高さの短いスマホ（iPhone SE等） ──────────────────────── */
+/* ── 高さの短いスマホ：案内画面の縦スクロール ────────────── */
 @media (max-width: 767px) and (max-height: 700px) {
+  /* 青いヘッダーと下部バーは常に表示し、5つの案内項目だけを
+     必要に応じてスクロールできるようにする。 */
+  .info-panel-inner {
+    min-height: 0;
+    justify-content: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .info-menu-btn {
+    flex-shrink: 0;
+  }
+}
+
+/* ── 横幅の狭いスマホ（iPhone SE等） ──────────────────────── */
+@media (max-width: 379px) and (max-height: 700px) {
   /* 固定高さのボタン列を上端基準にし、二重になっていたgapとmarginを
      整理して全ボタンを地図領域内へ収める。ボタン自体の寸法は維持する。 */
   .side-swipe-ctrl {
@@ -2465,26 +2480,19 @@ body.side-swipe-right #minimap {
   #sideSwipeCtrl .leaflet-control-zoom {
     margin-top: 0 !important;
   }
-
-  /* 青いヘッダーと下部バーは常に表示し、5つの案内項目だけを
-     必要に応じてスクロールできるようにする。 */
-  .info-panel-inner {
-    min-height: 0;
-    justify-content: flex-start;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .info-menu-btn {
-    flex-shrink: 0;
-  }
 }
 
-/* ── 高さのあるスマホ（iPhone 16e等） ─────────────────────── */
-@media (max-width: 767px) and (min-height: 701px) {
-  /* 高い画面では従来の36%基準だと操作列が上がりすぎるため、
-     指が届きやすい位置へ約50px下げる。短い画面の配置には影響しない。 */
+/* ── 横幅の広いスマホ（iPhone 16e等） ─────────────────────── */
+@media (min-width: 380px) and (max-width: 767px) {
+  /* ヘッダー表示中は見切れを防ぎ、地図操作でヘッダーが閉じた後は
+     画面下から一定距離に固定して指が届きやすい位置へ下げる。 */
   .side-swipe-ctrl {
-    bottom: calc(30% - 90px);
+    top: 8px;
+    bottom: auto;
+  }
+  body.header-collapsed .side-swipe-ctrl {
+    top: auto;
+    bottom: 144px;
   }
 }
 
