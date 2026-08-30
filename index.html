@@ -12,6 +12,16 @@
   <meta charset="UTF-8">
   <meta name="google-site-verification" content="-gJaI5ebtnCtTEM0IbZDKCUkNh_H2_hvWkc7Kf_JmRE" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script>
+    // 表示領域では区別できない小型・大型iPhoneを、実機の画面寸法で判別する。
+    (() => {
+      const screenShortEdge = Math.min(window.screen.width, window.screen.height);
+      const screenLongEdge = Math.max(window.screen.width, window.screen.height);
+      if (screenShortEdge <= 430 && screenLongEdge >= 680) {
+        document.documentElement.classList.add('tall-phone-screen');
+      }
+    })();
+  </script>
   <meta name="theme-color" content="#2e7d32">
   <meta name="description" content="沖縄県うるま市石川エリアの飲食店・コンビニ・ガソリンスタンドなど、店舗・施設情報をまとめた地図サイト。うるま市石川で食事処・居酒屋を探すならこちら。">
   <link rel="canonical" href="https://mokumao.github.io/ishikawa-map/">
@@ -23,7 +33,7 @@
   <meta property="og:locale" content="ja_JP">
   <title>うるま市石川 飲食店マップ</title>
   <link rel="stylesheet" href="leaflet/leaflet.css"/>
-  <link rel="stylesheet" href="style.css?v=20260830e">
+  <link rel="stylesheet" href="style.css?v=20260830f">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -398,6 +408,7 @@
           `dpr: ${window.devicePixelRatio}`,
           `short-height: ${matchMedia('(max-height: 700px)').matches}`,
           `se-width: ${matchMedia('(max-width: 379px)').matches}`,
+          `tall-device: ${document.documentElement.classList.contains('tall-phone-screen')}`,
           `controls: top ${controlsStyle ? controlsStyle.top : '-'} / bottom ${controlsStyle ? controlsStyle.bottom : '-'}`,
           `body: ${document.body.className || '(none)'}`
         ].join('\n');
