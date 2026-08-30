@@ -7,7 +7,7 @@ const restaurants = [
     status:      "test",
     publicDemo:  true,
     tel:         "",
-    lastChecked: "",
+    lastChecked: "2026-08-31",
     listedDate:  "2026-05-16",
     name:      "【テスト用】石川ビーチ海上店",
     genre:     "テスト用",
@@ -19,8 +19,11 @@ const restaurants = [
     sourceUrl: "",
     warn:      false,
     alwaysShow: true,
-    lat:       26.4268,
-    lng:       127.8415,
+    lat:       26.4237,
+    lng:       127.8378,
+    revisionHistory: [
+      { date: "2026-08-31", type: "manager", note: "管理者指定の画像に基づき、公開テスト店舗の位置を石川ビーチ沖へ移動（26.4268, 127.8415 → 26.4237, 127.8378）" }
+    ],
     twitter:    "",
     instagram:  "",
     youtube:    "",
