@@ -97,7 +97,11 @@
     .update-card.admin .update-title { color: #1257a3; }
     .update-body { margin-top: 6px; color: #546e7a; font-size: .8rem; line-height: 1.65; }
     .update-meta { margin-top: 8px; color: #90a4ae; font-size: .7rem; line-height: 1.5; }
-    .update-card.news .update-meta { color: #e53935; }
+    .update-card.news .update-meta {
+      color: #b71c1c;
+      font-size: .92rem;
+      font-weight: 700;
+    }
     .update-store { margin-bottom: 4px; color: #455a64; font-size: .72rem; font-weight: 700; }
     .updates-message {
       margin-top: 16px;
@@ -226,6 +230,19 @@
 
       function renderNews(data) {
         var articles = data && Array.isArray(data.articles) ? data.articles : [];
+        // 自動収集元や管理人投稿の追加順に左右されず、公開日時が新しい順に表示する。
+        // 日時不明の記事は末尾に置き、同日時なら元の順序を維持する。
+        articles = articles.map(function (article, index) {
+          return { article: article, index: index };
+        }).sort(function (a, b) {
+          var aTime = Date.parse(a.article.pub_date || '');
+          var bTime = Date.parse(b.article.pub_date || '');
+          if (Number.isNaN(aTime)) aTime = -Infinity;
+          if (Number.isNaN(bTime)) bTime = -Infinity;
+          return bTime - aTime || a.index - b.index;
+        }).map(function (item) {
+          return item.article;
+        });
         setCount('news', articles.length);
         var list = document.querySelector('[data-list="news"]');
         list.replaceChildren();
