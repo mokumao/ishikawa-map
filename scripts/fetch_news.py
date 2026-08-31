@@ -9,8 +9,11 @@ import feedparser
 import os
 import re
 import json
+import hashlib
+import unicodedata
 from datetime import datetime, timezone, timedelta
 from html import unescape, escape
+from urllib.parse import urlsplit, urlunsplit
 
 # ── 日時設定（日本時間） ──────────────────────────────────────────
 JST = timezone(timedelta(hours=9))
@@ -26,6 +29,8 @@ cutoff_date = now_jst - timedelta(days=DAYS_LIMIT)
 # 「ニュースがなかった日」を記録するファイル（日をまたいでも過去分の
 # 「〇月△日のニュースはありません」表示を消さずに残すための永続化）
 NO_NEWS_FILE = 'news/no_news_dates.json'
+CANDIDATES_FILE = 'news/candidates.json'
+REVIEW_FILE = 'news/review.json'
 
 # 管理人投稿フォームの回答スプレッドシート（ウェブに公開したCSV）
 # Googleフォーム「石川ニュース投稿（管理人用）」→ シート「フォームの回答 1」
@@ -50,6 +55,18 @@ ISHIKAWA_KEYWORDS = [
     '高江洲', 'うるま市', 'うるま', '石川',
 ]
 
+DISTRICT_TERMS = [
+    '石川', '伊波', '嘉手苅', '山城', '楚南', '東恩納', '東山',
+    '白浜', '赤崎', '曙',
+]
+
+FACILITY_TERMS = [
+    '石川多目的ドーム', '石川ドーム', '石川岳', '石川歴史民俗資料館',
+    '石川図書館', '石川少年自然の家',
+]
+
+OTHER_REGION_TERMS = ['石川県', '金沢市', '加賀市', '小松市', '能登']
+
 # ── RSSソース一覧 ──────────────────────────────────────────────────
 def gnews(query):
     """Google News RSS URLを生成"""
@@ -59,29 +76,49 @@ def gnews(query):
 RSS_SOURCES = [
     # ── 地域全般 ──
     {
+        'id': 'google-news-ishikawa',
         'name': 'Google ニュース（うるま市 石川）',
         'url': gnews('うるま市 石川 沖縄'),
+        'type': 'discovery',
+        'trust': 60,
+        'method': 'google-news',
         'filter_strict': True,   # 石川地区の記事に限定
     },
     # ── 施設別 ──
     {
+        'id': 'google-news-ishikawa-dome',
         'name': '石川ドーム・闘牛',
         'url': gnews('石川ドーム 闘牛'),
+        'type': 'discovery',
+        'trust': 60,
+        'method': 'google-news',
         'filter': False,
     },
     {
+        'id': 'google-news-ishikawa-nature',
         'name': '石川少年自然の家',
         'url': gnews('石川少年自然の家'),
+        'type': 'discovery',
+        'trust': 60,
+        'method': 'google-news',
         'filter': False,
     },
     {
+        'id': 'google-news-bios-hill',
         'name': 'ビオスの丘',
         'url': gnews('ビオスの丘'),
+        'type': 'discovery',
+        'trust': 60,
+        'method': 'google-news',
         'filter': False,
     },
     {
+        'id': 'google-news-coco-garden',
         'name': 'ココガーデンリゾート沖縄',
         'url': gnews('ココガーデンリゾート沖縄'),
+        'type': 'discovery',
+        'trust': 60,
+        'method': 'google-news',
         'filter': False,
     },
     # ── ニュースサイト ──
@@ -93,18 +130,30 @@ RSS_SOURCES = [
     # 新聞に石川地区の記事が載る頻度は低いため、日によっては0件になる
     # （その分は管理人投稿で補う設計）
     {
+        'id': 'okinawa-times',
         'name': '沖縄タイムス',
         'url': gnews('site:okinawatimes.co.jp うるま 石川'),
+        'type': 'media',
+        'trust': 80,
+        'method': 'google-news',
         'filter_strict': True,
     },
     {
+        'id': 'ryukyu-shimpo',
         'name': '琉球新報',
         'url': gnews('site:ryukyushimpo.jp うるま 石川'),
+        'type': 'media',
+        'trust': 80,
+        'method': 'google-news',
         'filter_strict': True,
     },
     {
+        'id': 'uruma-city',
         'name': 'うるま市公式サイト',
         'url': gnews('site:city.uruma.lg.jp'),
+        'type': 'official',
+        'trust': 90,
+        'method': 'google-news',
         # 市公式は入札公告など石川地区と無関係な事務情報も多い。
         # うるま市の情報しか流れないソースなので「石川」のみで判定
         'filter_strict': 'ishikawa_only',
@@ -146,6 +195,164 @@ def truncate(text, length=130):
     if not text:
         return ''
     return text[:length] + '…' if len(text) > length else text
+
+def normalize_text(text):
+    """重複判定用に表記揺れ・空白・記号をそろえる。"""
+    value = unicodedata.normalize('NFKC', text or '').lower()
+    return re.sub(r'[\s\W_]+', '', value, flags=re.UNICODE)
+
+def canonical_url(url):
+    """候補識別用にURLのフラグメントを除去する。"""
+    try:
+        parts = urlsplit(url or '')
+        return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), parts.path, parts.query, ''))
+    except Exception:
+        return url or ''
+
+def assess_candidate(title, summary, source, pub_date, link):
+    """Skillの初期基準に沿って地域関連度と信頼度を機械判定する。"""
+    text = f'{title} {summary}'
+    score = 0
+    evidence = []
+    reasons = []
+
+    if 'うるま市石川' in text:
+        score += 60
+        evidence.append('うるま市石川')
+    if 'うるま市' in text and '石川' in text:
+        score += 40
+        evidence.append('うるま市と石川')
+
+    facilities = [term for term in FACILITY_TERMS if term in text]
+    if facilities:
+        score += 35
+        evidence.extend(facilities)
+
+    districts = [term for term in DISTRICT_TERMS if term in text]
+    if districts and ('沖縄' in text or 'うるま' in text):
+        score += 25
+        evidence.extend(districts[:3])
+
+    if source.get('type') == 'official':
+        score += 15
+        evidence.append('うるま市公式発信')
+
+    other_regions = [term for term in OTHER_REGION_TERMS if term in text]
+    if other_regions:
+        score -= 100
+        reasons.append('石川県など他地域との一致を検出')
+
+    if 'うるま市' in text and not districts and '石川' not in text:
+        score -= 25
+        reasons.append('うるま市内だが石川地区の根拠が不足')
+
+    if source.get('method') == 'google-news':
+        score -= 20
+        reasons.append('Googleニュース経由のため原典URL確認が必要')
+
+    score = max(0, min(100, score))
+    confidence = int(source.get('trust', 50))
+    if source.get('method') == 'google-news':
+        confidence -= 15
+    if pub_date is None:
+        confidence -= 20
+        reasons.append('公開日時を確認できない')
+    if not link:
+        confidence -= 30
+        reasons.append('原典URLを確認できない')
+    confidence = max(0, min(100, confidence))
+
+    if 35 <= score < 60:
+        reasons.append('石川地区との関係を管理人が確認')
+    elif score < 35:
+        reasons.append('石川地区との関連根拠が不足')
+
+    return score, list(dict.fromkeys(evidence)), confidence, list(dict.fromkeys(reasons))
+
+def build_candidate(title, summary, link, source, pub_date, public_eligible, previous=None):
+    """公開表示用の記事とは分離した、管理者確認用の候補データを作る。"""
+    previous = previous or {}
+    normalized_title = normalize_text(title)
+    normalized_url = canonical_url(link)
+    fingerprint = hashlib.sha256(
+        f'{normalized_title}|{normalized_url}'.encode('utf-8')
+    ).hexdigest()[:20]
+    date_prefix = pub_date.strftime('%Y%m%d') if pub_date else now_jst.strftime('%Y%m%d')
+    candidate_id = f'{date_prefix}-{source["id"]}-{fingerprint[:10]}'
+    score, evidence, confidence, reasons = assess_candidate(
+        title, summary, source, pub_date, link
+    )
+
+    if public_eligible:
+        status = 'published'
+        reasons.append('従来ルールの公開対象。管理人確認候補として記録')
+    elif score >= 35:
+        status = 'review'
+    else:
+        status = 'rejected'
+
+    expires_at = None
+    if pub_date:
+        expires_at = (pub_date + timedelta(days=DAYS_LIMIT)).replace(
+            hour=23, minute=59, second=59
+        ).isoformat()
+
+    return {
+        'id': candidate_id,
+        'title': title,
+        'summary': truncate(summary),
+        'url': link,
+        'sourceId': source['id'],
+        'sourceName': source['name'],
+        'sourceType': source.get('type', 'discovery'),
+        'publishedAt': pub_date.isoformat() if pub_date else None,
+        'discoveredAt': previous.get('discoveredAt') or now_jst.isoformat(),
+        'checkedAt': now_jst.isoformat(),
+        'eventStartsAt': None,
+        'eventEndsAt': None,
+        'expiresAt': expires_at,
+        'category': 'news',
+        'localScore': score,
+        'localEvidence': evidence,
+        'confidence': confidence,
+        'status': status,
+        'requiresReview': public_eligible or status == 'review',
+        'reviewReasons': reasons,
+        'fingerprint': fingerprint,
+        'relatedUrls': [],
+    }
+
+def load_previous_candidates(path=CANDIDATES_FILE):
+    if not os.path.exists(path):
+        return {}
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return {item['id']: item for item in data.get('candidates', []) if item.get('id')}
+    except Exception:
+        return {}
+
+def save_candidate_data(candidates, source_results):
+    """個人情報を含まないRSS候補だけを管理者確認用JSONへ保存する。"""
+    os.makedirs('news', exist_ok=True)
+    candidates.sort(key=lambda item: item.get('publishedAt') or '', reverse=True)
+    review_candidates = [item for item in candidates if item.get('requiresReview')]
+    data = {
+        'updated': now_jst.isoformat(),
+        'count': len(candidates),
+        'reviewCount': len(review_candidates),
+        'sourceResults': source_results,
+        'candidates': candidates,
+    }
+    with open(CANDIDATES_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    with open(REVIEW_FILE, 'w', encoding='utf-8') as f:
+        json.dump({
+            'updated': now_jst.isoformat(),
+            'count': len(review_candidates),
+            'candidates': review_candidates,
+        }, f, ensure_ascii=False, indent=2)
+    print(f'[OK] ニュース候補を保存しました（全{len(candidates)}件／確認待ち{len(review_candidates)}件）')
 
 def get_pub_date(entry):
     """RSSエントリから公開日時を取得してdatetimeで返す。取得できない場合はNone"""
@@ -304,17 +511,37 @@ def fetch_reader_posts():
 # ── メイン処理 ────────────────────────────────────────────────────
 
 def fetch_articles():
-    """全ソースからニュースを収集・フィルタ・重複除去して返す"""
+    """公開記事と管理者確認用候補を分けて収集する。"""
     articles = []
+    candidates = []
+    source_results = []
+    previous_candidates = load_previous_candidates()
     seen = set()
 
     for source in RSS_SOURCES:
+        source_result = {
+            'id': source['id'],
+            'name': source['name'],
+            'status': 'success',
+            'entryCount': 0,
+            'candidateCount': 0,
+            'publishedCount': 0,
+            'error': None,
+        }
         try:
             print(f"取得中: {source['name']} ...")
             feed = feedparser.parse(source['url'])
+            source_result['entryCount'] = len(feed.entries)
 
             if not feed.entries:
-                print(f"  → 0件（フィードが空またはアクセス不可）")
+                if getattr(feed, 'bozo', False):
+                    print("  ⚠️ 取得エラー（記事を取得できませんでした）")
+                    source_result['status'] = 'error'
+                    source_result['error'] = str(getattr(feed, 'bozo_exception', '取得失敗'))[:200]
+                else:
+                    print("  → 0件（フィードに記事なし）")
+                    source_result['status'] = 'empty'
+                source_results.append(source_result)
                 continue
 
             count = 0
@@ -326,18 +553,19 @@ def fetch_articles():
                 if not title or not link:
                     continue
 
-                # キーワードフィルタ（必要なソースのみ）
+                # 現在の公開条件は維持しつつ、条件外の記事も候補として評価する。
+                public_eligible = True
                 if source.get('filter') and not is_ishikawa_related(title, summary):
-                    continue
+                    public_eligible = False
                 # 石川地区限定フィルタ（うるま市全域ではなく石川地区に絞る）
                 # 'ishikawa_only' 指定のソースは「うるま」表記が無くても通す
                 strict = source.get('filter_strict')
                 if strict:
                     require_uruma = (strict != 'ishikawa_only')
                     if not is_ishikawa_district_related(title, summary, require_uruma):
-                        continue
+                        public_eligible = False
 
-                # 日付フィルタ：7日以内の過去 or 未来のみ掲載
+                # 候補も公開記事と同じ期間を対象にする。
                 pub_date = get_pub_date(entry)
                 if not is_within_period(pub_date):
                     continue
@@ -345,9 +573,25 @@ def fetch_articles():
                 # 重複除去（タイトル冒頭20文字で判定）
                 # 全角/半角の違い（例: ２０日 と 20日）で同一記事が二重掲載
                 # されないよう、NFKC正規化してから比較する
-                import unicodedata
                 key = unicodedata.normalize('NFKC', title)[:20]
-                if key in seen:
+                duplicate = key in seen
+                if duplicate:
+                    public_eligible = False
+
+                candidate = build_candidate(
+                    title, summary, link, source, pub_date, public_eligible
+                )
+                previous = previous_candidates.get(candidate['id'])
+                if previous:
+                    candidate['discoveredAt'] = previous.get('discoveredAt') or candidate['discoveredAt']
+                if duplicate:
+                    candidate['status'] = 'rejected'
+                    candidate['requiresReview'] = False
+                    candidate['reviewReasons'].append('同一タイトルの公開記事と重複')
+                candidates.append(candidate)
+                source_result['candidateCount'] += 1
+
+                if not public_eligible:
                     continue
                 seen.add(key)
 
@@ -360,13 +604,17 @@ def fetch_articles():
                     'pub_date':   pub_date.isoformat() if pub_date else '',
                 })
                 count += 1
+                source_result['publishedCount'] += 1
 
             print(f"  → {count}件")
 
         except Exception as e:
             print(f"  ⚠️ エラー: {e}")
+            source_result['status'] = 'error'
+            source_result['error'] = str(e)[:200]
+        source_results.append(source_result)
 
-    return articles
+    return articles, candidates, source_results
 
 
 def generate_html(articles, no_news_dates=None):
@@ -647,7 +895,8 @@ def generate_html(articles, no_news_dates=None):
 # ── エントリーポイント ─────────────────────────────────────────────
 if __name__ == '__main__':
     print(f"=== Ishikawa News Fetch Start: {today_date} ===\n")
-    articles = fetch_articles()
+    articles, candidates, source_results = fetch_articles()
+    save_candidate_data(candidates, source_results)
     # 管理人投稿・承認済み読者投稿もニュース記事として合流させる
     # （本日の投稿があれば「ニュースはありません」の対象からも外れる）
     articles += fetch_admin_posts()

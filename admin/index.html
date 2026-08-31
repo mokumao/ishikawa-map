@@ -210,6 +210,132 @@
   }
   .error { color: #e53935; }
 
+  .news-review-card h2 { border-left-color: #e53935; }
+  .news-review-intro {
+    color: #455a64;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .news-review-note {
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 8px;
+    color: #6d4c41;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+  }
+  .news-review-header,
+  .news-review-controls,
+  .news-review-summary,
+  .candidate-badges,
+  .candidate-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .news-review-header {
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .news-review-header h2 { margin-bottom: 0; }
+  .news-review-summary { margin-bottom: 12px; }
+  .news-review-chip,
+  .candidate-badge {
+    background: #eceff1;
+    border-radius: 999px;
+    color: #455a64;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 8px;
+  }
+  .news-review-chip.review,
+  .candidate-badge.review { background: #fff3e0; color: #e65100; }
+  .candidate-badge.published { background: #e8f5e9; color: #2e7d32; }
+  .candidate-badge.rejected { background: #eceff1; color: #607d8b; }
+  .news-review-controls {
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .news-review-controls label { color: #455a64; font-size: 12px; font-weight: 700; }
+  .news-review-controls select,
+  .news-review-controls button,
+  .candidate-action {
+    background: #fff;
+    border: 1px solid #b0bec5;
+    border-radius: 8px;
+    color: #1257a3;
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    min-height: 40px;
+    padding: 8px 12px;
+  }
+  .news-review-controls button { margin-left: auto; }
+  .news-candidate-list {
+    display: grid;
+    gap: 12px;
+  }
+  .news-candidate {
+    border: 1px solid #dce3e7;
+    border-left: 4px solid #fb8c00;
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .news-candidate[data-status="published"] { border-left-color: #43a047; }
+  .news-candidate[data-status="rejected"] { border-left-color: #90a4ae; }
+  .candidate-title {
+    color: #1257a3;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    overflow-wrap: anywhere;
+  }
+  .candidate-meta,
+  .candidate-detail {
+    color: #607d8b;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .candidate-detail { margin-top: 8px; }
+  .candidate-detail strong { color: #455a64; }
+  .candidate-actions { margin-top: 12px; }
+  .candidate-action { flex: 1; min-width: 120px; }
+  .candidate-action.approve[aria-pressed="true"] {
+    background: #2e7d32;
+    border-color: #2e7d32;
+    color: #fff;
+  }
+  .candidate-action.reject[aria-pressed="true"] {
+    background: #607d8b;
+    border-color: #607d8b;
+    color: #fff;
+  }
+  .news-review-feedback {
+    color: #2e7d32;
+    font-size: 12px;
+    min-height: 20px;
+    padding-top: 8px;
+  }
+  .source-warning {
+    background: #ffebee;
+    border-radius: 8px;
+    color: #b71c1c;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+  }
+  @media (min-width: 760px) {
+    .news-candidate-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
   .hist-btn {
     font: inherit;
     font-size: 0.75rem;
@@ -243,6 +369,7 @@
       <p>このページは管理者専用です。公開サイト（石川マップ本体）とは別に管理されています。</p>
     </header>
     <a class="site-link-btn" href="https://mokumao.github.io/ishikawa-map/" target="_blank" rel="noopener">🗺 石川マップを開く</a>
+    <a class="site-link-btn" href="#newsReview">📰 石川ニュース候補を確認</a>
   </div>
 
   <section class="card">
@@ -284,6 +411,35 @@
   </aside>
 
   <div class="main-content">
+  <section class="card news-review-card" id="newsReview">
+    <div class="news-review-header">
+      <h2>石川ニュース候補</h2>
+      <span class="stat-updated" id="newsReviewUpdated">読み込み中…</span>
+    </div>
+    <p class="news-review-intro">
+      自動収集した情報を、公開ニュースとは分けて確認する一覧です。地域との関係、原典、日時を確認して判断してください。
+    </p>
+    <p class="news-review-note">
+      この画面での選択は、このブラウザだけに保存され、公開ニュースはまだ変更されません。「確認結果をコピー」してCodexへ貼り付けると、公開反映の相談を続けられます。
+    </p>
+    <div class="news-review-summary" id="newsReviewSummary"></div>
+    <div id="newsSourceWarning"></div>
+    <div class="news-review-controls">
+      <label for="newsStatusFilter">表示</label>
+      <select id="newsStatusFilter">
+        <option value="review">確認待ち</option>
+        <option value="published">現在の公開対象</option>
+        <option value="rejected">関連不足・重複</option>
+        <option value="">すべて</option>
+      </select>
+      <button type="button" id="copyNewsDecisions">確認結果をコピー</button>
+    </div>
+    <div class="news-candidate-list" id="newsCandidateList">
+      <p class="loading">候補を読み込んでいます…</p>
+    </div>
+    <p class="news-review-feedback" id="newsReviewFeedback" role="status" aria-live="polite"></p>
+  </section>
+
   <section class="card card-list">
     <div class="list-sticky-header" id="listStickyHeader">
       <div class="list-header-row">
@@ -333,6 +489,9 @@
 
 <script>
   var SITE_ORIGIN = 'https://mokumao.github.io/ishikawa-map';
+  var NEWS_DATA_ORIGIN = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
+    ? location.origin
+    : SITE_ORIGIN;
 
   var STATUS_LABEL = {
     published: '公開中',
@@ -341,6 +500,185 @@
     refused:   '掲載拒否',
     test:      'テスト用'
   };
+
+  // ── 石川ニュース候補（選択結果はブラウザ内だけに保存） ──────
+  (function () {
+    var list = document.getElementById('newsCandidateList');
+    var summary = document.getElementById('newsReviewSummary');
+    var updated = document.getElementById('newsReviewUpdated');
+    var sourceWarning = document.getElementById('newsSourceWarning');
+    var filter = document.getElementById('newsStatusFilter');
+    var copyButton = document.getElementById('copyNewsDecisions');
+    var feedback = document.getElementById('newsReviewFeedback');
+    var storageKey = 'ishikawa-news-review-decisions-v1';
+    var candidates = [];
+    var decisions = loadDecisions();
+
+    function escapeHtml(value) {
+      return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
+        return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+      });
+    }
+
+    function safeUrl(value) {
+      try {
+        var parsed = new URL(value);
+        return /^https?:$/.test(parsed.protocol) ? parsed.href : '';
+      } catch (_error) {
+        return '';
+      }
+    }
+
+    function loadDecisions() {
+      try { return JSON.parse(localStorage.getItem(storageKey) || '{}'); }
+      catch (_error) { return {}; }
+    }
+
+    function saveDecisions() {
+      try { localStorage.setItem(storageKey, JSON.stringify(decisions)); }
+      catch (_error) { feedback.textContent = 'このブラウザでは選択結果を保存できませんでした。'; }
+    }
+
+    function formatDate(value) {
+      if (!value) return '日時不明';
+      var date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '日時不明';
+      return date.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
+    }
+
+    function statusLabel(status) {
+      return { review: '確認待ち', published: '現在の公開対象', rejected: '関連不足・重複' }[status] || status;
+    }
+
+    function renderSummary(data) {
+      var counts = { review: 0, published: 0, rejected: 0 };
+      candidates.forEach(function (item) {
+        if (item.requiresReview) counts.review += 1;
+        if (item.status === 'published') counts.published += 1;
+        if (item.status === 'rejected') counts.rejected += 1;
+      });
+      summary.innerHTML =
+        '<span class="news-review-chip review">確認待ち: ' + counts.review + '件</span>' +
+        '<span class="news-review-chip">公開対象: ' + counts.published + '件</span>' +
+        '<span class="news-review-chip">関連不足・重複: ' + counts.rejected + '件</span>';
+      updated.textContent = '最終収集: ' + formatDate(data.updated);
+
+      var failed = (data.sourceResults || []).filter(function (source) {
+        return source.status === 'error' || source.status === 'empty';
+      });
+      if (!failed.length) {
+        sourceWarning.replaceChildren();
+        return;
+      }
+      sourceWarning.innerHTML = '<p class="source-warning">取得できなかった可能性がある情報源: ' +
+        failed.map(function (source) { return escapeHtml(source.name); }).join('、') +
+        '。ニュースが0件でも「情報が存在しない」とは限りません。</p>';
+    }
+
+    function render() {
+      var selectedStatus = filter.value;
+      var visible = candidates.filter(function (item) {
+        if (!selectedStatus) return true;
+        if (selectedStatus === 'review') return item.requiresReview;
+        return item.status === selectedStatus;
+      });
+      if (!visible.length) {
+        list.innerHTML = '<p class="loading">この状態の候補はありません。</p>';
+        return;
+      }
+      list.innerHTML = visible.map(function (item) {
+        var url = safeUrl(item.url);
+        var title = url
+          ? '<a class="candidate-title" href="' + escapeHtml(url) + '" target="_blank" rel="noopener">' + escapeHtml(item.title) + '</a>'
+          : '<span class="candidate-title">' + escapeHtml(item.title) + '</span>';
+        var evidence = (item.localEvidence || []).map(escapeHtml).join('、') || '記録なし';
+        var reasons = (item.reviewReasons || []).map(escapeHtml).join('、') || 'なし';
+        var decision = decisions[item.id] || '';
+        return '<article class="news-candidate" data-id="' + escapeHtml(item.id) + '" data-status="' + escapeHtml(item.status) + '">' +
+          '<div class="candidate-badges">' +
+            '<span class="candidate-badge ' + escapeHtml(item.status) + '">' + escapeHtml(statusLabel(item.status)) + '</span>' +
+            '<span class="candidate-badge">地域関連度 ' + Number(item.localScore || 0) + '</span>' +
+            '<span class="candidate-badge">信頼度 ' + Number(item.confidence || 0) + '</span>' +
+          '</div>' +
+          title +
+          '<p class="candidate-meta">' + escapeHtml(item.sourceName) + ' ／ ' + escapeHtml(formatDate(item.publishedAt)) + '</p>' +
+          '<p class="candidate-detail"><strong>地域根拠：</strong>' + evidence + '</p>' +
+          '<p class="candidate-detail"><strong>確認理由：</strong>' + reasons + '</p>' +
+          (item.requiresReview ? '<div class="candidate-actions">' +
+            '<button type="button" class="candidate-action approve" data-decision="approve" aria-pressed="' + (decision === 'approve') + '">掲載したい</button>' +
+            '<button type="button" class="candidate-action reject" data-decision="reject" aria-pressed="' + (decision === 'reject') + '">見送る</button>' +
+          '</div>' : '') +
+        '</article>';
+      }).join('');
+    }
+
+    function setDecision(card, decision) {
+      var id = card.dataset.id;
+      decisions[id] = decisions[id] === decision ? '' : decision;
+      if (!decisions[id]) delete decisions[id];
+      saveDecisions();
+      render();
+      feedback.textContent = '選択結果をこのブラウザに保存しました。まだ公開内容は変わっていません。';
+    }
+
+    function decisionText() {
+      var selected = candidates.filter(function (item) { return decisions[item.id]; });
+      if (!selected.length) return '';
+      var lines = ['石川ニュース候補の確認結果です。公開反映前に内容を再確認してください。', ''];
+      selected.forEach(function (item) {
+        lines.push((decisions[item.id] === 'approve' ? '掲載希望' : '見送り') +
+          '：' + item.title + '（候補ID: ' + item.id + '）');
+      });
+      return lines.join('\n');
+    }
+
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+      var area = document.createElement('textarea');
+      area.value = text;
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand('copy');
+      area.remove();
+      return Promise.resolve();
+    }
+
+    filter.addEventListener('change', render);
+    list.addEventListener('click', function (event) {
+      var button = event.target.closest('[data-decision]');
+      var card = event.target.closest('.news-candidate');
+      if (button && card) setDecision(card, button.dataset.decision);
+    });
+    copyButton.addEventListener('click', function () {
+      var text = decisionText();
+      if (!text) {
+        feedback.textContent = '先に確認待ち候補の「掲載したい」または「見送る」を選んでください。';
+        return;
+      }
+      copyText(text).then(function () {
+        feedback.textContent = '確認結果をコピーしました。Codexのチャットへ貼り付けてください。';
+      }).catch(function () {
+        feedback.textContent = 'コピーできませんでした。ブラウザのクリップボード設定をご確認ください。';
+      });
+    });
+
+    fetch(NEWS_DATA_ORIGIN + '/news/candidates.json?_=' + Date.now())
+      .then(function (response) {
+        if (!response.ok) throw new Error('status ' + response.status);
+        return response.json();
+      })
+      .then(function (data) {
+        candidates = Array.isArray(data.candidates) ? data.candidates : [];
+        renderSummary(data);
+        render();
+      })
+      .catch(function () {
+        updated.textContent = '読み込み失敗';
+        list.innerHTML = '<p class="error">ニュース候補を読み込めませんでした。</p>';
+      });
+  })();
 
   // ── 本日/累計アクセス数（script.js と同じデータソースを利用） ──────
   (function () {
