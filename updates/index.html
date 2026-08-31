@@ -97,6 +97,7 @@
     .update-card.admin .update-title { color: #1257a3; }
     .update-body { margin-top: 6px; color: #546e7a; font-size: .8rem; line-height: 1.65; }
     .update-meta { margin-top: 8px; color: #90a4ae; font-size: .7rem; line-height: 1.5; }
+    .update-card.news .update-meta { color: #e53935; }
     .update-store { margin-bottom: 4px; color: #455a64; font-size: .72rem; font-weight: 700; }
     .updates-message {
       margin-top: 16px;
@@ -234,7 +235,7 @@
         }
         articles.forEach(function (article) {
           var card = document.createElement('article');
-          card.className = 'update-card';
+          card.className = 'update-card news';
           var title;
           if (article.link && /^https?:\/\//i.test(article.link)) {
             title = document.createElement('a');
@@ -247,7 +248,6 @@
           title.className = 'update-title';
           title.textContent = article.title || '名称未設定';
           card.appendChild(title);
-          appendText(card, 'update-body', article.summary || '');
           appendText(card, 'update-meta', [article.date_label, article.source ? '出典：' + article.source : ''].filter(Boolean).join(' / '));
           list.appendChild(card);
         });
