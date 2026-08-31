@@ -99,9 +99,20 @@
     .update-meta { margin-top: 8px; color: #90a4ae; font-size: .7rem; line-height: 1.5; }
     .update-card.news .update-meta {
       color: #b71c1c;
-      font-size: .92rem;
+      font-size: .82rem;
       font-weight: 700;
     }
+    .update-card.no-news {
+      border-left-color: #90a4ae;
+      background: #fafafa;
+    }
+    .no-news-text {
+      color: #455a64;
+      font-size: .82rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+    .no-news-date { color: #b71c1c; }
     .update-store { margin-bottom: 4px; color: #455a64; font-size: .72rem; font-weight: 700; }
     .updates-message {
       margin-top: 16px;
@@ -228,29 +239,65 @@
         return el;
       }
 
-      function renderNews(data) {
+      function formatDateLabel(label) {
+        return String(label || '').replace(/(\d{2})\/(\d{2})/, function (_match, month, day) {
+          return Number(month) + '/' + Number(day);
+        });
+      }
+
+      function articleDateKey(article) {
+        var value = article && article.pub_date ? String(article.pub_date) : '';
+        return /^\d{4}-\d{2}-\d{2}/.test(value) ? value.slice(0, 10) : '';
+      }
+
+      function renderNews(data, noNewsDates) {
         var articles = data && Array.isArray(data.articles) ? data.articles : [];
+        var articleDates = new Set(articles.map(articleDateKey).filter(Boolean));
+        var items = articles.map(function (article, index) {
+          var time = Date.parse(article.pub_date || '');
+          return {
+            kind: 'article',
+            article: article,
+            index: index,
+            time: Number.isNaN(time) ? -Infinity : time
+          };
+        });
+        (Array.isArray(noNewsDates) ? noNewsDates : []).forEach(function (date, index) {
+          if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || articleDates.has(date)) return;
+          items.push({
+            kind: 'no-news',
+            date: date,
+            index: articles.length + index,
+            time: Date.parse(date + 'T23:59:59+09:00')
+          });
+        });
         // 自動収集元や管理人投稿の追加順に左右されず、公開日時が新しい順に表示する。
         // 日時不明の記事は末尾に置き、同日時なら元の順序を維持する。
-        articles = articles.map(function (article, index) {
-          return { article: article, index: index };
-        }).sort(function (a, b) {
-          var aTime = Date.parse(a.article.pub_date || '');
-          var bTime = Date.parse(b.article.pub_date || '');
-          if (Number.isNaN(aTime)) aTime = -Infinity;
-          if (Number.isNaN(bTime)) bTime = -Infinity;
-          return bTime - aTime || a.index - b.index;
-        }).map(function (item) {
-          return item.article;
+        items.sort(function (a, b) {
+          return b.time - a.time || a.index - b.index;
         });
         setCount('news', articles.length);
         var list = document.querySelector('[data-list="news"]');
         list.replaceChildren();
-        if (!articles.length) {
+        if (!items.length) {
           showMessage('news', 'ニュースはありません', '新しい情報が見つかると、ここに表示されます。');
           return;
         }
-        articles.forEach(function (article) {
+        items.forEach(function (item) {
+          if (item.kind === 'no-news') {
+            var emptyCard = document.createElement('article');
+            emptyCard.className = 'update-card news no-news';
+            var emptyText = document.createElement('p');
+            emptyText.className = 'no-news-text';
+            var emptyDate = document.createElement('span');
+            emptyDate.className = 'no-news-date';
+            emptyDate.textContent = formatDateLabel(item.date.slice(5, 7) + '/' + item.date.slice(8, 10));
+            emptyText.append(emptyDate, document.createTextNode(' 「本日のニュースはありません」'));
+            emptyCard.appendChild(emptyText);
+            list.appendChild(emptyCard);
+            return;
+          }
+          var article = item.article;
           var card = document.createElement('article');
           card.className = 'update-card news';
           var title;
@@ -265,7 +312,7 @@
           title.className = 'update-title';
           title.textContent = article.title || '名称未設定';
           card.appendChild(title);
-          appendText(card, 'update-meta', [article.date_label, article.source ? '出典：' + article.source : ''].filter(Boolean).join(' / '));
+          appendText(card, 'update-meta', [formatDateLabel(article.date_label), article.source ? '出典：' + article.source : ''].filter(Boolean).join(' / '));
           list.appendChild(card);
         });
       }
@@ -303,15 +350,31 @@
       }
 
       function loadJson(url, onSuccess, tab) {
-        fetch(url + '?_=' + Date.now())
-          .then(function (response) {
-            if (!response.ok) throw new Error('status ' + response.status);
-            return response.json();
-          })
+        fetchJson(url)
           .then(onSuccess)
           .catch(function () {
             setCount(tab, 0);
             showMessage(tab, '読み込めませんでした', '時間をおいて、もう一度お試しください。');
+          });
+      }
+
+      function fetchJson(url) {
+        return fetch(url + '?_=' + Date.now())
+          .then(function (response) {
+            if (!response.ok) throw new Error('status ' + response.status);
+            return response.json();
+          });
+      }
+
+      function loadNews() {
+        Promise.all([
+          fetchJson('../news/today.json'),
+          fetchJson('../news/no_news_dates.json').catch(function () { return []; })
+        ])
+          .then(function (results) { renderNews(results[0], results[1]); })
+          .catch(function () {
+            setCount('news', 0);
+            showMessage('news', '読み込めませんでした', '時間をおいて、もう一度お試しください。');
           });
       }
 
@@ -320,7 +383,7 @@
       });
 
       setActiveTab(activeTab, false);
-      loadJson('../news/today.json', renderNews, 'news');
+      loadNews();
       loadJson('shop-updates.json', function (data) { renderNotices('shops', data); }, 'shops');
       loadJson('admin-notices.json', function (data) { renderNotices('admin', data); }, 'admin');
     })();
