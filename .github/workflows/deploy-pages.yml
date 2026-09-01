@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # ニュース収集内のGITHUB_TOKENによるpushは別Workflowを起動しないため、
+  # 収集Workflowの正常終了を直接受けて最新mainを再公開する。
+  workflow_run:
+    workflows: ["今日の石川ニュース 自動更新"]
+    types: [completed]
+    branches: [main]
 
 permissions:
   contents: read
@@ -16,6 +22,8 @@ concurrency:
 
 jobs:
   deploy:
+    # ニュース収集が失敗した場合は、古い内容を再公開せず終了する。
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
