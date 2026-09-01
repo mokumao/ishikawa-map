@@ -924,8 +924,11 @@ function rNote(r)   { return r.note;   }
     }
     // マーカーのタップを無効化（mapは初期化済みなのでここで取得）
     map.getPane('markerPane').style.pointerEvents = 'none';
-    // ヘッダーを非表示にして地図エリアを広げる
-    document.querySelector('header').style.display = 'none';
+    // スマホではヘッダーを非表示にして地図エリアを広げる。
+    // PCはサイド操作列を常設するため、画面構成を変えずにパネルだけを重ねる。
+    if (window.innerWidth <= 767) {
+      document.querySelector('header').style.display = 'none';
+    }
     // パネルを開く＋オーバーレイ（グレー表示のみ・地図操作は維持）
     menu.style.display = 'block';
     showCategory();
@@ -934,11 +937,13 @@ function rNote(r)   { return r.note;   }
     requestAnimationFrame(function () {
       menu.classList.add('gear-visible');
       overlay.classList.add('gear-visible');
-      var panelTop  = menu.getBoundingClientRect().top;
-      var px        = Math.round((window.innerHeight - panelTop) / 2);
-      if (px > 0) {
-        savedPanPixels = px; // ずらした量を保存（復元用）
-        map.panBy([0, px], { animate: true, duration: 0.7 });
+      if (window.innerWidth <= 767) {
+        var panelTop  = menu.getBoundingClientRect().top;
+        var px        = Math.round((window.innerHeight - panelTop) / 2);
+        if (px > 0) {
+          savedPanPixels = px; // ずらした量を保存（復元用）
+          map.panBy([0, px], { animate: true, duration: 0.7 });
+        }
       }
     });
     // disableMap() は呼ばない → ドラッグ・ピンチ・ダブルタップズームは動作継続
@@ -1044,6 +1049,8 @@ function rNote(r)   { return r.note;   }
 
   // メインメニュー
   document.getElementById('gearCloseBtn').addEventListener('click', closeMenu);
+  var desktopCatClose = document.getElementById('gearCatDesktopClose');
+  if (desktopCatClose) desktopCatClose.addEventListener('click', closeMenu);
 
   // カテゴリサブメニュー
   // 「すべて」ボタン：全カテゴリを選択
@@ -1923,18 +1930,16 @@ map.on('moveend', function () {
   } catch (e) {}
 });
 
-// ＋－ボタン：スマホ→左下、PC→左上
-L.control.zoom({ position: window.innerWidth <= 767 ? 'bottomleft' : 'topleft' }).addTo(map);
+// ＋－ボタンを生成後、スマホ・PC共通の縦型操作列へ移動する。
+L.control.zoom({ position: 'topleft' }).addTo(map);
 
-// スマホ：＋－ボタンを左側アイコン列（歯車の下）に移動し、矢印ボタンをその下に配置
+// ＋－ボタンを左側アイコン列（歯車の下）に移動し、矢印ボタンをその下に配置
 // （ユーザー要望：表示順を「歯車→＋－→矢印」に入れ替え）
-if (window.innerWidth <= 767) {
-  var _sideCtrl  = document.getElementById('sideSwipeCtrl');
-  var _zoomCtrl  = document.querySelector('.leaflet-control-zoom');
-  var _arrowBtn1 = document.getElementById('sideSwitchRightBtn');
-  if (_sideCtrl && _zoomCtrl && _arrowBtn1) {
-    _sideCtrl.insertBefore(_zoomCtrl, _arrowBtn1);
-  }
+var _sideCtrl  = document.getElementById('sideSwipeCtrl');
+var _zoomCtrl  = document.querySelector('.leaflet-control-zoom');
+var _arrowBtn1 = document.getElementById('sideSwitchRightBtn');
+if (_sideCtrl && _zoomCtrl && _arrowBtn1) {
+  _sideCtrl.insertBefore(_zoomCtrl, _arrowBtn1);
 }
 
 // ダブルクリック/ダブルタップでスムーズズームイン（CSSトランジション使用）

@@ -174,10 +174,11 @@ header h1 {
 /* 情報パネルはスマホのみ（PCでは常に非表示） */
 .info-panel { display: none; }
 
-/* スマホ専用要素（PCでは非表示） */
+/* 初期状態では非表示。画面幅別のルールで必要な要素だけ表示する。 */
 .header-mobile   { display: none; }
 .side-swipe-ctrl { display: none; }
 .bottom-tabs     { display: none; }
+.desktop-cat-close { display: none; }
 
 /* ── Mobile tabs（スマホのみ表示） ─────────────────────────── */
 .mobile-tabs { display: none; }
@@ -2507,18 +2508,253 @@ body.side-swipe-right #minimap {
   }
 }
 
-/* ── PC：左上コントロールを横並び（＋－ ＋ 店名ボタン） ──── */
+/* ── PC：スマホと共通の地図操作アイコン列 ────────────────── */
 @media (min-width: 768px) {
+  /* 店舗一覧（290px）の右隣、地図の左端へ配置する。 */
+  .side-swipe-ctrl {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: absolute;
+    top: 10px;
+    left: 300px;
+    z-index: 1000;
+    pointer-events: auto;
+  }
+  .side-swipe-ctrl.side-right {
+    left: auto;
+    right: 10px;
+  }
+  body.info-open .side-swipe-ctrl {
+    display: none;
+  }
+  .side-swipe-btn {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 2px solid #e53935;
+    border-radius: 50%;
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 2px 8px rgba(0,0,0,.28);
+    font: inherit;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .side-swipe-btn:hover {
+    background: #fff;
+    box-shadow: 0 3px 10px rgba(0,0,0,.34);
+  }
+  .side-swipe-btn:focus-visible {
+    outline: 3px solid rgba(25,118,210,.38);
+    outline-offset: 2px;
+  }
+  .locate-btn { color: #1565c0; }
+  .ishikawa-btn { color: #2e7d32; }
+  .gear-btn { color: #546e7a; }
+  .category-pin-btn { background: #fff; border-width: 2.5px; }
+  .locate-btn.locating { animation: locate-pulse 1s ease-in-out infinite; }
+
+  /* Leafletの＋－も歯車と左右切替の間へ取り込む。 */
+  #sideSwipeCtrl .leaflet-control-zoom {
+    margin: 0 !important;
+    align-self: center;
+  }
+  #sideSwipeCtrl .leaflet-control-zoom-in,
+  #sideSwipeCtrl .leaflet-control-zoom-out {
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 40px !important;
+    font-size: 22px !important;
+  }
+
+  /* 「店名を隠す」は操作列の右隣へずらして重なりを避ける。 */
   .leaflet-top.leaflet-left {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     top: 10px;
-    left: 10px;
+    left: 62px;
   }
   /* コントロール間の横間隔 */
   .leaflet-top.leaflet-left .leaflet-control {
     margin: 0 8px 0 0;
+  }
+
+  /* 情報ボタン：スマホと同じ案内内容を地図上のドロワーで表示する。 */
+  .app-body[data-view="info"] .info-panel {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 300px;
+    width: min(440px, calc(100vw - 320px));
+    z-index: 1600;
+    overflow: hidden;
+    background: #eef1f4;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.3);
+  }
+  .info-panel-header {
+    flex-shrink: 0;
+    padding: 16px;
+    text-align: center;
+    color: #fff;
+    background: linear-gradient(135deg, #1e88e5, #1257a3);
+  }
+  .info-panel-header h2 { margin: 0; font-size: 1.3rem; }
+  .info-panel-header-sub { margin: 3px 0 0; font-size: .7rem; color: rgba(255,255,255,.85); }
+  .info-panel-inner {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 14px;
+    overflow-y: auto;
+  }
+  .info-menu-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border: 1px solid #eceff1;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,.06);
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .info-menu-btn:hover { background: #f5f8fb; }
+  .info-menu-icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  .info-menu-svg { width: 44px; height: 44px; }
+  .info-menu-svg-text { width: 44px; height: 28px; }
+  .info-menu-icon-blue { background: #e3f2fd; }
+  .info-menu-icon-green { background: #e8f5e9; }
+  .info-menu-icon-purple { background: #f3e5f5; }
+  .info-menu-icon-orange { background: #fff3e0; }
+  .info-menu-icon-cyan { background: #e0f7fa; }
+  .info-menu-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .info-menu-title { color: #263238; font-size: .98rem; font-weight: 700; }
+  .info-menu-desc { color: #78909c; font-size: .7rem; }
+  .info-menu-chevron { flex-shrink: 0; color: #b0bec5; font-size: 2rem; }
+  .info-panel-footer {
+    flex-shrink: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 8px;
+    padding: 8px 10px;
+    margin: 0;
+    border-top: 1px solid #e0e0e0;
+    background: #fff;
+  }
+  .info-map-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 4px;
+    border: 2px solid #e53935;
+    border-radius: 7px;
+    background: #fff;
+    color: #222;
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  /* 設定・カテゴリパネルもPC上で既存機能を利用できるようにする。 */
+  .gear-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1500;
+    opacity: 0;
+    background: rgba(0,0,0,.34);
+    transition: opacity .15s ease;
+  }
+  .gear-overlay.active { display: block; }
+  .gear-overlay.active.gear-visible { opacity: 1; }
+  .gear-overlay.map-interactive { pointer-events: none; }
+  .gear-menu {
+    position: absolute;
+    top: 230px;
+    left: 64px;
+    z-index: 1501;
+    opacity: 0;
+    pointer-events: auto;
+    transition: opacity .15s ease;
+  }
+  .gear-menu.gear-visible { opacity: 1; }
+  body.side-swipe-right .gear-menu { left: auto; right: 64px; }
+  .gear-panel { display: flex; flex-direction: column; gap: 10px; }
+  .gear-row { display: flex; gap: 10px; }
+  .gear-menu-btn {
+    padding: 9px 16px;
+    border: 1.5px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    color: #263238;
+    box-shadow: 0 2px 8px rgba(0,0,0,.22);
+    font-family: inherit;
+    font-size: .9rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .gear-back-btn { display: flex; align-items: center; justify-content: center; border-color: #ffcdd2; }
+  .gear-menu.cat-mode {
+    top: auto;
+    bottom: 24px;
+    left: 154px;
+    width: min(540px, calc(100% - 178px));
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  body.side-swipe-right .gear-menu.cat-mode { left: auto; right: 64px; }
+  .cat-ctrl-row { display: flex; gap: 7px; margin-bottom: 7px; }
+  .cat-ctrl-btn {
+    flex: 1;
+    border: 2px solid #1976d2;
+    border-radius: 7px;
+    text-align: center;
+  }
+  .desktop-cat-close {
+    display: block;
+    border-color: #e53935;
+    color: #b71c1c;
+  }
+  .cat-icon-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+  .cat-icon-btn { width: 100%; padding: 6px 8px; text-align: center; }
+  .gear-menu-btn.cat-selected {
+    border-color: #e53935;
+    background: var(--fc-tint, #ffcdd2);
+    color: #b71c1c;
+  }
+  .gear-menu-btn.cat-all-active,
+  .gear-menu-btn.cat-clear-inactive {
+    border-color: #aaa;
+    background: #ccc;
+    color: #777;
+  }
+  @keyframes locate-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .4; }
   }
 }
 

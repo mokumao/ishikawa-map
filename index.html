@@ -33,7 +33,7 @@
   <meta property="og:locale" content="ja_JP">
   <title>うるま市石川 飲食店マップ</title>
   <link rel="stylesheet" href="leaflet/leaflet.css"/>
-  <link rel="stylesheet" href="style.css?v=20260831a">
+  <link rel="stylesheet" href="style.css?v=20260901a">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -179,7 +179,7 @@
         </svg>
       </button>
 
-      <!-- 歯車メニュー（スマホのみ） -->
+      <!-- 地図操作用の歯車メニュー -->
       <div id="gearMenu" class="gear-menu" style="display:none;">
         <!-- メインメニュー -->
         <div id="gearMenuMain" class="gear-panel">
@@ -195,6 +195,7 @@
           <div class="cat-ctrl-row">
             <button class="gear-menu-btn cat-ctrl-btn" id="gearCatAll">すべて選択</button>
             <button class="gear-menu-btn cat-ctrl-btn" id="gearCatClear">すべて解除</button>
+            <button class="gear-menu-btn cat-ctrl-btn desktop-cat-close" id="gearCatDesktopClose">閉じる</button>
           </div>
           <!-- カテゴリグリッド（CATEGORIESからJSで動的生成。script.jsのbuildGearCategoryGrid()参照） -->
           <div class="cat-icon-grid" id="gearCatGrid"></div>
@@ -293,7 +294,7 @@
       </div>
     </div>
 
-    <!-- 左側スワイプコントロール（スマホのみ・地図ビュー時） -->
+    <!-- 地図左側の縦型操作コントロール -->
     <div class="side-swipe-ctrl" id="sideSwipeCtrl">
       <button class="side-swipe-btn" id="sideSwipeDown" aria-label="情報パネルを開く">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="26" height="26">
@@ -372,7 +373,7 @@
   <script src="leaflet/leaflet.js"></script>
   <script src="restaurants-data.js?v=20260831b"></script>
   <script src="ishikawa-boundary.js?v=20260709b"></script>
-  <script src="script.js?v=20260831a"></script>
+  <script src="script.js?v=20260901a"></script>
   <script>
     // 実機表示の診断用。通常のURLでは何も追加しない。
     if (new URLSearchParams(window.location.search).get('screen-debug') === '1') {
