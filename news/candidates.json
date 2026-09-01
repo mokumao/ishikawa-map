@@ -1,22 +1,29 @@
 {
-  "updated": "2026-09-01T09:19:37.139120+09:00",
-  "count": 56,
-  "reviewCount": 12,
+  "updated": "2026-09-02T06:28:28.211112+09:00",
+  "count": 74,
+  "reviewCount": 0,
+  "statusCounts": {
+    "published": 3,
+    "review": 0,
+    "rejected": 37,
+    "duplicate": 13,
+    "expired": 21
+  },
   "sourceResults": [
     {
       "id": "google-news-ishikawa",
       "name": "Google ニュース（うるま市 石川）",
       "status": "success",
       "entryCount": 100,
-      "candidateCount": 2,
-      "publishedCount": 1,
+      "candidateCount": 1,
+      "publishedCount": 0,
       "error": null
     },
     {
       "id": "google-news-ishikawa-dome",
       "name": "石川ドーム・闘牛",
       "status": "success",
-      "entryCount": 77,
+      "entryCount": 100,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -34,18 +41,18 @@
       "id": "google-news-bios-hill",
       "name": "ビオスの丘",
       "status": "success",
-      "entryCount": 70,
-      "candidateCount": 4,
-      "publishedCount": 3,
+      "entryCount": 69,
+      "candidateCount": 3,
+      "publishedCount": 1,
       "error": null
     },
     {
       "id": "google-news-coco-garden",
       "name": "ココガーデンリゾート沖縄",
       "status": "success",
-      "entryCount": 75,
+      "entryCount": 70,
       "candidateCount": 8,
-      "publishedCount": 8,
+      "publishedCount": 1,
       "error": null
     },
     {
@@ -53,7 +60,7 @@
       "name": "沖縄タイムス",
       "status": "success",
       "entryCount": 100,
-      "candidateCount": 29,
+      "candidateCount": 30,
       "publishedCount": 0,
       "error": null
     },
@@ -62,8 +69,8 @@
       "name": "琉球新報",
       "status": "success",
       "entryCount": 100,
-      "candidateCount": 13,
-      "publishedCount": 0,
+      "candidateCount": 11,
+      "publishedCount": 1,
       "error": null
     },
     {
@@ -78,16 +85,156 @@
   ],
   "candidates": [
     {
-      "id": "20260901-ryukyu-shimpo-3c710cece2",
-      "title": "◇高齢者叙勲（１日） - 琉球新報デジタル",
-      "summary": "◇高齢者叙勲（１日） 琉球新報デジタル",
-      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFAtRHpGQnhkQ1prOGpyVmpXeWRsQVJyNVN1dlM0ZXVPOVFKSFRTNXBSZTJPbm1pOVIzSHl0R2VQQ3ljRGRsTVh5Z29NZldQNC1zSElNblIwd0U5dXNHTXJLbA?oc=5",
+      "id": "20260902-ryukyu-shimpo-7ab8136512",
+      "title": "【台風24号】大東や沖縄本島へ「暴風域なし」で接近か 船は一部欠航 高波に警戒＜2日朝＞ - 琉球新報デジタル",
+      "displayTitle": "【台風24号】大東や沖縄本島へ「暴風域なし」で接近か 船は一部欠航 高波に警戒<2日朝>",
+      "summary": "【台風24号】大東や沖縄本島へ「暴風域なし」で接近か 船は一部欠航 高波に警戒＜2日朝＞ 琉球新報デジタル",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE83R0g2bGw0dlZBMTBXd2xOd0NkQk1WRUJsSzRpWE8tZ1o0U3dVb25Ka196U1pEZjRGUWN4QTYtRDd5OWhWZ0dwMzRneEtuWEhyWUdsdmtQVEJNbWdTZkE0eQ?oc=5",
       "sourceId": "ryukyu-shimpo",
       "sourceName": "琉球新報",
       "sourceType": "media",
-      "publishedAt": "2026-09-01T05:00:00+09:00",
-      "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "publishedAt": "2026-09-02T05:47:40+09:00",
+      "discoveredAt": "2026-09-02T06:25:38.961688+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-09T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "fa0737076cc389645054",
+      "articleFingerprint": "7ab81365123528497b7b",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260902-ryukyu-shimpo-a5b78b7ce7",
+      "title": "「市町村」の記事一覧 - 琉球新報デジタル",
+      "displayTitle": "「市町村」の記事一覧",
+      "summary": "「市町村」の記事一覧 琉球新報デジタル",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9rd0szNXhNYWpPak13TGQ2MUZTSXMwZ2g4MFZkM1ZUUVUzV0tueXlvcE1iY0plZ3FOM2pHYUhkcjc3Yk5zaFBsMWc0T3UzWlRJSk5UekRWS2RBbXFXMkFFZg?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-09-02T05:36:37+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-09T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "a679098e4f0aed36b7ad",
+      "articleFingerprint": "a5b78b7ce7ff38797b71",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260902-okinawa-times-6e87ef0afc",
+      "title": "肉用牛や山羊 発育状況審査 うるま市畜産共進会 - 沖縄タイムス社",
+      "displayTitle": "肉用牛や山羊 発育状況審査 うるま市畜産共進会",
+      "summary": "肉用牛や山羊 発育状況審査 うるま市畜産共進会 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1VVjYxaGVNZUxScDM3OUlUc2RlMFVsWC1HOUhiZWlzdDlzYXhBRWttdzNfYm0yaHZucERDR1hUV2o3WXBFSmpqMGF5TktXbU9YeHdRTGdIcl9MVWlsaEE?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-09-02T03:57:00+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-09T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "うるま市内だが石川地区の根拠が不足",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "0a95ad4492581065cc4e",
+      "articleFingerprint": "6e87ef0afca3488a0785",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260902-okinawa-times-554afcb88f",
+      "title": "［軟式野球］◇第19回中部北地区選手権大会 - 沖縄タイムス社",
+      "displayTitle": "[軟式野球]◇第19回中部北地区選手権大会",
+      "summary": "［軟式野球］◇第19回中部北地区選手権大会 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1taS1XaVZLSW5MRzROZmoyMm51bHBHcGgyVWEtY0UtRm5EYnNWektiQkhSbjZjZlJYTVdYeGFENGJUYmhsTXVRY2haRE92eWxkWHVCbzNoZ29TZlhkRkE?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-09-02T03:57:00+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-09T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "0f1001f38e7cf6714827",
+      "articleFingerprint": "554afcb88f86f2ab8310",
+      "facilityId": null,
+      "eventMarkers": [
+        "軟式野球第19回中部北地区選手権大会"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260901-okinawa-times-b45306aef4",
+      "title": "「もう『夏』は無理だ」 暑さで闘牛が闘わず 全島大会は夏開催取りやめに 熱中症が一番怖い - 沖縄タイムス社",
+      "displayTitle": "「もう『夏』は無理だ」 暑さで闘牛が闘わず 全島大会は夏開催取りやめに 熱中症が一番怖い",
+      "summary": "「もう『夏』は無理だ」 暑さで闘牛が闘わず 全島大会は夏開催取りやめに 熱中症が一番怖い 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1tVU9sTjdhSi1lY3V2MDZMXzMxS3BaOThVZ05YME9SZlk3T0lvRFdSM0pCUGVOQi1lVWJRU1QtcmxZYlc2b2xob05iRUkyMndhcE9kTFYtZWpoWkxuWHc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-09-01T10:09:00+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -98,11 +245,100 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "3c710cece2910ae71ff0",
-      "relatedUrls": []
+      "fingerprint": "070fb2e57656aca7029e",
+      "articleFingerprint": "b45306aef47346562852",
+      "facilityId": null,
+      "eventMarkers": [
+        "もう夏は無理だ暑さで闘牛が闘わず全島大会は夏開催取りやめに熱中症が一番怖い"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260901-google-news-coco-garden-de03f32d16",
+      "title": "画像6 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - walkerplus.com",
+      "displayTitle": "沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート",
+      "summary": "画像6 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート walkerplus.com",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5hcUk0V2syZG5tdnFfU2NmU2M0Y3h4dDdOc2Z1NVZRRmpZbndwWFJocmVKNDNEOUR2NldwSV9TRTNwbjdDVTJnUTZvdm5oNGhCNk56dlRISUh5UEs2UjNlOU5kaW1CUldsUzYwbnBB?oc=5",
+      "sourceId": "google-news-coco-garden",
+      "sourceName": "ココガーデンリゾート沖縄",
+      "sourceType": "discovery",
+      "publishedAt": "2026-09-01T10:08:30+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-08T23:59:59+09:00",
+      "category": "news",
+      "localScore": 100,
+      "localEvidence": [
+        "ココ ガーデンリゾート オキナワ"
+      ],
+      "confidence": 45,
+      "status": "published",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区・日時・情報源の自動掲載条件を満たした",
+        "同じ内容の記事7件を代表記事へ統合"
+      ],
+      "fingerprint": "c4e1d054620620d435a5",
+      "articleFingerprint": "de03f32d16e748a177fe",
+      "facilityId": "coco-garden",
+      "eventMarkers": [],
+      "relatedUrls": [
+        "https://news.google.com/rss/articles/CBMibkFVX3lxTE1nQnBiNWgxMTJBdjlacnF6Z0ZBZ1VyY0lsWHhkOHRaNWU2QWF4R0tZWVV2bEJHZ01COVZ2cVE3Uzc2TFNHb0tqUHBhZm02MXFjVlZTVHQ5dXByWTBQVzBIVXU0TDNtcTBZRDgyd0NB?oc=5",
+        "https://news.google.com/rss/articles/CBMibkFVX3lxTE85QlFPa3VfN3cwMnhsUktQY2U3dG5Yc3lMQmVPTXJDWDlWbW4wSXhIU0ZxS1o5aDNGTGRndXJHOW1tMXVGbzB4d3NuWW1NR1FqLXJhdDVnTEZ6c2RRa0FGYVFTbWEzWlFRSkg3RlBR?oc=5",
+        "https://news.google.com/rss/articles/CBMibkFVX3lxTFBFMVAweU1aa2M2SWYwbzlLYjlwRDdMcGFoZzNSQV95SUVhR2stYkhyYnFJZmRHVlFkUmJPYTJLWDAxajdiVTFoZ1d3ZFlkbmlNX1YzSmM5VHpTSXhqakZOZVkzeXRtQ0dhTElSdVB3?oc=5",
+        "https://news.google.com/rss/articles/CBMibkFVX3lxTE4yZll1XzNGSWVBWW1ISUJ3ckZ4Z3hDaWxGRm9DV1JzLV9xSkk2d0lnaldxVU1KWWM3c1pTX2JZU1RiMkQweGRqQlZPelE4MHVJSE1KWUF4U3lnQlJGVjZfbFVYbVZybExjbmJicUx3?oc=5",
+        "https://news.google.com/rss/articles/CBMibkFVX3lxTE4xMEVFUk93YVBPSHNIcHdmMWVnY25rMzFTdm5aUTl5ZUc5TTFSeHFDUzhqa3pJTnp5TVc0V0xaTzAzNE9XOVVKOVdWVHpLNm4tNVZMU1VmMl9uMXRrc015WnBlbWJIRFJrTkltMXJ3?oc=5",
+        "https://news.google.com/rss/articles/CBMibkFVX3lxTE9kYXVHaTVza0ZYVThRc2NxR2xibWtmVEhySDI1UllNV25YTkcxSkZyZG03RndOSXJGQWNDQ256TENsbkd3TE1iLWhZbWYxalVkWGx1R293ZkdublhOQUZxQlY4OVpoUlNwNWp2b3N3?oc=5",
+        "https://news.google.com/rss/articles/CBMibkFVX3lxTE9YZU5GT1RCMU1tS0tFb3VPbDBUa1Vja3ZPSGNXRXY0MzJkUFRHM2hGWUxmTXNKdnlUZktfdHdzTjZ2WGFqZGRHWG1ldW9nOEF5eEtaNEc5Yjl3R0NnZ2JRUm9iVmZ3a0hjaTJFVDRn?oc=5"
+      ],
+      "duplicateOf": null,
+      "relatedCount": 7
+    },
+    {
+      "id": "20260901-ryukyu-shimpo-3c710cece2",
+      "title": "◇高齢者叙勲（１日） - 琉球新報デジタル",
+      "displayTitle": "◇高齢者叙勲(1日)",
+      "summary": "◇高齢者叙勲（１日） 琉球新報デジタル",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFAtRHpGQnhkQ1prOGpyVmpXeWRsQVJyNVN1dlM0ZXVPOVFKSFRTNXBSZTJPbm1pOVIzSHl0R2VQQ3ljRGRsTVh5Z29NZldQNC1zSElNblIwd0U5dXNHTXJLbA?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-09-01T05:00:00+09:00",
+      "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-08T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "同じ内容の記事1件を代表記事へ統合"
+      ],
+      "fingerprint": "d87e2458551d659dd9e3",
+      "articleFingerprint": "3c710cece2910ae71ff0",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [
+        "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBWcmJCbXJwX1F3YTJtQTVDQmlrRHZINEMxZk1uald2LTF5RGtSUzF5cHRsWHdSTzFRSW84VHA3bGcwTjFGN0hPdFE3TTdmN1pmZ29LU0pmTFVkdlJpaHc?oc=5"
+      ],
+      "duplicateOf": null,
+      "relatedCount": 1
     },
     {
       "id": "20260901-okinawa-times-18d58fc856",
@@ -122,18 +358,21 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "石川地区との関連根拠が不足",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "18d58fc856d74a40eced",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "rejected"
     },
     {
       "id": "20260901-okinawa-times-11ad73f5fb",
       "title": "特殊詐欺防止へ チラシ配り訴え 石川署や郵便局など - 沖縄タイムス社",
+      "displayTitle": "特殊詐欺防止へ チラシ配り訴え 石川署や郵便局など",
       "summary": "特殊詐欺防止へ チラシ配り訴え 石川署や郵便局など 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9rbXVKay1yY1Q2V0lXVUx4UXAwVGhmczRhVmROcTBDY1hTeGI0NUE3QzhtM1dXdU83RWdfRHFpX0x6cmhiSDA3bHpwNnRuT2xRTDZfdC1rSHRxNTFTeEE?oc=5",
       "sourceId": "okinawa-times",
@@ -141,12 +380,12 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T03:57:00+09:00",
       "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
       "category": "news",
-      "localScore": 5,
+      "localScore": 25,
       "localEvidence": [
         "石川"
       ],
@@ -154,15 +393,25 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "同じ内容の記事1件を代表記事へ統合"
       ],
-      "fingerprint": "11ad73f5fb1ae871a88b",
-      "relatedUrls": []
+      "fingerprint": "2b447b441722dc96982f",
+      "articleFingerprint": "11ad73f5fb1ae871a88b",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [
+        "https://news.google.com/rss/articles/CBMiZkFVX3lxTE4yWW9QYWdob19nQWlYUTE0MFZ4TEVTTmllcXI4RnBZSDhuelJXYVhiZGNKdFJBb0c0V2NhSFNfbW5WUm1oT3ZKOHluMERjMk5lUDY5T2huV3FFU21TWkJtSmhuLUIyQQ?oc=5"
+      ],
+      "duplicateOf": null,
+      "relatedCount": 1
     },
     {
       "id": "20260901-okinawa-times-f682d8bcd2",
       "title": "写真：特殊詐欺防止へ チラシ配り訴え 石川署や郵便局など - 沖縄タイムス社",
+      "displayTitle": "特殊詐欺防止へ チラシ配り訴え 石川署や郵便局など",
       "summary": "写真：特殊詐欺防止へ チラシ配り訴え 石川署や郵便局など 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE4yWW9QYWdob19nQWlYUTE0MFZ4TEVTTmllcXI4RnBZSDhuelJXYVhiZGNKdFJBb0c0V2NhSFNfbW5WUm1oT3ZKOHluMERjMk5lUDY5T2huV3FFU21TWkJtSmhuLUIyQQ?oc=5",
       "sourceId": "okinawa-times",
@@ -170,28 +419,32 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T03:57:00+09:00",
       "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
       "category": "news",
-      "localScore": 5,
+      "localScore": 25,
       "localEvidence": [
         "石川"
       ],
       "confidence": 65,
-      "status": "rejected",
+      "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "同じ内容として代表記事「特殊詐欺防止へ チラシ配り訴え 石川署や郵便局など」へ統合"
       ],
-      "fingerprint": "f682d8bcd20a6c0b2cd4",
-      "relatedUrls": []
+      "fingerprint": "2b447b441722dc96982f",
+      "articleFingerprint": "f682d8bcd20a6c0b2cd4",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20260901-okinawa-times-11ad73f5fb"
     },
     {
       "id": "20260901-okinawa-times-32c628ce87",
       "title": "郵便局員 詐欺被害防ぐ 上間さんに県警感謝状 - 沖縄タイムス社",
+      "displayTitle": "郵便局員 詐欺被害防ぐ 上間さんに県警感謝状",
       "summary": "郵便局員 詐欺被害防ぐ 上間さんに県警感謝状 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE02YlkyOW9Ed3YzeFg3ZG5zYkdfNUM5YkhzMk1XeWtZeE5lTlc1RjlZZGFsU2JFNGpNb2lQSm8yakE5UmV3V1Y4UWpZQTEzX3IyNldDMDVKM2NZeW4zNkE?oc=5",
       "sourceId": "okinawa-times",
@@ -199,7 +452,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T03:57:00+09:00",
       "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -210,15 +463,22 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "32c628ce876eb93cc10a",
-      "relatedUrls": []
+      "fingerprint": "bc37fbb40661dd2ec4c2",
+      "articleFingerprint": "32c628ce876eb93cc10a",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260901-okinawa-times-03d75835cb",
       "title": "［高齢者叙勲］（1日） - 沖縄タイムス社",
+      "displayTitle": "[高齢者叙勲](1日)",
       "summary": "［高齢者叙勲］（1日） 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBWcmJCbXJwX1F3YTJtQTVDQmlrRHZINEMxZk1uald2LTF5RGtSUzF5cHRsWHdSTzFRSW84VHA3bGcwTjFGN0hPdFE3TTdmN1pmZ29LU0pmTFVkdlJpaHc?oc=5",
       "sourceId": "okinawa-times",
@@ -226,7 +486,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T03:57:00+09:00",
       "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -234,14 +494,17 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "同じ内容として代表記事「◇高齢者叙勲(1日)」へ統合"
       ],
-      "fingerprint": "03d75835cb46c458a9bd",
-      "relatedUrls": []
+      "fingerprint": "d87e2458551d659dd9e3",
+      "articleFingerprint": "03d75835cb46c458a9bd",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20260901-ryukyu-shimpo-3c710cece2"
     },
     {
       "id": "20260901-okinawa-times-b1a5da9d6f",
@@ -261,14 +524,16 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "石川地区との関連根拠が不足",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "b1a5da9d6f5b48cd1107",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "rejected"
     },
     {
       "id": "20260901-okinawa-times-6d645f079c",
@@ -288,18 +553,21 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "石川地区との関連根拠が不足",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "6d645f079c67d302bcd5",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "rejected"
     },
     {
       "id": "20260831-okinawa-times-e9088f7ea1",
       "title": "バレー石川真佑「申し訳ない」 女子アジア選手権から帰国 - 沖縄タイムス社",
+      "displayTitle": "バレー石川真佑「申し訳ない」 女子アジア選手権から帰国",
       "summary": "バレー石川真佑「申し訳ない」 女子アジア選手権から帰国 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBPZ1hPS1o5Nzh4RlBGRDVVTDJRd3F0VHNESUU0cm84M3UwcmEzMnhiVGxyRUxoQ3dNOVV0MkdVeGdBTlpqczQ4XzM2eWRud1BvNWNUQXVpbkRHOTg2aEE?oc=5",
       "sourceId": "okinawa-times",
@@ -307,12 +575,12 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T22:11:23+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
       "category": "news",
-      "localScore": 5,
+      "localScore": 0,
       "localEvidence": [
         "石川"
       ],
@@ -320,15 +588,56 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "人名の「石川」との一致を検出",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "e9088f7ea110291729e5",
-      "relatedUrls": []
+      "fingerprint": "01afd09228ba276cf49b",
+      "articleFingerprint": "e9088f7ea110291729e5",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260831-google-news-coco-garden-ac24847da2",
+      "title": "画像22 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - walkerplus.com",
+      "displayTitle": "沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート",
+      "summary": "画像22 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート walkerplus.com",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1nQnBiNWgxMTJBdjlacnF6Z0ZBZ1VyY0lsWHhkOHRaNWU2QWF4R0tZWVV2bEJHZ01COVZ2cVE3Uzc2TFNHb0tqUHBhZm02MXFjVlZTVHQ5dXByWTBQVzBIVXU0TDNtcTBZRDgyd0NB?oc=5",
+      "sourceId": "google-news-coco-garden",
+      "sourceName": "ココガーデンリゾート沖縄",
+      "sourceType": "discovery",
+      "publishedAt": "2026-08-31T21:26:54+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-07T23:59:59+09:00",
+      "category": "news",
+      "localScore": 100,
+      "localEvidence": [
+        "ココ ガーデンリゾート オキナワ"
+      ],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート」へ統合"
+      ],
+      "fingerprint": "c4e1d054620620d435a5",
+      "articleFingerprint": "ac24847da2f939b04c52",
+      "facilityId": "coco-garden",
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20260901-google-news-coco-garden-de03f32d16"
     },
     {
       "id": "20260831-okinawa-times-cd3ff29eb3",
       "title": "収穫目前の米どころ直撃 北陸大雨、田んぼ冠水 - 沖縄タイムス社",
+      "displayTitle": "収穫目前の米どころ直撃 北陸大雨、田んぼ冠水",
       "summary": "収穫目前の米どころ直撃 北陸大雨、田んぼ冠水 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5ZYlEzTjRvTFNrcjBnc0swVzVXQ0xvVUI1QWRXbkc5UmM1TWVVZXdpbzk3c1V0dWJRSGg3N0RTOWJ6cXFjYkthcmZGODd3VE9zMERDU0VOdTRRajRWRFE?oc=5",
       "sourceId": "okinawa-times",
@@ -336,7 +645,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T16:43:49+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -347,15 +656,22 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "cd3ff29eb34de11048ae",
-      "relatedUrls": []
+      "fingerprint": "41cbcd21203d1f75405a",
+      "articleFingerprint": "cd3ff29eb34de11048ae",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260831-okinawa-times-903821754b",
       "title": "２４年の能登地震死者７５５人に 石川県で関連死５人認定 - 沖縄タイムス社",
+      "displayTitle": "24年の能登地震死者755人に 石川県で関連死5人認定",
       "summary": "２４年の能登地震死者７５５人に 石川県で関連死５人認定 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBhTkRXV1RLTWZ0TjJmWk9MbkRVa1NZMUtrWVBVVGhuRjIzbVEwVTlYOGU5UTc1M2xwSndZUjJJeUp2OGZ6dnNaU2pHclhjVWlWWXNFdGdQQUdEQU5uX2c?oc=5",
       "sourceId": "okinawa-times",
@@ -363,7 +679,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T15:49:40+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -377,15 +693,22 @@
       "requiresReview": false,
       "reviewReasons": [
         "石川県など他地域との一致を検出",
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "903821754bb264b11a1a",
-      "relatedUrls": []
+      "fingerprint": "5a3f126e926098738b65",
+      "articleFingerprint": "903821754bb264b11a1a",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260831-okinawa-times-762811e677",
       "title": "金沢工業大学の2名の教授が「令和8年度ISICOスタートアップ創出支援事業（F／S 支援枠）」に採択 - 沖縄タイムス社",
+      "displayTitle": "金沢工業大学の2名の教授が「令和8年度ISICOスタートアップ創出支援事業(F/S 支援枠)」に採択",
       "summary": "金沢工業大学の2名の教授が「令和8年度ISICOスタートアップ創出支援事業（F／S 支援枠）」に採択 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9ER0tzZG95dXpsMzhNMXpSMWxhUU5HYVVoaDFFeVB4b1lCTmpWVkRQMXNDMGZ1cmFYeXI2RkVkbmwtQVRadVM5bEJqZmZWMERHWGFFQ0NUaFNZR3hDSnc?oc=5",
       "sourceId": "okinawa-times",
@@ -393,7 +716,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T12:00:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -404,15 +727,22 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "762811e677cefd3f329d",
-      "relatedUrls": []
+      "fingerprint": "8ee087f6be22a71f1487",
+      "articleFingerprint": "762811e677cefd3f329d",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260831-okinawa-times-3faf7c2621",
       "title": "輪島朝市の継承へ奮闘続く 子ども招待、出店者も募集 - 沖縄タイムス社",
+      "displayTitle": "輪島朝市の継承へ奮闘続く 子ども招待、出店者も募集",
       "summary": "輪島朝市の継承へ奮闘続く 子ども招待、出店者も募集 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE4ydEdUYlhCOU9IUUlhZnUtbXN0X3FEekxqSzlwUks1X2FEWXI4SVRMUEs5dktZOFY1aXFDSldPeEtLRUhHWHQwbVRsNTNmdHJFZlVUZ29WMkFiRnltZmc?oc=5",
       "sourceId": "okinawa-times",
@@ -420,7 +750,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T07:00:03+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -431,15 +761,22 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "3faf7c2621a47532be94",
-      "relatedUrls": []
+      "fingerprint": "4de5b119ff48463848fd",
+      "articleFingerprint": "3faf7c2621a47532be94",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260831-ryukyu-shimpo-290e7ec3ce",
       "title": "三線最高4人 優秀7人合格 八重山古典芸能コンクール 沖縄 - 琉球新報デジタル",
+      "displayTitle": "三線最高4人 優秀7人合格 八重山古典芸能コンクール 沖縄",
       "summary": "三線最高4人 優秀7人合格 八重山古典芸能コンクール 沖縄 琉球新報デジタル",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBwMWd2Q0hZSkh4dWxwZFN6d29EeUdXY3JwNm9jSHNvc25FN3RFdlVEeUFQNFdVTTNDdkxJY3NSQV9rUVljU0NyOXBUbDNjVUNwS1E4dFdZbGp0WDBzUWJz?oc=5",
       "sourceId": "ryukyu-shimpo",
@@ -447,7 +784,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T05:00:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -458,15 +795,22 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "290e7ec3cea4fbcee68a",
-      "relatedUrls": []
+      "fingerprint": "607ec232b6e153b3f395",
+      "articleFingerprint": "290e7ec3cea4fbcee68a",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260831-ryukyu-shimpo-c8c3d68084",
       "title": "児童ら白バイ試乗や鑑識活動を体験 沖縄県警が子ども向け見学会 那覇 - 琉球新報デジタル",
+      "displayTitle": "児童ら白バイ試乗や鑑識活動を体験 沖縄県警が子ども向け見学会 那覇",
       "summary": "児童ら白バイ試乗や鑑識活動を体験 沖縄県警が子ども向け見学会 那覇 琉球新報デジタル",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1jczVfS1hJRUxMLWJFUGlJajdsc0NMenN2TDdrNzZtbU5QaGt3SXVHRE9CeV9IM3BUY1ZmVFpJazEzMWlVYTBoMjN4MTBUS2F1eFhnT05mRjVZbTNabHc?oc=5",
       "sourceId": "ryukyu-shimpo",
@@ -474,7 +818,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T05:00:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -485,15 +829,22 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "c8c3d68084f6186168c4",
-      "relatedUrls": []
+      "fingerprint": "5bc2e720b1f4738a0ea5",
+      "articleFingerprint": "c8c3d68084f6186168c4",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260831-okinawa-times-649abe6a78",
       "title": "日本女子 笑顔なき3位 バレーアジア選手権 - 沖縄タイムス社",
+      "displayTitle": "日本女子 笑顔なき3位 バレーアジア選手権",
       "summary": "日本女子 笑顔なき3位 バレーアジア選手権 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBnZmxJYWhHQzF4bmVZTWFIOFhKeV9CX3M2M3g2MFhHNDlaV2dZX0RQTmF2ZEM4aFV5N0hJcUt2TGtNaFU2NzVsckNtYXc4eGstRFZLRU0zUkZiNWd3RXc?oc=5",
       "sourceId": "okinawa-times",
@@ -501,7 +852,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T03:57:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -512,11 +863,17 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "649abe6a788b0dd6d711",
-      "relatedUrls": []
+      "fingerprint": "2dc88d8cdb3344aafe6b",
+      "articleFingerprint": "649abe6a788b0dd6d711",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260830-okinawa-times-1c860c72b0",
@@ -536,14 +893,84 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "石川地区との関連根拠が不足",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "1c860c72b0ef6f57dceb",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "rejected"
+    },
+    {
+      "id": "20260830-okinawa-times-111f0e5e00",
+      "title": "本格メキシコ風タコスや餅作りに挑戦 うるま市の学童で100人 料理で異文化や老舗店のこだわりを体験 - 沖縄タイムス社",
+      "displayTitle": "本格メキシコ風タコスや餅作りに挑戦 うるま市の学童で100人 料理で異文化や老舗店のこだわりを体験",
+      "summary": "本格メキシコ風タコスや餅作りに挑戦 うるま市の学童で100人 料理で異文化や老舗店のこだわりを体験 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1wVUZHclExeFR4TDBxLUZUNWdESmpHVjdLd3N3SDRiQzJFQ3RMQjAxSmVzaTVaMnRnOWNxaEZuRDJGYzA1dmpGV3JYT0RQVlp5ZkVOQmNEVWdQUDVwNFE?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-08-30T17:33:00+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-06T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "うるま市内だが石川地区の根拠が不足",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "f61f3ab07f1b85f21c62",
+      "articleFingerprint": "111f0e5e0089f094cc81",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260830-google-news-coco-garden-1083b2cb6d",
+      "title": "画像21 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - walkerplus.com",
+      "displayTitle": "沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート",
+      "summary": "画像21 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート walkerplus.com",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE4xMEVFUk93YVBPSHNIcHdmMWVnY25rMzFTdm5aUTl5ZUc5TTFSeHFDUzhqa3pJTnp5TVc0V0xaTzAzNE9XOVVKOVdWVHpLNm4tNVZMU1VmMl9uMXRrc015WnBlbWJIRFJrTkltMXJ3?oc=5",
+      "sourceId": "google-news-coco-garden",
+      "sourceName": "ココガーデンリゾート沖縄",
+      "sourceType": "discovery",
+      "publishedAt": "2026-08-30T17:04:44+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-06T23:59:59+09:00",
+      "category": "news",
+      "localScore": 100,
+      "localEvidence": [
+        "ココ ガーデンリゾート オキナワ"
+      ],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート」へ統合"
+      ],
+      "fingerprint": "c4e1d054620620d435a5",
+      "articleFingerprint": "1083b2cb6d6f57e066d7",
+      "facilityId": "coco-garden",
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20260901-google-news-coco-garden-de03f32d16"
     },
     {
       "id": "20260830-google-news-coco-garden-c5e3ef15b8",
@@ -563,15 +990,17 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "published",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
         "石川地区との関連根拠が不足",
-        "従来ルールの公開対象。管理人確認候補として記録"
+        "従来ルールの公開対象。管理人確認候補として記録",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "c5e3ef15b83ee0a4be6d",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "published"
     },
     {
       "id": "20260830-google-news-coco-garden-ef8a9efd18",
@@ -591,15 +1020,50 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "published",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
         "石川地区との関連根拠が不足",
-        "従来ルールの公開対象。管理人確認候補として記録"
+        "従来ルールの公開対象。管理人確認候補として記録",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "ef8a9efd189c8efeb50f",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "published"
+    },
+    {
+      "id": "20260830-google-news-coco-garden-34d03f68e3",
+      "title": "画像12 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - walkerplus.com",
+      "displayTitle": "沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート",
+      "summary": "画像12 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート walkerplus.com",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9kYXVHaTVza0ZYVThRc2NxR2xibWtmVEhySDI1UllNV25YTkcxSkZyZG03RndOSXJGQWNDQ256TENsbkd3TE1iLWhZbWYxalVkWGx1R293ZkdublhOQUZxQlY4OVpoUlNwNWp2b3N3?oc=5",
+      "sourceId": "google-news-coco-garden",
+      "sourceName": "ココガーデンリゾート沖縄",
+      "sourceType": "discovery",
+      "publishedAt": "2026-08-30T13:56:04+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-06T23:59:59+09:00",
+      "category": "news",
+      "localScore": 100,
+      "localEvidence": [
+        "ココ ガーデンリゾート オキナワ"
+      ],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート」へ統合"
+      ],
+      "fingerprint": "c4e1d054620620d435a5",
+      "articleFingerprint": "34d03f68e344b58f953b",
+      "facilityId": "coco-garden",
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20260901-google-news-coco-garden-de03f32d16"
     },
     {
       "id": "20260830-google-news-coco-garden-357da6ebcb",
@@ -619,15 +1083,50 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "published",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
         "石川地区との関連根拠が不足",
-        "従来ルールの公開対象。管理人確認候補として記録"
+        "従来ルールの公開対象。管理人確認候補として記録",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "357da6ebcbff1a802df1",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "published"
+    },
+    {
+      "id": "20260830-google-news-coco-garden-73a2e58298",
+      "title": "画像8 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - walkerplus.com",
+      "displayTitle": "沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート",
+      "summary": "画像8 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート walkerplus.com",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9YZU5GT1RCMU1tS0tFb3VPbDBUa1Vja3ZPSGNXRXY0MzJkUFRHM2hGWUxmTXNKdnlUZktfdHdzTjZ2WGFqZGRHWG1ldW9nOEF5eEtaNEc5Yjl3R0NnZ2JRUm9iVmZ3a0hjaTJFVDRn?oc=5",
+      "sourceId": "google-news-coco-garden",
+      "sourceName": "ココガーデンリゾート沖縄",
+      "sourceType": "discovery",
+      "publishedAt": "2026-08-30T13:48:14+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-06T23:59:59+09:00",
+      "category": "news",
+      "localScore": 100,
+      "localEvidence": [
+        "ココ ガーデンリゾート オキナワ"
+      ],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート」へ統合"
+      ],
+      "fingerprint": "c4e1d054620620d435a5",
+      "articleFingerprint": "73a2e58298c65a61ccaa",
+      "facilityId": "coco-garden",
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20260901-google-news-coco-garden-de03f32d16"
     },
     {
       "id": "20260830-google-news-coco-garden-41c336bd8a",
@@ -647,15 +1146,50 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "published",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
         "石川地区との関連根拠が不足",
-        "従来ルールの公開対象。管理人確認候補として記録"
+        "従来ルールの公開対象。管理人確認候補として記録",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "41c336bd8a08658b4b69",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "published"
+    },
+    {
+      "id": "20260830-google-news-coco-garden-7ad89671bd",
+      "title": "画像15 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - walkerplus.com",
+      "displayTitle": "沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート",
+      "summary": "画像15 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート walkerplus.com",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBFMVAweU1aa2M2SWYwbzlLYjlwRDdMcGFoZzNSQV95SUVhR2stYkhyYnFJZmRHVlFkUmJPYTJLWDAxajdiVTFoZ1d3ZFlkbmlNX1YzSmM5VHpTSXhqakZOZVkzeXRtQ0dhTElSdVB3?oc=5",
+      "sourceId": "google-news-coco-garden",
+      "sourceName": "ココガーデンリゾート沖縄",
+      "sourceType": "discovery",
+      "publishedAt": "2026-08-30T13:22:07+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-06T23:59:59+09:00",
+      "category": "news",
+      "localScore": 100,
+      "localEvidence": [
+        "ココ ガーデンリゾート オキナワ"
+      ],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート」へ統合"
+      ],
+      "fingerprint": "c4e1d054620620d435a5",
+      "articleFingerprint": "7ad89671bdfa1c75cbde",
+      "facilityId": "coco-garden",
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20260901-google-news-coco-garden-de03f32d16"
     },
     {
       "id": "20260830-google-news-coco-garden-f5a84590e0",
@@ -675,27 +1209,30 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "published",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
         "石川地区との関連根拠が不足",
-        "従来ルールの公開対象。管理人確認候補として記録"
+        "従来ルールの公開対象。管理人確認候補として記録",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "f5a84590e07f1e91a434",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "published"
     },
     {
-      "id": "20260830-okinawa-times-580715df63",
-      "title": "［大弦小弦］写真売り込み 「伝える」固いジャーナリスト魂 - 沖縄タイムス社",
-      "summary": "［大弦小弦］写真売り込み 「伝える」固いジャーナリスト魂 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1iY3pyZHVUMl8xNkVRbkRHalAwdjlCYjZRWWQxNHBVSlp0UENQNkpta2l2V0NYd19SMGZITXo3WHpmOXJsOEFXOVF6cjcxV1YyNEdCZG85R2t5WDhUWkE?oc=5",
+      "id": "20260830-okinawa-times-b8533f8612",
+      "title": "琉球アスティーダ 2連敗で首位陥落 卓球Tリーグ 上江洲、ダブルスで今季初出場 - 沖縄タイムス社",
+      "displayTitle": "琉球アスティーダ 2連敗で首位陥落 卓球Tリーグ 上江洲、ダブルスで今季初出場",
+      "summary": "琉球アスティーダ 2連敗で首位陥落 卓球Tリーグ 上江洲、ダブルスで今季初出場 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBnamFHN1ZfSzBGVlRIUjdUZ0ZFd2RPTjN6MmdpaGpKN21EME5lUkFCS0s0R2lfeG5zd0JqZ1dhTnEwU3ZvM1VpVGU2NnJ0SnRENG0yTDNrRkJsWnhPbUE?oc=5",
       "sourceId": "okinawa-times",
       "sourceName": "沖縄タイムス",
       "sourceType": "media",
-      "publishedAt": "2026-08-30T06:00:00+09:00",
-      "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "publishedAt": "2026-08-30T07:40:00+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-06T23:59:59+09:00",
@@ -706,11 +1243,51 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "580715df6312cbd6d43f",
-      "relatedUrls": []
+      "fingerprint": "f5ae7a1fe5dc4d8c6003",
+      "articleFingerprint": "b8533f8612ef16bd0efa",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260830-okinawa-times-580715df63",
+      "title": "［大弦小弦］写真売り込み 「伝える」固いジャーナリスト魂 - 沖縄タイムス社",
+      "displayTitle": "[大弦小弦]写真売り込み 「伝える」固いジャーナリスト魂",
+      "summary": "［大弦小弦］写真売り込み 「伝える」固いジャーナリスト魂 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1iY3pyZHVUMl8xNkVRbkRHalAwdjlCYjZRWWQxNHBVSlp0UENQNkpta2l2V0NYd19SMGZITXo3WHpmOXJsOEFXOVF6cjcxV1YyNEdCZG85R2t5WDhUWkE?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-08-30T06:00:00+09:00",
+      "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-06T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "4716c2d50e9eb38f95c6",
+      "articleFingerprint": "580715df6312cbd6d43f",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260830-okinawa-times-6a34589946",
@@ -730,18 +1307,21 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "石川地区との関連根拠が不足",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "6a3458994645092f62c1",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "rejected"
     },
     {
       "id": "20260830-ryukyu-shimpo-35769e8b04",
       "title": "西原東小が臨時休校へ 31日、停電で 工事進ちょく次第で休校延長も 沖縄 - 琉球新報デジタル",
+      "displayTitle": "西原東小が臨時休校へ 31日、停電で 工事進ちょく次第で休校延長も 沖縄",
       "summary": "西原東小が臨時休校へ 31日、停電で 工事進ちょく次第で休校延長も 沖縄 琉球新報デジタル",
       "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE8wd2NoT0pjNHdqQzJBbC02ZEgtam1HWE9jVDZFQUdaaXQyM3pQdzU4UG5wVGlRTVpaMnJTd2pwTzk3S0lna0JsUHNFRUNDS1dhTkFFMFowT3ZXcjVpZTl2Nw?oc=5",
       "sourceId": "ryukyu-shimpo",
@@ -749,7 +1329,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-30T05:00:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-06T23:59:59+09:00",
@@ -760,11 +1340,17 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "35769e8b0423273e55f0",
-      "relatedUrls": []
+      "fingerprint": "4d2deaa964290ccd660f",
+      "articleFingerprint": "35769e8b0423273e55f0",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260830-ryukyu-shimpo-e9e0bf53e1",
@@ -784,26 +1370,29 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "石川地区との関連根拠が不足",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "e9e0bf53e1155113fdfb",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "rejected"
     },
     {
-      "id": "20260830-okinawa-times-efa08818ae",
-      "title": "日本、準決勝で敗退 五輪切符持ち越し バレーアジア選手権 - 沖縄タイムス社",
-      "summary": "日本、準決勝で敗退 五輪切符持ち越し バレーアジア選手権 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9zTTYtQjI3WEoyaWtBVXRPNkRpcG1qRWJCMzdoekRfblFxVDZfR25RREZXOUktRFVwbC1CSnVlOVZ3MVlzNXhxOWZVbnRRYVgyTlRHTW5HYWEycTNJYVE?oc=5",
+      "id": "20260830-okinawa-times-1e3bb56474",
+      "title": "うるま市窓口 来月から短縮 午前9時～午後4時に - 沖縄タイムス社",
+      "displayTitle": "うるま市窓口 来月から短縮 午前9時~午後4時に",
+      "summary": "うるま市窓口 来月から短縮 午前9時～午後4時に 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE56d25oVjgwTW4tNllqd0Z3RUFocTREb21PSnJLNGZIaVlzaWFEcjdTZWU0VGZ5VEdlTU42QVdhcHRrQUpSZnZMVVN4MXBwNHAyR292cGU5dWlUVHQyQXc?oc=5",
       "sourceId": "okinawa-times",
       "sourceName": "沖縄タイムス",
       "sourceType": "media",
       "publishedAt": "2026-08-30T03:57:00+09:00",
-      "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-06T23:59:59+09:00",
@@ -814,15 +1403,57 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "うるま市内だが石川地区の根拠が不足",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "efa08818ae511b751b51",
-      "relatedUrls": []
+      "fingerprint": "7bdb317161c5d9dea665",
+      "articleFingerprint": "1e3bb56474e69748d5b2",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260830-okinawa-times-efa08818ae",
+      "title": "日本、準決勝で敗退 五輪切符持ち越し バレーアジア選手権 - 沖縄タイムス社",
+      "displayTitle": "日本、準決勝で敗退 五輪切符持ち越し バレーアジア選手権",
+      "summary": "日本、準決勝で敗退 五輪切符持ち越し バレーアジア選手権 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9zTTYtQjI3WEoyaWtBVXRPNkRpcG1qRWJCMzdoekRfblFxVDZfR25RREZXOUktRFVwbC1CSnVlOVZ3MVlzNXhxOWZVbnRRYVgyTlRHTW5HYWEycTNJYVE?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-08-30T03:57:00+09:00",
+      "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-06T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "4ca3ccc5d02e9fe5cfc8",
+      "articleFingerprint": "efa08818ae511b751b51",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260830-okinawa-times-bcec8bc7a0",
       "title": "石川県気象防災速報（線状降水帯直前予測）（第１報）＝金沢地方気象台発表（３０日１時５８分） ：気象防災速報 - 沖縄タイムス社",
+      "displayTitle": "石川県気象防災速報(線状降水帯直前予測)(第1報)=金沢地方気象台発表(30日1時58分) :気象防災速報",
       "summary": "石川県気象防災速報（線状降水帯直前予測）（第１報）＝金沢地方気象台発表（３０日１時５８分） ：気象防災速報 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE02cDhqTDZ0WFZ5bE52cFMwU29hYXAzZ3pwM1lwdlRPcWlOOHN3eUQtSVVzZS1oTWNTeU16TzV6cks4U3otd0RzRnV4bG9qeU9DUDduT0hSQmxzS01MV2c?oc=5",
       "sourceId": "okinawa-times",
@@ -830,7 +1461,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-30T01:58:31+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-06T23:59:59+09:00",
@@ -844,15 +1475,22 @@
       "requiresReview": false,
       "reviewReasons": [
         "石川県など他地域との一致を検出",
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "bcec8bc7a056df2ee9da",
-      "relatedUrls": []
+      "fingerprint": "3877943d7608f7690ff0",
+      "articleFingerprint": "bcec8bc7a056df2ee9da",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260829-okinawa-times-db38df7c99",
       "title": "バレー日本女子は準決勝敗退 ロス五輪切符持ち越し - 沖縄タイムス社",
+      "displayTitle": "バレー日本女子は準決勝敗退 ロス五輪切符持ち越し",
       "summary": "バレー日本女子は準決勝敗退 ロス五輪切符持ち越し 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1CTGROQ0F5Q3BFVEFwZWt6ems1bjlVTW81RWlSWm5KS1V4OVU1bFBCZS1nVjV0WWNhZ0hDeFVYUVJyWFhRNEZrS0lvX1lwTGdHX0dyem1OaHdtd0lFelE?oc=5",
       "sourceId": "okinawa-times",
@@ -860,7 +1498,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-29T20:45:55+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-05T23:59:59+09:00",
@@ -871,11 +1509,50 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "db38df7c9926baca380d",
-      "relatedUrls": []
+      "fingerprint": "fbd8a5ac2e9617081fa6",
+      "articleFingerprint": "db38df7c9926baca380d",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260829-google-news-coco-garden-e526b7f2e9",
+      "title": "画像2 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - walkerplus.com",
+      "displayTitle": "沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート",
+      "summary": "画像2 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート walkerplus.com",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE4yZll1XzNGSWVBWW1ISUJ3ckZ4Z3hDaWxGRm9DV1JzLV9xSkk2d0lnaldxVU1KWWM3c1pTX2JZU1RiMkQweGRqQlZPelE4MHVJSE1KWUF4U3lnQlJGVjZfbFVYbVZybExjbmJicUx3?oc=5",
+      "sourceId": "google-news-coco-garden",
+      "sourceName": "ココガーデンリゾート沖縄",
+      "sourceType": "discovery",
+      "publishedAt": "2026-08-29T12:53:39+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-05T23:59:59+09:00",
+      "category": "news",
+      "localScore": 100,
+      "localEvidence": [
+        "ココ ガーデンリゾート オキナワ"
+      ],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート」へ統合"
+      ],
+      "fingerprint": "c4e1d054620620d435a5",
+      "articleFingerprint": "e526b7f2e9b66973f4e8",
+      "facilityId": "coco-garden",
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20260901-google-news-coco-garden-de03f32d16"
     },
     {
       "id": "20260829-google-news-coco-garden-f350cdcf72",
@@ -895,15 +1572,50 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "published",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
         "石川地区との関連根拠が不足",
-        "従来ルールの公開対象。管理人確認候補として記録"
+        "従来ルールの公開対象。管理人確認候補として記録",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "f350cdcf7204207ee028",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "published"
+    },
+    {
+      "id": "20260829-google-news-coco-garden-834c99787b",
+      "title": "画像18 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート - walkerplus.com",
+      "displayTitle": "沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート",
+      "summary": "画像18 / 23＞沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート walkerplus.com",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE85QlFPa3VfN3cwMnhsUktQY2U3dG5Yc3lMQmVPTXJDWDlWbW4wSXhIU0ZxS1o5aDNGTGRndXJHOW1tMXVGbzB4d3NuWW1NR1FqLXJhdDVnTEZ6c2RRa0FGYVFTbWEzWlFRSkg3RlBR?oc=5",
+      "sourceId": "google-news-coco-garden",
+      "sourceName": "ココガーデンリゾート沖縄",
+      "sourceType": "discovery",
+      "publishedAt": "2026-08-29T12:23:52+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-05T23:59:59+09:00",
+      "category": "news",
+      "localScore": 100,
+      "localEvidence": [
+        "ココ ガーデンリゾート オキナワ"
+      ],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート」へ統合"
+      ],
+      "fingerprint": "c4e1d054620620d435a5",
+      "articleFingerprint": "834c99787b463de57faa",
+      "facilityId": "coco-garden",
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20260901-google-news-coco-garden-de03f32d16"
     },
     {
       "id": "20260829-google-news-coco-garden-585dd983e1",
@@ -923,19 +1635,22 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "published",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
         "石川地区との関連根拠が不足",
-        "従来ルールの公開対象。管理人確認候補として記録"
+        "従来ルールの公開対象。管理人確認候補として記録",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "585dd983e12ab7a24b37",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "published"
     },
     {
       "id": "20260828-okinawa-times-555ed55bb5",
       "title": "沖縄道で米軍車両火災 金武―屋嘉IC間の南向けで渋滞 約40分後に鎮火 - 沖縄タイムス社",
+      "displayTitle": "沖縄道で米軍車両火災 金武―屋嘉IC間の南向けで渋滞 約40分後に鎮火",
       "summary": "沖縄道で米軍車両火災 金武―屋嘉IC間の南向けで渋滞 約40分後に鎮火 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9wbUZJNUhET2t3STVUd0xHT0piaDVCSm5qQ05EZi1hYTlSM3U2ZHVIaVhKMmxjTG5FNy12ZU9jWGRkRHFUNXFIMmdwXzF2N0RpaFhwdUZsY3U0Znp5ZUE?oc=5",
       "sourceId": "okinawa-times",
@@ -943,7 +1658,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-28T17:54:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
@@ -954,15 +1669,56 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "555ed55bb5297533916e",
-      "relatedUrls": []
+      "fingerprint": "c913f05a2110e20f3b43",
+      "articleFingerprint": "555ed55bb5297533916e",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260828-ryukyu-shimpo-c0f0b6bb70",
+      "title": "今日のニュース - 琉球新報デジタル",
+      "displayTitle": "今日のニュース",
+      "summary": "今日のニュース 琉球新報デジタル",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9QcnUzaGhfanMzTHNQckwzQ29ZTlNhYk13VFVRRVd1MHZhWTE2VEk3M3J1azFjQ2Q3Y3I5UHFnOFBqR3ZOUndsTEN0b3ZBTUJLRHFGcExVaWVrSzlYNk4xZjJKVm1ETHVwZzdSYkMwRmk?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-08-28T16:00:00+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-04T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "d194d07ea512e0a0a075",
+      "articleFingerprint": "c0f0b6bb708ba088e5cd",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260828-ryukyu-shimpo-16bab9dec7",
       "title": "夏休み明け、県内多くの学校で授業始まる 児童ら再会喜ぶ 沖縄 - 琉球新報デジタル",
+      "displayTitle": "夏休み明け、県内多くの学校で授業始まる 児童ら再会喜ぶ 沖縄",
       "summary": "夏休み明け、県内多くの学校で授業始まる 児童ら再会喜ぶ 沖縄 琉球新報デジタル",
       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5RVGl6UFFWeTU2Z3FaYzVpeFRpOE1hQ0VfMnh0THh4SUpCcVBldGJjQ05UMmdUTno3VEo5TmhEX05QcVhBVGtwVXViZFBOSXR6WGVUX1dpaG5mSFE?oc=5",
       "sourceId": "ryukyu-shimpo",
@@ -970,7 +1726,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-28T11:22:06+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
@@ -981,15 +1737,22 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "16bab9dec740fbbf22c4",
-      "relatedUrls": []
+      "fingerprint": "0dce7363a4d01d23e0b5",
+      "articleFingerprint": "16bab9dec740fbbf22c4",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260828-google-news-bios-hill-10c7e477c8",
       "title": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - Mantan Web",
+      "displayTitle": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - Mantan Web",
       "summary": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 Mantan Web",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPelh1aS1TUlV6bGRiV2ZxbUpJWFo1YlFHRlNYZklwNkV3VjhJMExLSUdjSUNJS3doTXZrSFB6X2J0NU5sTV9IUFlNSXRCdVRsaVJUYVpLNVpwTktIMHBlRXNESlY4R2lqUlFZRE9OamR3OElHdWJ3NlMwNWw3VGxtMjJLajhOd3Bw?oc=5",
       "sourceId": "google-news-bios-hill",
@@ -997,27 +1760,42 @@
       "sourceType": "discovery",
       "publishedAt": "2026-08-28T10:08:14+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
       "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
+      "localScore": 100,
+      "localEvidence": [
+        "ビオスの丘"
+      ],
       "confidence": 45,
-      "status": "rejected",
+      "status": "published",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足",
-        "同一タイトルの公開記事と重複"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区・日時・情報源の自動掲載条件を満たした",
+        "同じ内容の記事3件を代表記事へ統合"
       ],
-      "fingerprint": "10c7e477c879f3934ae6",
-      "relatedUrls": []
+      "fingerprint": "c84ab09c2382d3772126",
+      "articleFingerprint": "10c7e477c879f3934ae6",
+      "facilityId": "bios-hill",
+      "eventMarkers": [
+        "らんの花祭り秋",
+        "沖縄ビオスの丘を約1万輪のデンファレが彩るらんの花祭り秋9月12日開幕mantanweb"
+      ],
+      "relatedUrls": [
+        "https://news.google.com/rss/articles/CBMiakFVX3lxTE05SHphMEZHZXRHU2JybUkyaVNrQl8tRnRkRENXY3loc0dIa3VDSzdrMmFvbWJTMUVKbnlqdU5HaXJTNEhVWXctTk5ROGk4bGdnQlFNQUk3dXprakNWYWRCSFpJVnVTbWVCbmc?oc=5",
+        "https://news.google.com/rss/articles/CBMiZkFVX3lxTFA3cUpZYTVMdTZieHJsNjl6Q3FTempIWkpLWWFUUWEzM2NOUzg3TU41QVE3T00zTDhWS082VjJpWE0yWDdUcmhIOVVWdTZKZ2Uxd3lxZ01JTnNzUmViZ2dmTVZBRjhvZw?oc=5",
+        "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9oM3hTVnVDWFlpR3pnbXRjUUVRa2NpOXdVNEdESW80ZWhjS3EwUVVaVW10TEUxMGRHcmFKamdjdU9LSzNXdzFtSTdDckJwUFNZVHkxUFNZMEk5VFY0bVE?oc=5"
+      ],
+      "duplicateOf": null,
+      "relatedCount": 3
     },
     {
       "id": "20260828-google-news-ishikawa-53f94448dd",
       "title": "70代や児童らがエイサー 40年ぶり多数で演舞 次世代へつなぐ うるま石川山城 沖縄 - 琉球新報デジタル",
+      "displayTitle": "70代や児童らがエイサー 40年ぶり多数で演舞 次世代へつなぐ うるま石川山城 沖縄",
       "summary": "70代や児童らがエイサー 40年ぶり多数で演舞 次世代へつなぐ うるま石川山城 沖縄 琉球新報デジタル",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE0yV3daUjVxemd2NnJRZkltZDQ3MmhWUlhFb3Y2VzJkZ0c1NlNDaXlfZ3NPa1lCelFUaUF0NTloSWl4dzF3VDdpamNQSDNZUk4teUd5dVo3TlBoWk53R3c?oc=5",
       "sourceId": "google-news-ishikawa",
@@ -1025,30 +1803,34 @@
       "sourceType": "discovery",
       "publishedAt": "2026-08-28T05:00:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
       "category": "news",
-      "localScore": 5,
+      "localScore": 85,
       "localEvidence": [
+        "うるま市石川",
         "石川",
         "山城"
       ],
       "confidence": 45,
-      "status": "published",
-      "requiresReview": true,
+      "status": "duplicate",
+      "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足",
-        "従来ルールの公開対象。管理人確認候補として記録"
+        "同じ内容として代表記事「70代や児童らがエイサー 40年ぶり多数で演舞 次世代へつなぐ うるま石川山城 沖縄」へ統合"
       ],
-      "fingerprint": "53f94448ddc307c8d543",
-      "relatedUrls": []
+      "fingerprint": "f26555a7ac7ee5e17df0",
+      "articleFingerprint": "53f94448ddc307c8d543",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20260828-ryukyu-shimpo-53f94448dd"
     },
     {
       "id": "20260828-ryukyu-shimpo-53f94448dd",
       "title": "70代や児童らがエイサー 40年ぶり多数で演舞 次世代へつなぐ うるま石川山城 沖縄 - 琉球新報デジタル",
+      "displayTitle": "70代や児童らがエイサー 40年ぶり多数で演舞 次世代へつなぐ うるま石川山城 沖縄",
       "summary": "70代や児童らがエイサー 40年ぶり多数で演舞 次世代へつなぐ うるま石川山城 沖縄 琉球新報デジタル",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE0yV3daUjVxemd2NnJRZkltZDQ3MmhWUlhFb3Y2VzJkZ0c1NlNDaXlfZ3NPa1lCelFUaUF0NTloSWl4dzF3VDdpamNQSDNZUk4teUd5dVo3TlBoWk53R3c?oc=5",
       "sourceId": "ryukyu-shimpo",
@@ -1056,30 +1838,37 @@
       "sourceType": "media",
       "publishedAt": "2026-08-28T05:00:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
       "category": "news",
-      "localScore": 5,
+      "localScore": 85,
       "localEvidence": [
+        "うるま市石川",
         "石川",
         "山城"
       ],
       "confidence": 65,
-      "status": "rejected",
+      "status": "published",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足",
-        "同一タイトルの公開記事と重複"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区・日時・情報源の自動掲載条件を満たした",
+        "同じ内容の記事1件を代表記事へ統合"
       ],
-      "fingerprint": "53f94448ddc307c8d543",
-      "relatedUrls": []
+      "fingerprint": "f26555a7ac7ee5e17df0",
+      "articleFingerprint": "53f94448ddc307c8d543",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 1
     },
     {
       "id": "20260828-ryukyu-shimpo-309f1a2de7",
       "title": "ご先祖様に「またね」 旧盆、みんなでウークイ 感謝込めて手を合わせ 沖縄 - 琉球新報デジタル",
+      "displayTitle": "ご先祖様に「またね」 旧盆、みんなでウークイ 感謝込めて手を合わせ 沖縄",
       "summary": "ご先祖様に「またね」 旧盆、みんなでウークイ 感謝込めて手を合わせ 沖縄 琉球新報デジタル",
       "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE8xQVNUbzdQSDVIS0Rtc3FXYmc2VFl6RW9SZDBDLUVxN081YlNPUW5ILWl6RG9IRVpBM0MzVHBJR3JPX2dZZGF1Q0RYbjVwYW96TnluTDY5QUtNUENkdzd6Sg?oc=5",
       "sourceId": "ryukyu-shimpo",
@@ -1087,7 +1876,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-28T05:00:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
@@ -1098,15 +1887,22 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "309f1a2de739e6a224b7",
-      "relatedUrls": []
+      "fingerprint": "38f17095b1190c40990f",
+      "articleFingerprint": "309f1a2de739e6a224b7",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260828-okinawa-times-bd83260d1c",
       "title": "母の故郷を望み第一声 玉城氏 本部町から - 沖縄タイムス社",
+      "displayTitle": "母の故郷を望み第一声 玉城氏 本部町から",
       "summary": "母の故郷を望み第一声 玉城氏 本部町から 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE90c205YWh6VmVBMTFpLVY4NlZYMnc3cTVVMkgzOVJJenRmVDVEaEJXYWs1WjdCQjBuaUNBRG5JYm9CSUswNjRJRk9LTnMtbEhHWTJHX2NXOTdlMDV3MXc?oc=5",
       "sourceId": "okinawa-times",
@@ -1114,7 +1910,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-28T03:59:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
@@ -1125,15 +1921,22 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "bd83260d1c1856ae63e4",
-      "relatedUrls": []
+      "fingerprint": "06105eca5186375dd652",
+      "articleFingerprint": "bd83260d1c1856ae63e4",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260827-okinawa-times-00ce4ee58f",
       "title": "石川、富山両県の大雨特別警報を切り替え - 沖縄タイムス社",
+      "displayTitle": "石川、富山両県の大雨特別警報を切り替え",
       "summary": "石川、富山両県の大雨特別警報を切り替え 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9WSHJSQ0liRWRHbUJLM0dBaXc5LU00ZmZOSW54d2JNcU9nTDY3ZDVYNEZTZ3YxZ1pNNFByc3JZbnNYWUdDX1lxX3VrWFViZmZFbkpMQTdhUnN6YnJBNmc?oc=5",
       "sourceId": "okinawa-times",
@@ -1141,12 +1944,12 @@
       "sourceType": "media",
       "publishedAt": "2026-08-27T16:33:08+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-03T23:59:59+09:00",
       "category": "news",
-      "localScore": 5,
+      "localScore": 25,
       "localEvidence": [
         "石川"
       ],
@@ -1154,15 +1957,22 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "00ce4ee58ffe2c812bda",
-      "relatedUrls": []
+      "fingerprint": "349d22a0d20d7373859a",
+      "articleFingerprint": "00ce4ee58ffe2c812bda",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260827-okinawa-times-d06d6ac499",
       "title": "九州新幹線、９月１８日全線再開 鹿児島線は１０月中旬ごろ - 沖縄タイムス社",
+      "displayTitle": "九州新幹線、9月18日全線再開 鹿児島線は10月中旬ごろ",
       "summary": "九州新幹線、９月１８日全線再開 鹿児島線は１０月中旬ごろ 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5VRUdDLXZDeU5XbGQtRjVJakpQU0FnNV81Smp2VEtBT3VVb3E5S2RQS3dHYVpsVmk1elowV2NNLWVyazd3eExOYXpwOER4Q08yUzFIMUh1eGllcHUwaUE?oc=5",
       "sourceId": "okinawa-times",
@@ -1170,7 +1980,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-27T14:58:58+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-03T23:59:59+09:00",
@@ -1181,15 +1991,22 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "d06d6ac49933219eaa49",
-      "relatedUrls": []
+      "fingerprint": "2984100e7ee4a204f1f9",
+      "articleFingerprint": "d06d6ac49933219eaa49",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260827-google-news-bios-hill-dea9cb0c41",
       "title": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - PR TIMES",
+      "displayTitle": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕",
       "summary": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 PR TIMES",
       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE05SHphMEZHZXRHU2JybUkyaVNrQl8tRnRkRENXY3loc0dIa3VDSzdrMmFvbWJTMUVKbnlqdU5HaXJTNEhVWXctTk5ROGk4bGdnQlFNQUk3dXprakNWYWRCSFpJVnVTbWVCbmc?oc=5",
       "sourceId": "google-news-bios-hill",
@@ -1197,27 +2014,35 @@
       "sourceType": "discovery",
       "publishedAt": "2026-08-27T14:26:49+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-03T23:59:59+09:00",
       "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 45,
-      "status": "published",
-      "requiresReview": true,
-      "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足",
-        "従来ルールの公開対象。管理人確認候補として記録"
+      "localScore": 100,
+      "localEvidence": [
+        "ビオスの丘"
       ],
-      "fingerprint": "dea9cb0c41df326cbee9",
-      "relatedUrls": []
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - Mantan Web」へ統合"
+      ],
+      "fingerprint": "c84ab09c2382d3772126",
+      "articleFingerprint": "dea9cb0c41df326cbee9",
+      "facilityId": "bios-hill",
+      "eventMarkers": [
+        "らんの花祭り秋",
+        "沖縄ビオスの丘を約1万輪のデンファレが彩るらんの花祭り秋9月12日開幕"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": "20260828-google-news-bios-hill-10c7e477c8"
     },
     {
       "id": "20260827-google-news-bios-hill-bb1f697376",
       "title": "写真：沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - 沖縄タイムス社",
+      "displayTitle": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕",
       "summary": "写真：沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFA3cUpZYTVMdTZieHJsNjl6Q3FTempIWkpLWWFUUWEzM2NOUzg3TU41QVE3T00zTDhWS082VjJpWE0yWDdUcmhIOVVWdTZKZ2Uxd3lxZ01JTnNzUmViZ2dmTVZBRjhvZw?oc=5",
       "sourceId": "google-news-bios-hill",
@@ -1225,27 +2050,71 @@
       "sourceType": "discovery",
       "publishedAt": "2026-08-27T14:26:49+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-03T23:59:59+09:00",
       "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 45,
-      "status": "published",
-      "requiresReview": true,
-      "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足",
-        "従来ルールの公開対象。管理人確認候補として記録"
+      "localScore": 100,
+      "localEvidence": [
+        "ビオスの丘"
       ],
-      "fingerprint": "bb1f6973769ba145466a",
-      "relatedUrls": []
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - Mantan Web」へ統合"
+      ],
+      "fingerprint": "c84ab09c2382d3772126",
+      "articleFingerprint": "bb1f6973769ba145466a",
+      "facilityId": "bios-hill",
+      "eventMarkers": [
+        "らんの花祭り秋",
+        "沖縄ビオスの丘を約1万輪のデンファレが彩るらんの花祭り秋9月12日開幕"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": "20260828-google-news-bios-hill-10c7e477c8"
+    },
+    {
+      "id": "20260827-okinawa-times-ba45185e2d",
+      "title": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - 沖縄タイムス社",
+      "displayTitle": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕",
+      "summary": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9oM3hTVnVDWFlpR3pnbXRjUUVRa2NpOXdVNEdESW80ZWhjS3EwUVVaVW10TEUxMGRHcmFKamdjdU9LSzNXdzFtSTdDckJwUFNZVHkxUFNZMEk5VFY0bVE?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-08-27T14:26:49+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-03T23:59:59+09:00",
+      "category": "news",
+      "localScore": 60,
+      "localEvidence": [
+        "ビオスの丘"
+      ],
+      "confidence": 65,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - Mantan Web」へ統合"
+      ],
+      "fingerprint": "c84ab09c2382d3772126",
+      "articleFingerprint": "ba45185e2d917f06c0c9",
+      "facilityId": null,
+      "eventMarkers": [
+        "らんの花祭り秋",
+        "沖縄ビオスの丘を約1万輪のデンファレが彩るらんの花祭り秋9月12日開幕"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": "20260828-google-news-bios-hill-10c7e477c8"
     },
     {
       "id": "20260827-ryukyu-shimpo-5c27423c4c",
       "title": "「うるま市」の記事一覧 - 琉球新報デジタル",
+      "displayTitle": "「うるま市」の記事一覧",
       "summary": "「うるま市」の記事一覧 琉球新報デジタル",
       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE81aVVzalRNdUw4N2cyeXh1Ry1kTlZNVFQxVkFOcDJSLTBnTk1UMm1zTVNfOXBrOW9OSlMyUnMwSTRiejh0U0JCNVJTWGVxRzdzZ1pVdVotdERtZw?oc=5",
       "sourceId": "ryukyu-shimpo",
@@ -1253,7 +2122,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-27T11:33:04+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-03T23:59:59+09:00",
@@ -1265,15 +2134,22 @@
       "requiresReview": false,
       "reviewReasons": [
         "うるま市内だが石川地区の根拠が不足",
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "5c27423c4ca5bec05693",
-      "relatedUrls": []
+      "fingerprint": "6814d2f2df66b31a1cd2",
+      "articleFingerprint": "5c27423c4ca5bec05693",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260827-okinawa-times-d0b4dbc959",
       "title": "全般気象解説情報（大雨・氾濫・落雷）（第５報）＝気象庁発表（２７日１０時４８分） ：気象解説情報 - 沖縄タイムス社",
+      "displayTitle": "全般気象解説情報(大雨・氾濫・落雷)(第5報)=気象庁発表(27日10時48分) :気象解説情報",
       "summary": "全般気象解説情報（大雨・氾濫・落雷）（第５報）＝気象庁発表（２７日１０時４８分） ：気象解説情報 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBGVXRFcVlWRV9SdE9jZTc0SHZ0bzlhR010Q3lhbG9RdlFuT0RFdFowaVlISEVXdGhEU2FuUnJISk9Mb0FnXzZsTGExcDJib215Z19PaVVWRlJzdGJXMXc?oc=5",
       "sourceId": "okinawa-times",
@@ -1281,7 +2157,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-27T10:48:32+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-03T23:59:59+09:00",
@@ -1292,15 +2168,22 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "d0b4dbc95996eb90d248",
-      "relatedUrls": []
+      "fingerprint": "227c42e5879aab856a83",
+      "articleFingerprint": "d0b4dbc95996eb90d248",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260827-okinawa-times-ea6d159813",
       "title": "石川県にレベル５大雨特別警報＝金沢地方気象台発表（２７日午前６時２０分） - 沖縄タイムス社",
+      "displayTitle": "石川県にレベル5大雨特別警報=金沢地方気象台発表(27日午前6時20分)",
       "summary": "石川県にレベル５大雨特別警報＝金沢地方気象台発表（２７日午前６時２０分） 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5rVFFVS2pVa3dRMFJrWms2Y3hvaTg1MTlTcDFZZWV6MEgtQmRaUVE4T0dZMHJ4MG12YWtWWEJqZXJsUHlwT1J3dkM1OTVHc255SXhuS2FLay1XSkNlU1E?oc=5",
       "sourceId": "okinawa-times",
@@ -1308,7 +2191,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-27T06:20:24+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-03T23:59:59+09:00",
@@ -1322,15 +2205,22 @@
       "requiresReview": false,
       "reviewReasons": [
         "石川県など他地域との一致を検出",
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "ea6d1598132e9231c21c",
-      "relatedUrls": []
+      "fingerprint": "03d994bc0bb2452803fa",
+      "articleFingerprint": "ea6d1598132e9231c21c",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260827-okinawa-times-1152f51db5",
       "title": "【PR・2026 秋の大型連休企画】“よくばり時間”を過ごそう 沖縄本島中北部の、おすすめスポット･施設4選 - 週刊ほ〜むぷらざ",
+      "displayTitle": "【PR・2026 秋の大型連休企画】“よくばり時間”を過ごそう 沖縄本島中北部の、おすすめスポット・施設4選 - 週刊ほ〜むぷらざ",
       "summary": "【PR・2026 秋の大型連休企画】“よくばり時間”を過ごそう 沖縄本島中北部の、おすすめスポット･施設4選 週刊ほ〜むぷらざ",
       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9fTFdCU0dPRWw1eFNRb25XeG8wQ05acjNIUUkzS0pfMGpKLWdKWnAyTy05RE1uNUhnZmxHbzB1Ui1NZWRmeExSWVpJNmFKdXprdlpzLTdaZ0pzc2JUWFBENlZB?oc=5",
       "sourceId": "okinawa-times",
@@ -1338,7 +2228,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-27T06:00:41+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-03T23:59:59+09:00",
@@ -1349,15 +2239,22 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "1152f51db5acd1262149",
-      "relatedUrls": []
+      "fingerprint": "bf066d5037cadfd03105",
+      "articleFingerprint": "1152f51db5acd1262149",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260827-okinawa-times-e796930b3f",
       "title": "富山、石川に線状降水帯 気象庁、非常に激しい雨 - 沖縄タイムス社",
+      "displayTitle": "富山、石川に線状降水帯 気象庁、非常に激しい雨",
       "summary": "富山、石川に線状降水帯 気象庁、非常に激しい雨 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5RZlZfXzZpYk5tWGc3MUxzNXY0U3JHQXp3eGp3UjM0MThBbTduWU9MLXpWTmhSWTcxNWlBam9td3Ria0VyM0xYdGdFNVBuMjdUcWxsX3dYaEx0cHNtMnc?oc=5",
       "sourceId": "okinawa-times",
@@ -1365,12 +2262,12 @@
       "sourceType": "media",
       "publishedAt": "2026-08-27T05:49:43+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-03T23:59:59+09:00",
       "category": "news",
-      "localScore": 5,
+      "localScore": 25,
       "localEvidence": [
         "石川"
       ],
@@ -1378,15 +2275,22 @@
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "e796930b3f9af4c0bde5",
-      "relatedUrls": []
+      "fingerprint": "175641e4e8d1b13a0b35",
+      "articleFingerprint": "e796930b3f9af4c0bde5",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260827-okinawa-times-96188d9460",
       "title": "石川県気象防災速報（線状降水帯直前予測）（第２報）＝金沢地方気象台発表（２７日５時４８分） ：気象防災速報 - 沖縄タイムス社",
+      "displayTitle": "石川県気象防災速報(線状降水帯直前予測)(第2報)=金沢地方気象台発表(27日5時48分) :気象防災速報",
       "summary": "石川県気象防災速報（線状降水帯直前予測）（第２報）＝金沢地方気象台発表（２７日５時４８分） ：気象防災速報 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBwOWozdmxxbGttUnBLWWFUV3NsU0VWNkViWl9LX2dzSjhmMndmTm85RTJVMTZjNUo1SDQyN1UtejA1Qk5OUGdzMmRmS3FpYURDZ2licEk5MVYwUWk1eVE?oc=5",
       "sourceId": "okinawa-times",
@@ -1394,7 +2298,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-27T05:48:58+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-01T09:19:37.139120+09:00",
+      "checkedAt": "2026-09-02T06:28:28.211112+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-03T23:59:59+09:00",
@@ -1408,11 +2312,17 @@
       "requiresReview": false,
       "reviewReasons": [
         "石川県など他地域との一致を検出",
-        "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "96188d9460730ba39355",
-      "relatedUrls": []
+      "fingerprint": "09b21cabd4eb04daf073",
+      "articleFingerprint": "96188d9460730ba39355",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260827-ryukyu-shimpo-7f53ba2c1b",
@@ -1432,14 +2342,16 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "石川地区との関連根拠が不足",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "7f53ba2c1b18d9e82bdf",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "rejected"
     },
     {
       "id": "20260826-okinawa-times-c6824817e3",
@@ -1461,15 +2373,17 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "石川県など他地域との一致を検出",
         "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "石川地区との関連根拠が不足",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "c6824817e3699bbfe00c",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "rejected"
     },
     {
       "id": "20260826-google-news-ishikawa-14aa95a86f",
@@ -1489,14 +2403,16 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "石川地区との関連根拠が不足",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "14aa95a86fc6e5511058",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "rejected"
     },
     {
       "id": "20260826-ryukyu-shimpo-14aa95a86f",
@@ -1516,14 +2432,16 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "石川地区との関連根拠が不足",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "14aa95a86fc6e5511058",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "rejected"
     },
     {
       "id": "20260826-ryukyu-shimpo-f689b0d4f8",
@@ -1543,15 +2461,17 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "うるま市内だが石川地区の根拠が不足",
         "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "石川地区との関連根拠が不足",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "f689b0d4f8bfe682c9ff",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "rejected"
     },
     {
       "id": "20260826-ryukyu-shimpo-7b5281cc6a",
@@ -1571,14 +2491,16 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
-        "石川地区との関連根拠が不足"
+        "石川地区との関連根拠が不足",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "7b5281cc6a923d47d717",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "rejected"
     },
     {
       "id": "20260825-google-news-coco-garden-8172d24401",
@@ -1598,15 +2520,17 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "published",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
         "石川地区との関連根拠が不足",
-        "従来ルールの公開対象。管理人確認候補として記録"
+        "従来ルールの公開対象。管理人確認候補として記録",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "8172d24401b5e611f187",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "published"
     },
     {
       "id": "20260825-google-news-bios-hill-4a422573d5",
@@ -1626,15 +2550,17 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "published",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため原典URL確認が必要",
         "石川地区との関連根拠が不足",
-        "従来ルールの公開対象。管理人確認候補として記録"
+        "従来ルールの公開対象。管理人確認候補として記録",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "4a422573d57b6b6a885c",
-      "relatedUrls": []
+      "relatedUrls": [],
+      "previousStatus": "published"
     }
   ]
 }

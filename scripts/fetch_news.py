@@ -25,6 +25,7 @@ updated_str = now_jst.strftime('%Y年%m月%d日 %H:%M')
 # 掲載期間：7日以内（過去）＋ 未来の情報は無制限
 DAYS_LIMIT  = 7
 cutoff_date = now_jst - timedelta(days=DAYS_LIMIT)
+AUDIT_RETENTION_DAYS = 30
 
 # 「ニュースがなかった日」を記録するファイル（日をまたいでも過去分の
 # 「〇月△日のニュースはありません」表示を消さずに残すための永続化）
@@ -62,10 +63,32 @@ DISTRICT_TERMS = [
 
 FACILITY_TERMS = [
     '石川多目的ドーム', '石川ドーム', '石川岳', '石川歴史民俗資料館',
-    '石川図書館', '石川少年自然の家',
+    '石川図書館', '石川少年自然の家', 'ビオスの丘',
+    'ココガーデンリゾート沖縄', 'ココ ガーデンリゾート オキナワ',
 ]
 
 OTHER_REGION_TERMS = ['石川県', '金沢市', '加賀市', '小松市', '能登']
+
+# 地名ではなく人名の「石川」を、石川地区として誤判定しやすい既知例。
+# 一般的な姓だけで除外すると地区名まで消えるため、実際に誤一致した氏名だけを扱う。
+OTHER_PERSON_TERMS = ['石川真佑', '石川祐希', '石川佳純', '石川文洋']
+
+# 誤掲載時の影響が大きいため、地域関連度が高くても自動掲載しない話題。
+HIGH_IMPACT_TERMS = [
+    '死亡', '死去', '訃報', '逮捕', '容疑', '犯罪', '事故', '火災', 'けが',
+    '負傷', '行方不明', '閉店', '廃業', '営業終了', '食中毒',
+]
+
+# 写真ギャラリーや転載記事で、媒体名だけが違うタイトルを出来事単位にそろえる。
+MEDIA_SUFFIXES = [
+    '沖縄タイムス社', '沖縄タイムス', '琉球新報デジタル', '琉球新報',
+    'PR TIMES', 'ウォーカープラス', 'walkerplus.com',
+]
+
+EVENT_TERMS = [
+    '祭り', 'まつり', 'フェスティバル', 'フェス', '大会', '講座',
+    '展示会', '企画展', '公演', 'イベント',
+]
 
 # ── RSSソース一覧 ──────────────────────────────────────────────────
 def gnews(query):
@@ -93,6 +116,8 @@ RSS_SOURCES = [
         'trust': 60,
         'method': 'google-news',
         'filter': False,
+        'facilityId': 'ishikawa-dome',
+        'facilityAliases': ['石川多目的ドーム', '石川ドーム'],
     },
     {
         'id': 'google-news-ishikawa-nature',
@@ -102,6 +127,8 @@ RSS_SOURCES = [
         'trust': 60,
         'method': 'google-news',
         'filter': False,
+        'facilityId': 'ishikawa-youth-center',
+        'facilityAliases': ['石川少年自然の家', '石川青少年の家'],
     },
     {
         'id': 'google-news-bios-hill',
@@ -111,6 +138,8 @@ RSS_SOURCES = [
         'trust': 60,
         'method': 'google-news',
         'filter': False,
+        'facilityId': 'bios-hill',
+        'facilityAliases': ['ビオスの丘'],
     },
     {
         'id': 'google-news-coco-garden',
@@ -120,6 +149,11 @@ RSS_SOURCES = [
         'trust': 60,
         'method': 'google-news',
         'filter': False,
+        'facilityId': 'coco-garden',
+        'facilityAliases': [
+            'ココガーデンリゾート沖縄', 'ココ ガーデンリゾート オキナワ',
+            'ココガーデンリゾート オキナワ',
+        ],
     },
     # ── ニュースサイト ──
     # ※以前設定していた琉球新報RSS(rss/news.xml)は廃止、うるま市公式RSSは404、
@@ -201,6 +235,45 @@ def normalize_text(text):
     value = unicodedata.normalize('NFKC', text or '').lower()
     return re.sub(r'[\s\W_]+', '', value, flags=re.UNICODE)
 
+def strip_gallery_prefix(title):
+    """画像番号や「写真：」を除き、公開表示・重複判定用の表題を返す。"""
+    value = unicodedata.normalize('NFKC', title or '').strip()
+    value = re.sub(
+        r'^(?:画像|写真)\s*\d+\s*/\s*\d+\s*[>＞]\s*',
+        '', value, flags=re.IGNORECASE,
+    )
+    value = re.sub(r'^(?:画像|写真)\s*[:：]\s*', '', value, flags=re.IGNORECASE)
+    return value.strip()
+
+def strip_media_suffix(title):
+    """タイトル末尾の媒体名を、重複比較のときだけ取り除く。"""
+    value = title or ''
+    for media in MEDIA_SUFFIXES:
+        value = re.sub(
+            rf'(?:\s*[-‐‑–—]\s*|\s+){re.escape(media)}\s*$', '', value,
+            flags=re.IGNORECASE,
+        )
+    return value.strip()
+
+def normalized_event_title(title):
+    """画像番号・媒体名・表記揺れを除いた出来事単位のタイトル。"""
+    return normalize_text(strip_media_suffix(strip_gallery_prefix(title)))
+
+def extract_event_markers(title):
+    """同じ施設の催しを媒体違いでまとめるため、明示された催し名を抽出する。"""
+    clean = strip_media_suffix(strip_gallery_prefix(title))
+    segments = re.findall(r'[「『]([^」』]{3,60})[」』]', clean)
+    before_parenthesis = re.split(r'[（(]', clean, maxsplit=1)[0].strip()
+    if before_parenthesis:
+        segments.append(before_parenthesis)
+    markers = []
+    for segment in segments:
+        if any(term in segment for term in EVENT_TERMS):
+            marker = normalize_text(segment)
+            if 4 <= len(marker) <= 60:
+                markers.append(marker)
+    return list(dict.fromkeys(markers))
+
 def canonical_url(url):
     """候補識別用にURLのフラグメントを除去する。"""
     try:
@@ -216,7 +289,7 @@ def assess_candidate(title, summary, source, pub_date, link):
     evidence = []
     reasons = []
 
-    if 'うるま市石川' in text:
+    if 'うるま市石川' in text or 'うるま石川' in text:
         score += 60
         evidence.append('うるま市石川')
     if 'うるま市' in text and '石川' in text:
@@ -225,8 +298,20 @@ def assess_candidate(title, summary, source, pub_date, link):
 
     facilities = [term for term in FACILITY_TERMS if term in text]
     if facilities:
-        score += 35
+        score += 60
         evidence.extend(facilities)
+
+    source_facilities = [
+        term for term in source.get('facilityAliases', []) if term in text
+    ]
+    if source_facilities:
+        score += 60
+        evidence.extend(source_facilities)
+    elif source.get('facilityId'):
+        # 専用検索から見つかっただけでは公開せず、原典で施設名を確認するまで保留する。
+        score += 35
+        evidence.append(f'取得元候補：{source["name"]}')
+        reasons.append('施設専用検索で発見したが、記事内の施設名確認が必要')
 
     districts = [term for term in DISTRICT_TERMS if term in text]
     if districts and ('沖縄' in text or 'うるま' in text):
@@ -242,18 +327,20 @@ def assess_candidate(title, summary, source, pub_date, link):
         score -= 100
         reasons.append('石川県など他地域との一致を検出')
 
+    other_people = [term for term in OTHER_PERSON_TERMS if term in text]
+    if other_people:
+        score -= 100
+        reasons.append('人名の「石川」との一致を検出')
+
     if 'うるま市' in text and not districts and '石川' not in text:
         score -= 25
         reasons.append('うるま市内だが石川地区の根拠が不足')
-
-    if source.get('method') == 'google-news':
-        score -= 20
-        reasons.append('Googleニュース経由のため原典URL確認が必要')
 
     score = max(0, min(100, score))
     confidence = int(source.get('trust', 50))
     if source.get('method') == 'google-news':
         confidence -= 15
+        reasons.append('Googleニュース経由のため配信元記事を確認できるリンクを使用')
     if pub_date is None:
         confidence -= 20
         reasons.append('公開日時を確認できない')
@@ -269,27 +356,41 @@ def assess_candidate(title, summary, source, pub_date, link):
 
     return score, list(dict.fromkeys(evidence)), confidence, list(dict.fromkeys(reasons))
 
-def build_candidate(title, summary, link, source, pub_date, public_eligible, previous=None):
-    """公開表示用の記事とは分離した、管理者確認用の候補データを作る。"""
+def classify_candidate(score, confidence, text, pub_date, link):
+    """候補を自動掲載・判断保留・自動除外の3経路へ分ける。"""
+    if score < 35:
+        return 'rejected', '石川地区との関連根拠が基準未満のため自動除外'
+    if any(term in text for term in HIGH_IMPACT_TERMS):
+        return 'review', '慎重な確認が必要な内容のため判断保留'
+    if score < 60:
+        return 'review', '石川地区との関係を確定できないため判断保留'
+    if pub_date is None:
+        return 'review', '公開日時を確認できないため判断保留'
+    if not link:
+        return 'review', '配信元へ移動できるURLがないため判断保留'
+    if confidence < 45:
+        return 'review', '情報源の信頼度が自動掲載基準未満のため判断保留'
+    return 'published', '石川地区・日時・情報源の自動掲載条件を満たした'
+
+def build_candidate(title, summary, link, source, pub_date, previous=None):
+    """公開記事とは分離した、自動判定・監査用の候補データを作る。"""
     previous = previous or {}
     normalized_title = normalize_text(title)
     normalized_url = canonical_url(link)
-    fingerprint = hashlib.sha256(
+    article_fingerprint = hashlib.sha256(
         f'{normalized_title}|{normalized_url}'.encode('utf-8')
     ).hexdigest()[:20]
+    event_title = normalized_event_title(title) or normalized_title
+    fingerprint = hashlib.sha256(event_title.encode('utf-8')).hexdigest()[:20]
     date_prefix = pub_date.strftime('%Y%m%d') if pub_date else now_jst.strftime('%Y%m%d')
-    candidate_id = f'{date_prefix}-{source["id"]}-{fingerprint[:10]}'
+    candidate_id = f'{date_prefix}-{source["id"]}-{article_fingerprint[:10]}'
     score, evidence, confidence, reasons = assess_candidate(
         title, summary, source, pub_date, link
     )
-
-    if public_eligible:
-        status = 'published'
-        reasons.append('従来ルールの公開対象。管理人確認候補として記録')
-    elif score >= 35:
-        status = 'review'
-    else:
-        status = 'rejected'
+    status, decision_reason = classify_candidate(
+        score, confidence, f'{title} {summary}', pub_date, link
+    )
+    reasons.append(decision_reason)
 
     expires_at = None
     if pub_date:
@@ -300,6 +401,7 @@ def build_candidate(title, summary, link, source, pub_date, public_eligible, pre
     return {
         'id': candidate_id,
         'title': title,
+        'displayTitle': strip_media_suffix(strip_gallery_prefix(title)),
         'summary': truncate(summary),
         'url': link,
         'sourceId': source['id'],
@@ -316,10 +418,14 @@ def build_candidate(title, summary, link, source, pub_date, public_eligible, pre
         'localEvidence': evidence,
         'confidence': confidence,
         'status': status,
-        'requiresReview': public_eligible or status == 'review',
+        'requiresReview': status == 'review',
         'reviewReasons': reasons,
         'fingerprint': fingerprint,
+        'articleFingerprint': article_fingerprint,
+        'facilityId': source.get('facilityId'),
+        'eventMarkers': extract_event_markers(title),
         'relatedUrls': [],
+        'duplicateOf': None,
     }
 
 def load_previous_candidates(path=CANDIDATES_FILE):
@@ -333,14 +439,19 @@ def load_previous_candidates(path=CANDIDATES_FILE):
         return {}
 
 def save_candidate_data(candidates, source_results):
-    """個人情報を含まないRSS候補だけを管理者確認用JSONへ保存する。"""
+    """個人情報を含まないRSS候補と自動判定結果を監査用JSONへ保存する。"""
     os.makedirs('news', exist_ok=True)
     candidates.sort(key=lambda item: item.get('publishedAt') or '', reverse=True)
     review_candidates = [item for item in candidates if item.get('requiresReview')]
+    status_counts = {
+        status: sum(1 for item in candidates if item.get('status') == status)
+        for status in ('published', 'review', 'rejected', 'duplicate', 'expired')
+    }
     data = {
         'updated': now_jst.isoformat(),
         'count': len(candidates),
         'reviewCount': len(review_candidates),
+        'statusCounts': status_counts,
         'sourceResults': source_results,
         'candidates': candidates,
     }
@@ -352,7 +463,12 @@ def save_candidate_data(candidates, source_results):
             'count': len(review_candidates),
             'candidates': review_candidates,
         }, f, ensure_ascii=False, indent=2)
-    print(f'[OK] ニュース候補を保存しました（全{len(candidates)}件／確認待ち{len(review_candidates)}件）')
+    print(
+        '[OK] ニュース自動判定を保存しました'
+        f'（掲載{status_counts["published"]}／保留{status_counts["review"]}'
+        f'／除外{status_counts["rejected"]}／重複{status_counts["duplicate"]}'
+        f'／期限切れ{status_counts["expired"]}）'
+    )
 
 def get_pub_date(entry):
     """RSSエントリから公開日時を取得してdatetimeで返す。取得できない場合はNone"""
@@ -394,15 +510,16 @@ def format_date_label(pub_date):
     """表示用の日付ラベルを返す"""
     if pub_date is None:
         return ''
+    month_day = f'{pub_date.month}/{pub_date.day}'
     delta = (pub_date.date() - now_jst.date()).days
     if delta > 0:
-        return f'予定 {pub_date.strftime("%m/%d")}'
+        return f'予定 {month_day}'
     elif delta == 0:
         return f'本日 {pub_date.strftime("%H:%M")}'
     elif delta == -1:
-        return f'昨日 {pub_date.strftime("%m/%d")}'
+        return f'昨日 {month_day}'
     else:
-        return pub_date.strftime('%m/%d')
+        return month_day
 
 # ── 管理人投稿の取得 ──────────────────────────────────────────────
 
@@ -510,13 +627,157 @@ def fetch_reader_posts():
 
 # ── メイン処理 ────────────────────────────────────────────────────
 
+def same_event(candidate_a, candidate_b):
+    """タイトル正規化、または同じ施設の明示的な催し名で同一内容か判定する。"""
+    if candidate_a.get('fingerprint') == candidate_b.get('fingerprint'):
+        return True
+    facility_a = candidate_a.get('facilityId')
+    facility_b = candidate_b.get('facilityId')
+    if not facility_a or facility_a != facility_b:
+        return False
+    markers_a = set(candidate_a.get('eventMarkers') or [])
+    markers_b = set(candidate_b.get('eventMarkers') or [])
+    return bool(markers_a & markers_b)
+
+def representative_rank(candidate):
+    """同一内容から、公開リンクとして最も分かりやすい代表記事を選ぶ。"""
+    status_rank = {'published': 3, 'review': 2, 'rejected': 1}.get(
+        candidate.get('status'), 0
+    )
+    clean_title = candidate.get('displayTitle') or candidate.get('title') or ''
+    is_clean_title = int(clean_title == (candidate.get('title') or ''))
+    source_rank = {'official': 3, 'media': 2, 'discovery': 1}.get(
+        candidate.get('sourceType'), 0
+    )
+    return (
+        status_rank,
+        is_clean_title,
+        source_rank,
+        int(candidate.get('confidence') or 0),
+        int(candidate.get('localScore') or 0),
+        candidate.get('publishedAt') or '',
+    )
+
+def deduplicate_candidates(candidates):
+    """同じ出来事をまとめ、代表1件だけを公開対象として残す。"""
+    count = len(candidates)
+    parents = list(range(count))
+
+    def find(index):
+        while parents[index] != index:
+            parents[index] = parents[parents[index]]
+            index = parents[index]
+        return index
+
+    def union(left, right):
+        root_left = find(left)
+        root_right = find(right)
+        if root_left != root_right:
+            parents[root_right] = root_left
+
+    for left in range(count):
+        for right in range(left + 1, count):
+            if same_event(candidates[left], candidates[right]):
+                union(left, right)
+
+    groups = {}
+    for index, candidate in enumerate(candidates):
+        groups.setdefault(find(index), []).append(candidate)
+
+    for group in groups.values():
+        if len(group) == 1:
+            group[0]['relatedCount'] = 0
+            continue
+        representative = max(group, key=representative_rank)
+        group_fingerprint = representative['fingerprint']
+        related_urls = []
+        for candidate in group:
+            candidate['fingerprint'] = group_fingerprint
+            if candidate is representative:
+                continue
+            if candidate.get('url') and candidate['url'] != representative.get('url'):
+                related_urls.append(candidate['url'])
+            candidate['status'] = 'duplicate'
+            candidate['requiresReview'] = False
+            candidate['duplicateOf'] = representative['id']
+            candidate['reviewReasons'] = [
+                f'同じ内容として代表記事「{representative["displayTitle"]}」へ統合'
+            ]
+        representative['relatedUrls'] = list(dict.fromkeys(related_urls))
+        representative['relatedCount'] = len(group) - 1
+        representative['reviewReasons'] = list(dict.fromkeys(
+            (representative.get('reviewReasons') or []) +
+            [f'同じ内容の記事{len(group) - 1}件を代表記事へ統合']
+        ))
+
+    return candidates
+
+def candidate_to_article(candidate):
+    """自動掲載候補を公開ニュースの既存形式へ変換する。"""
+    published_at = candidate.get('publishedAt')
+    pub_date = None
+    if published_at:
+        try:
+            pub_date = datetime.fromisoformat(published_at)
+        except ValueError:
+            pub_date = None
+    display_title = strip_media_suffix(
+        candidate.get('displayTitle') or candidate['title']
+    )
+    summary = strip_media_suffix(strip_gallery_prefix(candidate.get('summary') or ''))
+    if normalize_text(summary) == normalize_text(display_title):
+        summary = ''
+    return {
+        'title': display_title,
+        'summary': summary,
+        'link': candidate.get('url') or '',
+        'source': candidate.get('sourceName') or '',
+        'date_label': format_date_label(pub_date),
+        'pub_date': published_at or '',
+    }
+
+def parse_candidate_date(candidate):
+    """監査記録の保存期限判定に使える日時を返す。"""
+    for field in ('publishedAt', 'discoveredAt', 'checkedAt'):
+        value = candidate.get(field)
+        if not value:
+            continue
+        try:
+            parsed = datetime.fromisoformat(value)
+            if parsed.tzinfo is None:
+                parsed = parsed.replace(tzinfo=JST)
+            return parsed.astimezone(JST)
+        except (TypeError, ValueError):
+            continue
+    return None
+
+def merge_audit_history(candidates, previous_candidates):
+    """今回のフィードから消えた候補を30日間、期限切れの監査記録として残す。"""
+    current_ids = {candidate['id'] for candidate in candidates}
+    audit_cutoff = now_jst - timedelta(days=AUDIT_RETENTION_DAYS)
+    for candidate_id, previous in previous_candidates.items():
+        if candidate_id in current_ids:
+            continue
+        record_date = parse_candidate_date(previous)
+        if record_date and record_date < audit_cutoff:
+            continue
+        archived = dict(previous)
+        if archived.get('status') != 'expired':
+            archived['previousStatus'] = archived.get('status')
+            archived['status'] = 'expired'
+            archived['requiresReview'] = False
+            archived['reviewReasons'] = list(dict.fromkeys(
+                (archived.get('reviewReasons') or []) +
+                ['掲載・判断期間を過ぎたため監査記録へ移動']
+            ))
+        candidates.append(archived)
+    return candidates
+
 def fetch_articles():
-    """公開記事と管理者確認用候補を分けて収集する。"""
-    articles = []
+    """候補を収集し、自動掲載・判断保留・自動除外・重複へ分類する。"""
     candidates = []
     source_results = []
     previous_candidates = load_previous_candidates()
-    seen = set()
 
     for source in RSS_SOURCES:
         source_result = {
@@ -544,7 +805,6 @@ def fetch_articles():
                 source_results.append(source_result)
                 continue
 
-            count = 0
             for entry in feed.entries[:30]:
                 title   = strip_html(entry.get('title', ''))
                 summary = strip_html(entry.get('summary', entry.get('description', '')))
@@ -553,60 +813,18 @@ def fetch_articles():
                 if not title or not link:
                     continue
 
-                # 現在の公開条件は維持しつつ、条件外の記事も候補として評価する。
-                public_eligible = True
-                if source.get('filter') and not is_ishikawa_related(title, summary):
-                    public_eligible = False
-                # 石川地区限定フィルタ（うるま市全域ではなく石川地区に絞る）
-                # 'ishikawa_only' 指定のソースは「うるま」表記が無くても通す
-                strict = source.get('filter_strict')
-                if strict:
-                    require_uruma = (strict != 'ishikawa_only')
-                    if not is_ishikawa_district_related(title, summary, require_uruma):
-                        public_eligible = False
-
                 # 候補も公開記事と同じ期間を対象にする。
                 pub_date = get_pub_date(entry)
                 if not is_within_period(pub_date):
                     continue
 
-                # 重複除去（タイトル冒頭20文字で判定）
-                # 全角/半角の違い（例: ２０日 と 20日）で同一記事が二重掲載
-                # されないよう、NFKC正規化してから比較する
-                key = unicodedata.normalize('NFKC', title)[:20]
-                duplicate = key in seen
-                if duplicate:
-                    public_eligible = False
-
-                candidate = build_candidate(
-                    title, summary, link, source, pub_date, public_eligible
-                )
+                candidate = build_candidate(title, summary, link, source, pub_date)
                 previous = previous_candidates.get(candidate['id'])
                 if previous:
                     candidate['discoveredAt'] = previous.get('discoveredAt') or candidate['discoveredAt']
-                if duplicate:
-                    candidate['status'] = 'rejected'
-                    candidate['requiresReview'] = False
-                    candidate['reviewReasons'].append('同一タイトルの公開記事と重複')
                 candidates.append(candidate)
                 source_result['candidateCount'] += 1
-
-                if not public_eligible:
-                    continue
-                seen.add(key)
-
-                articles.append({
-                    'title':      title,
-                    'summary':    truncate(summary),
-                    'link':       link,
-                    'source':     source['name'],
-                    'date_label': format_date_label(pub_date),
-                    'pub_date':   pub_date.isoformat() if pub_date else '',
-                })
-                count += 1
-                source_result['publishedCount'] += 1
-
-            print(f"  → {count}件")
+            print(f"  → 候補{source_result['candidateCount']}件")
 
         except Exception as e:
             print(f"  ⚠️ エラー: {e}")
@@ -614,6 +832,20 @@ def fetch_articles():
             source_result['error'] = str(e)[:200]
         source_results.append(source_result)
 
+    deduplicate_candidates(candidates)
+    merge_audit_history(candidates, previous_candidates)
+    articles = [
+        candidate_to_article(candidate)
+        for candidate in candidates
+        if candidate.get('status') == 'published'
+    ]
+    source_by_id = {result['id']: result for result in source_results}
+    for candidate in candidates:
+        if candidate.get('status') != 'published':
+            continue
+        result = source_by_id.get(candidate.get('sourceId'))
+        if result:
+            result['publishedCount'] += 1
     return articles, candidates, source_results
 
 
@@ -642,7 +874,7 @@ def generate_html(articles, no_news_dates=None):
     </article>'''
             continue
         a = data
-        summary_html   = f'<p class="ns">{a["summary"]}</p>' if a['summary'] else ''
+        summary_html   = f'\n      <p class="ns">{a["summary"]}</p>' if a['summary'] else ''
         date_html      = f'<span class="date-label">{a["date_label"]}</span>' if a['date_label'] else ''
         is_future      = a['pub_date'] and a['pub_date'] > now_jst.isoformat()
         future_class   = ' future' if is_future else ''
@@ -657,8 +889,7 @@ def generate_html(articles, no_news_dates=None):
       <div class="ni-header">
         {title_html}
         {date_html}
-      </div>
-      {summary_html}
+      </div>{summary_html}
       <span class="src">出典：{a['source']}</span>
     </article>'''
 
