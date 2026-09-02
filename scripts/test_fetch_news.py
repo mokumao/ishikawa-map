@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
+from unittest.mock import patch
 from datetime import datetime
 import sys
 import types
@@ -52,6 +53,57 @@ def candidate(title, source, minute=0):
 
 
 class NewsAutomationTests(unittest.TestCase):
+    def test_bullfighting_page_link_and_dates_are_parsed(self):
+        city_html = '''
+        <p>更新日：2026年5月19日</p>
+        <a href="https://www.lequio-tourist.okinawa/travel_03.php">開催日程</a>
+        '''
+        detail_html = '''
+        <h2>観光闘牛 4月〜9月開催分</h2>
+        <p>2026年 8月11日 / 9月21日</p>
+        <h2>観光闘牛 10月〜3月開催分</h2>
+        <p>2026年 10月17日 / 11月14日 / 12月27日</p>
+        <p>2027年 1月23日 / 1月24日 / 2月20日 / 3月20日</p>
+        <p>2027年 1月23日</p>
+        '''
+        self.assertEqual(
+            fetch_news.extract_bullfighting_detail_url(city_html),
+            'https://www.lequio-tourist.okinawa/travel_03.php',
+        )
+        updated = fetch_news.extract_official_page_updated_at(city_html)
+        self.assertEqual(updated.date().isoformat(), '2026-05-19')
+        dates = fetch_news.parse_bullfighting_event_dates(detail_html)
+        self.assertEqual(
+            [item.date().isoformat() for item in dates],
+            [
+                '2026-08-11', '2026-09-21', '2026-10-17', '2026-11-14',
+                '2026-12-27', '2027-01-23', '2027-01-24', '2027-02-20',
+                '2027-03-20',
+            ],
+        )
+
+    def test_bullfighting_schedule_is_one_public_candidate(self):
+        city_html = '''
+        <p>更新日：2026年5月19日</p>
+        <a href="https://www.lequio-tourist.okinawa/travel_03.php">開催日程</a>
+        '''
+        detail_html = '''
+        <p>2026年 8月11日 / 9月21日 / 10月17日 / 11月14日 / 12月27日</p>
+        <p>2027年 1月23日 / 1月24日 / 2月20日 / 3月20日</p>
+        '''
+        with patch.object(fetch_news, 'fetch_page', side_effect=[city_html, detail_html]):
+            items, result = fetch_news.fetch_official_bullfighting_candidates({})
+        self.assertEqual(result['entryCount'], 9)
+        self.assertEqual(result['candidateCount'], 1)
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0]['status'], 'published')
+        self.assertEqual(items[0]['category'], 'event')
+        self.assertEqual(items[0]['scheduleGroup'], 'tourist-bullfighting-calendar')
+        self.assertEqual(items[0]['eventStartsAt'][:10], '2026-09-21')
+        self.assertEqual(items[0]['eventEndsAt'][:10], '2027-03-20')
+        public = fetch_news.candidate_to_article(items[0])
+        self.assertEqual(public['pub_date'][:10], '2026-09-21')
+
     def test_gallery_numbers_have_same_event_title(self):
         first = '画像7 / 23＞沖縄のホテルを紹介 - ウォーカープラス'
         second = '画像21/23＞沖縄のホテルを紹介 - ウォーカープラス'

@@ -13,7 +13,7 @@ import hashlib
 import unicodedata
 from datetime import datetime, timezone, timedelta
 from html import unescape, escape
-from urllib.parse import urlsplit, urlunsplit
+from urllib.parse import urljoin, urlsplit, urlunsplit
 
 # ── 日時設定（日本時間） ──────────────────────────────────────────
 JST = timezone(timedelta(hours=9))
@@ -32,6 +32,20 @@ AUDIT_RETENTION_DAYS = 30
 NO_NEWS_FILE = 'news/no_news_dates.json'
 CANDIDATES_FILE = 'news/candidates.json'
 REVIEW_FILE = 'news/review.json'
+
+# うるま市公式ページを入口に、公式に案内された開催情報だけを取得する。
+URUMA_BULLFIGHTING_PAGE_URL = (
+    'https://www.city.uruma.lg.jp/1007003000/contents/1408.html'
+)
+BULLFIGHTING_SOURCE = {
+    'id': 'uruma-official-bullfighting',
+    'name': 'うるま市公式案内・観光闘牛',
+    'type': 'official',
+    'trust': 100,
+    'method': 'official-page',
+    'facilityId': 'ishikawa-dome',
+    'facilityAliases': ['石川多目的ドーム'],
+}
 
 # 管理人投稿フォームの回答スプレッドシート（ウェブに公開したCSV）
 # Googleフォーム「石川ニュース投稿（管理人用）」→ シート「フォームの回答 1」
@@ -372,7 +386,8 @@ def classify_candidate(score, confidence, text, pub_date, link):
         return 'review', '情報源の信頼度が自動掲載基準未満のため判断保留'
     return 'published', '石川地区・日時・情報源の自動掲載条件を満たした'
 
-def build_candidate(title, summary, link, source, pub_date, previous=None):
+def build_candidate(title, summary, link, source, pub_date, previous=None,
+                    event_starts_at=None, event_ends_at=None, category='news'):
     """公開記事とは分離した、自動判定・監査用の候補データを作る。"""
     previous = previous or {}
     normalized_title = normalize_text(title)
@@ -382,18 +397,23 @@ def build_candidate(title, summary, link, source, pub_date, previous=None):
     ).hexdigest()[:20]
     event_title = normalized_event_title(title) or normalized_title
     fingerprint = hashlib.sha256(event_title.encode('utf-8')).hexdigest()[:20]
-    date_prefix = pub_date.strftime('%Y%m%d') if pub_date else now_jst.strftime('%Y%m%d')
+    effective_date = event_starts_at or pub_date
+    date_prefix = effective_date.strftime('%Y%m%d') if effective_date else now_jst.strftime('%Y%m%d')
     candidate_id = f'{date_prefix}-{source["id"]}-{article_fingerprint[:10]}'
     score, evidence, confidence, reasons = assess_candidate(
         title, summary, source, pub_date, link
     )
     status, decision_reason = classify_candidate(
-        score, confidence, f'{title} {summary}', pub_date, link
+        score, confidence, f'{title} {summary}', effective_date, link
     )
     reasons.append(decision_reason)
 
     expires_at = None
-    if pub_date:
+    if event_ends_at:
+        expires_at = event_ends_at.replace(hour=23, minute=59, second=59).isoformat()
+    elif event_starts_at:
+        expires_at = event_starts_at.replace(hour=23, minute=59, second=59).isoformat()
+    elif pub_date:
         expires_at = (pub_date + timedelta(days=DAYS_LIMIT)).replace(
             hour=23, minute=59, second=59
         ).isoformat()
@@ -410,10 +430,10 @@ def build_candidate(title, summary, link, source, pub_date, previous=None):
         'publishedAt': pub_date.isoformat() if pub_date else None,
         'discoveredAt': previous.get('discoveredAt') or now_jst.isoformat(),
         'checkedAt': now_jst.isoformat(),
-        'eventStartsAt': None,
-        'eventEndsAt': None,
+        'eventStartsAt': event_starts_at.isoformat() if event_starts_at else None,
+        'eventEndsAt': event_ends_at.isoformat() if event_ends_at else None,
         'expiresAt': expires_at,
-        'category': 'news',
+        'category': category,
         'localScore': score,
         'localEvidence': evidence,
         'confidence': confidence,
@@ -434,14 +454,28 @@ def load_previous_candidates(path=CANDIDATES_FILE):
     try:
         with open(path, 'r', encoding='utf-8') as f:
             data = json.load(f)
-        return {item['id']: item for item in data.get('candidates', []) if item.get('id')}
+        items = []
+        for item in data.get('candidates', []):
+            if not item.get('id'):
+                continue
+            if (
+                item.get('sourceId') == BULLFIGHTING_SOURCE['id']
+                and item.get('scheduleGroup') != 'tourist-bullfighting-calendar'
+            ):
+                # 開催日ごとに候補を作った旧試作形式は、監査記録へ引き継がない。
+                continue
+            items.append(item)
+        return {item['id']: item for item in items}
     except Exception:
         return {}
 
 def save_candidate_data(candidates, source_results):
     """個人情報を含まないRSS候補と自動判定結果を監査用JSONへ保存する。"""
     os.makedirs('news', exist_ok=True)
-    candidates.sort(key=lambda item: item.get('publishedAt') or '', reverse=True)
+    candidates.sort(
+        key=lambda item: item.get('eventStartsAt') or item.get('publishedAt') or '',
+        reverse=True,
+    )
     review_candidates = [item for item in candidates if item.get('requiresReview')]
     status_counts = {
         status: sum(1 for item in candidates if item.get('status') == status)
@@ -635,6 +669,10 @@ def same_event(candidate_a, candidate_b):
     facility_b = candidate_b.get('facilityId')
     if not facility_a or facility_a != facility_b:
         return False
+    event_date_a = (candidate_a.get('eventStartsAt') or '')[:10]
+    event_date_b = (candidate_b.get('eventStartsAt') or '')[:10]
+    if event_date_a and event_date_b and event_date_a != event_date_b:
+        return False
     markers_a = set(candidate_a.get('eventMarkers') or [])
     markers_b = set(candidate_b.get('eventMarkers') or [])
     return bool(markers_a & markers_b)
@@ -655,7 +693,7 @@ def representative_rank(candidate):
         source_rank,
         int(candidate.get('confidence') or 0),
         int(candidate.get('localScore') or 0),
-        candidate.get('publishedAt') or '',
+        candidate.get('eventStartsAt') or candidate.get('publishedAt') or '',
     )
 
 def deduplicate_candidates(candidates):
@@ -714,7 +752,7 @@ def deduplicate_candidates(candidates):
 
 def candidate_to_article(candidate):
     """自動掲載候補を公開ニュースの既存形式へ変換する。"""
-    published_at = candidate.get('publishedAt')
+    published_at = candidate.get('eventStartsAt') or candidate.get('publishedAt')
     pub_date = None
     if published_at:
         try:
@@ -738,7 +776,7 @@ def candidate_to_article(candidate):
 
 def parse_candidate_date(candidate):
     """監査記録の保存期限判定に使える日時を返す。"""
-    for field in ('publishedAt', 'discoveredAt', 'checkedAt'):
+    for field in ('eventStartsAt', 'publishedAt', 'discoveredAt', 'checkedAt'):
         value = candidate.get(field)
         if not value:
             continue
@@ -773,11 +811,149 @@ def merge_audit_history(candidates, previous_candidates):
         candidates.append(archived)
     return candidates
 
+def fetch_page(url):
+    """公開ページを1回だけ取得する。呼び出し側で失敗を監査記録へ残す。"""
+    import urllib.request
+    request = urllib.request.Request(
+        url,
+        headers={
+            'User-Agent': (
+                'IshikawaMapNewsBot/1.0 '
+                '(https://github.com/mokumao/ishikawa-map)'
+            )
+        },
+    )
+    with urllib.request.urlopen(request, timeout=30) as response:
+        return response.read().decode('utf-8', errors='replace')
+
+def extract_bullfighting_detail_url(city_html):
+    """うるま市公式ページが案内している観光闘牛ページを返す。"""
+    for href in re.findall(r'href=["\']([^"\']+)["\']', city_html or '', re.IGNORECASE):
+        absolute = urljoin(URUMA_BULLFIGHTING_PAGE_URL, unescape(href))
+        parsed = urlsplit(absolute)
+        if parsed.hostname == 'www.lequio-tourist.okinawa' and parsed.path.endswith('/travel_03.php'):
+            return absolute
+    return None
+
+def extract_official_page_updated_at(city_html):
+    """うるま市公式ページに表示された更新日をJSTで返す。"""
+    text = strip_html(city_html)
+    match = re.search(r'更新日\s*[：:]\s*(20\d{2})年\s*(\d{1,2})月\s*(\d{1,2})日', text)
+    if not match:
+        return None
+    try:
+        return datetime(
+            int(match.group(1)), int(match.group(2)), int(match.group(3)),
+            12, 0, tzinfo=JST,
+        )
+    except ValueError:
+        return None
+
+def parse_bullfighting_event_dates(detail_html):
+    """観光闘牛ページから、年をまたぐ開催日を重複なく抽出する。"""
+    text = strip_html(detail_html)
+    dates = []
+    current_year = None
+    pattern = re.compile(
+        r'(?:(20\d{2})年\s*)?(\d{1,2})月\s*(\d{1,2})日'
+    )
+    for match in pattern.finditer(text):
+        if match.group(1):
+            current_year = int(match.group(1))
+        if current_year is None:
+            continue
+        try:
+            event_date = datetime(
+                current_year, int(match.group(2)), int(match.group(3)),
+                0, 0, tzinfo=JST,
+            )
+        except ValueError:
+            continue
+        if event_date not in dates:
+            dates.append(event_date)
+    return sorted(dates)
+
+def fetch_official_bullfighting_candidates(previous_candidates):
+    """うるま市公式の案内を入口に、石川多目的ドームの開催日を候補化する。"""
+    result = {
+        'id': BULLFIGHTING_SOURCE['id'],
+        'name': BULLFIGHTING_SOURCE['name'],
+        'status': 'success',
+        'entryCount': 0,
+        'candidateCount': 0,
+        'publishedCount': 0,
+        'error': None,
+    }
+    candidates = []
+    try:
+        print(f"取得中: {BULLFIGHTING_SOURCE['name']} ...")
+        city_html = fetch_page(URUMA_BULLFIGHTING_PAGE_URL)
+        detail_url = extract_bullfighting_detail_url(city_html)
+        if not detail_url:
+            raise ValueError('うるま市公式ページから観光闘牛の案内先を確認できません')
+        page_updated_at = extract_official_page_updated_at(city_html)
+        detail_html = fetch_page(detail_url)
+        event_dates = parse_bullfighting_event_dates(detail_html)
+        result['entryCount'] = len(event_dates)
+        active_dates = [
+            date for date in event_dates if date.date() >= now_jst.date()
+        ]
+        if active_dates:
+            next_date = active_dates[0]
+            last_date = active_dates[-1]
+            title = (
+                '石川多目的ドーム 観光闘牛の開催日程'
+                f'（次回{next_date.year}年{next_date.month}月{next_date.day}日）'
+            )
+            schedule = '、'.join(
+                f'{date.year}年{date.month}月{date.day}日' for date in active_dates
+            )
+            summary = f'開催予定：{schedule}'
+            candidate = build_candidate(
+                title,
+                summary,
+                detail_url,
+                BULLFIGHTING_SOURCE,
+                page_updated_at,
+                event_starts_at=next_date,
+                event_ends_at=last_date,
+                category='event',
+            )
+            previous = previous_candidates.get(candidate['id'])
+            if previous:
+                candidate['discoveredAt'] = previous.get('discoveredAt') or candidate['discoveredAt']
+            candidate['reviewReasons'] = list(dict.fromkeys(
+                candidate['reviewReasons'] +
+                ['うるま市公式ページから案内された開催日程を確認']
+            ))
+            candidate['scheduleGroup'] = 'tourist-bullfighting-calendar'
+            candidates.append(candidate)
+            result['candidateCount'] = 1
+        if not event_dates:
+            result['status'] = 'empty'
+        elif not active_dates:
+            result['status'] = 'empty'
+        print(
+            f"  → 有効な開催日{len(active_dates)}件を"
+            f"{result['candidateCount']}件の候補に集約"
+        )
+    except Exception as error:
+        print(f"  ⚠️ 取得エラー: {error}")
+        result['status'] = 'error'
+        result['error'] = str(error)[:200]
+    return candidates, result
+
 def fetch_articles():
     """候補を収集し、自動掲載・判断保留・自動除外・重複へ分類する。"""
     candidates = []
     source_results = []
     previous_candidates = load_previous_candidates()
+
+    official_candidates, official_result = fetch_official_bullfighting_candidates(
+        previous_candidates
+    )
+    candidates.extend(official_candidates)
+    source_results.append(official_result)
 
     for source in RSS_SOURCES:
         source_result = {
