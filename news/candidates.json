@@ -1,15 +1,15 @@
 {
   "regionId": "ishikawa",
   "regionName": "石川",
-  "updated": "2026-09-02T23:15:26.452771+09:00",
-  "count": 114,
+  "updated": "2026-09-03T07:56:35.227352+09:00",
+  "count": 123,
   "reviewCount": 0,
   "statusCounts": {
     "published": 4,
     "review": 0,
-    "rejected": 56,
-    "duplicate": 15,
-    "expired": 39
+    "rejected": 45,
+    "duplicate": 13,
+    "expired": 61
   },
   "sourceResults": [
     {
@@ -34,7 +34,7 @@
       "id": "google-news-ishikawa-dome",
       "name": "石川ドーム・闘牛",
       "status": "success",
-      "entryCount": 100,
+      "entryCount": 59,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -43,7 +43,7 @@
       "id": "google-news-ishikawa-nature",
       "name": "石川少年自然の家",
       "status": "success",
-      "entryCount": 11,
+      "entryCount": 9,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -52,8 +52,8 @@
       "id": "google-news-bios-hill",
       "name": "ビオスの丘",
       "status": "success",
-      "entryCount": 61,
-      "candidateCount": 4,
+      "entryCount": 54,
+      "candidateCount": 3,
       "publishedCount": 1,
       "error": null
     },
@@ -61,8 +61,8 @@
       "id": "google-news-coco-garden",
       "name": "ココガーデンリゾート沖縄",
       "status": "success",
-      "entryCount": 67,
-      "candidateCount": 6,
+      "entryCount": 61,
+      "candidateCount": 5,
       "publishedCount": 1,
       "error": null
     },
@@ -80,7 +80,7 @@
       "name": "琉球新報",
       "status": "success",
       "entryCount": 100,
-      "candidateCount": 27,
+      "candidateCount": 18,
       "publishedCount": 1,
       "error": null
     },
@@ -97,7 +97,7 @@
       "id": "region-facility-ishikawa-ishikawa-mountain",
       "name": "石川施設：石川岳",
       "status": "success",
-      "entryCount": 9,
+      "entryCount": 10,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -106,7 +106,7 @@
       "id": "region-facility-ishikawa-ishikawa-history-museum",
       "name": "石川施設：石川歴史民俗資料館",
       "status": "success",
-      "entryCount": 43,
+      "entryCount": 40,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -115,7 +115,7 @@
       "id": "region-facility-ishikawa-ishikawa-library",
       "name": "石川施設：石川図書館",
       "status": "success",
-      "entryCount": 68,
+      "entryCount": 64,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -133,8 +133,8 @@
       "id": "region-discovery-ishikawa-government",
       "name": "石川：行政・自治会",
       "status": "success",
-      "entryCount": 49,
-      "candidateCount": 1,
+      "entryCount": 47,
+      "candidateCount": 0,
       "publishedCount": 0,
       "error": null
     },
@@ -151,7 +151,7 @@
       "id": "region-discovery-ishikawa-public-facilities",
       "name": "石川：公共施設",
       "status": "success",
-      "entryCount": 32,
+      "entryCount": 27,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -160,7 +160,7 @@
       "id": "region-discovery-ishikawa-education",
       "name": "石川：学校・教育",
       "status": "success",
-      "entryCount": 48,
+      "entryCount": 44,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -169,7 +169,7 @@
       "id": "region-discovery-ishikawa-safety",
       "name": "石川：防災・安全",
       "status": "success",
-      "entryCount": 50,
+      "entryCount": 45,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -179,7 +179,7 @@
       "name": "石川：健康・福祉",
       "status": "success",
       "entryCount": 38,
-      "candidateCount": 2,
+      "candidateCount": 1,
       "publishedCount": 0,
       "error": null
     },
@@ -187,7 +187,7 @@
       "id": "region-discovery-ishikawa-transport-construction",
       "name": "石川：交通・工事",
       "status": "success",
-      "entryCount": 50,
+      "entryCount": 47,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -196,7 +196,7 @@
       "id": "region-discovery-ishikawa-business-community",
       "name": "石川：商業・地域活動",
       "status": "success",
-      "entryCount": 47,
+      "entryCount": 45,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -214,7 +214,7 @@
       "sourceType": "official",
       "publishedAt": "2026-05-19T12:00:00+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": "2026-09-21T00:00:00+09:00",
       "eventEndsAt": "2027-03-20T00:00:00+09:00",
       "expiresAt": "2027-03-20T23:59:59+09:00",
@@ -241,6 +241,221 @@
       "relatedCount": 0
     },
     {
+      "id": "20260903-ryukyu-shimpo-a2d3ce0da1",
+      "title": "「市町村」の記事一覧 - 琉球新報デジタル",
+      "displayTitle": "「市町村」の記事一覧",
+      "summary": "「市町村」の記事一覧 琉球新報デジタル",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBzcDNQb0FoVkc1aFdmVnBENHhDSlQ4dGdQa05iQ2xQbUtsdk15RVVOLVhKMVg1UW9fbXpyWFM5dWhzSTN1bHdsVVpsdm1MU3JGLWQ4aUFENzI2ZUxUTXhxcQ?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-09-03T05:04:56+09:00",
+      "discoveredAt": "2026-09-03T07:56:35.227352+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-10T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "同じ内容の記事1件を代表記事へ統合"
+      ],
+      "fingerprint": "a679098e4f0aed36b7ad",
+      "articleFingerprint": "a2d3ce0da179a1675065",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [
+        "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9rd0szNXhNYWpPak13TGQ2MUZTSXMwZ2g4MFZkM1ZUUVUzV0tueXlvcE1iY0plZ3FOM2pHYUhkcjc3Yk5zaFBsMWc0T3UzWlRJSk5UekRWS2RBbXFXMkFFZg?oc=5"
+      ],
+      "duplicateOf": null,
+      "relatedCount": 1
+    },
+    {
+      "id": "20260903-okinawa-times-5097845a80",
+      "title": "秋田県気象防災速報（竜巻注意） 第２号＝気象庁発表 - 沖縄タイムス社",
+      "displayTitle": "秋田県気象防災速報(竜巻注意) 第2号=気象庁発表",
+      "summary": "秋田県気象防災速報（竜巻注意） 第２号＝気象庁発表 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9LckpvcnNiaU0xYnVxX2pZeFVzX1ZLUEY3TVVLb1lPZDRZRkNwZ2dsdzJJQ1RYUlI0YWdVMmtiNk9Fbjg4UGV1VjVXbzMwMERONEtnUXRNRHd2czNRMXc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-09-03T04:23:11+09:00",
+      "discoveredAt": "2026-09-03T07:56:35.227352+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-10T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "70b2fe914f073098514f",
+      "articleFingerprint": "5097845a806ac940fb4f",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260903-okinawa-times-c3ea2491cb",
+      "title": "石川県気象防災速報（竜巻注意） 第２号＝気象庁発表 - 沖縄タイムス社",
+      "displayTitle": "石川県気象防災速報(竜巻注意) 第2号=気象庁発表",
+      "summary": "石川県気象防災速報（竜巻注意） 第２号＝気象庁発表 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9lNWt1VWhOcDdHSTFMZHgtR0xpaFo4Y2pvQmcxV0pCMmExbUx6dFV4NDV6UTN6akhNR01kc0ZONllFVV9PeWhtVnZaSUpqVGlEQ0o4TlJhOWV1a1dEeVE?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-09-03T04:17:01+09:00",
+      "discoveredAt": "2026-09-03T07:56:35.227352+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-10T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [
+        "石川"
+      ],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "対象外地域との一致を検出",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "aeea8dae329cd342343a",
+      "articleFingerprint": "c3ea2491cba99973638a",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260903-okinawa-times-d0c5f7b0d2",
+      "title": "［セ・リーグ］［プロ野球］ヤクルト山野 初の10勝 - 沖縄タイムス社",
+      "displayTitle": "[セ・リーグ][プロ野球]ヤクルト山野 初の10勝",
+      "summary": "［セ・リーグ］［プロ野球］ヤクルト山野 初の10勝 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBvY3ZoR2Z4VEZtMEpEYVlyODhWeGZnU09OTGVQZnp3el9QSFZzUk0zNlB1TkRKbGNsNlV5Uk5KQ0o2eHRvQkVlakgtRE9fVmFTT2VXZWxNdGljczBOcXc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-09-03T03:58:00+09:00",
+      "discoveredAt": "2026-09-03T07:56:35.227352+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-10T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "b586affa2c4d805dcf9f",
+      "articleFingerprint": "d0c5f7b0d2002315866f",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260903-okinawa-times-45cf62855a",
+      "title": "ヤクルト石川 引退へ 最年長46歳 通算188勝 - 沖縄タイムス社",
+      "displayTitle": "ヤクルト石川 引退へ 最年長46歳 通算188勝",
+      "summary": "ヤクルト石川 引退へ 最年長46歳 通算188勝 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE45VWtRal9iWl9PWjBIZXBXVFFUeUwxaXZMM04xVmJKYnZ4REJyODVBUmVjbWQ5SS1wTm1ld0E0U2JFckZySnJxRzZxejJZSVRlUmU0VGZvanhoejBPU3c?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-09-03T03:57:00+09:00",
+      "discoveredAt": "2026-09-03T07:56:35.227352+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-10T23:59:59+09:00",
+      "category": "news",
+      "localScore": 25,
+      "localEvidence": [
+        "石川"
+      ],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "2ca645137880be8afd34",
+      "articleFingerprint": "45cf62855a3290d15dc9",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260903-okinawa-times-db1b6aca35",
+      "title": "石川県気象防災速報（竜巻注意） 第１号＝気象庁発表 - 沖縄タイムス社",
+      "displayTitle": "石川県気象防災速報(竜巻注意) 第1号=気象庁発表",
+      "summary": "石川県気象防災速報（竜巻注意） 第１号＝気象庁発表 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE16Nlc1ek90VlUxLTdGRllhUWRPSmYxNlpNb3hwa21YMDRtbnhEMFF2aUVaakYzR2EyNGdFUEcxaFBzSk1GMm0zaWJVLVlmRXMyWXdMeU9OdUtENWRVdmc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-09-03T03:23:10+09:00",
+      "discoveredAt": "2026-09-03T07:56:35.227352+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-10T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [
+        "石川"
+      ],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "対象外地域との一致を検出",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "f46b8cf678e81989997b",
+      "articleFingerprint": "db1b6aca356b45d2dfec",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
       "id": "20260902-ryukyu-shimpo-8f486c2bcb",
       "title": "結婚相談所代表が投資詐欺疑い マッチングアプリ悪用 - 琉球新報デジタル",
       "displayTitle": "結婚相談所代表が投資詐欺疑い マッチングアプリ悪用",
@@ -251,7 +466,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T22:34:06+09:00",
       "discoveredAt": "2026-09-02T23:05:35.042494+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -285,7 +500,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T22:19:47+09:00",
       "discoveredAt": "2026-09-02T23:05:35.042494+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -327,12 +542,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "88c9f68379d0a9106248",
       "articleFingerprint": "9252cd02a53ae61d1bed",
@@ -340,7 +556,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260902-ryukyu-shimpo-0695aaf8fe",
@@ -361,12 +578,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "6b9aa9b545c8f1b46efe",
       "articleFingerprint": "0695aaf8fe9a50302ac0",
@@ -374,7 +592,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260902-ryukyu-shimpo-e0a1fbf8a8",
@@ -387,7 +606,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T19:49:28+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -429,12 +648,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "176ad9819f231dc71083",
       "articleFingerprint": "66a1a2bf1793e53f0948",
@@ -442,7 +662,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260902-okinawa-times-1c5c4307ef",
@@ -493,7 +714,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T15:41:42+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -537,6 +758,44 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
+      "status": "expired",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
+      ],
+      "fingerprint": "d2e5d1d1b23a47ea8edb",
+      "articleFingerprint": "acdcb6399096c954e5d4",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0,
+      "previousStatus": "rejected"
+    },
+    {
+      "id": "20260902-okinawa-times-7cbb5159e0",
+      "title": "ヤクルトの石川が現役引退を表明 - 沖縄タイムス社",
+      "displayTitle": "ヤクルトの石川が現役引退を表明",
+      "summary": "ヤクルトの石川が現役引退を表明 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBVcmZTYXpzUWdMQ1VlUlRvUnNkNEhwTENiS3dJUUhJX3h2MnR4ZFFTQ2pNa1FpXzBWbkkyNlJoVld5cGdyb25RcmllZGpZREhTMUtLX2k5UEo1My1Wbnc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-09-02T15:21:16+09:00",
+      "discoveredAt": "2026-09-03T07:56:35.227352+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-09T23:59:59+09:00",
+      "category": "news",
+      "localScore": 25,
+      "localEvidence": [
+        "石川"
+      ],
+      "confidence": 65,
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
@@ -544,8 +803,8 @@
         "石川地区との関連根拠が不足",
         "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "d2e5d1d1b23a47ea8edb",
-      "articleFingerprint": "acdcb6399096c954e5d4",
+      "fingerprint": "589e6847d9529a840d46",
+      "articleFingerprint": "7cbb5159e05367c45732",
       "facilityId": null,
       "eventMarkers": [],
       "relatedUrls": [],
@@ -571,12 +830,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "7df6ed811610c4b4eef6",
       "articleFingerprint": "ea34ea9a1a00334dcd2a",
@@ -584,7 +844,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260902-google-news-bios-hill-c62fd3370e",
@@ -607,12 +868,13 @@
         "ビオスの丘"
       ],
       "confidence": 45,
-      "status": "published",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区・日時・情報源の自動掲載条件を満たした",
-        "同じ内容の記事4件を代表記事へ統合"
+        "同じ内容の記事4件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "08524ecd09bdafd07dc3",
       "articleFingerprint": "c62fd3370e33306063ae",
@@ -628,7 +890,8 @@
         "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9oM3hTVnVDWFlpR3pnbXRjUUVRa2NpOXdVNEdESW80ZWhjS3EwUVVaVW10TEUxMGRHcmFKamdjdU9LSzNXdzFtSTdDckJwUFNZVHkxUFNZMEk5VFY0bVE?oc=5"
       ],
       "duplicateOf": null,
-      "relatedCount": 4
+      "relatedCount": 4,
+      "previousStatus": "published"
     },
     {
       "id": "20260902-okinawa-times-e9615ff650",
@@ -641,7 +904,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T14:20:10+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -684,12 +947,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "5824e9e5b6ec89d609cc",
       "articleFingerprint": "397b8326c927597a657c",
@@ -697,7 +961,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260902-okinawa-times-fbb5ceb348",
@@ -710,7 +975,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T09:54:07+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -790,12 +1055,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "fa0737076cc389645054",
       "articleFingerprint": "7ab81365123528497b7b",
@@ -803,7 +1069,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260902-ryukyu-shimpo-a5b78b7ce7",
@@ -816,7 +1083,38 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T05:36:37+09:00",
       "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-09T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「「市町村」の記事一覧」へ統合"
+      ],
+      "fingerprint": "a679098e4f0aed36b7ad",
+      "articleFingerprint": "a5b78b7ce7ff38797b71",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20260903-ryukyu-shimpo-a2d3ce0da1"
+    },
+    {
+      "id": "20260902-ryukyu-shimpo-ae9abe9ef3",
+      "title": "また延期 北谷の新給食センターの完成 27年1月に 沖縄 - 琉球新報デジタル",
+      "displayTitle": "また延期 北谷の新給食センターの完成 27年1月に 沖縄",
+      "summary": "また延期 北谷の新給食センターの完成 27年1月に 沖縄 琉球新報デジタル",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1zbWlRMGZnUDY2YnlTQmFPVW5mXzRjb0hhS1dSeTdabXpuZkhKc05UYUhWU2s2Z3Zycm1BSHg2eG4zSC1HU0pRbW1Ic1NQMUtCN1g0NEdqMWdmcjR2c3c?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-09-02T05:00:00+09:00",
+      "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -831,8 +1129,8 @@
         "石川地区との関連根拠が不足",
         "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "a679098e4f0aed36b7ad",
-      "articleFingerprint": "a5b78b7ce7ff38797b71",
+      "fingerprint": "521680b29ca3c518b773",
+      "articleFingerprint": "ae9abe9ef32f3152667f",
       "facilityId": null,
       "eventMarkers": [],
       "relatedUrls": [],
@@ -858,13 +1156,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "うるま市内だが石川地区の根拠が不足",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "1b1f552326f9b75a8f9a",
       "articleFingerprint": "73fe4b0cfe4ae4adf48b",
@@ -872,41 +1171,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
-    },
-    {
-      "id": "20260902-ryukyu-shimpo-ae9abe9ef3",
-      "title": "また延期 北谷の新給食センターの完成 27年1月に 沖縄 - 琉球新報デジタル",
-      "displayTitle": "また延期 北谷の新給食センターの完成 27年1月に 沖縄",
-      "summary": "また延期 北谷の新給食センターの完成 27年1月に 沖縄 琉球新報デジタル",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1zbWlRMGZnUDY2YnlTQmFPVW5mXzRjb0hhS1dSeTdabXpuZkhKc05UYUhWU2s2Z3Zycm1BSHg2eG4zSC1HU0pRbW1Ic1NQMUtCN1g0NEdqMWdmcjR2c3c?oc=5",
-      "sourceId": "ryukyu-shimpo",
-      "sourceName": "琉球新報",
-      "sourceType": "media",
-      "publishedAt": "2026-09-02T05:00:00+09:00",
-      "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-09-09T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 65,
-      "status": "rejected",
-      "requiresReview": false,
-      "reviewReasons": [
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
-      ],
-      "fingerprint": "521680b29ca3c518b773",
-      "articleFingerprint": "ae9abe9ef32f3152667f",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260902-ryukyu-shimpo-2af377fd73",
@@ -927,12 +1193,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "2f54954bd92be53a33f8",
       "articleFingerprint": "2af377fd7357662bcccb",
@@ -940,7 +1207,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260902-ryukyu-shimpo-f156fa67f4",
@@ -961,12 +1229,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "139cfa4bc91f9e2551dd",
       "articleFingerprint": "f156fa67f4eff226ef14",
@@ -974,7 +1243,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260902-ryukyu-shimpo-013bbb4a87",
@@ -1061,7 +1331,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T03:57:00+09:00",
       "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -1096,7 +1366,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T03:57:00+09:00",
       "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -1168,7 +1438,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T19:32:22+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -1202,7 +1472,7 @@
       "sourceType": "official",
       "publishedAt": "2026-09-01T18:28:05+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -1246,12 +1516,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "6c164b74231f2e52991b",
       "articleFingerprint": "2ccd2c2c413163251357",
@@ -1259,7 +1530,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260901-ryukyu-shimpo-1a208853a3",
@@ -1272,7 +1544,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T11:25:39+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -1314,12 +1586,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "4eb0af4195180afae87b",
       "articleFingerprint": "4d6a77beb3ece3335605",
@@ -1327,7 +1600,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260901-okinawa-times-b45306aef4",
@@ -1340,7 +1614,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T10:09:00+09:00",
       "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -1377,7 +1651,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-09-01T10:09:00+09:00",
       "discoveredAt": "2026-09-02T23:15:26.452771+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -1410,7 +1684,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-09-01T10:08:30+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -1425,7 +1699,7 @@
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区・日時・情報源の自動掲載条件を満たした",
-        "同じ内容の記事5件を代表記事へ統合"
+        "同じ内容の記事4件を代表記事へ統合"
       ],
       "fingerprint": "c4e1d054620620d435a5",
       "articleFingerprint": "c5afe95a09e99b8bcfb8",
@@ -1433,13 +1707,12 @@
       "eventMarkers": [],
       "relatedUrls": [
         "https://news.google.com/rss/articles/CBMibkFVX3lxTE1nQnBiNWgxMTJBdjlacnF6Z0ZBZ1VyY0lsWHhkOHRaNWU2QWF4R0tZWVV2bEJHZ01COVZ2cVE3Uzc2TFNHb0tqUHBhZm02MXFjVlZTVHQ5dXByWTBQVzBIVXU0TDNtcTBZRDgyd0NB?oc=5",
-        "https://news.google.com/rss/articles/CBMibkFVX3lxTE85QlFPa3VfN3cwMnhsUktQY2U3dG5Yc3lMQmVPTXJDWDlWbW4wSXhIU0ZxS1o5aDNGTGRndXJHOW1tMXVGbzB4d3NuWW1NR1FqLXJhdDVnTEZ6c2RRa0FGYVFTbWEzWlFRSkg3RlBR?oc=5",
         "https://news.google.com/rss/articles/CBMibkFVX3lxTFBFMVAweU1aa2M2SWYwbzlLYjlwRDdMcGFoZzNSQV95SUVhR2stYkhyYnFJZmRHVlFkUmJPYTJLWDAxajdiVTFoZ1d3ZFlkbmlNX1YzSmM5VHpTSXhqakZOZVkzeXRtQ0dhTElSdVB3?oc=5",
-        "https://news.google.com/rss/articles/CBMibkFVX3lxTE4yZll1XzNGSWVBWW1ISUJ3ckZ4Z3hDaWxGRm9DV1JzLV9xSkk2d0lnaldxVU1KWWM3c1pTX2JZU1RiMkQweGRqQlZPelE4MHVJSE1KWUF4U3lnQlJGVjZfbFVYbVZybExjbmJicUx3?oc=5",
+        "https://news.google.com/rss/articles/CBMibkFVX3lxTE85QlFPa3VfN3cwMnhsUktQY2U3dG5Yc3lMQmVPTXJDWDlWbW4wSXhIU0ZxS1o5aDNGTGRndXJHOW1tMXVGbzB4d3NuWW1NR1FqLXJhdDVnTEZ6c2RRa0FGYVFTbWEzWlFRSkg3RlBR?oc=5",
         "https://news.google.com/rss/articles/CBMibkFVX3lxTE9YZU5GT1RCMU1tS0tFb3VPbDBUa1Vja3ZPSGNXRXY0MzJkUFRHM2hGWUxmTXNKdnlUZktfdHdzTjZ2WGFqZGRHWG1ldW9nOEF5eEtaNEc5Yjl3R0NnZ2JRUm9iVmZ3a0hjaTJFVDRn?oc=5"
       ],
       "duplicateOf": null,
-      "relatedCount": 5
+      "relatedCount": 4
     },
     {
       "id": "20260901-google-news-coco-garden-de03f32d16",
@@ -1498,7 +1771,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T06:30:00+09:00",
       "discoveredAt": "2026-09-02T07:56:48.765470+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -1600,7 +1873,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T03:57:00+09:00",
       "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -1639,7 +1912,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T03:57:00+09:00",
       "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -1672,7 +1945,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T03:57:00+09:00",
       "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -1805,14 +2078,15 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "うるま市内だが石川地区の根拠が不足",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "石川地区との関連根拠が基準未満のため自動除外",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容の記事1件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "fb30fd9a2916ff8c9638",
       "articleFingerprint": "10af6a52c823048c75fc",
@@ -1820,7 +2094,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260901-region-discovery-ishikawa-health-welfare-10af6a52c8",
@@ -1841,17 +2116,19 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "duplicate",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「うるま市民健康づくりアンケート へのご協力について - city.uruma.lg.jp」へ統合"
+        "同じ内容として代表記事「うるま市民健康づくりアンケート へのご協力について - city.uruma.lg.jp」へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "fb30fd9a2916ff8c9638",
       "articleFingerprint": "10af6a52c823048c75fc",
       "facilityId": null,
       "eventMarkers": [],
       "relatedUrls": [],
-      "duplicateOf": "20260901-region-discovery-ishikawa-government-10af6a52c8"
+      "duplicateOf": "20260901-region-discovery-ishikawa-government-10af6a52c8",
+      "previousStatus": "duplicate"
     },
     {
       "id": "20260831-okinawa-times-e9088f7ea1",
@@ -1864,7 +2141,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T22:11:23+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -1901,7 +2178,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-08-31T21:26:54+09:00",
       "discoveredAt": "2026-09-02T07:56:48.765470+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -1969,7 +2246,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T16:43:49+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -2003,7 +2280,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T15:49:40+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -2084,12 +2361,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "4de5b119ff48463848fd",
       "articleFingerprint": "3faf7c2621a47532be94",
@@ -2097,7 +2375,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260831-ryukyu-shimpo-290e7ec3ce",
@@ -2110,7 +2389,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T05:00:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -2144,7 +2423,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T05:00:00+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -2178,7 +2457,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T05:00:00+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-02T22:16:40.399363+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -2186,13 +2465,12 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "expired",
+      "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
       "fingerprint": "c243435a29a81b5d214f",
       "articleFingerprint": "5242a7a2a53942823330",
@@ -2200,8 +2478,7 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0,
-      "previousStatus": "rejected"
+      "relatedCount": 0
     },
     {
       "id": "20260831-ryukyu-shimpo-c8c3d68084",
@@ -2250,7 +2527,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T03:57:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -2321,13 +2598,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "うるま市内だが石川地区の根拠が不足",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "f61f3ab07f1b85f21c62",
       "articleFingerprint": "111f0e5e0089f094cc81",
@@ -2335,7 +2613,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260830-google-news-coco-garden-c5e3ef15b8",
@@ -2523,7 +2802,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-08-30T13:48:14+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-06T23:59:59+09:00",
@@ -2591,7 +2870,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-08-30T13:22:07+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-06T23:59:59+09:00",
@@ -2659,7 +2938,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-30T07:40:00+09:00",
       "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-06T23:59:59+09:00",
@@ -2693,7 +2972,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-30T06:00:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-06T23:59:59+09:00",
@@ -2756,7 +3035,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-30T05:00:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-06T23:59:59+09:00",
@@ -2819,7 +3098,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-30T03:57:00+09:00",
       "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-06T23:59:59+09:00",
@@ -2854,7 +3133,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-30T03:57:00+09:00",
       "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-06T23:59:59+09:00",
@@ -2888,7 +3167,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-30T01:58:31+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-06T23:59:59+09:00",
@@ -2925,7 +3204,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-29T20:45:55+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-05T23:59:59+09:00",
@@ -2969,17 +3248,19 @@
         "ココ ガーデンリゾート オキナワ"
       ],
       "confidence": 45,
-      "status": "duplicate",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート」へ統合"
+        "同じ内容として代表記事「沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート」へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "c4e1d054620620d435a5",
       "articleFingerprint": "f350cdcf7204207ee028",
       "facilityId": "coco-garden",
       "eventMarkers": [],
       "relatedUrls": [],
-      "duplicateOf": "20260901-google-news-coco-garden-c5afe95a09"
+      "duplicateOf": "20260901-google-news-coco-garden-c5afe95a09",
+      "previousStatus": "duplicate"
     },
     {
       "id": "20260829-google-news-coco-garden-e526b7f2e9",
@@ -3027,7 +3308,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-08-29T12:23:52+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-05T23:59:59+09:00",
@@ -3095,7 +3376,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-28T17:54:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
@@ -3129,7 +3410,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-28T16:00:00+09:00",
       "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
@@ -3163,7 +3444,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-28T15:47:26+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-02T22:16:40.399363+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
@@ -3171,13 +3452,12 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "expired",
+      "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
       "fingerprint": "14e05c2da5b1c460453f",
       "articleFingerprint": "248ac07ba5379f438334",
@@ -3185,8 +3465,7 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0,
-      "previousStatus": "rejected"
+      "relatedCount": 0
     },
     {
       "id": "20260828-ryukyu-shimpo-16bab9dec7",
@@ -3199,7 +3478,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-28T11:22:06+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
@@ -3223,6 +3502,49 @@
       "relatedCount": 0
     },
     {
+      "id": "20260828-google-news-bios-hill-181e3b02d9",
+      "title": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - mantan-web.jp",
+      "displayTitle": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - mantan-web.jp",
+      "summary": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 mantan-web.jp",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPelh1aS1TUlV6bGRiV2ZxbUpJWFo1YlFHRlNYZklwNkV3VjhJMExLSUdjSUNJS3doTXZrSFB6X2J0NU5sTV9IUFlNSXRCdVRsaVJUYVpLNVpwTktIMHBlRXNESlY4R2lqUlFZRE9OamR3OElHdWJ3NlMwNWw3VGxtMjJLajhOd3Bw?oc=5",
+      "sourceId": "google-news-bios-hill",
+      "sourceName": "ビオスの丘",
+      "sourceType": "discovery",
+      "publishedAt": "2026-08-28T10:08:14+09:00",
+      "discoveredAt": "2026-09-03T07:56:35.227352+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-04T23:59:59+09:00",
+      "category": "news",
+      "localScore": 100,
+      "localEvidence": [
+        "ビオスの丘"
+      ],
+      "confidence": 45,
+      "status": "published",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区・日時・情報源の自動掲載条件を満たした",
+        "同じ内容の記事3件を代表記事へ統合"
+      ],
+      "fingerprint": "d72229c4b369ee700fb2",
+      "articleFingerprint": "181e3b02d9666f720444",
+      "facilityId": "bios-hill",
+      "eventMarkers": [
+        "らんの花祭り秋",
+        "沖縄ビオスの丘を約1万輪のデンファレが彩るらんの花祭り秋9月12日開幕mantanwebjp"
+      ],
+      "relatedUrls": [
+        "https://news.google.com/rss/articles/CBMiakFVX3lxTE05SHphMEZHZXRHU2JybUkyaVNrQl8tRnRkRENXY3loc0dIa3VDSzdrMmFvbWJTMUVKbnlqdU5HaXJTNEhVWXctTk5ROGk4bGdnQlFNQUk3dXprakNWYWRCSFpJVnVTbWVCbmc?oc=5",
+        "https://news.google.com/rss/articles/CBMiZkFVX3lxTFA3cUpZYTVMdTZieHJsNjl6Q3FTempIWkpLWWFUUWEzM2NOUzg3TU41QVE3T00zTDhWS082VjJpWE0yWDdUcmhIOVVWdTZKZ2Uxd3lxZ01JTnNzUmViZ2dmTVZBRjhvZw?oc=5",
+        "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9oM3hTVnVDWFlpR3pnbXRjUUVRa2NpOXdVNEdESW80ZWhjS3EwUVVaVW10TEUxMGRHcmFKamdjdU9LSzNXdzFtSTdDckJwUFNZVHkxUFNZMEk5VFY0bVE?oc=5"
+      ],
+      "duplicateOf": null,
+      "relatedCount": 3
+    },
+    {
       "id": "20260828-google-news-bios-hill-10c7e477c8",
       "title": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - Mantan Web",
       "displayTitle": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - Mantan Web",
@@ -3243,10 +3565,11 @@
         "ビオスの丘"
       ],
       "confidence": 45,
-      "status": "duplicate",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「ビオスの丘で「らんの花祭り 秋」、約1万輪のデンファレが亜熱帯の森彩る - 株式会社旅行新聞新社」へ統合"
+        "同じ内容として代表記事「ビオスの丘で「らんの花祭り 秋」、約1万輪のデンファレが亜熱帯の森彩る - 株式会社旅行新聞新社」へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "08524ecd09bdafd07dc3",
       "articleFingerprint": "10c7e477c879f3934ae6",
@@ -3256,7 +3579,8 @@
         "沖縄ビオスの丘を約1万輪のデンファレが彩るらんの花祭り秋9月12日開幕mantanweb"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20260902-google-news-bios-hill-c62fd3370e"
+      "duplicateOf": "20260902-google-news-bios-hill-c62fd3370e",
+      "previousStatus": "duplicate"
     },
     {
       "id": "20260828-google-news-ishikawa-53f94448dd",
@@ -3269,7 +3593,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-08-28T05:00:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
@@ -3304,7 +3628,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-28T05:00:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
@@ -3332,40 +3656,6 @@
       "relatedCount": 3
     },
     {
-      "id": "20260828-ryukyu-shimpo-309f1a2de7",
-      "title": "ご先祖様に「またね」 旧盆、みんなでウークイ 感謝込めて手を合わせ 沖縄 - 琉球新報デジタル",
-      "displayTitle": "ご先祖様に「またね」 旧盆、みんなでウークイ 感謝込めて手を合わせ 沖縄",
-      "summary": "ご先祖様に「またね」 旧盆、みんなでウークイ 感謝込めて手を合わせ 沖縄 琉球新報デジタル",
-      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE8xQVNUbzdQSDVIS0Rtc3FXYmc2VFl6RW9SZDBDLUVxN081YlNPUW5ILWl6RG9IRVpBM0MzVHBJR3JPX2dZZGF1Q0RYbjVwYW96TnluTDY5QUtNUENkdzd6Sg?oc=5",
-      "sourceId": "ryukyu-shimpo",
-      "sourceName": "琉球新報",
-      "sourceType": "media",
-      "publishedAt": "2026-08-28T05:00:00+09:00",
-      "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-09-04T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 65,
-      "status": "rejected",
-      "requiresReview": false,
-      "reviewReasons": [
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
-      ],
-      "fingerprint": "38f17095b1190c40990f",
-      "articleFingerprint": "309f1a2de739e6a224b7",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": null,
-      "relatedCount": 0
-    },
-    {
       "id": "20260828-region-discovery-ishikawa-events-culture-53f94448dd",
       "title": "70代や児童らがエイサー 40年ぶり多数で演舞 次世代へつなぐ うるま石川山城 沖縄 - 琉球新報デジタル",
       "displayTitle": "70代や児童らがエイサー 40年ぶり多数で演舞 次世代へつなぐ うるま石川山城 沖縄",
@@ -3376,7 +3666,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-08-28T05:00:00+09:00",
       "discoveredAt": "2026-09-02T23:05:35.042494+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
@@ -3411,7 +3701,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-08-28T05:00:00+09:00",
       "discoveredAt": "2026-09-02T23:05:35.042494+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
@@ -3434,6 +3724,42 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": "20260828-ryukyu-shimpo-53f94448dd"
+    },
+    {
+      "id": "20260828-ryukyu-shimpo-309f1a2de7",
+      "title": "ご先祖様に「またね」 旧盆、みんなでウークイ 感謝込めて手を合わせ 沖縄 - 琉球新報デジタル",
+      "displayTitle": "ご先祖様に「またね」 旧盆、みんなでウークイ 感謝込めて手を合わせ 沖縄",
+      "summary": "ご先祖様に「またね」 旧盆、みんなでウークイ 感謝込めて手を合わせ 沖縄 琉球新報デジタル",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE8xQVNUbzdQSDVIS0Rtc3FXYmc2VFl6RW9SZDBDLUVxN081YlNPUW5ILWl6RG9IRVpBM0MzVHBJR3JPX2dZZGF1Q0RYbjVwYW96TnluTDY5QUtNUENkdzd6Sg?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-08-28T05:00:00+09:00",
+      "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
+      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-04T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "expired",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
+      ],
+      "fingerprint": "38f17095b1190c40990f",
+      "articleFingerprint": "309f1a2de739e6a224b7",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260828-okinawa-times-bd83260d1c",
@@ -3482,7 +3808,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-27T16:33:08+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-03T23:59:59+09:00",
@@ -3544,6 +3870,151 @@
       "previousStatus": "rejected"
     },
     {
+      "id": "20260827-okinawa-times-73094a5d54",
+      "title": "石川県にレベル５大雨特別警報＝金沢地方気象台発表（２７日午後２時３２分） - 沖縄タイムス社",
+      "displayTitle": "石川県にレベル5大雨特別警報=金沢地方気象台発表(27日午後2時32分)",
+      "summary": "石川県にレベル５大雨特別警報＝金沢地方気象台発表（２７日午後２時３２分） 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE92M1AwQlYteGZNMTcycVRybS13QmUxeC1BTFp4ZlVEaXRzZ3hiSzlpQWJRbFB3LTlySDB2UDNoa2ZJSHI2TnJpVkJ6UUxFTUlURU9lZWZ3YnAyc2FPLWc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-08-27T14:32:29+09:00",
+      "discoveredAt": "2026-09-03T07:56:35.227352+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-03T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [
+        "石川"
+      ],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "対象外地域との一致を検出",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "53c6e7ee21e163f94ddd",
+      "articleFingerprint": "73094a5d540f4ee08082",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260827-google-news-bios-hill-dea9cb0c41",
+      "title": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - PR TIMES",
+      "displayTitle": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕",
+      "summary": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 PR TIMES",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE05SHphMEZHZXRHU2JybUkyaVNrQl8tRnRkRENXY3loc0dIa3VDSzdrMmFvbWJTMUVKbnlqdU5HaXJTNEhVWXctTk5ROGk4bGdnQlFNQUk3dXprakNWYWRCSFpJVnVTbWVCbmc?oc=5",
+      "sourceId": "google-news-bios-hill",
+      "sourceName": "ビオスの丘",
+      "sourceType": "discovery",
+      "publishedAt": "2026-08-27T14:26:49+09:00",
+      "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-03T23:59:59+09:00",
+      "category": "news",
+      "localScore": 100,
+      "localEvidence": [
+        "ビオスの丘"
+      ],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - mantan-web.jp」へ統合"
+      ],
+      "fingerprint": "d72229c4b369ee700fb2",
+      "articleFingerprint": "dea9cb0c41df326cbee9",
+      "facilityId": "bios-hill",
+      "eventMarkers": [
+        "らんの花祭り秋",
+        "沖縄ビオスの丘を約1万輪のデンファレが彩るらんの花祭り秋9月12日開幕"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": "20260828-google-news-bios-hill-181e3b02d9"
+    },
+    {
+      "id": "20260827-google-news-bios-hill-bb1f697376",
+      "title": "写真：沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - 沖縄タイムス社",
+      "displayTitle": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕",
+      "summary": "写真：沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFA3cUpZYTVMdTZieHJsNjl6Q3FTempIWkpLWWFUUWEzM2NOUzg3TU41QVE3T00zTDhWS082VjJpWE0yWDdUcmhIOVVWdTZKZ2Uxd3lxZ01JTnNzUmViZ2dmTVZBRjhvZw?oc=5",
+      "sourceId": "google-news-bios-hill",
+      "sourceName": "ビオスの丘",
+      "sourceType": "discovery",
+      "publishedAt": "2026-08-27T14:26:49+09:00",
+      "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-03T23:59:59+09:00",
+      "category": "news",
+      "localScore": 100,
+      "localEvidence": [
+        "ビオスの丘"
+      ],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - mantan-web.jp」へ統合"
+      ],
+      "fingerprint": "d72229c4b369ee700fb2",
+      "articleFingerprint": "bb1f6973769ba145466a",
+      "facilityId": "bios-hill",
+      "eventMarkers": [
+        "らんの花祭り秋",
+        "沖縄ビオスの丘を約1万輪のデンファレが彩るらんの花祭り秋9月12日開幕"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": "20260828-google-news-bios-hill-181e3b02d9"
+    },
+    {
+      "id": "20260827-okinawa-times-ba45185e2d",
+      "title": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - 沖縄タイムス社",
+      "displayTitle": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕",
+      "summary": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9oM3hTVnVDWFlpR3pnbXRjUUVRa2NpOXdVNEdESW80ZWhjS3EwUVVaVW10TEUxMGRHcmFKamdjdU9LSzNXdzFtSTdDckJwUFNZVHkxUFNZMEk5VFY0bVE?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-08-27T14:26:49+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-03T23:59:59+09:00",
+      "category": "news",
+      "localScore": 60,
+      "localEvidence": [
+        "ビオスの丘"
+      ],
+      "confidence": 65,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - mantan-web.jp」へ統合"
+      ],
+      "fingerprint": "d72229c4b369ee700fb2",
+      "articleFingerprint": "ba45185e2d917f06c0c9",
+      "facilityId": null,
+      "eventMarkers": [
+        "らんの花祭り秋",
+        "沖縄ビオスの丘を約1万輪のデンファレが彩るらんの花祭り秋9月12日開幕"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": "20260828-google-news-bios-hill-181e3b02d9"
+    },
+    {
       "id": "20260827-google-news-bios-hill-593b444c73",
       "title": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - prtimes.jp",
       "displayTitle": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - prtimes.jp",
@@ -3564,114 +4035,6 @@
         "ビオスの丘"
       ],
       "confidence": 45,
-      "status": "duplicate",
-      "requiresReview": false,
-      "reviewReasons": [
-        "同じ内容として代表記事「ビオスの丘で「らんの花祭り 秋」、約1万輪のデンファレが亜熱帯の森彩る - 株式会社旅行新聞新社」へ統合"
-      ],
-      "fingerprint": "08524ecd09bdafd07dc3",
-      "articleFingerprint": "593b444c73802e43a985",
-      "facilityId": "bios-hill",
-      "eventMarkers": [
-        "らんの花祭り秋",
-        "沖縄ビオスの丘を約1万輪のデンファレが彩るらんの花祭り秋9月12日開幕prtimesjp"
-      ],
-      "relatedUrls": [],
-      "duplicateOf": "20260902-google-news-bios-hill-c62fd3370e"
-    },
-    {
-      "id": "20260827-google-news-bios-hill-bb1f697376",
-      "title": "写真：沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - 沖縄タイムス社",
-      "displayTitle": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕",
-      "summary": "写真：沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFA3cUpZYTVMdTZieHJsNjl6Q3FTempIWkpLWWFUUWEzM2NOUzg3TU41QVE3T00zTDhWS082VjJpWE0yWDdUcmhIOVVWdTZKZ2Uxd3lxZ01JTnNzUmViZ2dmTVZBRjhvZw?oc=5",
-      "sourceId": "google-news-bios-hill",
-      "sourceName": "ビオスの丘",
-      "sourceType": "discovery",
-      "publishedAt": "2026-08-27T14:26:49+09:00",
-      "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-09-03T23:59:59+09:00",
-      "category": "news",
-      "localScore": 100,
-      "localEvidence": [
-        "ビオスの丘"
-      ],
-      "confidence": 45,
-      "status": "duplicate",
-      "requiresReview": false,
-      "reviewReasons": [
-        "同じ内容として代表記事「ビオスの丘で「らんの花祭り 秋」、約1万輪のデンファレが亜熱帯の森彩る - 株式会社旅行新聞新社」へ統合"
-      ],
-      "fingerprint": "08524ecd09bdafd07dc3",
-      "articleFingerprint": "bb1f6973769ba145466a",
-      "facilityId": "bios-hill",
-      "eventMarkers": [
-        "らんの花祭り秋",
-        "沖縄ビオスの丘を約1万輪のデンファレが彩るらんの花祭り秋9月12日開幕"
-      ],
-      "relatedUrls": [],
-      "duplicateOf": "20260902-google-news-bios-hill-c62fd3370e"
-    },
-    {
-      "id": "20260827-okinawa-times-ba45185e2d",
-      "title": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - 沖縄タイムス社",
-      "displayTitle": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕",
-      "summary": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9oM3hTVnVDWFlpR3pnbXRjUUVRa2NpOXdVNEdESW80ZWhjS3EwUVVaVW10TEUxMGRHcmFKamdjdU9LSzNXdzFtSTdDckJwUFNZVHkxUFNZMEk5VFY0bVE?oc=5",
-      "sourceId": "okinawa-times",
-      "sourceName": "沖縄タイムス",
-      "sourceType": "media",
-      "publishedAt": "2026-08-27T14:26:49+09:00",
-      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-09-03T23:59:59+09:00",
-      "category": "news",
-      "localScore": 60,
-      "localEvidence": [
-        "ビオスの丘"
-      ],
-      "confidence": 65,
-      "status": "duplicate",
-      "requiresReview": false,
-      "reviewReasons": [
-        "同じ内容として代表記事「ビオスの丘で「らんの花祭り 秋」、約1万輪のデンファレが亜熱帯の森彩る - 株式会社旅行新聞新社」へ統合"
-      ],
-      "fingerprint": "08524ecd09bdafd07dc3",
-      "articleFingerprint": "ba45185e2d917f06c0c9",
-      "facilityId": null,
-      "eventMarkers": [
-        "らんの花祭り秋",
-        "沖縄ビオスの丘を約1万輪のデンファレが彩るらんの花祭り秋9月12日開幕"
-      ],
-      "relatedUrls": [],
-      "duplicateOf": "20260902-google-news-bios-hill-c62fd3370e"
-    },
-    {
-      "id": "20260827-google-news-bios-hill-dea9cb0c41",
-      "title": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - PR TIMES",
-      "displayTitle": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕",
-      "summary": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 PR TIMES",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE05SHphMEZHZXRHU2JybUkyaVNrQl8tRnRkRENXY3loc0dIa3VDSzdrMmFvbWJTMUVKbnlqdU5HaXJTNEhVWXctTk5ROGk4bGdnQlFNQUk3dXprakNWYWRCSFpJVnVTbWVCbmc?oc=5",
-      "sourceId": "google-news-bios-hill",
-      "sourceName": "ビオスの丘",
-      "sourceType": "discovery",
-      "publishedAt": "2026-08-27T14:26:49+09:00",
-      "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T22:16:40.399363+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-09-03T23:59:59+09:00",
-      "category": "news",
-      "localScore": 100,
-      "localEvidence": [
-        "ビオスの丘"
-      ],
-      "confidence": 45,
       "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
@@ -3679,11 +4042,11 @@
         "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "08524ecd09bdafd07dc3",
-      "articleFingerprint": "dea9cb0c41df326cbee9",
+      "articleFingerprint": "593b444c73802e43a985",
       "facilityId": "bios-hill",
       "eventMarkers": [
         "らんの花祭り秋",
-        "沖縄ビオスの丘を約1万輪のデンファレが彩るらんの花祭り秋9月12日開幕"
+        "沖縄ビオスの丘を約1万輪のデンファレが彩るらんの花祭り秋9月12日開幕prtimesjp"
       ],
       "relatedUrls": [],
       "duplicateOf": "20260902-google-news-bios-hill-c62fd3370e",
@@ -3700,7 +4063,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-27T11:33:04+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-03T23:59:59+09:00",
@@ -3735,7 +4098,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-27T10:48:32+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-02T23:15:26.452771+09:00",
+      "checkedAt": "2026-09-03T07:56:35.227352+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-03T23:59:59+09:00",
@@ -3779,13 +4142,14 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "対象外地域との一致を検出",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "03d994bc0bb2452803fa",
       "articleFingerprint": "ea6d1598132e9231c21c",
@@ -3793,7 +4157,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260827-okinawa-times-1152f51db5",
@@ -3814,12 +4179,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "bf066d5037cadfd03105",
       "articleFingerprint": "1152f51db5acd1262149",
@@ -3827,7 +4193,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260827-okinawa-times-e796930b3f",
@@ -3850,12 +4217,13 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "175641e4e8d1b13a0b35",
       "articleFingerprint": "e796930b3f9af4c0bde5",
@@ -3863,7 +4231,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260827-okinawa-times-96188d9460",
@@ -3886,13 +4255,14 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "対象外地域との一致を検出",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "09b21cabd4eb04daf073",
       "articleFingerprint": "96188d9460730ba39355",
@@ -3900,7 +4270,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260827-ryukyu-shimpo-7f53ba2c1b",
