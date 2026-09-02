@@ -38,6 +38,18 @@
     {"id": "transport-construction", "label": "交通・工事", "terms": ["交通", "道路", "工事", "通行止め", "バス"]},
     {"id": "business-community", "label": "商業・地域活動", "terms": ["開店", "閉店", "地域活動", "観光", "産業"]}
   ],
+  "resourceDiscovery": {
+    "enabled": true,
+    "lookbackDays": 730,
+    "characteristicCategories": [
+      {"id": "identity", "label": "有名・名物・地域の特徴", "terms": ["有名", "名物", "地域の特徴", "地域資源"]},
+      {"id": "festivals-traditions", "label": "祭り・伝統行事・芸能", "terms": ["祭り", "まつり", "伝統行事", "伝統芸能", "エイサー"]},
+      {"id": "history-culture", "label": "歴史・文化・文化財", "terms": ["歴史", "文化", "文化財", "史跡"]},
+      {"id": "nature-tourism", "label": "自然・観光", "terms": ["自然", "観光", "景勝地", "公園"]},
+      {"id": "industry-food", "label": "産業・農漁業・食", "terms": ["産業", "農業", "漁業", "特産品", "郷土料理"]},
+      {"id": "sports-community", "label": "スポーツ・大会・地域活動", "terms": ["スポーツ", "大会", "地域活動"]}
+    ]
+  },
   "regionalThemes": [
     {"id": "bullfighting", "label": "闘牛", "terms": ["闘牛", "石川多目的ドーム", "石川ドーム"]}
   ],

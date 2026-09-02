@@ -35,7 +35,7 @@ def validate_region_profile(profile):
         'searchPhrase', 'outputDir', 'exactRegionPhrases', 'districtTerms',
         'contextTerms', 'verifiedFacilities', 'falsePositiveRegions',
         'falsePositivePeople', 'discoveryCategories', 'regionalThemes', 'rssSources',
-        'officialAdapters',
+        'officialAdapters', 'resourceDiscovery',
     )
     missing = [key for key in required if key not in profile]
     if missing:
@@ -58,6 +58,19 @@ def validate_region_profile(profile):
         raise ValueError('地域固有テーマのidは必須かつ重複不可です')
     if any(not item.get('terms') for item in profile['regionalThemes']):
         raise ValueError('地域固有テーマには検索語が必要です')
+    resource_discovery = profile['resourceDiscovery']
+    if not isinstance(resource_discovery.get('enabled'), bool):
+        raise ValueError('resourceDiscovery.enabledは真偽値で指定してください')
+    if resource_discovery.get('lookbackDays', 0) <= 0:
+        raise ValueError('resourceDiscovery.lookbackDaysは正の整数で指定してください')
+    characteristic_categories = resource_discovery.get('characteristicCategories', [])
+    characteristic_ids = [item.get('id') for item in characteristic_categories]
+    if not characteristic_ids or None in characteristic_ids:
+        raise ValueError('地域特性カテゴリを1件以上登録してください')
+    if len(characteristic_ids) != len(set(characteristic_ids)):
+        raise ValueError('地域特性カテゴリのidは重複不可です')
+    if any(not item.get('terms') for item in characteristic_categories):
+        raise ValueError('地域特性カテゴリには検索語が必要です')
 
 
 def google_news_url(query):
@@ -134,3 +147,27 @@ def facility_aliases(profile):
     for facility in profile['verifiedFacilities']:
         aliases.extend(facility.get('aliases', []))
     return list(dict.fromkeys(aliases))
+
+
+def build_resource_discovery_sources(profile):
+    """地域特性・共通分野の二方向から非掲載の資源探索先を作る。"""
+    if not profile['resourceDiscovery']['enabled']:
+        return []
+    sources = []
+    route_categories = (
+        ('characteristic', profile['resourceDiscovery']['characteristicCategories']),
+        ('common', profile['discoveryCategories']),
+    )
+    for route, categories in route_categories:
+        for category in categories:
+            terms = ' OR '.join(category['terms'])
+            query = f'"{profile["searchPhrase"]}" ({terms})'
+            sources.append({
+                'id': f'resource-{route}-{profile["id"]}-{category["id"]}',
+                'name': f'{profile["displayName"]}資源探索：{category["label"]}',
+                'url': google_news_url(query),
+                'discoveryRoute': route,
+                'discoveryCategory': category['id'],
+                'maxEntries': category.get('maxEntries', 20),
+            })
+    return sources

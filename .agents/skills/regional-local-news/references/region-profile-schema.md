@@ -14,11 +14,27 @@
 - `verifiedFacilities`: 公式根拠を確認した施設ID、正式名、別表記
 - `falsePositiveRegions`, `falsePositivePeople`: 実際に発生した誤一致
 - `discoveryCategories`: 共通8分野の検索語
+- `resourceDiscovery`: 公開画面に掲載しない地域資源発見で使う有効状態、対象期間、地域特性カテゴリ
 - `regionalThemes`: 公式根拠を確認した地域固有テーマと深掘り検索語
 - `rssSources`: 継続取得する固定情報源
 - `officialAdapters`: 地域固有の直接取得処理
 
-`scripts/validate_news_region.py <region-id>`で必須項目、共通8分野、施設ID重複を検査する。
+`resourceDiscovery.characteristicCategories`は、名物・祭り・歴史・文化・自然・観光・産業・食・スポーツなど地域特性を発見する検索入口を持つ。ここに登録された語は地域資源候補を探すためのもので、地域固有テーマとして確定したことを意味しない。
+
+`scripts/validate_news_region.py <region-id>`で必須項目、共通8分野、地域特性カテゴリ、施設ID重複を検査する。
+
+## 地域資源候補の出力
+
+`scripts/discover_region_resources.py --region <region-id>`は、地域特性ルートと共通分野ルートを検索し、`<outputDir>/resource-candidates.json`へ公開画面に掲載しない調査記録を生成する。
+
+このJSONはローカル専用とし、`.gitignore`でGitの保存対象から外す。GitHub Pagesはリポジトリ内のファイルへ直接アクセスできるため、保護された保存先を用意するまではコミットしない。
+
+- `known`: すでに確認済みの施設・地域固有テーマと一致
+- `candidate`: 地域根拠はあるが、恒久設定への登録は未確認
+- `excluded`: 誤一致または地域根拠不足
+- `verified` / `rejected`: 将来、人が確認した状態。再収集時も維持する
+
+常設紹介ページは地域資源の発見根拠として保存できるが、公開ニュースではない。開催日、募集、休館、規制、変更など時間とともに変わる情報は、日々のニュース収集が別に扱う。
 
 ## 追加時の禁止事項
 
