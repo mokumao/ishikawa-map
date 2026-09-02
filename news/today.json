@@ -1,23 +1,31 @@
 {
   "date": "2026-09-02",
-  "updated": "2026-09-02T07:56:48.765470+09:00",
-  "count": 3,
+  "updated": "2026-09-02T22:16:40.399363+09:00",
+  "count": 4,
   "articles": [
     {
-      "title": "沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - Mantan Web",
+      "title": "石川多目的ドーム 観光闘牛の開催日程(次回2026年9月21日)",
+      "summary": "開催予定:2026年9月21日、2026年10月17日、2026年11月14日、2026年12月27日、2027年1月23日、2027年1月24日、2027年2月20日、2027年3月20日",
+      "link": "https://www.lequio-tourist.okinawa/travel_03.php",
+      "source": "うるま市公式案内・観光闘牛",
+      "date_label": "予定 9/21",
+      "pub_date": "2026-09-21T00:00:00+09:00"
+    },
+    {
+      "title": "ビオスの丘で「らんの花祭り 秋」、約1万輪のデンファレが亜熱帯の森彩る - 株式会社旅行新聞新社",
       "summary": "",
-      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPelh1aS1TUlV6bGRiV2ZxbUpJWFo1YlFHRlNYZklwNkV3VjhJMExLSUdjSUNJS3doTXZrSFB6X2J0NU5sTV9IUFlNSXRCdVRsaVJUYVpLNVpwTktIMHBlRXNESlY4R2lqUlFZRE9OamR3OElHdWJ3NlMwNWw3VGxtMjJLajhOd3Bw?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE8wakphTGlwWDFoOHFxQkt5ZlFNSHRDYmFUZWMtY1g2NkZMdUtRcDZhNXJaNDFlMDA2UGdJOUJhTlo1dDVILXUwQTg4aHdlUQ?oc=5",
       "source": "ビオスの丘",
-      "date_label": "8/28",
-      "pub_date": "2026-08-28T10:08:14+09:00"
+      "date_label": "本日 14:24",
+      "pub_date": "2026-09-02T14:24:01+09:00"
     },
     {
       "title": "沖縄のリゾートホテルで“暮らすように泊まる”。「ルネッサンス リゾート オキナワ」「ココ ガーデンリゾート オキナワ」の魅力をレポート",
       "summary": "",
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1nQnBiNWgxMTJBdjlacnF6Z0ZBZ1VyY0lsWHhkOHRaNWU2QWF4R0tZWVV2bEJHZ01COVZ2cVE3Uzc2TFNHb0tqUHBhZm02MXFjVlZTVHQ5dXByWTBQVzBIVXU0TDNtcTBZRDgyd0NB?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5hcUk0V2syZG5tdnFfU2NmU2M0Y3h4dDdOc2Z1NVZRRmpZbndwWFJocmVKNDNEOUR2NldwSV9TRTNwbjdDVTJnUTZvdm5oNGhCNk56dlRISUh5UEs2UjNlOU5kaW1CUldsUzYwbnBB?oc=5",
       "source": "ココガーデンリゾート沖縄",
-      "date_label": "8/31",
-      "pub_date": "2026-08-31T21:26:54+09:00"
+      "date_label": "昨日 9/1",
+      "pub_date": "2026-09-01T10:08:30+09:00"
     },
     {
       "title": "70代や児童らがエイサー 40年ぶり多数で演舞 次世代へつなぐ うるま石川山城 沖縄",
