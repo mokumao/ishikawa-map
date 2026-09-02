@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "ishikawa",
+  "displayName": "石川",
+  "municipality": "うるま市",
+  "prefecture": "沖縄県",
+  "searchPhrase": "うるま市 石川",
+  "outputDir": "news",
+  "exactRegionPhrases": ["うるま市石川", "うるま石川"],
+  "regionKeywords": [
+    "うるま市石川", "石川市", "石川区", "石川岳", "石川IC",
+    "石川インター", "伊波", "嘉手苅", "田場", "東恩納",
+    "高江洲", "うるま市", "うるま", "石川"
+  ],
+  "districtTerms": [
+    "石川", "伊波", "嘉手苅", "山城", "楚南", "東恩納", "東山",
+    "白浜", "赤崎", "曙"
+  ],
+  "contextTerms": ["沖縄", "うるま"],
+  "verifiedFacilities": [
+    {"id": "ishikawa-dome", "name": "石川多目的ドーム", "aliases": ["石川多目的ドーム", "石川ドーム"]},
+    {"id": "ishikawa-mountain", "name": "石川岳", "aliases": ["石川岳"]},
+    {"id": "ishikawa-history-museum", "name": "石川歴史民俗資料館", "aliases": ["石川歴史民俗資料館"]},
+    {"id": "ishikawa-library", "name": "石川図書館", "aliases": ["石川図書館"]},
+    {"id": "ishikawa-youth-center", "name": "石川少年自然の家", "aliases": ["石川少年自然の家", "石川青少年の家"]},
+    {"id": "bios-hill", "name": "ビオスの丘", "aliases": ["ビオスの丘"]},
+    {"id": "coco-garden", "name": "ココガーデンリゾート沖縄", "aliases": ["ココガーデンリゾート沖縄", "ココ ガーデンリゾート オキナワ", "ココガーデンリゾート オキナワ"]}
+  ],
+  "falsePositiveRegions": ["石川県", "金沢市", "加賀市", "小松市", "能登"],
+  "falsePositivePeople": ["石川真佑", "石川祐希", "石川佳純", "石川文洋"],
+  "discoveryCategories": [
+    {"id": "government", "label": "行政・自治会", "terms": ["行政", "自治会", "お知らせ", "募集"]},
+    {"id": "events-culture", "label": "催し・祭り・文化", "terms": ["イベント", "祭り", "エイサー", "文化", "闘牛"]},
+    {"id": "public-facilities", "label": "公共施設", "terms": ["公民館", "図書館", "体育館", "公共施設", "休館"]},
+    {"id": "education", "label": "学校・教育", "terms": ["学校", "幼稚園", "保育園", "講座", "教育"]},
+    {"id": "safety", "label": "防災・安全", "terms": ["防災", "避難", "消防", "警察", "災害"]},
+    {"id": "health-welfare", "label": "健康・福祉", "terms": ["健康", "福祉", "医療", "健診", "子育て"]},
+    {"id": "transport-construction", "label": "交通・工事", "terms": ["交通", "道路", "工事", "通行止め", "バス"]},
+    {"id": "business-community", "label": "商業・地域活動", "terms": ["開店", "閉店", "地域活動", "観光", "産業"]}
+  ],
+  "regionalThemes": [
+    {"id": "bullfighting", "label": "闘牛", "terms": ["闘牛", "石川多目的ドーム", "石川ドーム"]}
+  ],
+  "rssSources": [
+    {"id": "google-news-ishikawa", "name": "Google ニュース（うるま市 石川）", "query": "うるま市 石川 沖縄", "type": "discovery", "trust": 60, "method": "google-news", "filter_strict": true},
+    {"id": "google-news-ishikawa-dome", "name": "石川ドーム・闘牛", "query": "石川ドーム 闘牛", "type": "discovery", "trust": 60, "method": "google-news", "filter": false, "facilityId": "ishikawa-dome", "facilityAliases": ["石川多目的ドーム", "石川ドーム"]},
+    {"id": "google-news-ishikawa-nature", "name": "石川少年自然の家", "query": "石川少年自然の家", "type": "discovery", "trust": 60, "method": "google-news", "filter": false, "facilityId": "ishikawa-youth-center", "facilityAliases": ["石川少年自然の家", "石川青少年の家"]},
+    {"id": "google-news-bios-hill", "name": "ビオスの丘", "query": "ビオスの丘", "type": "discovery", "trust": 60, "method": "google-news", "filter": false, "facilityId": "bios-hill", "facilityAliases": ["ビオスの丘"]},
+    {"id": "google-news-coco-garden", "name": "ココガーデンリゾート沖縄", "query": "ココガーデンリゾート沖縄", "type": "discovery", "trust": 60, "method": "google-news", "filter": false, "facilityId": "coco-garden", "facilityAliases": ["ココガーデンリゾート沖縄", "ココ ガーデンリゾート オキナワ", "ココガーデンリゾート オキナワ"]},
+    {"id": "okinawa-times", "name": "沖縄タイムス", "query": "site:okinawatimes.co.jp うるま 石川", "type": "media", "trust": 80, "method": "google-news", "filter_strict": true},
+    {"id": "ryukyu-shimpo", "name": "琉球新報", "query": "site:ryukyushimpo.jp うるま 石川", "type": "media", "trust": 80, "method": "google-news", "filter_strict": true},
+    {"id": "uruma-city", "name": "うるま市公式サイト", "query": "site:city.uruma.lg.jp", "type": "official", "trust": 90, "method": "google-news", "filter_strict": "region_only"}
+  ],
+  "officialAdapters": ["bullfighting_schedule"]
+}

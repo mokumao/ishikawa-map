@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-今日の石川ニュース 自動収集スクリプト
+地域ニュース 自動収集スクリプト
 GitHub Actions で毎日朝6時(JST)に実行される
 """
 
@@ -14,6 +14,8 @@ import unicodedata
 from datetime import datetime, timezone, timedelta
 from html import unescape, escape
 from urllib.parse import urljoin, urlsplit, urlunsplit
+
+from region_news_config import build_rss_sources, facility_aliases, load_region_profile
 
 # ── 日時設定（日本時間） ──────────────────────────────────────────
 JST = timezone(timedelta(hours=9))
@@ -29,9 +31,14 @@ AUDIT_RETENTION_DAYS = 30
 
 # 「ニュースがなかった日」を記録するファイル（日をまたいでも過去分の
 # 「〇月△日のニュースはありません」表示を消さずに残すための永続化）
-NO_NEWS_FILE = 'news/no_news_dates.json'
-CANDIDATES_FILE = 'news/candidates.json'
-REVIEW_FILE = 'news/review.json'
+REGION = load_region_profile()
+REGION_NAME = REGION['displayName']
+MUNICIPALITY_NAME = REGION['municipality']
+PREFECTURE_NAME = REGION['prefecture']
+NEWS_OUTPUT_DIR = REGION['outputDir']
+NO_NEWS_FILE = f'{NEWS_OUTPUT_DIR}/no_news_dates.json'
+CANDIDATES_FILE = f'{NEWS_OUTPUT_DIR}/candidates.json'
+REVIEW_FILE = f'{NEWS_OUTPUT_DIR}/review.json'
 
 # うるま市公式ページを入口に、公式に案内された開催情報だけを取得する。
 URUMA_BULLFIGHTING_PAGE_URL = (
@@ -63,29 +70,14 @@ READER_POSTS_CSV_URL = ('https://docs.google.com/spreadsheets/d/e/'
 # 「承認」列でこのいずれかが入力されていたら掲載する
 READER_APPROVED_MARKS = {'○', '〇', '◯', 'OK', 'ok', 'Ok', '済', '掲載'}
 
-# ── 石川関連キーワード ─────────────────────────────────────────────
-ISHIKAWA_KEYWORDS = [
-    'うるま市石川', '石川市', '石川区', '石川岳', '石川IC',
-    '石川インター', '伊波', '嘉手苅', '田場', '東恩納',
-    '高江洲', 'うるま市', 'うるま', '石川',
-]
-
-DISTRICT_TERMS = [
-    '石川', '伊波', '嘉手苅', '山城', '楚南', '東恩納', '東山',
-    '白浜', '赤崎', '曙',
-]
-
-FACILITY_TERMS = [
-    '石川多目的ドーム', '石川ドーム', '石川岳', '石川歴史民俗資料館',
-    '石川図書館', '石川少年自然の家', 'ビオスの丘',
-    'ココガーデンリゾート沖縄', 'ココ ガーデンリゾート オキナワ',
-]
-
-OTHER_REGION_TERMS = ['石川県', '金沢市', '加賀市', '小松市', '能登']
-
-# 地名ではなく人名の「石川」を、石川地区として誤判定しやすい既知例。
-# 一般的な姓だけで除外すると地区名まで消えるため、実際に誤一致した氏名だけを扱う。
-OTHER_PERSON_TERMS = ['石川真佑', '石川祐希', '石川佳純', '石川文洋']
+# ── 地域別設定 ────────────────────────────────────────────────────
+REGION_KEYWORDS = REGION.get('regionKeywords', REGION['exactRegionPhrases'])
+EXACT_REGION_PHRASES = REGION['exactRegionPhrases']
+DISTRICT_TERMS = REGION['districtTerms']
+CONTEXT_TERMS = REGION['contextTerms']
+FACILITY_TERMS = facility_aliases(REGION)
+OTHER_REGION_TERMS = REGION['falsePositiveRegions']
+OTHER_PERSON_TERMS = REGION['falsePositivePeople']
 
 # 誤掲載時の影響が大きいため、地域関連度が高くても自動掲載しない話題。
 HIGH_IMPACT_TERMS = [
@@ -104,109 +96,9 @@ EVENT_TERMS = [
     '展示会', '企画展', '公演', 'イベント',
 ]
 
-# ── RSSソース一覧 ──────────────────────────────────────────────────
-def gnews(query):
-    """Google News RSS URLを生成"""
-    import urllib.parse
-    return f'https://news.google.com/rss/search?q={urllib.parse.quote(query)}&hl=ja&gl=JP&ceid=JP:ja'
-
-RSS_SOURCES = [
-    # ── 地域全般 ──
-    {
-        'id': 'google-news-ishikawa',
-        'name': 'Google ニュース（うるま市 石川）',
-        'url': gnews('うるま市 石川 沖縄'),
-        'type': 'discovery',
-        'trust': 60,
-        'method': 'google-news',
-        'filter_strict': True,   # 石川地区の記事に限定
-    },
-    # ── 施設別 ──
-    {
-        'id': 'google-news-ishikawa-dome',
-        'name': '石川ドーム・闘牛',
-        'url': gnews('石川ドーム 闘牛'),
-        'type': 'discovery',
-        'trust': 60,
-        'method': 'google-news',
-        'filter': False,
-        'facilityId': 'ishikawa-dome',
-        'facilityAliases': ['石川多目的ドーム', '石川ドーム'],
-    },
-    {
-        'id': 'google-news-ishikawa-nature',
-        'name': '石川少年自然の家',
-        'url': gnews('石川少年自然の家'),
-        'type': 'discovery',
-        'trust': 60,
-        'method': 'google-news',
-        'filter': False,
-        'facilityId': 'ishikawa-youth-center',
-        'facilityAliases': ['石川少年自然の家', '石川青少年の家'],
-    },
-    {
-        'id': 'google-news-bios-hill',
-        'name': 'ビオスの丘',
-        'url': gnews('ビオスの丘'),
-        'type': 'discovery',
-        'trust': 60,
-        'method': 'google-news',
-        'filter': False,
-        'facilityId': 'bios-hill',
-        'facilityAliases': ['ビオスの丘'],
-    },
-    {
-        'id': 'google-news-coco-garden',
-        'name': 'ココガーデンリゾート沖縄',
-        'url': gnews('ココガーデンリゾート沖縄'),
-        'type': 'discovery',
-        'trust': 60,
-        'method': 'google-news',
-        'filter': False,
-        'facilityId': 'coco-garden',
-        'facilityAliases': [
-            'ココガーデンリゾート沖縄', 'ココ ガーデンリゾート オキナワ',
-            'ココガーデンリゾート オキナワ',
-        ],
-    },
-    # ── ニュースサイト ──
-    # ※以前設定していた琉球新報RSS(rss/news.xml)は廃止、うるま市公式RSSは404、
-    #   NHKのURLは国際ニュースのフィードでいずれも機能していなかった(2026-07確認)。
-    #   Googleニュースのサイト内検索RSSに置き換えて再構築。
-    # 「今日の石川ニュース」の名の通り、うるま市全域ではなく石川地区の
-    # 記事に限定するため、いずれも石川限定フィルタ(filter_strict)を適用する。
-    # 新聞に石川地区の記事が載る頻度は低いため、日によっては0件になる
-    # （その分は管理人投稿で補う設計）
-    {
-        'id': 'okinawa-times',
-        'name': '沖縄タイムス',
-        'url': gnews('site:okinawatimes.co.jp うるま 石川'),
-        'type': 'media',
-        'trust': 80,
-        'method': 'google-news',
-        'filter_strict': True,
-    },
-    {
-        'id': 'ryukyu-shimpo',
-        'name': '琉球新報',
-        'url': gnews('site:ryukyushimpo.jp うるま 石川'),
-        'type': 'media',
-        'trust': 80,
-        'method': 'google-news',
-        'filter_strict': True,
-    },
-    {
-        'id': 'uruma-city',
-        'name': 'うるま市公式サイト',
-        'url': gnews('site:city.uruma.lg.jp'),
-        'type': 'official',
-        'trust': 90,
-        'method': 'google-news',
-        # 市公式は入札公告など石川地区と無関係な事務情報も多い。
-        # うるま市の情報しか流れないソースなので「石川」のみで判定
-        'filter_strict': 'ishikawa_only',
-    },
-]
+# 固定取得先に加え、行政、催し、施設、学校、防災、福祉、交通、商業を
+# 地域設定から漏れなく探索する。新地域ではJSONを追加し、ここは変更しない。
+RSS_SOURCES = build_rss_sources(REGION)
 
 # ── ユーティリティ関数 ────────────────────────────────────────────
 
@@ -219,22 +111,17 @@ def strip_html(text):
     text = re.sub(r'\s+', ' ', text)
     return text.strip()
 
-def is_ishikawa_related(title, summary=''):
-    """石川関連キーワードが含まれているか判定"""
+def is_region_related(title, summary=''):
+    """対象地域の関連キーワードが含まれているか判定"""
     text = title + ' ' + summary
-    return any(kw in text for kw in ISHIKAWA_KEYWORDS)
+    return any(kw in text for kw in REGION_KEYWORDS)
 
-def is_ishikawa_district_related(title, summary='', require_uruma=True):
-    """うるま市石川地区に関わる記事かを判定する厳しめのフィルタ。
-    「今日の石川ニュース」の名の通り、うるま市全域ではなく石川地区の
-    記事に限定するために使う。「石川」を含むことが必須。
-    新聞は石川県や石川姓の人物の記事も多いため、原則「うるま」も
-    含む記事に限定する。require_uruma=False はうるま市公式サイトなど、
-    うるま市の情報しか流れないソース用（「うるま」表記が無くても通す）"""
+def is_region_district_related(title, summary='', require_context=True):
+    """対象地区と自治体・都道府県の根拠を組み合わせて判定する。"""
     text = title + ' ' + summary
-    if '石川' not in text:
+    if not any(term in text for term in DISTRICT_TERMS):
         return False
-    if require_uruma and 'うるま' not in text:
+    if require_context and not any(term in text for term in CONTEXT_TERMS):
         return False
     return True
 
@@ -303,12 +190,13 @@ def assess_candidate(title, summary, source, pub_date, link):
     evidence = []
     reasons = []
 
-    if 'うるま市石川' in text or 'うるま石川' in text:
+    exact_phrases = [term for term in EXACT_REGION_PHRASES if term in text]
+    if exact_phrases:
         score += 60
-        evidence.append('うるま市石川')
-    if 'うるま市' in text and '石川' in text:
+        evidence.extend(exact_phrases)
+    if MUNICIPALITY_NAME in text and REGION_NAME in text:
         score += 40
-        evidence.append('うるま市と石川')
+        evidence.append(f'{MUNICIPALITY_NAME}と{REGION_NAME}')
 
     facilities = [term for term in FACILITY_TERMS if term in text]
     if facilities:
@@ -328,27 +216,27 @@ def assess_candidate(title, summary, source, pub_date, link):
         reasons.append('施設専用検索で発見したが、記事内の施設名確認が必要')
 
     districts = [term for term in DISTRICT_TERMS if term in text]
-    if districts and ('沖縄' in text or 'うるま' in text):
+    if districts and any(term in text for term in CONTEXT_TERMS):
         score += 25
         evidence.extend(districts[:3])
 
     if source.get('type') == 'official':
         score += 15
-        evidence.append('うるま市公式発信')
+        evidence.append(f'{MUNICIPALITY_NAME}等の公式発信')
 
     other_regions = [term for term in OTHER_REGION_TERMS if term in text]
     if other_regions:
         score -= 100
-        reasons.append('石川県など他地域との一致を検出')
+        reasons.append('対象外地域との一致を検出')
 
     other_people = [term for term in OTHER_PERSON_TERMS if term in text]
     if other_people:
         score -= 100
-        reasons.append('人名の「石川」との一致を検出')
+        reasons.append(f'人名の「{REGION_NAME}」との一致を検出')
 
-    if 'うるま市' in text and not districts and '石川' not in text:
+    if MUNICIPALITY_NAME in text and not districts and REGION_NAME not in text:
         score -= 25
-        reasons.append('うるま市内だが石川地区の根拠が不足')
+        reasons.append(f'{MUNICIPALITY_NAME}内だが{REGION_NAME}地区の根拠が不足')
 
     score = max(0, min(100, score))
     confidence = int(source.get('trust', 50))
@@ -364,27 +252,27 @@ def assess_candidate(title, summary, source, pub_date, link):
     confidence = max(0, min(100, confidence))
 
     if 35 <= score < 60:
-        reasons.append('石川地区との関係を管理人が確認')
+        reasons.append(f'{REGION_NAME}地区との関係を確認できないため記録')
     elif score < 35:
-        reasons.append('石川地区との関連根拠が不足')
+        reasons.append(f'{REGION_NAME}地区との関連根拠が不足')
 
     return score, list(dict.fromkeys(evidence)), confidence, list(dict.fromkeys(reasons))
 
 def classify_candidate(score, confidence, text, pub_date, link):
     """候補を自動掲載・判断保留・自動除外の3経路へ分ける。"""
     if score < 35:
-        return 'rejected', '石川地区との関連根拠が基準未満のため自動除外'
+        return 'rejected', f'{REGION_NAME}地区との関連根拠が基準未満のため自動除外'
     if any(term in text for term in HIGH_IMPACT_TERMS):
         return 'review', '慎重な確認が必要な内容のため判断保留'
     if score < 60:
-        return 'review', '石川地区との関係を確定できないため判断保留'
+        return 'review', f'{REGION_NAME}地区との関係を確定できないため判断保留'
     if pub_date is None:
         return 'review', '公開日時を確認できないため判断保留'
     if not link:
         return 'review', '配信元へ移動できるURLがないため判断保留'
     if confidence < 45:
         return 'review', '情報源の信頼度が自動掲載基準未満のため判断保留'
-    return 'published', '石川地区・日時・情報源の自動掲載条件を満たした'
+    return 'published', f'{REGION_NAME}地区・日時・情報源の自動掲載条件を満たした'
 
 def build_candidate(title, summary, link, source, pub_date, previous=None,
                     event_starts_at=None, event_ends_at=None, category='news'):
@@ -471,7 +359,7 @@ def load_previous_candidates(path=CANDIDATES_FILE):
 
 def save_candidate_data(candidates, source_results):
     """個人情報を含まないRSS候補と自動判定結果を監査用JSONへ保存する。"""
-    os.makedirs('news', exist_ok=True)
+    os.makedirs(NEWS_OUTPUT_DIR, exist_ok=True)
     candidates.sort(
         key=lambda item: item.get('eventStartsAt') or item.get('publishedAt') or '',
         reverse=True,
@@ -482,6 +370,8 @@ def save_candidate_data(candidates, source_results):
         for status in ('published', 'review', 'rejected', 'duplicate', 'expired')
     }
     data = {
+        'regionId': REGION['id'],
+        'regionName': REGION_NAME,
         'updated': now_jst.isoformat(),
         'count': len(candidates),
         'reviewCount': len(review_candidates),
@@ -949,11 +839,12 @@ def fetch_articles():
     source_results = []
     previous_candidates = load_previous_candidates()
 
-    official_candidates, official_result = fetch_official_bullfighting_candidates(
-        previous_candidates
-    )
-    candidates.extend(official_candidates)
-    source_results.append(official_result)
+    if 'bullfighting_schedule' in REGION['officialAdapters']:
+        official_candidates, official_result = fetch_official_bullfighting_candidates(
+            previous_candidates
+        )
+        candidates.extend(official_candidates)
+        source_results.append(official_result)
 
     for source in RSS_SOURCES:
         source_result = {
@@ -981,7 +872,7 @@ def fetch_articles():
                 source_results.append(source_result)
                 continue
 
-            for entry in feed.entries[:30]:
+            for entry in feed.entries[:source.get('maxEntries', 30)]:
                 title   = strip_html(entry.get('title', ''))
                 summary = strip_html(entry.get('summary', entry.get('description', '')))
                 link    = entry.get('link', '')
@@ -1026,7 +917,7 @@ def fetch_articles():
 
 
 def generate_html(articles, no_news_dates=None):
-    """ニュース一覧 HTML を生成して news/index.html に保存"""
+    """ニュース一覧HTMLを地域設定の出力先へ保存する。"""
     no_news_dates = no_news_dates or set()
 
     # 記事と「〇月△日のニュースはありません」カードを、日付順のひとつの
@@ -1073,10 +964,10 @@ def generate_html(articles, no_news_dates=None):
         body_html = f'<div class="nl">{cards}\n  </div>'
         count_label = f'{len(articles)}件'
     else:
-        body_html = '''
+        body_html = f'''
   <div class="empty">
     <div class="empty-icon">📭</div>
-    <p>本日は石川に関するニュースが<br>見つかりませんでした。</p>
+    <p>本日は{escape(REGION_NAME)}に関するニュースが<br>見つかりませんでした。</p>
     <p class="empty-sub">明日また自動更新されます。</p>
   </div>'''
         count_label = 'なし'
@@ -1088,7 +979,7 @@ def generate_html(articles, no_news_dates=None):
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#e53935">
-  <title>今日の石川ニュース {today_str}</title>
+  <title>今日の{escape(REGION_NAME)}ニュース {today_str}</title>
   <style>
     *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
     /* html/body自体はスクロールさせず、中身(.scroll-area)だけをスクロールさせる構造。
@@ -1255,7 +1146,7 @@ def generate_html(articles, no_news_dates=None):
   <div class="page-wrap">
   <header>
     <div class="hd-text">
-      <h1>今日の石川ニュース</h1>
+      <h1>今日の{escape(REGION_NAME)}ニュース</h1>
       <small>{today_str} 更新</small>
     </div>
     <span class="badge">{count_label}</span>
@@ -1276,32 +1167,36 @@ def generate_html(articles, no_news_dates=None):
   <!-- 下部バー：地図へ戻る＋読者の情報提供フォームへの入口 -->
   <div class="bottom-bar">
     <a href="../index.html" class="bottom-map-btn">地図</a>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfVfV2ZNg6X9ub5qMNSvmFoCJBHf4rbYV1AOuMOBG6pNAvrcA/viewform" class="bottom-submit-btn">石川の情報をお寄せください</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfVfV2ZNg6X9ub5qMNSvmFoCJBHf4rbYV1AOuMOBG6pNAvrcA/viewform" class="bottom-submit-btn">{escape(REGION_NAME)}の情報をお寄せください</a>
   </div>
   </div>
 </body>
 </html>'''
 
-    os.makedirs('news', exist_ok=True)
-    with open('news/index.html', 'w', encoding='utf-8') as f:
+    os.makedirs(NEWS_OUTPUT_DIR, exist_ok=True)
+    index_path = os.path.join(NEWS_OUTPUT_DIR, 'index.html')
+    with open(index_path, 'w', encoding='utf-8') as f:
         f.write(html)
-    print(f"\n[OK] news/index.html を生成しました（{len(articles)}件）")
+    print(f"\n[OK] {index_path} を生成しました（{len(articles)}件）")
 
     # JSON も保存（将来の活用のため）
     data = {
+        'regionId': REGION['id'],
+        'regionName': REGION_NAME,
         'date':     today_date,
         'updated':  now_jst.isoformat(),
         'count':    len(articles),
         'articles': articles,
     }
-    with open('news/today.json', 'w', encoding='utf-8') as f:
+    today_path = os.path.join(NEWS_OUTPUT_DIR, 'today.json')
+    with open(today_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    print("[OK] news/today.json を生成しました")
+    print(f"[OK] {today_path} を生成しました")
 
 
 # ── エントリーポイント ─────────────────────────────────────────────
 if __name__ == '__main__':
-    print(f"=== Ishikawa News Fetch Start: {today_date} ===\n")
+    print(f"=== {REGION_NAME} News Fetch Start: {today_date} ===\n")
     articles, candidates, source_results = fetch_articles()
     save_candidate_data(candidates, source_results)
     # 管理人投稿・承認済み読者投稿もニュース記事として合流させる

@@ -10,6 +10,7 @@ import types
 # Pure function tests do not fetch feeds; avoid requiring the Actions-only dependency.
 sys.modules.setdefault('feedparser', types.SimpleNamespace(parse=None))
 import fetch_news
+import region_news_config
 
 
 MEDIA_SOURCE = {
@@ -53,6 +54,35 @@ def candidate(title, source, minute=0):
 
 
 class NewsAutomationTests(unittest.TestCase):
+    def test_ishikawa_profile_covers_common_discovery_categories(self):
+        profile = region_news_config.load_region_profile('ishikawa')
+        category_ids = {
+            item['id'] for item in profile['discoveryCategories']
+        }
+        self.assertTrue(
+            region_news_config.REQUIRED_DISCOVERY_CATEGORIES <= category_ids
+        )
+        sources = region_news_config.build_rss_sources(profile)
+        source_ids = {item['id'] for item in sources}
+        self.assertIn('google-news-ishikawa-dome', source_ids)
+        self.assertIn('region-discovery-ishikawa-education', source_ids)
+        self.assertIn(
+            'region-facility-ishikawa-ishikawa-library', source_ids
+        )
+        self.assertIn('region-theme-ishikawa-bullfighting', source_ids)
+        self.assertIn('bullfighting_schedule', profile['officialAdapters'])
+
+    def test_special_adapter_is_controlled_by_region_profile(self):
+        profile = dict(fetch_news.REGION)
+        profile['officialAdapters'] = []
+        with patch.object(fetch_news, 'REGION', profile), patch.object(
+            fetch_news, 'RSS_SOURCES', []
+        ), patch.object(
+            fetch_news, 'fetch_official_bullfighting_candidates'
+        ) as bullfighting:
+            fetch_news.fetch_articles()
+        bullfighting.assert_not_called()
+
     def test_bullfighting_page_link_and_dates_are_parsed(self):
         city_html = '''
         <p>更新日：2026年5月19日</p>

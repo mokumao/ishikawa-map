@@ -26,6 +26,8 @@ jobs:
         run: pip install feedparser requests
 
       - name: ニュース収集スクリプトを実行
+        env:
+          NEWS_REGION: ishikawa
         run: python scripts/fetch_news.py
 
       - name: 変更をコミット・プッシュ
