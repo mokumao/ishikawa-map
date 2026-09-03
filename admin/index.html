@@ -338,11 +338,114 @@
     margin-bottom: 12px;
     padding: 8px 12px;
   }
+  .resource-review-card h2 { border-left-color: #00897b; }
+  .resource-review-intro {
+    color: #455a64;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .resource-review-note {
+    background: #e0f2f1;
+    border: 1px solid #80cbc4;
+    border-radius: 8px;
+    color: #285e5b;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+  }
+  .resource-review-header,
+  .resource-review-summary,
+  .resource-review-controls,
+  .resource-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .resource-review-header {
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .resource-review-header h2 { margin-bottom: 0; }
+  .resource-review-summary { margin-bottom: 12px; }
+  .resource-review-chip,
+  .resource-badge {
+    background: #eceff1;
+    border-radius: 999px;
+    color: #455a64;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 8px;
+  }
+  .resource-review-chip.track,
+  .resource-badge.track { background: #e8f5e9; color: #2e7d32; }
+  .resource-review-chip.duplicate,
+  .resource-badge.duplicate { background: #e3f2fd; color: #1565c0; }
+  .resource-review-chip.exclude,
+  .resource-badge.exclude { background: #f5f5f5; color: #607d8b; }
+  .resource-review-controls {
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .resource-review-controls label {
+    color: #455a64;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .resource-review-controls select {
+    background: #fff;
+    border: 1px solid #b0bec5;
+    border-radius: 8px;
+    color: #1257a3;
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    min-height: 40px;
+    padding: 8px 12px;
+  }
+  .resource-list {
+    display: grid;
+    gap: 12px;
+  }
+  .resource-item {
+    border: 1px solid #dce3e7;
+    border-left: 4px solid #43a047;
+    border-radius: 10px;
+    min-width: 0;
+    padding: 12px;
+  }
+  .resource-item[data-decision="duplicate"] { border-left-color: #42a5f5; }
+  .resource-item[data-decision="exclude"] { border-left-color: #90a4ae; }
+  .resource-name {
+    color: #263238;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 8px 0;
+    overflow-wrap: anywhere;
+  }
+  .resource-detail {
+    color: #607d8b;
+    font-size: 12px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+  .resource-detail + .resource-detail { margin-top: 6px; }
+  .resource-detail strong { color: #455a64; }
+  .resource-source-list { list-style: none; margin-top: 4px; }
+  .resource-source-list li + li { margin-top: 4px; }
+  .resource-source-list a { color: #1257a3; }
   @media (min-width: 760px) {
-    .news-candidate-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .news-candidate-list,
+    .resource-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 600px) {
+    .resource-review-controls label,
     .news-review-controls label { width: 100%; }
+    .resource-review-controls select,
     .news-review-controls select,
     .news-review-controls button { margin-left: 0; width: 100%; }
   }
@@ -380,6 +483,7 @@
       <p>このページは管理者専用です。公開サイト（石川マップ本体）とは別に管理されています。</p>
     </header>
     <a class="site-link-btn" href="https://mokumao.github.io/ishikawa-map/" target="_blank" rel="noopener">🗺 石川マップを開く</a>
+    <a class="site-link-btn" href="#newsResources">🎯 追跡中の地域資源を見る</a>
     <a class="site-link-btn" href="#newsReview">📰 石川ニュース自動運用を見る</a>
   </div>
 
@@ -422,6 +526,32 @@
   </aside>
 
   <div class="main-content">
+  <section class="card resource-review-card" id="newsResources">
+    <div class="resource-review-header">
+      <h2>追跡中の地域資源</h2>
+      <span class="stat-updated" id="resourceReviewUpdated">読み込み中…</span>
+    </div>
+    <p class="resource-review-intro">
+      石川地区の新しい情報を見つけるために、毎朝のニュース収集で追跡する施設・催し・地域テーマの判断結果です。
+    </p>
+    <p class="resource-review-note" id="resourceReviewPolicy">
+      この29件はニュース記事の件数ではありません。「どこを継続して見張るか」を記録した閲覧専用の一覧です。
+    </p>
+    <div class="resource-review-summary" id="resourceReviewSummary"></div>
+    <div class="resource-review-controls">
+      <label for="resourceDecisionFilter">表示</label>
+      <select id="resourceDecisionFilter">
+        <option value="track">正式追跡</option>
+        <option value="duplicate">重複統合</option>
+        <option value="exclude">追跡対象外</option>
+        <option value="">すべて</option>
+      </select>
+    </div>
+    <div class="resource-list" id="resourceReviewList">
+      <p class="loading">地域資源を読み込んでいます…</p>
+    </div>
+  </section>
+
   <section class="card news-review-card" id="newsReview">
     <div class="news-review-header">
       <h2>石川ニュース自動運用状況</h2>
@@ -505,6 +635,143 @@
   var NEWS_DATA_ORIGIN = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
     ? location.origin
     : SITE_ORIGIN;
+
+  // ── 追跡中の地域資源 ──────────────────────────
+  (function () {
+    var list = document.getElementById('resourceReviewList');
+    var summary = document.getElementById('resourceReviewSummary');
+    var updated = document.getElementById('resourceReviewUpdated');
+    var policy = document.getElementById('resourceReviewPolicy');
+    var filter = document.getElementById('resourceDecisionFilter');
+    var decisions = [];
+    var resourcesById = {};
+
+    function escapeHtml(value) {
+      return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
+        return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+      });
+    }
+
+    function safeUrl(value) {
+      try {
+        var parsed = new URL(value);
+        return /^https?:$/.test(parsed.protocol) ? parsed.href : '';
+      } catch (_error) {
+        return '';
+      }
+    }
+
+    function decisionLabel(decision) {
+      return {
+        track: '正式追跡',
+        duplicate: '重複統合',
+        exclude: '追跡対象外'
+      }[decision] || decision;
+    }
+
+    function connectionLabel(decision) {
+      return {
+        track: '毎朝のニュース収集へ接続済み',
+        duplicate: '同じ地域資源へ統合済み',
+        exclude: '毎朝の追跡には接続しない'
+      }[decision] || '未設定';
+    }
+
+    function resourceDetails(item) {
+      return (item.resourceIds || []).map(function (id) {
+        return resourcesById[id] || { id: id, name: id, type: '地域資源' };
+      });
+    }
+
+    function render() {
+      var selectedDecision = filter.value;
+      var visible = decisions.filter(function (item) {
+        return !selectedDecision || item.decision === selectedDecision;
+      });
+      if (!visible.length) {
+        list.innerHTML = '<p class="loading">この判断の地域資源はありません。</p>';
+        return;
+      }
+      list.innerHTML = visible.map(function (item) {
+        var linked = resourceDetails(item);
+        var name = linked.length
+          ? linked.map(function (resource) { return resource.name; }).join(' ／ ')
+          : (item.displayName || '追跡対象外の候補');
+        var types = linked.map(function (resource) { return resource.type; })
+          .filter(function (value, index, values) { return values.indexOf(value) === index; });
+        var sources = linked.map(function (resource) {
+          return { name: resource.name, url: safeUrl(resource.sourceUrl) };
+        }).filter(function (source, index, values) {
+          return source.url && values.findIndex(function (other) { return other.url === source.url; }) === index;
+        });
+        var sourceHtml = sources.length
+          ? '<ul class="resource-source-list">' + sources.map(function (source) {
+              return '<li><a href="' + escapeHtml(source.url) + '" target="_blank" rel="noopener">' +
+                escapeHtml(source.name) + 'の公式情報源</a></li>';
+            }).join('') + '</ul>'
+          : 'なし';
+        var duplicateHtml = item.duplicateOf
+          ? '<p class="resource-detail"><strong>統合先候補ID：</strong>' + escapeHtml(item.duplicateOf) + '</p>'
+          : '';
+        return '<article class="resource-item" data-decision="' + escapeHtml(item.decision) + '">' +
+          '<div class="resource-badges">' +
+            '<span class="resource-badge ' + escapeHtml(item.decision) + '">' + escapeHtml(decisionLabel(item.decision)) + '</span>' +
+            (types.length ? '<span class="resource-badge">' + escapeHtml(types.join('・')) + '</span>' : '') +
+          '</div>' +
+          '<h3 class="resource-name">' + escapeHtml(name) + '</h3>' +
+          '<p class="resource-detail"><strong>接続状態：</strong>' + escapeHtml(connectionLabel(item.decision)) + '</p>' +
+          '<p class="resource-detail"><strong>判断理由：</strong>' + escapeHtml(item.reason || '記録なし') + '</p>' +
+          '<div class="resource-detail"><strong>公式情報源：</strong>' + sourceHtml + '</div>' +
+          duplicateHtml +
+          '<p class="resource-detail"><strong>候補ID：</strong>' + escapeHtml(item.candidateId) + '</p>' +
+        '</article>';
+      }).join('');
+    }
+
+    filter.addEventListener('change', render);
+    Promise.all([
+      fetch(NEWS_DATA_ORIGIN + '/config/news-regions/ishikawa.json?_=' + Date.now()),
+      fetch(NEWS_DATA_ORIGIN + '/config/news-regions/ishikawa-resource-review.json?_=' + Date.now())
+    ]).then(function (responses) {
+      responses.forEach(function (response) {
+        if (!response.ok) throw new Error('status ' + response.status);
+      });
+      return Promise.all(responses.map(function (response) { return response.json(); }));
+    }).then(function (data) {
+      var profile = data[0];
+      var review = data[1];
+      (profile.verifiedFacilities || []).forEach(function (facility) {
+        resourcesById[facility.id] = {
+          id: facility.id,
+          name: facility.name,
+          type: '施設・団体',
+          sourceUrl: facility.sourceUrl
+        };
+      });
+      (profile.regionalThemes || []).forEach(function (theme) {
+        resourcesById[theme.id] = {
+          id: theme.id,
+          name: theme.label,
+          type: '地域テーマ',
+          sourceUrl: theme.sourceUrl
+        };
+      });
+      decisions = Array.isArray(review.decisions) ? review.decisions : [];
+      var counts = review.summary || { track: 0, duplicate: 0, exclude: 0 };
+      summary.innerHTML =
+        '<span class="resource-review-chip track">正式追跡: ' + Number(counts.track || 0) + '件</span>' +
+        '<span class="resource-review-chip duplicate">重複統合: ' + Number(counts.duplicate || 0) + '件</span>' +
+        '<span class="resource-review-chip exclude">追跡対象外: ' + Number(counts.exclude || 0) + '件</span>';
+      updated.textContent = '最終確認: ' + String(review.reviewedAt || '日付不明').replace(/-/g, '/');
+      if (review.policy) {
+        policy.textContent = 'この' + Number(review.candidateCount || decisions.length) + '件はニュース記事の件数ではありません。' + review.policy;
+      }
+      render();
+    }).catch(function () {
+      updated.textContent = '読み込み失敗';
+      list.innerHTML = '<p class="error">地域資源の判断結果を読み込めませんでした。</p>';
+    });
+  })();
 
   var STATUS_LABEL = {
     published: '公開中',
