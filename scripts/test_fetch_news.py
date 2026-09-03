@@ -31,17 +31,6 @@ BIOS_SOURCE = {
     'facilityAliases': ['ビオスの丘'],
 }
 
-COCO_SOURCE = {
-    'id': 'google-news-coco-garden',
-    'name': 'ココガーデンリゾート沖縄',
-    'type': 'discovery',
-    'trust': 60,
-    'method': 'google-news',
-    'facilityId': 'coco-garden',
-    'facilityAliases': ['ココ ガーデンリゾート オキナワ'],
-}
-
-
 def candidate(title, source, minute=0):
     published = datetime(2026, 9, 1, 9, minute, tzinfo=fetch_news.JST)
     return fetch_news.build_candidate(
@@ -174,11 +163,11 @@ class NewsAutomationTests(unittest.TestCase):
         )
 
     def test_gallery_is_published_once(self):
-        base = ('沖縄のリゾートホテルで暮らすように泊まる。'
-                '「ココ ガーデンリゾート オキナワ」の魅力をレポート'
+        base = ('うるま市石川の催しを紹介。'
+                '地域イベントの魅力をレポート'
                 ' - ウォーカープラス')
         items = [
-            candidate(f'画像{number} / 23＞{base}', COCO_SOURCE, number)
+            candidate(f'画像{number} / 23＞{base}', MEDIA_SOURCE, number)
             for number in (2, 7, 21)
         ]
         fetch_news.deduplicate_candidates(items)

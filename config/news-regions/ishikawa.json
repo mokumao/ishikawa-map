@@ -24,7 +24,6 @@
     {"id": "ishikawa-library", "name": "石川図書館", "aliases": ["石川図書館"]},
     {"id": "ishikawa-youth-center", "name": "石川少年自然の家", "aliases": ["石川少年自然の家", "石川青少年の家"]},
     {"id": "bios-hill", "name": "ビオスの丘", "aliases": ["ビオスの丘"]},
-    {"id": "coco-garden", "name": "ココガーデンリゾート沖縄", "aliases": ["ココガーデンリゾート沖縄", "ココ ガーデンリゾート オキナワ", "ココガーデンリゾート オキナワ"]},
     {"id": "rakujuen", "name": "特別養護老人ホーム 楽寿園", "aliases": ["特別養護老人ホーム 楽寿園", "社会福祉法人育賛会 楽寿園", "育賛会 楽寿園", "楽寿園"], "requireRegionContext": true, "sourceUrl": "https://www.ikusan-k.jp/", "verifiedAt": "2026-09-03"},
     {"id": "ishikawa-police-station", "name": "石川警察署", "aliases": ["石川警察署", "石川署"], "sourceUrl": "https://www.police.pref.okinawa.jp/docs/2015022800185/", "verifiedAt": "2026-09-03"},
     {"id": "ishikawa-water-treatment-plant", "name": "石川浄水場", "aliases": ["石川浄水場"], "sourceUrl": "https://www.eb.pref.okinawa.jp/opeb/48/4837", "verifiedAt": "2026-09-03"},
@@ -78,7 +77,6 @@
     {"id": "google-news-ishikawa-dome", "name": "石川ドーム・闘牛", "query": "石川ドーム 闘牛", "type": "discovery", "trust": 60, "method": "google-news", "filter": false, "facilityId": "ishikawa-dome", "facilityAliases": ["石川多目的ドーム", "石川ドーム"]},
     {"id": "google-news-ishikawa-nature", "name": "石川少年自然の家", "query": "石川少年自然の家", "type": "discovery", "trust": 60, "method": "google-news", "filter": false, "facilityId": "ishikawa-youth-center", "facilityAliases": ["石川少年自然の家", "石川青少年の家"]},
     {"id": "google-news-bios-hill", "name": "ビオスの丘", "query": "ビオスの丘", "type": "discovery", "trust": 60, "method": "google-news", "filter": false, "facilityId": "bios-hill", "facilityAliases": ["ビオスの丘"]},
-    {"id": "google-news-coco-garden", "name": "ココガーデンリゾート沖縄", "query": "ココガーデンリゾート沖縄", "type": "discovery", "trust": 60, "method": "google-news", "filter": false, "facilityId": "coco-garden", "facilityAliases": ["ココガーデンリゾート沖縄", "ココ ガーデンリゾート オキナワ", "ココガーデンリゾート オキナワ"]},
     {"id": "okinawa-times", "name": "沖縄タイムス", "query": "site:okinawatimes.co.jp うるま 石川", "type": "media", "trust": 80, "method": "google-news", "filter_strict": true},
     {"id": "ryukyu-shimpo", "name": "琉球新報", "query": "site:ryukyushimpo.jp うるま 石川", "type": "media", "trust": 80, "method": "google-news", "filter_strict": true},
     {"id": "uruma-city", "name": "うるま市公式サイト", "query": "site:city.uruma.lg.jp", "type": "official", "trust": 90, "method": "google-news", "filter_strict": "region_only"}
