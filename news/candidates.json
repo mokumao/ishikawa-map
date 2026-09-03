@@ -1,15 +1,15 @@
 {
   "regionId": "ishikawa",
   "regionName": "石川",
-  "updated": "2026-09-03T21:50:31.681108+09:00",
-  "count": 147,
-  "reviewCount": 3,
+  "updated": "2026-09-04T07:56:02.470081+09:00",
+  "count": 161,
+  "reviewCount": 4,
   "statusCounts": {
-    "published": 4,
-    "review": 3,
-    "rejected": 44,
-    "duplicate": 5,
-    "expired": 91
+    "published": 3,
+    "review": 4,
+    "rejected": 38,
+    "duplicate": 6,
+    "expired": 110
   },
   "sourceResults": [
     {
@@ -26,7 +26,7 @@
       "name": "Google ニュース（うるま市 石川）",
       "status": "success",
       "entryCount": 100,
-      "candidateCount": 1,
+      "candidateCount": 0,
       "publishedCount": 0,
       "error": null
     },
@@ -34,7 +34,7 @@
       "id": "google-news-ishikawa-dome",
       "name": "石川ドーム・闘牛",
       "status": "success",
-      "entryCount": 100,
+      "entryCount": 30,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -43,7 +43,7 @@
       "id": "google-news-ishikawa-nature",
       "name": "石川少年自然の家",
       "status": "success",
-      "entryCount": 6,
+      "entryCount": 4,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -53,7 +53,7 @@
       "name": "ビオスの丘",
       "status": "success",
       "entryCount": 41,
-      "candidateCount": 2,
+      "candidateCount": 1,
       "publishedCount": 1,
       "error": null
     },
@@ -62,7 +62,7 @@
       "name": "沖縄タイムス",
       "status": "success",
       "entryCount": 100,
-      "candidateCount": 29,
+      "candidateCount": 30,
       "publishedCount": 1,
       "error": null
     },
@@ -71,8 +71,8 @@
       "name": "琉球新報",
       "status": "success",
       "entryCount": 100,
-      "candidateCount": 16,
-      "publishedCount": 1,
+      "candidateCount": 11,
+      "publishedCount": 0,
       "error": null
     },
     {
@@ -88,7 +88,7 @@
       "id": "region-facility-ishikawa-ishikawa-mountain",
       "name": "石川施設：石川岳",
       "status": "success",
-      "entryCount": 10,
+      "entryCount": 7,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -97,7 +97,7 @@
       "id": "region-facility-ishikawa-ishikawa-history-museum",
       "name": "石川施設：石川歴史民俗資料館",
       "status": "success",
-      "entryCount": 26,
+      "entryCount": 24,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -106,8 +106,8 @@
       "id": "region-facility-ishikawa-ishikawa-library",
       "name": "石川施設：石川図書館",
       "status": "success",
-      "entryCount": 48,
-      "candidateCount": 1,
+      "entryCount": 46,
+      "candidateCount": 0,
       "publishedCount": 0,
       "error": null
     },
@@ -125,7 +125,7 @@
       "name": "石川施設：石川警察署",
       "status": "success",
       "entryCount": 46,
-      "candidateCount": 1,
+      "candidateCount": 2,
       "publishedCount": 0,
       "error": null
     },
@@ -133,7 +133,7 @@
       "id": "region-facility-ishikawa-ishikawa-water-treatment-plant",
       "name": "石川施設：石川浄水場",
       "status": "success",
-      "entryCount": 41,
+      "entryCount": 35,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -142,7 +142,7 @@
       "id": "region-facility-ishikawa-ishikawa-park",
       "name": "石川施設：石川公園",
       "status": "success",
-      "entryCount": 6,
+      "entryCount": 4,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -152,15 +152,15 @@
       "name": "石川施設：新石川調理場",
       "status": "success",
       "entryCount": 17,
-      "candidateCount": 0,
+      "candidateCount": 1,
       "publishedCount": 0,
       "error": null
     },
     {
       "id": "region-facility-ishikawa-johoku-community",
       "name": "石川施設：城北区自治会",
-      "status": "success",
-      "entryCount": 1,
+      "status": "empty",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -178,7 +178,7 @@
       "id": "region-facility-ishikawa-kadekaru-community",
       "name": "石川施設：嘉手苅区自治会",
       "status": "success",
-      "entryCount": 1,
+      "entryCount": 2,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -186,8 +186,8 @@
     {
       "id": "region-facility-ishikawa-yamashiro-community",
       "name": "石川施設：山城自治会",
-      "status": "empty",
-      "entryCount": 0,
+      "status": "success",
+      "entryCount": 1,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -205,7 +205,7 @@
       "id": "region-theme-ishikawa-ishikawa-mihoso-festival",
       "name": "石川固有テーマ：石川みほそまつり",
       "status": "success",
-      "entryCount": 9,
+      "entryCount": 6,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -214,7 +214,7 @@
       "id": "region-theme-ishikawa-yamashiro-tea",
       "name": "石川固有テーマ：山城茶",
       "status": "success",
-      "entryCount": 7,
+      "entryCount": 6,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -223,7 +223,7 @@
       "id": "region-theme-ishikawa-okinawa-water-festival",
       "name": "石川固有テーマ：おきなわみずまつり",
       "status": "success",
-      "entryCount": 4,
+      "entryCount": 3,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -232,7 +232,7 @@
       "id": "region-theme-ishikawa-ishikawa-area-redevelopment",
       "name": "石川固有テーマ：石川庁舎周辺・石川公園のまちづくり",
       "status": "success",
-      "entryCount": 10,
+      "entryCount": 8,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -240,8 +240,8 @@
     {
       "id": "region-theme-ishikawa-ishikawa-community-traditions",
       "name": "石川固有テーマ：石川地区の自治会行事・伝統芸能",
-      "status": "empty",
-      "entryCount": 0,
+      "status": "success",
+      "entryCount": 9,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -249,8 +249,8 @@
     {
       "id": "region-theme-ishikawa-ishikawa-yam-imo",
       "name": "石川固有テーマ：石川地区の山芋スーブ",
-      "status": "empty",
-      "entryCount": 0,
+      "status": "success",
+      "entryCount": 1,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -259,25 +259,25 @@
       "id": "region-discovery-ishikawa-government",
       "name": "石川：行政・自治会",
       "status": "success",
-      "entryCount": 40,
-      "candidateCount": 1,
+      "entryCount": 41,
+      "candidateCount": 0,
       "publishedCount": 0,
       "error": null
     },
     {
       "id": "region-discovery-ishikawa-events-culture",
       "name": "石川：催し・祭り・文化",
-      "status": "empty",
-      "entryCount": 0,
-      "candidateCount": 0,
+      "status": "success",
+      "entryCount": 88,
+      "candidateCount": 1,
       "publishedCount": 0,
       "error": null
     },
     {
       "id": "region-discovery-ishikawa-public-facilities",
       "name": "石川：公共施設",
-      "status": "empty",
-      "entryCount": 0,
+      "status": "success",
+      "entryCount": 19,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -285,8 +285,8 @@
     {
       "id": "region-discovery-ishikawa-education",
       "name": "石川：学校・教育",
-      "status": "empty",
-      "entryCount": 0,
+      "status": "success",
+      "entryCount": 44,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -294,8 +294,8 @@
     {
       "id": "region-discovery-ishikawa-safety",
       "name": "石川：防災・安全",
-      "status": "empty",
-      "entryCount": 0,
+      "status": "success",
+      "entryCount": 46,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -303,8 +303,8 @@
     {
       "id": "region-discovery-ishikawa-health-welfare",
       "name": "石川：健康・福祉",
-      "status": "empty",
-      "entryCount": 0,
+      "status": "success",
+      "entryCount": 42,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -312,8 +312,8 @@
     {
       "id": "region-discovery-ishikawa-transport-construction",
       "name": "石川：交通・工事",
-      "status": "empty",
-      "entryCount": 0,
+      "status": "success",
+      "entryCount": 48,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -321,8 +321,8 @@
     {
       "id": "region-discovery-ishikawa-business-community",
       "name": "石川：商業・地域活動",
-      "status": "empty",
-      "entryCount": 0,
+      "status": "success",
+      "entryCount": 45,
       "candidateCount": 0,
       "publishedCount": 0,
       "error": null
@@ -340,7 +340,7 @@
       "sourceType": "official",
       "publishedAt": "2026-05-19T12:00:00+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": "2026-09-21T00:00:00+09:00",
       "eventEndsAt": "2027-03-20T00:00:00+09:00",
       "expiresAt": "2027-03-20T23:59:59+09:00",
@@ -367,6 +367,76 @@
       "relatedCount": 0
     },
     {
+      "id": "20260904-ryukyu-shimpo-94a08d2382",
+      "title": "闘牛経済効果１億３０００万円 飼料高、担い手不足課題 おきぎん経研発表 観光資源化に期待も - ryukyushimpo.jp",
+      "displayTitle": "闘牛経済効果1億3000万円 飼料高、担い手不足課題 おきぎん経研発表 観光資源化に期待も - ryukyushimpo.jp",
+      "summary": "闘牛経済効果１億３０００万円 飼料高、担い手不足課題 おきぎん経研発表 観光資源化に期待も ryukyushimpo.jp",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE0tZTI5bjRwSFdGbEowMWNhVUp4R29oZjFpUGNZVUg0clBYN1k3MmgxZFZxblQwUjhPZTZiWHZGZ0ZQa081WkhBMmIybkxHU1Fvd1BzOWtsUzk3dDN4R0FTWDNR?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-09-04T05:00:00+09:00",
+      "discoveredAt": "2026-09-04T07:56:02.470081+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-11T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "4ece0e0473f819c60fa6",
+      "articleFingerprint": "94a08d2382684b844b56",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
+      "id": "20260904-okinawa-times-0f56aac3df",
+      "title": "古酒の日限定酒 石川酒造場販売 29年と3年ブレンド - 沖縄タイムス社",
+      "displayTitle": "古酒の日限定酒 石川酒造場販売 29年と3年ブレンド",
+      "summary": "古酒の日限定酒 石川酒造場販売 29年と3年ブレンド 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBTdUlEOG56YmRaU2ZTNXBXNTFaMUc0Vk9zcTZKQklZSHFMT3hHOWJyODR4ZGxMaWJ1cnh1Q3Y2eHZuOWp6UFNZeDFFX1VJRGVZd2V4bnAzeFdfQU9jZXc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-09-04T03:57:00+09:00",
+      "discoveredAt": "2026-09-04T07:56:02.470081+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-11T23:59:59+09:00",
+      "category": "news",
+      "localScore": 25,
+      "localEvidence": [
+        "石川"
+      ],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "676c84515346ddfc6450",
+      "articleFingerprint": "0f56aac3df4375f96d0a",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
       "id": "20260903-okinawa-times-fe3d723b1a",
       "title": "４日からバレー男子アジア選手権 五輪出場懸け、石川「出し切る」 - 沖縄タイムス社",
       "displayTitle": "4日からバレー男子アジア選手権 五輪出場懸け、石川「出し切る」",
@@ -377,7 +447,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-03T20:39:05+09:00",
       "discoveredAt": "2026-09-03T21:50:31.681108+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-10T23:59:59+09:00",
@@ -403,6 +473,40 @@
       "relatedCount": 0
     },
     {
+      "id": "20260903-ryukyu-shimpo-f288bffbc8",
+      "title": "「石川・宮森630会」の記事一覧 - ryukyushimpo.jp",
+      "displayTitle": "「石川・宮森630会」の記事一覧 - ryukyushimpo.jp",
+      "summary": "「石川・宮森630会」の記事一覧 ryukyushimpo.jp",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPS2tVUm83OXZnSjVHZktKREtMUUlPaFU2MGp6RDI2cWRaeTR2VWh5VHBueEpNZEtLS3BxLW1keXBLNlUxbVBxYmduaVdLWlExOUoyZ0pFUWJKUGdWTzdBaG1yeEFrOFNOeDM3RDlyeDJFUThlT1ktdnhUVlctWVJ4T0pnN08zWEktMEkzVGFQV1RKVU1ZMU1N?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-09-03T13:02:30+09:00",
+      "discoveredAt": "2026-09-04T07:56:02.470081+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-10T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "8edc2ae41abe32b949db",
+      "articleFingerprint": "f288bffbc83ff081e464",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
       "id": "20260903-ryukyu-shimpo-7885bb4d85",
       "title": "「石川・宮森630会」の記事一覧 - 琉球新報デジタル",
       "displayTitle": "「石川・宮森630会」の記事一覧",
@@ -421,12 +525,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "5265a714e5cb2b09fdbe",
       "articleFingerprint": "7885bb4d8578585c22f2",
@@ -434,7 +539,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260903-okinawa-times-1430c08645",
@@ -447,7 +553,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-03T13:00:00+09:00",
       "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-10T23:59:59+09:00",
@@ -471,6 +577,43 @@
       "relatedCount": 0
     },
     {
+      "id": "20260903-region-facility-ishikawa-new-ishikawa-kitchen-8bfe52f25a",
+      "title": "調理員と児童が一緒に給食を食べることも…高松市の屋島小学校が「学校給食優良学校等」を受賞 - Infoseek",
+      "displayTitle": "調理員と児童が一緒に給食を食べることも...高松市の屋島小学校が「学校給食優良学校等」を受賞 - Infoseek",
+      "summary": "調理員と児童が一緒に給食を食べることも…高松市の屋島小学校が「学校給食優良学校等」を受賞 Infoseek",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9YRE40SHVJR0llclpxaGtyTG9NWm5nUlhWWEUxcnlTNkpEUmxKYzR0WWtGUTEzbTFKNUdqdVlLSmhtdFRJQjZDbG1OV0hEZUplUlcyT3Q5ZnY3V2pabFHSAWNBVV95cUxNRC1kZlM3NU9zNFNmUUJrQnNFcjZnVDl1OTNZSi1pbTBVaHR6V3J0NEItakJER1I5TlVFenFxSkpVNDFXNGNrSzNHWUFjZWFWaHpTMF9xVFRFS19oeS0ycE1lVkE?oc=5",
+      "sourceId": "region-facility-ishikawa-new-ishikawa-kitchen",
+      "sourceName": "石川施設：新石川調理場",
+      "sourceType": "discovery",
+      "publishedAt": "2026-09-03T12:56:00+09:00",
+      "discoveredAt": "2026-09-04T07:56:02.470081+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-10T23:59:59+09:00",
+      "category": "news",
+      "localScore": 35,
+      "localEvidence": [
+        "取得元候補：石川施設：新石川調理場"
+      ],
+      "confidence": 45,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "施設専用検索で発見したが、記事内の施設名確認が必要",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関係を確認できないため記録",
+        "石川地区との関係を確定できないため判断保留"
+      ],
+      "fingerprint": "5c8562045ac3c12df1c6",
+      "articleFingerprint": "8bfe52f25a22d80861ea",
+      "facilityId": "new-ishikawa-kitchen",
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
       "id": "20260903-okinawa-times-b4810fa59b",
       "title": "【キル フェ ボン】秋の風情漂う9月25日“十五夜”に ―月に住むウサギとすすきが彩る「お月見タルト」、今年も約2週間限定で登場。 - 沖縄タイムス社",
       "displayTitle": "【キル フェ ボン】秋の風情漂う9月25日“十五夜”に ―月に住むウサギとすすきが彩る「お月見タルト」、今年も約2週間限定で登場。",
@@ -481,7 +624,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-03T11:00:00+09:00",
       "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-10T23:59:59+09:00",
@@ -515,7 +658,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-03T07:53:12+09:00",
       "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-10T23:59:59+09:00",
@@ -542,6 +685,37 @@
       "relatedCount": 0
     },
     {
+      "id": "20260903-okinawa-times-ec15f076c5",
+      "title": "闘牛の経済効果は1.3億円超 おきぎん経済研究所が試算 担い手不足やコスト高騰が課題 - 沖縄タイムス社",
+      "displayTitle": "闘牛の経済効果は1.3億円超 おきぎん経済研究所が試算 担い手不足やコスト高騰が課題",
+      "summary": "闘牛の経済効果は1.3億円超 おきぎん経済研究所が試算 担い手不足やコスト高騰が課題 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBVRUIzX0pzRjh6TEFQUExzUzc5V1pTNmxHcFd1dU4wWVA2SEtQOXF5VDN3NlRWajdSYkhPMW1pMjVDdU5NaWtVUzQta195RlE2QzJJY0E5aG51VGhpcmc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-09-03T07:02:00+09:00",
+      "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-10T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「闘牛の経済効果は1.3億円超 おきぎん経済研究所が試算 担い手不足やコスト高騰が課題」へ統合"
+      ],
+      "fingerprint": "cb3c1e08fa75b585b87c",
+      "articleFingerprint": "ec15f076c5acd8de3a20",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20260903-region-theme-ishikawa-bullfighting-ec15f076c5"
+    },
+    {
       "id": "20260903-region-theme-ishikawa-bullfighting-ec15f076c5",
       "title": "闘牛の経済効果は1.3億円超 おきぎん経済研究所が試算 担い手不足やコスト高騰が課題 - 沖縄タイムス社",
       "displayTitle": "闘牛の経済効果は1.3億円超 おきぎん経済研究所が試算 担い手不足やコスト高騰が課題",
@@ -552,7 +726,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-09-03T07:02:00+09:00",
       "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-10T23:59:59+09:00",
@@ -568,7 +742,8 @@
         "地域固有テーマ専用検索で発見したが、記事内の地域文脈確認が必要",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関係を確認できないため記録",
-        "石川地区との関係を確定できないため判断保留"
+        "石川地区との関係を確定できないため判断保留",
+        "同じ内容の記事1件を代表記事へ統合"
       ],
       "fingerprint": "cb3c1e08fa75b585b87c",
       "articleFingerprint": "ec15f076c5acd8de3a20",
@@ -576,40 +751,7 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
-    },
-    {
-      "id": "20260903-okinawa-times-ec15f076c5",
-      "title": "闘牛の経済効果は1.3億円超 おきぎん経済研究所が試算 担い手不足やコスト高騰が課題 - 沖縄タイムス社",
-      "displayTitle": "闘牛の経済効果は1.3億円超 おきぎん経済研究所が試算 担い手不足やコスト高騰が課題",
-      "summary": "闘牛の経済効果は1.3億円超 おきぎん経済研究所が試算 担い手不足やコスト高騰が課題 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBVRUIzX0pzRjh6TEFQUExzUzc5V1pTNmxHcFd1dU4wWVA2SEtQOXF5VDN3NlRWajdSYkhPMW1pMjVDdU5NaWtVUzQta195RlE2QzJJY0E5aG51VGhpcmc?oc=5",
-      "sourceId": "okinawa-times",
-      "sourceName": "沖縄タイムス",
-      "sourceType": "media",
-      "publishedAt": "2026-09-03T07:02:00+09:00",
-      "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
-      "checkedAt": "2026-09-03T19:47:57.286962+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-09-10T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 65,
-      "status": "expired",
-      "requiresReview": false,
-      "reviewReasons": [
-        "同じ内容として代表記事「闘牛の経済効果は1.3億円超 おきぎん経済研究所が試算 担い手不足やコスト高騰が課題」へ統合",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
-      ],
-      "fingerprint": "cb3c1e08fa75b585b87c",
-      "articleFingerprint": "ec15f076c5acd8de3a20",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": "20260903-region-theme-ishikawa-bullfighting-ec15f076c5",
-      "previousStatus": "duplicate"
+      "relatedCount": 1
     },
     {
       "id": "20260903-okinawa-times-9213c1303b",
@@ -622,7 +764,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-03T06:57:10+09:00",
       "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-10T23:59:59+09:00",
@@ -649,6 +791,41 @@
       "relatedCount": 0
     },
     {
+      "id": "20260903-ryukyu-shimpo-e31826345f",
+      "title": "「うるま市」の記事一覧 - ryukyushimpo.jp",
+      "displayTitle": "「うるま市」の記事一覧 - ryukyushimpo.jp",
+      "summary": "「うるま市」の記事一覧 ryukyushimpo.jp",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5iX3pmQmlsQXBtZVUxZkUzei1ma0pEZnlsQ2Y0V0RWTG9XMTlWTkRXN09MYnUzdjl6cnVpYUxMZVFfeS1Mc1pBZ1czbG9UbEZQZGNwTmUtUlBLQQ?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-09-03T05:26:39+09:00",
+      "discoveredAt": "2026-09-04T07:56:02.470081+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-10T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "うるま市内だが石川地区の根拠が不足",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "c937b88ca59051fe96c5",
+      "articleFingerprint": "e31826345fcc1eb17bc0",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
       "id": "20260903-ryukyu-shimpo-28150d27f3",
       "title": "「うるま市」の記事一覧 - 琉球新報デジタル",
       "displayTitle": "「うるま市」の記事一覧",
@@ -667,13 +844,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "うるま市内だが石川地区の根拠が不足",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "6814d2f2df66b31a1cd2",
       "articleFingerprint": "28150d27f35c6318652f",
@@ -681,7 +859,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260903-ryukyu-shimpo-a2d3ce0da1",
@@ -702,12 +881,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "a679098e4f0aed36b7ad",
       "articleFingerprint": "a2d3ce0da179a1675065",
@@ -715,7 +895,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260903-okinawa-times-5097845a80",
@@ -811,12 +992,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "10b489f4251954d2a88b",
       "articleFingerprint": "7b250dc33553fa452462",
@@ -824,7 +1006,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260903-okinawa-times-d0c5f7b0d2",
@@ -837,7 +1020,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-03T03:58:00+09:00",
       "discoveredAt": "2026-09-03T07:56:35.227352+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-10T23:59:59+09:00",
@@ -871,7 +1054,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-03T03:57:00+09:00",
       "discoveredAt": "2026-09-03T07:56:35.227352+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-10T23:59:59+09:00",
@@ -907,7 +1090,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-03T03:57:00+09:00",
       "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-10T23:59:59+09:00",
@@ -949,12 +1132,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "148846d5052f701b0d28",
       "articleFingerprint": "de90314c9bd97085eee4",
@@ -964,7 +1148,8 @@
       ],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260903-okinawa-times-db1b6aca35",
@@ -1006,6 +1191,40 @@
       "previousStatus": "rejected"
     },
     {
+      "id": "20260902-ryukyu-shimpo-b4bf15e9b3",
+      "title": "結婚相談所代表が投資詐欺疑い マッチングアプリ悪用 - ryukyushimpo.jp",
+      "displayTitle": "結婚相談所代表が投資詐欺疑い マッチングアプリ悪用 - ryukyushimpo.jp",
+      "summary": "結婚相談所代表が投資詐欺疑い マッチングアプリ悪用 ryukyushimpo.jp",
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9nc1lMMDJDX1hDSFcwc3Q0Rm5Vb0FJcFlvb2MyRWNVenNPZ2hFOVFfekNGZGZnb2lWU0hab1QyWEdyWjZrU2pnMWtJQzREVVRBTzBncnctOWJTMlBy?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-09-02T22:34:06+09:00",
+      "discoveredAt": "2026-09-04T07:56:02.470081+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-09T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "6d34093b5bb1b4c70908",
+      "articleFingerprint": "b4bf15e9b3db11c71ef0",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
       "id": "20260902-ryukyu-shimpo-8f486c2bcb",
       "title": "結婚相談所代表が投資詐欺疑い マッチングアプリ悪用 - 琉球新報デジタル",
       "displayTitle": "結婚相談所代表が投資詐欺疑い マッチングアプリ悪用",
@@ -1024,12 +1243,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "8c473048675ec017fc20",
       "articleFingerprint": "8f486c2bcb84cea8d46f",
@@ -1037,7 +1257,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260902-ryukyu-shimpo-8e05fc504a",
@@ -1058,12 +1279,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "a4ca616d48dcd3e424c6",
       "articleFingerprint": "8e05fc504a59ea07a0c7",
@@ -1071,7 +1293,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260902-ryukyu-shimpo-9252cd02a5",
@@ -1164,12 +1387,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "9e97e2a20f8206083231",
       "articleFingerprint": "e0a1fbf8a8407b77b04d",
@@ -1177,7 +1401,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260902-ryukyu-shimpo-66a1a2bf17",
@@ -1305,7 +1530,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T15:41:42+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -1377,7 +1602,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T15:21:16+09:00",
       "discoveredAt": "2026-09-03T07:56:35.227352+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -1459,12 +1684,13 @@
         "ビオスの丘"
       ],
       "confidence": 45,
-      "status": "published",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区・日時・情報源の自動掲載条件を満たした",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容の記事1件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "08524ecd09bdafd07dc3",
       "articleFingerprint": "c62fd3370e33306063ae",
@@ -1477,7 +1703,8 @@
         "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPelh1aS1TUlV6bGRiV2ZxbUpJWFo1YlFHRlNYZklwNkV3VjhJMExLSUdjSUNJS3doTXZrSFB6X2J0NU5sTV9IUFlNSXRCdVRsaVJUYVpLNVpwTktIMHBlRXNESlY4R2lqUlFZRE9OamR3OElHdWJ3NlMwNWw3VGxtMjJLajhOd3Bw?oc=5"
       ],
       "duplicateOf": null,
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "published"
     },
     {
       "id": "20260902-google-news-bios-hill-2163e8751b",
@@ -1533,7 +1760,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T14:20:10+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -1568,7 +1795,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T13:30:00+09:00",
       "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
-      "checkedAt": "2026-09-03T19:47:57.286962+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -1576,13 +1803,12 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "expired",
+      "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
       "fingerprint": "423f93444e5cc458d64b",
       "articleFingerprint": "178b75c667883d12572a",
@@ -1590,8 +1816,7 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0,
-      "previousStatus": "rejected"
+      "relatedCount": 0
     },
     {
       "id": "20260902-okinawa-times-20b5db80af",
@@ -1604,7 +1829,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T12:53:00+09:00",
       "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
-      "checkedAt": "2026-09-03T19:47:57.286962+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -1612,13 +1837,12 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "expired",
+      "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
+        "石川地区との関連根拠が基準未満のため自動除外"
       ],
       "fingerprint": "15ba79a6166416e94e7a",
       "articleFingerprint": "20b5db80afde10211c01",
@@ -1626,8 +1850,7 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0,
-      "previousStatus": "rejected"
+      "relatedCount": 0
     },
     {
       "id": "20260902-okinawa-times-671ab1522d",
@@ -1640,7 +1863,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T12:43:10+09:00",
       "discoveredAt": "2026-09-03T21:50:31.681108+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -1710,7 +1933,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-02T09:54:07+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-09T23:59:59+09:00",
@@ -1859,12 +2082,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "521680b29ca3c518b773",
       "articleFingerprint": "ae9abe9ef32f3152667f",
@@ -1872,7 +2096,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260902-ryukyu-shimpo-73fe4b0cfe",
@@ -2215,7 +2440,7 @@
       "sourceType": "official",
       "publishedAt": "2026-09-01T18:28:05+09:00",
       "discoveredAt": "2026-09-02T22:16:40.399363+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -2277,6 +2502,40 @@
       "previousStatus": "rejected"
     },
     {
+      "id": "20260901-ryukyu-shimpo-42a2230a6c",
+      "title": "【PR TIMES】法人向け生成AI「ChatSense」、Claudeでも「Deep Research」を利用可能に - ryukyushimpo.jp",
+      "displayTitle": "【PR TIMES】法人向け生成AI「ChatSense」、Claudeでも「Deep Research」を利用可能に - ryukyushimpo.jp",
+      "summary": "【PR TIMES】法人向け生成AI「ChatSense」、Claudeでも「Deep Research」を利用可能に ryukyushimpo.jp",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9NT2lMS25xUmN5eXhPVm13eHVySERoOFU0REJsV3FmMzdEam5mcjdOM1BWNFE1MFNTZm0xR1o1YWNYbUhUY0s2aVVsUkV2a09lU0puY2R2eklfejM4blNB?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-09-01T11:25:39+09:00",
+      "discoveredAt": "2026-09-04T07:56:02.470081+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-08T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "29326b2a96048bdc8c5c",
+      "articleFingerprint": "42a2230a6cab730bde5d",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
       "id": "20260901-ryukyu-shimpo-1a208853a3",
       "title": "【PR TIMES】法人向け生成AI「ChatSense」、Claudeでも「Deep Research」を利用可能に - 琉球新報デジタル",
       "displayTitle": "【PR TIMES】法人向け生成AI「ChatSense」、Claudeでも「Deep Research」を利用可能に",
@@ -2295,12 +2554,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "712c2b5f048d3925fb36",
       "articleFingerprint": "1a208853a383e949fd8c",
@@ -2308,7 +2568,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260901-ryukyu-shimpo-4d6a77beb3",
@@ -2357,7 +2618,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T10:09:00+09:00",
       "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -2390,7 +2651,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-09-01T10:09:00+09:00",
       "discoveredAt": "2026-09-02T23:15:26.452771+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -2501,6 +2762,40 @@
       "previousStatus": "published"
     },
     {
+      "id": "20260901-ryukyu-shimpo-e33b263973",
+      "title": "イメイド、プレシリーズAブリッジラウンドで資金調達を実施 大手自動車部品メーカーの株式会社ユニバンスが出資 - ryukyushimpo.jp",
+      "displayTitle": "イメイド、プレシリーズAブリッジラウンドで資金調達を実施 大手自動車部品メーカーの株式会社ユニバンスが出資 - ryukyushimpo.jp",
+      "summary": "イメイド、プレシリーズAブリッジラウンドで資金調達を実施 大手自動車部品メーカーの株式会社ユニバンスが出資 ryukyushimpo.jp",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5PcU5qWS1ZYmdaeDlFbWlxbm5YSGc5cE95YkJJT19vZnBCYkt2c0ktcEVYbVpsNTlqcVM5WWxlaWFIQXBLVlo4VGJRVTlWTGdYLXBYY2Y3cjhqR05aeUtr?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-09-01T06:30:00+09:00",
+      "discoveredAt": "2026-09-04T07:56:02.470081+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-08T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "0cd81b8fbb6815f2d752",
+      "articleFingerprint": "e33b26397378b699130a",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
       "id": "20260901-ryukyu-shimpo-ff94d81de2",
       "title": "イメイド、プレシリーズAブリッジラウンドで資金調達を実施 大手自動車部品メーカーの株式会社ユニバンスが出資 - 琉球新報デジタル",
       "displayTitle": "イメイド、プレシリーズAブリッジラウンドで資金調達を実施 大手自動車部品メーカーの株式会社ユニバンスが出資",
@@ -2519,12 +2814,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "3948aebc3d640692d6d6",
       "articleFingerprint": "ff94d81de20c660e46cd",
@@ -2532,7 +2828,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260901-ryukyu-shimpo-1dbf61d61a",
@@ -2649,7 +2946,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T03:57:00+09:00",
       "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -2665,7 +2962,7 @@
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区・日時・情報源の自動掲載条件を満たした",
-        "同じ内容の記事2件を代表記事へ統合"
+        "同じ内容の記事3件を代表記事へ統合"
       ],
       "fingerprint": "2b447b441722dc96982f",
       "articleFingerprint": "11ad73f5fb1ae871a88b",
@@ -2675,7 +2972,7 @@
         "https://news.google.com/rss/articles/CBMiZkFVX3lxTE4yWW9QYWdob19nQWlYUTE0MFZ4TEVTTmllcXI4RnBZSDhuelJXYVhiZGNKdFJBb0c0V2NhSFNfbW5WUm1oT3ZKOHluMERjMk5lUDY5T2huV3FFU21TWkJtSmhuLUIyQQ?oc=5"
       ],
       "duplicateOf": null,
-      "relatedCount": 2
+      "relatedCount": 3
     },
     {
       "id": "20260901-okinawa-times-f682d8bcd2",
@@ -2688,7 +2985,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T03:57:00+09:00",
       "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -2722,7 +3019,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T03:57:00+09:00",
       "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -2756,7 +3053,7 @@
       "sourceType": "media",
       "publishedAt": "2026-09-01T03:57:00+09:00",
       "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -2790,7 +3087,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-09-01T03:57:00+09:00",
       "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
@@ -2808,6 +3105,40 @@
       ],
       "fingerprint": "2b447b441722dc96982f",
       "articleFingerprint": "11ad73f5fb1ae871a88b",
+      "facilityId": "ishikawa-police-station",
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20260901-okinawa-times-11ad73f5fb"
+    },
+    {
+      "id": "20260901-region-facility-ishikawa-ishikawa-police-station-f682d8bcd2",
+      "title": "写真：特殊詐欺防止へ チラシ配り訴え 石川署や郵便局など - 沖縄タイムス社",
+      "displayTitle": "特殊詐欺防止へ チラシ配り訴え 石川署や郵便局など",
+      "summary": "写真：特殊詐欺防止へ チラシ配り訴え 石川署や郵便局など 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE4yWW9QYWdob19nQWlYUTE0MFZ4TEVTTmllcXI4RnBZSDhuelJXYVhiZGNKdFJBb0c0V2NhSFNfbW5WUm1oT3ZKOHluMERjMk5lUDY5T2huV3FFU21TWkJtSmhuLUIyQQ?oc=5",
+      "sourceId": "region-facility-ishikawa-ishikawa-police-station",
+      "sourceName": "石川施設：石川警察署",
+      "sourceType": "discovery",
+      "publishedAt": "2026-09-01T03:57:00+09:00",
+      "discoveredAt": "2026-09-04T07:56:02.470081+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-08T23:59:59+09:00",
+      "category": "news",
+      "localScore": 100,
+      "localEvidence": [
+        "石川署",
+        "石川"
+      ],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「特殊詐欺防止へ チラシ配り訴え 石川署や郵便局など」へ統合"
+      ],
+      "fingerprint": "2b447b441722dc96982f",
+      "articleFingerprint": "f682d8bcd20a6c0b2cd4",
       "facilityId": "ishikawa-police-station",
       "eventMarkers": [],
       "relatedUrls": [],
@@ -2890,13 +3221,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "うるま市内だが石川地区の根拠が不足",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "fb30fd9a2916ff8c9638",
       "articleFingerprint": "10af6a52c823048c75fc",
@@ -2904,7 +3236,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260901-region-discovery-ishikawa-health-welfare-10af6a52c8",
@@ -2950,7 +3283,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T22:11:23+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -3057,7 +3390,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T16:43:49+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -3192,6 +3525,40 @@
       "previousStatus": "rejected"
     },
     {
+      "id": "20260831-ryukyu-shimpo-9474abc0b1",
+      "title": "北陸「大雨メカニズム」 湿った空気 前線活発に ２６日ごろから気圧配置固定 - ryukyushimpo.jp",
+      "displayTitle": "北陸「大雨メカニズム」 湿った空気 前線活発に 26日ごろから気圧配置固定 - ryukyushimpo.jp",
+      "summary": "北陸「大雨メカニズム」 湿った空気 前線活発に ２６日ごろから気圧配置固定 ryukyushimpo.jp",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5jLWtOT0YtaUxaSFk1Yjc5VVpyRGp0X0daenQ0TFNTZnVzRmxVUG9PUWROcXR5elNWSG43clFFLUxNNUZQMWF3SXFUUmxUWjhkNDloRlNlbE5FLTd2b2FBag?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-08-31T05:00:00+09:00",
+      "discoveredAt": "2026-09-04T07:56:02.470081+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-07T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "5f57123236650576c195",
+      "articleFingerprint": "9474abc0b1cab70c52d5",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
       "id": "20260831-ryukyu-shimpo-287e85a9e6",
       "title": "北陸「大雨メカニズム」 湿った空気 前線活発に ２６日ごろから気圧配置固定 - 琉球新報デジタル",
       "displayTitle": "北陸「大雨メカニズム」 湿った空気 前線活発に 26日ごろから気圧配置固定",
@@ -3210,12 +3577,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "6cb27edbd92d8c7b952f",
       "articleFingerprint": "287e85a9e6110a1ea3c7",
@@ -3223,7 +3591,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260831-ryukyu-shimpo-5242a7a2a5",
@@ -3244,12 +3613,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "c243435a29a81b5d214f",
       "articleFingerprint": "5242a7a2a53942823330",
@@ -3257,7 +3627,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260831-ryukyu-shimpo-290e7ec3ce",
@@ -3342,7 +3713,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-31T03:57:00+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -3366,6 +3737,75 @@
       "relatedCount": 0
     },
     {
+      "id": "20260831-region-theme-ishikawa-bullfighting-c154bfeca5",
+      "title": "『ウシオーラセー（闘牛）の角突き稽古』(26/8/30 放送) - 日本テレビ",
+      "displayTitle": "『ウシオーラセー(闘牛)の角突き稽古』(26/8/30 放送) - 日本テレビ",
+      "summary": "『ウシオーラセー（闘牛）の角突き稽古』(26/8/30 放送) 日本テレビ",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1FT1dnNGwtekp2cXFDcVRFQzNENXFlTWtpOFhXRXRyQWhuMTAyemlaQk1QelEwTDlCTXFZZGtQcmVHZVUxMk0zQU02Y3BfMjNZTzhxQktTVTNHR09SS2Eyc0VSWFZlQ0pKc21WVXpHcw?oc=5",
+      "sourceId": "region-theme-ishikawa-bullfighting",
+      "sourceName": "石川固有テーマ：闘牛",
+      "sourceType": "discovery",
+      "publishedAt": "2026-08-31T02:39:52+09:00",
+      "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-07T23:59:59+09:00",
+      "category": "news",
+      "localScore": 35,
+      "localEvidence": [
+        "取得元候補：石川固有テーマ：闘牛"
+      ],
+      "confidence": 45,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "地域固有テーマ専用検索で発見したが、記事内の地域文脈確認が必要",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関係を確認できないため記録",
+        "石川地区との関係を確定できないため判断保留",
+        "同じ内容の記事1件を代表記事へ統合"
+      ],
+      "fingerprint": "51d75628a9ea44a6e01e",
+      "articleFingerprint": "c154bfeca5d15418f3a2",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 1
+    },
+    {
+      "id": "20260831-region-discovery-ishikawa-events-culture-c154bfeca5",
+      "title": "『ウシオーラセー（闘牛）の角突き稽古』(26/8/30 放送) - 日本テレビ",
+      "displayTitle": "『ウシオーラセー(闘牛)の角突き稽古』(26/8/30 放送) - 日本テレビ",
+      "summary": "『ウシオーラセー（闘牛）の角突き稽古』(26/8/30 放送) 日本テレビ",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1FT1dnNGwtekp2cXFDcVRFQzNENXFlTWtpOFhXRXRyQWhuMTAyemlaQk1QelEwTDlCTXFZZGtQcmVHZVUxMk0zQU02Y3BfMjNZTzhxQktTVTNHR09SS2Eyc0VSWFZlQ0pKc21WVXpHcw?oc=5",
+      "sourceId": "region-discovery-ishikawa-events-culture",
+      "sourceName": "石川：催し・祭り・文化",
+      "sourceType": "discovery",
+      "publishedAt": "2026-08-31T02:39:52+09:00",
+      "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-07T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「『ウシオーラセー(闘牛)の角突き稽古』(26/8/30 放送) - 日本テレビ」へ統合"
+      ],
+      "fingerprint": "51d75628a9ea44a6e01e",
+      "articleFingerprint": "c154bfeca5d15418f3a2",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20260831-region-theme-ishikawa-bullfighting-c154bfeca5"
+    },
+    {
       "id": "20260831-region-theme-ishikawa-bullfighting-f6c0300caf",
       "title": "『ウシオーラセー（闘牛）の角突き稽古』(26/8/30 放送) - ntv.co.jp",
       "displayTitle": "『ウシオーラセー(闘牛)の角突き稽古』(26/8/30 放送) - ntv.co.jp",
@@ -3386,43 +3826,6 @@
         "取得元候補：石川固有テーマ：闘牛"
       ],
       "confidence": 45,
-      "status": "review",
-      "requiresReview": true,
-      "reviewReasons": [
-        "地域固有テーマ専用検索で発見したが、記事内の地域文脈確認が必要",
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関係を確認できないため記録",
-        "石川地区との関係を確定できないため判断保留"
-      ],
-      "fingerprint": "1135ba9ecc2330be2b67",
-      "articleFingerprint": "f6c0300caf54f7c69791",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": null,
-      "relatedCount": 0
-    },
-    {
-      "id": "20260831-region-theme-ishikawa-bullfighting-c154bfeca5",
-      "title": "『ウシオーラセー（闘牛）の角突き稽古』(26/8/30 放送) - 日本テレビ",
-      "displayTitle": "『ウシオーラセー(闘牛)の角突き稽古』(26/8/30 放送) - 日本テレビ",
-      "summary": "『ウシオーラセー（闘牛）の角突き稽古』(26/8/30 放送) 日本テレビ",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1FT1dnNGwtekp2cXFDcVRFQzNENXFlTWtpOFhXRXRyQWhuMTAyemlaQk1QelEwTDlCTXFZZGtQcmVHZVUxMk0zQU02Y3BfMjNZTzhxQktTVTNHR09SS2Eyc0VSWFZlQ0pKc21WVXpHcw?oc=5",
-      "sourceId": "region-theme-ishikawa-bullfighting",
-      "sourceName": "石川固有テーマ：闘牛",
-      "sourceType": "discovery",
-      "publishedAt": "2026-08-31T02:39:52+09:00",
-      "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
-      "checkedAt": "2026-09-03T19:47:57.286962+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-09-07T23:59:59+09:00",
-      "category": "news",
-      "localScore": 35,
-      "localEvidence": [
-        "取得元候補：石川固有テーマ：闘牛"
-      ],
-      "confidence": 45,
       "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
@@ -3430,50 +3833,16 @@
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関係を確認できないため記録",
         "石川地区との関係を確定できないため判断保留",
-        "同じ内容の記事1件を代表記事へ統合",
         "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
-      "fingerprint": "51d75628a9ea44a6e01e",
-      "articleFingerprint": "c154bfeca5d15418f3a2",
+      "fingerprint": "1135ba9ecc2330be2b67",
+      "articleFingerprint": "f6c0300caf54f7c69791",
       "facilityId": null,
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 1,
+      "relatedCount": 0,
       "previousStatus": "review"
-    },
-    {
-      "id": "20260831-region-discovery-ishikawa-events-culture-c154bfeca5",
-      "title": "『ウシオーラセー（闘牛）の角突き稽古』(26/8/30 放送) - 日本テレビ",
-      "displayTitle": "『ウシオーラセー(闘牛)の角突き稽古』(26/8/30 放送) - 日本テレビ",
-      "summary": "『ウシオーラセー（闘牛）の角突き稽古』(26/8/30 放送) 日本テレビ",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1FT1dnNGwtekp2cXFDcVRFQzNENXFlTWtpOFhXRXRyQWhuMTAyemlaQk1QelEwTDlCTXFZZGtQcmVHZVUxMk0zQU02Y3BfMjNZTzhxQktTVTNHR09SS2Eyc0VSWFZlQ0pKc21WVXpHcw?oc=5",
-      "sourceId": "region-discovery-ishikawa-events-culture",
-      "sourceName": "石川：催し・祭り・文化",
-      "sourceType": "discovery",
-      "publishedAt": "2026-08-31T02:39:52+09:00",
-      "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
-      "checkedAt": "2026-09-03T19:47:57.286962+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-09-07T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 45,
-      "status": "expired",
-      "requiresReview": false,
-      "reviewReasons": [
-        "同じ内容として代表記事「『ウシオーラセー(闘牛)の角突き稽古』(26/8/30 放送) - 日本テレビ」へ統合",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
-      ],
-      "fingerprint": "51d75628a9ea44a6e01e",
-      "articleFingerprint": "c154bfeca5d15418f3a2",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": "20260831-region-theme-ishikawa-bullfighting-c154bfeca5",
-      "previousStatus": "duplicate"
     },
     {
       "id": "20260830-okinawa-times-1c860c72b0",
@@ -3867,7 +4236,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-30T07:40:00+09:00",
       "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-06T23:59:59+09:00",
@@ -3956,6 +4325,40 @@
       "previousStatus": "rejected"
     },
     {
+      "id": "20260830-ryukyu-shimpo-0aaf540a32",
+      "title": "西原東小が臨時休校へ 31日、停電で 工事進ちょく次第で休校延長も 沖縄 - ryukyushimpo.jp",
+      "displayTitle": "西原東小が臨時休校へ 31日、停電で 工事進ちょく次第で休校延長も 沖縄 - ryukyushimpo.jp",
+      "summary": "西原東小が臨時休校へ 31日、停電で 工事進ちょく次第で休校延長も 沖縄 ryukyushimpo.jp",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE8wd2NoT0pjNHdqQzJBbC02ZEgtam1HWE9jVDZFQUdaaXQyM3pQdzU4UG5wVGlRTVpaMnJTd2pwTzk3S0lna0JsUHNFRUNDS1dhTkFFMFowT3ZXcjVpZTl2Nw?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-08-30T05:00:00+09:00",
+      "discoveredAt": "2026-09-04T07:56:02.470081+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-06T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "54a6551ae0ef30970e16",
+      "articleFingerprint": "0aaf540a320252ccc79c",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
       "id": "20260830-ryukyu-shimpo-35769e8b04",
       "title": "西原東小が臨時休校へ 31日、停電で 工事進ちょく次第で休校延長も 沖縄 - 琉球新報デジタル",
       "displayTitle": "西原東小が臨時休校へ 31日、停電で 工事進ちょく次第で休校延長も 沖縄",
@@ -3974,12 +4377,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "4d2deaa964290ccd660f",
       "articleFingerprint": "35769e8b0423273e55f0",
@@ -3987,7 +4391,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260830-ryukyu-shimpo-e9e0bf53e1",
@@ -4019,6 +4424,41 @@
       "previousStatus": "rejected"
     },
     {
+      "id": "20260830-okinawa-times-1e3bb56474",
+      "title": "うるま市窓口 来月から短縮 午前9時～午後4時に - 沖縄タイムス社",
+      "displayTitle": "うるま市窓口 来月から短縮 午前9時~午後4時に",
+      "summary": "うるま市窓口 来月から短縮 午前9時～午後4時に 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE56d25oVjgwTW4tNllqd0Z3RUFocTREb21PSnJLNGZIaVlzaWFEcjdTZWU0VGZ5VEdlTU42QVdhcHRrQUpSZnZMVVN4MXBwNHAyR292cGU5dWlUVHQyQXc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-08-30T03:57:00+09:00",
+      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-06T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "うるま市内だが石川地区の根拠が不足",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外"
+      ],
+      "fingerprint": "7bdb317161c5d9dea665",
+      "articleFingerprint": "1e3bb56474e69748d5b2",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    },
+    {
       "id": "20260830-okinawa-times-efa08818ae",
       "title": "日本、準決勝で敗退 五輪切符持ち越し バレーアジア選手権 - 沖縄タイムス社",
       "displayTitle": "日本、準決勝で敗退 五輪切符持ち越し バレーアジア選手権",
@@ -4029,7 +4469,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-30T03:57:00+09:00",
       "discoveredAt": "2026-09-01T09:19:37.139120+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-06T23:59:59+09:00",
@@ -4053,43 +4493,6 @@
       "relatedCount": 0
     },
     {
-      "id": "20260830-okinawa-times-1e3bb56474",
-      "title": "うるま市窓口 来月から短縮 午前9時～午後4時に - 沖縄タイムス社",
-      "displayTitle": "うるま市窓口 来月から短縮 午前9時~午後4時に",
-      "summary": "うるま市窓口 来月から短縮 午前9時～午後4時に 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE56d25oVjgwTW4tNllqd0Z3RUFocTREb21PSnJLNGZIaVlzaWFEcjdTZWU0VGZ5VEdlTU42QVdhcHRrQUpSZnZMVVN4MXBwNHAyR292cGU5dWlUVHQyQXc?oc=5",
-      "sourceId": "okinawa-times",
-      "sourceName": "沖縄タイムス",
-      "sourceType": "media",
-      "publishedAt": "2026-08-30T03:57:00+09:00",
-      "discoveredAt": "2026-09-02T06:20:31.965630+09:00",
-      "checkedAt": "2026-09-03T19:47:57.286962+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-09-06T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 65,
-      "status": "expired",
-      "requiresReview": false,
-      "reviewReasons": [
-        "うるま市内だが石川地区の根拠が不足",
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
-      ],
-      "fingerprint": "7bdb317161c5d9dea665",
-      "articleFingerprint": "1e3bb56474e69748d5b2",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": null,
-      "relatedCount": 0,
-      "previousStatus": "rejected"
-    },
-    {
       "id": "20260830-okinawa-times-bcec8bc7a0",
       "title": "石川県気象防災速報（線状降水帯直前予測）（第１報）＝金沢地方気象台発表（３０日１時５８分） ：気象防災速報 - 沖縄タイムス社",
       "displayTitle": "石川県気象防災速報(線状降水帯直前予測)(第1報)=金沢地方気象台発表(30日1時58分) :気象防災速報",
@@ -4100,7 +4503,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-30T01:58:31+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-06T23:59:59+09:00",
@@ -4137,7 +4540,7 @@
       "sourceType": "media",
       "publishedAt": "2026-08-29T20:45:55+09:00",
       "discoveredAt": "2026-09-01T01:37:10.397339+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-05T23:59:59+09:00",
@@ -4181,14 +4584,15 @@
         "取得元候補：石川施設：石川図書館"
       ],
       "confidence": 45,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "施設専用検索で発見したが、記事内の施設名確認が必要",
         "対象外地域との一致を検出",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "38cdd1a661a45bc7950a",
       "articleFingerprint": "8598f9db147c6b8bfd7f",
@@ -4196,7 +4600,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260829-google-news-coco-garden-f350cdcf72",
@@ -4357,6 +4762,42 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
+      "status": "expired",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
+      ],
+      "fingerprint": "c913f05a2110e20f3b43",
+      "articleFingerprint": "555ed55bb5297533916e",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0,
+      "previousStatus": "rejected"
+    },
+    {
+      "id": "20260828-ryukyu-shimpo-202177a8d9",
+      "title": "今日のニュース - ryukyushimpo.jp",
+      "displayTitle": "今日のニュース - ryukyushimpo.jp",
+      "summary": "今日のニュース ryukyushimpo.jp",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9QcnUzaGhfanMzTHNQckwzQ29ZTlNhYk13VFVRRVd1MHZhWTE2VEk3M3J1azFjQ2Q3Y3I5UHFnOFBqR3ZOUndsTEN0b3ZBTUJLRHFGcExVaWVrSzlYNk4xZjJKVm1ETHVwZzdSYkMwRmk?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-08-28T16:00:00+09:00",
+      "discoveredAt": "2026-09-04T07:56:02.470081+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-04T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
@@ -4364,8 +4805,8 @@
         "石川地区との関連根拠が不足",
         "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "c913f05a2110e20f3b43",
-      "articleFingerprint": "555ed55bb5297533916e",
+      "fingerprint": "cc8b9937621eaaecd7e4",
+      "articleFingerprint": "202177a8d991a75391cd",
       "facilityId": null,
       "eventMarkers": [],
       "relatedUrls": [],
@@ -4391,6 +4832,42 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
+      "status": "expired",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
+      ],
+      "fingerprint": "d194d07ea512e0a0a075",
+      "articleFingerprint": "c0f0b6bb708ba088e5cd",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0,
+      "previousStatus": "rejected"
+    },
+    {
+      "id": "20260828-ryukyu-shimpo-00b2a3e30b",
+      "title": "正殿に設置前「唯一の機会」 黄色でよみがえった「中山世土」扁額お披露目 県博で9月30日まで【動画あり】 - ryukyushimpo.jp",
+      "displayTitle": "正殿に設置前「唯一の機会」 黄色でよみがえった「中山世土」扁額お披露目 県博で9月30日まで【動画あり】 - ryukyushimpo.jp",
+      "summary": "正殿に設置前「唯一の機会」 黄色でよみがえった「中山世土」扁額お披露目 県博で9月30日まで【動画あり】 ryukyushimpo.jp",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBGRjZOdVhrcnRPMVFZWlZfWTFxMFA0NHVDY1V5ZVU1Wl9yWnk5VnhzS1NsOElTN0I3TTFtVmhVclRmZlFZUWpfUUZPZ2VEX0JBY0MyclBabERBUmM?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-08-28T15:47:26+09:00",
+      "discoveredAt": "2026-09-04T07:56:02.470081+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-04T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
@@ -4398,8 +4875,8 @@
         "石川地区との関連根拠が不足",
         "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "d194d07ea512e0a0a075",
-      "articleFingerprint": "c0f0b6bb708ba088e5cd",
+      "fingerprint": "9e01eb5e9dea3f271564",
+      "articleFingerprint": "00b2a3e30b4014ab5cd6",
       "facilityId": null,
       "eventMarkers": [],
       "relatedUrls": [],
@@ -4425,6 +4902,42 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
+      "status": "expired",
+      "requiresReview": false,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
+      ],
+      "fingerprint": "14e05c2da5b1c460453f",
+      "articleFingerprint": "248ac07ba5379f438334",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0,
+      "previousStatus": "rejected"
+    },
+    {
+      "id": "20260828-ryukyu-shimpo-3de5652933",
+      "title": "夏休み明け、県内多くの学校で授業始まる 児童ら再会喜ぶ 沖縄 - ryukyushimpo.jp",
+      "displayTitle": "夏休み明け、県内多くの学校で授業始まる 児童ら再会喜ぶ 沖縄 - ryukyushimpo.jp",
+      "summary": "夏休み明け、県内多くの学校で授業始まる 児童ら再会喜ぶ 沖縄 ryukyushimpo.jp",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5RVGl6UFFWeTU2Z3FaYzVpeFRpOE1hQ0VfMnh0THh4SUpCcVBldGJjQ05UMmdUTno3VEo5TmhEX05QcVhBVGtwVXViZFBOSXR6WGVUX1dpaG5mSFE?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-08-28T11:22:06+09:00",
+      "discoveredAt": "2026-09-04T07:56:02.470081+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-04T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
       "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
@@ -4432,8 +4945,8 @@
         "石川地区との関連根拠が不足",
         "石川地区との関連根拠が基準未満のため自動除外"
       ],
-      "fingerprint": "14e05c2da5b1c460453f",
-      "articleFingerprint": "248ac07ba5379f438334",
+      "fingerprint": "152cd55cbcded596d001",
+      "articleFingerprint": "3de5652933a8d7d3b11c",
       "facilityId": null,
       "eventMarkers": [],
       "relatedUrls": [],
@@ -4459,12 +4972,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "0dce7363a4d01d23e0b5",
       "articleFingerprint": "16bab9dec740fbbf22c4",
@@ -4472,7 +4986,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260828-google-news-bios-hill-181e3b02d9",
@@ -4485,7 +5000,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-08-28T10:08:14+09:00",
       "discoveredAt": "2026-09-03T07:56:35.227352+09:00",
-      "checkedAt": "2026-09-03T21:50:31.681108+09:00",
+      "checkedAt": "2026-09-04T07:56:02.470081+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-04T23:59:59+09:00",
@@ -4495,12 +5010,13 @@
         "ビオスの丘"
       ],
       "confidence": 45,
-      "status": "duplicate",
+      "status": "published",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「ビオスの丘で「らんの花祭り 秋」、約1万輪のデンファレが亜熱帯の森彩る - 株式会社旅行新聞新社」へ統合"
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区・日時・情報源の自動掲載条件を満たした"
       ],
-      "fingerprint": "08524ecd09bdafd07dc3",
+      "fingerprint": "d72229c4b369ee700fb2",
       "articleFingerprint": "181e3b02d9666f720444",
       "facilityId": "bios-hill",
       "eventMarkers": [
@@ -4508,7 +5024,8 @@
         "沖縄ビオスの丘を約1万輪のデンファレが彩るらんの花祭り秋9月12日開幕mantanwebjp"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20260902-google-news-bios-hill-c62fd3370e"
+      "duplicateOf": null,
+      "relatedCount": 0
     },
     {
       "id": "20260828-google-news-bios-hill-10c7e477c8",
@@ -4571,17 +5088,19 @@
         "山城"
       ],
       "confidence": 45,
-      "status": "duplicate",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「70代や児童らがエイサー 40年ぶり多数で演舞 次世代へつなぐ うるま石川山城 沖縄」へ統合"
+        "同じ内容として代表記事「70代や児童らがエイサー 40年ぶり多数で演舞 次世代へつなぐ うるま石川山城 沖縄」へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "f26555a7ac7ee5e17df0",
       "articleFingerprint": "53f94448ddc307c8d543",
       "facilityId": null,
       "eventMarkers": [],
       "relatedUrls": [],
-      "duplicateOf": "20260828-ryukyu-shimpo-53f94448dd"
+      "duplicateOf": "20260828-ryukyu-shimpo-53f94448dd",
+      "previousStatus": "duplicate"
     },
     {
       "id": "20260828-ryukyu-shimpo-53f94448dd",
@@ -4606,12 +5125,13 @@
         "山城"
       ],
       "confidence": 65,
-      "status": "published",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区・日時・情報源の自動掲載条件を満たした",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容の記事1件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "f26555a7ac7ee5e17df0",
       "articleFingerprint": "53f94448ddc307c8d543",
@@ -4619,7 +5139,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "published"
     },
     {
       "id": "20260828-region-discovery-ishikawa-events-culture-53f94448dd",
@@ -4752,12 +5273,13 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外"
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "9f88b3963c186a5f09d9",
       "articleFingerprint": "6e3c31e7b840dc03f44f",
@@ -4765,7 +5287,8 @@
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20260828-okinawa-times-bd83260d1c",
