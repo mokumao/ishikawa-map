@@ -190,6 +190,15 @@ def assess_candidate(title, summary, source, pub_date, link):
     evidence = []
     reasons = []
 
+    region_context = (
+        any(term in text for term in EXACT_REGION_PHRASES)
+        or (MUNICIPALITY_NAME in text and REGION_NAME in text)
+        or (
+            any(term in text for term in DISTRICT_TERMS)
+            and any(term in text for term in CONTEXT_TERMS)
+        )
+    )
+
     exact_phrases = [term for term in EXACT_REGION_PHRASES if term in text]
     if exact_phrases:
         score += 60
@@ -198,15 +207,28 @@ def assess_candidate(title, summary, source, pub_date, link):
         score += 40
         evidence.append(f'{MUNICIPALITY_NAME}と{REGION_NAME}')
 
-    facilities = [term for term in FACILITY_TERMS if term in text]
+    facilities = []
+    context_required_facilities = []
+    for facility in REGION['verifiedFacilities']:
+        matches = [term for term in facility.get('aliases', []) if term in text]
+        if not matches:
+            continue
+        if facility.get('requireRegionContext') and not region_context:
+            context_required_facilities.extend(matches)
+        else:
+            facilities.extend(matches)
     if facilities:
         score += 60
         evidence.extend(facilities)
+    if context_required_facilities:
+        reasons.append('同名施設の誤一致を防ぐため地域文脈の確認が必要')
 
     source_facilities = [
         term for term in source.get('facilityAliases', []) if term in text
     ]
-    if source_facilities:
+    if source_facilities and (
+        not source.get('facilityRequireContext') or region_context
+    ):
         score += 60
         evidence.extend(source_facilities)
     elif source.get('facilityId'):
@@ -214,6 +236,19 @@ def assess_candidate(title, summary, source, pub_date, link):
         score += 35
         evidence.append(f'取得元候補：{source["name"]}')
         reasons.append('施設専用検索で発見したが、記事内の施設名確認が必要')
+
+    source_theme_terms = [
+        term for term in source.get('regionalThemeTerms', []) if term in text
+    ]
+    if source_theme_terms and (
+        not source.get('regionalThemeRequireContext') or region_context
+    ):
+        score += 60
+        evidence.extend(source_theme_terms)
+    elif source.get('regionalTheme'):
+        score += 35
+        evidence.append(f'取得元候補：{source["name"]}')
+        reasons.append('地域固有テーマ専用検索で発見したが、記事内の地域文脈確認が必要')
 
     districts = [term for term in DISTRICT_TERMS if term in text]
     if districts and any(term in text for term in CONTEXT_TERMS):

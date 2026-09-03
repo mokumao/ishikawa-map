@@ -81,6 +81,27 @@ class RegionResourceDiscoveryTests(unittest.TestCase):
         self.assertEqual(item['status'], 'verified')
         self.assertEqual(item['reviewNote'], '公式確認済み')
 
+    def test_all_29_review_decisions_reference_registered_resources(self):
+        review = region_news_config.load_resource_review(self.profile)
+        self.assertEqual(len(review['decisions']), 29)
+        self.assertEqual(review['summary'], {
+            'track': 19, 'duplicate': 3, 'exclude': 7,
+        })
+
+    def test_tracked_review_is_applied_to_local_audit(self):
+        item = resources.build_candidate(
+            self.entry(
+                '楽寿園改装 全室個室に うるま石川の老人ホーム',
+                'https://news.google.com/rss/articles/test-rakujuen',
+            ),
+            self.source(), self.profile,
+        )
+        item['id'] = 'eae743d01ebe6a695a52'
+        review = region_news_config.load_resource_review(self.profile)
+        resources.apply_resource_review([item], review)
+        self.assertEqual(item['status'], 'verified')
+        self.assertEqual(item['linkedResourceIds'], ['rakujuen'])
+
 
 if __name__ == '__main__':
     unittest.main()

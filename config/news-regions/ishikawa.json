@@ -24,7 +24,16 @@
     {"id": "ishikawa-library", "name": "石川図書館", "aliases": ["石川図書館"]},
     {"id": "ishikawa-youth-center", "name": "石川少年自然の家", "aliases": ["石川少年自然の家", "石川青少年の家"]},
     {"id": "bios-hill", "name": "ビオスの丘", "aliases": ["ビオスの丘"]},
-    {"id": "coco-garden", "name": "ココガーデンリゾート沖縄", "aliases": ["ココガーデンリゾート沖縄", "ココ ガーデンリゾート オキナワ", "ココガーデンリゾート オキナワ"]}
+    {"id": "coco-garden", "name": "ココガーデンリゾート沖縄", "aliases": ["ココガーデンリゾート沖縄", "ココ ガーデンリゾート オキナワ", "ココガーデンリゾート オキナワ"]},
+    {"id": "rakujuen", "name": "特別養護老人ホーム 楽寿園", "aliases": ["特別養護老人ホーム 楽寿園", "社会福祉法人育賛会 楽寿園", "育賛会 楽寿園", "楽寿園"], "requireRegionContext": true, "sourceUrl": "https://www.ikusan-k.jp/", "verifiedAt": "2026-09-03"},
+    {"id": "ishikawa-police-station", "name": "石川警察署", "aliases": ["石川警察署", "石川署"], "sourceUrl": "https://www.police.pref.okinawa.jp/docs/2015022800185/", "verifiedAt": "2026-09-03"},
+    {"id": "ishikawa-water-treatment-plant", "name": "石川浄水場", "aliases": ["石川浄水場"], "sourceUrl": "https://www.eb.pref.okinawa.jp/opeb/48/4837", "verifiedAt": "2026-09-03"},
+    {"id": "ishikawa-park", "name": "石川公園", "aliases": ["うるま市石川公園", "石川公園"], "requireRegionContext": true, "sourceUrl": "https://www.city.uruma.lg.jp/1002003000/event/p000006.html", "verifiedAt": "2026-09-03"},
+    {"id": "new-ishikawa-kitchen", "name": "新石川調理場", "aliases": ["新石川調理場"], "sourceUrl": "https://www.city.uruma.lg.jp/1002002000/contents/p000010.html", "verifiedAt": "2026-09-03"},
+    {"id": "johoku-community", "name": "城北区自治会", "aliases": ["城北区自治会", "石川城北区", "城北区まつり"], "requireRegionContext": true, "sourceUrl": "https://www.city.uruma.lg.jp/1006001000/contents/10536.html", "verifiedAt": "2026-09-03"},
+    {"id": "iha-community", "name": "伊波区自治会", "aliases": ["伊波区自治会", "石川伊波区"], "requireRegionContext": true, "sourceUrl": "https://www.city.uruma.lg.jp/1006001000/contents/10543.html", "verifiedAt": "2026-09-03"},
+    {"id": "kadekaru-community", "name": "嘉手苅区自治会", "aliases": ["嘉手苅区自治会", "石川嘉手苅区"], "requireRegionContext": true, "sourceUrl": "https://www.city.uruma.lg.jp/1006001000/contents/10544.html", "verifiedAt": "2026-09-03"},
+    {"id": "yamashiro-community", "name": "山城自治会", "aliases": ["山城自治会", "山城区公民館", "石川山城区"], "requireRegionContext": true, "sourceUrl": "https://www.city.uruma.lg.jp/1006001000/contents/10545.html", "verifiedAt": "2026-09-03"}
   ],
   "falsePositiveRegions": ["石川県", "金沢市", "加賀市", "小松市", "能登"],
   "falsePositivePeople": ["石川真佑", "石川祐希", "石川佳純", "石川文洋"],
@@ -51,8 +60,19 @@
     ]
   },
   "regionalThemes": [
-    {"id": "bullfighting", "label": "闘牛", "terms": ["闘牛", "石川多目的ドーム", "石川ドーム"]}
+    {"id": "bullfighting", "label": "闘牛", "terms": ["闘牛", "石川多目的ドーム", "石川ドーム"], "requireRegionContext": true},
+    {"id": "ishikawa-mihoso-festival", "label": "石川みほそまつり", "terms": ["石川みほそまつり", "みほそまつり"], "sourceUrl": "https://www.city.uruma.lg.jp/1007003000/contents/p000049.html", "verifiedAt": "2026-09-03"},
+    {"id": "yamashiro-tea", "label": "山城茶", "terms": ["山城茶", "やまぐすく茶"], "requireRegionContext": true, "sourceUrl": "https://www.city.uruma.lg.jp/documents/7998/2025_selection_pamph.pdf", "verifiedAt": "2026-09-03"},
+    {"id": "okinawa-water-festival", "label": "おきなわみずまつり", "terms": ["おきなわみずまつり", "みずまつり", "水道週間 石川浄水場"], "requireRegionContext": true, "sourceUrl": "https://www.eb.pref.okinawa.jp/opeb/48/4837", "verifiedAt": "2026-09-03"},
+    {"id": "ishikawa-area-redevelopment", "label": "石川庁舎周辺・石川公園のまちづくり", "terms": ["石川庁舎周辺", "ISHIKAWA BASE", "石川公園", "石川ビーチ", "石川漁港", "パークセンター"], "requireRegionContext": true, "sourceUrl": "https://www.city.uruma.lg.jp/1002003000/contents/p000054.html", "verifiedAt": "2026-09-03"},
+    {"id": "ishikawa-community-traditions", "label": "石川地区の自治会行事・伝統芸能", "terms": ["石川城北区まつり", "石川嘉手苅区", "石川伊波区", "石川山城区", "石川エンサー", "石川みほそ太鼓", "ウスデーク"], "requireRegionContext": true, "sourceUrl": "https://www.city.uruma.lg.jp/1006001000/contents/p000033.html", "verifiedAt": "2026-09-03"},
+    {"id": "ishikawa-yam-imo", "label": "石川地区の山芋スーブ", "terms": ["山芋スーブ", "山イモスーブ", "山芋勝負"], "requireRegionContext": true, "sourceUrl": "https://www.city.uruma.lg.jp/1006001000/contents/10544.html", "verifiedAt": "2026-09-03"}
   ],
+  "resourceReview": {
+    "reviewedAt": "2026-09-03",
+    "candidateCount": 29,
+    "decisionFile": "config/news-regions/ishikawa-resource-review.json"
+  },
   "rssSources": [
     {"id": "google-news-ishikawa", "name": "Google ニュース（うるま市 石川）", "query": "うるま市 石川 沖縄", "type": "discovery", "trust": 60, "method": "google-news", "filter_strict": true},
     {"id": "google-news-ishikawa-dome", "name": "石川ドーム・闘牛", "query": "石川ドーム 闘牛", "type": "discovery", "trust": 60, "method": "google-news", "filter": false, "facilityId": "ishikawa-dome", "facilityAliases": ["石川多目的ドーム", "石川ドーム"]},

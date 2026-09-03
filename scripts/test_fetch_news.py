@@ -83,6 +83,37 @@ class NewsAutomationTests(unittest.TestCase):
             fetch_news.fetch_articles()
         bullfighting.assert_not_called()
 
+    def test_reviewed_resources_are_connected_to_daily_sources(self):
+        profile = region_news_config.load_region_profile('ishikawa')
+        sources = region_news_config.build_rss_sources(profile)
+        source_ids = {item['id'] for item in sources}
+        self.assertIn('region-facility-ishikawa-ishikawa-police-station', source_ids)
+        self.assertIn('region-facility-ishikawa-ishikawa-water-treatment-plant', source_ids)
+        self.assertIn('region-theme-ishikawa-ishikawa-mihoso-festival', source_ids)
+        self.assertIn('region-theme-ishikawa-ishikawa-yam-imo', source_ids)
+
+    def test_ambiguous_facility_requires_ishikawa_context(self):
+        profile = region_news_config.load_region_profile('ishikawa')
+        source = next(
+            item for item in region_news_config.build_rss_sources(profile)
+            if item['id'] == 'region-facility-ishikawa-rakujuen'
+        )
+        outside = candidate('静岡県三島市の楽寿園でイベント開催', source)
+        local = candidate('うるま市石川嘉手苅の楽寿園で催しを開催', source, 1)
+        self.assertNotEqual(outside['status'], 'published')
+        self.assertEqual(local['status'], 'published')
+
+    def test_verified_theme_can_publish_with_required_context(self):
+        profile = region_news_config.load_region_profile('ishikawa')
+        source = next(
+            item for item in region_news_config.build_rss_sources(profile)
+            if item['id'] == 'region-theme-ishikawa-yamashiro-tea'
+        )
+        local = candidate('沖縄・うるま市石川山城で山城茶の催し', source)
+        outside = candidate('県外で山城茶を紹介', source, 1)
+        self.assertEqual(local['status'], 'published')
+        self.assertNotEqual(outside['status'], 'published')
+
     def test_bullfighting_page_link_and_dates_are_parsed(self):
         city_html = '''
         <p>更新日：2026年5月19日</p>

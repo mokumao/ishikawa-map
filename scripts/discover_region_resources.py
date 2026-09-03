@@ -14,7 +14,11 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 import feedparser
 
-from region_news_config import build_resource_discovery_sources, load_region_profile
+from region_news_config import (
+    build_resource_discovery_sources,
+    load_region_profile,
+    load_resource_review,
+)
 
 
 UTC = timezone.utc
@@ -163,6 +167,28 @@ def preserve_manual_decisions(candidates, previous):
             candidate['reviewedAt'] = old.get('reviewedAt')
 
 
+def apply_resource_review(candidates, review):
+    """追跡対象・重複・除外の確定結果を候補記録へ反映する。"""
+    if not review:
+        return
+    decisions = {item['candidateId']: item for item in review['decisions']}
+    status_by_decision = {
+        'track': 'verified',
+        'duplicate': 'duplicate',
+        'exclude': 'rejected',
+    }
+    for candidate in candidates:
+        decision = decisions.get(candidate['id'])
+        if not decision:
+            continue
+        candidate['status'] = status_by_decision[decision['decision']]
+        candidate['reviewNote'] = decision['reason']
+        candidate['reviewedAt'] = review['reviewedAt']
+        candidate['linkedResourceIds'] = decision.get('resourceIds', [])
+        if decision.get('duplicateOf'):
+            candidate['duplicateOf'] = decision['duplicateOf']
+
+
 def registered_resources(profile):
     facilities = [
         {'type': 'facility', 'id': item['id'], 'name': item['name'],
@@ -214,6 +240,7 @@ def main():
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     profile = load_region_profile(args.region, root)
+    review = load_resource_review(profile, root)
     output = Path(args.output) if args.output else root / profile['outputDir'] / 'resource-candidates.json'
     previous = {}
     if output.exists():
@@ -222,6 +249,7 @@ def main():
     checked_at = datetime.now(UTC)
     candidates, source_results = collect(profile, checked_at)
     preserve_manual_decisions(candidates, previous)
+    apply_resource_review(candidates, review)
     candidates.sort(key=lambda item: (item['status'] == 'excluded', item['publishedAt'] or ''), reverse=False)
     counts = {}
     for item in candidates:
