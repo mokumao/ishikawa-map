@@ -980,6 +980,7 @@ def generate_html(articles, no_news_dates=None):
         date_html      = f'<span class="date-label">{a["date_label"]}</span>' if a['date_label'] else ''
         is_future      = a['pub_date'] and a['pub_date'] > now_jst.isoformat()
         future_class   = ' future' if is_future else ''
+        future_heading = '<div class="future-heading">今後の予定</div>' if is_future else ''
         admin_class    = ' admin' if a.get('admin') else ''
         # 管理人投稿は外部リンクが無いため、タイトルをリンクではなくテキストで表示
         if a['link']:
@@ -988,6 +989,7 @@ def generate_html(articles, no_news_dates=None):
             title_html = f'<span class="nt nt-noline">{a["title"]}</span>'
         cards += f'''
     <article class="ni{future_class}{admin_class}">
+      {future_heading}
       <div class="ni-header">
         {title_html}
         {date_html}
@@ -1107,8 +1109,22 @@ def generate_html(articles, no_news_dates=None):
       margin-top: 3px;
       white-space: nowrap;
     }}
-    .ni.future {{ border-left-color: #1565c0; }}
-    .ni.future .date-label {{ background: #e3f2fd; color: #1565c0; }}
+    .ni.future {{
+      background: #f1f8e9;
+      border-left-color: #43a047;
+    }}
+    .future-heading {{
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #dcedc8;
+      color: #2e7d32;
+      font-size: 0.75rem;
+      font-weight: bold;
+      line-height: 1.4;
+    }}
+    .ni.future .date-label {{ background: #dcedc8; color: #2e7d32; }}
     /* 管理人投稿：緑の縁取りで区別。タイトルはリンクではないので黒系 */
     .ni.admin {{ border-left-color: #2e7d32; }}
     .nt-noline {{ color: #263238; cursor: default; }}

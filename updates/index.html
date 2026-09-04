@@ -102,6 +102,21 @@
       font-size: .82rem;
       font-weight: 700;
     }
+    .update-card.news.future {
+      border-left-color: #43a047;
+      background: #f1f8e9;
+    }
+    .future-heading {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #dcedc8;
+      color: #2e7d32;
+      font-size: .75rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
     .update-card.no-news {
       border-left-color: #90a4ae;
       background: #fafafa;
@@ -299,7 +314,14 @@
           }
           var article = item.article;
           var card = document.createElement('article');
-          card.className = 'update-card news';
+          var isFuture = Number.isFinite(item.time) && item.time > Date.now();
+          card.className = 'update-card news' + (isFuture ? ' future' : '');
+          if (isFuture) {
+            var futureHeading = document.createElement('div');
+            futureHeading.className = 'future-heading';
+            futureHeading.textContent = '今後の予定';
+            card.appendChild(futureHeading);
+          }
           var title;
           if (article.link && /^https?:\/\//i.test(article.link)) {
             title = document.createElement('a');
