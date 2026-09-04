@@ -106,17 +106,16 @@
       border-left-color: #43a047;
       background: #f1f8e9;
     }
-    .future-heading {
-      display: inline-block;
-      margin-bottom: 8px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: #dcedc8;
-      color: #2e7d32;
-      font-size: .75rem;
+    .news-section-heading {
+      padding: 2px 4px;
+      font-size: .82rem;
       font-weight: 700;
-      line-height: 1.4;
+      line-height: 1.5;
     }
+    .future-section {
+      color: #2e7d32;
+    }
+    .recent-section { margin-top: 4px; color: #455a64; }
     .update-card.no-news {
       border-left-color: #90a4ae;
       background: #fafafa;
@@ -286,11 +285,21 @@
             time: Date.parse(date + 'T23:59:59+09:00')
           });
         });
-        // 自動収集元や管理人投稿の追加順に左右されず、公開日時が新しい順に表示する。
-        // 日時不明の記事は末尾に置き、同日時なら元の順序を維持する。
-        items.sort(function (a, b) {
+        var now = Date.now();
+        var futureItems = items.filter(function (item) {
+          return item.kind === 'article' && Number.isFinite(item.time) && item.time > now;
+        });
+        var recentItems = items.filter(function (item) {
+          return futureItems.indexOf(item) < 0;
+        });
+        // 今後の予定は開催日が近い順、最近のニュースは新しい順に表示する。
+        futureItems.sort(function (a, b) {
+          return a.time - b.time || a.index - b.index;
+        });
+        recentItems.sort(function (a, b) {
           return b.time - a.time || a.index - b.index;
         });
+        items = futureItems.concat(recentItems);
         setCount('news', articles.length);
         var list = document.querySelector('[data-list="news"]');
         list.replaceChildren();
@@ -298,7 +307,17 @@
           showMessage('news', 'ニュースはありません', '新しい情報が見つかると、ここに表示されます。');
           return;
         }
+        var futureHeadingAdded = false;
+        var recentHeadingAdded = false;
         items.forEach(function (item) {
+          var isFuture = item.kind === 'article' && Number.isFinite(item.time) && item.time > now;
+          if (futureItems.length && isFuture && !futureHeadingAdded) {
+            appendText(list, 'news-section-heading future-section', '今後の予定');
+            futureHeadingAdded = true;
+          } else if (futureItems.length && !isFuture && !recentHeadingAdded) {
+            appendText(list, 'news-section-heading recent-section', '最近のニュース');
+            recentHeadingAdded = true;
+          }
           if (item.kind === 'no-news') {
             var emptyCard = document.createElement('article');
             emptyCard.className = 'update-card news no-news';
@@ -314,14 +333,7 @@
           }
           var article = item.article;
           var card = document.createElement('article');
-          var isFuture = Number.isFinite(item.time) && item.time > Date.now();
           card.className = 'update-card news' + (isFuture ? ' future' : '');
-          if (isFuture) {
-            var futureHeading = document.createElement('div');
-            futureHeading.className = 'future-heading';
-            futureHeading.textContent = '今後の予定';
-            card.appendChild(futureHeading);
-          }
           var title;
           if (article.link && /^https?:\/\//i.test(article.link)) {
             title = document.createElement('a');

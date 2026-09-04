@@ -955,19 +955,31 @@ def generate_html(articles, no_news_dates=None):
     """ニュース一覧HTMLを地域設定の出力先へ保存する。"""
     no_news_dates = no_news_dates or set()
 
-    # 記事と「〇月△日のニュースはありません」カードを、日付順のひとつの
-    # 流れ（新しいものが上）に混ぜて表示する。
-    # ソートキーはISO日時文字列。「ニュースはありません」カードには T99 を
-    # 付けて、同じ日の記事よりも上（その日の先頭）に来るようにする
-    items = []
+    # 今後の予定は開催日が近い順、最近のニュースは新しい順に分ける。
+    # 「ニュースはありません」カードは最近のニュース側へ入れる。
+    future_items = []
+    recent_items = []
     for a in articles:
-        items.append((a['pub_date'] or '0000', 'article', a))
+        item = (a['pub_date'] or '0000', 'article', a)
+        if a['pub_date'] and a['pub_date'] > now_jst.isoformat():
+            future_items.append(item)
+        else:
+            recent_items.append(item)
     for d in no_news_dates:
-        items.append((d + 'T99', 'no_news', d))
-    items.sort(key=lambda t: t[0], reverse=True)
+        recent_items.append((d + 'T99', 'no_news', d))
+    future_items.sort(key=lambda t: t[0])
+    recent_items.sort(key=lambda t: t[0], reverse=True)
+    items = future_items + recent_items
 
     cards = ''
-    for _key, kind, data in items:
+    recent_heading_added = False
+    for key, kind, data in items:
+        is_future_item = kind == 'article' and key > now_jst.isoformat()
+        if future_items and is_future_item and not cards:
+            cards += '\n    <div class="news-section-heading future-section">今後の予定</div>'
+        elif future_items and not is_future_item and not recent_heading_added:
+            cards += '\n    <div class="news-section-heading recent-section">最近のニュース</div>'
+            recent_heading_added = True
         if kind == 'no_news':
             dt = datetime.strptime(data, '%Y-%m-%d')
             cards += f'''
@@ -980,7 +992,6 @@ def generate_html(articles, no_news_dates=None):
         date_html      = f'<span class="date-label">{a["date_label"]}</span>' if a['date_label'] else ''
         is_future      = a['pub_date'] and a['pub_date'] > now_jst.isoformat()
         future_class   = ' future' if is_future else ''
-        future_heading = '<div class="future-heading">今後の予定</div>' if is_future else ''
         admin_class    = ' admin' if a.get('admin') else ''
         # 管理人投稿は外部リンクが無いため、タイトルをリンクではなくテキストで表示
         if a['link']:
@@ -989,7 +1000,6 @@ def generate_html(articles, no_news_dates=None):
             title_html = f'<span class="nt nt-noline">{a["title"]}</span>'
         cards += f'''
     <article class="ni{future_class}{admin_class}">
-      {future_heading}
       <div class="ni-header">
         {title_html}
         {date_html}
@@ -1113,17 +1123,16 @@ def generate_html(articles, no_news_dates=None):
       background: #f1f8e9;
       border-left-color: #43a047;
     }}
-    .future-heading {{
-      display: inline-block;
-      margin-bottom: 8px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: #dcedc8;
-      color: #2e7d32;
-      font-size: 0.75rem;
+    .news-section-heading {{
+      padding: 2px 4px;
+      font-size: 0.82rem;
       font-weight: bold;
-      line-height: 1.4;
+      line-height: 1.5;
     }}
+    .future-section {{
+      color: #2e7d32;
+    }}
+    .recent-section {{ margin-top: 4px; color: #455a64; }}
     .ni.future .date-label {{ background: #dcedc8; color: #2e7d32; }}
     /* 管理人投稿：緑の縁取りで区別。タイトルはリンクではないので黒系 */
     .ni.admin {{ border-left-color: #2e7d32; }}
