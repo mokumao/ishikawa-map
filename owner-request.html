@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>店舗主様からのご依頼 | 石川マップ</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      color: #24323d;
+      background: #eef2f5;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
+    }
+    button, input, textarea, select { font: inherit; }
+    .page-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; }
+    .page-header {
+      padding: 20px 16px;
+      color: #fff;
+      text-align: center;
+      background: linear-gradient(135deg, #1689d8, #1164ad);
+    }
+    .page-header h1 { margin: 0; font-size: 24px; line-height: 1.35; }
+    .page-header p { margin: 8px 0 0; font-size: 14px; line-height: 1.6; }
+    .content { width: min(100% - 24px, 680px); margin: 16px auto 32px; }
+    .card {
+      margin-bottom: 16px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 9px rgba(28, 51, 67, .09);
+    }
+    .store-label { margin: 0 0 4px; color: #607d8b; font-size: 12px; font-weight: 700; }
+    .store-name { margin: 0; color: #075fa9; font-size: 20px; line-height: 1.45; }
+    .store-meta { margin: 8px 0 0; color: #52636e; font-size: 14px; line-height: 1.6; }
+    .intro { margin: 0; font-size: 14px; line-height: 1.7; }
+    .section-title { margin: 0 0 12px; font-size: 20px; line-height: 1.4; }
+    .required { color: #c62828; font-size: 12px; }
+    .choice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .choice-btn {
+      min-height: 52px;
+      padding: 8px 4px;
+      border: 2px solid #1689d8;
+      border-radius: 10px;
+      color: #075fa9;
+      background: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color .18s ease-out, color .18s ease-out, transform .18s ease-out;
+    }
+    .choice-btn:active { transform: scale(.98); }
+    .choice-btn.is-active { color: #fff; background: #0878c9; }
+    .request-panel { margin: 16px 0 0; padding: 0; border: 0; }
+    .request-panel[hidden] { display: none; }
+    .panel-heading { margin: 0 0 12px; color: #075fa9; font-size: 16px; }
+    .field { margin-top: 16px; }
+    .field-label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 700; line-height: 1.5; }
+    .radio-list { display: grid; gap: 8px; }
+    .radio-item, .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid #cbd7df;
+      border-radius: 9px;
+      background: #fbfdfe;
+      font-size: 14px;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+    .radio-item input, .check-item input { flex: 0 0 auto; width: 20px; height: 20px; margin: 1px 0 0; }
+    textarea, input[type="email"] {
+      width: 100%;
+      border: 1.5px solid #aebdc7;
+      border-radius: 9px;
+      background: #fff;
+      color: #24323d;
+      font-size: 16px;
+    }
+    textarea { min-height: 120px; padding: 12px; resize: vertical; line-height: 1.6; }
+    input[type="email"] { min-height: 46px; padding: 10px 12px; }
+    textarea:focus, input[type="email"]:focus { outline: 3px solid rgba(22, 137, 216, .2); border-color: #1689d8; }
+    .current-info { display: grid; gap: 8px; margin-top: 12px; padding: 12px; border-radius: 9px; background: #f1f6f9; }
+    .current-info p { margin: 0; font-size: 13px; line-height: 1.55; }
+    .notice {
+      margin-top: 12px;
+      padding: 12px;
+      border-left: 4px solid #f9a825;
+      border-radius: 0 8px 8px 0;
+      background: #fff8e1;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .notice.error { border-color: #e53935; background: #ffebee; color: #8e2020; }
+    .contact-area[hidden], .owner-no-help[hidden], .success-card[hidden], .request-card[hidden] { display: none; }
+    .privacy-note { margin: 12px 0 0; color: #52636e; font-size: 12px; line-height: 1.65; }
+    .submit-btn {
+      width: 100%;
+      min-height: 64px;
+      margin-top: 20px;
+      padding: 10px 12px;
+      border: 0;
+      border-radius: 10px;
+      color: #fff;
+      background: #0878c9;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+    .submit-btn:disabled { cursor: not-allowed; background: #aab7bf; }
+    .switch-link { margin-top: 8px; border: 0; padding: 4px 0; color: #075fa9; background: transparent; font-weight: 700; text-decoration: underline; cursor: pointer; }
+    .form-status { min-height: 24px; margin: 12px 0 0; color: #b3261e; font-size: 13px; font-weight: 700; line-height: 1.5; }
+    .success-card { text-align: center; border-top: 5px solid #43a047; }
+    .success-mark {
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      color: #fff;
+      background: #43a047;
+      font-size: 32px;
+      font-weight: 700;
+    }
+    .success-card h2 { margin: 0; color: #246b2c; font-size: 20px; line-height: 1.5; }
+    .success-card p { margin: 12px 0 0; font-size: 14px; line-height: 1.7; text-align: left; }
+    .inquiry-link {
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      padding: 8px 12px;
+      border: 2px solid #1689d8;
+      border-radius: 10px;
+      color: #075fa9;
+      background: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.5;
+      text-decoration: none;
+    }
+    .footer-bar {
+      flex: 0 0 auto;
+      height: 51px;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border-top: 1px solid #e0e0e0;
+      background: #fff;
+      box-shadow: 0 -2px 8px rgba(0,0,0,.08);
+    }
+    .footer-inner { display: flex; justify-content: space-between; gap: 8px; width: min(100%, 680px); height: 34px; margin: 0 auto; }
+    .footer-btn {
+      flex: 0 0 113px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 4px;
+      border: 2px solid #e53935;
+      border-radius: 7px;
+      color: #222;
+      background: #fff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    @media (max-width: 359px) {
+      .content { width: min(100% - 16px, 680px); margin-top: 8px; }
+      .card { padding: 16px; }
+      .page-header { padding: 16px 12px; }
+      .page-header h1 { font-size: 20px; }
+      .choice-grid { grid-template-columns: 1fr; }
+      .choice-btn { min-height: 46px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-scroll">
+    <header class="page-header">
+      <h1>店舗主様からのご依頼</h1>
+      <p>掲載情報の削除・修正・その他のご連絡を受け付けます。</p>
+    </header>
+
+    <main class="content">
+      <section class="card" aria-labelledby="storeHeading">
+        <p class="store-label">ご依頼の対象店舗</p>
+        <h2 class="store-name" id="storeHeading">店舗情報を確認しています</h2>
+        <p class="store-meta" id="storeMeta"></p>
+        <div class="notice error" id="storeError" hidden>店舗を確認できませんでした。詳細ページから「店舗主様へ」を押して、もう一度お試しください。</div>
+      </section>
+
+      <section class="card request-card" id="requestCard">
+        <p class="intro">ご希望の項目を選んでください。送信内容は石川マップ管理者だけが確認するGoogleフォームへ送られます。</p>
+        <h2 class="section-title">ご依頼の種類 <span class="required">必須</span></h2>
+        <div class="choice-grid" role="group" aria-label="ご依頼の種類">
+          <button type="button" class="choice-btn" data-request-type="delete">削除依頼</button>
+          <button type="button" class="choice-btn" data-request-type="edit">修正依頼</button>
+          <button type="button" class="choice-btn" data-request-type="other">その他</button>
+        </div>
+
+        <form id="ownerRequestForm" action="https://docs.google.com/forms/d/e/1FAIpQLSdcgkoWavuTIU8DNaqynWRssQI-KjcJzRlaru3MH9Z2pDGnaQ/formResponse" method="post" target="ownerRequestSink">
+          <input type="hidden" name="entry.103687602" id="formPayload">
+          <input type="hidden" name="entry.770068099" id="formName">
+          <input type="hidden" name="fvv" value="1">
+          <input type="hidden" name="pageHistory" value="0">
+
+          <fieldset class="request-panel" id="deletePanel" data-panel="delete" hidden disabled>
+            <legend class="panel-heading">削除依頼</legend>
+            <div class="field">
+              <span class="field-label">あなたはこの店舗の店舗主ですか？ <span class="required">必須</span></span>
+              <div class="radio-list">
+                <label class="radio-item"><input type="radio" name="owner-confirm" value="はい" required>はい、店舗主です</label>
+                <label class="radio-item"><input type="radio" name="owner-confirm" value="いいえ" required>いいえ</label>
+              </div>
+              <div class="notice owner-no-help" id="ownerNoHelp" hidden>
+                店舗主ではない方からの削除依頼は、この画面では受け付けていません。誤情報などのご連絡は「その他」を選んでください。<br>
+                <button type="button" class="switch-link" id="switchToOther">「その他」へ切り替える</button>
+              </div>
+            </div>
+            <div id="ownerDeleteFields" hidden>
+              <div class="field">
+                <span class="field-label">ご希望の対応 <span class="required">必須</span></span>
+                <div class="radio-list">
+                  <label class="radio-item"><input type="radio" name="delete-kind" value="一時的に非表示" required>一時的に地図から消してほしい</label>
+                  <label class="radio-item"><input type="radio" name="delete-kind" value="今後掲載しない" required>今後、地図へ掲載しないでほしい</label>
+                </div>
+              </div>
+              <div class="field">
+                <label class="field-label" for="deleteReason">削除を希望する理由（任意）</label>
+                <textarea id="deleteReason" placeholder="差し支えない範囲でご記入ください"></textarea>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="request-panel" id="editPanel" data-panel="edit" hidden disabled>
+            <legend class="panel-heading">修正依頼</legend>
+            <div class="current-info" id="currentInfo"></div>
+            <div class="field">
+              <label class="field-label" for="editDetails">修正したい項目と正しい内容 <span class="required">必須</span></label>
+              <textarea id="editDetails" required placeholder="例：営業時間を10:00～18:00へ修正"></textarea>
+            </div>
+          </fieldset>
+
+          <fieldset class="request-panel" id="otherPanel" data-panel="other" hidden disabled>
+            <legend class="panel-heading">その他のご連絡</legend>
+            <div class="field">
+              <label class="field-label" for="otherDetails">ご連絡内容 <span class="required">必須</span></label>
+              <textarea id="otherDetails" required></textarea>
+            </div>
+          </fieldset>
+
+          <div class="contact-area" id="contactArea" hidden>
+            <div class="field">
+              <label class="field-label" for="ownerEmail">店舗主様のメールアドレス（任意）</label>
+              <input type="email" id="ownerEmail" autocomplete="email" inputmode="email" placeholder="name@example.com">
+            </div>
+            <div class="field">
+              <label class="check-item"><input type="checkbox" id="contactConsent">確認が必要な場合、管理者からメールで連絡を受けることに同意します</label>
+            </div>
+            <p class="privacy-note">メールアドレスと理由は公開サイト・公開GitHubには保存されません。管理者の非公開Googleフォームにのみ送信されます。</p>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn" disabled>依頼を送信する</button>
+          <p class="form-status" id="formStatus" role="alert" aria-live="polite"></p>
+        </form>
+        <iframe name="ownerRequestSink" title="送信先" hidden></iframe>
+      </section>
+
+      <section class="card success-card" id="successCard" aria-live="polite" hidden>
+        <div class="success-mark" aria-hidden="true">✓</div>
+        <h2>ご連絡ありがとうございます</h2>
+        <p id="successMessage">ご依頼を受け付けました。管理者が内容を確認します。</p>
+        <p id="relistMessage" hidden>店舗情報を再掲載したい場合は、石川マップの「ご意見・ご要望」からお問い合わせください。</p>
+        <a class="inquiry-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdcgkoWavuTIU8DNaqynWRssQI-KjcJzRlaru3MH9Z2pDGnaQ/viewform" target="_blank" rel="noopener">石川マップのご意見・ご要望を開く</a>
+      </section>
+    </main>
+  </div>
+
+  <nav class="footer-bar" aria-label="ページ移動">
+    <div class="footer-inner">
+      <a href="index.html?tab=map" class="footer-btn" id="mapBtn">地図</a>
+      <a href="detail.html" class="footer-btn" id="detailBtn">店舗詳細</a>
+    </div>
+  </nav>
+
+  <script src="restaurants-data.js?v=20260831b"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      var params = new URLSearchParams(location.search);
+      var id = Number(params.get('id'));
+      var store = Array.isArray(restaurants)
+        ? restaurants.find(function (item) { return item.id === id; })
+        : null;
+      var selectedType = '';
+
+      var storeHeading = document.getElementById('storeHeading');
+      var storeMeta = document.getElementById('storeMeta');
+      var storeError = document.getElementById('storeError');
+      var submitBtn = document.getElementById('submitBtn');
+      var contactArea = document.getElementById('contactArea');
+      var contactConsent = document.getElementById('contactConsent');
+      var ownerEmail = document.getElementById('ownerEmail');
+      var formStatus = document.getElementById('formStatus');
+      var requestCard = document.getElementById('requestCard');
+      var successCard = document.getElementById('successCard');
+      var successMessage = document.getElementById('successMessage');
+      var relistMessage = document.getElementById('relistMessage');
+      var currentInfo = document.getElementById('currentInfo');
+      var detailBtn = document.getElementById('detailBtn');
+      var mapBtn = document.getElementById('mapBtn');
+
+      function addInfo(label, value) {
+        var p = document.createElement('p');
+        var strong = document.createElement('strong');
+        strong.textContent = label + '：';
+        p.appendChild(strong);
+        p.appendChild(document.createTextNode(value || '記載なし'));
+        currentInfo.appendChild(p);
+      }
+
+      if (store && Number.isInteger(id)) {
+        storeHeading.textContent = store.name;
+        storeMeta.textContent = '店舗番号：' + store.id + ' ／ ' + (store.address || '住所未確認');
+        detailBtn.href = 'detail.html?id=' + encodeURIComponent(store.id);
+        mapBtn.href = 'index.html?tab=map&shop=' + encodeURIComponent(store.id);
+        addInfo('住所', store.address);
+        addInfo('営業時間', store.hours);
+        addInfo('定休日', store.closed);
+        addInfo('備考', store.note);
+      } else {
+        storeHeading.textContent = '対象店舗を確認できません';
+        storeError.hidden = false;
+        document.querySelectorAll('.choice-btn').forEach(function (button) { button.disabled = true; });
+      }
+
+      function selectType(type) {
+        selectedType = type;
+        formStatus.textContent = '';
+        document.querySelectorAll('.choice-btn').forEach(function (button) {
+          var active = button.dataset.requestType === type;
+          button.classList.toggle('is-active', active);
+          button.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        document.querySelectorAll('.request-panel').forEach(function (panel) {
+          var active = panel.dataset.panel === type;
+          panel.hidden = !active;
+          panel.disabled = !active;
+        });
+        if (type === 'delete') {
+          var ownerConfirm = document.querySelector('input[name="owner-confirm"]:checked');
+          var ownerConfirmed = ownerConfirm && ownerConfirm.value === 'はい';
+          document.getElementById('ownerDeleteFields').hidden = !ownerConfirmed;
+          document.getElementById('ownerNoHelp').hidden = !ownerConfirm || ownerConfirmed;
+          contactArea.hidden = !ownerConfirmed;
+          submitBtn.disabled = !store || !ownerConfirmed;
+        } else {
+          contactArea.hidden = false;
+          submitBtn.disabled = !store;
+        }
+        var submitLabels = {
+          delete: '石川マップの店舗情報を削除し、管理者に情報を送信する',
+          edit: '修正依頼を管理者へ送信する',
+          other: '連絡内容を管理者へ送信する'
+        };
+        submitBtn.textContent = submitLabels[type] || '依頼を送信する';
+        var panel = document.querySelector('[data-panel="' + type + '"]');
+        if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      document.querySelectorAll('.choice-btn').forEach(function (button) {
+        button.setAttribute('aria-pressed', 'false');
+        button.addEventListener('click', function () { selectType(button.dataset.requestType); });
+      });
+
+      document.querySelectorAll('input[name="owner-confirm"]').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+          var yes = radio.value === 'はい' && radio.checked;
+          document.getElementById('ownerDeleteFields').hidden = !yes;
+          document.getElementById('ownerNoHelp').hidden = yes;
+          contactArea.hidden = !yes;
+          submitBtn.disabled = !yes;
+        });
+      });
+
+      document.getElementById('switchToOther').addEventListener('click', function () { selectType('other'); });
+
+      function syncEmailConsent() {
+        ownerEmail.required = contactConsent.checked;
+        contactConsent.required = ownerEmail.value.trim() !== '';
+      }
+
+      contactConsent.addEventListener('change', syncEmailConsent);
+      ownerEmail.addEventListener('input', syncEmailConsent);
+
+      document.getElementById('ownerRequestForm').addEventListener('submit', function (event) {
+        formStatus.textContent = '';
+        if (!store || !selectedType) {
+          event.preventDefault();
+          formStatus.textContent = 'ご依頼の種類を選んでください。';
+          return;
+        }
+        var ownerConfirm = document.querySelector('input[name="owner-confirm"]:checked');
+        if (selectedType === 'delete' && (!ownerConfirm || ownerConfirm.value !== 'はい')) {
+          event.preventDefault();
+          formStatus.textContent = '削除依頼は店舗主の方だけ送信できます。';
+          return;
+        }
+
+        var typeLabels = { delete: '削除依頼', edit: '修正依頼', other: 'その他' };
+        var deleteKind = document.querySelector('input[name="delete-kind"]:checked');
+        var lines = [
+          '【店舗主向け依頼】',
+          '依頼種別：' + typeLabels[selectedType],
+          '店舗番号：' + store.id,
+          '店舗名：' + store.name,
+          '住所：' + (store.address || '記載なし')
+        ];
+        if (selectedType === 'delete') {
+          lines.push('店舗主確認：はい');
+          lines.push('希望対応：' + (deleteKind ? deleteKind.value : '未選択'));
+          lines.push('理由（任意）：' + (document.getElementById('deleteReason').value.trim() || '記載なし'));
+        } else if (selectedType === 'edit') {
+          lines.push('修正内容：' + document.getElementById('editDetails').value.trim());
+        } else {
+          lines.push('連絡内容：' + document.getElementById('otherDetails').value.trim());
+        }
+        lines.push('メール連絡への同意：' + (contactConsent.checked ? 'あり' : 'なし'));
+        lines.push('メールアドレス：' + (contactConsent.checked ? ownerEmail.value.trim() : '記載なし'));
+
+        document.getElementById('formPayload').value = lines.join('\n');
+        document.getElementById('formName').value = '店舗主向け依頼（店舗番号' + store.id + '）';
+        submitBtn.disabled = true;
+        submitBtn.textContent = '送信しています…';
+        window.setTimeout(function () {
+          requestCard.hidden = true;
+          successCard.hidden = false;
+          if (selectedType === 'delete') {
+            successMessage.textContent = '削除依頼を受け付けました。店舗情報を地図から非表示にする処理と、管理者への連絡を進めます。公開画面への反映には数分かかる場合があります。';
+            relistMessage.hidden = false;
+          } else {
+            successMessage.textContent = 'ご依頼を受け付けました。管理者が内容を確認します。';
+            relistMessage.hidden = true;
+          }
+          successCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 0);
+      });
+
+      if ((location.hostname === '127.0.0.1' || location.hostname === 'localhost') && params.get('preview') === 'success') {
+        requestCard.hidden = true;
+        successCard.hidden = false;
+        successMessage.textContent = '削除依頼を受け付けました。店舗情報を地図から非表示にする処理と、管理者への連絡を進めます。公開画面への反映には数分かかる場合があります。';
+        relistMessage.hidden = false;
+      }
+    })();
+  </script>
+</body>
+</html>

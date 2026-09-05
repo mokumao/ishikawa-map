@@ -183,6 +183,7 @@
       border-radius: 20px;
       white-space: nowrap;
       cursor: pointer;
+      text-decoration: none;
     }
 
     /* ── 基本情報テーブル ── */
@@ -718,7 +719,7 @@
         <div class="section">
           <div class="section-title-row">
             <div class="section-title">基本情報</div>
-            <button type="button" class="owner-btn">店舗主様へ</button>
+            <a class="owner-btn" href="owner-request.html?id=${encodeURIComponent(r.id)}">店舗主様へ</a>
           </div>
           <table class="info-table">
             <tr>
