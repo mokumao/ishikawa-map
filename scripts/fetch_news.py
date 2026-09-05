@@ -1159,7 +1159,7 @@ def generate_html(articles, no_news_dates=None):
       white-space: nowrap;
     }}
     .ni.future {{
-      background: #f1f8e9;
+      background: #e6f2dc;
       border-left-color: #43a047;
     }}
     .news-section-heading {{
