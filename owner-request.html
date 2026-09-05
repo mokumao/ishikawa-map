@@ -281,7 +281,7 @@
         <h2>ご連絡ありがとうございます</h2>
         <p id="successMessage">ご依頼を受け付けました。管理者が内容を確認します。</p>
         <p id="relistMessage" hidden>店舗情報を再掲載したい場合は、石川マップの「ご意見・ご要望」からお問い合わせください。</p>
-        <a class="inquiry-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdcgkoWavuTIU8DNaqynWRssQI-KjcJzRlaru3MH9Z2pDGnaQ/viewform" target="_blank" rel="noopener">石川マップのご意見・ご要望を開く</a>
+        <a class="inquiry-link" id="inquiryLink" href="https://docs.google.com/forms/d/e/1FAIpQLSdcgkoWavuTIU8DNaqynWRssQI-KjcJzRlaru3MH9Z2pDGnaQ/viewform" target="_blank" rel="noopener">石川マップのご意見・ご要望を開く</a>
       </section>
     </main>
   </div>
@@ -317,6 +317,7 @@
       var successCard = document.getElementById('successCard');
       var successMessage = document.getElementById('successMessage');
       var relistMessage = document.getElementById('relistMessage');
+      var inquiryLink = document.getElementById('inquiryLink');
       var currentInfo = document.getElementById('currentInfo');
       var detailBtn = document.getElementById('detailBtn');
       var mapBtn = document.getElementById('mapBtn');
@@ -335,6 +336,13 @@
         storeMeta.textContent = '店舗番号：' + store.id + ' ／ ' + (store.address || '住所未確認');
         detailBtn.href = 'detail.html?id=' + encodeURIComponent(store.id);
         mapBtn.href = 'index.html?tab=map&shop=' + encodeURIComponent(store.id);
+        var relistText = [
+          '【店舗再掲載依頼】',
+          '店舗番号：' + store.id,
+          '店舗名：' + store.name,
+          '再掲載を希望する理由：'
+        ].join('\n');
+        inquiryLink.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdcgkoWavuTIU8DNaqynWRssQI-KjcJzRlaru3MH9Z2pDGnaQ/viewform?usp=pp_url&entry.103687602=' + encodeURIComponent(relistText);
         addInfo('住所', store.address);
         addInfo('営業時間', store.hours);
         addInfo('定休日', store.closed);

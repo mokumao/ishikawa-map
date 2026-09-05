@@ -1,0 +1,83 @@
+name: 店舗主依頼 自動処理
+
+on:
+  repository_dispatch:
+    types: [owner_delete_request]
+  workflow_dispatch:
+    inputs:
+      store_id:
+        description: 店舗番号
+        required: true
+        type: string
+      action:
+        description: 処理
+        required: true
+        type: choice
+        options:
+          - hide
+          - restore
+      request_ref:
+        description: 個人情報を含まない受付番号（12〜64桁の16進数）
+        required: true
+        type: string
+      delete_kind:
+        description: 削除種別（hide時のみ）
+        required: false
+        type: choice
+        options:
+          - 一時的に非表示
+          - 今後掲載しない
+
+permissions:
+  contents: write
+
+concurrency:
+  group: owner-request-${{ github.event.client_payload.store_id || inputs.store_id }}
+  cancel-in-progress: false
+
+jobs:
+  process-owner-request:
+    runs-on: ubuntu-latest
+    env:
+      STORE_ID: ${{ github.event.client_payload.store_id || inputs.store_id }}
+      REQUEST_ACTION: ${{ github.event_name == 'repository_dispatch' && 'hide' || inputs.action }}
+      REQUEST_REF: ${{ github.event.client_payload.request_ref || inputs.request_ref }}
+      DELETE_KIND: ${{ github.event.client_payload.delete_kind || inputs.delete_kind }}
+      REASON_PROVIDED: ${{ github.event.client_payload.reason_provided || 'false' }}
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Node.jsをセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 入力値を検証して店舗状態を更新
+        run: |
+          TODAY_JST="$(TZ='Asia/Tokyo' date +'%Y-%m-%d')"
+          node scripts/process_owner_request.js \
+            --id "$STORE_ID" \
+            --action "$REQUEST_ACTION" \
+            --date "$TODAY_JST" \
+            --request-ref "$REQUEST_REF" \
+            --delete-kind "$DELETE_KIND" \
+            --reason-provided "$REASON_PROVIDED"
+
+      - name: サイトマップを再生成
+        run: node scripts/generate_sitemap.js
+
+      - name: 変更をコミット・プッシュ
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Actions Bot"
+          git add restaurants-data.js index.html detail.html owner-request.html sitemap.xml
+          if git diff --staged --quiet; then
+            echo "同じ依頼は処理済みです。変更はありません。"
+            exit 0
+          fi
+          git commit -m "🏪 店舗主依頼を反映 店舗番号${STORE_ID} (${REQUEST_ACTION})"
+          git pull --rebase origin main
+          git push origin HEAD:main

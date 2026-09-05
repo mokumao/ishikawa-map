@@ -1057,6 +1057,7 @@
         return '<li><span class="hist-date">' + escapeHtml(h.date || '') + '</span> ' +
           escapeHtml(from) + ' → ' + escapeHtml(h.to || '') +
           (h.note ? '　<span class="hist-note">' + escapeHtml(h.note) + '</span>' : '') +
+          (h.requestRef ? '　<span class="hist-note">受付番号: ' + escapeHtml(h.requestRef) + '</span>' : '') +
           '</li>';
       }).join('') + '</ul>';
     }

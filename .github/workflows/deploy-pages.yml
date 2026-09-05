@@ -7,7 +7,7 @@ on:
   # ニュース収集内のGITHUB_TOKENによるpushは別Workflowを起動しないため、
   # 収集Workflowの正常終了を直接受けて最新mainを再公開する。
   workflow_run:
-    workflows: ["今日の石川ニュース 自動更新"]
+    workflows: ["今日の石川ニュース 自動更新", "店舗主依頼 自動処理"]
     types: [completed]
     branches: [main]
 
