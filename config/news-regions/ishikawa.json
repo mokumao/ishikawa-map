@@ -75,6 +75,7 @@
   "rssSources": [
     {"id": "google-news-ishikawa", "name": "Google ニュース（うるま市 石川）", "query": "うるま市 石川 沖縄", "type": "discovery", "trust": 60, "method": "google-news", "filter_strict": true},
     {"id": "google-news-ishikawa-dome", "name": "石川ドーム・闘牛", "query": "石川ドーム 闘牛", "type": "discovery", "trust": 60, "method": "google-news", "filter": false, "facilityId": "ishikawa-dome", "facilityAliases": ["石川多目的ドーム", "石川ドーム"]},
+    {"id": "togyu-okinawa-blog", "name": "【公式】闘牛 in Okinawa Blog", "url": "https://togyu.ti-da.net/index.rdf", "type": "specialist", "trust": 85, "method": "direct-rss", "maxEntries": 20, "facilityId": "ishikawa-dome", "facilityAliases": ["石川多目的ドーム", "石川ドーム"], "requiredAnyTerms": ["石川多目的ドーム", "石川ドーム"], "extractEventDate": true},
     {"id": "google-news-ishikawa-nature", "name": "石川少年自然の家", "query": "石川少年自然の家", "type": "discovery", "trust": 60, "method": "google-news", "filter": false, "facilityId": "ishikawa-youth-center", "facilityAliases": ["石川少年自然の家", "石川青少年の家"]},
     {"id": "google-news-bios-hill", "name": "ビオスの丘", "query": "ビオスの丘", "type": "discovery", "trust": 60, "method": "google-news", "filter": false, "facilityId": "bios-hill", "facilityAliases": ["ビオスの丘"]},
     {"id": "okinawa-times", "name": "沖縄タイムス", "query": "site:okinawatimes.co.jp うるま 石川", "type": "media", "trust": 80, "method": "google-news", "filter_strict": true},

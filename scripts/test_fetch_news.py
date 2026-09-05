@@ -54,12 +54,39 @@ class NewsAutomationTests(unittest.TestCase):
         sources = region_news_config.build_rss_sources(profile)
         source_ids = {item['id'] for item in sources}
         self.assertIn('google-news-ishikawa-dome', source_ids)
+        self.assertIn('togyu-okinawa-blog', source_ids)
         self.assertIn('region-discovery-ishikawa-education', source_ids)
         self.assertIn(
             'region-facility-ishikawa-ishikawa-library', source_ids
         )
         self.assertIn('region-theme-ishikawa-bullfighting', source_ids)
         self.assertIn('bullfighting_schedule', profile['officialAdapters'])
+
+    def test_bullfighting_blog_only_accepts_ishikawa_dome_entries(self):
+        profile = region_news_config.load_region_profile('ishikawa')
+        source = next(
+            item for item in region_news_config.build_rss_sources(profile)
+            if item['id'] == 'togyu-okinawa-blog'
+        )
+        self.assertTrue(fetch_news.source_entry_matches(
+            source,
+            '9月20日 闘牛カーニバル',
+            '場所：うるま市石川多目的ドーム',
+        ))
+        self.assertFalse(fetch_news.source_entry_matches(
+            source,
+            '8月26日 山城ナイター闘牛大会',
+            '場所：うるま市安慶名闘牛場',
+        ))
+
+    def test_bullfighting_blog_extracts_future_event_date(self):
+        published = datetime(2026, 8, 28, 15, 9, tzinfo=fetch_news.JST)
+        event_date = fetch_news.extract_event_date(
+            '9月20日（日）闘牛カーニバル',
+            '日時：2026年9月20日　場所：石川多目的ドーム',
+            published,
+        )
+        self.assertEqual(event_date.date().isoformat(), '2026-09-20')
 
     def test_special_adapter_is_controlled_by_region_profile(self):
         profile = dict(fetch_news.REGION)

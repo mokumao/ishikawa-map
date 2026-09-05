@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-05T07:44:13.147002+09:00",
+  "updated": "2026-09-05T08:44:41.215778+09:00",
   "count": 4,
   "candidates": [
     {
@@ -13,7 +13,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-09-03T12:56:00+09:00",
       "discoveredAt": "2026-09-04T07:56:02.470081+09:00",
-      "checkedAt": "2026-09-05T07:44:13.147002+09:00",
+      "checkedAt": "2026-09-05T08:44:41.215778+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-10T23:59:59+09:00",
@@ -40,43 +40,44 @@
       "relatedCount": 0
     },
     {
-      "id": "20260901-region-theme-ishikawa-bullfighting-b45306aef4",
+      "id": "20260901-google-news-ishikawa-dome-b45306aef4",
       "title": "「もう『夏』は無理だ」 暑さで闘牛が闘わず 全島大会は夏開催取りやめに 熱中症が一番怖い - 沖縄タイムス社",
       "displayTitle": "「もう『夏』は無理だ」 暑さで闘牛が闘わず 全島大会は夏開催取りやめに 熱中症が一番怖い",
       "summary": "「もう『夏』は無理だ」 暑さで闘牛が闘わず 全島大会は夏開催取りやめに 熱中症が一番怖い 沖縄タイムス社",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1tVU9sTjdhSi1lY3V2MDZMXzMxS3BaOThVZ05YME9SZlk3T0lvRFdSM0pCUGVOQi1lVWJRU1QtcmxZYlc2b2xob05iRUkyMndhcE9kTFYtZWpoWkxuWHc?oc=5",
-      "sourceId": "region-theme-ishikawa-bullfighting",
-      "sourceName": "石川固有テーマ：闘牛",
+      "sourceId": "google-news-ishikawa-dome",
+      "sourceName": "石川ドーム・闘牛",
       "sourceType": "discovery",
       "publishedAt": "2026-09-01T10:09:00+09:00",
-      "discoveredAt": "2026-09-02T23:15:26.452771+09:00",
-      "checkedAt": "2026-09-05T07:44:13.147002+09:00",
+      "discoveredAt": "2026-09-05T08:44:41.215778+09:00",
+      "checkedAt": "2026-09-05T08:44:41.215778+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-08T23:59:59+09:00",
       "category": "news",
       "localScore": 35,
       "localEvidence": [
-        "取得元候補：石川固有テーマ：闘牛"
+        "取得元候補：石川ドーム・闘牛"
       ],
       "confidence": 45,
       "status": "review",
       "requiresReview": true,
       "reviewReasons": [
-        "地域固有テーマ専用検索で発見したが、記事内の地域文脈確認が必要",
+        "施設専用検索で発見したが、記事内の施設名確認が必要",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関係を確認できないため記録",
-        "石川地区との関係を確定できないため判断保留"
+        "石川地区との関係を確定できないため判断保留",
+        "同じ内容の記事1件を代表記事へ統合"
       ],
       "fingerprint": "070fb2e57656aca7029e",
       "articleFingerprint": "b45306aef47346562852",
-      "facilityId": null,
+      "facilityId": "ishikawa-dome",
       "eventMarkers": [
         "もう夏は無理だ暑さで闘牛が闘わず全島大会は夏開催取りやめに熱中症が一番怖い"
       ],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "relatedCount": 1
     },
     {
       "id": "20260831-region-facility-ishikawa-new-ishikawa-kitchen-20322ee12a",
@@ -89,7 +90,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-08-31T18:24:00+09:00",
       "discoveredAt": "2026-09-05T07:44:13.147002+09:00",
-      "checkedAt": "2026-09-05T07:44:13.147002+09:00",
+      "checkedAt": "2026-09-05T08:44:41.215778+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -116,17 +117,17 @@
       "relatedCount": 0
     },
     {
-      "id": "20260831-region-theme-ishikawa-bullfighting-f6c0300caf",
-      "title": "『ウシオーラセー（闘牛）の角突き稽古』(26/8/30 放送) - ntv.co.jp",
-      "displayTitle": "『ウシオーラセー(闘牛)の角突き稽古』(26/8/30 放送) - ntv.co.jp",
-      "summary": "『ウシオーラセー（闘牛）の角突き稽古』(26/8/30 放送) ntv.co.jp",
+      "id": "20260831-region-theme-ishikawa-bullfighting-c154bfeca5",
+      "title": "『ウシオーラセー（闘牛）の角突き稽古』(26/8/30 放送) - 日本テレビ",
+      "displayTitle": "『ウシオーラセー(闘牛)の角突き稽古』(26/8/30 放送) - 日本テレビ",
+      "summary": "『ウシオーラセー（闘牛）の角突き稽古』(26/8/30 放送) 日本テレビ",
       "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1FT1dnNGwtekp2cXFDcVRFQzNENXFlTWtpOFhXRXRyQWhuMTAyemlaQk1QelEwTDlCTXFZZGtQcmVHZVUxMk0zQU02Y3BfMjNZTzhxQktTVTNHR09SS2Eyc0VSWFZlQ0pKc21WVXpHcw?oc=5",
       "sourceId": "region-theme-ishikawa-bullfighting",
       "sourceName": "石川固有テーマ：闘牛",
       "sourceType": "discovery",
       "publishedAt": "2026-08-31T02:39:52+09:00",
-      "discoveredAt": "2026-09-03T21:50:31.681108+09:00",
-      "checkedAt": "2026-09-05T07:44:13.147002+09:00",
+      "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
+      "checkedAt": "2026-09-05T08:44:41.215778+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-07T23:59:59+09:00",
@@ -145,8 +146,8 @@
         "石川地区との関係を確定できないため判断保留",
         "同じ内容の記事1件を代表記事へ統合"
       ],
-      "fingerprint": "1135ba9ecc2330be2b67",
-      "articleFingerprint": "f6c0300caf54f7c69791",
+      "fingerprint": "51d75628a9ea44a6e01e",
+      "articleFingerprint": "c154bfeca5d15418f3a2",
       "facilityId": null,
       "eventMarkers": [],
       "relatedUrls": [],

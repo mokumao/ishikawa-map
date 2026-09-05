@@ -449,6 +449,28 @@ def is_within_period(pub_date):
         return True  # 日付不明の場合は掲載する（除外しすぎを防ぐ）
     return pub_date >= cutoff_date  # cutoff_date以降（7日前〜未来）
 
+def source_entry_matches(source, title, summary=''):
+    """直接取得先に指定された必須語が本文または見出しにあるか確認する。"""
+    required_terms = source.get('requiredAnyTerms', [])
+    if not required_terms:
+        return True
+    text = unicodedata.normalize('NFKC', f'{title} {summary}')
+    return any(term in text for term in required_terms)
+
+def extract_event_date(title, summary, pub_date):
+    """記事の先頭側にある年月日を開催日として読み取る。"""
+    text = unicodedata.normalize('NFKC', f'{title} {summary}')
+    for match in re.finditer(r'(?:(20\d{2})年)?\s*(\d{1,2})月\s*(\d{1,2})日', text):
+        year = int(match.group(1)) if match.group(1) else (pub_date or now_jst).year
+        try:
+            event_date = datetime(
+                year, int(match.group(2)), int(match.group(3)), tzinfo=JST
+            )
+        except ValueError:
+            continue
+        return event_date
+    return None
+
 def load_no_news_dates(path=NO_NEWS_FILE):
     """過去に「ニュースなし」だった日付（YYYY-MM-DD）の集合を読み込む"""
     if os.path.exists(path):
@@ -915,12 +937,29 @@ def fetch_articles():
                 if not title or not link:
                     continue
 
-                # 候補も公開記事と同じ期間を対象にする。
-                pub_date = get_pub_date(entry)
-                if not is_within_period(pub_date):
+                if not source_entry_matches(source, title, summary):
                     continue
 
-                candidate = build_candidate(title, summary, link, source, pub_date)
+                # 候補も公開記事と同じ期間を対象にする。
+                pub_date = get_pub_date(entry)
+                event_starts_at = None
+                if source.get('extractEventDate'):
+                    event_starts_at = extract_event_date(title, summary, pub_date)
+                if (
+                    not is_within_period(pub_date)
+                    and not (event_starts_at and event_starts_at >= now_jst)
+                ):
+                    continue
+
+                candidate = build_candidate(
+                    title,
+                    summary,
+                    link,
+                    source,
+                    pub_date,
+                    event_starts_at=event_starts_at,
+                    category='event' if event_starts_at else 'news',
+                )
                 previous = previous_candidates.get(candidate['id'])
                 if previous:
                     candidate['discoveredAt'] = previous.get('discoveredAt') or candidate['discoveredAt']
