@@ -2,7 +2,7 @@ name: 店舗主依頼 自動処理
 
 on:
   repository_dispatch:
-    types: [owner_delete_request]
+    types: [owner_delete_request, admin_restore_request]
   workflow_dispatch:
     inputs:
       store_id:
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       STORE_ID: ${{ github.event.client_payload.store_id || inputs.store_id }}
-      REQUEST_ACTION: ${{ github.event_name == 'repository_dispatch' && 'hide' || inputs.action }}
+      REQUEST_ACTION: ${{ github.event_name == 'repository_dispatch' && (github.event.action == 'admin_restore_request' && 'restore' || 'hide') || inputs.action }}
       REQUEST_REF: ${{ github.event.client_payload.request_ref || inputs.request_ref }}
       DELETE_KIND: ${{ github.event.client_payload.delete_kind || inputs.delete_kind }}
       REASON_PROVIDED: ${{ github.event.client_payload.reason_provided || 'false' }}

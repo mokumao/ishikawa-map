@@ -327,6 +327,10 @@
       padding: 1px 6px;
       margin-right: 4px;
     }
+    .rev-type-status {
+      color: #1b5e20;
+      background: #e8f5e9;
+    }
 
     /* ── Googleマップボタン ── */
     .gmap-btn {
@@ -668,17 +672,34 @@
       // lastChecked と履歴の最新日付が一致する回だけ「前回より修正あり」として扱う
       const REVISION_TYPE_LABELS = { ai: 'AIによる自動修正', manager: '管理者による修正', owner: '店舗主による修正' };
       const revisionHistory = Array.isArray(r.revisionHistory) ? r.revisionHistory : [];
+      const statusHistory = Array.isArray(r.statusHistory) ? r.statusHistory : [];
+      const publicStatusHistory = statusHistory.map(function (h, index) {
+        if (h.to === 'hidden') {
+          return { date: h.date, type: 'status', note: '地図から非表示（削除日）', order: index };
+        }
+        if (h.from === 'hidden' && (h.to === 'published' || h.to === 'test')) {
+          return { date: h.date, type: 'status', note: '地図に再表示（再表示日）', order: index };
+        }
+        return null;
+      }).filter(Boolean);
+      const publicHistory = revisionHistory.map(function (h, index) {
+        return { date: h.date, type: h.type, note: h.note, order: index - revisionHistory.length };
+      }).concat(publicStatusHistory).sort(function (a, b) {
+        return String(b.date || '').localeCompare(String(a.date || '')) || b.order - a.order;
+      });
       const lastRevision = revisionHistory.length > 0 ? revisionHistory[revisionHistory.length - 1] : null;
       const hasChangeThisCheck = !!(lastRevision && r.lastChecked && lastRevision.date === r.lastChecked);
       const lastCheckedNote = r.lastChecked
         ? `<p class="info-note last-checked">最終情報確認日または修正日：${r.lastChecked}（前回より${hasChangeThisCheck ? '修正あり。ページ下を参照。' : '修正なし'}）</p>`
         : `<p class="info-note last-checked">最終情報確認日または修正日：未確認</p>`;
-      const historySection = revisionHistory.length > 0
+      const historySection = publicHistory.length > 0
         ? `<div class="section">
              <div class="section-title">修正履歴</div>
              <ul class="revision-list">
-               ${revisionHistory.slice().reverse().map(function (h) {
-                 return `<li><span class="rev-date">(${h.date})</span><span class="rev-type">${REVISION_TYPE_LABELS[h.type] || h.type}</span>${h.note}</li>`;
+               ${publicHistory.map(function (h) {
+                 const typeLabel = h.type === 'status' ? '掲載状態' : (REVISION_TYPE_LABELS[h.type] || h.type);
+                 const typeClass = h.type === 'status' ? ' rev-type-status' : '';
+                 return `<li><span class="rev-date">(${h.date})</span><span class="rev-type${typeClass}">${typeLabel}</span>${h.note}</li>`;
                }).join('')}
              </ul>
            </div>`

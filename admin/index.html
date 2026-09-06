@@ -469,6 +469,29 @@
   .hist-list li { padding: 3px 0; }
   .hist-date { color: #607d8b; margin-right: 6px; }
   .hist-note { color: #455a64; }
+  .hist-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #dfe5e8;
+  }
+  .restore-btn {
+    min-height: 40px;
+    padding: 8px 16px;
+    border: 1px solid #2e7d32;
+    border-radius: 8px;
+    background: #e8f5e9;
+    color: #1b5e20;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .restore-btn:hover { background: #c8e6c9; }
+  .restore-help { color: #607d8b; font-size: 0.75rem; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -632,6 +655,9 @@
 
 <script>
   var SITE_ORIGIN = 'https://mokumao.github.io/ishikawa-map';
+  // Apps Scriptを「実行するユーザー: 自分」「アクセスできるユーザー: 自分のみ」で
+  // ウェブアプリとしてデプロイしたURLを設定する。
+  var ADMIN_RESTORE_URL = 'https://script.google.com/macros/s/AKfycbxZh1Gal4waSyQTG0zFkRhmlv_XTrfAF9UMRcq38SQHz_6PQuYMerq0EIgoNRZBKWwe6Q/exec';
   var NEWS_DATA_ORIGIN = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
     ? location.origin
     : SITE_ORIGIN;
@@ -1049,10 +1075,9 @@
 
     function renderHistory(r) {
       var hist = r.statusHistory || [];
-      if (hist.length === 0) {
-        return '<span class="hist-empty">status変更履歴なし</span>';
-      }
-      return '<ul class="hist-list">' + hist.map(function (h) {
+      var historyHtml = hist.length === 0
+        ? '<span class="hist-empty">status変更履歴なし</span>'
+        : '<ul class="hist-list">' + hist.map(function (h) {
         var from = h.from || '(新規)';
         return '<li><span class="hist-date">' + escapeHtml(h.date || '') + '</span> ' +
           escapeHtml(from) + ' → ' + escapeHtml(h.to || '') +
@@ -1060,6 +1085,12 @@
           (h.requestRef ? '　<span class="hist-note">受付番号: ' + escapeHtml(h.requestRef) + '</span>' : '') +
           '</li>';
       }).join('') + '</ul>';
+      if ((r.status || 'published') !== 'hidden') return historyHtml;
+      return historyHtml +
+        '<div class="hist-actions">' +
+          '<button type="button" class="restore-btn" data-id="' + r.id + '" data-name="' + escapeHtml(r.name || '') + '">再表示</button>' +
+          '<span class="restore-help">確認画面のあと、地図への再表示処理を開始します。</span>' +
+        '</div>';
     }
 
     function escapeHtml(s) {
@@ -1098,6 +1129,17 @@
     searchBox.addEventListener('input', render);
 
     tbody.addEventListener('click', function (e) {
+      var restoreBtn = e.target.closest('.restore-btn');
+      if (restoreBtn) {
+        if (!ADMIN_RESTORE_URL) {
+          window.alert('再表示用の安全な接続先は、現在設定中です。');
+          return;
+        }
+        var url = ADMIN_RESTORE_URL + '?action=restore&store_id=' + encodeURIComponent(restoreBtn.dataset.id) +
+          '&store_name=' + encodeURIComponent(restoreBtn.dataset.name || '');
+        window.open(url, '_blank', 'noopener');
+        return;
+      }
       var btn = e.target.closest('.hist-btn');
       if (!btn) return;
       var row = document.getElementById('hist-' + btn.dataset.id);
@@ -1108,13 +1150,20 @@
     });
 
     var script = document.createElement('script');
-    script.src = SITE_ORIGIN + '/restaurants-data.js?_=' + Date.now();
+    script.src = NEWS_DATA_ORIGIN + '/restaurants-data.js?_=' + Date.now();
     script.onload = function () {
       if (typeof restaurants === 'undefined') {
         tbody.innerHTML = '<tr><td colspan="10" class="error">店舗データの読み込みに失敗しました</td></tr>';
         return;
       }
-      allStores = restaurants;
+      var previewHiddenId = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
+        ? new URLSearchParams(location.search).get('preview_hidden')
+        : null;
+      allStores = restaurants.map(function (store) {
+        return previewHiddenId !== null && String(store.id) === previewHiddenId
+          ? Object.assign({}, store, { status: 'hidden' })
+          : store;
+      });
       renderSummary();
       populateGenreFilter();
       render();
