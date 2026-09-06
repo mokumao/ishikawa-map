@@ -39,9 +39,11 @@
     .store-label { margin: 0 0 4px; color: #607d8b; font-size: 12px; font-weight: 700; }
     .store-name { margin: 0; color: #075fa9; font-size: 20px; line-height: 1.45; }
     .store-meta { margin: 8px 0 0; color: #52636e; font-size: 14px; line-height: 1.6; }
+    .store-number { color: #c62828; font-weight: 700; }
     .intro { margin: 0; font-size: 14px; line-height: 1.7; }
     .section-title { margin: 0 0 12px; font-size: 20px; line-height: 1.4; }
     .required { color: #c62828; font-size: 12px; }
+    .optional { color: #1565c0; }
     .choice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
     .choice-btn {
       min-height: 52px;
@@ -50,18 +52,21 @@
       border-radius: 10px;
       color: #075fa9;
       background: #fff;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
       cursor: pointer;
       transition: background-color .18s ease-out, color .18s ease-out, transform .18s ease-out;
     }
     .choice-btn:active { transform: scale(.98); }
     .choice-btn.is-active { color: #fff; background: #0878c9; }
+    .choice-emphasis { color: #c62828; }
+    .choice-btn.is-active .choice-emphasis { color: #fff; }
     .request-panel { margin: 16px 0 0; padding: 0; border: 0; }
     .request-panel[hidden] { display: none; }
     .panel-heading { margin: 0 0 12px; color: #075fa9; font-size: 16px; }
     .field { margin-top: 16px; }
     .field-label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 700; line-height: 1.5; }
+    .free-entry-label { margin-top: 12px; }
     .radio-list { display: grid; gap: 8px; }
     .radio-item, .check-item {
       display: flex;
@@ -118,6 +123,8 @@
     .submit-btn:disabled { cursor: not-allowed; background: #aab7bf; }
     .switch-link { margin-top: 8px; border: 0; padding: 4px 0; color: #075fa9; background: transparent; font-weight: 700; text-decoration: underline; cursor: pointer; }
     .form-status { min-height: 24px; margin: 12px 0 0; color: #b3261e; font-size: 13px; font-weight: 700; line-height: 1.5; }
+    .consent-error { margin: 8px 0 0; color: #b3261e; font-size: 13px; font-weight: 700; line-height: 1.5; }
+    .consent-error[hidden] { display: none; }
     .success-card { text-align: center; border-top: 5px solid #43a047; }
     .success-mark {
       width: 56px;
@@ -203,8 +210,8 @@
         <p class="intro">ご希望の項目を選んでください。送信内容は石川マップ管理者だけが確認するGoogleフォームへ送られます。</p>
         <h2 class="section-title">ご依頼の種類 <span class="required">必須</span></h2>
         <div class="choice-grid" role="group" aria-label="ご依頼の種類">
-          <button type="button" class="choice-btn" data-request-type="delete">削除依頼</button>
-          <button type="button" class="choice-btn" data-request-type="edit">修正依頼</button>
+          <button type="button" class="choice-btn" data-request-type="delete">掲載情報の<span class="choice-emphasis">削除依頼</span></button>
+          <button type="button" class="choice-btn" data-request-type="edit">掲載情報の<span class="choice-emphasis">修正依頼</span></button>
           <button type="button" class="choice-btn" data-request-type="other">その他</button>
         </div>
 
@@ -231,12 +238,17 @@
               <div class="field">
                 <span class="field-label">ご希望の対応 <span class="required">必須</span></span>
                 <div class="radio-list">
-                  <label class="radio-item"><input type="radio" name="delete-kind" value="一時的に非表示" required>一時的に地図から消してほしい</label>
-                  <label class="radio-item"><input type="radio" name="delete-kind" value="今後掲載しない" required>今後、地図へ掲載しないでほしい</label>
+                  <label class="radio-item"><input type="radio" name="delete-kind" value="掲載情報を削除" required>掲載情報を消してほしい</label>
                 </div>
               </div>
               <div class="field">
-                <label class="field-label" for="deleteReason">削除を希望する理由（任意）</label>
+                <span class="field-label">削除を希望する理由<span class="optional">（任意）</span></span>
+                <div class="radio-list">
+                  <label class="check-item"><input type="checkbox" name="delete-reason-choice" value="店舗情報の公開を希望しない">店舗情報の公開を希望しない</label>
+                  <label class="check-item"><input type="checkbox" name="delete-reason-choice" value="掲載について事前の確認がなく、不安を感じている">掲載について事前の確認がなく、不安を感じている</label>
+                  <label class="check-item"><input type="checkbox" name="delete-reason-choice" value="閉店・休業・移転などにより掲載が不要になった">閉店・休業・移転などにより掲載が不要になった</label>
+                </div>
+                <label class="field-label free-entry-label" for="deleteReason">その他自由記載<span class="optional">（任意）</span></label>
                 <textarea id="deleteReason" placeholder="差し支えない範囲でご記入ください"></textarea>
               </div>
             </div>
@@ -261,11 +273,12 @@
 
           <div class="contact-area" id="contactArea" hidden>
             <div class="field">
-              <label class="field-label" for="ownerEmail">店舗主様のメールアドレス（任意）</label>
+              <label class="field-label" for="ownerEmail">店舗主様のメールアドレス<span class="optional">（任意）</span></label>
               <input type="email" id="ownerEmail" autocomplete="email" inputmode="email" placeholder="name@example.com">
             </div>
             <div class="field">
-              <label class="check-item"><input type="checkbox" id="contactConsent">確認が必要な場合、管理者からメールで連絡を受けることに同意します</label>
+              <label class="check-item"><input type="checkbox" id="contactConsent">確認が必要な場合、管理者がメールで連絡することがあります</label>
+              <p class="consent-error" id="consentError" role="alert" hidden>「確認が必要な場合、管理者がメールで連絡することがあります」にチェックが入っていません。</p>
             </div>
             <p class="privacy-note">メールアドレスと理由は公開サイト・公開GitHubには保存されません。管理者の非公開Googleフォームにのみ送信されます。</p>
           </div>
@@ -312,6 +325,7 @@
       var contactArea = document.getElementById('contactArea');
       var contactConsent = document.getElementById('contactConsent');
       var ownerEmail = document.getElementById('ownerEmail');
+      var consentError = document.getElementById('consentError');
       var formStatus = document.getElementById('formStatus');
       var requestCard = document.getElementById('requestCard');
       var successCard = document.getElementById('successCard');
@@ -333,7 +347,12 @@
 
       if (store && Number.isInteger(id)) {
         storeHeading.textContent = store.name;
-        storeMeta.textContent = '店舗番号：' + store.id + ' ／ ' + (store.address || '住所未確認');
+        storeMeta.textContent = '';
+        var storeNumber = document.createElement('span');
+        storeNumber.className = 'store-number';
+        storeNumber.textContent = '店舗番号：' + store.id;
+        storeMeta.appendChild(storeNumber);
+        storeMeta.appendChild(document.createTextNode(' ／ ' + (store.address || '住所未確認')));
         detailBtn.href = 'detail.html?id=' + encodeURIComponent(store.id);
         mapBtn.href = 'index.html?tab=map&shop=' + encodeURIComponent(store.id);
         var relistText = [
@@ -406,14 +425,34 @@
 
       function syncEmailConsent() {
         ownerEmail.required = contactConsent.checked;
-        contactConsent.required = ownerEmail.value.trim() !== '';
+        if (!ownerEmail.value.trim() || contactConsent.checked) consentError.hidden = true;
       }
 
       contactConsent.addEventListener('change', syncEmailConsent);
       ownerEmail.addEventListener('input', syncEmailConsent);
 
+      function blockMissingEmailConsent() {
+        if (!ownerEmail.value.trim() || contactConsent.checked) return false;
+        var message = '「確認が必要な場合、管理者がメールで連絡することがあります」にチェックが入っていません。';
+        formStatus.textContent = message;
+        consentError.textContent = message;
+        consentError.hidden = false;
+        contactConsent.focus();
+        contactConsent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return true;
+      }
+
+      submitBtn.addEventListener('click', function (event) {
+        formStatus.textContent = '';
+        if (blockMissingEmailConsent()) event.preventDefault();
+      });
+
       document.getElementById('ownerRequestForm').addEventListener('submit', function (event) {
         formStatus.textContent = '';
+        if (blockMissingEmailConsent()) {
+          event.preventDefault();
+          return;
+        }
         if (!store || !selectedType) {
           event.preventDefault();
           formStatus.textContent = 'ご依頼の種類を選んでください。';
@@ -436,9 +475,12 @@
           '住所：' + (store.address || '記載なし')
         ];
         if (selectedType === 'delete') {
+          var deleteReasonChoices = Array.from(document.querySelectorAll('input[name="delete-reason-choice"]:checked'))
+            .map(function (input) { return input.value; });
           lines.push('店舗主確認：はい');
           lines.push('希望対応：' + (deleteKind ? deleteKind.value : '未選択'));
-          lines.push('理由（任意）：' + (document.getElementById('deleteReason').value.trim() || '記載なし'));
+          lines.push('削除理由（選択）：' + (deleteReasonChoices.length ? deleteReasonChoices.join('／') : '選択なし'));
+          lines.push('削除理由（自由記載）：' + (document.getElementById('deleteReason').value.trim() || '記載なし'));
         } else if (selectedType === 'edit') {
           lines.push('修正内容：' + document.getElementById('editDetails').value.trim());
         } else {
