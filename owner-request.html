@@ -121,6 +121,7 @@
       cursor: pointer;
     }
     .submit-btn:disabled { cursor: not-allowed; background: #aab7bf; }
+    .form-actions[hidden] { display: none; }
     .switch-link { margin-top: 8px; border: 0; padding: 4px 0; color: #075fa9; background: transparent; font-weight: 700; text-decoration: underline; cursor: pointer; }
     .form-status { min-height: 24px; margin: 12px 0 0; color: #b3261e; font-size: 13px; font-weight: 700; line-height: 1.5; }
     .consent-error { margin: 8px 0 0; color: #b3261e; font-size: 13px; font-weight: 700; line-height: 1.5; }
@@ -242,7 +243,7 @@
                   <label class="radio-item"><input type="radio" name="delete-kind" value="掲載情報を削除" required>掲載情報を消してほしい</label>
                 </div>
               </div>
-              <div class="field">
+              <div class="field" id="deleteReasonFields" hidden>
                 <span class="field-label">削除を希望する理由<span class="optional">（任意）</span></span>
                 <div class="radio-list">
                   <label class="check-item"><input type="checkbox" name="delete-reason-choice" value="店舗情報の公開を希望しない">店舗情報の公開を希望しない</label>
@@ -287,8 +288,10 @@
             <p class="privacy-note">メールアドレスと理由は公開サイト・公開GitHubには保存されません。管理者の非公開Googleフォームにのみ送信されます。</p>
           </div>
 
-          <button type="submit" class="submit-btn" id="submitBtn" disabled>依頼を送信する</button>
-          <p class="form-status" id="formStatus" role="alert" aria-live="polite"></p>
+          <div class="form-actions" id="formActions" hidden>
+            <button type="submit" class="submit-btn" id="submitBtn" disabled>依頼を送信する</button>
+            <p class="form-status" id="formStatus" role="alert" aria-live="polite"></p>
+          </div>
         </form>
         <iframe name="ownerRequestSink" title="送信先" hidden></iframe>
       </section>
@@ -326,6 +329,7 @@
       var storeMeta = document.getElementById('storeMeta');
       var storeError = document.getElementById('storeError');
       var submitBtn = document.getElementById('submitBtn');
+      var formActions = document.getElementById('formActions');
       var contactArea = document.getElementById('contactArea');
       var contactConsent = document.getElementById('contactConsent');
       var ownerEmail = document.getElementById('ownerEmail');
@@ -379,6 +383,7 @@
       function selectType(type) {
         selectedType = type;
         formStatus.textContent = '';
+        formActions.hidden = false;
         document.querySelectorAll('.choice-btn').forEach(function (button) {
           var active = button.dataset.requestType === type;
           button.classList.toggle('is-active', active);
@@ -392,7 +397,9 @@
         if (type === 'delete') {
           var ownerConfirm = document.querySelector('input[name="owner-confirm"]:checked');
           var ownerConfirmed = ownerConfirm && ownerConfirm.value === 'はい';
+          var deleteKindSelected = document.querySelector('input[name="delete-kind"]:checked');
           document.getElementById('ownerDeleteFields').hidden = !ownerConfirmed;
+          document.getElementById('deleteReasonFields').hidden = !ownerConfirmed || !deleteKindSelected;
           document.getElementById('ownerNoHelp').hidden = !ownerConfirm || ownerConfirmed;
           contactArea.hidden = !ownerConfirmed;
           submitBtn.disabled = !store || !ownerConfirmed;
@@ -418,10 +425,18 @@
       document.querySelectorAll('input[name="owner-confirm"]').forEach(function (radio) {
         radio.addEventListener('change', function () {
           var yes = radio.value === 'はい' && radio.checked;
+          var deleteKindSelected = document.querySelector('input[name="delete-kind"]:checked');
           document.getElementById('ownerDeleteFields').hidden = !yes;
+          document.getElementById('deleteReasonFields').hidden = !yes || !deleteKindSelected;
           document.getElementById('ownerNoHelp').hidden = yes;
           contactArea.hidden = !yes;
           submitBtn.disabled = !yes;
+        });
+      });
+
+      document.querySelectorAll('input[name="delete-kind"]').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+          document.getElementById('deleteReasonFields').hidden = !radio.checked;
         });
       });
 
