@@ -904,6 +904,18 @@ footer a:hover { text-decoration: underline; }
   margin: -14px -14px 8px;
   padding: 10px 14px 8px;
 }
+.popup-store-number {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 7px;
+  border: 1px solid rgba(255,255,255,.8);
+  border-radius: 100px;
+  font-size: .68rem;
+  font-weight: 700;
+  line-height: 1.35;
+  white-space: nowrap;
+  vertical-align: middle;
+}
 .popup-genre {
   display: inline-block;
   background: #e8f5e9;

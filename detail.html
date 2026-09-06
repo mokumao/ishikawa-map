@@ -112,6 +112,18 @@
       line-height: 1.3;
       color: #fff;
     }
+    .shop-store-number {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border: 1px solid rgba(255,255,255,.85);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      line-height: 1.4;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
     .shop-genre-badge {
       display: inline-block;
       background: #e8f5e9;
@@ -202,6 +214,10 @@
     .info-note { margin-top: 10px; font-size: 0.78rem; color: #1565c0; line-height: 1.5; }
     .info-note.last-checked { color: #c62828; }
     .info-note.store-no { color: #2e7d32; }
+    .info-note.store-no-primary {
+      font-size: 0.84rem;
+      white-space: nowrap;
+    }
     .store-no-hint { margin-left: 16px; }
 
     /* ── 警告ボックス ── */
@@ -731,7 +747,7 @@
           </div>` : ''}
         <!-- ショップヒーロー -->
         <div class="shop-hero${r.publicDemo ? ' demo-hero' : ''}">
-          <div class="shop-name">${r.name}</div>
+          <div class="shop-name">${r.name}<span class="shop-store-number">店舗番号 ${storeNo}</span></div>
           <span class="shop-genre-badge">${r.genre}</span>
           ${r.warn ? `<span class="warn-badge">⚠️ 要確認</span><span class="warn-reason">⚠️ ${warnReasonText(r)}</span>` : ''}
         </div>
@@ -759,7 +775,7 @@
           </table>
           ${lastCheckedNote}
           <p class="info-note">基本情報はAIが情報源をもとに自動収集したものです。詳細は情報源をご確認ください。</p>
-          <p class="info-note store-no">店舗番号：${storeNo}<span class="store-no-hint">（サイト通し番号）</span></p>
+          <p class="info-note store-no store-no-primary">店舗番号：${storeNo}<span class="store-no-hint">（サイト通し番号）</span></p>
           <p class="info-note store-no">掲載内容の修正・お問い合わせの際は、店舗番号をお知らせください。</p>
         </div>
 

@@ -1790,7 +1790,7 @@ function makePopup(r) {
 
   return `
     <div class="popup-wrap">
-      <div class="popup-name">${r.name}</div>
+      <div class="popup-name">${r.name}<span class="popup-store-number">店舗番号 No.${r.id}</span></div>
       ${r.publicDemo ? '<div class="popup-demo-notice">動作確認用の架空店舗です。実際には営業していません。</div>' : ''}
       <span class="popup-genre">${rGenre(r)}</span>
       <table class="popup-table">
