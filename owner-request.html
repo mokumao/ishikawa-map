@@ -125,6 +125,7 @@
     .form-status { min-height: 24px; margin: 12px 0 0; color: #b3261e; font-size: 13px; font-weight: 700; line-height: 1.5; }
     .consent-error { margin: 8px 0 0; color: #b3261e; font-size: 13px; font-weight: 700; line-height: 1.5; }
     .consent-error[hidden] { display: none; }
+    .email-guidance { margin: 6px 0 0; color: #1565c0; font-size: 13px; font-weight: 700; line-height: 1.55; }
     .success-card { text-align: center; border-top: 5px solid #43a047; }
     .success-mark {
       width: 56px;
@@ -275,10 +276,13 @@
             <div class="field">
               <label class="field-label" for="ownerEmail">店舗主様のメールアドレス<span class="optional">（任意）</span></label>
               <input type="email" id="ownerEmail" autocomplete="email" inputmode="email" placeholder="name@example.com">
+              <p class="email-guidance">※管理者からのメール連絡を希望しない場合は、メールアドレスを入力しないでください。</p>
             </div>
             <div class="field">
-              <label class="check-item"><input type="checkbox" id="contactConsent">確認が必要な場合、管理者がメールで連絡することがあります</label>
-              <p class="consent-error" id="consentError" role="alert" hidden>「確認が必要な場合、管理者がメールで連絡することがあります」にチェックが入っていません。</p>
+              <label class="check-item"><input type="checkbox" id="contactConsent">確認が必要な場合、管理者がメールで連絡することがあります。</label>
+              <p class="consent-error" id="consentError" role="alert" hidden>
+                <span>「確認が必要な場合、管理者がメールで連絡することがあります」にチェックが入っていません。</span>
+              </p>
             </div>
             <p class="privacy-note">メールアドレスと理由は公開サイト・公開GitHubには保存されません。管理者の非公開Googleフォームにのみ送信されます。</p>
           </div>
@@ -434,8 +438,6 @@
       function blockMissingEmailConsent() {
         if (!ownerEmail.value.trim() || contactConsent.checked) return false;
         var message = '「確認が必要な場合、管理者がメールで連絡することがあります」にチェックが入っていません。';
-        formStatus.textContent = message;
-        consentError.textContent = message;
         consentError.hidden = false;
         contactConsent.focus();
         contactConsent.scrollIntoView({ behavior: 'smooth', block: 'center' });
