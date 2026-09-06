@@ -4,7 +4,7 @@ const restaurants = [
   {
     id:          0,
     code:        "47213-IS-0",
-    status:      "hidden",
+    status:      "test",
     publicDemo:  true,
     tel:         "",
     lastChecked: "2026-08-31",
@@ -23,7 +23,8 @@ const restaurants = [
     lng:       127.8378,
     statusHistory: [
       { date: "2026-09-06", from: "test", to: "hidden", note: "店舗主からの削除依頼により非表示（削除理由の記載なし）", requestRef: "468e0e98a423418596eab219" }
-    ],
+    ,
+      { date: "2026-09-06", from: "hidden", to: "test", note: "店舗主からの再掲載依頼を管理者が確認し再掲載", requestRef: "a63b427b06674cbda395d879" }],
     revisionHistory: [
       { date: "2026-08-31", type: "manager", note: "管理者指定の画像に基づき、公開テスト店舗の位置を石川ビーチ沖へ移動（26.4268, 127.8415 → 26.4237, 127.8378）" }
     ],
