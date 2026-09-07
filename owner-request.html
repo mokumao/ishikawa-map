@@ -82,6 +82,7 @@
     }
     .radio-item { font-size: 20px; }
     #deleteReasonFields .check-item { font-size: 16px; }
+    .free-entry-label, label[for="ownerEmail"] { width: max-content; font-size: 15px; white-space: nowrap; }
     .radio-item input, .check-item input { flex: 0 0 auto; width: 20px; height: 20px; margin: 1px 0 0; }
     textarea, input[type="email"] {
       width: 100%;
@@ -123,12 +124,45 @@
       cursor: pointer;
     }
     .submit-btn:disabled { cursor: not-allowed; background: #aab7bf; }
+    .submit-btn.delete-submit { font-size: 14px; white-space: nowrap; }
     .form-actions[hidden] { display: none; }
     .switch-link { margin-top: 8px; border: 0; padding: 4px 0; color: #075fa9; background: transparent; font-weight: 700; text-decoration: underline; cursor: pointer; }
     .form-status { min-height: 24px; margin: 12px 0 0; color: #b3261e; font-size: 13px; font-weight: 700; line-height: 1.5; }
     .consent-error { margin: 8px 0 0; color: #b3261e; font-size: 13px; font-weight: 700; line-height: 1.5; }
     .consent-error[hidden] { display: none; }
     .email-guidance { margin: 6px 0 0; color: #1565c0; font-size: 13px; font-weight: 700; line-height: 1.55; }
+    .confirmation-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(20, 35, 45, .58);
+    }
+    .confirmation-overlay[hidden] { display: none; }
+    .confirmation-dialog {
+      width: min(100%, 420px);
+      padding: 24px;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .28);
+      text-align: center;
+    }
+    .confirmation-dialog h2 { margin: 0; color: #17313f; font-size: 20px; line-height: 1.6; }
+    .confirmation-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+    .confirmation-actions button {
+      min-height: 48px;
+      padding: 8px 4px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .confirmation-cancel { border: 2px solid #1689d8; color: #075fa9; background: #fff; }
+    .confirmation-delete { border: 2px solid #d32f2f; color: #fff; background: #d32f2f; }
+    body.confirmation-open { overflow: hidden; }
     .success-card { text-align: center; border-top: 5px solid #43a047; }
     .success-mark {
       width: 56px;
@@ -242,7 +276,7 @@
               <div class="field">
                 <span class="field-label">ご希望の対応 <span class="required">必須</span></span>
                 <div class="radio-list">
-                  <label class="radio-item"><input type="radio" name="delete-kind" value="石川マップへの掲載停止を希望する" required>石川マップへの掲載停止を希望する</label>
+                  <label class="radio-item"><input type="radio" name="delete-kind" value="石川マップへの掲載削除を希望する" required>石川マップへの掲載削除を希望する</label>
                 </div>
               </div>
               <div class="field" id="deleteReasonFields" hidden>
@@ -279,12 +313,12 @@
             <div class="field">
               <label class="field-label" for="ownerEmail">店舗主様のメールアドレス<span class="optional">（任意）</span></label>
               <input type="email" id="ownerEmail" autocomplete="email" inputmode="email" placeholder="name@example.com">
-              <p class="email-guidance">※管理者からのメール連絡を希望しない場合は、メールアドレスを入力しないでください。</p>
+              <p class="email-guidance">※メールアドレスをご入力いただいた場合も、内容の確認が必要なときにのみ管理者からメールでご連絡する場合があります。<br><br>メール連絡を希望しない場合は、メールアドレスの入力は不要です。</p>
             </div>
             <div class="field">
-              <label class="check-item"><input type="checkbox" id="contactConsent">確認が必要な場合、管理者がメールで連絡することがあります。</label>
+              <label class="check-item"><input type="checkbox" id="contactConsent">内容の確認が必要な場合、管理者からメールでご連絡することがあります。</label>
               <p class="consent-error" id="consentError" role="alert" hidden>
-                <span>「確認が必要な場合、管理者がメールで連絡することがあります」にチェックが入っていません。</span>
+                <span>「内容の確認が必要な場合、管理者からメールでご連絡することがあります」にチェックが入っていません。</span>
               </p>
             </div>
             <p class="privacy-note">メールアドレスと理由は公開サイト・公開GitHubには保存されません。管理者の非公開Googleフォームにのみ送信されます。</p>
@@ -306,6 +340,16 @@
         <a class="inquiry-link" id="inquiryLink" href="https://docs.google.com/forms/d/e/1FAIpQLSdcgkoWavuTIU8DNaqynWRssQI-KjcJzRlaru3MH9Z2pDGnaQ/viewform" target="_blank" rel="noopener">石川マップのご意見・ご要望を開く</a>
       </section>
     </main>
+  </div>
+
+  <div class="confirmation-overlay" id="deleteConfirmation" hidden>
+    <div class="confirmation-dialog" role="dialog" aria-modal="true" aria-labelledby="deleteConfirmationTitle">
+      <h2 id="deleteConfirmationTitle">石川マップの地図と公開ページから店舗情報を削除します。よろしいですか？</h2>
+      <div class="confirmation-actions">
+        <button type="button" class="confirmation-cancel" id="cancelDelete">キャンセル</button>
+        <button type="button" class="confirmation-delete" id="confirmDelete">削除する</button>
+      </div>
+    </div>
   </div>
 
   <nav class="footer-bar" aria-label="ページ移動">
@@ -337,6 +381,11 @@
       var ownerEmail = document.getElementById('ownerEmail');
       var consentError = document.getElementById('consentError');
       var formStatus = document.getElementById('formStatus');
+      var ownerRequestForm = document.getElementById('ownerRequestForm');
+      var deleteConfirmation = document.getElementById('deleteConfirmation');
+      var cancelDelete = document.getElementById('cancelDelete');
+      var confirmDelete = document.getElementById('confirmDelete');
+      var deleteConfirmed = false;
       var requestCard = document.getElementById('requestCard');
       var successCard = document.getElementById('successCard');
       var successMessage = document.getElementById('successMessage');
@@ -411,10 +460,11 @@
           submitBtn.disabled = !store;
         }
         var submitLabels = {
-          delete: '石川マップの店舗情報を削除し、管理者に情報を送信する',
+          delete: '石川マップの店舗情報を削除する',
           edit: '修正依頼を管理者へ送信する',
           other: '連絡内容を管理者へ送信する'
         };
+        submitBtn.classList.toggle('delete-submit', type === 'delete');
         submitBtn.textContent = submitLabels[type] || '依頼を送信する';
         var panel = document.querySelector('[data-panel="' + type + '"]');
         if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -460,7 +510,7 @@
 
       function blockMissingEmailConsent() {
         if (!ownerEmail.value.trim() || contactConsent.checked) return false;
-        var message = '「確認が必要な場合、管理者がメールで連絡することがあります」にチェックが入っていません。';
+        var message = '「内容の確認が必要な場合、管理者からメールでご連絡することがあります」にチェックが入っていません。';
         consentError.hidden = false;
         contactConsent.focus();
         contactConsent.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -472,7 +522,33 @@
         if (blockMissingEmailConsent()) event.preventDefault();
       });
 
-      document.getElementById('ownerRequestForm').addEventListener('submit', function (event) {
+      function closeDeleteConfirmation() {
+        deleteConfirmation.hidden = true;
+        document.body.classList.remove('confirmation-open');
+        submitBtn.focus();
+      }
+
+      function openDeleteConfirmation() {
+        deleteConfirmation.hidden = false;
+        document.body.classList.add('confirmation-open');
+        cancelDelete.focus();
+      }
+
+      cancelDelete.addEventListener('click', closeDeleteConfirmation);
+      confirmDelete.addEventListener('click', function () {
+        deleteConfirmed = true;
+        deleteConfirmation.hidden = true;
+        document.body.classList.remove('confirmation-open');
+        ownerRequestForm.requestSubmit();
+      });
+      deleteConfirmation.addEventListener('click', function (event) {
+        if (event.target === deleteConfirmation) closeDeleteConfirmation();
+      });
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && !deleteConfirmation.hidden) closeDeleteConfirmation();
+      });
+
+      ownerRequestForm.addEventListener('submit', function (event) {
         formStatus.textContent = '';
         if (blockMissingEmailConsent()) {
           event.preventDefault();
@@ -487,6 +563,11 @@
         if (selectedType === 'delete' && (!ownerConfirm || ownerConfirm.value !== 'はい')) {
           event.preventDefault();
           formStatus.textContent = '削除依頼は店舗主の方だけ送信できます。';
+          return;
+        }
+        if (selectedType === 'delete' && !deleteConfirmed) {
+          event.preventDefault();
+          openDeleteConfirmation();
           return;
         }
 
