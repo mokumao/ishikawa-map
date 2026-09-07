@@ -383,7 +383,6 @@
       function selectType(type) {
         selectedType = type;
         formStatus.textContent = '';
-        formActions.hidden = false;
         document.querySelectorAll('.choice-btn').forEach(function (button) {
           var active = button.dataset.requestType === type;
           button.classList.toggle('is-active', active);
@@ -401,10 +400,12 @@
           document.getElementById('ownerDeleteFields').hidden = !ownerConfirmed;
           document.getElementById('deleteReasonFields').hidden = !ownerConfirmed || !deleteKindSelected;
           document.getElementById('ownerNoHelp').hidden = !ownerConfirm || ownerConfirmed;
-          contactArea.hidden = !ownerConfirmed;
-          submitBtn.disabled = !store || !ownerConfirmed;
+          contactArea.hidden = !ownerConfirmed || !deleteKindSelected;
+          formActions.hidden = !ownerConfirmed || !deleteKindSelected;
+          submitBtn.disabled = !store || !ownerConfirmed || !deleteKindSelected;
         } else {
           contactArea.hidden = false;
+          formActions.hidden = false;
           submitBtn.disabled = !store;
         }
         var submitLabels = {
@@ -429,14 +430,19 @@
           document.getElementById('ownerDeleteFields').hidden = !yes;
           document.getElementById('deleteReasonFields').hidden = !yes || !deleteKindSelected;
           document.getElementById('ownerNoHelp').hidden = yes;
-          contactArea.hidden = !yes;
-          submitBtn.disabled = !yes;
+          contactArea.hidden = !yes || !deleteKindSelected;
+          formActions.hidden = !yes || !deleteKindSelected;
+          submitBtn.disabled = !store || !yes || !deleteKindSelected;
         });
       });
 
       document.querySelectorAll('input[name="delete-kind"]').forEach(function (radio) {
         radio.addEventListener('change', function () {
-          document.getElementById('deleteReasonFields').hidden = !radio.checked;
+          var showDeleteDetails = radio.checked;
+          document.getElementById('deleteReasonFields').hidden = !showDeleteDetails;
+          contactArea.hidden = !showDeleteDetails;
+          formActions.hidden = !showDeleteDetails;
+          submitBtn.disabled = !store || !showDeleteDetails;
         });
       });
 
