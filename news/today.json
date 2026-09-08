@@ -1,8 +1,8 @@
 {
   "regionId": "ishikawa",
   "regionName": "石川",
-  "date": "2026-09-08",
-  "updated": "2026-09-08T08:14:43.780631+09:00",
+  "date": "2026-09-09",
+  "updated": "2026-09-09T08:07:10.168965+09:00",
   "count": 3,
   "articles": [
     {
@@ -14,20 +14,20 @@
       "pub_date": "2026-09-21T00:00:00+09:00"
     },
     {
-      "title": "9月20日(日)「まんまうるまDAY! 闘牛カーニバル」",
-      "summary": "まんまうるまDAY! 闘牛カーニバル 日時:2026年9月20日(日曜) 時間:13時試合開始(11時〜オープニングアクト・龍神伝説・闘牛戦士ワイドーショー) 場所:うるま市石川多目的ドーム 料金:無料 主催:うるま市闘牛連合会 共催:うるま市教育委員会 石川...",
-      "link": "https://togyu.ti-da.net/e13153649.html",
-      "source": "【公式】闘牛 in Okinawa Blog",
-      "date_label": "予定 9/20",
-      "pub_date": "2026-09-20T00:00:00+09:00"
-    },
-    {
       "title": "ビオスの丘で「らんの花祭り 秋」、約1万輪のデンファレが亜熱帯の森彩る - 株式会社旅行新聞新社",
       "summary": "",
       "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE8wakphTGlwWDFoOHFxQkt5ZlFNSHRDYmFUZWMtY1g2NkZMdUtRcDZhNXJaNDFlMDA2UGdJOUJhTlo1dDVILXUwQTg4aHdlUQ?oc=5",
       "source": "ビオスの丘",
       "date_label": "9/2",
       "pub_date": "2026-09-02T14:24:01+09:00"
+    },
+    {
+      "title": "伝統の演舞、「豊年」祈願 うるま・石川 エンサー、ウスデーク",
+      "summary": "",
+      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9udHhudmZHdWp5cC1pb3BkcG9lZ2JyejFaWFpxREpsLUJER21ReWYzX0h6WmFqemE5ZUdtX21lSHhkTFVhbnh0VTV4VzlCM1NPcGlsU1BxM0RKNkQ4SkE?oc=5",
+      "source": "石川固有テーマ：石川地区の自治会行事・伝統芸能",
+      "date_label": "本日 05:00",
+      "pub_date": "2026-09-09T05:00:00+09:00"
     }
   ]
 }
