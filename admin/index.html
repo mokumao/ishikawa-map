@@ -284,6 +284,7 @@
     display: grid;
     gap: 12px;
   }
+  .news-candidate-list[hidden] { display: none; }
   .news-candidate {
     border: 1px solid #dce3e7;
     border-left: 4px solid #fb8c00;
@@ -410,6 +411,7 @@
     display: grid;
     gap: 12px;
   }
+  .resource-list[hidden] { display: none; }
   .resource-item {
     border: 1px solid #dce3e7;
     border-left: 4px solid #43a047;
@@ -564,13 +566,14 @@
     <div class="resource-review-controls">
       <label for="resourceDecisionFilter">表示</label>
       <select id="resourceDecisionFilter">
+        <option value="hidden">非表示</option>
         <option value="track">正式追跡</option>
         <option value="duplicate">重複統合</option>
         <option value="exclude">追跡対象外</option>
         <option value="">すべて</option>
       </select>
     </div>
-    <div class="resource-list" id="resourceReviewList">
+    <div class="resource-list" id="resourceReviewList" hidden>
       <p class="loading">地域資源を読み込んでいます…</p>
     </div>
   </section>
@@ -591,6 +594,7 @@
     <div class="news-review-controls">
       <label for="newsStatusFilter">表示</label>
       <select id="newsStatusFilter">
+        <option value="hidden">非表示</option>
         <option value="published">自動掲載</option>
         <option value="review">判断保留・監査記録</option>
         <option value="rejected">自動除外</option>
@@ -600,7 +604,7 @@
       </select>
       <button type="button" id="copyNewsDecisions">判断保留を相談用にコピー</button>
     </div>
-    <div class="news-candidate-list" id="newsCandidateList">
+    <div class="news-candidate-list" id="newsCandidateList" hidden>
       <p class="loading">候補を読み込んでいます…</p>
     </div>
     <p class="news-review-feedback" id="newsReviewFeedback" role="status" aria-live="polite"></p>
@@ -711,6 +715,11 @@
 
     function render() {
       var selectedDecision = filter.value;
+      if (selectedDecision === 'hidden') {
+        list.hidden = true;
+        return;
+      }
+      list.hidden = false;
       var visible = decisions.filter(function (item) {
         return !selectedDecision || item.decision === selectedDecision;
       });
@@ -877,6 +886,11 @@
 
     function render() {
       var selectedStatus = filter.value;
+      if (selectedStatus === 'hidden') {
+        list.hidden = true;
+        return;
+      }
+      list.hidden = false;
       var visible = candidates.filter(function (item) {
         if (!selectedStatus) return true;
         return item.status === selectedStatus;
