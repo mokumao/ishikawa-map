@@ -1,43 +1,5 @@
 {
-  "updated": "2026-09-09T08:07:10.168965+09:00",
-  "count": 1,
-  "candidates": [
-    {
-      "id": "20260903-region-theme-ishikawa-bullfighting-ec15f076c5",
-      "title": "闘牛の経済効果は1.3億円超 おきぎん経済研究所が試算 担い手不足やコスト高騰が課題 - 沖縄タイムス社",
-      "displayTitle": "闘牛の経済効果は1.3億円超 おきぎん経済研究所が試算 担い手不足やコスト高騰が課題",
-      "summary": "闘牛の経済効果は1.3億円超 おきぎん経済研究所が試算 担い手不足やコスト高騰が課題 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBVRUIzX0pzRjh6TEFQUExzUzc5V1pTNmxHcFd1dU4wWVA2SEtQOXF5VDN3NlRWajdSYkhPMW1pMjVDdU5NaWtVUzQta195RlE2QzJJY0E5aG51VGhpcmc?oc=5",
-      "sourceId": "region-theme-ishikawa-bullfighting",
-      "sourceName": "石川固有テーマ：闘牛",
-      "sourceType": "discovery",
-      "publishedAt": "2026-09-03T07:02:00+09:00",
-      "discoveredAt": "2026-09-03T19:47:57.286962+09:00",
-      "checkedAt": "2026-09-09T08:07:10.168965+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-09-10T23:59:59+09:00",
-      "category": "news",
-      "localScore": 35,
-      "localEvidence": [
-        "取得元候補：石川固有テーマ：闘牛"
-      ],
-      "confidence": 45,
-      "status": "review",
-      "requiresReview": true,
-      "reviewReasons": [
-        "地域固有テーマ専用検索で発見したが、記事内の地域文脈確認が必要",
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関係を確認できないため記録",
-        "石川地区との関係を確定できないため判断保留"
-      ],
-      "fingerprint": "cb3c1e08fa75b585b87c",
-      "articleFingerprint": "ec15f076c5acd8de3a20",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": null,
-      "relatedCount": 0
-    }
-  ]
+  "updated": "2026-09-10T07:52:46.344088+09:00",
+  "count": 0,
+  "candidates": []
 }

@@ -1,9 +1,9 @@
 {
   "regionId": "ishikawa",
   "regionName": "石川",
-  "date": "2026-09-09",
-  "updated": "2026-09-09T08:07:10.168965+09:00",
-  "count": 3,
+  "date": "2026-09-10",
+  "updated": "2026-09-10T07:52:46.344088+09:00",
+  "count": 2,
   "articles": [
     {
       "title": "石川多目的ドーム 観光闘牛の開催日程(次回2026年9月21日)",
@@ -14,19 +14,11 @@
       "pub_date": "2026-09-21T00:00:00+09:00"
     },
     {
-      "title": "ビオスの丘で「らんの花祭り 秋」、約1万輪のデンファレが亜熱帯の森彩る - 株式会社旅行新聞新社",
-      "summary": "",
-      "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE8wakphTGlwWDFoOHFxQkt5ZlFNSHRDYmFUZWMtY1g2NkZMdUtRcDZhNXJaNDFlMDA2UGdJOUJhTlo1dDVILXUwQTg4aHdlUQ?oc=5",
-      "source": "ビオスの丘",
-      "date_label": "9/2",
-      "pub_date": "2026-09-02T14:24:01+09:00"
-    },
-    {
       "title": "伝統の演舞、「豊年」祈願 うるま・石川 エンサー、ウスデーク",
       "summary": "",
       "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9udHhudmZHdWp5cC1pb3BkcG9lZ2JyejFaWFpxREpsLUJER21ReWYzX0h6WmFqemE5ZUdtX21lSHhkTFVhbnh0VTV4VzlCM1NPcGlsU1BxM0RKNkQ4SkE?oc=5",
       "source": "石川固有テーマ：石川地区の自治会行事・伝統芸能",
-      "date_label": "本日 05:00",
+      "date_label": "昨日 9/9",
       "pub_date": "2026-09-09T05:00:00+09:00"
     }
   ]
