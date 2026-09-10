@@ -508,7 +508,7 @@ function rNote(r)   { return r.note;   }
   // 選択中カテゴリに合わせてマーカーを表示（タップ不可モード）
   function updateCatPreview() {
     markersData.forEach(function({ restaurant: r, marker }) {
-      var show = catSel.has(macroOf(r.genre).key);
+      var show = r.publicDemo || catSel.has(macroOf(r.genre).key);
       if (show && isStatusVisible(r)) { if (!map.hasLayer(marker)) marker.addTo(map); }
       else       { if (map.hasLayer(marker))  map.removeLayer(marker); }
     });
@@ -908,8 +908,12 @@ function rNote(r)   { return r.note;   }
       } else {
         // 何も表示されていない → 全マーカーを非表示にして新規選択
         hideCatLabel();
-        markersData.forEach(function({ marker }) {
-          if (map.hasLayer(marker)) map.removeLayer(marker);
+        markersData.forEach(function({ restaurant: r, marker }) {
+          if (r.publicDemo) {
+            if (!map.hasLayer(marker)) marker.addTo(map);
+          } else if (map.hasLayer(marker)) {
+            map.removeLayer(marker);
+          }
         });
         updateClearBtn(); // 何も選択なし → 解除ボタンをグレーアウト
       }
@@ -1133,8 +1137,12 @@ function rNote(r)   { return r.note;   }
         // 何も選択せずに閉じた場合は、選択状態に合わせて全マーカーを非表示にする
         // （以前は元のフィルターを復元していたが、パネルで「すべて解除」した
         // つもりなのに閉じたら全件表示に戻る、という誤解を招く挙動だったため変更）
-        markersData.forEach(function({ marker }) {
-          if (map.hasLayer(marker)) map.removeLayer(marker);
+        markersData.forEach(function({ restaurant: r, marker }) {
+          if (r.publicDemo) {
+            if (!map.hasLayer(marker)) marker.addTo(map);
+          } else if (map.hasLayer(marker)) {
+            map.removeLayer(marker);
+          }
         });
         hideCatLabel();
         syncLabelBtnWithMarkers();
@@ -1701,6 +1709,20 @@ function makePinIcon(fillColor, isWarn, innerLabel) {
   });
 }
 
+// 公開テスト店舗専用の「涙目」ピン。
+function makePublicDemoIcon() {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 42" width="30" height="42" aria-hidden="true">
+      <path d="M15 1C8.1 1 2.5 6.6 2.5 13.5C2.5 22.9 15 41 15 41C15 41 27.5 22.9 27.5 13.5C27.5 6.6 21.9 1 15 1Z" fill="#00a6c8" stroke="white" stroke-width="2.2"/>
+      <circle cx="15" cy="13.5" r="8" fill="#fff"/>
+      <path d="M9.3 11.3l2.7 1.1M20.7 11.3L18 12.4" stroke="#263238" stroke-width="1.4" stroke-linecap="round"/>
+      <circle cx="11.2" cy="14" r="1.25" fill="#263238"/><circle cx="18.8" cy="14" r="1.25" fill="#263238"/>
+      <path d="M12.2 18.4q2.8-2.2 5.6 0" fill="none" stroke="#263238" stroke-width="1.3" stroke-linecap="round"/>
+      <path d="M9.4 15.3c-1.8 2-1.9 3.3-.2 3.3 1.8 0 1.9-1.3.2-3.3ZM20.6 15.3c-1.8 2-1.9 3.3-.2 3.3 1.8 0 1.9-1.3.2-3.3Z" fill="#42a5f5"/>
+    </svg>`;
+  return L.divIcon({ className: "public-demo-marker", html: `<div class="pin-anim-wrap">${svg}</div>`, iconSize: [30, 42], iconAnchor: [15, 42], popupAnchor: [0, -48] });
+}
+
 // ── Google マップ URL 生成 ────────────────────────────────────────
 function gmapUrl(name, address) {
   return "https://www.google.com/maps/search/?api=1&query="
@@ -1762,6 +1784,7 @@ function makePopup(r) {
   return `
     <div class="popup-wrap">
       <div class="popup-name">${r.name}</div>
+      ${r.publicDemo ? '<div class="popup-demo-notice">動作確認用の架空店舗です。実際には営業していません。</div>' : ''}
       <span class="popup-genre">${rGenre(r)}</span>
       <table class="popup-table">
         <tr>
@@ -2232,7 +2255,7 @@ const markersData = restaurants.map((r, idx) => {
   }
   pinLabel = undefined;
   const marker = L.marker([r.lat, r.lng], {
-    icon:  makePinIcon(color, r.warn, pinLabel),
+    icon:  r.publicDemo ? makePublicDemoIcon() : makePinIcon(color, r.warn, pinLabel),
     title: r.name
   });
   marker.bindPopup(makePopup(r), { maxWidth: 300, autoPan: false });
@@ -3405,12 +3428,14 @@ function isPreviewEnv() {
 // ※restaurants配列自体は一切変更せず、表示可否だけをここで判定する。
 function isStatusVisible(r) {
   if (!r.status || r.status === 'published') return true;
+  if (r.status === 'test' && r.publicDemo) return true;
   return isPreviewEnv();
 }
 
 // ── 表示判定（フィルター＋検索の両方を満たすか） ────────────────
 function isVisible(r) {
   if (!isStatusVisible(r)) return false;
+  if (r.publicDemo) return true;
   // alwaysShow フラグがある店舗はフィルターに関わらず常時表示
   if (!r.alwaysShow) {
     const macro = macroOf(r.genre);
@@ -3458,7 +3483,7 @@ function applyFilter(macroKey, subKey) {
 
 // ── 店舗一覧レンダリング ─────────────────────────────────────────
 function renderShopList() {
-  const visible = markersData.filter(({ restaurant: r }) => isVisible(r));
+  const visible = markersData.filter(({ restaurant: r }) => isVisible(r) && !r.publicDemo);
 
   const shopCount = document.getElementById('shopCount');
   shopCount.textContent = t('count.results', { n: visible.length });

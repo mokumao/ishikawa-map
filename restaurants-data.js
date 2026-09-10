@@ -3,7 +3,37 @@
 const restaurants = [
   {
     id:          0,
-    code:        "47213-IS-0001",
+    code:        "47213-IS-0",
+    status:      "test",
+    publicDemo:  true,
+    tel:         "",
+    lastChecked: "2026-08-31",
+    listedDate:  "2026-05-16",
+    name:      "【テスト用】石川ビーチ海上店",
+    genre:     "テスト用",
+    address:   "石川ビーチ沖合（テスト用・実在しません）",
+    hours:     "テスト営業時間 9:00〜18:00",
+    closed:    "テスト定休日",
+    note:      "これは動作確認用のテスト店舗です。実在しません。店舗オーナー操作機能の確認に使用します。",
+    note_en:   "This is a test store for system verification. Not a real restaurant.",
+    sourceUrl: "",
+    warn:      false,
+    alwaysShow: true,
+    lat:       26.4237,
+    lng:       127.8378,
+    revisionHistory: [
+      { date: "2026-08-31", type: "manager", note: "管理者指定の画像に基づき、公開テスト店舗の位置を石川ビーチ沖へ移動（26.4268, 127.8415 → 26.4237, 127.8378）" }
+    ],
+    twitter:    "",
+    instagram:  "",
+    youtube:    "",
+    website:    "",
+    detailText: "これはテスト用の店舗です。\n\n今後、店舗オーナーが自分で情報を更新・追加できる機能の確認に使用します。\n\n実際の営業はしていません。",
+    photos:     []
+  },
+  {
+    id:          1,
+    code:        "47213-IS-1",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-06",
@@ -32,8 +62,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          1,
-    code:        "47213-IS-0002",
+    id:          2,
+    code:        "47213-IS-2",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-06",
@@ -61,8 +91,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          2,
-    code:        "47213-IS-0003",
+    id:          3,
+    code:        "47213-IS-3",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -90,8 +120,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          3,
-    code:        "47213-IS-0004",
+    id:          4,
+    code:        "47213-IS-4",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-09",
@@ -119,8 +149,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          4,
-    code:        "47213-IS-0005",
+    id:          5,
+    code:        "47213-IS-5",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-09",
@@ -149,8 +179,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          5,
-    code:        "47213-IS-0006",
+    id:          6,
+    code:        "47213-IS-6",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -178,8 +208,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          6,
-    code:        "47213-IS-0007",
+    id:          7,
+    code:        "47213-IS-7",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -209,8 +239,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          7,
-    code:        "47213-IS-0008",
+    id:          8,
+    code:        "47213-IS-8",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-06",
@@ -238,8 +268,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          8,
-    code:        "47213-IS-0009",
+    id:          9,
+    code:        "47213-IS-9",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -268,8 +298,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          9,
-    code:        "47213-IS-0010",
+    id:          10,
+    code:        "47213-IS-10",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -297,11 +327,9 @@ const restaurants = [
     detailText: "",
     photos:     []
   },
-
-  // ── 追加10店舗（2026-05-08） ─────────────────────────────────────
   {
-    id:          10,
-    code:        "47213-IS-0011",
+    id:          11,
+    code:        "47213-IS-11",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-09",
@@ -330,8 +358,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          11,
-    code:        "47213-IS-0012",
+    id:          12,
+    code:        "47213-IS-12",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -359,8 +387,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          12,
-    code:        "47213-IS-0013",
+    id:          13,
+    code:        "47213-IS-13",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-06",
@@ -390,8 +418,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          13,
-    code:        "47213-IS-0014",
+    id:          14,
+    code:        "47213-IS-14",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-06",
@@ -420,8 +448,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          14,
-    code:        "47213-IS-0015",
+    id:          15,
+    code:        "47213-IS-15",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -450,8 +478,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          15,
-    code:        "47213-IS-0016",
+    id:          16,
+    code:        "47213-IS-16",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-06",
@@ -480,8 +508,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          16,
-    code:        "47213-IS-0017",
+    id:          17,
+    code:        "47213-IS-17",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -509,8 +537,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          17,
-    code:        "47213-IS-0018",
+    id:          18,
+    code:        "47213-IS-18",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-06",
@@ -539,8 +567,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          18,
-    code:        "47213-IS-0019",
+    id:          19,
+    code:        "47213-IS-19",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -569,8 +597,8 @@ const restaurants = [
     photos:     []
   },
   {
-    id:          19,
-    code:        "47213-IS-0020",
+    id:          20,
+    code:        "47213-IS-20",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-06",
@@ -597,11 +625,9 @@ const restaurants = [
     detailText: "",
     photos:     []
   },
-
-  // ── コンビニエンスストア ──────────────────────────────────────────
   {
-    id:          20,
-    code:        "47213-IS-0021",
+    id:          21,
+    code:        "47213-IS-21",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -624,8 +650,8 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
   },
   {
-    id:          21,
-    code:        "47213-IS-0022",
+    id:          22,
+    code:        "47213-IS-22",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -648,8 +674,8 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://www.family.co.jp/", detailText: "", photos: []
   },
   {
-    id:          22,
-    code:        "47213-IS-0023",
+    id:          23,
+    code:        "47213-IS-23",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -671,11 +697,9 @@ const restaurants = [
     lng:       127.826263,
     twitter: "", instagram: "", youtube: "", website: "https://www.sej.co.jp/", detailText: "", photos: []
   },
-  // ※以下4件のファミマ＋3件のローソンは2026-07-21にOpenStreetMap抽出＋
-  //   公式店舗検索等とのウェブ二重照合で追加（座標はOSM、住所・店名は公式等で確認）
   {
-    id:          23,
-    code:        "47213-IS-0024",
+    id:          24,
+    code:        "47213-IS-24",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -694,8 +718,8 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://www.family.co.jp/", detailText: "", photos: []
   },
   {
-    id:          24,
-    code:        "47213-IS-0025",
+    id:          25,
+    code:        "47213-IS-25",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -717,8 +741,8 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://www.family.co.jp/", detailText: "", photos: []
   },
   {
-    id:          25,
-    code:        "47213-IS-0026",
+    id:          26,
+    code:        "47213-IS-26",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -740,8 +764,8 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://www.family.co.jp/", detailText: "", photos: []
   },
   {
-    id:          26,
-    code:        "47213-IS-0027",
+    id:          27,
+    code:        "47213-IS-27",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -761,8 +785,8 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://www.family.co.jp/", detailText: "", photos: []
   },
   {
-    id:          27,
-    code:        "47213-IS-0028",
+    id:          28,
+    code:        "47213-IS-28",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -785,8 +809,8 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
   },
   {
-    id:          28,
-    code:        "47213-IS-0029",
+    id:          29,
+    code:        "47213-IS-29",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -808,8 +832,8 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
   },
   {
-    id:          29,
-    code:        "47213-IS-0030",
+    id:          30,
+    code:        "47213-IS-30",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -830,11 +854,9 @@ const restaurants = [
     lng:       127.807813,
     twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
   },
-  // ※以下4件は2026-07-21にサイト管理人の指摘を受けて追加。
-  //   OSM未登録だったためチェーン公式店舗検索・複数地図サービスで存在・住所・座標を照合済み
   {
-    id:          30,
-    code:        "47213-IS-0031",
+    id:          31,
+    code:        "47213-IS-31",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -857,8 +879,8 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
   },
   {
-    id:          31,
-    code:        "47213-IS-0032",
+    id:          32,
+    code:        "47213-IS-32",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -880,8 +902,8 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://www.sej.co.jp/", detailText: "", photos: []
   },
   {
-    id:          32,
-    code:        "47213-IS-0033",
+    id:          33,
+    code:        "47213-IS-33",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -904,8 +926,8 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "https://www.sej.co.jp/", detailText: "", photos: []
   },
   {
-    id:          33,
-    code:        "47213-IS-0034",
+    id:          34,
+    code:        "47213-IS-34",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -927,11 +949,9 @@ const restaurants = [
     lng:       127.824158,
     twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
   },
-
-  // ── ガソリンスタンド ──────────────────────────────────────────────
   {
-    id:          34,
-    code:        "47213-IS-0035",
+    id:          35,
+    code:        "47213-IS-35",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -954,8 +974,8 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
-    id:          35,
-    code:        "47213-IS-0036",
+    id:          36,
+    code:        "47213-IS-36",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -978,8 +998,8 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
-    id:          36,
-    code:        "47213-IS-0037",
+    id:          37,
+    code:        "47213-IS-37",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -1003,11 +1023,9 @@ const restaurants = [
     lng:       127.813352,
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
-  // ※以下2件は2026-07-24にOSM抽出＋出光公式SS検索/Yahoo!地図/geocoding.jp等との
-  // ウェブ複数照合で追加（poi-surveyスキル手順）
   {
-    id:          37,
-    code:        "47213-IS-0038",
+    id:          38,
+    code:        "47213-IS-38",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1030,8 +1048,8 @@ const restaurants = [
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
   {
-    id:          38,
-    code:        "47213-IS-0039",
+    id:          39,
+    code:        "47213-IS-39",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -1054,38 +1072,9 @@ const restaurants = [
     lng:       127.835272,
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
-
-  // ── テスト用店舗（石川ビーチ沖合・動作確認専用） ─────────────────
-  {
-    id:          39,
-    code:        "47213-IS-0040",
-    status:      "test",
-    tel:         "",
-    lastChecked: "",
-    listedDate:  "2026-05-16",
-    name:      "【テスト】石川ビーチ海上店",
-    genre:     "テスト用",
-    address:   "石川ビーチ沖合（テスト用・実在しません）",
-    hours:     "テスト営業時間 9:00〜18:00",
-    closed:    "テスト定休日",
-    note:      "これは動作確認用のテスト店舗です。実在しません。店舗オーナー操作機能の確認に使用します。",
-    note_en:   "This is a test store for system verification. Not a real restaurant.",
-    sourceUrl: "",
-    warn:      false,
-    alwaysShow: true,
-    lat:       26.4268,
-    lng:       127.8415,
-    twitter:    "",
-    instagram:  "",
-    youtube:    "",
-    website:    "",
-    detailText: "これはテスト用の店舗です。\n\n今後、店舗オーナーが自分で情報を更新・追加できる機能の確認に使用します。\n\n実際の営業はしていません。",
-    photos:     []
-  },
-  // ── 宿泊施設 ───────────────────────────────────────────────────
   {
     id:          40,
-    code:        "47213-IS-0041",
+    code:        "47213-IS-40",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-11",
@@ -1109,7 +1098,7 @@ const restaurants = [
   },
   {
     id:          41,
-    code:        "47213-IS-0042",
+    code:        "47213-IS-41",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-05",
@@ -1133,7 +1122,7 @@ const restaurants = [
   },
   {
     id:          42,
-    code:        "47213-IS-0043",
+    code:        "47213-IS-42",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-06",
@@ -1152,7 +1141,7 @@ const restaurants = [
   },
   {
     id:          43,
-    code:        "47213-IS-0044",
+    code:        "47213-IS-43",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-06",
@@ -1172,10 +1161,9 @@ const restaurants = [
     lat:       26.42059,
     lng:       127.82524
   },
-  // ── 金融機関 ───────────────────────────────────────────────────
   {
     id:          44,
-    code:        "47213-IS-0045",
+    code:        "47213-IS-44",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1193,7 +1181,7 @@ const restaurants = [
   },
   {
     id:          45,
-    code:        "47213-IS-0046",
+    code:        "47213-IS-45",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1215,7 +1203,7 @@ const restaurants = [
   },
   {
     id:          46,
-    code:        "47213-IS-0047",
+    code:        "47213-IS-46",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1236,10 +1224,9 @@ const restaurants = [
     lat:       26.43363,
     lng:       127.83207
   },
-  // ── 教育施設 ───────────────────────────────────────────────────
   {
     id:          47,
-    code:        "47213-IS-0048",
+    code:        "47213-IS-47",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1261,7 +1248,7 @@ const restaurants = [
   },
   {
     id:          48,
-    code:        "47213-IS-0049",
+    code:        "47213-IS-48",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-06",
@@ -1283,7 +1270,7 @@ const restaurants = [
   },
   {
     id:          49,
-    code:        "47213-IS-0050",
+    code:        "47213-IS-49",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1304,10 +1291,9 @@ const restaurants = [
     lat:       26.41535,
     lng:       127.82052
   },
-  // ── 観光スポット ───────────────────────────────────────────────
   {
     id:          50,
-    code:        "47213-IS-0051",
+    code:        "47213-IS-50",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-06",
@@ -1332,7 +1318,7 @@ const restaurants = [
   },
   {
     id:          51,
-    code:        "47213-IS-0052",
+    code:        "47213-IS-51",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1349,13 +1335,9 @@ const restaurants = [
     lat:       26.44810,
     lng:       127.83208
   },
-
-  // ── 美容・理容 ─────────────────────────────────────────────────
-  // ※以下16件は2026-07-24にOSM抽出＋公式サイト/Yahoo!地図/エキテン等との
-  // ウェブ複数照合（Agentツールによる並行検証）で追加
   {
     id:          52,
-    code:        "47213-IS-0053",
+    code:        "47213-IS-52",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-10",
@@ -1379,7 +1361,7 @@ const restaurants = [
   },
   {
     id:          53,
-    code:        "47213-IS-0054",
+    code:        "47213-IS-53",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1400,7 +1382,7 @@ const restaurants = [
   },
   {
     id:          54,
-    code:        "47213-IS-0055",
+    code:        "47213-IS-54",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1421,7 +1403,7 @@ const restaurants = [
   },
   {
     id:          55,
-    code:        "47213-IS-0056",
+    code:        "47213-IS-55",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1445,7 +1427,7 @@ const restaurants = [
   },
   {
     id:          56,
-    code:        "47213-IS-0057",
+    code:        "47213-IS-56",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1469,7 +1451,7 @@ const restaurants = [
   },
   {
     id:          57,
-    code:        "47213-IS-0058",
+    code:        "47213-IS-57",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1493,7 +1475,7 @@ const restaurants = [
   },
   {
     id:          58,
-    code:        "47213-IS-0059",
+    code:        "47213-IS-58",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1518,7 +1500,7 @@ const restaurants = [
   },
   {
     id:          59,
-    code:        "47213-IS-0060",
+    code:        "47213-IS-59",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1541,7 +1523,7 @@ const restaurants = [
   },
   {
     id:          60,
-    code:        "47213-IS-0061",
+    code:        "47213-IS-60",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1565,7 +1547,7 @@ const restaurants = [
   },
   {
     id:          61,
-    code:        "47213-IS-0062",
+    code:        "47213-IS-61",
     status:      "published",
     tel:         "",
     lastChecked: "2026-07-29",
@@ -1586,7 +1568,7 @@ const restaurants = [
   },
   {
     id:          62,
-    code:        "47213-IS-0063",
+    code:        "47213-IS-62",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-09",
@@ -1610,7 +1592,7 @@ const restaurants = [
   },
   {
     id:          63,
-    code:        "47213-IS-0064",
+    code:        "47213-IS-63",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1635,7 +1617,7 @@ const restaurants = [
   },
   {
     id:          64,
-    code:        "47213-IS-0065",
+    code:        "47213-IS-64",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1659,7 +1641,7 @@ const restaurants = [
   },
   {
     id:          65,
-    code:        "47213-IS-0066",
+    code:        "47213-IS-65",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1683,7 +1665,7 @@ const restaurants = [
   },
   {
     id:          66,
-    code:        "47213-IS-0067",
+    code:        "47213-IS-66",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1707,7 +1689,7 @@ const restaurants = [
   },
   {
     id:          67,
-    code:        "47213-IS-0068",
+    code:        "47213-IS-67",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1729,12 +1711,9 @@ const restaurants = [
     lng:       127.81932,
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
-  // ※以下1件はOSM・ウェブ検索いずれでも発見できず、2026-07-24にユーザーが
-  // Googleマップの現地写真で発見。住所・電話番号はウェブ複数照合で確認済みだが、
-  // 店名変更（旧「ヘアープロジェクトサヴァ」）はウェブ上で未確認のため要確認扱い
   {
     id:          68,
-    code:        "47213-IS-0069",
+    code:        "47213-IS-68",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-08",
@@ -1756,15 +1735,9 @@ const restaurants = [
     lng:       127.826201,
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
-
-  // ── 観光（追加分）─────────────────────────────────────────────
-  // ※以下1件は2026-08-02に追加。「石川について」ページ作成中に発見。
-  // 実在・住所・電話・開館時間はうるま市公式サイトと沖縄観光情報WEBサイト
-  // 「おきなわ物語」（沖縄観光コンベンションビューロー）で一致を確認。
-  // 座標はOSM(node/1068017752)を採用し、国土地理院の住所検索と31m以内で一致。
   {
     id:          69,
-    code:        "47213-IS-0070",
+    code:        "47213-IS-69",
     status:      "published",
     tel:         "098-965-3866",
     lastChecked: "2026-08-02",
@@ -1786,19 +1759,9 @@ const restaurants = [
     lng:       127.825245,
     twitter: "", instagram: "", youtube: "", website: "https://www.city.uruma.lg.jp/bunka/1282.html", detailText: "", photos: []
   },
-
-  // ── 観光・教育（追加分）───────────────────────────────────────
-  // ※以下4件は2026-08-03に追加。「石川について」ページ作成時のarea-profile調査
-  // （うるま市教育委員会リーフレット・市公式サイト）で見つかった候補をOSM抽出＋
-  // ウェブ複数照合で検証。座標は国土地理院の住所検索とOSMを突合（詳細は各note参照）。
-  // 同時に見つかった以下は住所・座標の確証が取れず今回は保留：
-  // 伊波貝塚（国指定史跡、大字レベルの住所のみで特定不可）、
-  // 沖縄諮詢会堂跡・石川部落事務所（市指定文化財、住所情報が見つからず/一部で
-  // 資料館と同一住所という疑わしい情報のみ）、エナジックスタジアム石川
-  // （住所表記がサイトごとに揺れ、国土地理院とOSMの座標が232m離れ不一致）。
   {
     id:          70,
-    code:        "47213-IS-0071",
+    code:        "47213-IS-70",
     status:      "published",
     tel:         "098-964-4888",
     lastChecked: "2026-08-03",
@@ -1819,7 +1782,7 @@ const restaurants = [
   },
   {
     id:          71,
-    code:        "47213-IS-0072",
+    code:        "47213-IS-71",
     status:      "published",
     tel:         "",
     lastChecked: "2026-08-03",
@@ -1840,7 +1803,7 @@ const restaurants = [
   },
   {
     id:          72,
-    code:        "47213-IS-0073",
+    code:        "47213-IS-72",
     status:      "published",
     tel:         "098-923-7612",
     lastChecked: "2026-08-03",
@@ -1860,7 +1823,7 @@ const restaurants = [
   },
   {
     id:          73,
-    code:        "47213-IS-0074",
+    code:        "47213-IS-73",
     status:      "published",
     tel:         "098-964-2086",
     lastChecked: "2026-08-03",
