@@ -1,8 +1,8 @@
 {
   "regionId": "ishikawa",
   "regionName": "石川",
-  "date": "2026-09-10",
-  "updated": "2026-09-10T07:52:46.344088+09:00",
+  "date": "2026-09-11",
+  "updated": "2026-09-11T07:54:25.645506+09:00",
   "count": 2,
   "articles": [
     {
@@ -18,7 +18,7 @@
       "summary": "",
       "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9udHhudmZHdWp5cC1pb3BkcG9lZ2JyejFaWFpxREpsLUJER21ReWYzX0h6WmFqemE5ZUdtX21lSHhkTFVhbnh0VTV4VzlCM1NPcGlsU1BxM0RKNkQ4SkE?oc=5",
       "source": "石川固有テーマ：石川地区の自治会行事・伝統芸能",
-      "date_label": "昨日 9/9",
+      "date_label": "9/9",
       "pub_date": "2026-09-09T05:00:00+09:00"
     }
   ]
