@@ -88,6 +88,57 @@ class NewsAutomationTests(unittest.TestCase):
         )
         self.assertEqual(event_date.date().isoformat(), '2026-09-20')
 
+    def test_event_period_extracts_compact_multiple_dates(self):
+        published = datetime(2026, 8, 13, 9, 52, tzinfo=fetch_news.JST)
+        start, end = fetch_news.extract_event_period(
+            '大相撲冬巡業、12月19・20日に石川多目的ドームで開催へ',
+            '',
+            published,
+        )
+        self.assertEqual(start.date().isoformat(), '2026-12-19')
+        self.assertEqual(end.date().isoformat(), '2026-12-20')
+
+    def test_event_period_extracts_single_concert_date(self):
+        published = datetime(2026, 8, 21, 5, 0, tzinfo=fetch_news.JST)
+        start, end = fetch_news.extract_event_period(
+            '9月22日にタイムスリップコンサート',
+            '石川会館で開催',
+            published,
+        )
+        self.assertEqual(start.date().isoformat(), '2026-09-22')
+        self.assertEqual(end.date().isoformat(), '2026-09-22')
+
+    def test_date_without_event_signal_is_not_treated_as_event(self):
+        published = datetime(2026, 8, 21, 5, 0, tzinfo=fetch_news.JST)
+        self.assertEqual(
+            fetch_news.extract_event_period(
+                '9月22日の地域の様子を振り返る', '', published
+            ),
+            (None, None),
+        )
+
+    def test_future_event_remains_published_after_feed_entry_disappears(self):
+        checked_at = datetime(2026, 9, 12, 6, 0, tzinfo=fetch_news.JST)
+        previous = {
+            'sumo-event': {
+                'id': 'sumo-event',
+                'title': '大相撲冬巡業、12月19・20日に石川多目的ドームで開催へ',
+                'summary': '',
+                'publishedAt': '2026-08-13T09:52:00+09:00',
+                'checkedAt': checked_at.isoformat(),
+                'status': 'expired',
+                'previousStatus': 'published',
+                'requiresReview': False,
+                'reviewReasons': ['掲載・判断期間を過ぎたため監査記録へ移動'],
+            }
+        }
+        items = []
+        with patch.object(fetch_news, 'now_jst', checked_at):
+            fetch_news.merge_audit_history(items, previous)
+        self.assertEqual(items[0]['status'], 'published')
+        self.assertEqual(items[0]['eventStartsAt'][:10], '2026-12-19')
+        self.assertEqual(items[0]['eventEndsAt'][:10], '2026-12-20')
+
     def test_special_adapter_is_controlled_by_region_profile(self):
         profile = dict(fetch_news.REGION)
         profile['officialAdapters'] = []

@@ -28,6 +28,10 @@ updated_str = now_jst.strftime('%Y年%m月%d日 %H:%M')
 DAYS_LIMIT  = 7
 cutoff_date = now_jst - timedelta(days=DAYS_LIMIT)
 AUDIT_RETENTION_DAYS = 30
+EVENT_SIGNAL_TERMS = (
+    '開催', '催し', 'イベント', '大会', '祭り', 'まつり', '巡業', '公演',
+    'コンサート', 'ライブ', '講座', '募集', '日程', '開幕', '開演',
+)
 
 # 「ニュースがなかった日」を記録するファイル（日をまたいでも過去分の
 # 「〇月△日のニュースはありません」表示を消さずに残すための永続化）
@@ -471,6 +475,57 @@ def extract_event_date(title, summary, pub_date):
         return event_date
     return None
 
+def _event_datetime(year, month, day, pub_date):
+    """年が省略された催し日を、公開日を基準に直近の開催年へ補う。"""
+    base = pub_date or now_jst
+    event_year = int(year) if year else base.year
+    try:
+        event_date = datetime(event_year, int(month), int(day), tzinfo=JST)
+    except ValueError:
+        return None
+    if not year and event_date < base - timedelta(days=60):
+        try:
+            event_date = event_date.replace(year=event_date.year + 1)
+        except ValueError:
+            return None
+    return event_date
+
+def extract_event_period(title, summary, pub_date, force=False):
+    """催しを示す記事から、単日または複数日の開催期間を読み取る。"""
+    text = unicodedata.normalize('NFKC', f'{title} {summary}')
+    if not force and not any(term in text for term in EVENT_SIGNAL_TERMS):
+        return None, None
+
+    range_pattern = re.compile(
+        r'(?:(20\d{2})年)?\s*(\d{1,2})月\s*(\d{1,2})日?'
+        r'(?:\s*[（(][^）)]{0,10}[）)])?\s*'
+        r'(?:[~〜～・、,／/\-‐‑–—]|から)\s*'
+        r'(?:(?:(20\d{2})年)?\s*(\d{1,2})月\s*)?(\d{1,2})日'
+    )
+    range_match = range_pattern.search(text)
+    if range_match:
+        start = _event_datetime(
+            range_match.group(1), range_match.group(2), range_match.group(3), pub_date
+        )
+        end = _event_datetime(
+            range_match.group(4) or (str(start.year) if start else None),
+            range_match.group(5) or range_match.group(2),
+            range_match.group(6),
+            pub_date,
+        )
+        if start and end and end >= start:
+            return start, end
+
+    single_match = re.search(
+        r'(?:(20\d{2})年)?\s*(\d{1,2})月\s*(\d{1,2})日', text
+    )
+    if not single_match:
+        return None, None
+    start = _event_datetime(
+        single_match.group(1), single_match.group(2), single_match.group(3), pub_date
+    )
+    return start, start
+
 def load_no_news_dates(path=NO_NEWS_FILE):
     """過去に「ニュースなし」だった日付（YYYY-MM-DD）の集合を読み込む"""
     if os.path.exists(path):
@@ -737,16 +792,43 @@ def parse_candidate_date(candidate):
     return None
 
 def merge_audit_history(candidates, previous_candidates):
-    """今回のフィードから消えた候補を30日間、期限切れの監査記録として残す。"""
+    """未来の催しを維持し、それ以外の消えた候補を期限切れ記録へ移す。"""
     current_ids = {candidate['id'] for candidate in candidates}
     audit_cutoff = now_jst - timedelta(days=AUDIT_RETENTION_DAYS)
     for candidate_id, previous in previous_candidates.items():
         if candidate_id in current_ids:
             continue
+        retained = dict(previous)
+        event_start = parse_iso_datetime(retained.get('eventStartsAt'))
+        event_end = parse_iso_datetime(retained.get('eventEndsAt'))
+        if not event_start:
+            published_at = parse_iso_datetime(retained.get('publishedAt'))
+            event_start, event_end = extract_event_period(
+                retained.get('title', ''), retained.get('summary', ''), published_at
+            )
+        event_end = event_end or event_start
+        prior_status = retained.get('previousStatus') or retained.get('status')
+        if event_start and event_end and event_end.date() >= now_jst.date():
+            retained['eventStartsAt'] = event_start.isoformat()
+            retained['eventEndsAt'] = event_end.isoformat()
+            retained['expiresAt'] = event_end.replace(
+                hour=23, minute=59, second=59
+            ).isoformat()
+            retained['category'] = 'event'
+            if prior_status == 'published':
+                retained['status'] = 'published'
+                retained['requiresReview'] = False
+                retained.pop('previousStatus', None)
+                retained['reviewReasons'] = [
+                    reason for reason in retained.get('reviewReasons', [])
+                    if reason != '掲載・判断期間を過ぎたため監査記録へ移動'
+                ]
+            candidates.append(retained)
+            continue
         record_date = parse_candidate_date(previous)
         if record_date and record_date < audit_cutoff:
             continue
-        archived = dict(previous)
+        archived = retained
         if archived.get('status') != 'expired':
             archived['previousStatus'] = archived.get('status')
             archived['status'] = 'expired'
@@ -757,6 +839,18 @@ def merge_audit_history(candidates, previous_candidates):
             ))
         candidates.append(archived)
     return candidates
+
+def parse_iso_datetime(value):
+    """候補JSONのISO日時をJSTのdatetimeとして読み取る。"""
+    if not value:
+        return None
+    try:
+        parsed = datetime.fromisoformat(value)
+    except (TypeError, ValueError):
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=JST)
+    return parsed.astimezone(JST)
 
 def fetch_page(url):
     """公開ページを1回だけ取得する。呼び出し側で失敗を監査記録へ残す。"""
@@ -942,12 +1036,15 @@ def fetch_articles():
 
                 # 候補も公開記事と同じ期間を対象にする。
                 pub_date = get_pub_date(entry)
-                event_starts_at = None
-                if source.get('extractEventDate'):
-                    event_starts_at = extract_event_date(title, summary, pub_date)
+                event_starts_at, event_ends_at = extract_event_period(
+                    title,
+                    summary,
+                    pub_date,
+                    force=bool(source.get('extractEventDate')),
+                )
                 if (
                     not is_within_period(pub_date)
-                    and not (event_starts_at and event_starts_at >= now_jst)
+                    and not (event_ends_at and event_ends_at.date() >= now_jst.date())
                 ):
                     continue
 
@@ -958,6 +1055,7 @@ def fetch_articles():
                     source,
                     pub_date,
                     event_starts_at=event_starts_at,
+                    event_ends_at=event_ends_at,
                     category='event' if event_starts_at else 'news',
                 )
                 previous = previous_candidates.get(candidate['id'])
@@ -973,8 +1071,8 @@ def fetch_articles():
             source_result['error'] = str(e)[:200]
         source_results.append(source_result)
 
-    deduplicate_candidates(candidates)
     merge_audit_history(candidates, previous_candidates)
+    deduplicate_candidates(candidates)
     articles = [
         candidate_to_article(candidate)
         for candidate in candidates
