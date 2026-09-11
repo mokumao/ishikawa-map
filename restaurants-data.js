@@ -22,6 +22,12 @@ const restaurants = [
     alwaysShow: true,
     lat:       26.4237,
     lng:       127.8378,
+    statusHistory: [
+      { date: "2026-09-06", from: "test", to: "hidden", note: "店舗主からの削除依頼により非表示（削除理由の記載なし）", requestRef: "468e0e98a423418596eab219" }
+    ,
+      { date: "2026-09-06", from: "hidden", to: "test", note: "店舗主からの再掲載依頼を管理者が確認し再掲載", requestRef: "a63b427b06674cbda395d879" },
+      { date: "2026-09-08", from: "test", to: "hidden", note: "店舗主からの削除依頼により非表示（削除理由の記載なし）", requestRef: "cc4ea165701b321837426d64" },
+      { date: "2026-09-10", from: "hidden", to: "test", note: "店舗主からの再掲載依頼を管理者が確認し再掲載", requestRef: "d0d40d9626d44a0061d73492" }],
     revisionHistory: [
       { date: "2026-08-31", type: "manager", note: "管理者指定の画像に基づき、公開テスト店舗の位置を石川ビーチ沖へ移動（26.4268, 127.8415 → 26.4237, 127.8378）" }
     ],
@@ -700,8 +706,6 @@ const restaurants = [
     lng:       127.826263,
     twitter: "", instagram: "", youtube: "", website: "https://www.sej.co.jp/", detailText: "", photos: []
   },
-  // ※以下4件のファミマ＋3件のローソンは2026-07-21にOpenStreetMap抽出＋
-  //   公式店舗検索等とのウェブ二重照合で追加（座標はOSM、住所・店名は公式等で確認）
   {
     id:          24,
     code:        "47213-IS-24",
@@ -859,8 +863,6 @@ const restaurants = [
     lng:       127.807813,
     twitter: "", instagram: "", youtube: "", website: "https://store.lawson.co.jp/", detailText: "", photos: []
   },
-  // ※以下4件は2026-07-21にサイト管理人の指摘を受けて追加。
-  //   OSM未登録だったためチェーン公式店舗検索・複数地図サービスで存在・住所・座標を照合済み
   {
     id:          31,
     code:        "47213-IS-31",
@@ -1031,8 +1033,6 @@ const restaurants = [
     lng:       127.813352,
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
-  // ※以下2件は2026-07-24にOSM抽出＋出光公式SS検索/Yahoo!地図/geocoding.jp等との
-  // ウェブ複数照合で追加（poi-surveyスキル手順）
   {
     id:          38,
     code:        "47213-IS-38",
@@ -1172,7 +1172,6 @@ const restaurants = [
     lat:       26.42059,
     lng:       127.82524
   },
-  // ── 金融機関 ───────────────────────────────────────────────────
   {
     id:          44,
     code:        "47213-IS-44",
@@ -1236,7 +1235,6 @@ const restaurants = [
     lat:       26.43363,
     lng:       127.83207
   },
-  // ── 教育施設 ───────────────────────────────────────────────────
   {
     id:          47,
     code:        "47213-IS-47",
@@ -1304,7 +1302,6 @@ const restaurants = [
     lat:       26.41535,
     lng:       127.82052
   },
-  // ── 観光スポット ───────────────────────────────────────────────
   {
     id:          50,
     code:        "47213-IS-50",
@@ -1728,9 +1725,6 @@ const restaurants = [
     lng:       127.81932,
     twitter: "", instagram: "", youtube: "", website: "", detailText: "", photos: []
   },
-  // ※以下1件はOSM・ウェブ検索いずれでも発見できず、2026-07-24にユーザーが
-  // Googleマップの現地写真で発見。住所・電話番号はウェブ複数照合で確認済みだが、
-  // 店名変更（旧「ヘアープロジェクトサヴァ」）はウェブ上で未確認のため要確認扱い
   {
     id:          68,
     code:        "47213-IS-68",

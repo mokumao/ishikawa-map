@@ -8,6 +8,7 @@
 {
   "id": "20260829-source-hash",
   "title": "原典で確認したタイトル",
+  "displayTitle": "画像番号など表示上不要な接頭辞だけを除いたタイトル",
   "summary": "原典にある事実だけの短い要約",
   "url": "https://example.jp/original",
   "sourceId": "uruma-city",
@@ -26,7 +27,8 @@
   "status": "review",
   "reviewReasons": [],
   "fingerprint": "normalized-event-key",
-  "relatedUrls": []
+  "relatedUrls": [],
+  "duplicateOf": null
 }
 ```
 
@@ -47,11 +49,12 @@
 - `collected`：取得直後で未判定
 - `review`：管理人確認待ち
 - `approved`：掲載承認済み
-- `published`：公開データへ反映済み
+- `published`：自動掲載条件を満たし、公開データへ反映済み
 - `rejected`：対象外、誤情報、重複など
+- `duplicate`：同じ内容の代表記事へ統合済み。`duplicateOf`に代表候補IDを持つ
 - `expired`：期限切れ
 
-状態変更時は理由と日時を残せるようにする。`rejected`を単に削除すると同じ候補を毎日再取得するため、IDまたはfingerprintを一定期間保持する。
+状態変更時は理由と日時を残せるようにする。`rejected`や`duplicate`を単に削除すると同じ候補を毎日再取得するため、IDまたはfingerprintを一定期間保持する。通常ニュースの7日間を過ぎた候補は`expired`へ移し、監査記録として30日間保持できる。
 
 ## カテゴリ初期値
 
@@ -74,8 +77,8 @@
 - `title`、`summary`、`link`、`source`、`date_label`、`pub_date`を生成する。
 - 未来のイベントは`eventStartsAt`を並び順とラベルに使う。
 - 表示用の日付文字列を保存値の代わりにせず、ISO日時から毎回生成する。
-- 同じfingerprintの候補は代表1件だけを掲載する。
-- `review`、`rejected`、`expired`は公開HTMLへ出さない。
+- 同じfingerprintの候補は代表1件だけを掲載し、他URLを代表の`relatedUrls`へ残す。
+- `review`、`rejected`、`duplicate`、`expired`は公開HTMLへ出さない。
 
 ## 候補ファイル案
 
@@ -84,3 +87,5 @@
 - `news/today.json`：公開用の生成結果
 
 候補ファイルへ読者投稿の個人情報や非公開列を保存・公開しない。GitHub Pagesに配置されるファイルは誰でも閲覧できる前提で扱う。
+
+管理者ページは、候補の承認を毎日求める画面にしない。自動掲載、判断保留、自動除外、重複統合、期限切れを確認できる監査画面とし、通常は操作不要であることを明示する。判断保留のコピー機能は、必要なときにCodexへ相談する補助機能として扱う。
