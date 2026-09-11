@@ -15,6 +15,10 @@ assert(html.includes('id="editHoursEndHour"'), '終了時刻の時を1時間単�
 assert(html.includes('id="editHoursEndMinute"'), '終了時刻の分を選べること');
 assert(!html.includes('id="editHoursNote" required'), '営業時間の補足が任意入力であること');
 assert(html.includes('曜日別・昼夜営業などの補足 <span class="optional">（任意）</span>'), '営業時間の補足に任意表示があること');
+assert(html.includes('店舗主様のメールアドレス<span class="required">（必須）</span>'), 'メールアドレスに赤い必須表示があること');
+assert(html.includes('id="ownerEmail" required'), 'メールアドレスが必須入力であること');
+assert(html.includes('id="emailError" role="alert" hidden>メールアドレスを入力してください。'), 'メール未入力時のエラー表示があること');
+assert(html.includes('function blockMissingEmail()'), 'メール未入力時に送信を止めること');
 assert(html.includes('hasIncompleteHoursRange'), '開始・終了の片方だけの入力を検出すること');
 assert(html.includes('営業時間は開始時間と終了時間を両方選んでください。'), '不完全な営業時間の案内があること');
 assert(!html.includes('id="editTel"'), '電話番号の修正欄がないこと');

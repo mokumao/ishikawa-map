@@ -404,9 +404,10 @@
 
           <div class="contact-area" id="contactArea" hidden>
             <div class="field">
-              <label class="field-label" for="ownerEmail">店舗主様のメールアドレス<span class="optional">（任意）</span></label>
-              <input type="email" id="ownerEmail" autocomplete="email" inputmode="email" placeholder="name@example.com">
-              <p class="email-guidance">※メールアドレスをご入力いただいた場合も、内容の確認が必要なときにのみ管理者からメールでご連絡する場合があります。<br><br>メール連絡を希望しない場合は、メールアドレスの入力は不要です。</p>
+              <label class="field-label" for="ownerEmail">店舗主様のメールアドレス<span class="required">（必須）</span></label>
+              <input type="email" id="ownerEmail" required autocomplete="email" inputmode="email" placeholder="name@example.com" aria-describedby="emailError emailGuidance">
+              <p class="consent-error" id="emailError" role="alert" hidden>メールアドレスを入力してください。</p>
+              <p class="email-guidance" id="emailGuidance">※ご依頼内容の確認に必要なため、メールアドレスを入力してください。管理者からの連絡は、内容の確認が必要な場合に限ります。</p>
             </div>
             <div class="field">
               <label class="check-item"><input type="checkbox" id="contactConsent">内容の確認が必要な場合、管理者からメールでご連絡することがあります。</label>
@@ -483,6 +484,7 @@
       var contactArea = document.getElementById('contactArea');
       var contactConsent = document.getElementById('contactConsent');
       var ownerEmail = document.getElementById('ownerEmail');
+      var emailError = document.getElementById('emailError');
       var consentError = document.getElementById('consentError');
       var formStatus = document.getElementById('formStatus');
       var ownerRequestForm = document.getElementById('ownerRequestForm');
@@ -752,12 +754,25 @@
       document.getElementById('switchToOther').addEventListener('click', function () { selectType('other'); });
 
       function syncEmailConsent() {
-        ownerEmail.required = contactConsent.checked;
-        if (!ownerEmail.value.trim() || contactConsent.checked) consentError.hidden = true;
+        if (contactConsent.checked) consentError.hidden = true;
       }
 
       contactConsent.addEventListener('change', syncEmailConsent);
-      ownerEmail.addEventListener('input', syncEmailConsent);
+      ownerEmail.addEventListener('input', function () {
+        emailError.hidden = Boolean(ownerEmail.value.trim());
+        syncEmailConsent();
+      });
+
+      function blockMissingEmail() {
+        if (ownerEmail.value.trim()) {
+          emailError.hidden = true;
+          return false;
+        }
+        emailError.hidden = false;
+        ownerEmail.focus();
+        ownerEmail.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return true;
+      }
 
       function blockMissingEmailConsent() {
         if (!ownerEmail.value.trim() || contactConsent.checked) return false;
@@ -770,7 +785,7 @@
 
       submitBtn.addEventListener('click', function (event) {
         formStatus.textContent = '';
-        if (blockMissingEmailConsent()) event.preventDefault();
+        if (blockMissingEmail() || blockMissingEmailConsent()) event.preventDefault();
       });
 
       function closeDeleteConfirmation() {
@@ -848,7 +863,7 @@
 
       ownerRequestForm.addEventListener('submit', function (event) {
         formStatus.textContent = '';
-        if (blockMissingEmailConsent()) {
+        if (blockMissingEmail() || blockMissingEmailConsent()) {
           event.preventDefault();
           return;
         }
