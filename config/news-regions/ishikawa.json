@@ -22,6 +22,7 @@
     {"id": "ishikawa-mountain", "name": "石川岳", "aliases": ["石川岳"]},
     {"id": "ishikawa-history-museum", "name": "石川歴史民俗資料館", "aliases": ["石川歴史民俗資料館"]},
     {"id": "ishikawa-library", "name": "石川図書館", "aliases": ["石川図書館"]},
+    {"id": "ishikawa-hall", "name": "うるま市石川会館", "aliases": ["うるま市石川会館", "石川会館"], "sourceUrl": "https://www.city.uruma.lg.jp/3001007000/shisetsu/p000123.html", "verifiedAt": "2026-09-12"},
     {"id": "ishikawa-youth-center", "name": "石川少年自然の家", "aliases": ["石川少年自然の家", "石川青少年の家"]},
     {"id": "bios-hill", "name": "ビオスの丘", "aliases": ["ビオスの丘"]},
     {"id": "rakujuen", "name": "特別養護老人ホーム 楽寿園", "aliases": ["特別養護老人ホーム 楽寿園", "社会福祉法人育賛会 楽寿園", "育賛会 楽寿園", "楽寿園"], "requireRegionContext": true, "sourceUrl": "https://www.ikusan-k.jp/", "verifiedAt": "2026-09-03"},
@@ -39,7 +40,7 @@
   "discoveryCategories": [
     {"id": "government", "label": "行政・自治会", "terms": ["行政", "自治会", "お知らせ", "募集"]},
     {"id": "events-culture", "label": "催し・祭り・文化", "terms": ["イベント", "祭り", "エイサー", "文化", "闘牛"]},
-    {"id": "public-facilities", "label": "公共施設", "terms": ["公民館", "図書館", "体育館", "公共施設", "休館"]},
+    {"id": "public-facilities", "label": "公共施設", "terms": ["公民館", "図書館", "体育館", "会館", "公共施設", "休館"]},
     {"id": "education", "label": "学校・教育", "terms": ["学校", "幼稚園", "保育園", "講座", "教育"]},
     {"id": "safety", "label": "防災・安全", "terms": ["防災", "避難", "消防", "警察", "災害"]},
     {"id": "health-welfare", "label": "健康・福祉", "terms": ["健康", "福祉", "医療", "健診", "子育て"]},
