@@ -112,9 +112,9 @@
     .hours-picker-item { display: grid; gap: 6px; }
     .hours-picker-item label, .hours-note-label { color: #52636e; font-size: 12px; }
     .hours-picker-separator { padding-bottom: 13px; font-weight: 700; }
-    .time-selects { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto; gap: 4px; align-items: center; }
+    .time-selects { display: grid; grid-template-columns: 76px auto 76px auto; gap: 4px; align-items: center; justify-content: start; }
     .time-selects select {
-      min-width: 0;
+      width: 76px;
       min-height: 46px;
       padding: 8px 4px;
       border: 1.5px solid #aebdc7;
@@ -122,9 +122,11 @@
       background: #fff;
       color: #24323d;
       font-size: 16px;
+      text-align: center;
+      text-align-last: center;
     }
     .time-selects select:focus { outline: 3px solid rgba(22, 137, 216, .2); border-color: #1689d8; }
-    .time-unit { color: #52636e; font-size: 12px; }
+    .time-unit { color: #52636e; font-size: 16px; font-weight: 700; }
     #editHoursNote { min-height: 80px; }
     .edit-field.is-changed input, .edit-field.is-changed textarea, .edit-field.is-changed select { border-color: #1689d8; background: #f2f9fe; }
     .changed-mark { display: none; margin-left: 6px; color: #0878c9; font-size: 12px; }
@@ -258,6 +260,10 @@
       font-weight: 700;
       text-decoration: none;
     }
+    @media (max-width: 520px) {
+      .hours-picker { grid-template-columns: 1fr; }
+      .hours-picker-separator { padding: 0; text-align: center; }
+    }
     @media (max-width: 359px) {
       .content { width: min(100% - 16px, 680px); margin-top: 8px; }
       .card { padding: 16px; }
@@ -265,8 +271,6 @@
       .page-header h1 { font-size: 20px; }
       .choice-grid { grid-template-columns: 1fr; }
       .choice-btn { min-height: 46px; }
-      .hours-picker { grid-template-columns: 1fr; }
-      .hours-picker-separator { padding: 0; text-align: center; }
       .confirmation-overlay { padding: 12px; }
       .confirmation-dialog { padding: 18px; }
       .confirmation-actions { grid-template-columns: 1fr; }
