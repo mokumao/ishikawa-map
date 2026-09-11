@@ -13,6 +13,8 @@ assert(html.includes('id="editHoursStartMinute"'), '開始時刻の分を選べ�
 assert(html.includes("var minutes = ['00', '10', '20', '30', '40', '50']"), '分の選択肢が10分刻みであること');
 assert(html.includes('id="editHoursEndHour"'), '終了時刻の時を1時間単位で選べること');
 assert(html.includes('id="editHoursEndMinute"'), '終了時刻の分を選べること');
+assert(html.includes('id="editHoursNote" required'), '営業時間の補足が必須入力であること');
+assert(html.includes('曜日別・昼夜営業などの補足 <span class="required">（必須）</span>'), '営業時間の補足に赤い必須表示があること');
 assert(html.includes('hasIncompleteHoursRange'), '開始・終了の片方だけの入力を検出すること');
 assert(html.includes('営業時間は開始時間と終了時間を両方選んでください。'), '不完全な営業時間の案内があること');
 assert(!html.includes('id="editTel"'), '電話番号の修正欄がないこと');

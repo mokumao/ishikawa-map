@@ -103,14 +103,17 @@
     .current-info tr:last-child { border-bottom: none; }
     .current-info td { padding: 12px 0; vertical-align: top; color: #222; font-size: 16px; line-height: 1.55; }
     .current-info .current-info-label { width: 88px; padding-right: 12px; font-weight: 700; white-space: nowrap; }
+    .current-info td:not(.current-info-label) { color: #075fa9; font-size: 20px; }
     .edit-intro { margin: 88px 0 0; color: #c62828; font-size: 14px; font-weight: 700; line-height: 1.65; }
     .edit-fields { display: grid; gap: 16px; margin-top: 16px; }
     .edit-field { display: grid; gap: 6px; }
     .edit-field label, .edit-field-heading { font-size: 14px; font-weight: 700; line-height: 1.5; }
+    .edit-field > label:not(.hours-note-label), .edit-field > .edit-field-heading { font-size: 18px; }
     .edit-field textarea { min-height: 96px; }
     .hours-picker { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 8px; align-items: end; }
     .hours-picker-item { display: grid; gap: 6px; }
     .hours-picker-item label, .hours-note-label { color: #52636e; font-size: 12px; }
+    .hours-note-label { margin-top: 40px; font-size: 15px; white-space: nowrap; }
     .hours-picker-separator { padding-bottom: 13px; font-weight: 700; }
     .time-selects { display: grid; grid-template-columns: 76px auto 76px auto; gap: 4px; align-items: center; justify-content: start; }
     .time-selects select {
@@ -263,6 +266,7 @@
     @media (max-width: 520px) {
       .hours-picker { grid-template-columns: 1fr; }
       .hours-picker-separator { padding: 0; text-align: center; }
+      .time-selects { justify-content: center; }
     }
     @media (max-width: 359px) {
       .content { width: min(100% - 16px, 680px); margin-top: 8px; }
@@ -376,8 +380,8 @@
                     </div>
                   </div>
                 </div>
-                <label class="hours-note-label" for="editHoursNote">曜日別・昼夜営業などの補足（任意）</label>
-                <textarea id="editHoursNote" maxlength="500" placeholder="例：土日は11:00開始／14:00〜17:00は休憩"></textarea>
+                <label class="hours-note-label" for="editHoursNote">曜日別・昼夜営業などの補足 <span class="required">（必須）</span></label>
+                <textarea id="editHoursNote" required maxlength="500" placeholder="例：土日は11:00開始／14:00〜17:00は休憩"></textarea>
               </div>
               <div class="edit-field" data-edit-field="closed">
                 <label for="editClosed">定休日<span class="changed-mark">変更あり</span></label>
