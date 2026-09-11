@@ -84,7 +84,7 @@
     #deleteReasonFields .check-item { font-size: 16px; }
     .free-entry-label, label[for="ownerEmail"] { width: max-content; font-size: 15px; white-space: nowrap; }
     .radio-item input, .check-item input { flex: 0 0 auto; width: 20px; height: 20px; margin: 1px 0 0; }
-    textarea, input[type="email"] {
+    textarea, input[type="email"], input[type="text"], input[type="tel"] {
       width: 100%;
       border: 1.5px solid #aebdc7;
       border-radius: 9px;
@@ -93,10 +93,49 @@
       font-size: 16px;
     }
     textarea { min-height: 120px; padding: 12px; resize: vertical; line-height: 1.6; }
-    input[type="email"] { min-height: 46px; padding: 10px 12px; }
-    textarea:focus, input[type="email"]:focus { outline: 3px solid rgba(22, 137, 216, .2); border-color: #1689d8; }
-    .current-info { display: grid; gap: 8px; margin-top: 12px; padding: 12px; border-radius: 9px; background: #f1f6f9; }
-    .current-info p { margin: 0; font-size: 13px; line-height: 1.55; }
+    input[type="email"], input[type="text"], input[type="tel"] { min-height: 46px; padding: 10px 12px; }
+    textarea:focus, input[type="email"]:focus, input[type="text"]:focus, input[type="tel"]:focus { outline: 3px solid rgba(22, 137, 216, .2); border-color: #1689d8; }
+    .current-info-caption { margin: 12px 0 8px; color: #c62828; font-size: 16px; font-weight: 700; line-height: 1.6; }
+    .current-info-card { padding: 16px 20px; border-radius: 16px; background: #fff; box-shadow: 0 2px 12px rgba(0, 0, 0, .08); }
+    .current-info-title { padding-bottom: 12px; border-bottom: 1px solid #e8e8e8; color: #222; font-size: 20px; font-weight: 700; text-align: center; }
+    .current-info { width: 100%; border-collapse: collapse; }
+    .current-info tr { border-bottom: 1px solid #f5f5f5; }
+    .current-info tr:last-child { border-bottom: none; }
+    .current-info td { padding: 12px 0; vertical-align: top; color: #222; font-size: 16px; line-height: 1.55; }
+    .current-info .current-info-label { width: 88px; padding-right: 12px; font-weight: 700; white-space: nowrap; }
+    .edit-intro { margin: 88px 0 0; color: #c62828; font-size: 14px; font-weight: 700; line-height: 1.65; }
+    .edit-fields { display: grid; gap: 16px; margin-top: 16px; }
+    .edit-field { display: grid; gap: 6px; }
+    .edit-field label, .edit-field-heading { font-size: 14px; font-weight: 700; line-height: 1.5; }
+    .edit-field textarea { min-height: 96px; }
+    .hours-picker { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 8px; align-items: end; }
+    .hours-picker-item { display: grid; gap: 6px; }
+    .hours-picker-item label, .hours-note-label { color: #52636e; font-size: 12px; }
+    .hours-picker-separator { padding-bottom: 13px; font-weight: 700; }
+    .time-selects { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto; gap: 4px; align-items: center; }
+    .time-selects select {
+      min-width: 0;
+      min-height: 46px;
+      padding: 8px 4px;
+      border: 1.5px solid #aebdc7;
+      border-radius: 9px;
+      background: #fff;
+      color: #24323d;
+      font-size: 16px;
+    }
+    .time-selects select:focus { outline: 3px solid rgba(22, 137, 216, .2); border-color: #1689d8; }
+    .time-unit { color: #52636e; font-size: 12px; }
+    #editHoursNote { min-height: 80px; }
+    .edit-field.is-changed input, .edit-field.is-changed textarea, .edit-field.is-changed select { border-color: #1689d8; background: #f2f9fe; }
+    .changed-mark { display: none; margin-left: 6px; color: #0878c9; font-size: 12px; }
+    .edit-field.is-changed .changed-mark { display: inline; }
+    .edit-summary { display: grid; gap: 12px; max-height: min(52dvh, 420px); margin-top: 16px; overflow-y: auto; text-align: left; }
+    .edit-summary-item { padding: 12px; border-radius: 10px; background: #f1f6f9; }
+    .edit-summary-item strong { display: block; margin-bottom: 8px; color: #075fa9; font-size: 14px; }
+    .edit-summary-row { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 8px; font-size: 13px; line-height: 1.55; }
+    .edit-summary-row + .edit-summary-row { margin-top: 6px; }
+    .edit-summary-label { color: #607d8b; font-weight: 700; }
+    .edit-confirmation { border: 2px solid #1689d8; color: #fff; background: #0878c9; }
     .notice {
       margin-top: 12px;
       padding: 12px;
@@ -226,6 +265,11 @@
       .page-header h1 { font-size: 20px; }
       .choice-grid { grid-template-columns: 1fr; }
       .choice-btn { min-height: 46px; }
+      .hours-picker { grid-template-columns: 1fr; }
+      .hours-picker-separator { padding: 0; text-align: center; }
+      .confirmation-overlay { padding: 12px; }
+      .confirmation-dialog { padding: 18px; }
+      .confirmation-actions { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -294,10 +338,51 @@
 
           <fieldset class="request-panel" id="editPanel" data-panel="edit" hidden disabled>
             <legend class="panel-heading">修正依頼</legend>
-            <div class="current-info" id="currentInfo"></div>
-            <div class="field">
-              <label class="field-label" for="editDetails">修正したい項目と正しい内容 <span class="required">必須</span></label>
-              <textarea id="editDetails" required placeholder="例：営業時間を10:00～18:00へ修正"></textarea>
+            <p class="current-info-caption">以下が現在の基本情報です。</p>
+            <div class="current-info-card">
+              <div class="current-info-title">基本情報</div>
+              <table class="current-info" id="currentInfo"></table>
+            </div>
+            <p class="edit-intro">以下に現在の内容が入力されています。修正したい項目を書き換えてください。</p>
+            <div class="edit-fields" id="editFields">
+              <div class="edit-field" data-edit-field="name">
+                <label for="editName">店名<span class="changed-mark">変更あり</span></label>
+                <input type="text" id="editName" maxlength="120">
+              </div>
+              <div class="edit-field" data-edit-field="address">
+                <label for="editAddress">住所<span class="changed-mark">変更あり</span></label>
+                <input type="text" id="editAddress" maxlength="200">
+              </div>
+              <div class="edit-field" data-edit-field="hours">
+                <span class="edit-field-heading">営業時間<span class="changed-mark">変更あり</span></span>
+                <div class="hours-picker">
+                  <div class="hours-picker-item">
+                    <span>開始時間</span>
+                    <div class="time-selects">
+                      <select id="editHoursStartHour" aria-label="開始時刻（時）"></select><span class="time-unit">時</span>
+                      <select id="editHoursStartMinute" aria-label="開始時刻（分）"></select><span class="time-unit">分</span>
+                    </div>
+                  </div>
+                  <span class="hours-picker-separator" aria-hidden="true">〜</span>
+                  <div class="hours-picker-item">
+                    <span>終了時間</span>
+                    <div class="time-selects">
+                      <select id="editHoursEndHour" aria-label="終了時刻（時）"></select><span class="time-unit">時</span>
+                      <select id="editHoursEndMinute" aria-label="終了時刻（分）"></select><span class="time-unit">分</span>
+                    </div>
+                  </div>
+                </div>
+                <label class="hours-note-label" for="editHoursNote">曜日別・昼夜営業などの補足（任意）</label>
+                <textarea id="editHoursNote" maxlength="500" placeholder="例：土日は11:00開始／14:00〜17:00は休憩"></textarea>
+              </div>
+              <div class="edit-field" data-edit-field="closed">
+                <label for="editClosed">定休日<span class="changed-mark">変更あり</span></label>
+                <input type="text" id="editClosed" maxlength="200">
+              </div>
+              <div class="edit-field" data-edit-field="note">
+                <label for="editNote">備考<span class="changed-mark">変更あり</span></label>
+                <textarea id="editNote" maxlength="1000"></textarea>
+              </div>
             </div>
           </fieldset>
 
@@ -352,6 +437,17 @@
     </div>
   </div>
 
+  <div class="confirmation-overlay" id="editConfirmation" hidden>
+    <div class="confirmation-dialog" role="dialog" aria-modal="true" aria-labelledby="editConfirmationTitle">
+      <h2 id="editConfirmationTitle">この修正内容で送信しますか？</h2>
+      <div class="edit-summary" id="editSummary"></div>
+      <div class="confirmation-actions">
+        <button type="button" class="confirmation-cancel" id="cancelEdit">修正に戻る</button>
+        <button type="button" class="edit-confirmation" id="confirmEdit">この内容で送信</button>
+      </div>
+    </div>
+  </div>
+
   <nav class="footer-bar" aria-label="ページ移動">
     <div class="footer-inner">
       <a href="index.html?tab=map" class="footer-btn" id="mapBtn">地図</a>
@@ -386,6 +482,11 @@
       var cancelDelete = document.getElementById('cancelDelete');
       var confirmDelete = document.getElementById('confirmDelete');
       var deleteConfirmed = false;
+      var editConfirmation = document.getElementById('editConfirmation');
+      var editSummary = document.getElementById('editSummary');
+      var cancelEdit = document.getElementById('cancelEdit');
+      var confirmEdit = document.getElementById('confirmEdit');
+      var editConfirmed = false;
       var requestCard = document.getElementById('requestCard');
       var successCard = document.getElementById('successCard');
       var successMessage = document.getElementById('successMessage');
@@ -394,14 +495,154 @@
       var currentInfo = document.getElementById('currentInfo');
       var detailBtn = document.getElementById('detailBtn');
       var mapBtn = document.getElementById('mapBtn');
+      var editHoursStartHour = document.getElementById('editHoursStartHour');
+      var editHoursStartMinute = document.getElementById('editHoursStartMinute');
+      var editHoursEndHour = document.getElementById('editHoursEndHour');
+      var editHoursEndMinute = document.getElementById('editHoursEndMinute');
+      var editHoursNote = document.getElementById('editHoursNote');
+      var editHoursElements = [editHoursStartHour, editHoursStartMinute, editHoursEndHour, editHoursEndMinute, editHoursNote];
+      var editFieldDefinitions = [
+        { key: 'name', label: '店名', element: document.getElementById('editName') },
+        { key: 'address', label: '住所', element: document.getElementById('editAddress') },
+        {
+          key: 'hours',
+          label: '営業時間',
+          element: editHoursNote,
+          elements: editHoursElements,
+          getValue: getHoursValue,
+          getComparable: getHoursComparable,
+          initialComparable: ''
+        },
+        { key: 'closed', label: '定休日', element: document.getElementById('editClosed') },
+        { key: 'note', label: '備考', element: document.getElementById('editNote') }
+      ];
+
+      function normalizeEditValue(value) {
+        return String(value || '').trim();
+      }
+
+      function populateTimeOptions(select, values) {
+        var blank = document.createElement('option');
+        blank.value = '';
+        blank.textContent = '--';
+        select.appendChild(blank);
+        values.forEach(function (value) {
+          var option = document.createElement('option');
+          option.value = value;
+          option.textContent = value;
+          select.appendChild(option);
+        });
+      }
+
+      function getSelectedTime(hourSelect, minuteSelect) {
+        if (!hourSelect.value || !minuteSelect.value) return '';
+        return hourSelect.value + ':' + minuteSelect.value;
+      }
+
+      function getStartTime() {
+        return getSelectedTime(editHoursStartHour, editHoursStartMinute);
+      }
+
+      function getEndTime() {
+        return getSelectedTime(editHoursEndHour, editHoursEndMinute);
+      }
+
+      function getHoursComparable() {
+        return [getStartTime(), getEndTime(), normalizeEditValue(editHoursNote.value)].join('|');
+      }
+
+      function getHoursValue() {
+        var timeRange = '';
+        var startTime = getStartTime();
+        var endTime = getEndTime();
+        if (startTime || endTime) {
+          timeRange = (startTime || '未指定') + '〜' + (endTime || '未指定');
+        }
+        var note = normalizeEditValue(editHoursNote.value);
+        return [timeRange, note].filter(Boolean).join('\n');
+      }
+
+      function hasIncompleteHoursRange() {
+        var startComplete = Boolean(editHoursStartHour.value && editHoursStartMinute.value);
+        var endComplete = Boolean(editHoursEndHour.value && editHoursEndMinute.value);
+        var hasPartialSelection = Boolean(editHoursStartHour.value || editHoursStartMinute.value || editHoursEndHour.value || editHoursEndMinute.value);
+        return hasPartialSelection && (!startComplete || !endComplete);
+      }
+
+      function parseHours(value) {
+        var original = normalizeEditValue(value);
+        var match = original.match(/([01]?\d|2[0-3]):([0-5]\d)\s*[〜～~-]\s*([01]?\d|2[0-3]):([0-5]\d)/);
+        if (!match) return { start: '', end: '', note: original };
+        var start = String(Number(match[1])).padStart(2, '0') + ':' + match[2];
+        var end = String(Number(match[3])).padStart(2, '0') + ':' + match[4];
+        var matchedRange = match[0].trim();
+        var note = original.replace(matchedRange, '').replace(/^[\s:：・／/-]+|[\s:：・／/-]+$/g, '').trim();
+        return { start: start, end: end, note: note };
+      }
+
+      function getEditChanges() {
+        if (!store) return [];
+        return editFieldDefinitions.map(function (field) {
+          var after = field.getValue ? field.getValue() : normalizeEditValue(field.element.value);
+          var comparable = field.getComparable ? field.getComparable() : after;
+          var initialComparable = field.getComparable ? field.initialComparable : normalizeEditValue(store[field.key]);
+          return {
+            key: field.key,
+            label: field.label,
+            before: normalizeEditValue(store[field.key]),
+            after: after,
+            changed: comparable !== initialComparable
+          };
+        }).filter(function (change) { return change.changed; });
+      }
+
+      function updateEditFieldState() {
+        var changedKeys = getEditChanges().map(function (change) { return change.key; });
+        editFieldDefinitions.forEach(function (field) {
+          var wrapper = field.element.closest('.edit-field');
+          if (wrapper) wrapper.classList.toggle('is-changed', changedKeys.indexOf(field.key) !== -1);
+        });
+      }
+
+      function populateEditFields() {
+        if (!store) return;
+        var hours = Array.from({ length: 24 }, function (_, index) { return String(index).padStart(2, '0'); });
+        var minutes = ['00', '10', '20', '30', '40', '50'];
+        [editHoursStartHour, editHoursEndHour].forEach(function (select) { populateTimeOptions(select, hours); });
+        [editHoursStartMinute, editHoursEndMinute].forEach(function (select) { populateTimeOptions(select, minutes); });
+        editFieldDefinitions.forEach(function (field) {
+          var elements = field.elements || [field.element];
+          if (field.key === 'hours') {
+            var parsedHours = parseHours(store.hours);
+            var startParts = parsedHours.start.split(':');
+            var endParts = parsedHours.end.split(':');
+            editHoursStartHour.value = startParts[0] || '';
+            editHoursStartMinute.value = minutes.indexOf(startParts[1]) !== -1 ? startParts[1] : '';
+            editHoursEndHour.value = endParts[0] || '';
+            editHoursEndMinute.value = minutes.indexOf(endParts[1]) !== -1 ? endParts[1] : '';
+            editHoursNote.value = parsedHours.note;
+            field.initialComparable = getHoursComparable();
+          } else {
+            field.element.value = normalizeEditValue(store[field.key]);
+          }
+          elements.forEach(function (element) { element.addEventListener('input', function () {
+            editConfirmed = false;
+            updateEditFieldState();
+          }); });
+        });
+        updateEditFieldState();
+      }
 
       function addInfo(label, value) {
-        var p = document.createElement('p');
-        var strong = document.createElement('strong');
-        strong.textContent = label + '：';
-        p.appendChild(strong);
-        p.appendChild(document.createTextNode(value || '記載なし'));
-        currentInfo.appendChild(p);
+        var row = document.createElement('tr');
+        var labelCell = document.createElement('td');
+        var valueCell = document.createElement('td');
+        labelCell.className = 'current-info-label';
+        labelCell.textContent = label;
+        valueCell.textContent = value || '記載なし';
+        row.appendChild(labelCell);
+        row.appendChild(valueCell);
+        currentInfo.appendChild(row);
       }
 
       if (store && Number.isInteger(id)) {
@@ -425,6 +666,7 @@
         addInfo('営業時間', store.hours);
         addInfo('定休日', store.closed);
         addInfo('備考', store.note);
+        populateEditFields();
       } else {
         storeHeading.textContent = '対象店舗を確認できません';
         storeError.hidden = false;
@@ -433,6 +675,7 @@
 
       function selectType(type) {
         selectedType = type;
+        editConfirmed = false;
         formStatus.textContent = '';
         document.querySelectorAll('.choice-btn').forEach(function (button) {
           var active = button.dataset.requestType === type;
@@ -534,6 +777,42 @@
         cancelDelete.focus();
       }
 
+      function closeEditConfirmation() {
+        editConfirmation.hidden = true;
+        document.body.classList.remove('confirmation-open');
+        submitBtn.focus();
+      }
+
+      function openEditConfirmation(changes) {
+        editSummary.textContent = '';
+        changes.forEach(function (change) {
+          var item = document.createElement('div');
+          item.className = 'edit-summary-item';
+          var heading = document.createElement('strong');
+          heading.textContent = change.label;
+          item.appendChild(heading);
+          [
+            { label: '変更前', value: change.before || '記載なし' },
+            { label: '変更後', value: change.after || '記載なし' }
+          ].forEach(function (rowData) {
+            var row = document.createElement('div');
+            row.className = 'edit-summary-row';
+            var label = document.createElement('span');
+            label.className = 'edit-summary-label';
+            label.textContent = rowData.label;
+            var value = document.createElement('span');
+            value.textContent = rowData.value;
+            row.appendChild(label);
+            row.appendChild(value);
+            item.appendChild(row);
+          });
+          editSummary.appendChild(item);
+        });
+        editConfirmation.hidden = false;
+        document.body.classList.add('confirmation-open');
+        cancelEdit.focus();
+      }
+
       cancelDelete.addEventListener('click', closeDeleteConfirmation);
       confirmDelete.addEventListener('click', function () {
         deleteConfirmed = true;
@@ -544,8 +823,19 @@
       deleteConfirmation.addEventListener('click', function (event) {
         if (event.target === deleteConfirmation) closeDeleteConfirmation();
       });
+      cancelEdit.addEventListener('click', closeEditConfirmation);
+      confirmEdit.addEventListener('click', function () {
+        editConfirmed = true;
+        editConfirmation.hidden = true;
+        document.body.classList.remove('confirmation-open');
+        ownerRequestForm.requestSubmit();
+      });
+      editConfirmation.addEventListener('click', function (event) {
+        if (event.target === editConfirmation) closeEditConfirmation();
+      });
       document.addEventListener('keydown', function (event) {
         if (event.key === 'Escape' && !deleteConfirmation.hidden) closeDeleteConfirmation();
+        if (event.key === 'Escape' && !editConfirmation.hidden) closeEditConfirmation();
       });
 
       ownerRequestForm.addEventListener('submit', function (event) {
@@ -570,6 +860,26 @@
           openDeleteConfirmation();
           return;
         }
+        var editChanges = selectedType === 'edit' ? getEditChanges() : [];
+        if (selectedType === 'edit' && hasIncompleteHoursRange()) {
+          event.preventDefault();
+          formStatus.textContent = '営業時間は開始時間と終了時間を両方選んでください。';
+          var missingHoursInput = editHoursStartHour.value && editHoursStartMinute.value ? editHoursEndHour : editHoursStartHour;
+          missingHoursInput.focus();
+          missingHoursInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+        if (selectedType === 'edit' && !editChanges.length) {
+          event.preventDefault();
+          formStatus.textContent = '修正したい項目を書き換えてください。';
+          document.getElementById('editFields').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+        if (selectedType === 'edit' && !editConfirmed) {
+          event.preventDefault();
+          openEditConfirmation(editChanges);
+          return;
+        }
 
         var typeLabels = { delete: '削除依頼', edit: '修正依頼', other: 'その他' };
         var deleteKind = document.querySelector('input[name="delete-kind"]:checked');
@@ -588,7 +898,12 @@
           lines.push('削除理由（選択）：' + (deleteReasonChoices.length ? deleteReasonChoices.join('／') : '選択なし'));
           lines.push('削除理由（自由記載）：' + (document.getElementById('deleteReason').value.trim() || '記載なし'));
         } else if (selectedType === 'edit') {
-          lines.push('修正内容：' + document.getElementById('editDetails').value.trim());
+          lines.push('修正項目数：' + editChanges.length);
+          editChanges.forEach(function (change) {
+            lines.push('変更項目：' + change.label);
+            lines.push('変更前：' + (change.before || '記載なし'));
+            lines.push('変更後：' + (change.after || '記載なし'));
+          });
         } else {
           lines.push('連絡内容：' + document.getElementById('otherDetails').value.trim());
         }

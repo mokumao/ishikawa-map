@@ -27,11 +27,12 @@ function doGet(event) {
   );
 
   const safeName = escapeHtml_(storeName);
+  const serviceUrl = ScriptApp.getService().getUrl();
   const body =
     '<p class="store-name">' + safeName + '</p>' +
     '<p>本当に地図に再表示しますか？</p>' +
     '<p class="note">実行するとGitHubの自動処理が始まり、通常は数分後に地図へ反映されます。</p>' +
-    '<form method="post">' +
+    '<form method="post" action="' + escapeHtml_(serviceUrl) + '" target="_top">' +
       '<input type="hidden" name="nonce" value="' + escapeHtml_(nonce) + '">' +
       '<button type="submit">地図に再表示する</button>' +
     '</form>' +

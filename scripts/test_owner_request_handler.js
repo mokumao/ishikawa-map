@@ -24,6 +24,9 @@ const context = {
     },
   },
   MailApp: { sendEmail: (message) => emails.push(message) },
+  ScriptApp: {
+    getService: () => ({ getUrl: () => 'https://script.google.com/macros/s/test-deployment/exec' }),
+  },
   CacheService: {
     getScriptCache: () => ({
       put: (key, value) => cacheValues.set(key, value),
@@ -107,6 +110,8 @@ const confirmPage = context.handler.doGet({
 });
 assert.ok(confirmPage.html.includes('本当に地図に再表示しますか？'));
 assert.ok(confirmPage.html.includes('0123456789abcdef0123456789abcdef'));
+assert.ok(confirmPage.html.includes('action="https://script.google.com/macros/s/test-deployment/exec"'));
+assert.ok(confirmPage.html.includes('target="_top"'));
 
 const restoredPage = context.handler.doPost({
   parameter: { nonce: '0123456789abcdef0123456789abcdef' },
