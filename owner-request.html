@@ -404,10 +404,10 @@
 
           <div class="contact-area" id="contactArea" hidden>
             <div class="field">
-              <label class="field-label" for="ownerEmail">店舗主様のメールアドレス<span class="required">（必須）</span></label>
-              <input type="email" id="ownerEmail" required autocomplete="email" inputmode="email" placeholder="name@example.com" aria-describedby="emailError emailGuidance">
+              <label class="field-label" for="ownerEmail">店舗主様のメールアドレス<span class="optional" id="emailRequirement">（任意）</span></label>
+              <input type="email" id="ownerEmail" autocomplete="email" inputmode="email" placeholder="name@example.com" aria-describedby="emailError emailGuidance">
               <p class="consent-error" id="emailError" role="alert" hidden>メールアドレスを入力してください。</p>
-              <p class="email-guidance" id="emailGuidance">※ご依頼内容の確認に必要なため、メールアドレスを入力してください。管理者からの連絡は、内容の確認が必要な場合に限ります。</p>
+              <p class="email-guidance" id="emailGuidance">※メールアドレスをご入力いただいた場合も、内容の確認が必要なときにのみ管理者からメールでご連絡する場合があります。<br><br>メール連絡を希望しない場合は、メールアドレスの入力は不要です。</p>
             </div>
             <div class="field">
               <label class="check-item"><input type="checkbox" id="contactConsent">内容の確認が必要な場合、管理者からメールでご連絡することがあります。</label>
@@ -484,7 +484,9 @@
       var contactArea = document.getElementById('contactArea');
       var contactConsent = document.getElementById('contactConsent');
       var ownerEmail = document.getElementById('ownerEmail');
+      var emailRequirement = document.getElementById('emailRequirement');
       var emailError = document.getElementById('emailError');
+      var emailGuidance = document.getElementById('emailGuidance');
       var consentError = document.getElementById('consentError');
       var formStatus = document.getElementById('formStatus');
       var ownerRequestForm = document.getElementById('ownerRequestForm');
@@ -687,6 +689,7 @@
         selectedType = type;
         editConfirmed = false;
         formStatus.textContent = '';
+        syncEmailRequirement();
         document.querySelectorAll('.choice-btn').forEach(function (button) {
           var active = button.dataset.requestType === type;
           button.classList.toggle('is-active', active);
@@ -753,6 +756,17 @@
 
       document.getElementById('switchToOther').addEventListener('click', function () { selectType('other'); });
 
+      function syncEmailRequirement() {
+        var isRequired = selectedType === 'edit';
+        ownerEmail.required = isRequired;
+        emailRequirement.className = isRequired ? 'required' : 'optional';
+        emailRequirement.textContent = isRequired ? '（必須）' : '（任意）';
+        emailGuidance.innerHTML = isRequired
+          ? '※ご依頼内容の確認に必要なため、メールアドレスを入力してください。管理者からの連絡は、内容の確認が必要な場合に限ります。'
+          : '※メールアドレスをご入力いただいた場合も、内容の確認が必要なときにのみ管理者からメールでご連絡する場合があります。<br><br>メール連絡を希望しない場合は、メールアドレスの入力は不要です。';
+        if (!isRequired) emailError.hidden = true;
+      }
+
       function syncEmailConsent() {
         if (contactConsent.checked) consentError.hidden = true;
       }
@@ -764,6 +778,10 @@
       });
 
       function blockMissingEmail() {
+        if (selectedType !== 'edit') {
+          emailError.hidden = true;
+          return false;
+        }
         if (ownerEmail.value.trim()) {
           emailError.hidden = true;
           return false;
