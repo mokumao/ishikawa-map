@@ -17,6 +17,7 @@ assert(html.includes('class="time-wheel-trigger"'), '時刻欄がホイール選
 assert(html.includes('id="timeWheelPicker"'), '時刻用ホイール画面があること');
 assert(html.includes('scroll-snap-type: y mandatory'), 'ホイールが中央の選択行へ止まること');
 assert(html.includes('function openTimeWheel(trigger)'), '開始・終了時刻で同じホイールを使用できること');
+assert(html.includes('#editName, #editAddress, #editHoursNote, #editClosed, #editNote, .time-wheel-trigger { color: #075fa9; }'), '指定された入力内容・備考・時刻が青色であること');
 assert(!html.includes('id="editHoursNote" required'), '営業時間の補足が任意入力であること');
 assert(html.includes('曜日別・昼夜営業などの補足 <span class="optional">（任意）</span>'), '営業時間の補足に任意表示があること');
 assert(html.includes('id="emailRequirement">（任意）</span>'), 'メールアドレスが初期状態では任意表示であること');
