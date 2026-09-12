@@ -256,6 +256,17 @@ class NewsAutomationTests(unittest.TestCase):
         self.assertEqual(published[0]['relatedCount'], 2)
         self.assertFalse(published[0]['displayTitle'].startswith('画像'))
 
+    def test_legacy_candidate_without_display_title_can_be_deduplicated(self):
+        title = '大相撲冬巡業、12月19・20日に石川多目的ドームで開催へ - 沖縄タイムス社'
+        legacy = candidate(title, MEDIA_SOURCE)
+        duplicate = candidate(title, MEDIA_SOURCE, 1)
+        legacy.pop('displayTitle')
+        fetch_news.deduplicate_candidates([legacy, duplicate])
+        duplicate_item = next(
+            item for item in (legacy, duplicate) if item['status'] == 'duplicate'
+        )
+        self.assertIn('大相撲冬巡業', duplicate_item['reviewReasons'][0])
+
     def test_same_facility_event_from_multiple_media_is_grouped(self):
         titles = [
             '沖縄・ビオスの丘を約1万輪のデンファレが彩る「らんの花祭り 秋」9月12日開幕 - PR TIMES',

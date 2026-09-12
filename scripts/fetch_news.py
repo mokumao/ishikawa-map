@@ -698,6 +698,12 @@ def representative_rank(candidate):
         candidate.get('eventStartsAt') or candidate.get('publishedAt') or '',
     )
 
+def candidate_display_title(candidate):
+    """旧形式の候補でも、通常タイトルから安全に表示用タイトルを補う。"""
+    return strip_media_suffix(strip_gallery_prefix(
+        candidate.get('displayTitle') or candidate.get('title') or ''
+    ))
+
 def deduplicate_candidates(candidates):
     """同じ出来事をまとめ、代表1件だけを公開対象として残す。"""
     count = len(candidates)
@@ -730,6 +736,7 @@ def deduplicate_candidates(candidates):
             continue
         representative = max(group, key=representative_rank)
         group_fingerprint = representative['fingerprint']
+        representative_title = candidate_display_title(representative)
         related_urls = []
         for candidate in group:
             candidate['fingerprint'] = group_fingerprint
@@ -741,7 +748,7 @@ def deduplicate_candidates(candidates):
             candidate['requiresReview'] = False
             candidate['duplicateOf'] = representative['id']
             candidate['reviewReasons'] = [
-                f'同じ内容として代表記事「{representative["displayTitle"]}」へ統合'
+                f'同じ内容として代表記事「{representative_title}」へ統合'
             ]
         representative['relatedUrls'] = list(dict.fromkeys(related_urls))
         representative['relatedCount'] = len(group) - 1
@@ -761,9 +768,7 @@ def candidate_to_article(candidate):
             pub_date = datetime.fromisoformat(published_at)
         except ValueError:
             pub_date = None
-    display_title = strip_media_suffix(
-        candidate.get('displayTitle') or candidate['title']
-    )
+    display_title = candidate_display_title(candidate)
     summary = strip_media_suffix(strip_gallery_prefix(candidate.get('summary') or ''))
     if normalize_text(summary) == normalize_text(display_title):
         summary = ''
