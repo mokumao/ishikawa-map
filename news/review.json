@@ -1,5 +1,43 @@
 {
-  "updated": "2026-09-12T09:29:56.481863+09:00",
-  "count": 0,
-  "candidates": []
+  "updated": "2026-09-13T07:47:05.221706+09:00",
+  "count": 1,
+  "candidates": [
+    {
+      "id": "20260912-region-facility-ishikawa-ishikawa-library-2cdadc79d9",
+      "title": "沖縄知事選、１３日投開票 - 金沢経済新聞",
+      "displayTitle": "沖縄知事選、13日投開票 - 金沢経済新聞",
+      "summary": "沖縄知事選、１３日投開票 金沢経済新聞",
+      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5vb01fMXBMdjJlVHZiY2FFOWJLbjBpeU9zLW5odkhlb2kxQld2M0lWZDJDMVBuZVFrejhXcXpXLWJ4WmFVNmZtaVNtVzFlSHRGTmNoUk9n?oc=5",
+      "sourceId": "region-facility-ishikawa-ishikawa-library",
+      "sourceName": "石川施設：石川図書館",
+      "sourceType": "discovery",
+      "publishedAt": "2026-09-12T18:28:15+09:00",
+      "discoveredAt": "2026-09-13T07:47:05.221706+09:00",
+      "checkedAt": "2026-09-13T07:47:05.221706+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-09-19T23:59:59+09:00",
+      "category": "news",
+      "localScore": 35,
+      "localEvidence": [
+        "取得元候補：石川施設：石川図書館"
+      ],
+      "confidence": 45,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "施設専用検索で発見したが、記事内の施設名確認が必要",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関係を確認できないため記録",
+        "石川地区との関係を確定できないため判断保留"
+      ],
+      "fingerprint": "406e19101fa48d23f733",
+      "articleFingerprint": "2cdadc79d9df34ed58d6",
+      "facilityId": "ishikawa-library",
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "relatedCount": 0
+    }
+  ]
 }
