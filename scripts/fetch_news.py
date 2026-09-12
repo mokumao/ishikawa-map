@@ -43,6 +43,7 @@ NEWS_OUTPUT_DIR = REGION['outputDir']
 NO_NEWS_FILE = f'{NEWS_OUTPUT_DIR}/no_news_dates.json'
 CANDIDATES_FILE = f'{NEWS_OUTPUT_DIR}/candidates.json'
 REVIEW_FILE = f'{NEWS_OUTPUT_DIR}/review.json'
+NEWS_DECISIONS_FILE = 'config/news-regions/ishikawa-news-decisions.json'
 
 # うるま市公式ページを入口に、公式に案内された開催情報だけを取得する。
 URUMA_BULLFIGHTING_PAGE_URL = (
@@ -396,6 +397,38 @@ def load_previous_candidates(path=CANDIDATES_FILE):
     except Exception:
         return {}
 
+def load_news_decisions(path=NEWS_DECISIONS_FILE):
+    """管理者がGitHubで確定した掲載・除外判断を読み込む。"""
+    if not os.path.exists(path):
+        return {}
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return {
+            item['candidateId']: item
+            for item in data.get('decisions', [])
+            if item.get('candidateId') and item.get('decision') in ('publish', 'reject')
+        }
+    except Exception:
+        return {}
+
+def apply_news_decisions(candidates, decisions):
+    """管理者判断を候補へ反映し、判断理由と日時を監査記録に残す。"""
+    for candidate in candidates:
+        decision = decisions.get(candidate.get('id'))
+        if not decision:
+            continue
+        publish = decision['decision'] == 'publish'
+        candidate['status'] = 'published' if publish else 'rejected'
+        candidate['requiresReview'] = False
+        candidate['manualDecision'] = decision['decision']
+        candidate['manualDecisionAt'] = decision.get('decidedAt')
+        candidate['reviewReasons'] = list(dict.fromkeys(
+            (candidate.get('reviewReasons') or []) + [
+                '管理者が掲載を承認' if publish else '管理者が掲載対象外と判断'
+            ]
+        ))
+
 def save_candidate_data(candidates, source_results):
     """個人情報を含まないRSS候補と自動判定結果を監査用JSONへ保存する。"""
     os.makedirs(NEWS_OUTPUT_DIR, exist_ok=True)
@@ -490,11 +523,56 @@ def _event_datetime(year, month, day, pub_date):
             return None
     return event_date
 
+def _relative_event_month(relative_month, pub_date):
+    """「今月」「来月」などを、記事の公開日を基準に年月へ変換する。"""
+    if pub_date is None:
+        return None
+    month_offset = {
+        '今月': 0,
+        '来月': 1,
+        '翌月': 1,
+    }.get(relative_month)
+    if month_offset is None:
+        return None
+    month_index = pub_date.year * 12 + pub_date.month - 1 + month_offset
+    return month_index // 12, month_index % 12 + 1
+
 def extract_event_period(title, summary, pub_date, force=False):
     """催しを示す記事から、単日または複数日の開催期間を読み取る。"""
     text = unicodedata.normalize('NFKC', f'{title} {summary}')
     if not force and not any(term in text for term in EVENT_SIGNAL_TERMS):
         return None, None
+
+    relative_range_match = re.search(
+        r'(今月|来月|翌月)\s*(\d{1,2})日?'
+        r'(?:\s*[（(][^）)]{0,10}[）)])?\s*'
+        r'(?:[~〜～・、,／/\-‐‑–—]|から)\s*(\d{1,2})日',
+        text,
+    )
+    if relative_range_match:
+        year_month = _relative_event_month(relative_range_match.group(1), pub_date)
+        if year_month:
+            year, month = year_month
+            start = _event_datetime(
+                str(year), str(month), relative_range_match.group(2), pub_date
+            )
+            end = _event_datetime(
+                str(year), str(month), relative_range_match.group(3), pub_date
+            )
+            if start and end and end >= start:
+                return start, end
+
+    relative_single_match = re.search(
+        r'(今月|来月|翌月)\s*(\d{1,2})日', text
+    )
+    if relative_single_match:
+        year_month = _relative_event_month(relative_single_match.group(1), pub_date)
+        if year_month:
+            year, month = year_month
+            start = _event_datetime(
+                str(year), str(month), relative_single_match.group(2), pub_date
+            )
+            return start, start
 
     range_pattern = re.compile(
         r'(?:(20\d{2})年)?\s*(\d{1,2})月\s*(\d{1,2})日?'
@@ -1076,6 +1154,7 @@ def fetch_articles():
             source_result['error'] = str(e)[:200]
         source_results.append(source_result)
 
+    apply_news_decisions(candidates, load_news_decisions())
     merge_audit_history(candidates, previous_candidates)
     deduplicate_candidates(candidates)
     articles = [

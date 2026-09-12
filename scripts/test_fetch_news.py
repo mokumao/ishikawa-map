@@ -108,6 +108,40 @@ class NewsAutomationTests(unittest.TestCase):
         self.assertEqual(start.date().isoformat(), '2026-09-22')
         self.assertEqual(end.date().isoformat(), '2026-09-22')
 
+    def test_event_period_extracts_relative_concert_date(self):
+        published = datetime(2026, 8, 21, 5, 0, tzinfo=fetch_news.JST)
+        start, end = fetch_news.extract_event_period(
+            '来月22日にタイムスリップコンサート（石川会館）',
+            '',
+            published,
+        )
+        self.assertEqual(start.date().isoformat(), '2026-09-22')
+        self.assertEqual(end.date().isoformat(), '2026-09-22')
+
+    def test_relative_event_date_requires_publication_date(self):
+        self.assertEqual(
+            fetch_news.extract_event_period(
+                '来月22日にタイムスリップコンサート（石川会館）',
+                '',
+                None,
+            ),
+            (None, None),
+        )
+
+    def test_manual_news_decision_overrides_review_status(self):
+        item = candidate('秋の自然体験イベントを開催', BIOS_SOURCE, 2)
+        self.assertEqual(item['status'], 'review')
+        fetch_news.apply_news_decisions([item], {
+            item['id']: {
+                'candidateId': item['id'],
+                'decision': 'publish',
+                'decidedAt': '2026-09-12T12:00:00+09:00',
+            }
+        })
+        self.assertEqual(item['status'], 'published')
+        self.assertFalse(item['requiresReview'])
+        self.assertEqual(item['manualDecision'], 'publish')
+
     def test_date_without_event_signal_is_not_treated_as_event(self):
         published = datetime(2026, 8, 21, 5, 0, tzinfo=fetch_news.JST)
         self.assertEqual(

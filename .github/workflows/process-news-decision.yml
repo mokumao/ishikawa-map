@@ -1,0 +1,63 @@
+name: 石川ニュース 管理者判断反映
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: news-decision-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  apply-decision:
+    if: ${{ github.actor == 'mokumao' && startsWith(github.event.issue.title, '[石川ニュース判断]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Pythonをセットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Issueの判断内容を検証して保存
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          printf '%s' "$ISSUE_BODY" > /tmp/news-decision.txt
+          python scripts/apply_news_decision.py \
+            /tmp/news-decision.txt news/candidates.json config/news-regions/ishikawa-news-decisions.json
+
+      - name: ニュースを再生成
+        env:
+          NEWS_REGION: ishikawa
+        run: |
+          pip install feedparser requests
+          python scripts/fetch_news.py
+
+      - name: 判断結果をコミット・プッシュ
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Actions Bot"
+          git add config/news-regions/ishikawa-news-decisions.json news/
+          if git diff --staged --quiet; then
+            echo "同じ判断は反映済みです。"
+            exit 0
+          fi
+          git commit -m "🗞️ 石川ニュースの管理者判断を反映 #${{ github.event.issue.number }}"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: 処理済みIssueを閉じる
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment ${{ github.event.issue.number }} --body "管理者判断を石川ニュースへ反映しました。"
+          gh issue close ${{ github.event.issue.number }}

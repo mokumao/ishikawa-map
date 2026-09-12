@@ -279,6 +279,8 @@
     min-height: 40px;
     padding: 8px 12px;
   }
+  #newsStatusFilter.review-selected,
+  #newsStatusFilter option[value="review"] { color: #d32f2f; }
   .news-review-controls button { margin-left: auto; }
   .news-candidate-list {
     display: grid;
@@ -324,6 +326,27 @@
   .candidate-related summary { color: #1257a3; cursor: pointer; font-weight: 700; }
   .candidate-related ul { margin: 8px 0 0 18px; }
   .candidate-related a { color: #1257a3; overflow-wrap: anywhere; }
+  .candidate-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .candidate-action {
+    align-items: center;
+    border: 2px solid #1565c0;
+    border-radius: 8px;
+    color: #1257a3;
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 700;
+    justify-content: center;
+    min-height: 44px;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  .candidate-action.publish { background: #1565c0; color: #fff; }
+  .candidate-action.reject { border-color: #78909c; color: #546e7a; }
   .news-review-feedback {
     color: #2e7d32;
     font-size: 12px;
@@ -450,6 +473,7 @@
     .resource-review-controls select,
     .news-review-controls select,
     .news-review-controls button { margin-left: 0; width: 100%; }
+    .candidate-action { flex: 1 1 130px; }
   }
 
   .hist-btn {
@@ -587,7 +611,7 @@
       収集した記事を、地域との関係、情報源、日時、重複から自動判定した結果です。通常の確認作業は必要ありません。
     </p>
     <p class="news-review-note">
-      明確な記事だけを自動掲載し、無関係・重複は自動除外します。判断できない記事は公開せず、監査記録として保存されます。
+      明確な記事だけを自動掲載し、無関係・重複は自動除外します。判断できない記事は公開せず、監査記録として保存されます。判断保留の記事は、GitHubで確認後に掲載・除外を確定できます。
     </p>
     <div class="news-review-summary" id="newsReviewSummary"></div>
     <div id="newsSourceWarning"></div>
@@ -886,6 +910,7 @@
 
     function render() {
       var selectedStatus = filter.value;
+      filter.classList.toggle('review-selected', selectedStatus === 'review');
       if (selectedStatus === 'hidden') {
         list.hidden = true;
         return;
@@ -917,6 +942,23 @@
         var duplicateHtml = item.duplicateOf
           ? '<p class="candidate-detail"><strong>代表候補ID：</strong>' + escapeHtml(item.duplicateOf) + '</p>'
           : '';
+        var actionHtml = '';
+        if (item.status === 'review') {
+          var issueBase = 'https://github.com/mokumao/ishikawa-map/issues/new';
+          var issueTitle = '[石川ニュース判断] ' + displayTitle.slice(0, 120);
+          var issueBody = function (decision) {
+            return '候補ID: ' + item.id + '\n判断: ' + decision +
+              '\n\n原典を確認し、この内容でよければIssueを作成してください。\n記事: ' + (url || 'URLなし');
+          };
+          var publishUrl = issueBase + '?title=' + encodeURIComponent(issueTitle) +
+            '&body=' + encodeURIComponent(issueBody('掲載'));
+          var rejectUrl = issueBase + '?title=' + encodeURIComponent(issueTitle) +
+            '&body=' + encodeURIComponent(issueBody('除外'));
+          actionHtml = '<div class="candidate-actions" aria-label="この記事の判断">' +
+            '<a class="candidate-action publish" href="' + escapeHtml(publishUrl) + '" target="_blank" rel="noopener">掲載する</a>' +
+            '<a class="candidate-action reject" href="' + escapeHtml(rejectUrl) + '" target="_blank" rel="noopener">除外する</a>' +
+          '</div>';
+        }
         return '<article class="news-candidate" data-id="' + escapeHtml(item.id) + '" data-status="' + escapeHtml(item.status) + '">' +
           '<div class="candidate-badges">' +
             '<span class="candidate-badge ' + escapeHtml(item.status) + '">' + escapeHtml(statusLabel(item.status)) + '</span>' +
@@ -930,7 +972,7 @@
           '<p class="candidate-meta">' + escapeHtml(item.sourceName) + ' ／ ' + escapeHtml(formatDate(item.publishedAt)) + '</p>' +
           '<p class="candidate-detail"><strong>地域根拠：</strong>' + evidence + '</p>' +
           '<p class="candidate-detail"><strong>処理理由：</strong>' + reasons + '</p>' +
-          duplicateHtml + relatedHtml +
+          duplicateHtml + relatedHtml + actionHtml +
         '</article>';
       }).join('');
     }

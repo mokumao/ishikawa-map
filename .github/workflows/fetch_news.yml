@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   fetch-news:
@@ -28,7 +29,25 @@ jobs:
       - name: ニュース収集スクリプトを実行
         env:
           NEWS_REGION: ishikawa
-        run: python scripts/fetch_news.py
+        run: |
+          cp news/candidates.json /tmp/previous-news-candidates.json
+          python scripts/fetch_news.py
+
+      - name: 新しい判断保留を確認
+        run: |
+          python scripts/prepare_news_review_notification.py \
+            /tmp/previous-news-candidates.json news/candidates.json /tmp/news-review-notification.md
+
+      - name: 判断保留を管理者へ通知
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -s /tmp/news-review-notification.md ]; then
+            gh issue create \
+              --title "石川ニュースに新しい判断保留があります $(TZ='Asia/Tokyo' date +'%Y-%m-%d')" \
+              --body-file /tmp/news-review-notification.md \
+              --assignee mokumao
+          fi
 
       - name: 変更をコミット・プッシュ
         run: |
