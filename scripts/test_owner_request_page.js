@@ -13,6 +13,10 @@ assert(html.includes('id="editHoursStartMinute"'), '開始時刻の分を選べ�
 assert(html.includes("var minutes = ['00', '10', '20', '30', '40', '50']"), '分の選択肢が10分刻みであること');
 assert(html.includes('id="editHoursEndHour"'), '終了時刻の時を1時間単位で選べること');
 assert(html.includes('id="editHoursEndMinute"'), '終了時刻の分を選べること');
+assert(html.includes('class="time-wheel-trigger"'), '時刻欄がホイール選択画面を開くこと');
+assert(html.includes('id="timeWheelPicker"'), '時刻用ホイール画面があること');
+assert(html.includes('scroll-snap-type: y mandatory'), 'ホイールが中央の選択行へ止まること');
+assert(html.includes('function openTimeWheel(trigger)'), '開始・終了時刻で同じホイールを使用できること');
 assert(!html.includes('id="editHoursNote" required'), '営業時間の補足が任意入力であること');
 assert(html.includes('曜日別・昼夜営業などの補足 <span class="optional">（任意）</span>'), '営業時間の補足に任意表示があること');
 assert(html.includes('id="emailRequirement">（任意）</span>'), 'メールアドレスが初期状態では任意表示であること');

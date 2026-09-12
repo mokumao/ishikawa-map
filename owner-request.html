@@ -115,23 +115,27 @@
     .hours-picker-item label, .hours-note-label { color: #52636e; font-size: 12px; }
     .hours-note-label { margin-top: 40px; font-size: 15px; white-space: nowrap; }
     .hours-picker-separator { padding-bottom: 13px; font-weight: 700; }
-    .time-selects { display: grid; grid-template-columns: 76px auto 76px auto; gap: 4px; align-items: center; justify-content: start; }
-    .time-selects select {
-      width: 76px;
-      min-height: 46px;
-      padding: 8px 4px;
+    .time-selects { display: flex; justify-content: start; }
+    .time-value-select { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+    .time-wheel-trigger {
+      min-width: 188px;
+      min-height: 54px;
+      padding: 8px 14px;
       border: 1.5px solid #aebdc7;
       border-radius: 9px;
       background: #fff;
       color: #24323d;
-      font-size: 16px;
+      font: inherit;
+      font-size: 20px;
+      font-weight: 600;
       text-align: center;
-      text-align-last: center;
+      cursor: pointer;
     }
-    .time-selects select:focus { outline: 3px solid rgba(22, 137, 216, .2); border-color: #1689d8; }
-    .time-unit { color: #52636e; font-size: 16px; font-weight: 700; }
+    .time-wheel-trigger:focus { outline: 3px solid rgba(22, 137, 216, .2); border-color: #1689d8; }
+    .time-wheel-trigger .time-unit { margin: 0 8px 0 4px; color: #52636e; font-size: 18px; font-weight: 700; }
+    .time-wheel-trigger .time-unit:last-child { margin-right: 0; }
     #editHoursNote { min-height: 80px; }
-    .edit-field.is-changed input, .edit-field.is-changed textarea, .edit-field.is-changed select { border-color: #1689d8; background: #f2f9fe; }
+    .edit-field.is-changed input, .edit-field.is-changed textarea, .edit-field.is-changed select, .edit-field.is-changed .time-wheel-trigger { border-color: #1689d8; background: #f2f9fe; }
     .changed-mark { display: none; margin-left: 6px; color: #0878c9; font-size: 12px; }
     .edit-field.is-changed .changed-mark { display: inline; }
     .edit-summary { display: grid; gap: 12px; max-height: min(52dvh, 420px); margin-top: 16px; overflow-y: auto; text-align: left; }
@@ -268,6 +272,17 @@
       .hours-picker-separator { padding: 0; text-align: center; }
       .time-selects { justify-content: center; }
     }
+    .time-wheel-dialog { width: min(100%, 360px); padding: 20px; border-radius: 20px; background: #fff; box-shadow: 0 16px 40px rgba(0, 0, 0, .28); }
+    .time-wheel-dialog h2 { margin: 0 0 14px; color: #17313f; font-size: 20px; text-align: center; }
+    .time-wheel-columns { position: relative; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; }
+    .time-wheel-columns::after { content: ''; position: absolute; left: 0; right: 0; top: 76px; height: 48px; border-radius: 14px; background: #eef3f6; pointer-events: none; }
+    .time-wheel-column { position: relative; z-index: 1; height: 200px; padding: 76px 0; overflow-y: auto; scroll-snap-type: y mandatory; scrollbar-width: none; }
+    .time-wheel-column::-webkit-scrollbar { display: none; }
+    .time-wheel-option { display: block; width: 100%; height: 48px; border: 0; padding: 0; color: #7a858d; background: transparent; font: inherit; font-size: 18px; scroll-snap-align: center; cursor: pointer; }
+    .time-wheel-option.is-selected { color: #24323d; font-size: 22px; font-weight: 700; }
+    .time-wheel-colon { position: relative; z-index: 2; font-size: 24px; font-weight: 700; }
+    .time-wheel-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+    .time-wheel-actions button { min-height: 48px; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; }
     @media (max-width: 359px) {
       .content { width: min(100% - 16px, 680px); margin-top: 8px; }
       .card { padding: 16px; }
@@ -367,16 +382,18 @@
                   <div class="hours-picker-item">
                     <span>開始時間</span>
                     <div class="time-selects">
-                      <select id="editHoursStartHour" aria-label="開始時刻（時）"></select><span class="time-unit">時</span>
-                      <select id="editHoursStartMinute" aria-label="開始時刻（分）"></select><span class="time-unit">分</span>
+                      <select class="time-value-select" id="editHoursStartHour" aria-label="開始時刻（時）" tabindex="-1"></select>
+                      <select class="time-value-select" id="editHoursStartMinute" aria-label="開始時刻（分）" tabindex="-1"></select>
+                      <button type="button" class="time-wheel-trigger" data-hour-select="editHoursStartHour" data-minute-select="editHoursStartMinute" data-title="開始時間" aria-haspopup="dialog"><span class="time-hour-display">--</span><span class="time-unit">時</span><span class="time-minute-display">--</span><span class="time-unit">分</span></button>
                     </div>
                   </div>
                   <span class="hours-picker-separator" aria-hidden="true">〜</span>
                   <div class="hours-picker-item">
                     <span>終了時間</span>
                     <div class="time-selects">
-                      <select id="editHoursEndHour" aria-label="終了時刻（時）"></select><span class="time-unit">時</span>
-                      <select id="editHoursEndMinute" aria-label="終了時刻（分）"></select><span class="time-unit">分</span>
+                      <select class="time-value-select" id="editHoursEndHour" aria-label="終了時刻（時）" tabindex="-1"></select>
+                      <select class="time-value-select" id="editHoursEndMinute" aria-label="終了時刻（分）" tabindex="-1"></select>
+                      <button type="button" class="time-wheel-trigger" data-hour-select="editHoursEndHour" data-minute-select="editHoursEndMinute" data-title="終了時間" aria-haspopup="dialog"><span class="time-hour-display">--</span><span class="time-unit">時</span><span class="time-minute-display">--</span><span class="time-unit">分</span></button>
                     </div>
                   </div>
                 </div>
@@ -457,6 +474,21 @@
     </div>
   </div>
 
+  <div class="confirmation-overlay" id="timeWheelPicker" hidden>
+    <div class="time-wheel-dialog" role="dialog" aria-modal="true" aria-labelledby="timeWheelTitle">
+      <h2 id="timeWheelTitle">時間を選択</h2>
+      <div class="time-wheel-columns">
+        <div class="time-wheel-column" id="timeWheelHours" role="listbox" aria-label="時"></div>
+        <span class="time-wheel-colon" aria-hidden="true">:</span>
+        <div class="time-wheel-column" id="timeWheelMinutes" role="listbox" aria-label="分"></div>
+      </div>
+      <div class="time-wheel-actions">
+        <button type="button" class="confirmation-cancel" id="cancelTimeWheel">キャンセル</button>
+        <button type="button" class="edit-confirmation" id="applyTimeWheel">決定</button>
+      </div>
+    </div>
+  </div>
+
   <nav class="footer-bar" aria-label="ページ移動">
     <div class="footer-inner">
       <a href="index.html?tab=map" class="footer-btn" id="mapBtn">地図</a>
@@ -499,6 +531,13 @@
       var cancelEdit = document.getElementById('cancelEdit');
       var confirmEdit = document.getElementById('confirmEdit');
       var editConfirmed = false;
+      var timeWheelPicker = document.getElementById('timeWheelPicker');
+      var timeWheelTitle = document.getElementById('timeWheelTitle');
+      var timeWheelHours = document.getElementById('timeWheelHours');
+      var timeWheelMinutes = document.getElementById('timeWheelMinutes');
+      var cancelTimeWheel = document.getElementById('cancelTimeWheel');
+      var applyTimeWheel = document.getElementById('applyTimeWheel');
+      var activeTimeTrigger = null;
       var requestCard = document.getElementById('requestCard');
       var successCard = document.getElementById('successCard');
       var successMessage = document.getElementById('successMessage');
@@ -545,6 +584,90 @@
           select.appendChild(option);
         });
       }
+
+      function syncTimeTrigger(trigger) {
+        var hourSelect = document.getElementById(trigger.dataset.hourSelect);
+        var minuteSelect = document.getElementById(trigger.dataset.minuteSelect);
+        trigger.querySelector('.time-hour-display').textContent = hourSelect.value || '--';
+        trigger.querySelector('.time-minute-display').textContent = minuteSelect.value || '--';
+        trigger.setAttribute('aria-label', trigger.dataset.title + ' ' + (getSelectedTime(hourSelect, minuteSelect) || '未指定'));
+      }
+
+      function selectWheelOption(column, option) {
+        column.querySelectorAll('.time-wheel-option').forEach(function (item) {
+          item.classList.toggle('is-selected', item === option);
+          item.setAttribute('aria-selected', item === option ? 'true' : 'false');
+        });
+      }
+
+      function populateWheelColumn(column, values, selectedValue) {
+        column.textContent = '';
+        [''].concat(values).forEach(function (value) {
+          var option = document.createElement('button');
+          option.type = 'button';
+          option.className = 'time-wheel-option';
+          option.dataset.value = value;
+          option.textContent = value || '--';
+          option.setAttribute('role', 'option');
+          option.addEventListener('click', function () {
+            selectWheelOption(column, option);
+            option.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          });
+          column.appendChild(option);
+        });
+        var selected = Array.from(column.children).find(function (item) { return item.dataset.value === selectedValue; }) || column.firstElementChild;
+        selectWheelOption(column, selected);
+        requestAnimationFrame(function () { selected.scrollIntoView({ block: 'center' }); });
+      }
+
+      function syncWheelFromScroll(column) {
+        var options = Array.from(column.querySelectorAll('.time-wheel-option'));
+        if (!options.length) return;
+        var index = Math.max(0, Math.min(options.length - 1, Math.round(column.scrollTop / 48)));
+        selectWheelOption(column, options[index]);
+      }
+
+      function openTimeWheel(trigger) {
+        activeTimeTrigger = trigger;
+        var hourSelect = document.getElementById(trigger.dataset.hourSelect);
+        var minuteSelect = document.getElementById(trigger.dataset.minuteSelect);
+        var hours = Array.from({ length: 24 }, function (_, index) { return String(index).padStart(2, '0'); });
+        var minutes = ['00', '10', '20', '30', '40', '50'];
+        timeWheelTitle.textContent = trigger.dataset.title + 'を選択';
+        timeWheelPicker.hidden = false;
+        document.body.classList.add('confirmation-open');
+        populateWheelColumn(timeWheelHours, hours, hourSelect.value);
+        populateWheelColumn(timeWheelMinutes, minutes, minuteSelect.value);
+        cancelTimeWheel.focus();
+      }
+
+      function closeTimeWheel() {
+        timeWheelPicker.hidden = true;
+        document.body.classList.remove('confirmation-open');
+        if (activeTimeTrigger) activeTimeTrigger.focus();
+      }
+
+      timeWheelHours.addEventListener('scroll', function () { syncWheelFromScroll(timeWheelHours); });
+      timeWheelMinutes.addEventListener('scroll', function () { syncWheelFromScroll(timeWheelMinutes); });
+      document.querySelectorAll('.time-wheel-trigger').forEach(function (trigger) {
+        trigger.addEventListener('click', function () { openTimeWheel(trigger); });
+      });
+      cancelTimeWheel.addEventListener('click', closeTimeWheel);
+      applyTimeWheel.addEventListener('click', function () {
+        if (!activeTimeTrigger) return;
+        var hourSelect = document.getElementById(activeTimeTrigger.dataset.hourSelect);
+        var minuteSelect = document.getElementById(activeTimeTrigger.dataset.minuteSelect);
+        var selectedHour = timeWheelHours.querySelector('.time-wheel-option.is-selected');
+        var selectedMinute = timeWheelMinutes.querySelector('.time-wheel-option.is-selected');
+        hourSelect.value = selectedHour ? selectedHour.dataset.value : '';
+        minuteSelect.value = selectedMinute ? selectedMinute.dataset.value : '';
+        [hourSelect, minuteSelect].forEach(function (select) { select.dispatchEvent(new Event('input', { bubbles: true })); });
+        syncTimeTrigger(activeTimeTrigger);
+        closeTimeWheel();
+      });
+      timeWheelPicker.addEventListener('click', function (event) {
+        if (event.target === timeWheelPicker) closeTimeWheel();
+      });
 
       function getSelectedTime(hourSelect, minuteSelect) {
         if (!hourSelect.value || !minuteSelect.value) return '';
@@ -642,6 +765,7 @@
             updateEditFieldState();
           }); });
         });
+        document.querySelectorAll('.time-wheel-trigger').forEach(syncTimeTrigger);
         updateEditFieldState();
       }
 
@@ -877,6 +1001,7 @@
       document.addEventListener('keydown', function (event) {
         if (event.key === 'Escape' && !deleteConfirmation.hidden) closeDeleteConfirmation();
         if (event.key === 'Escape' && !editConfirmation.hidden) closeEditConfirmation();
+        if (event.key === 'Escape' && !timeWheelPicker.hidden) closeTimeWheel();
       });
 
       ownerRequestForm.addEventListener('submit', function (event) {
