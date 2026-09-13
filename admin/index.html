@@ -281,6 +281,7 @@
   }
   #newsStatusFilter.review-selected,
   #newsStatusFilter option[value="review"] { color: #d32f2f; }
+  #newsStatusFilter { width: min(560px, 100%); }
   .news-review-controls button { margin-left: auto; }
   .news-candidate-list {
     display: grid;
@@ -616,13 +617,13 @@
     <div class="news-review-controls">
       <label for="newsStatusFilter">表示</label>
       <select id="newsStatusFilter">
-        <option value="hidden">非表示</option>
-        <option value="published">自動掲載</option>
-        <option value="review">判断保留・監査記録</option>
-        <option value="rejected">自動除外</option>
-        <option value="duplicate">重複統合</option>
-        <option value="expired">期限切れ・過去記録</option>
-        <option value="">すべて</option>
+        <option value="hidden">非表示（記事一覧を閉じる）</option>
+        <option value="published">自動掲載（現在公開している記事）</option>
+        <option value="review">判断保留・監査記録（内容の確認が必要な記事）</option>
+        <option value="rejected">自動除外（地域外など掲載しない記事）</option>
+        <option value="duplicate">重複統合（同じ内容を代表記事へまとめた記録）</option>
+        <option value="expired">期限切れ・過去記録（掲載期間を終えた記事）</option>
+        <option value="">すべて（すべての判定結果を表示）</option>
       </select>
       <button type="button" id="copyNewsDecisions">判断保留を相談用にコピー</button>
     </div>
