@@ -434,6 +434,7 @@
   .resource-list {
     display: grid;
     gap: 12px;
+    grid-template-columns: minmax(0, 1fr);
   }
   .resource-list[hidden] { display: none; }
   .resource-item {
@@ -464,9 +465,6 @@
   .resource-source-list { list-style: none; margin-top: 4px; }
   .resource-source-list li + li { margin-top: 4px; }
   .resource-source-list a { color: #1257a3; }
-  @media (min-width: 760px) {
-    .resource-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  }
   @media (max-width: 600px) {
     .resource-review-controls label,
     .news-review-controls label { width: 100%; }
