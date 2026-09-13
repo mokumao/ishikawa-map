@@ -28,9 +28,24 @@
   "reviewReasons": [],
   "fingerprint": "normalized-event-key",
   "relatedUrls": [],
-  "duplicateOf": null
+  "duplicateOf": null,
+  "contentCheck": {
+    "status": "checked",
+    "checkedAt": "2026-08-29T12:05:00+09:00",
+    "requestedUrl": "https://news.example/redirect",
+    "finalUrl": "https://example.jp/original",
+    "pageTitle": "原典で確認した表題",
+    "matchedFacilities": ["石川多目的ドーム"],
+    "venue": "石川多目的ドーム",
+    "organizer": "主催者名",
+    "eventStartsAt": "2026-09-20T13:00:00+09:00",
+    "eventEndsAt": "2026-09-20T16:00:00+09:00",
+    "error": ""
+  }
 }
 ```
+
+`contentCheck.status`は、リンク先の主要部分を取得できた`checked`、取得制限・有料記事・タイムアウト等の`unavailable`、見出しの段階で地域根拠が基準未満の`skipped`、外部URLを持たない投稿等の`not-applicable`を使う。本文自体は保存せず、確認結果と根拠だけを監査記録に残す。
 
 ## 必須項目
 

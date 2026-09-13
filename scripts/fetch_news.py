@@ -10,10 +10,12 @@ import os
 import re
 import json
 import hashlib
+import ipaddress
 import unicodedata
 from datetime import datetime, timezone, timedelta
 from html import unescape, escape
-from urllib.parse import urljoin, urlsplit, urlunsplit
+from html.parser import HTMLParser
+from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 
 from region_news_config import build_rss_sources, facility_aliases, load_region_profile
 
@@ -32,6 +34,10 @@ EVENT_SIGNAL_TERMS = (
     '開催', '催し', 'イベント', '大会', '祭り', 'まつり', '巡業', '公演',
     'コンサート', 'ライブ', '講座', '募集', '日程', '開幕', '開演',
 )
+ARTICLE_FETCH_TIMEOUT_SECONDS = 15
+ARTICLE_FETCH_MAX_BYTES = 512 * 1024
+ARTICLE_CONTEXT_MAX_CHARS = 4000
+ARTICLE_CHECK_CACHE = {}
 
 # 「ニュースがなかった日」を記録するファイル（日をまたいでも過去分の
 # 「〇月△日のニュースはありません」表示を消さずに残すための永続化）
@@ -98,8 +104,13 @@ MEDIA_SUFFIXES = [
 
 EVENT_TERMS = [
     '祭り', 'まつり', 'フェスティバル', 'フェス', '大会', '講座',
-    '展示会', '企画展', '公演', 'イベント',
+    '展示会', '企画展', '公演', 'イベント', '巡業', 'コンサート',
+    'ライブ', '闘牛', 'エイサー',
 ]
+EVENT_IDENTITY_TERMS = (
+    '巡業', 'コンサート', 'ライブ', '闘牛', 'エイサー', 'カーニバル',
+    'フェスティバル', '企画展', '講座', '神祭', '運動会',
+)
 
 # 固定取得先に加え、行政、催し、施設、学校、防災、福祉、交通、商業を
 # 地域設定から漏れなく探索する。新地域ではJSONを追加し、ここは変更しない。
@@ -173,6 +184,10 @@ def extract_event_markers(title):
     if before_parenthesis:
         segments.append(before_parenthesis)
     markers = []
+    markers.extend(
+        f'term:{normalize_text(term)}'
+        for term in EVENT_IDENTITY_TERMS if term in clean
+    )
     for segment in segments:
         if any(term in segment for term in EVENT_TERMS):
             marker = normalize_text(segment)
@@ -181,12 +196,195 @@ def extract_event_markers(title):
     return list(dict.fromkeys(markers))
 
 def canonical_url(url):
-    """候補識別用にURLのフラグメントを除去する。"""
+    """候補識別用にフラグメントと追跡用クエリを除去する。"""
     try:
         parts = urlsplit(url or '')
-        return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), parts.path, parts.query, ''))
+        tracking_keys = {
+            'oc', 'hl', 'gl', 'ceid', 'utm_source', 'utm_medium',
+            'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid',
+        }
+        query = urlencode([
+            (key, value) for key, value in parse_qsl(parts.query, keep_blank_values=True)
+            if key.lower() not in tracking_keys
+        ])
+        return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), parts.path, query, ''))
     except Exception:
         return url or ''
+
+def is_safe_article_url(url):
+    """RSS由来URLでも内部ネットワークへ接続しないよう公開HTTP(S)だけ許可する。"""
+    try:
+        parts = urlsplit(url or '')
+        if parts.scheme.lower() not in ('http', 'https') or not parts.hostname:
+            return False
+        hostname = parts.hostname.lower().rstrip('.')
+        if hostname in ('localhost', 'localhost.localdomain') or hostname.endswith('.local'):
+            return False
+        try:
+            address = ipaddress.ip_address(hostname)
+        except ValueError:
+            return True
+        return not (
+            address.is_private or address.is_loopback or address.is_link_local
+            or address.is_multicast or address.is_reserved or address.is_unspecified
+        )
+    except Exception:
+        return False
+
+
+class ArticleHTMLParser(HTMLParser):
+    """記事確認に必要な見出し・説明・本文ブロックだけを抽出する。"""
+
+    CAPTURE_TAGS = {'title', 'h1', 'h2', 'h3', 'p', 'li'}
+    SKIP_TAGS = {'script', 'style', 'noscript', 'svg'}
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.page_title = ''
+        self.description = ''
+        self.canonical = ''
+        self.blocks = []
+        self._skip_depth = 0
+        self._capture_tag = None
+        self._capture_parts = []
+
+    def handle_starttag(self, tag, attrs):
+        tag = tag.lower()
+        attrs = {str(key).lower(): value for key, value in attrs}
+        if tag in self.SKIP_TAGS:
+            self._skip_depth += 1
+            return
+        if self._skip_depth:
+            return
+        if tag == 'meta':
+            name = (attrs.get('name') or attrs.get('property') or '').lower()
+            if name in ('description', 'og:description', 'twitter:description'):
+                self.description = self.description or strip_html(attrs.get('content') or '')
+        elif tag == 'link':
+            rel = (attrs.get('rel') or '').lower()
+            if 'canonical' in rel:
+                self.canonical = attrs.get('href') or self.canonical
+        elif tag in self.CAPTURE_TAGS and self._capture_tag is None:
+            self._capture_tag = tag
+            self._capture_parts = []
+
+    def handle_endtag(self, tag):
+        tag = tag.lower()
+        if tag in self.SKIP_TAGS and self._skip_depth:
+            self._skip_depth -= 1
+            return
+        if self._skip_depth or tag != self._capture_tag:
+            return
+        text = re.sub(r'\s+', ' ', ''.join(self._capture_parts)).strip()
+        if text:
+            if tag == 'title':
+                self.page_title = text
+            else:
+                self.blocks.append(text)
+        self._capture_tag = None
+        self._capture_parts = []
+
+    def handle_data(self, data):
+        if not self._skip_depth and self._capture_tag:
+            self._capture_parts.append(data)
+
+
+def relevant_article_context(parser):
+    """公開日などを開催日と誤認しないよう、催し・地域に関係する段落を選ぶ。"""
+    signal_terms = tuple(dict.fromkeys(
+        EVENT_SIGNAL_TERMS + tuple(FACILITY_TERMS) + tuple(EXACT_REGION_PHRASES)
+        + ('主催', '主催者', '会場', '場所', '日時', '期間')
+    ))
+    selected = [parser.page_title, parser.description]
+    selected.extend(
+        block for block in parser.blocks
+        if any(term in block for term in signal_terms)
+    )
+    context = re.sub(r'\s+', ' ', ' '.join(item for item in selected if item)).strip()
+    return context[:ARTICLE_CONTEXT_MAX_CHARS]
+
+
+def inspect_article_page(url):
+    """リンク先を安全に1回取得し、監査情報と一時的な本文文脈を返す。"""
+    import urllib.request
+    cache_key = canonical_url(url)
+    cached = ARTICLE_CHECK_CACHE.get(cache_key)
+    if cached:
+        return dict(cached[0]), cached[1]
+    result = {
+        'status': 'unavailable',
+        'checkedAt': now_jst.isoformat(),
+        'requestedUrl': url,
+        'finalUrl': url,
+        'pageTitle': '',
+        'matchedFacilities': [],
+        'organizer': '',
+        'error': '',
+    }
+    if not is_safe_article_url(url):
+        result['error'] = '公開HTTP(S) URLではないため取得しない'
+        ARTICLE_CHECK_CACHE[cache_key] = (dict(result), '')
+        return result, ''
+    try:
+        request = urllib.request.Request(
+            url,
+            headers={
+                'User-Agent': (
+                    'IshikawaMapNewsBot/1.0 '
+                    '(https://github.com/mokumao/ishikawa-map)'
+                ),
+                'Accept': 'text/html,application/xhtml+xml',
+            },
+        )
+        with urllib.request.urlopen(request, timeout=ARTICLE_FETCH_TIMEOUT_SECONDS) as response:
+            final_url = response.geturl()
+            content_type = response.headers.get_content_type()
+            charset = response.headers.get_content_charset() or 'utf-8'
+            payload = response.read(ARTICLE_FETCH_MAX_BYTES + 1)
+        result['finalUrl'] = final_url
+        if not is_safe_article_url(final_url):
+            result['error'] = '安全でないURLへ転送されたため中止'
+            ARTICLE_CHECK_CACHE[cache_key] = (dict(result), '')
+            return result, ''
+        if content_type not in ('text/html', 'application/xhtml+xml'):
+            result['error'] = f'HTMLではないため本文未確認 ({content_type})'
+            ARTICLE_CHECK_CACHE[cache_key] = (dict(result), '')
+            return result, ''
+        truncated_payload = len(payload) > ARTICLE_FETCH_MAX_BYTES
+        payload = payload[:ARTICLE_FETCH_MAX_BYTES]
+        html_text = payload.decode(charset, errors='replace')
+        parser = ArticleHTMLParser()
+        parser.feed(html_text)
+        context = relevant_article_context(parser)
+        canonical = urljoin(final_url, parser.canonical) if parser.canonical else final_url
+        if is_safe_article_url(canonical):
+            result['finalUrl'] = canonical
+        result['pageTitle'] = truncate(parser.page_title, 160)
+        result['matchedFacilities'] = list(dict.fromkeys(
+            term for term in FACILITY_TERMS if term in context
+        ))
+        organizer = re.search(r'(?:主催|主催者)\s*[：:]?\s*([^。\n]{2,80})', context)
+        if organizer:
+            result['organizer'] = organizer.group(1).strip()
+        result['status'] = 'checked' if context else 'unavailable'
+        if not context:
+            result['error'] = '記事本文の主要部分を抽出できない'
+        elif truncated_payload:
+            result['note'] = '取得上限内の先頭部分を確認'
+        ARTICLE_CHECK_CACHE[cache_key] = (dict(result), context)
+        return result, context
+    except Exception as exc:
+        result['error'] = f'{type(exc).__name__}: {str(exc)[:160]}'
+        ARTICLE_CHECK_CACHE[cache_key] = (dict(result), '')
+        return result, ''
+
+
+def detect_facility_id(text):
+    """見出し・本文にある確認済み施設名から施設IDを補う。"""
+    for facility in REGION['verifiedFacilities']:
+        if any(alias in text for alias in facility.get('aliases', [])):
+            return facility.get('id')
+    return None
 
 def assess_candidate(title, summary, source, pub_date, link):
     """Skillの初期基準に沿って地域関連度と信頼度を機械判定する。"""
@@ -315,7 +513,8 @@ def classify_candidate(score, confidence, text, pub_date, link):
     return 'published', f'{REGION_NAME}地区・日時・情報源の自動掲載条件を満たした'
 
 def build_candidate(title, summary, link, source, pub_date, previous=None,
-                    event_starts_at=None, event_ends_at=None, category='news'):
+                    event_starts_at=None, event_ends_at=None, category='news',
+                    analysis_text='', content_check=None):
     """公開記事とは分離した、自動判定・監査用の候補データを作る。"""
     previous = previous or {}
     normalized_title = normalize_text(title)
@@ -328,13 +527,23 @@ def build_candidate(title, summary, link, source, pub_date, previous=None,
     effective_date = event_starts_at or pub_date
     date_prefix = effective_date.strftime('%Y%m%d') if effective_date else now_jst.strftime('%Y%m%d')
     candidate_id = f'{date_prefix}-{source["id"]}-{article_fingerprint[:10]}'
+    assessment_summary = f'{summary} {analysis_text}'.strip()
     score, evidence, confidence, reasons = assess_candidate(
-        title, summary, source, pub_date, link
+        title, assessment_summary, source, pub_date, link
     )
     status, decision_reason = classify_candidate(
-        score, confidence, f'{title} {summary}', effective_date, link
+        score, confidence, f'{title} {assessment_summary}', effective_date, link
     )
     reasons.append(decision_reason)
+    if content_check:
+        if content_check.get('status') == 'checked':
+            confidence = min(100, confidence + 10)
+            reasons.append('リンク先ページの主要部分を確認')
+        else:
+            reasons.append(
+                'リンク先本文を取得できず: '
+                + (content_check.get('error') or '理由不明')
+            )
 
     expires_at = None
     if event_ends_at:
@@ -370,10 +579,18 @@ def build_candidate(title, summary, link, source, pub_date, previous=None,
         'reviewReasons': reasons,
         'fingerprint': fingerprint,
         'articleFingerprint': article_fingerprint,
-        'facilityId': source.get('facilityId'),
-        'eventMarkers': extract_event_markers(title),
+        'facilityId': source.get('facilityId') or detect_facility_id(
+            f'{title} {assessment_summary}'
+        ),
+        'eventMarkers': extract_event_markers(
+            f'{title} {(content_check or {}).get("pageTitle", "")}'
+        ),
         'relatedUrls': [],
         'duplicateOf': None,
+        'contentCheck': content_check or {
+            'status': 'not-applicable',
+            'checkedAt': now_jst.isoformat(),
+        },
     }
 
 def load_previous_candidates(path=CANDIDATES_FILE):
@@ -743,6 +960,16 @@ def fetch_reader_posts():
 
 def same_event(candidate_a, candidate_b):
     """タイトル正規化、または同じ施設の明示的な催し名で同一内容か判定する。"""
+    url_a = canonical_url(
+        (candidate_a.get('contentCheck') or {}).get('finalUrl')
+        or candidate_a.get('url')
+    )
+    url_b = canonical_url(
+        (candidate_b.get('contentCheck') or {}).get('finalUrl')
+        or candidate_b.get('url')
+    )
+    if url_a and url_a == url_b:
+        return True
     if candidate_a.get('fingerprint') == candidate_b.get('fingerprint'):
         return True
     facility_a = candidate_a.get('facilityId')
@@ -762,6 +989,12 @@ def representative_rank(candidate):
     status_rank = {'published': 3, 'review': 2, 'rejected': 1}.get(
         candidate.get('status'), 0
     )
+    content_rank = {
+        'checked': 3,
+        'unavailable': 2,
+        'skipped': 1,
+        'not-applicable': 0,
+    }.get((candidate.get('contentCheck') or {}).get('status'), 0)
     clean_title = candidate.get('displayTitle') or candidate.get('title') or ''
     is_clean_title = int(clean_title == (candidate.get('title') or ''))
     source_rank = {'official': 3, 'media': 2, 'discovery': 1}.get(
@@ -769,6 +1002,7 @@ def representative_rank(candidate):
     )
     return (
         status_rank,
+        content_rank,
         is_clean_title,
         source_rank,
         int(candidate.get('confidence') or 0),
@@ -1042,6 +1276,20 @@ def fetch_official_bullfighting_candidates(previous_candidates):
                 event_starts_at=next_date,
                 event_ends_at=last_date,
                 category='event',
+                analysis_text=strip_html(detail_html),
+                content_check={
+                    'status': 'checked',
+                    'checkedAt': now_jst.isoformat(),
+                    'requestedUrl': URUMA_BULLFIGHTING_PAGE_URL,
+                    'finalUrl': detail_url,
+                    'pageTitle': '観光闘牛開催日程',
+                    'matchedFacilities': ['石川多目的ドーム'],
+                    'venue': '石川多目的ドーム',
+                    'organizer': '',
+                    'eventStartsAt': next_date.isoformat(),
+                    'eventEndsAt': last_date.isoformat(),
+                    'error': '',
+                },
             )
             previous = previous_candidates.get(candidate['id'])
             if previous:
@@ -1088,6 +1336,8 @@ def fetch_articles():
             'entryCount': 0,
             'candidateCount': 0,
             'publishedCount': 0,
+            'contentCheckedCount': 0,
+            'contentUnavailableCount': 0,
             'error': None,
         }
         try:
@@ -1131,6 +1381,61 @@ def fetch_articles():
                 ):
                     continue
 
+                preliminary = build_candidate(
+                    title,
+                    summary,
+                    link,
+                    source,
+                    pub_date,
+                    event_starts_at=event_starts_at,
+                    event_ends_at=event_ends_at,
+                    category='event' if event_starts_at else 'news',
+                )
+                should_check_content = (
+                    preliminary.get('status') != 'rejected'
+                    or bool(source.get('facilityId'))
+                )
+                article_context = ''
+                if should_check_content:
+                    content_check, article_context = inspect_article_page(link)
+                    if content_check.get('status') == 'checked':
+                        source_result['contentCheckedCount'] += 1
+                    else:
+                        source_result['contentUnavailableCount'] += 1
+                    event_starts_at, event_ends_at = extract_event_period(
+                        title,
+                        f'{summary} {article_context}'.strip(),
+                        pub_date,
+                        force=bool(source.get('extractEventDate')),
+                    )
+                    content_check['eventStartsAt'] = (
+                        event_starts_at.isoformat() if event_starts_at else None
+                    )
+                    content_check['eventEndsAt'] = (
+                        event_ends_at.isoformat() if event_ends_at else None
+                    )
+                    content_check['venue'] = (
+                        content_check.get('matchedFacilities') or ['']
+                    )[0]
+                else:
+                    content_check = {
+                        'status': 'skipped',
+                        'checkedAt': now_jst.isoformat(),
+                        'requestedUrl': link,
+                        'finalUrl': link,
+                        'pageTitle': '',
+                        'matchedFacilities': [],
+                        'venue': '',
+                        'organizer': '',
+                        'eventStartsAt': (
+                            event_starts_at.isoformat() if event_starts_at else None
+                        ),
+                        'eventEndsAt': (
+                            event_ends_at.isoformat() if event_ends_at else None
+                        ),
+                        'error': '見出しとRSS要約の地域関連根拠が基準未満',
+                    }
+
                 candidate = build_candidate(
                     title,
                     summary,
@@ -1140,6 +1445,8 @@ def fetch_articles():
                     event_starts_at=event_starts_at,
                     event_ends_at=event_ends_at,
                     category='event' if event_starts_at else 'news',
+                    analysis_text=article_context,
+                    content_check=content_check,
                 )
                 previous = previous_candidates.get(candidate['id'])
                 if previous:

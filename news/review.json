@@ -1,19 +1,19 @@
 {
-  "updated": "2026-09-13T07:47:05.221706+09:00",
+  "updated": "2026-09-13T13:20:55.219671+09:00",
   "count": 1,
   "candidates": [
     {
-      "id": "20260912-region-facility-ishikawa-ishikawa-library-2cdadc79d9",
-      "title": "沖縄知事選、１３日投開票 - 金沢経済新聞",
-      "displayTitle": "沖縄知事選、13日投開票 - 金沢経済新聞",
-      "summary": "沖縄知事選、１３日投開票 金沢経済新聞",
+      "id": "20260912-region-facility-ishikawa-ishikawa-library-c641bc6145",
+      "title": "沖縄知事選、１３日投開票 - kanazawa.keizai.biz",
+      "displayTitle": "沖縄知事選、13日投開票 - kanazawa.keizai.biz",
+      "summary": "沖縄知事選、１３日投開票 kanazawa.keizai.biz",
       "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5vb01fMXBMdjJlVHZiY2FFOWJLbjBpeU9zLW5odkhlb2kxQld2M0lWZDJDMVBuZVFrejhXcXpXLWJ4WmFVNmZtaVNtVzFlSHRGTmNoUk9n?oc=5",
       "sourceId": "region-facility-ishikawa-ishikawa-library",
       "sourceName": "石川施設：石川図書館",
       "sourceType": "discovery",
       "publishedAt": "2026-09-12T18:28:15+09:00",
-      "discoveredAt": "2026-09-13T07:47:05.221706+09:00",
-      "checkedAt": "2026-09-13T07:47:05.221706+09:00",
+      "discoveredAt": "2026-09-13T13:20:55.219671+09:00",
+      "checkedAt": "2026-09-13T13:20:55.219671+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-09-19T23:59:59+09:00",
@@ -29,15 +29,30 @@
         "施設専用検索で発見したが、記事内の施設名確認が必要",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関係を確認できないため記録",
-        "石川地区との関係を確定できないため判断保留"
+        "石川地区との関係を確定できないため判断保留",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "同じ内容の記事2件を代表記事へ統合"
       ],
-      "fingerprint": "406e19101fa48d23f733",
-      "articleFingerprint": "2cdadc79d9df34ed58d6",
+      "fingerprint": "5eee5c1d9c22c0119096",
+      "articleFingerprint": "c641bc6145ba1905bb98",
       "facilityId": "ishikawa-library",
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
-      "relatedCount": 0
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-09-13T13:20:55.219671+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5vb01fMXBMdjJlVHZiY2FFOWJLbjBpeU9zLW5odkhlb2kxQld2M0lWZDJDMVBuZVFrejhXcXpXLWJ4WmFVNmZtaVNtVzFlSHRGTmNoUk9n?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5vb01fMXBMdjJlVHZiY2FFOWJLbjBpeU9zLW5odkhlb2kxQld2M0lWZDJDMVBuZVFrejhXcXpXLWJ4WmFVNmZtaVNtVzFlSHRGTmNoUk9n",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 2
     }
   ]
 }

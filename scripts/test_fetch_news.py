@@ -4,6 +4,7 @@
 import unittest
 from unittest.mock import patch
 from datetime import datetime
+from email.message import Message
 import sys
 import types
 
@@ -43,6 +44,138 @@ def candidate(title, source, minute=0):
 
 
 class NewsAutomationTests(unittest.TestCase):
+    def test_tracking_query_does_not_split_same_article(self):
+        base = 'https://news.google.com/rss/articles/example'
+        self.assertEqual(
+            fetch_news.canonical_url(base + '?oc=5&hl=ja'),
+            fetch_news.canonical_url(base),
+        )
+
+    def test_same_tracked_url_is_deduplicated_with_different_titles(self):
+        published = datetime(2026, 8, 13, 16, 0, tzinfo=fetch_news.JST)
+        base = 'https://news.google.com/rss/articles/example'
+        first = fetch_news.build_candidate(
+            '豊昇龍・大の里らがうるま市に', '',
+            base + '?oc=5', MEDIA_SOURCE, published,
+        )
+        second = fetch_news.build_candidate(
+            '大相撲冬巡業、12月19・20日に開催', '',
+            base, MEDIA_SOURCE, published,
+        )
+        fetch_news.deduplicate_candidates([first, second])
+        self.assertEqual(sum(item['status'] == 'duplicate' for item in (first, second)), 1)
+
+    def test_article_page_extracts_auditable_context_without_storing_body(self):
+        html = '''
+        <html><head>
+          <title>石川会館でコンサート</title>
+          <meta name="description" content="9月22日に開催">
+          <link rel="canonical" href="https://example.test/news/concert">
+        </head><body>
+          <p>日時：2026年9月22日　会場：石川会館</p>
+          <p>主催：石川地域文化協会</p>
+          <script>取得しない文字</script>
+        </body></html>
+        '''
+        headers = Message()
+        headers['Content-Type'] = 'text/html; charset=utf-8'
+
+        class Response:
+            def __enter__(self): return self
+            def __exit__(self, *args): return False
+            def geturl(self): return 'https://example.test/redirected'
+            def read(self, size): return html.encode('utf-8')
+            @property
+            def headers(self): return headers
+
+        with patch('urllib.request.urlopen', return_value=Response()):
+            result, context = fetch_news.inspect_article_page(
+                'https://example.test/google-news-link'
+            )
+        self.assertEqual(result['status'], 'checked')
+        self.assertEqual(result['finalUrl'], 'https://example.test/news/concert')
+        self.assertIn('石川会館', result['matchedFacilities'])
+        self.assertEqual(result['organizer'], '石川地域文化協会')
+        self.assertIn('2026年9月22日', context)
+        self.assertNotIn('取得しない文字', context)
+
+    def test_unavailable_article_page_records_reason(self):
+        with patch('urllib.request.urlopen', side_effect=TimeoutError('時間切れ')):
+            result, context = fetch_news.inspect_article_page(
+                'https://example.test/article'
+            )
+        self.assertEqual(result['status'], 'unavailable')
+        self.assertIn('TimeoutError', result['error'])
+        self.assertEqual(context, '')
+
+    def test_article_context_can_supply_event_period_and_facility_evidence(self):
+        published = datetime(2026, 8, 21, 5, 0, tzinfo=fetch_news.JST)
+        check = {
+            'status': 'checked',
+            'checkedAt': published.isoformat(),
+            'finalUrl': 'https://example.test/concert',
+            'matchedFacilities': ['石川会館'],
+            'organizer': '',
+            'error': '',
+        }
+        context = '石川会館でコンサートを2026年9月22日に開催'
+        start, end = fetch_news.extract_event_period('', context, published)
+        item = fetch_news.build_candidate(
+            '地域のコンサートを開催', '',
+            'https://example.test/link', MEDIA_SOURCE, published,
+            event_starts_at=start, event_ends_at=end,
+            analysis_text=context, content_check=check,
+        )
+        self.assertEqual(item['eventStartsAt'][:10], '2026-09-22')
+        self.assertIn('石川会館', item['localEvidence'])
+        self.assertEqual(item['contentCheck']['status'], 'checked')
+        self.assertNotIn(context, item['summary'])
+
+    def test_same_final_url_is_deduplicated_despite_title_suffix(self):
+        published = datetime(2026, 8, 13, 16, 0, tzinfo=fetch_news.JST)
+        common_check = {
+            'status': 'checked',
+            'checkedAt': published.isoformat(),
+            'finalUrl': 'https://example.test/sumo',
+            'matchedFacilities': ['石川多目的ドーム'],
+            'organizer': '',
+            'error': '',
+        }
+        first = fetch_news.build_candidate(
+            '豊昇龍・大の里らがうるま市に 大相撲冬巡業', '',
+            'https://news.google.test/a', MEDIA_SOURCE, published,
+            content_check=common_check,
+        )
+        second = fetch_news.build_candidate(
+            '大相撲冬巡業、12月19・20日に開催 - 沖縄タイムス社', '',
+            'https://news.google.test/b', MEDIA_SOURCE, published,
+            content_check=common_check,
+        )
+        fetch_news.deduplicate_candidates([first, second])
+        self.assertEqual(sum(item['status'] == 'duplicate' for item in (first, second)), 1)
+
+    def test_checked_candidate_is_preferred_over_legacy_duplicate(self):
+        published = datetime(2026, 8, 13, 16, 0, tzinfo=fetch_news.JST)
+        base = 'https://news.google.com/rss/articles/sumo'
+        legacy = fetch_news.build_candidate(
+            '大相撲冬巡業を石川多目的ドームで開催', '',
+            base + '?oc=5', MEDIA_SOURCE, published,
+        )
+        legacy.pop('contentCheck')
+        checked = fetch_news.build_candidate(
+            '大相撲冬巡業を石川多目的ドームで開催', '',
+            base, MEDIA_SOURCE, published,
+            content_check={
+                'status': 'unavailable',
+                'checkedAt': published.isoformat(),
+                'finalUrl': base,
+                'error': '有料記事',
+            },
+        )
+        fetch_news.deduplicate_candidates([legacy, checked])
+        self.assertEqual(checked['status'], 'published')
+        self.assertEqual(legacy['status'], 'duplicate')
+
     def test_ishikawa_profile_covers_common_discovery_categories(self):
         profile = region_news_config.load_region_profile('ishikawa')
         category_ids = {
