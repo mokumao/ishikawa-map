@@ -108,6 +108,63 @@ class NewsAutomationTests(unittest.TestCase):
         self.assertIn('TimeoutError', result['error'])
         self.assertEqual(context, '')
 
+    def test_unavailable_content_is_held_instead_of_auto_rejected(self):
+        published = datetime(2026, 9, 13, 5, 0, tzinfo=fetch_news.JST)
+        item = fetch_news.build_candidate(
+            'うるま市で地域行事を開催', '',
+            'https://example.test/event', MEDIA_SOURCE, published,
+            content_check={
+                'status': 'unavailable',
+                'checkedAt': published.isoformat(),
+                'finalUrl': 'https://example.test/event',
+                'matchedFacilities': [],
+                'organizer': '',
+                'error': '時間切れ',
+            },
+        )
+        fetch_news.apply_content_verification_policy(item)
+        self.assertEqual(item['status'], 'review')
+        self.assertTrue(item['requiresReview'])
+        self.assertIn(
+            '記事本文を確認できないため自動掲載・自動除外せず判断保留',
+            item['reviewReasons'],
+        )
+
+    def test_unavailable_content_is_not_auto_published(self):
+        published = datetime(2026, 9, 13, 5, 0, tzinfo=fetch_news.JST)
+        item = fetch_news.build_candidate(
+            '石川多目的ドームで地域行事を開催', '',
+            'https://example.test/event', MEDIA_SOURCE, published,
+            content_check={
+                'status': 'unavailable',
+                'checkedAt': published.isoformat(),
+                'finalUrl': 'https://example.test/event',
+                'matchedFacilities': [],
+                'organizer': '',
+                'error': '有料記事',
+            },
+        )
+        self.assertEqual(item['status'], 'published')
+        fetch_news.apply_content_verification_policy(item)
+        self.assertEqual(item['status'], 'review')
+
+    def test_definitive_other_region_match_remains_rejected_when_unavailable(self):
+        published = datetime(2026, 9, 13, 5, 0, tzinfo=fetch_news.JST)
+        item = fetch_news.build_candidate(
+            '金沢市で石川イベントを開催', '',
+            'https://example.test/kanazawa', MEDIA_SOURCE, published,
+            content_check={
+                'status': 'unavailable',
+                'checkedAt': published.isoformat(),
+                'finalUrl': 'https://example.test/kanazawa',
+                'matchedFacilities': [],
+                'organizer': '',
+                'error': '時間切れ',
+            },
+        )
+        fetch_news.apply_content_verification_policy(item)
+        self.assertEqual(item['status'], 'rejected')
+
     def test_article_context_can_supply_event_period_and_facility_evidence(self):
         published = datetime(2026, 8, 21, 5, 0, tzinfo=fetch_news.JST)
         check = {
@@ -192,6 +249,7 @@ class NewsAutomationTests(unittest.TestCase):
         self.assertIn(
             'region-facility-ishikawa-ishikawa-library', source_ids
         )
+        self.assertIn('region-facility-ishikawa-cave-okinawa', source_ids)
         self.assertIn('region-theme-ishikawa-bullfighting', source_ids)
         self.assertIn('bullfighting_schedule', profile['officialAdapters'])
 

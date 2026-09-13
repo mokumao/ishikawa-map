@@ -25,6 +25,7 @@
     {"id": "ishikawa-hall", "name": "うるま市石川会館", "aliases": ["うるま市石川会館", "石川会館"], "sourceUrl": "https://www.city.uruma.lg.jp/3001007000/shisetsu/p000123.html", "verifiedAt": "2026-09-12"},
     {"id": "ishikawa-youth-center", "name": "石川少年自然の家", "aliases": ["石川少年自然の家", "石川青少年の家"]},
     {"id": "bios-hill", "name": "ビオスの丘", "aliases": ["ビオスの丘"]},
+    {"id": "cave-okinawa", "name": "CAVE OKINAWA", "aliases": ["CAVE OKINAWA", "ケイブオキナワ", "ケイブ沖縄"], "sourceUrl": "https://www.cave.okinawa/", "verifiedAt": "2026-09-13"},
     {"id": "rakujuen", "name": "特別養護老人ホーム 楽寿園", "aliases": ["特別養護老人ホーム 楽寿園", "社会福祉法人育賛会 楽寿園", "育賛会 楽寿園", "楽寿園"], "requireRegionContext": true, "sourceUrl": "https://www.ikusan-k.jp/", "verifiedAt": "2026-09-03"},
     {"id": "ishikawa-police-station", "name": "石川警察署", "aliases": ["石川警察署", "石川署"], "sourceUrl": "https://www.police.pref.okinawa.jp/docs/2015022800185/", "verifiedAt": "2026-09-03"},
     {"id": "ishikawa-water-treatment-plant", "name": "石川浄水場", "aliases": ["石川浄水場"], "sourceUrl": "https://www.eb.pref.okinawa.jp/opeb/48/4837", "verifiedAt": "2026-09-03"},

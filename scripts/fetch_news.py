@@ -614,6 +614,38 @@ def build_candidate(title, summary, link, source, pub_date, previous=None,
         },
     }
 
+
+def apply_content_verification_policy(candidate):
+    """本文未確認の候補を、明確な誤一致を除いて判断保留にする。"""
+    content_check = candidate.get('contentCheck') or {}
+    if content_check.get('status') == 'checked':
+        return candidate
+
+    reasons = candidate.get('reviewReasons') or []
+    definitive_exclusion_markers = (
+        '対象外地域との一致を検出',
+        '人名の「',
+        '他地域の媒体で、石川地区の直接的な根拠を確認できない',
+    )
+    definitively_unrelated = any(
+        marker in reason
+        for reason in reasons
+        for marker in definitive_exclusion_markers
+    )
+    if definitively_unrelated:
+        return candidate
+
+    if candidate.get('status') in ('published', 'rejected'):
+        candidate['status'] = 'review'
+        candidate['requiresReview'] = True
+        candidate['reviewReasons'] = list(dict.fromkeys([
+            reason for reason in reasons
+            if not reason.endswith('ため自動除外')
+        ] + [
+            '記事本文を確認できないため自動掲載・自動除外せず判断保留'
+        ]))
+    return candidate
+
 def load_previous_candidates(path=CANDIDATES_FILE):
     if not os.path.exists(path):
         return {}
@@ -1402,60 +1434,27 @@ def fetch_articles():
                 ):
                     continue
 
-                preliminary = build_candidate(
-                    title,
-                    summary,
-                    link,
-                    source,
-                    pub_date,
-                    event_starts_at=event_starts_at,
-                    event_ends_at=event_ends_at,
-                    category='event' if event_starts_at else 'news',
-                )
-                should_check_content = (
-                    preliminary.get('status') != 'rejected'
-                    or bool(source.get('facilityId'))
-                )
                 article_context = ''
-                if should_check_content:
-                    content_check, article_context = inspect_article_page(link)
-                    if content_check.get('status') == 'checked':
-                        source_result['contentCheckedCount'] += 1
-                    else:
-                        source_result['contentUnavailableCount'] += 1
-                    event_starts_at, event_ends_at = extract_event_period(
-                        title,
-                        f'{summary} {article_context}'.strip(),
-                        pub_date,
-                        force=bool(source.get('extractEventDate')),
-                    )
-                    content_check['eventStartsAt'] = (
-                        event_starts_at.isoformat() if event_starts_at else None
-                    )
-                    content_check['eventEndsAt'] = (
-                        event_ends_at.isoformat() if event_ends_at else None
-                    )
-                    content_check['venue'] = (
-                        content_check.get('matchedFacilities') or ['']
-                    )[0]
+                content_check, article_context = inspect_article_page(link)
+                if content_check.get('status') == 'checked':
+                    source_result['contentCheckedCount'] += 1
                 else:
-                    content_check = {
-                        'status': 'skipped',
-                        'checkedAt': now_jst.isoformat(),
-                        'requestedUrl': link,
-                        'finalUrl': link,
-                        'pageTitle': '',
-                        'matchedFacilities': [],
-                        'venue': '',
-                        'organizer': '',
-                        'eventStartsAt': (
-                            event_starts_at.isoformat() if event_starts_at else None
-                        ),
-                        'eventEndsAt': (
-                            event_ends_at.isoformat() if event_ends_at else None
-                        ),
-                        'error': '見出しとRSS要約の地域関連根拠が基準未満',
-                    }
+                    source_result['contentUnavailableCount'] += 1
+                event_starts_at, event_ends_at = extract_event_period(
+                    title,
+                    f'{summary} {article_context}'.strip(),
+                    pub_date,
+                    force=bool(source.get('extractEventDate')),
+                )
+                content_check['eventStartsAt'] = (
+                    event_starts_at.isoformat() if event_starts_at else None
+                )
+                content_check['eventEndsAt'] = (
+                    event_ends_at.isoformat() if event_ends_at else None
+                )
+                content_check['venue'] = (
+                    content_check.get('matchedFacilities') or ['']
+                )[0]
 
                 candidate = build_candidate(
                     title,
@@ -1469,6 +1468,7 @@ def fetch_articles():
                     analysis_text=article_context,
                     content_check=content_check,
                 )
+                apply_content_verification_policy(candidate)
                 previous = previous_candidates.get(candidate['id'])
                 if previous:
                     candidate['discoveredAt'] = previous.get('discoveredAt') or candidate['discoveredAt']
