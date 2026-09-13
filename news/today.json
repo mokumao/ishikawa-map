@@ -2,7 +2,7 @@
   "regionId": "ishikawa",
   "regionName": "石川",
   "date": "2026-09-13",
-  "updated": "2026-09-13T13:20:55.219671+09:00",
+  "updated": "2026-09-13T14:23:50.415674+09:00",
   "count": 5,
   "articles": [
     {
@@ -14,6 +14,14 @@
       "pub_date": "2026-09-21T00:00:00+09:00"
     },
     {
+      "title": "豊昇龍・大の里ら力士がうるま市に 大相撲冬巡業、12月19・20日に石川多目的ドームで開催へ",
+      "summary": "",
+      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9XNUZOenZxTFktaG1QeUp3THZTVXhRcnNFV1FCbWhGb0ppRUVFem9mdkQ1MjFJNEo3OHdyaVNQWnRpbmw1blZFR3NSZG5XQzFfaUU2cmw4VUQwX3VHSkE?oc=5",
+      "source": "Google ニュース（うるま市 石川）",
+      "date_label": "予定 12/19",
+      "pub_date": "2026-12-19T00:00:00+09:00"
+    },
+    {
       "title": "9月20日(日)「まんまうるまDAY! 闘牛カーニバル」",
       "summary": "まんまうるまDAY! 闘牛カーニバル 日時:2026年9月20日(日曜) 時間:13時試合開始(11時〜オープニングアクト・龍神伝説・闘牛戦士ワイドーショー) 場所:うるま市石川多目的ドーム 料金:無料 主催:うるま市闘牛連合会 共催:うるま市教育委員会 石川...",
       "link": "https://togyu.ti-da.net/e13153649.html",
@@ -22,7 +30,7 @@
       "pub_date": "2026-09-20T00:00:00+09:00"
     },
     {
-      "title": "◆来月22日にタイムスリップコンサート(石川会館) - ryukyushimpo.jp",
+      "title": "◆来月22日にタイムスリップコンサート(石川会館)",
       "summary": "",
       "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1OdU0yNzJwY1ppNi1nd0ZCR19xQmM0NGt6NjVtZkZzcnd4aG9rUkxUU3NxWm1KblVLQnFCVzZoQXA2d1RycEFIR1dEdGR0bWZUbVR2WWlDU2RFd09uVFE?oc=5",
       "source": "石川施設：うるま市石川会館",
@@ -30,20 +38,12 @@
       "pub_date": "2026-09-22T00:00:00+09:00"
     },
     {
-      "title": "伝統の演舞、「豊年」祈願 うるま・石川 エンサー、ウスデーク - ryukyushimpo.jp",
+      "title": "伝統の演舞、「豊年」祈願 うるま・石川 エンサー、ウスデーク",
       "summary": "",
       "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9udHhudmZHdWp5cC1pb3BkcG9lZ2JyejFaWFpxREpsLUJER21ReWYzX0h6WmFqemE5ZUdtX21lSHhkTFVhbnh0VTV4VzlCM1NPcGlsU1BxM0RKNkQ4SkE?oc=5",
       "source": "石川固有テーマ：石川地区の自治会行事・伝統芸能",
       "date_label": "9/9",
       "pub_date": "2026-09-09T05:00:00+09:00"
-    },
-    {
-      "title": "豊昇龍・大の里ら力士がうるま市に 大相撲冬巡業、12月19・20日に石川多目的ドームで開催へ - okinawatimes.co.jp",
-      "summary": "",
-      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9XNUZOenZxTFktaG1QeUp3THZTVXhRcnNFV1FCbWhGb0ppRUVFem9mdkQ1MjFJNEo3OHdyaVNQWnRpbmw1blZFR3NSZG5XQzFfaUU2cmw4VUQwX3VHSkE?oc=5",
-      "source": "Google ニュース（うるま市 石川）",
-      "date_label": "予定 12/19",
-      "pub_date": "2026-12-19T00:00:00+09:00"
     }
   ]
 }

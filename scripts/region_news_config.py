@@ -150,11 +150,15 @@ def build_rss_sources(profile):
     for facility in profile['verifiedFacilities']:
         if facility['id'] in configured_facility_ids:
             continue
-        terms = ' OR '.join(facility['aliases'])
+        # 施設名を単語へ分解した広い一致にすると、「石川」は石川県の媒体名、
+        # 「沖縄」は記事本文という別々の場所で一致した無関係記事まで混ざる。
+        # 施設名だけをフレーズ検索にし、自治体名を必須にせず地域記事を広く拾ったうえで
+        # 本文確認による最終判定へ回す。
+        terms = ' OR '.join(f'"{alias}"' for alias in facility['aliases'])
         sources.append({
             'id': f'region-facility-{profile["id"]}-{facility["id"]}',
             'name': f'{profile["displayName"]}施設：{facility["name"]}',
-            'url': google_news_url(f'({terms}) {profile["prefecture"]}'),
+            'url': google_news_url(f'({terms})'),
             'type': 'discovery',
             'trust': 60,
             'method': 'google-news',

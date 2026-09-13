@@ -88,6 +88,7 @@ DISTRICT_TERMS = REGION['districtTerms']
 CONTEXT_TERMS = REGION['contextTerms']
 FACILITY_TERMS = facility_aliases(REGION)
 OTHER_REGION_TERMS = REGION['falsePositiveRegions']
+OTHER_REGION_PUBLISHERS = REGION.get('falsePositivePublishers', [])
 OTHER_PERSON_TERMS = REGION['falsePositivePeople']
 
 # 誤掲載時の影響が大きいため、地域関連度が高くても自動掲載しない話題。
@@ -386,7 +387,8 @@ def detect_facility_id(text):
             return facility.get('id')
     return None
 
-def assess_candidate(title, summary, source, pub_date, link):
+def assess_candidate(title, summary, source, pub_date, link,
+                     allow_source_discovery_bonus=True):
     """Skillの初期基準に沿って地域関連度と信頼度を機械判定する。"""
     text = f'{title} {summary}'
     score = 0
@@ -434,11 +436,13 @@ def assess_candidate(title, summary, source, pub_date, link):
     ):
         score += 60
         evidence.extend(source_facilities)
-    elif source.get('facilityId'):
+    elif source.get('facilityId') and allow_source_discovery_bonus:
         # 専用検索から見つかっただけでは公開せず、原典で施設名を確認するまで保留する。
         score += 35
         evidence.append(f'取得元候補：{source["name"]}')
         reasons.append('施設専用検索で発見したが、記事内の施設名確認が必要')
+    elif source.get('facilityId'):
+        reasons.append('施設専用検索で発見したが、記事内に施設名を確認できない')
 
     source_theme_terms = [
         term for term in source.get('regionalThemeTerms', []) if term in text
@@ -457,6 +461,20 @@ def assess_candidate(title, summary, source, pub_date, link):
     if districts and any(term in text for term in CONTEXT_TERMS):
         score += 25
         evidence.extend(districts[:3])
+
+    # 他地域の媒体名・ドメインは、それだけで地域記事を否定しない。ただし、
+    # 記事内に石川地区の直接根拠が一つもない場合は検索誤一致として除外する。
+    direct_region_evidence = bool(
+        exact_phrases or facilities or source_facilities
+        or (districts and any(term in text for term in CONTEXT_TERMS))
+    )
+    other_region_publishers = [
+        term for term in OTHER_REGION_PUBLISHERS
+        if term.lower() in f'{text} {link}'.lower()
+    ]
+    if other_region_publishers and not direct_region_evidence:
+        score -= 100
+        reasons.append('他地域の媒体で、石川地区の直接的な根拠を確認できない')
 
     if source.get('type') == 'official':
         score += 15
@@ -529,7 +547,10 @@ def build_candidate(title, summary, link, source, pub_date, previous=None,
     candidate_id = f'{date_prefix}-{source["id"]}-{article_fingerprint[:10]}'
     assessment_summary = f'{summary} {analysis_text}'.strip()
     score, evidence, confidence, reasons = assess_candidate(
-        title, assessment_summary, source, pub_date, link
+        title, assessment_summary, source, pub_date, link,
+        # 初回判定では本文確認を始めるため検索経路に35点を与える。
+        # 本文確認後は検索経路を地域根拠にせず、記事内の証拠だけで再判定する。
+        allow_source_discovery_bonus=content_check is None,
     )
     status, decision_reason = classify_candidate(
         score, confidence, f'{title} {assessment_summary}', effective_date, link

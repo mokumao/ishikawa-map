@@ -36,6 +36,7 @@
     {"id": "yamashiro-community", "name": "山城自治会", "aliases": ["山城自治会", "山城区公民館", "石川山城区"], "requireRegionContext": true, "sourceUrl": "https://www.city.uruma.lg.jp/1006001000/contents/10545.html", "verifiedAt": "2026-09-03"}
   ],
   "falsePositiveRegions": ["石川県", "金沢市", "加賀市", "小松市", "能登"],
+  "falsePositivePublishers": ["金沢経済新聞", "kanazawa.keizai.biz"],
   "falsePositivePeople": ["石川真佑", "石川祐希", "石川佳純", "石川文洋"],
   "discoveryCategories": [
     {"id": "government", "label": "行政・自治会", "terms": ["行政", "自治会", "お知らせ", "募集"]},

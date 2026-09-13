@@ -195,6 +195,60 @@ class NewsAutomationTests(unittest.TestCase):
         self.assertIn('region-theme-ishikawa-bullfighting', source_ids)
         self.assertIn('bullfighting_schedule', profile['officialAdapters'])
 
+    def test_facility_discovery_query_uses_exact_name_without_municipality_requirement(self):
+        profile = region_news_config.load_region_profile('ishikawa')
+        source = next(
+            item for item in region_news_config.build_rss_sources(profile)
+            if item['id'] == 'region-facility-ishikawa-ishikawa-library'
+        )
+        self.assertIn('%22%E7%9F%B3%E5%B7%9D%E5%9B%B3%E6%9B%B8%E9%A4%A8%22', source['url'])
+        self.assertNotIn('%22%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82%22', source['url'])
+
+    def test_facility_search_without_article_evidence_is_rejected_after_check(self):
+        profile = region_news_config.load_region_profile('ishikawa')
+        source = next(
+            item for item in region_news_config.build_rss_sources(profile)
+            if item['id'] == 'region-facility-ishikawa-ishikawa-library'
+        )
+        published = datetime(2026, 9, 12, 18, 28, tzinfo=fetch_news.JST)
+        item = fetch_news.build_candidate(
+            '沖縄知事選、13日投開票 - 金沢経済新聞', '',
+            'https://kanazawa.keizai.biz/gpnews/example', source, published,
+            content_check={
+                'status': 'unavailable',
+                'checkedAt': published.isoformat(),
+                'finalUrl': 'https://kanazawa.keizai.biz/gpnews/example',
+                'matchedFacilities': [],
+                'organizer': '',
+                'error': '記事本文の主要部分を抽出できない',
+            },
+        )
+        self.assertEqual(item['status'], 'rejected')
+        self.assertEqual(item['localScore'], 0)
+        self.assertNotIn('取得元候補：石川施設：石川図書館', item['localEvidence'])
+
+    def test_unavailable_page_with_facility_in_title_remains_candidate(self):
+        profile = region_news_config.load_region_profile('ishikawa')
+        source = next(
+            item for item in region_news_config.build_rss_sources(profile)
+            if item['id'] == 'region-facility-ishikawa-ishikawa-library'
+        )
+        published = datetime(2026, 9, 12, 18, 28, tzinfo=fetch_news.JST)
+        item = fetch_news.build_candidate(
+            '石川図書館で読み聞かせ会を開催', '',
+            'https://example.test/library', source, published,
+            content_check={
+                'status': 'unavailable',
+                'checkedAt': published.isoformat(),
+                'finalUrl': 'https://example.test/library',
+                'matchedFacilities': [],
+                'organizer': '',
+                'error': '時間切れ',
+            },
+        )
+        self.assertNotEqual(item['status'], 'rejected')
+        self.assertGreaterEqual(item['localScore'], 60)
+
     def test_bullfighting_blog_only_accepts_ishikawa_dome_entries(self):
         profile = region_news_config.load_region_profile('ishikawa')
         source = next(
