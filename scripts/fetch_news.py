@@ -50,6 +50,7 @@ NO_NEWS_FILE = f'{NEWS_OUTPUT_DIR}/no_news_dates.json'
 CANDIDATES_FILE = f'{NEWS_OUTPUT_DIR}/candidates.json'
 REVIEW_FILE = f'{NEWS_OUTPUT_DIR}/review.json'
 NEWS_DECISIONS_FILE = 'config/news-regions/ishikawa-news-decisions.json'
+ADMIN_NOTICES_FILE = 'updates/admin-notices.json'
 
 # うるま市公式ページを入口に、公式に案内された開催情報だけを取得する。
 URUMA_BULLFIGHTING_PAGE_URL = (
@@ -917,8 +918,8 @@ def parse_admin_timestamp(ts):
     return None
 
 def fetch_admin_posts():
-    """管理人投稿フォームの回答（公開CSV）を取得して記事リスト形式で返す。
-    取得に失敗してもニュース生成全体は止めない（空リストを返す）"""
+    """管理人投稿フォームの回答（公開CSV）を管理者告知形式で返す。
+    取得に失敗してもニュース生成全体は止めない（Noneを返す）"""
     import csv
     import io
     import urllib.request
@@ -940,23 +941,32 @@ def fetch_admin_posts():
             pub_date = parse_admin_timestamp(ts)
             if not is_within_period(pub_date):
                 continue  # 掲載期間(7日)を過ぎた投稿は表示しない
-            # フォームは自由入力なのでHTMLとして解釈されないようエスケープする
-            source = '石川マップ管理人'
-            if category:
-                source += f'（{escape(category)}）'
+            post_key = f'{ts}\n{title}'
             posts.append({
-                'title':      escape(title),
-                'summary':    truncate(escape(body)),
-                'link':       '',   # 管理人投稿は外部リンクなし
-                'source':     source,
-                'date_label': format_date_label(pub_date),
-                'pub_date':   pub_date.isoformat() if pub_date else '',
-                'admin':      True,
+                'id':          'admin-' + hashlib.sha256(post_key.encode('utf-8')).hexdigest()[:16],
+                'title':       title,
+                'body':        truncate(body),
+                'category':    category,
+                'publishedAt': pub_date.isoformat() if pub_date else '',
+                'endsAt':      (pub_date + timedelta(days=DAYS_LIMIT)).isoformat() if pub_date else '',
+                'status':      'published',
             })
+        posts.sort(key=lambda post: post.get('publishedAt', ''), reverse=True)
         print(f"  → {len(posts)}件")
     except Exception as e:
-        print(f"  ⚠️ 管理人投稿の取得エラー: {e}")
+        print(f"  [WARN] 管理人投稿の取得エラー: {e}")
+        return None
     return posts
+
+def save_admin_notices(posts):
+    """管理人投稿を「管理者から」タブ用JSONへ保存する。"""
+    os.makedirs(os.path.dirname(ADMIN_NOTICES_FILE), exist_ok=True)
+    with open(ADMIN_NOTICES_FILE, 'w', encoding='utf-8') as f:
+        json.dump({
+            'updated': now_jst.isoformat(),
+            'items': posts,
+        }, f, ensure_ascii=False, indent=2)
+    print(f"[OK] {ADMIN_NOTICES_FILE} を生成しました（{len(posts)}件）")
 
 # ── 読者投稿（承認済みのみ）の取得 ────────────────────────────────
 
@@ -1808,9 +1818,11 @@ if __name__ == '__main__':
     print(f"=== {REGION_NAME} News Fetch Start: {today_date} ===\n")
     articles, candidates, source_results = fetch_articles()
     save_candidate_data(candidates, source_results)
-    # 管理人投稿・承認済み読者投稿もニュース記事として合流させる
-    # （本日の投稿があれば「ニュースはありません」の対象からも外れる）
-    articles += fetch_admin_posts()
+    # 管理人投稿は「管理者から」へ分け、取得失敗時は既存表示を消さない。
+    admin_posts = fetch_admin_posts()
+    if admin_posts is not None:
+        save_admin_notices(admin_posts)
+    # 承認済み読者投稿は石川ニュースへ合流させる。
     articles += fetch_reader_posts()
     print(f"\nTotal: {len(articles)} articles\n")
 

@@ -44,6 +44,34 @@ def candidate(title, source, minute=0):
 
 
 class NewsAutomationTests(unittest.TestCase):
+    def test_admin_form_posts_are_converted_to_admin_notices(self):
+        csv_text = (
+            'タイムスタンプ,タイトル,詳しい内容,カテゴリ\n'
+            '2026/09/14 9:30:00,管理者のお知らせ,本文です,行政\n'
+        )
+
+        class Response:
+            def __enter__(self): return self
+            def __exit__(self, *args): return False
+            def read(self): return csv_text.encode('utf-8')
+
+        with patch('urllib.request.urlopen', return_value=Response()):
+            posts = fetch_news.fetch_admin_posts()
+
+        self.assertEqual(len(posts), 1)
+        self.assertEqual(posts[0]['title'], '管理者のお知らせ')
+        self.assertEqual(posts[0]['body'], '本文です')
+        self.assertEqual(posts[0]['category'], '行政')
+        self.assertEqual(posts[0]['status'], 'published')
+        self.assertTrue(posts[0]['id'].startswith('admin-'))
+        self.assertEqual(posts[0]['publishedAt'][:10], '2026-09-14')
+        self.assertEqual(posts[0]['endsAt'][:10], '2026-09-21')
+        self.assertNotIn('summary', posts[0])
+
+    def test_admin_notices_are_preserved_when_form_fetch_fails(self):
+        with patch('urllib.request.urlopen', side_effect=TimeoutError('時間切れ')):
+            self.assertIsNone(fetch_news.fetch_admin_posts())
+
     def test_tracking_query_does_not_split_same_article(self):
         base = 'https://news.google.com/rss/articles/example'
         self.assertEqual(
