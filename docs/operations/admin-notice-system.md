@@ -7,7 +7,7 @@ Googleフォームを経由せず、管理者ページから地域別のお知�
 
 ## 構成
 
-- 管理画面: Cloudflare Accessで保護された`admin/`
+- 管理画面: 管理APIと同じCloudflare Workerから配信し、全体をCloudflare Accessで保護する
 - 管理API: Cloudflare Accessで保護したCloudflare Worker
 - 保存先: Cloudflare D1
 - 公開API: 別の読み取り専用Cloudflare Worker。`GET /api/v1/notices?region=ishikawa`だけを提供する

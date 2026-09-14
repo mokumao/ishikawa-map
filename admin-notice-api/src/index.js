@@ -1,4 +1,5 @@
 import { normalizeNoticeInput } from './validation.js';
+import adminPage from '../../admin/notices.html';
 
 const JSON_HEADERS = { 'content-type': 'application/json; charset=utf-8' };
 
@@ -12,9 +13,9 @@ export default {
     }
 
     try {
-      if (request.method === 'GET' && url.pathname === '/') {
-        const actor = await requireAdmin(env, ctx);
-        return json({ ok: true, message: '管理者投稿APIにログインしています。', actor }, 200, cors);
+      if (request.method === 'GET' && ['/', '/notices', '/notices.html'].includes(url.pathname)) {
+        await requireAdmin(env, ctx);
+        return new Response(adminPage, { headers: { 'content-type': 'text/html; charset=utf-8' } });
       }
       if (request.method === 'GET' && url.pathname === '/api/v1/notices') {
         return json(await listPublicNotices(env.DB, url.searchParams.get('region') || 'ishikawa'), 200, cors);

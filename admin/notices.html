@@ -39,7 +39,6 @@
     h2 { font-size: 20px; }
     .back-link { color: var(--blue); font-weight: 700; text-decoration: none; }
     .intro { margin: 8px 0 24px; color: var(--muted); }
-    .api-login { color: var(--blue); font-weight: 700; }
     .layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr); gap: 16px; }
     .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 24px; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
@@ -106,9 +105,9 @@
   <main class="page">
     <div class="page-header">
       <h1>管理者からのお知らせ管理</h1>
-      <a class="back-link" href="index.html">← 管理者ページへ</a>
+      <a class="back-link" href="https://ishikawa-map-admin.pages.dev/">← 管理者ページへ</a>
     </div>
-    <p class="intro">投稿は選択した地域だけに表示されます。非公開にしても履歴は残ります。初めて使うときや通信エラー時は、<a class="api-login" href="https://ishikawa-map-admin-notices.shinzatoisao1969.workers.dev/" target="_blank" rel="noopener">管理APIへログイン</a>してください。</p>
+    <p class="intro">投稿は選択した地域だけに表示されます。非公開にしても履歴は残ります。</p>
 
     <div class="layout">
       <section class="card" aria-labelledby="editorTitle">
@@ -162,6 +161,11 @@
     </div>
   </main>
 
+  <script>
+    if (location.hostname === 'ishikawa-map-admin.pages.dev') {
+      location.replace('https://ishikawa-map-admin-notices.shinzatoisao1969.workers.dev/');
+    }
+  </script>
   <script>
     (function () {
       'use strict';
