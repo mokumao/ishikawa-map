@@ -2993,6 +2993,39 @@ window.addEventListener('pageshow', function () {
     if (e.persisted) hideBannerInstant();
   });
 
+  function setBannerCount(tab, count) {
+    var countEl = document.querySelector('[data-updates-count="' + tab + '"]');
+    if (countEl) countEl.textContent = Math.max(0, Number(count) || 0) + '件';
+  }
+
+  function isCurrentNotice(item) {
+    if (!item || item.status !== 'published') return false;
+    var now = Date.now();
+    if (item.startsAt && Date.parse(item.startsAt) > now) return false;
+    if (item.endsAt && Date.parse(item.endsAt) < now) return false;
+    return true;
+  }
+
+  function loadBannerCount(tab, url, getCount) {
+    fetch(url + '?_=' + Date.now())
+      .then(function(response) {
+        if (!response.ok) throw new Error('status ' + response.status);
+        return response.json();
+      })
+      .then(function(data) { setBannerCount(tab, getCount(data)); })
+      .catch(function() { setBannerCount(tab, 0); });
+  }
+
+  loadBannerCount('news', 'news/today.json', function(data) {
+    return data && Array.isArray(data.articles) ? data.articles.length : 0;
+  });
+  loadBannerCount('shops', 'updates/shop-updates.json', function(data) {
+    return data && Array.isArray(data.items) ? data.items.filter(isCurrentNotice).length : 0;
+  });
+  loadBannerCount('admin', 'updates/admin-notices.json', function(data) {
+    return data && Array.isArray(data.items) ? data.items.filter(isCurrentNotice).length : 0;
+  });
+
   // 3つのお知らせボタン → 共通ページの対応タブへ遷移
   document.querySelectorAll('[data-updates-tab]').forEach(function(updatesBtn) {
     updatesBtn.addEventListener('click', function() {

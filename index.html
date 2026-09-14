@@ -33,7 +33,7 @@
   <meta property="og:locale" content="ja_JP">
   <title>うるま市石川 飲食店マップ</title>
   <link rel="stylesheet" href="leaflet/leaflet.css"/>
-  <link rel="stylesheet" href="style.css?v=20260911a">
+  <link rel="stylesheet" href="style.css?v=20260914a">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -142,9 +142,9 @@
       <div id="newsBanner" class="news-banner" aria-label="石川マップのお知らせ">
         <button class="news-banner-close news-banner-close-side" data-news-close aria-label="閉じる">×</button>
         <div class="news-banner-actions">
-          <button class="news-banner-btn" data-updates-tab="news">今日の石川ニュース</button>
-          <button class="news-banner-btn" data-updates-tab="shops">店舗主からのお知らせ</button>
-          <button class="news-banner-btn" data-updates-tab="admin">管理者からのお知らせ</button>
+          <button class="news-banner-btn" data-updates-tab="news">今日の石川ニュース<span class="news-banner-count" data-updates-count="news">0件</span></button>
+          <button class="news-banner-btn" data-updates-tab="shops">店舗主からのお知らせ<span class="news-banner-count" data-updates-count="shops">0件</span></button>
+          <button class="news-banner-btn" data-updates-tab="admin">管理者からのお知らせ<span class="news-banner-count" data-updates-count="admin">0件</span></button>
         </div>
         <button class="news-banner-close news-banner-close-side" data-news-close aria-label="閉じる">×</button>
       </div>
@@ -373,7 +373,7 @@
   <script src="leaflet/leaflet.js"></script>
   <script src="restaurants-data.js?v=20260911a"></script>
   <script src="ishikawa-boundary.js?v=20260709b"></script>
-  <script src="script.js?v=20260911a"></script>
+  <script src="script.js?v=20260914a"></script>
   <script>
     // 実機表示の診断用。通常のURLでは何も追加しない。
     if (new URLSearchParams(window.location.search).get('screen-debug') === '1') {

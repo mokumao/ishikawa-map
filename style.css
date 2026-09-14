@@ -1266,6 +1266,11 @@ body.info-open .label-toggle-btn { display: none !important; }
   background: #ffebee;
   color: #c62828;
 }
+.news-banner-count {
+  margin-left: 8px;
+  color: #e53935;
+  font-variant-numeric: tabular-nums;
+}
 /* 左右の × ボタン：店舗ポップアップの popup-close-side と同じ見た目 */
 .news-banner-close-side {
   position: static;
