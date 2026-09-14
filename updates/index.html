@@ -393,7 +393,7 @@
       }
 
       function fetchJson(url) {
-        return fetch(url + '?_=' + Date.now())
+        return fetch(url + (url.includes('?') ? '&' : '?') + '_=' + Date.now())
           .then(function (response) {
             if (!response.ok) throw new Error('status ' + response.status);
             return response.json();
@@ -419,7 +419,7 @@
       setActiveTab(activeTab, false);
       loadNews();
       loadJson('shop-updates.json', function (data) { renderNotices('shops', data); }, 'shops');
-      loadJson('admin-notices.json', function (data) { renderNotices('admin', data); }, 'admin');
+      loadJson('https://ishikawa-map-public-notices.shinzatoisao1969.workers.dev/api/v1/notices?region=ishikawa', function (data) { renderNotices('admin', data); }, 'admin');
     })();
   </script>
 </body>

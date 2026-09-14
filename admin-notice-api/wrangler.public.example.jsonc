@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ishikawa-map-public-notices",
+  "main": "src/public.js",
+  "compatibility_date": "2026-09-14",
+  "vars": {
+    "PUBLIC_ORIGINS": "https://mokumao.github.io"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "ishikawa-map-admin-notices",
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
+    }
+  ]
+}

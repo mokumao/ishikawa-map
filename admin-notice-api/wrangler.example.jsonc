@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ishikawa-map-admin-notices",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-14",
+  "vars": {
+    "ADMIN_EMAILS": "REPLACE_WITH_ADMIN_EMAIL",
+    "PUBLIC_ORIGINS": "https://ishikawa-map-admin.pages.dev"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "ishikawa-map-admin-notices",
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

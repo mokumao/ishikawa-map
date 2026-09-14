@@ -3007,7 +3007,7 @@ window.addEventListener('pageshow', function () {
   }
 
   function loadBannerCount(tab, url, getCount) {
-    fetch(url + '?_=' + Date.now())
+    fetch(url + (url.includes('?') ? '&' : '?') + '_=' + Date.now())
       .then(function(response) {
         if (!response.ok) throw new Error('status ' + response.status);
         return response.json();
@@ -3022,7 +3022,7 @@ window.addEventListener('pageshow', function () {
   loadBannerCount('shops', 'updates/shop-updates.json', function(data) {
     return data && Array.isArray(data.items) ? data.items.filter(isCurrentNotice).length : 0;
   });
-  loadBannerCount('admin', 'updates/admin-notices.json', function(data) {
+  loadBannerCount('admin', 'https://ishikawa-map-public-notices.shinzatoisao1969.workers.dev/api/v1/notices?region=ishikawa', function(data) {
     return data && Array.isArray(data.items) ? data.items.filter(isCurrentNotice).length : 0;
   });
 

@@ -1,0 +1,19 @@
+{
+  "name": "ishikawa-map-admin-notice-api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --config wrangler.jsonc",
+    "test": "vitest run",
+    "deploy": "npm run deploy:admin && npm run deploy:public",
+    "deploy:admin": "wrangler deploy --config wrangler.jsonc",
+    "deploy:public": "wrangler deploy --config wrangler.public.jsonc",
+    "db:local": "wrangler d1 migrations apply ADMIN_NOTICES_DB --local --config wrangler.jsonc"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.10.0",
+    "vitest": "^3.2.4",
+    "wrangler": "^4.37.1"
+  }
+}

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="admin-notice-api" content="https://ishikawa-map-admin-notices.shinzatoisao1969.workers.dev">
+  <title>管理者からのお知らせ管理｜石川マップ</title>
+  <style>
+    :root {
+      --blue: #0867b2;
+      --blue-dark: #074f89;
+      --green: #16865c;
+      --red: #c62828;
+      --ink: #183042;
+      --muted: #607d8b;
+      --line: #d9e2e8;
+      --surface: #fff;
+      --canvas: #eef3f6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    button, input, select, textarea { font: inherit; }
+    .page { width: min(1120px, 100%); margin: 0 auto; padding: 24px; }
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    h1, h2 { margin: 0; line-height: 1.35; }
+    h1 { font-size: 24px; }
+    h2 { font-size: 20px; }
+    .back-link { color: var(--blue); font-weight: 700; text-decoration: none; }
+    .intro { margin: 8px 0 24px; color: var(--muted); }
+    .api-login { color: var(--blue); font-weight: 700; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr); gap: 16px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 24px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .field { display: grid; gap: 4px; }
+    .field.wide { grid-column: 1 / -1; }
+    label { font-weight: 700; font-size: 14px; }
+    input, select, textarea {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid #aebdc7;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      padding: 10px 12px;
+    }
+    textarea { min-height: 152px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { outline: 3px solid rgba(8, 103, 178, .2); border-color: var(--blue); }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .button {
+      min-height: 48px;
+      border: 1px solid var(--blue);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--blue);
+      padding: 10px 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .button.primary { background: var(--blue); color: #fff; }
+    .button.danger { border-color: var(--red); color: var(--red); }
+    .button:disabled { cursor: wait; opacity: .55; }
+    .status { min-height: 24px; margin: 12px 0 0; font-size: 14px; font-weight: 700; }
+    .status.error { color: var(--red); }
+    .status.success { color: var(--green); }
+    .list-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .notice-list { display: grid; gap: 12px; margin-top: 16px; }
+    .notice {
+      border: 1px solid var(--line);
+      border-left: 5px solid #90a4ae;
+      border-radius: 10px;
+      padding: 16px;
+      cursor: pointer;
+    }
+    .notice[data-status="published"] { border-left-color: #43a047; }
+    .notice[data-status="draft"] { border-left-color: #fb8c00; }
+    .notice:hover { background: #f7fafc; }
+    .notice-title { margin: 4px 0; font-size: 16px; font-weight: 800; }
+    .notice-meta { color: var(--muted); font-size: 12px; }
+    .badge { display: inline-block; border-radius: 999px; background: #edf2f5; padding: 2px 8px; font-size: 12px; font-weight: 700; }
+    .empty { padding: 24px 8px; color: var(--muted); text-align: center; }
+    @media (max-width: 760px) {
+      .page { padding: 16px 12px calc(24px + env(safe-area-inset-bottom)); }
+      .page-header { align-items: flex-start; }
+      h1 { font-size: 20px; }
+      .layout { grid-template-columns: 1fr; }
+      .card { border-radius: 12px; padding: 16px; }
+      .form-grid { grid-template-columns: 1fr; gap: 12px; }
+      .field.wide { grid-column: auto; }
+      .actions .button { flex: 1 1 136px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="page-header">
+      <h1>管理者からのお知らせ管理</h1>
+      <a class="back-link" href="index.html">← 管理者ページへ</a>
+    </div>
+    <p class="intro">投稿は選択した地域だけに表示されます。非公開にしても履歴は残ります。初めて使うときや通信エラー時は、<a class="api-login" href="https://ishikawa-map-admin-notices.shinzatoisao1969.workers.dev/" target="_blank" rel="noopener">管理APIへログイン</a>してください。</p>
+
+    <div class="layout">
+      <section class="card" aria-labelledby="editorTitle">
+        <h2 id="editorTitle">新しいお知らせ</h2>
+        <form id="noticeForm">
+          <input type="hidden" id="noticeId">
+          <input type="hidden" id="revision">
+          <div class="form-grid">
+            <div class="field">
+              <label for="regionId">地域</label>
+              <select id="regionId" required><option value="ishikawa">うるま市石川地区</option></select>
+            </div>
+            <div class="field">
+              <label for="category">分類</label>
+              <input id="category" maxlength="40" placeholder="例：地域行事">
+            </div>
+            <div class="field wide">
+              <label for="title">タイトル（必須）</label>
+              <input id="title" maxlength="120" required>
+            </div>
+            <div class="field wide">
+              <label for="body">詳しい内容</label>
+              <textarea id="body" maxlength="2000"></textarea>
+            </div>
+            <div class="field">
+              <label for="startsAt">掲載開始</label>
+              <input id="startsAt" type="datetime-local">
+            </div>
+            <div class="field">
+              <label for="endsAt">掲載終了</label>
+              <input id="endsAt" type="datetime-local">
+            </div>
+          </div>
+          <div class="actions">
+            <button class="button" type="button" data-save="draft">下書き保存</button>
+            <button class="button primary" type="button" data-save="published">公開する</button>
+            <button class="button danger" id="hideButton" type="button" hidden>非公開にする</button>
+            <button class="button" id="resetButton" type="button">新規入力</button>
+          </div>
+          <p class="status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="card" aria-labelledby="listTitle">
+        <div class="list-head">
+          <h2 id="listTitle">投稿一覧</h2>
+          <button class="button" id="reloadButton" type="button">再読み込み</button>
+        </div>
+        <div class="notice-list" id="noticeList"><p class="empty">読み込み中です…</p></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      'use strict';
+      var configured = document.querySelector('meta[name="admin-notice-api"]').content.trim();
+      var apiBase = configured || location.origin;
+      var form = document.getElementById('noticeForm');
+      var status = document.getElementById('formStatus');
+      var list = document.getElementById('noticeList');
+      var notices = [];
+
+      function request(path, options) {
+        var config = Object.assign({ credentials: 'include' }, options || {});
+        config.headers = Object.assign({ 'content-type': 'application/json' }, config.headers || {});
+        return fetch(apiBase + path, config).then(function (response) {
+          return response.json().catch(function () { return {}; }).then(function (data) {
+            if (!response.ok) throw new Error(data.message || '通信に失敗しました。');
+            return data;
+          });
+        });
+      }
+
+      function value(id) { return document.getElementById(id).value; }
+      function iso(id) { var v = value(id); return v ? new Date(v).toISOString() : null; }
+      function localDate(value) {
+        if (!value) return '';
+        var date = new Date(value);
+        var local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+        return local.toISOString().slice(0, 16);
+      }
+      function payload(saveStatus) {
+        return {
+          regionId: value('regionId'), title: value('title'), body: value('body'),
+          category: value('category'), status: saveStatus,
+          startsAt: iso('startsAt'), endsAt: iso('endsAt'),
+          revision: Number(value('revision')) || undefined
+        };
+      }
+      function setStatus(message, type) { status.textContent = message; status.className = 'status ' + (type || ''); }
+      function setBusy(busy) { form.querySelectorAll('button').forEach(function (button) { button.disabled = busy; }); }
+
+      function save(saveStatus) {
+        if (!form.reportValidity()) return;
+        var id = value('noticeId');
+        setBusy(true); setStatus('保存しています…');
+        request('/api/v1/admin/notices' + (id ? '/' + encodeURIComponent(id) : ''), {
+          method: id ? 'PUT' : 'POST', body: JSON.stringify(payload(saveStatus))
+        }).then(function (data) {
+          document.getElementById('noticeId').value = data.id;
+          document.getElementById('revision').value = data.revision || '';
+          document.getElementById('hideButton').hidden = false;
+          document.getElementById('editorTitle').textContent = 'お知らせを編集';
+          setStatus(data.message, 'success');
+          return loadNotices();
+        }).catch(function (error) { setStatus(error.message, 'error'); }).finally(function () { setBusy(false); });
+      }
+
+      function resetForm() {
+        form.reset();
+        document.getElementById('noticeId').value = '';
+        document.getElementById('revision').value = '';
+        document.getElementById('hideButton').hidden = true;
+        document.getElementById('editorTitle').textContent = '新しいお知らせ';
+        setStatus('');
+      }
+
+      function editNotice(id) {
+        var item = notices.find(function (notice) { return notice.id === id; });
+        if (!item) return;
+        ['noticeId', 'revision', 'regionId', 'title', 'body', 'category'].forEach(function (key) {
+          document.getElementById(key).value = item[key] == null ? '' : item[key];
+        });
+        document.getElementById('startsAt').value = localDate(item.startsAt);
+        document.getElementById('endsAt').value = localDate(item.endsAt);
+        document.getElementById('hideButton').hidden = item.status === 'hidden';
+        document.getElementById('editorTitle').textContent = 'お知らせを編集';
+        setStatus('');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function loadNotices() {
+        list.innerHTML = '<p class="empty">読み込み中です…</p>';
+        return request('/api/v1/admin/notices?region=ishikawa').then(function (data) {
+          notices = data.items || [];
+          list.replaceChildren();
+          if (!notices.length) { list.innerHTML = '<p class="empty">投稿はまだありません。</p>'; return; }
+          notices.forEach(function (item) {
+            var article = document.createElement('article');
+            article.className = 'notice'; article.dataset.status = item.status; article.tabIndex = 0;
+            var labels = { published: '公開中', draft: '下書き', hidden: '非公開' };
+            var badge = document.createElement('span'); badge.className = 'badge'; badge.textContent = labels[item.status] || item.status;
+            var title = document.createElement('p'); title.className = 'notice-title'; title.textContent = item.title;
+            var meta = document.createElement('p'); meta.className = 'notice-meta';
+            meta.textContent = (item.category || '分類なし') + '／更新 ' + (item.updatedAt || '').slice(0, 16).replace('T', ' ');
+            article.append(badge, title, meta);
+            article.addEventListener('click', function () { editNotice(item.id); });
+            article.addEventListener('keydown', function (event) { if (event.key === 'Enter') editNotice(item.id); });
+            list.appendChild(article);
+          });
+        }).catch(function (error) { list.innerHTML = '<p class="empty">' + error.message + '</p>'; });
+      }
+
+      document.querySelectorAll('[data-save]').forEach(function (button) {
+        button.addEventListener('click', function () { save(button.dataset.save); });
+      });
+      document.getElementById('resetButton').addEventListener('click', resetForm);
+      document.getElementById('reloadButton').addEventListener('click', loadNotices);
+      document.getElementById('hideButton').addEventListener('click', function () {
+        var id = value('noticeId'); if (!id || !confirm('このお知らせを非公開にしますか？')) return;
+        setBusy(true);
+        request('/api/v1/admin/notices/' + encodeURIComponent(id), { method: 'DELETE' })
+          .then(function (data) { resetForm(); setStatus(data.message, 'success'); return loadNotices(); })
+          .catch(function (error) { setStatus(error.message, 'error'); })
+          .finally(function () { setBusy(false); });
+      });
+      loadNotices();
+    })();
+  </script>
+</body>
+</html>

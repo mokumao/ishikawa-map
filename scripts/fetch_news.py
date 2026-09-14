@@ -50,7 +50,6 @@ NO_NEWS_FILE = f'{NEWS_OUTPUT_DIR}/no_news_dates.json'
 CANDIDATES_FILE = f'{NEWS_OUTPUT_DIR}/candidates.json'
 REVIEW_FILE = f'{NEWS_OUTPUT_DIR}/review.json'
 NEWS_DECISIONS_FILE = 'config/news-regions/ishikawa-news-decisions.json'
-ADMIN_NOTICES_FILE = 'updates/admin-notices.json'
 
 # うるま市公式ページを入口に、公式に案内された開催情報だけを取得する。
 URUMA_BULLFIGHTING_PAGE_URL = (
@@ -65,12 +64,6 @@ BULLFIGHTING_SOURCE = {
     'facilityId': 'ishikawa-dome',
     'facilityAliases': ['石川多目的ドーム'],
 }
-
-# 管理人投稿フォームの回答スプレッドシート（ウェブに公開したCSV）
-# Googleフォーム「石川ニュース投稿（管理人用）」→ シート「フォームの回答 1」
-ADMIN_POSTS_CSV_URL = ('https://docs.google.com/spreadsheets/d/e/'
-    '2PACX-1vRiRIGgNkKBpeNKMsPOB8UOiwR_9yk7Gix_6LN6F4EG5X6i23K---P4V7JUY6oMuNW0OEQz8gCYM3F4'
-    '/pub?gid=1849219516&single=true&output=csv')
 
 # 読者投稿フォームの回答スプレッドシート（ウェブに公開したCSV）
 # Googleフォーム「石川マップ情報提供」→ シート「フォームの回答 1」
@@ -905,68 +898,6 @@ def format_date_label(pub_date):
         return f'昨日 {month_day}'
     else:
         return month_day
-
-# ── 管理人投稿の取得 ──────────────────────────────────────────────
-
-def parse_admin_timestamp(ts):
-    """Googleフォームのタイムスタンプ（例: 2026/07/16 0:12:34）をJSTのdatetimeに変換"""
-    for fmt in ('%Y/%m/%d %H:%M:%S', '%Y/%m/%d %H:%M'):
-        try:
-            return datetime.strptime(ts, fmt).replace(tzinfo=JST)
-        except ValueError:
-            continue
-    return None
-
-def fetch_admin_posts():
-    """管理人投稿フォームの回答（公開CSV）を管理者告知形式で返す。
-    取得に失敗してもニュース生成全体は止めない（Noneを返す）"""
-    import csv
-    import io
-    import urllib.request
-    posts = []
-    try:
-        print("取得中: 管理人投稿（Googleフォーム） ...")
-        req = urllib.request.Request(ADMIN_POSTS_CSV_URL,
-                                     headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            text = resp.read().decode('utf-8')
-        reader = csv.DictReader(io.StringIO(text))
-        for row in reader:
-            ts       = (row.get('タイムスタンプ') or '').strip()
-            title    = (row.get('タイトル') or '').strip()
-            body     = (row.get('詳しい内容') or '').strip()
-            category = (row.get('カテゴリ') or '').strip()
-            if not title:
-                continue
-            pub_date = parse_admin_timestamp(ts)
-            if not is_within_period(pub_date):
-                continue  # 掲載期間(7日)を過ぎた投稿は表示しない
-            post_key = f'{ts}\n{title}'
-            posts.append({
-                'id':          'admin-' + hashlib.sha256(post_key.encode('utf-8')).hexdigest()[:16],
-                'title':       title,
-                'body':        truncate(body),
-                'category':    category,
-                'publishedAt': pub_date.isoformat() if pub_date else '',
-                'endsAt':      (pub_date + timedelta(days=DAYS_LIMIT)).isoformat() if pub_date else '',
-                'status':      'published',
-            })
-        posts.sort(key=lambda post: post.get('publishedAt', ''), reverse=True)
-        print(f"  → {len(posts)}件")
-    except Exception as e:
-        print(f"  [WARN] 管理人投稿の取得エラー: {e}")
-        return None
-    return posts
-
-def save_admin_notices(posts):
-    """管理人投稿を「管理者から」タブ用JSONへ保存する。"""
-    os.makedirs(os.path.dirname(ADMIN_NOTICES_FILE), exist_ok=True)
-    with open(ADMIN_NOTICES_FILE, 'w', encoding='utf-8') as f:
-        json.dump({
-            'updated': now_jst.isoformat(),
-            'items': posts,
-        }, f, ensure_ascii=False, indent=2)
-    print(f"[OK] {ADMIN_NOTICES_FILE} を生成しました（{len(posts)}件）")
 
 # ── 読者投稿（承認済みのみ）の取得 ────────────────────────────────
 
@@ -1818,10 +1749,6 @@ if __name__ == '__main__':
     print(f"=== {REGION_NAME} News Fetch Start: {today_date} ===\n")
     articles, candidates, source_results = fetch_articles()
     save_candidate_data(candidates, source_results)
-    # 管理人投稿は「管理者から」へ分け、取得失敗時は既存表示を消さない。
-    admin_posts = fetch_admin_posts()
-    if admin_posts is not None:
-        save_admin_notices(admin_posts)
     # 承認済み読者投稿は石川ニュースへ合流させる。
     articles += fetch_reader_posts()
     print(f"\nTotal: {len(articles)} articles\n")
@@ -1833,7 +1760,7 @@ if __name__ == '__main__':
     if not has_today:
         no_news_dates.add(today_date)
     else:
-        # 朝の時点で「ニュースなし」と記録された後、同じ日に管理人投稿などで
+        # 朝の時点で「ニュースなし」と記録された後、同じ日に記事が増えた場合は
         # 記事が増えた場合は「〇月△日のニュースはありません」を取り下げる
         no_news_dates.discard(today_date)
     cutoff_date_str = cutoff_date.strftime('%Y-%m-%d')
