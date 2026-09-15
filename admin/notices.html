@@ -88,7 +88,17 @@
     .status.error { color: var(--red); }
     .status.success { color: var(--green); }
     .list-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .notice-list { display: grid; gap: 12px; margin-top: 16px; }
+    .notice-list {
+      display: grid;
+      gap: 12px;
+      max-height: calc(100vh - 180px);
+      max-height: calc(100dvh - 180px);
+      margin-top: 16px;
+      padding-right: 4px;
+      overflow-y: auto;
+      overscroll-behavior-y: contain;
+      scrollbar-gutter: stable;
+    }
     .notice {
       border: 1px solid var(--line);
       border-left: 5px solid #90a4ae;
@@ -112,6 +122,13 @@
       .form-grid { grid-template-columns: 1fr; gap: 12px; }
       .field.wide { grid-column: auto; }
       .actions .button { flex: 1 1 136px; }
+      .notice-list {
+        max-height: none;
+        padding-right: 0;
+        overflow-y: visible;
+        overscroll-behavior-y: auto;
+        scrollbar-gutter: auto;
+      }
     }
   </style>
 </head>
