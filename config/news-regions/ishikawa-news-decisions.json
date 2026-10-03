@@ -1,4 +1,11 @@
 {
   "regionId": "ishikawa",
-  "decisions": []
+  "decisions": [
+    {
+      "candidateId": "20261219-google-news-ishikawa-2b7ed8013d",
+      "decision": "publish",
+      "decidedAt": "2026-10-03T13:09:07+09:00",
+      "source": "github-owner-confirmation"
+    }
+  ]
 }
