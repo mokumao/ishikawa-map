@@ -93,6 +93,7 @@
     .list-actions .button[hidden] { display: none; }
     .notice-list {
       display: grid;
+      grid-template-columns: minmax(0, 1fr);
       gap: 12px;
       max-height: calc(100vh - 180px);
       max-height: calc(100dvh - 180px);
@@ -103,6 +104,7 @@
       scrollbar-gutter: stable;
     }
     .notice {
+      min-width: 0;
       border: 1px solid var(--line);
       border-left: 5px solid #90a4ae;
       border-radius: 10px;
@@ -113,7 +115,7 @@
     .notice[data-status="scheduled"] { border-left-color: #1976d2; }
     .notice[data-status="draft"] { border-left-color: #fb8c00; }
     .notice:hover { background: #f7fafc; }
-    .notice-title { margin: 4px 0; font-size: 16px; font-weight: 800; }
+    .notice-title { margin: 4px 0; overflow-wrap: anywhere; font-size: 16px; font-weight: 800; }
     .notice-meta { color: var(--muted); font-size: 12px; }
     .notice-delete-area { display: flex; justify-content: flex-end; margin-top: 12px; }
     .notice-delete-button { min-height: 40px; border-color: var(--red); color: var(--red); padding: 6px 16px; }

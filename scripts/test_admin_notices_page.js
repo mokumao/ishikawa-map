@@ -90,6 +90,11 @@ assert(
   '削除ボタンのキーボード操作で投稿編集を誤って開かないこと',
 );
 assert(
+  html.includes('grid-template-columns: minmax(0, 1fr);')
+    && html.includes('.notice-title { margin: 4px 0; overflow-wrap: anywhere;'),
+  '長い投稿タイトルでも削除ボタンを画面外へ押し出さないこと',
+);
+assert(
   /<div class="list-head">[\s\S]*?<\/div>\s*<div class="list-actions">/.test(html),
   '一覧の操作ボタンを見出しの下段に配置すること',
 );
