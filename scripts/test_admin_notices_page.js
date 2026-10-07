@@ -56,5 +56,13 @@ assert(
   html.includes('.list-actions .button[hidden] { display: none; }'),
   '過去の投稿がないときは切替ボタンを確実に隠すこと',
 );
+assert(
+  html.includes('<p class="list-summary">（公開中・公開予定・下書き）</p>'),
+  '投稿一覧の右側に初期表示対象を案内すること',
+);
+assert(
+  /<div class="list-head">[\s\S]*?<\/div>\s*<div class="list-actions">/.test(html),
+  '一覧の操作ボタンを見出しの下段に配置すること',
+);
 
 console.log('admin notices page tests: OK');

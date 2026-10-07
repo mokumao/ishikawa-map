@@ -88,7 +88,8 @@
     .status.error { color: var(--red); }
     .status.success { color: var(--green); }
     .list-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .list-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+    .list-summary { margin: 0; color: var(--muted); font-size: 12px; font-weight: 700; text-align: right; }
+    .list-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-top: 12px; }
     .list-actions .button[hidden] { display: none; }
     .notice-list {
       display: grid;
@@ -125,7 +126,8 @@
       .form-grid { grid-template-columns: 1fr; gap: 12px; }
       .field.wide { grid-column: auto; }
       .actions .button { flex: 1 1 136px; }
-      .list-head { align-items: stretch; flex-direction: column; }
+      .list-head { align-items: center; }
+      .list-summary { flex: 1 1 auto; }
       .list-actions { justify-content: stretch; }
       .list-actions .button { flex: 1 1 140px; }
       .notice-list {
@@ -196,10 +198,11 @@
       <section class="card" aria-labelledby="listTitle">
         <div class="list-head">
           <h2 id="listTitle">投稿一覧</h2>
-          <div class="list-actions">
-            <button class="button" id="togglePastButton" type="button" aria-expanded="false" hidden>過去の投稿を見る</button>
-            <button class="button" id="reloadButton" type="button">再読み込み</button>
-          </div>
+          <p class="list-summary">（公開中・公開予定・下書き）</p>
+        </div>
+        <div class="list-actions">
+          <button class="button" id="togglePastButton" type="button" aria-expanded="false" hidden>過去の投稿を見る</button>
+          <button class="button" id="reloadButton" type="button">再読み込み</button>
         </div>
         <div class="notice-list" id="noticeList"><p class="empty">読み込み中です…</p></div>
       </section>
