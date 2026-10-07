@@ -88,6 +88,8 @@
     .status.error { color: var(--red); }
     .status.success { color: var(--green); }
     .list-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .list-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+    .list-actions .button[hidden] { display: none; }
     .notice-list {
       display: grid;
       gap: 12px;
@@ -123,6 +125,9 @@
       .form-grid { grid-template-columns: 1fr; gap: 12px; }
       .field.wide { grid-column: auto; }
       .actions .button { flex: 1 1 136px; }
+      .list-head { align-items: stretch; flex-direction: column; }
+      .list-actions { justify-content: stretch; }
+      .list-actions .button { flex: 1 1 140px; }
       .notice-list {
         max-height: none;
         padding-right: 0;
@@ -191,7 +196,10 @@
       <section class="card" aria-labelledby="listTitle">
         <div class="list-head">
           <h2 id="listTitle">投稿一覧</h2>
-          <button class="button" id="reloadButton" type="button">再読み込み</button>
+          <div class="list-actions">
+            <button class="button" id="togglePastButton" type="button" aria-expanded="false" hidden>過去の投稿を見る</button>
+            <button class="button" id="reloadButton" type="button">再読み込み</button>
+          </div>
         </div>
         <div class="notice-list" id="noticeList"><p class="empty">読み込み中です…</p></div>
       </section>
@@ -214,7 +222,9 @@
       var hideButton = document.getElementById('hideButton');
       var hideConfirm = document.getElementById('hideConfirm');
       var confirmHideButton = document.getElementById('confirmHideButton');
+      var togglePastButton = document.getElementById('togglePastButton');
       var notices = [];
+      var showPast = false;
 
       function request(path, options) {
         var config = Object.assign({ credentials: 'include' }, options || {});
@@ -241,6 +251,10 @@
         if (item.startsAt && new Date(item.startsAt) > current) return 'scheduled';
         if (item.endsAt && new Date(item.endsAt) < current) return 'expired';
         return 'published';
+      }
+      function isPastNotice(item) {
+        var itemStatus = displayStatus(item);
+        return itemStatus === 'expired' || itemStatus === 'hidden';
       }
       function payload(saveStatus) {
         return {
@@ -302,13 +316,18 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      function loadNotices() {
-        list.innerHTML = '<p class="empty">読み込み中です…</p>';
-        return request('/api/v1/admin/notices?region=ishikawa').then(function (data) {
-          notices = data.items || [];
-          list.replaceChildren();
-          if (!notices.length) { list.innerHTML = '<p class="empty">投稿はまだありません。</p>'; return; }
-          notices.forEach(function (item) {
+      function renderNotices() {
+        var pastCount = notices.filter(isPastNotice).length;
+        var visibleNotices = notices.filter(function (item) { return showPast || !isPastNotice(item); });
+        togglePastButton.hidden = pastCount === 0;
+        togglePastButton.setAttribute('aria-expanded', String(showPast));
+        togglePastButton.textContent = showPast ? '過去の投稿を隠す' : '過去の投稿を見る（' + pastCount + '件）';
+        list.replaceChildren();
+        if (!visibleNotices.length) {
+          list.innerHTML = '<p class="empty">現在・今後の投稿はありません。</p>';
+          return;
+        }
+        visibleNotices.forEach(function (item) {
             var visibleStatus = displayStatus(item);
             var article = document.createElement('article');
             article.className = 'notice'; article.dataset.status = visibleStatus; article.tabIndex = 0;
@@ -321,8 +340,20 @@
             article.addEventListener('click', function () { editNotice(item.id); });
             article.addEventListener('keydown', function (event) { if (event.key === 'Enter') editNotice(item.id); });
             list.appendChild(article);
-          });
-        }).catch(function (error) { list.innerHTML = '<p class="empty">' + error.message + '</p>'; });
+        });
+      }
+
+      function loadNotices() {
+        list.innerHTML = '<p class="empty">読み込み中です…</p>';
+        togglePastButton.disabled = true;
+        return request('/api/v1/admin/notices?region=ishikawa').then(function (data) {
+          notices = data.items || [];
+          renderNotices();
+        }).catch(function (error) {
+          list.innerHTML = '<p class="empty">' + error.message + '</p>';
+        }).finally(function () {
+          togglePastButton.disabled = false;
+        });
       }
 
       document.querySelectorAll('[data-save]').forEach(function (button) {
@@ -330,6 +361,10 @@
       });
       document.getElementById('resetButton').addEventListener('click', resetForm);
       document.getElementById('reloadButton').addEventListener('click', loadNotices);
+      togglePastButton.addEventListener('click', function () {
+        showPast = !showPast;
+        renderNotices();
+      });
       hideButton.addEventListener('click', function (event) {
         event.preventDefault();
         event.stopPropagation();

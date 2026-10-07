@@ -36,5 +36,25 @@ assert(
   html.includes("scheduled: '公開予定', expired: '掲載期間終了'"),
   '実際の掲載期間に応じた日本語ラベルを表示すること',
 );
+assert(
+  html.includes("return itemStatus === 'expired' || itemStatus === 'hidden';"),
+  '掲載期間終了と非公開を過去の投稿として扱うこと',
+);
+assert(
+  html.includes("showPast ? '過去の投稿を隠す' : '過去の投稿を見る（' + pastCount + '件）'"),
+  '過去の投稿を件数付きで開閉できること',
+);
+assert(
+  html.includes("var visibleNotices = notices.filter(function (item) { return showPast || !isPastNotice(item); });"),
+  '初期表示では過去の投稿を一覧から除外すること',
+);
+assert(
+  html.includes('id="togglePastButton"') && html.includes('aria-expanded="false"'),
+  '過去の投稿を開閉する操作に展開状態が設定されていること',
+);
+assert(
+  html.includes('.list-actions .button[hidden] { display: none; }'),
+  '過去の投稿がないときは切替ボタンを確実に隠すこと',
+);
 
 console.log('admin notices page tests: OK');
