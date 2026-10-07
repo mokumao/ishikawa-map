@@ -39,8 +39,9 @@ assert(
 );
 assert(
   html.includes('.publish-buttons { display: flex; max-width: 100%; flex-direction: column; gap: 8px; }')
-    && html.includes('.actions .publish-buttons .button { flex: 0 0 auto; }'),
-  '2つの公開ボタンを縦並びにし、狭い画面でも高さが不自然に伸びないこと',
+    && html.includes('.actions .publish-buttons .button { flex: 0 0 auto; }')
+    && html.includes('.actions { display: flex; flex-wrap: wrap; align-items: flex-start;'),
+  '2つの公開ボタンを縦並びにし、左右の操作ボタンは従来の高さを保つこと',
 );
 const inlineScripts = Array.from(html.matchAll(/<script>([\s\S]*?)<\/script>/g));
 
