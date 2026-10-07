@@ -19,7 +19,7 @@ export default {
              starts_at AS startsAt, starts_at AS publishedAt,
              ends_at AS endsAt, updated_at AS updatedAt
       FROM admin_notices
-      WHERE region_id = ? AND status = 'published'
+      WHERE region_id = ? AND status = 'published' AND deleted_at IS NULL
         AND (starts_at IS NULL OR starts_at <= ?)
         AND (ends_at IS NULL OR ends_at >= ?)
       ORDER BY COALESCE(starts_at, created_at) DESC

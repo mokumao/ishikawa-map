@@ -31,6 +31,11 @@ export default {
         return json(await createNotice(request, env.DB, actor), 201, cors);
       }
 
+      const deleteMatch = url.pathname.match(/^\/api\/v1\/admin\/notices\/([a-zA-Z0-9-]+)\/delete$/);
+      if (deleteMatch && request.method === 'POST') {
+        return json(await softDeleteNotice(env.DB, actor, deleteMatch[1]), 200, cors);
+      }
+
       const match = url.pathname.match(/^\/api\/v1\/admin\/notices\/([a-zA-Z0-9-]+)$/);
       if (match && request.method === 'PUT') {
         return json(await updateNotice(request, env.DB, actor, match[1]), 200, cors);
@@ -53,7 +58,7 @@ async function listPublicNotices(db, regionId) {
            starts_at AS startsAt, starts_at AS publishedAt,
            ends_at AS endsAt, updated_at AS updatedAt
     FROM admin_notices
-    WHERE region_id = ? AND status = 'published'
+    WHERE region_id = ? AND status = 'published' AND deleted_at IS NULL
       AND (starts_at IS NULL OR starts_at <= ?)
       AND (ends_at IS NULL OR ends_at >= ?)
     ORDER BY COALESCE(starts_at, created_at) DESC
@@ -66,7 +71,9 @@ async function listAdminNotices(db, regionId) {
     SELECT id, region_id AS regionId, title, body, category, status,
            starts_at AS startsAt, ends_at AS endsAt, created_at AS createdAt,
            updated_at AS updatedAt, revision
-    FROM admin_notices WHERE region_id = ? ORDER BY updated_at DESC
+    FROM admin_notices
+    WHERE region_id = ? AND deleted_at IS NULL
+    ORDER BY updated_at DESC
   `).bind(regionId).all();
   return { items: result.results || [] };
 }
@@ -103,7 +110,7 @@ async function updateNotice(request, db, actor, id) {
   const result = await db.prepare(`UPDATE admin_notices SET
       region_id = ?, title = ?, body = ?, category = ?, status = ?, starts_at = ?, ends_at = ?,
       updated_at = ?, updated_by = ?, revision = revision + 1
-    WHERE id = ? AND revision = ?`)
+    WHERE id = ? AND revision = ? AND deleted_at IS NULL`)
     .bind(value.regionId, value.title, value.body, value.category, value.status,
       value.startsAt, value.endsAt, now, actor, id, revision).run();
   if (!result.meta?.changes) throw httpError(409, 'edit_conflict', '別の更新があります。再読み込みしてください。');
@@ -114,11 +121,23 @@ async function updateNotice(request, db, actor, id) {
 async function hideNotice(db, actor, id) {
   const now = new Date().toISOString();
   const result = await db.prepare(`UPDATE admin_notices
-    SET status = 'hidden', updated_at = ?, updated_by = ?, revision = revision + 1 WHERE id = ?`)
+    SET status = 'hidden', updated_at = ?, updated_by = ?, revision = revision + 1
+    WHERE id = ? AND deleted_at IS NULL`)
     .bind(now, actor, id).run();
   if (!result.meta?.changes) throw httpError(404, 'not_found', '投稿が見つかりません。');
   await recordHistory(db, id, 'hide', { status: 'hidden' }, actor, now);
   return { id, message: '非公開にしました。' };
+}
+
+async function softDeleteNotice(db, actor, id) {
+  const now = new Date().toISOString();
+  const result = await db.prepare(`UPDATE admin_notices
+    SET deleted_at = ?, deleted_by = ?, updated_at = ?, updated_by = ?, revision = revision + 1
+    WHERE id = ? AND deleted_at IS NULL`)
+    .bind(now, actor, now, actor, id).run();
+  if (!result.meta?.changes) throw httpError(404, 'not_found', '投稿が見つかりません。');
+  await recordHistory(db, id, 'update', { operation: 'delete', deletedAt: now }, actor, now);
+  return { id, deletedAt: now, message: '投稿を削除しました。' };
 }
 
 async function requireAdmin(env, ctx) {

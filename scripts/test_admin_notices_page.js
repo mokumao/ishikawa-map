@@ -70,6 +70,21 @@ assert(
   '過去の投稿の表示状態に合わせて一覧の案内を切り替えること',
 );
 assert(
+  html.includes("deleteButton.textContent = '削除';")
+    && html.includes("message.textContent = '投稿を削除しますか？';")
+    && html.includes("okButton.textContent = 'OK';"),
+  '各投稿に削除ボタンとページ内確認を表示すること',
+);
+assert(
+  html.includes("'/delete', { method: 'POST' }")
+    && html.includes("if (value('noticeId') === item.id) resetForm();"),
+  '削除確定後に論理削除APIを呼び、編集中の投稿ならフォームを初期化すること',
+);
+assert(
+  html.includes("if (event.target === article && event.key === 'Enter') editNotice(item.id);"),
+  '削除ボタンのキーボード操作で投稿編集を誤って開かないこと',
+);
+assert(
   /<div class="list-head">[\s\S]*?<\/div>\s*<div class="list-actions">/.test(html),
   '一覧の操作ボタンを見出しの下段に配置すること',
 );

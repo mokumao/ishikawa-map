@@ -115,6 +115,22 @@
     .notice:hover { background: #f7fafc; }
     .notice-title { margin: 4px 0; font-size: 16px; font-weight: 800; }
     .notice-meta { color: var(--muted); font-size: 12px; }
+    .notice-delete-area { display: flex; justify-content: flex-end; margin-top: 12px; }
+    .notice-delete-button { min-height: 40px; border-color: var(--red); color: var(--red); padding: 6px 16px; }
+    .notice-delete-confirm {
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 12px;
+      border: 1px solid #ef9a9a;
+      border-radius: 8px;
+      background: #fff5f5;
+    }
+    .notice-delete-confirm p { flex: 1 1 180px; margin: 0; font-size: 14px; font-weight: 700; }
+    .notice-delete-confirm .button { min-height: 40px; padding: 6px 16px; }
     .badge { display: inline-block; border-radius: 999px; background: #edf2f5; padding: 2px 8px; font-size: 12px; font-weight: 700; }
     .empty { padding: 24px 8px; color: var(--muted); text-align: center; }
     @media (max-width: 760px) {
@@ -343,10 +359,51 @@
             var title = document.createElement('p'); title.className = 'notice-title'; title.textContent = item.title;
             var meta = document.createElement('p'); meta.className = 'notice-meta';
             meta.textContent = (item.category || '分類なし') + '／更新 ' + (item.updatedAt || '').slice(0, 16).replace('T', ' ');
-            article.append(badge, title, meta);
+            var deleteArea = document.createElement('div'); deleteArea.className = 'notice-delete-area';
+            var deleteButton = document.createElement('button'); deleteButton.type = 'button';
+            deleteButton.className = 'button notice-delete-button'; deleteButton.textContent = '削除';
+            deleteButton.addEventListener('click', function (event) {
+              event.preventDefault();
+              event.stopPropagation();
+              showDeleteConfirm(item, deleteArea, deleteButton);
+            });
+            deleteArea.appendChild(deleteButton);
+            article.append(badge, title, meta, deleteArea);
             article.addEventListener('click', function () { editNotice(item.id); });
-            article.addEventListener('keydown', function (event) { if (event.key === 'Enter') editNotice(item.id); });
+            article.addEventListener('keydown', function (event) {
+              if (event.target === article && event.key === 'Enter') editNotice(item.id);
+            });
             list.appendChild(article);
+        });
+      }
+
+      function showDeleteConfirm(item, deleteArea, deleteButton) {
+        var confirm = document.createElement('div'); confirm.className = 'notice-delete-confirm';
+        var message = document.createElement('p'); message.textContent = '投稿を削除しますか？';
+        var okButton = document.createElement('button'); okButton.type = 'button';
+        okButton.className = 'button danger-confirm'; okButton.textContent = 'OK';
+        var cancelButton = document.createElement('button'); cancelButton.type = 'button';
+        cancelButton.className = 'button'; cancelButton.textContent = 'キャンセル';
+        confirm.append(message, okButton, cancelButton);
+        deleteArea.replaceChildren(confirm);
+        okButton.focus();
+        cancelButton.addEventListener('click', function (event) {
+          event.preventDefault(); event.stopPropagation();
+          deleteArea.replaceChildren(deleteButton); deleteButton.focus();
+        });
+        okButton.addEventListener('click', function (event) {
+          event.preventDefault(); event.stopPropagation();
+          okButton.disabled = true; cancelButton.disabled = true;
+          request('/api/v1/admin/notices/' + encodeURIComponent(item.id) + '/delete', { method: 'POST' })
+            .then(function (data) {
+              if (value('noticeId') === item.id) resetForm();
+              setStatus(data.message, 'success');
+              return loadNotices();
+            })
+            .catch(function (error) {
+              okButton.disabled = false; cancelButton.disabled = false;
+              setStatus(error.message, 'error');
+            });
         });
       }
 
