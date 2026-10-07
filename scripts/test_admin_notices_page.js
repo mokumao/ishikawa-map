@@ -57,8 +57,13 @@ assert(
   '過去の投稿がないときは切替ボタンを確実に隠すこと',
 );
 assert(
-  html.includes('<p class="list-summary">（公開中・公開予定・下書き）</p>'),
+  html.includes('<p class="list-summary" id="listSummary">（公開中・公開予定・下書き）</p>'),
   '投稿一覧の右側に初期表示対象を案内すること',
+);
+assert(
+  html.includes("? '（公開中・公開予定・下書き・掲載期間終了・非公開）'")
+    && html.includes(": '（公開中・公開予定・下書き）';"),
+  '過去の投稿の表示状態に合わせて一覧の案内を切り替えること',
 );
 assert(
   /<div class="list-head">[\s\S]*?<\/div>\s*<div class="list-actions">/.test(html),

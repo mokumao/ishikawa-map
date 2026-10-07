@@ -198,7 +198,7 @@
       <section class="card" aria-labelledby="listTitle">
         <div class="list-head">
           <h2 id="listTitle">投稿一覧</h2>
-          <p class="list-summary">（公開中・公開予定・下書き）</p>
+          <p class="list-summary" id="listSummary">（公開中・公開予定・下書き）</p>
         </div>
         <div class="list-actions">
           <button class="button" id="togglePastButton" type="button" aria-expanded="false" hidden>過去の投稿を見る</button>
@@ -226,6 +226,7 @@
       var hideConfirm = document.getElementById('hideConfirm');
       var confirmHideButton = document.getElementById('confirmHideButton');
       var togglePastButton = document.getElementById('togglePastButton');
+      var listSummary = document.getElementById('listSummary');
       var notices = [];
       var showPast = false;
 
@@ -325,6 +326,9 @@
         togglePastButton.hidden = pastCount === 0;
         togglePastButton.setAttribute('aria-expanded', String(showPast));
         togglePastButton.textContent = showPast ? '過去の投稿を隠す' : '過去の投稿を見る（' + pastCount + '件）';
+        listSummary.textContent = showPast
+          ? '（公開中・公開予定・下書き・掲載期間終了・非公開）'
+          : '（公開中・公開予定・下書き）';
         list.replaceChildren();
         if (!visibleNotices.length) {
           list.innerHTML = '<p class="empty">現在・今後の投稿はありません。</p>';
