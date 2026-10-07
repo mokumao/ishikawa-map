@@ -65,6 +65,11 @@ assert(
   '一覧の表示対象案内を少し大きな赤文字にすること',
 );
 assert(
+  html.includes('.list-head { display: flex; align-items: center; justify-content: flex-start; gap: 8px; }')
+    && html.includes('font-weight: 700; text-align: left; }'),
+  '一覧の表示対象案内を投稿一覧見出しのすぐ右側に配置すること',
+);
+assert(
   html.includes("? '（公開中・公開予定・下書き・掲載期間終了・非公開）'")
     && html.includes(": '（公開中・公開予定・下書き）';"),
   '過去の投稿の表示状態に合わせて一覧の案内を切り替えること',
