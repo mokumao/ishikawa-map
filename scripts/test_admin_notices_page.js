@@ -16,8 +16,10 @@ assert(
     && html.includes("published: '公開中', scheduled: '公開中', draft: '下書き', hidden: '非公開', expired: '掲載期間終了'")
     && html.includes('editorStatus.hidden = false;')
     && html.includes('editorStatus.hidden = true;')
+    && html.includes("publishButton.textContent = '修正して公開する';")
+    && html.includes("publishButton.textContent = '公開する';")
     && /\.editor-status\s*\{[\s\S]*?background: var\(--blue\);[\s\S]*?color: #fff;/.test(html),
-  '既存投稿の編集見出しの右側に4種類の状態を表示し、新規入力時は隠すこと',
+  '既存投稿では見出しと公開ボタンを編集用表示へ切り替え、新規入力時は元へ戻すこと',
 );
 const inlineScripts = Array.from(html.matchAll(/<script>([\s\S]*?)<\/script>/g));
 

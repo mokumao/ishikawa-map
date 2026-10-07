@@ -257,6 +257,7 @@
       var status = document.getElementById('formStatus');
       var list = document.getElementById('noticeList');
       var hideButton = document.getElementById('hideButton');
+      var publishButton = form.querySelector('[data-save="published"]');
       var hideConfirm = document.getElementById('hideConfirm');
       var confirmHideButton = document.getElementById('confirmHideButton');
       var togglePastButton = document.getElementById('togglePastButton');
@@ -302,11 +303,13 @@
         editorTitle.textContent = '既存のお知らせを編集';
         editorStatus.textContent = labels[itemStatus] || itemStatus;
         editorStatus.hidden = false;
+        publishButton.textContent = '修正して公開する';
       }
       function showNewEditorState() {
         editorTitle.textContent = '新規入力';
         editorStatus.textContent = '';
         editorStatus.hidden = true;
+        publishButton.textContent = '公開する';
       }
       function payload(saveStatus) {
         return {
