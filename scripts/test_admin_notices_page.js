@@ -150,6 +150,12 @@ assert(
   '投稿の分類と更新日時を16pxの濃い青文字で表示すること',
 );
 assert(
+  html.includes("timeZone: 'Asia/Tokyo'")
+    && html.includes("formatJst(item.updatedAt)")
+    && html.includes("return parts.year + '-' + parts.month + '-' + parts.day + ' ' + parts.hour + ':' + parts.minute;"),
+  'D1のUTC更新日時を日本時間の年月日時分へ変換して表示すること',
+);
+assert(
   /<div class="list-head">[\s\S]*?<\/div>\s*<div class="list-actions">/.test(html),
   '一覧の操作ボタンを見出しの下段に配置すること',
 );

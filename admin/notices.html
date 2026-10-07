@@ -302,6 +302,19 @@
         var local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
         return local.toISOString().slice(0, 16);
       }
+      function formatJst(value) {
+        if (!value) return '';
+        var date = new Date(value);
+        if (Number.isNaN(date.getTime())) return '';
+        var parts = new Intl.DateTimeFormat('ja-JP', {
+          timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+        }).formatToParts(date).reduce(function (result, part) {
+          result[part.type] = part.value;
+          return result;
+        }, {});
+        return parts.year + '-' + parts.month + '-' + parts.day + ' ' + parts.hour + ':' + parts.minute;
+      }
       function displayStatus(item, now) {
         if (item.status !== 'published') return item.status;
         var current = now || new Date();
@@ -413,7 +426,7 @@
             var badge = document.createElement('span'); badge.className = 'badge'; badge.textContent = labels[visibleStatus] || visibleStatus;
             var title = document.createElement('p'); title.className = 'notice-title'; title.textContent = item.title;
             var meta = document.createElement('p'); meta.className = 'notice-meta';
-            meta.textContent = (item.category || '分類なし') + '／更新 ' + (item.updatedAt || '').slice(0, 16).replace('T', ' ');
+            meta.textContent = (item.category || '分類なし') + '／更新 ' + formatJst(item.updatedAt);
             var footer = document.createElement('div'); footer.className = 'notice-footer';
             var deleteArea = document.createElement('div'); deleteArea.className = 'notice-delete-area';
             var deleteButton = document.createElement('button'); deleteButton.type = 'button';
