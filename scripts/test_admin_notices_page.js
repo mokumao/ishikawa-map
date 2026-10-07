@@ -5,10 +5,10 @@ const path = require('path');
 const html = fs.readFileSync(path.join(__dirname, '..', 'admin', 'notices.html'), 'utf8');
 
 assert(
-  html.includes('#editorTitle.is-editing { color: var(--red); }')
-    && html.includes("document.getElementById('editorTitle').classList.add('is-editing');")
-    && html.includes("document.getElementById('editorTitle').classList.remove('is-editing');"),
-  '編集中の見出しだけを赤色にし、新規入力時は元へ戻すこと',
+  html.includes('#editorTitle { color: var(--red); }')
+    && html.includes('<h2 id="editorTitle">新規入力</h2>')
+    && html.includes("document.getElementById('editorTitle').textContent = '新規入力';"),
+  '新規入力の見出しを赤色で表示すること',
 );
 const inlineScripts = Array.from(html.matchAll(/<script>([\s\S]*?)<\/script>/g));
 

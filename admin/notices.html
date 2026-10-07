@@ -37,7 +37,7 @@
     h1, h2 { margin: 0; line-height: 1.35; }
     h1 { font-size: 24px; }
     h2 { font-size: 20px; }
-    #editorTitle.is-editing { color: var(--red); }
+    #editorTitle { color: var(--red); }
     .back-link { color: var(--blue); font-weight: 700; text-decoration: none; }
     .intro { margin: 8px 0 24px; color: var(--muted); }
     .layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr); gap: 16px; }
@@ -171,7 +171,7 @@
 
     <div class="layout">
       <section class="card" aria-labelledby="editorTitle">
-        <h2 id="editorTitle">新しいお知らせ</h2>
+        <h2 id="editorTitle">新規入力</h2>
         <form id="noticeForm">
           <input type="hidden" id="noticeId">
           <input type="hidden" id="revision">
@@ -310,7 +310,6 @@
           document.getElementById('revision').value = data.revision || '';
           document.getElementById('hideButton').hidden = false;
           document.getElementById('editorTitle').textContent = 'お知らせを編集';
-          document.getElementById('editorTitle').classList.add('is-editing');
           setStatus(data.message, 'success');
           return loadNotices();
         }).catch(function (error) { setStatus(error.message, 'error'); }).finally(function () { setBusy(false); });
@@ -322,8 +321,7 @@
         document.getElementById('noticeId').value = '';
         document.getElementById('revision').value = '';
         document.getElementById('hideButton').hidden = true;
-        document.getElementById('editorTitle').textContent = '新しいお知らせ';
-        document.getElementById('editorTitle').classList.remove('is-editing');
+        document.getElementById('editorTitle').textContent = '新規入力';
         setStatus('');
       }
 
@@ -339,7 +337,6 @@
         document.getElementById('endsAt').value = localDate(item.endsAt);
         document.getElementById('hideButton').hidden = item.status === 'hidden';
         document.getElementById('editorTitle').textContent = 'お知らせを編集';
-        document.getElementById('editorTitle').classList.add('is-editing');
         setStatus('');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
