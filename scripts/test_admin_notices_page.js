@@ -96,9 +96,14 @@ assert(
 );
 assert(
   html.includes('padding: 12px 16px;')
-    && html.includes('.notice-meta { margin: 4px 0 0;')
-    && html.includes('.notice-delete-area { display: flex; justify-content: flex-end; margin-top: 8px; }'),
+    && html.includes('.notice-footer { display: flex; flex-wrap: wrap;')
+    && html.includes('footer.append(meta, deleteArea);'),
   '投稿内容を切らずに投稿カードの縦余白を短くすること',
+);
+assert(
+  html.includes("deleteArea.classList.add('is-confirming');")
+    && html.includes("deleteArea.classList.remove('is-confirming');"),
+  '削除確認中だけ確認欄を投稿カードの横幅に広げること',
 );
 assert(
   /<div class="list-head">[\s\S]*?<\/div>\s*<div class="list-actions">/.test(html),

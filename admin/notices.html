@@ -116,8 +116,10 @@
     .notice[data-status="draft"] { border-left-color: #fb8c00; }
     .notice:hover { background: #f7fafc; }
     .notice-title { margin: 4px 0; overflow-wrap: anywhere; font-size: 16px; font-weight: 800; }
-    .notice-meta { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
-    .notice-delete-area { display: flex; justify-content: flex-end; margin-top: 8px; }
+    .notice-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
+    .notice-meta { min-width: 0; flex: 1 1 180px; margin: 0; color: var(--muted); font-size: 12px; }
+    .notice-delete-area { display: flex; flex: 0 0 auto; justify-content: flex-end; }
+    .notice-delete-area.is-confirming { flex: 1 1 100%; }
     .notice-delete-button { min-height: 36px; border-color: var(--red); color: var(--red); padding: 4px 12px; }
     .notice-delete-confirm {
       display: flex;
@@ -361,6 +363,7 @@
             var title = document.createElement('p'); title.className = 'notice-title'; title.textContent = item.title;
             var meta = document.createElement('p'); meta.className = 'notice-meta';
             meta.textContent = (item.category || '分類なし') + '／更新 ' + (item.updatedAt || '').slice(0, 16).replace('T', ' ');
+            var footer = document.createElement('div'); footer.className = 'notice-footer';
             var deleteArea = document.createElement('div'); deleteArea.className = 'notice-delete-area';
             var deleteButton = document.createElement('button'); deleteButton.type = 'button';
             deleteButton.className = 'button notice-delete-button'; deleteButton.textContent = '削除';
@@ -370,7 +373,8 @@
               showDeleteConfirm(item, deleteArea, deleteButton);
             });
             deleteArea.appendChild(deleteButton);
-            article.append(badge, title, meta, deleteArea);
+            footer.append(meta, deleteArea);
+            article.append(badge, title, footer);
             article.addEventListener('click', function () { editNotice(item.id); });
             article.addEventListener('keydown', function (event) {
               if (event.target === article && event.key === 'Enter') editNotice(item.id);
@@ -387,10 +391,12 @@
         var cancelButton = document.createElement('button'); cancelButton.type = 'button';
         cancelButton.className = 'button'; cancelButton.textContent = 'キャンセル';
         confirm.append(message, okButton, cancelButton);
+        deleteArea.classList.add('is-confirming');
         deleteArea.replaceChildren(confirm);
         okButton.focus();
         cancelButton.addEventListener('click', function (event) {
           event.preventDefault(); event.stopPropagation();
+          deleteArea.classList.remove('is-confirming');
           deleteArea.replaceChildren(deleteButton); deleteButton.focus();
         });
         okButton.addEventListener('click', function (event) {
