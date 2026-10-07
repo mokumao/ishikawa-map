@@ -61,6 +61,10 @@ assert(
   '投稿一覧の右側に初期表示対象を案内すること',
 );
 assert(
+  html.includes('.list-summary { margin: 0; color: var(--red); font-size: 14px;'),
+  '一覧の表示対象案内を少し大きな赤文字にすること',
+);
+assert(
   html.includes("? '（公開中・公開予定・下書き・掲載期間終了・非公開）'")
     && html.includes(": '（公開中・公開予定・下書き）';"),
   '過去の投稿の表示状態に合わせて一覧の案内を切り替えること',
