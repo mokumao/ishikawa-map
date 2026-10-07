@@ -81,6 +81,9 @@
     .button.primary { background: var(--blue); color: #fff; }
     .button.danger { border-color: var(--red); color: var(--red); }
     .button.danger-confirm { border-color: var(--red); background: var(--red); color: #fff; }
+    .publish-buttons { display: flex; max-width: 100%; flex-direction: column; gap: 8px; }
+    .actions .publish-buttons .button { flex: 0 0 auto; }
+    .publish-buttons .button[hidden] { display: none; }
     .new-entry-row { display: flex; flex: 1 1 100%; justify-content: flex-end; }
     .actions .new-entry-button {
       flex: 0 0 auto;
@@ -223,7 +226,10 @@
           </div>
           <div class="actions">
             <button class="button" type="button" data-save="draft">下書き保存</button>
-            <button class="button primary" type="button" data-save="published">公開する</button>
+            <div class="publish-buttons">
+              <button class="button primary" type="button" data-save="published">公開する</button>
+              <button class="button primary" id="publishAsNewButton" type="button" hidden>修正して公開する（新規で）</button>
+            </div>
             <button class="button danger" id="hideButton" type="button" hidden>非公開にする</button>
             <div class="new-entry-row">
               <button class="button new-entry-button" id="resetButton" type="button">新規入力</button>
@@ -267,6 +273,7 @@
       var list = document.getElementById('noticeList');
       var hideButton = document.getElementById('hideButton');
       var publishButton = form.querySelector('[data-save="published"]');
+      var publishAsNewButton = document.getElementById('publishAsNewButton');
       var hideConfirm = document.getElementById('hideConfirm');
       var confirmHideButton = document.getElementById('confirmHideButton');
       var togglePastButton = document.getElementById('togglePastButton');
@@ -312,13 +319,15 @@
         editorTitle.textContent = '既存のお知らせを編集';
         editorStatus.textContent = labels[itemStatus] || itemStatus;
         editorStatus.hidden = false;
-        publishButton.textContent = '修正して公開する';
+        publishButton.textContent = '修正して公開する（上書き）';
+        publishAsNewButton.hidden = false;
       }
       function showNewEditorState() {
         editorTitle.textContent = '新規入力';
         editorStatus.textContent = '';
         editorStatus.hidden = true;
         publishButton.textContent = '公開する';
+        publishAsNewButton.hidden = true;
       }
       function payload(saveStatus) {
         return {
@@ -337,13 +346,15 @@
         if (restoreFocus && !hideButton.hidden) hideButton.focus();
       }
 
-      function save(saveStatus) {
+      function save(saveStatus, createNew) {
         if (!form.reportValidity()) return;
         closeHideConfirm(false);
-        var id = value('noticeId');
+        var id = createNew ? '' : value('noticeId');
+        var requestBody = payload(saveStatus);
+        if (createNew) delete requestBody.revision;
         setBusy(true); setStatus('保存しています…');
         request('/api/v1/admin/notices' + (id ? '/' + encodeURIComponent(id) : ''), {
-          method: id ? 'PUT' : 'POST', body: JSON.stringify(payload(saveStatus))
+          method: id ? 'PUT' : 'POST', body: JSON.stringify(requestBody)
         }).then(function (data) {
           document.getElementById('noticeId').value = data.id;
           document.getElementById('revision').value = data.revision || '';
@@ -471,6 +482,7 @@
       document.querySelectorAll('[data-save]').forEach(function (button) {
         button.addEventListener('click', function () { save(button.dataset.save); });
       });
+      publishAsNewButton.addEventListener('click', function () { save('published', true); });
       document.getElementById('resetButton').addEventListener('click', resetForm);
       document.getElementById('reloadButton').addEventListener('click', loadNotices);
       togglePastButton.addEventListener('click', function () {

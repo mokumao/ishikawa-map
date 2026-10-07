@@ -23,10 +23,24 @@ assert(
     && html.includes("published: '公開中', scheduled: '公開中', draft: '下書き', hidden: '非公開', expired: '掲載期間終了'")
     && html.includes('editorStatus.hidden = false;')
     && html.includes('editorStatus.hidden = true;')
-    && html.includes("publishButton.textContent = '修正して公開する';")
+    && html.includes("publishButton.textContent = '修正して公開する（上書き）';")
     && html.includes("publishButton.textContent = '公開する';")
     && /\.editor-status\s*\{[\s\S]*?background: var\(--blue\);[\s\S]*?color: #fff;/.test(html),
   '既存投稿では見出しと公開ボタンを編集用表示へ切り替え、新規入力時は元へ戻すこと',
+);
+assert(
+  html.includes('id="publishAsNewButton"')
+    && html.includes('修正して公開する（新規で）')
+    && html.includes("publishAsNewButton.addEventListener('click', function () { save('published', true); });")
+    && html.includes("var id = createNew ? '' : value('noticeId');")
+    && html.includes('if (createNew) delete requestBody.revision;')
+    && html.includes("method: id ? 'PUT' : 'POST'"),
+  '既存投稿を上書きする操作と、元を残して新規投稿する操作を分けること',
+);
+assert(
+  html.includes('.publish-buttons { display: flex; max-width: 100%; flex-direction: column; gap: 8px; }')
+    && html.includes('.actions .publish-buttons .button { flex: 0 0 auto; }'),
+  '2つの公開ボタンを縦並びにし、狭い画面でも高さが不自然に伸びないこと',
 );
 const inlineScripts = Array.from(html.matchAll(/<script>([\s\S]*?)<\/script>/g));
 
