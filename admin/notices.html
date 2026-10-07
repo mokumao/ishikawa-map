@@ -282,7 +282,8 @@
         closeHideConfirm(false);
         var item = notices.find(function (notice) { return notice.id === id; });
         if (!item) return;
-        ['noticeId', 'revision', 'regionId', 'title', 'body', 'category'].forEach(function (key) {
+        document.getElementById('noticeId').value = item.id;
+        ['revision', 'regionId', 'title', 'body', 'category'].forEach(function (key) {
           document.getElementById(key).value = item[key] == null ? '' : item[key];
         });
         document.getElementById('startsAt').value = localDate(item.startsAt);
