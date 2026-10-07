@@ -106,6 +106,10 @@ assert(
   '削除確認中だけ確認欄を投稿カードの横幅に広げること',
 );
 assert(
+  html.includes('.notice-meta { min-width: 0; flex: 1 1 180px; margin: 0; color: var(--blue);'),
+  '投稿の分類と更新日時を青文字で表示すること',
+);
+assert(
   /<div class="list-head">[\s\S]*?<\/div>\s*<div class="list-actions">/.test(html),
   '一覧の操作ボタンを見出しの下段に配置すること',
 );
