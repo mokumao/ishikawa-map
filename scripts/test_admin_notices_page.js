@@ -7,8 +7,16 @@ const html = fs.readFileSync(path.join(__dirname, '..', 'admin', 'notices.html')
 assert(
   html.includes('#editorTitle { color: var(--red); }')
     && html.includes('<h2 id="editorTitle">新規入力</h2>')
-    && html.includes("document.getElementById('editorTitle').textContent = '新規入力';"),
+    && html.includes("editorTitle.textContent = '新規入力';"),
   '新規入力の見出しを赤色で表示すること',
+);
+assert(
+  html.includes('<span class="editor-status" id="editorStatus" hidden></span>')
+    && html.includes("editorTitle.textContent = '既存のお知らせを編集';")
+    && html.includes("published: '公開中', scheduled: '公開中', draft: '下書き', hidden: '非公開', expired: '掲載期間終了'")
+    && html.includes('editorStatus.hidden = false;')
+    && html.includes('editorStatus.hidden = true;'),
+  '既存投稿の編集見出しの右側に4種類の状態を表示し、新規入力時は隠すこと',
 );
 const inlineScripts = Array.from(html.matchAll(/<script>([\s\S]*?)<\/script>/g));
 

@@ -38,6 +38,15 @@
     h1 { font-size: 24px; }
     h2 { font-size: 20px; }
     #editorTitle { color: var(--red); }
+    .editor-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .editor-status {
+      border-radius: 999px;
+      background: #edf2f5;
+      padding: 2px 8px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .editor-status[hidden] { display: none; }
     .back-link { color: var(--blue); font-weight: 700; text-decoration: none; }
     .intro { margin: 8px 0 24px; color: var(--muted); }
     .layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr); gap: 16px; }
@@ -171,7 +180,10 @@
 
     <div class="layout">
       <section class="card" aria-labelledby="editorTitle">
-        <h2 id="editorTitle">新規入力</h2>
+        <div class="editor-head">
+          <h2 id="editorTitle">新規入力</h2>
+          <span class="editor-status" id="editorStatus" hidden></span>
+        </div>
         <form id="noticeForm">
           <input type="hidden" id="noticeId">
           <input type="hidden" id="revision">
@@ -248,6 +260,8 @@
       var confirmHideButton = document.getElementById('confirmHideButton');
       var togglePastButton = document.getElementById('togglePastButton');
       var listSummary = document.getElementById('listSummary');
+      var editorTitle = document.getElementById('editorTitle');
+      var editorStatus = document.getElementById('editorStatus');
       var notices = [];
       var showPast = false;
 
@@ -281,6 +295,18 @@
         var itemStatus = displayStatus(item);
         return itemStatus === 'expired' || itemStatus === 'hidden';
       }
+      function showEditorState(item) {
+        var itemStatus = displayStatus(item);
+        var labels = { published: '公開中', scheduled: '公開中', draft: '下書き', hidden: '非公開', expired: '掲載期間終了' };
+        editorTitle.textContent = '既存のお知らせを編集';
+        editorStatus.textContent = labels[itemStatus] || itemStatus;
+        editorStatus.hidden = false;
+      }
+      function showNewEditorState() {
+        editorTitle.textContent = '新規入力';
+        editorStatus.textContent = '';
+        editorStatus.hidden = true;
+      }
       function payload(saveStatus) {
         return {
           regionId: value('regionId'), title: value('title'), body: value('body'),
@@ -309,7 +335,7 @@
           document.getElementById('noticeId').value = data.id;
           document.getElementById('revision').value = data.revision || '';
           document.getElementById('hideButton').hidden = false;
-          document.getElementById('editorTitle').textContent = 'お知らせを編集';
+          showEditorState({ status: saveStatus, startsAt: iso('startsAt'), endsAt: iso('endsAt') });
           setStatus(data.message, 'success');
           return loadNotices();
         }).catch(function (error) { setStatus(error.message, 'error'); }).finally(function () { setBusy(false); });
@@ -321,7 +347,7 @@
         document.getElementById('noticeId').value = '';
         document.getElementById('revision').value = '';
         document.getElementById('hideButton').hidden = true;
-        document.getElementById('editorTitle').textContent = '新規入力';
+        showNewEditorState();
         setStatus('');
       }
 
@@ -336,7 +362,7 @@
         document.getElementById('startsAt').value = localDate(item.startsAt);
         document.getElementById('endsAt').value = localDate(item.endsAt);
         document.getElementById('hideButton').hidden = item.status === 'hidden';
-        document.getElementById('editorTitle').textContent = 'お知らせを編集';
+        showEditorState(item);
         setStatus('');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
