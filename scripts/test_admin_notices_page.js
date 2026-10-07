@@ -95,6 +95,12 @@ assert(
   '長い投稿タイトルでも削除ボタンを画面外へ押し出さないこと',
 );
 assert(
+  html.includes('padding: 12px 16px;')
+    && html.includes('.notice-meta { margin: 4px 0 0;')
+    && html.includes('.notice-delete-area { display: flex; justify-content: flex-end; margin-top: 8px; }'),
+  '投稿内容を切らずに投稿カードの縦余白を短くすること',
+);
+assert(
   /<div class="list-head">[\s\S]*?<\/div>\s*<div class="list-actions">/.test(html),
   '一覧の操作ボタンを見出しの下段に配置すること',
 );
