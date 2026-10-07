@@ -81,6 +81,13 @@
     .button.primary { background: var(--blue); color: #fff; }
     .button.danger { border-color: var(--red); color: var(--red); }
     .button.danger-confirm { border-color: var(--red); background: var(--red); color: #fff; }
+    .new-entry-row { display: flex; flex: 1 1 100%; justify-content: flex-end; }
+    .actions .new-entry-button {
+      flex: 0 0 auto;
+      border-color: var(--green);
+      background: var(--green);
+      color: #fff;
+    }
     .button:disabled { cursor: wait; opacity: .55; }
     .hide-confirm {
       display: flex;
@@ -218,7 +225,9 @@
             <button class="button" type="button" data-save="draft">下書き保存</button>
             <button class="button primary" type="button" data-save="published">公開する</button>
             <button class="button danger" id="hideButton" type="button" hidden>非公開にする</button>
-            <button class="button" id="resetButton" type="button">新規入力</button>
+            <div class="new-entry-row">
+              <button class="button new-entry-button" id="resetButton" type="button">新規入力</button>
+            </div>
             <div class="hide-confirm" id="hideConfirm" role="group" aria-labelledby="hideConfirmText" hidden>
               <p class="hide-confirm-text" id="hideConfirmText">本当に非公開にしますか？</p>
               <button class="button danger-confirm" id="confirmHideButton" type="button">非公開にする</button>

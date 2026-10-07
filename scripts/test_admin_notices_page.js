@@ -11,6 +11,13 @@ assert(
   '新規入力の見出しを赤色で表示すること',
 );
 assert(
+  html.includes('<div class="new-entry-row">')
+    && html.includes('class="button new-entry-button" id="resetButton"')
+    && html.includes('.new-entry-row { display: flex; flex: 1 1 100%; justify-content: flex-end; }')
+    && /\.actions \.new-entry-button\s*\{[\s\S]*?background: var\(--green\);[\s\S]*?color: #fff;/.test(html),
+  '新規入力ボタンを操作欄の右下に置き、緑背景の白文字で表示すること',
+);
+assert(
   html.includes('<span class="editor-status" id="editorStatus" hidden></span>')
     && html.includes("editorTitle.textContent = '既存のお知らせを編集';")
     && html.includes("published: '公開中', scheduled: '公開中', draft: '下書き', hidden: '非公開', expired: '掲載期間終了'")
