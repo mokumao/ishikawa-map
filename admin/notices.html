@@ -107,6 +107,7 @@
       cursor: pointer;
     }
     .notice[data-status="published"] { border-left-color: #43a047; }
+    .notice[data-status="scheduled"] { border-left-color: #1976d2; }
     .notice[data-status="draft"] { border-left-color: #fb8c00; }
     .notice:hover { background: #f7fafc; }
     .notice-title { margin: 4px 0; font-size: 16px; font-weight: 800; }
@@ -234,6 +235,13 @@
         var local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
         return local.toISOString().slice(0, 16);
       }
+      function displayStatus(item, now) {
+        if (item.status !== 'published') return item.status;
+        var current = now || new Date();
+        if (item.startsAt && new Date(item.startsAt) > current) return 'scheduled';
+        if (item.endsAt && new Date(item.endsAt) < current) return 'expired';
+        return 'published';
+      }
       function payload(saveStatus) {
         return {
           regionId: value('regionId'), title: value('title'), body: value('body'),
@@ -301,10 +309,11 @@
           list.replaceChildren();
           if (!notices.length) { list.innerHTML = '<p class="empty">投稿はまだありません。</p>'; return; }
           notices.forEach(function (item) {
+            var visibleStatus = displayStatus(item);
             var article = document.createElement('article');
-            article.className = 'notice'; article.dataset.status = item.status; article.tabIndex = 0;
-            var labels = { published: '公開中', draft: '下書き', hidden: '非公開' };
-            var badge = document.createElement('span'); badge.className = 'badge'; badge.textContent = labels[item.status] || item.status;
+            article.className = 'notice'; article.dataset.status = visibleStatus; article.tabIndex = 0;
+            var labels = { published: '公開中', scheduled: '公開予定', expired: '掲載期間終了', draft: '下書き', hidden: '非公開' };
+            var badge = document.createElement('span'); badge.className = 'badge'; badge.textContent = labels[visibleStatus] || visibleStatus;
             var title = document.createElement('p'); title.className = 'notice-title'; title.textContent = item.title;
             var meta = document.createElement('p'); meta.className = 'notice-meta';
             meta.textContent = (item.category || '分類なし') + '／更新 ' + (item.updatedAt || '').slice(0, 16).replace('T', ' ');

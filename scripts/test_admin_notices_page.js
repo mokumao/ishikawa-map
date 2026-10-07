@@ -24,5 +24,17 @@ assert(
   html.includes('hideConfirm.hidden = false;'),
   '非公開を確定する前にページ内確認を表示すること',
 );
+assert(
+  html.includes("if (item.startsAt && new Date(item.startsAt) > current) return 'scheduled';"),
+  '掲載開始前の公開設定を公開予定として扱うこと',
+);
+assert(
+  html.includes("if (item.endsAt && new Date(item.endsAt) < current) return 'expired';"),
+  '掲載終了後の公開設定を掲載期間終了として扱うこと',
+);
+assert(
+  html.includes("scheduled: '公開予定', expired: '掲載期間終了'"),
+  '実際の掲載期間に応じた日本語ラベルを表示すること',
+);
 
 console.log('admin notices page tests: OK');
