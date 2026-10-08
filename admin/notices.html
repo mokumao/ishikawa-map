@@ -210,7 +210,16 @@
             </div>
             <div class="field">
               <label for="category">分類</label>
-              <input id="category" maxlength="40" placeholder="例：地域行事">
+              <select id="category">
+                <option value="">分類を選択してください</option>
+                <option>地域行事・イベント</option>
+                <option>工事・交通規制</option>
+                <option>防災・安全</option>
+                <option>公共施設</option>
+                <option>お店・施設</option>
+                <option>石川マップからのお知らせ</option>
+                <option>その他</option>
+              </select>
             </div>
             <div class="field wide">
               <label for="title">タイトル（必須）</label>
@@ -398,6 +407,15 @@
         var item = notices.find(function (notice) { return notice.id === id; });
         if (!item) return;
         document.getElementById('noticeId').value = item.id;
+        var categorySelect = document.getElementById('category');
+        Array.from(categorySelect.querySelectorAll('[data-existing-category]')).forEach(function (option) { option.remove(); });
+        if (item.category && !Array.from(categorySelect.options).some(function (option) { return option.value === item.category; })) {
+          var existingCategory = document.createElement('option');
+          existingCategory.value = item.category;
+          existingCategory.textContent = item.category;
+          existingCategory.dataset.existingCategory = 'true';
+          categorySelect.insertBefore(existingCategory, categorySelect.lastElementChild);
+        }
         ['revision', 'regionId', 'title', 'body', 'category'].forEach(function (key) {
           document.getElementById(key).value = item[key] == null ? '' : item[key];
         });
