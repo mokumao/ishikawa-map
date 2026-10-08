@@ -169,6 +169,10 @@ assert(
   'お知らせ一覧の下書きラベルをオレンジ背景の白文字で表示すること',
 );
 assert(
+  html.includes('.notice[data-status="scheduled"] .badge { background: var(--blue); color: #fff; }'),
+  'お知らせ一覧の公開予定ラベルを青背景の白文字で表示すること',
+);
+assert(
   html.includes("timeZone: 'Asia/Tokyo'")
     && html.includes("formatJst(item.updatedAt)")
     && html.includes("return parts.year + '-' + parts.month + '-' + parts.day + ' ' + parts.hour + ':' + parts.minute;"),
