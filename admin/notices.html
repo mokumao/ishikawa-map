@@ -70,6 +70,10 @@
       padding: 10px 12px;
     }
     textarea { min-height: 152px; resize: vertical; }
+    .date-field { position: relative; min-width: 0; }
+    .date-field input { color: transparent; caret-color: transparent; }
+    .date-field input::-webkit-datetime-edit { opacity: 0; }
+    .date-display { position: absolute; left: 12px; right: 40px; top: 50%; transform: translateY(-50%); pointer-events: none; background: #fff; color: var(--ink); white-space: nowrap; overflow: hidden; }
     input:focus, select:focus, textarea:focus { outline: 3px solid rgba(8, 103, 178, .2); border-color: var(--blue); }
     .actions { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px; margin-top: 16px; }
     .button {
@@ -236,11 +240,17 @@
             </div>
             <div class="field">
               <label for="startsAt">掲載開始</label>
-              <input id="startsAt" type="date">
+              <div class="date-field">
+                <input id="startsAt" type="date">
+                <span class="date-display" id="startsAtDisplay" aria-hidden="true"></span>
+              </div>
             </div>
             <div class="field">
               <label for="endsAt">掲載終了</label>
-              <input id="endsAt" type="date">
+              <div class="date-field">
+                <input id="endsAt" type="date">
+                <span class="date-display" id="endsAtDisplay" aria-hidden="true"></span>
+              </div>
             </div>
           </div>
           <div class="actions">
@@ -314,8 +324,18 @@
       }
 
       function value(id) { return document.getElementById(id).value; }
+      function updateDateDisplay(id) {
+        var parts = value(id).split('-');
+        document.getElementById(id + 'Display').textContent = parts.length === 3 ? parts[0] + '年' + parts[1] + '月' + parts[2] + '日' : '年／月／日';
+      }
+      ['startsAt', 'endsAt'].forEach(function (id) {
+        document.getElementById(id).addEventListener('input', function () { updateDateDisplay(id); });
+        document.getElementById(id).addEventListener('change', function () { updateDateDisplay(id); });
+        updateDateDisplay(id);
+      });
       function setTimeFields(id, dateValue) {
         document.getElementById(id).value = formatJst(dateValue).slice(0, 10);
+        updateDateDisplay(id);
       }
       function iso(id) {
         var v = value(id);
