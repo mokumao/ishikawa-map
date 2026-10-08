@@ -136,7 +136,8 @@ assert(
   '長い投稿タイトルでも削除ボタンを画面外へ押し出さないこと',
 );
 assert(
-  html.includes("body.className = 'notice-body'; body.textContent = item.body || '';")
+  html.includes("title.className = 'notice-title'; title.textContent = 'タイトル：' + item.title;")
+    && html.includes("body.className = 'notice-body'; body.textContent = '内容：' + (item.body || '');")
     && html.includes('if (item.body) article.appendChild(body);')
     && html.includes('white-space: pre-wrap;'),
   'お知らせ一覧に本文を改行保持・長文折り返しで表示すること',

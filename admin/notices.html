@@ -429,8 +429,8 @@
             article.className = 'notice'; article.dataset.status = visibleStatus; article.tabIndex = 0;
             var labels = { published: '公開中', scheduled: '公開予定', expired: '掲載期間終了', draft: '下書き', hidden: '非公開' };
             var badge = document.createElement('span'); badge.className = 'badge'; badge.textContent = labels[visibleStatus] || visibleStatus;
-            var title = document.createElement('p'); title.className = 'notice-title'; title.textContent = item.title;
-            var body = document.createElement('p'); body.className = 'notice-body'; body.textContent = item.body || '';
+            var title = document.createElement('p'); title.className = 'notice-title'; title.textContent = 'タイトル：' + item.title;
+            var body = document.createElement('p'); body.className = 'notice-body'; body.textContent = '内容：' + (item.body || '');
             var meta = document.createElement('p'); meta.className = 'notice-meta';
             meta.textContent = (item.category || '分類なし') + '／更新 ' + formatJst(item.updatedAt);
             var footer = document.createElement('div'); footer.className = 'notice-footer';
