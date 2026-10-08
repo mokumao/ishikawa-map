@@ -137,6 +137,7 @@
     .notice[data-status="draft"] { border-left-color: #fb8c00; }
     .notice:hover { background: #f7fafc; }
     .notice-title { margin: 4px 0; overflow-wrap: anywhere; font-size: 16px; font-weight: 800; }
+    .notice-body { margin: 8px 0; color: var(--ink); font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; white-space: pre-wrap; }
     .notice-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
     .notice-meta { min-width: 0; flex: 1 1 180px; margin: 0; color: var(--blue-dark); font-size: 16px; }
     .notice-delete-area { display: flex; flex: 0 0 auto; justify-content: flex-end; }
@@ -425,6 +426,7 @@
             var labels = { published: '公開中', scheduled: '公開予定', expired: '掲載期間終了', draft: '下書き', hidden: '非公開' };
             var badge = document.createElement('span'); badge.className = 'badge'; badge.textContent = labels[visibleStatus] || visibleStatus;
             var title = document.createElement('p'); title.className = 'notice-title'; title.textContent = item.title;
+            var body = document.createElement('p'); body.className = 'notice-body'; body.textContent = item.body || '';
             var meta = document.createElement('p'); meta.className = 'notice-meta';
             meta.textContent = (item.category || '分類なし') + '／更新 ' + formatJst(item.updatedAt);
             var footer = document.createElement('div'); footer.className = 'notice-footer';
@@ -438,7 +440,9 @@
             });
             deleteArea.appendChild(deleteButton);
             footer.append(meta, deleteArea);
-            article.append(badge, title, footer);
+            article.append(badge, title);
+            if (item.body) article.appendChild(body);
+            article.appendChild(footer);
             article.addEventListener('click', function () { editNotice(item.id); });
             article.addEventListener('keydown', function (event) {
               if (event.target === article && event.key === 'Enter') editNotice(item.id);

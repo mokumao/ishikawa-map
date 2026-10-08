@@ -136,6 +136,12 @@ assert(
   '長い投稿タイトルでも削除ボタンを画面外へ押し出さないこと',
 );
 assert(
+  html.includes("body.className = 'notice-body'; body.textContent = item.body || '';")
+    && html.includes('if (item.body) article.appendChild(body);')
+    && html.includes('white-space: pre-wrap;'),
+  'お知らせ一覧に本文を改行保持・長文折り返しで表示すること',
+);
+assert(
   html.includes('padding: 12px 16px;')
     && html.includes('.notice-footer { display: flex; flex-wrap: wrap;')
     && html.includes('footer.append(meta, deleteArea);'),
