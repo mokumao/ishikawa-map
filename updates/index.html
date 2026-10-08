@@ -379,6 +379,13 @@
           card.appendChild(title);
           appendText(card, 'update-body', item.body || '');
           appendText(card, 'update-meta', item.publishedAt ? '投稿日：' + item.publishedAt.slice(0, 10) : '');
+          if (tab === 'admin') {
+            var endDate = item.endsAt ? new Date(item.endsAt) : null;
+            var endLabel = endDate && !Number.isNaN(endDate.getTime())
+              ? new Intl.DateTimeFormat('ja-JP', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(endDate).replace(/\//g, '-')
+              : '未設定';
+            appendText(card, 'update-meta', '掲載終了日：' + endLabel);
+          }
           list.appendChild(card);
         });
       }
