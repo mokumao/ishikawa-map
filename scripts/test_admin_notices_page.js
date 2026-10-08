@@ -20,7 +20,7 @@ assert(
 assert(
   html.includes('<span class="editor-status" id="editorStatus" hidden></span>')
     && html.includes("editorTitle.textContent = '既存のお知らせを編集';")
-    && html.includes("published: '公開中', scheduled: '公開中', draft: '下書き', hidden: '非公開', expired: '掲載期間終了'")
+    && html.includes("published: '公開中', scheduled: '公開予定', draft: '下書き', hidden: '非公開', expired: '掲載期間終了'")
     && html.includes('editorStatus.hidden = false;')
     && html.includes('editorStatus.hidden = true;')
     && html.includes("publishButton.textContent = '修正して公開する（上書き）';")

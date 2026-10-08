@@ -48,6 +48,10 @@
       font-weight: 700;
     }
     .editor-status[hidden] { display: none; }
+    .editor-status[data-status="published"] { background: var(--green); }
+    .editor-status[data-status="draft"] { background: #fb8c00; }
+    .editor-status[data-status="expired"] { background: var(--red); }
+    .editor-status[data-status="hidden"] { background: #edf2f5; color: var(--ink); }
     .back-link { color: var(--blue); font-weight: 700; text-decoration: none; }
     .intro { margin: 8px 0 24px; color: var(--muted); }
     .layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr); gap: 16px; }
@@ -342,9 +346,10 @@
       }
       function showEditorState(item) {
         var itemStatus = displayStatus(item);
-        var labels = { published: '公開中', scheduled: '公開中', draft: '下書き', hidden: '非公開', expired: '掲載期間終了' };
+        var labels = { published: '公開中', scheduled: '公開予定', draft: '下書き', hidden: '非公開', expired: '掲載期間終了' };
         editorTitle.textContent = '既存のお知らせを編集';
         editorStatus.textContent = labels[itemStatus] || itemStatus;
+        editorStatus.dataset.status = itemStatus;
         editorStatus.hidden = false;
         publishButton.textContent = '修正して公開する（上書き）';
         publishAsNewButton.hidden = false;
