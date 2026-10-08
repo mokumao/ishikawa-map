@@ -157,6 +157,10 @@ assert(
   '投稿の分類と更新日時を16pxの濃い青文字で表示すること',
 );
 assert(
+  html.includes('.notice[data-status="published"] .badge { background: var(--green); color: #fff; }'),
+  'お知らせ一覧の公開中ラベルを緑背景の白文字で表示すること',
+);
+assert(
   html.includes("timeZone: 'Asia/Tokyo'")
     && html.includes("formatJst(item.updatedAt)")
     && html.includes("return parts.year + '-' + parts.month + '-' + parts.day + ' ' + parts.hour + ':' + parts.minute;"),
