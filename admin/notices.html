@@ -70,6 +70,8 @@
       padding: 10px 12px;
     }
     textarea { min-height: 152px; resize: vertical; }
+    .notice-time-inputs { display: grid; grid-template-columns: minmax(0, 1fr) 64px 64px; gap: 4px; }
+    .notice-time-inputs input, .notice-time-inputs select { min-width: 0; padding: 10px 4px; }
     input:focus, select:focus, textarea:focus { outline: 3px solid rgba(8, 103, 178, .2); border-color: var(--blue); }
     .actions { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px; margin-top: 16px; }
     .button {
@@ -235,12 +237,22 @@
               <textarea id="body" maxlength="2000"></textarea>
             </div>
             <div class="field">
-              <label for="startsAt">掲載開始</label>
-              <input id="startsAt" type="datetime-local">
+              <label for="startsAtDate">掲載開始</label>
+              <input id="startsAt" type="hidden">
+              <div class="notice-time-inputs" data-time="startsAt">
+                <input id="startsAtDate" type="date" aria-label="掲載開始日">
+                <select aria-label="掲載開始の時"></select>
+                <select aria-label="掲載開始の分"></select>
+              </div>
             </div>
             <div class="field">
-              <label for="endsAt">掲載終了</label>
-              <input id="endsAt" type="datetime-local">
+              <label for="endsAtDate">掲載終了</label>
+              <input id="endsAt" type="hidden">
+              <div class="notice-time-inputs" data-time="endsAt">
+                <input id="endsAtDate" type="date" aria-label="掲載終了日">
+                <select aria-label="掲載終了の時"></select>
+                <select aria-label="掲載終了の分"></select>
+              </div>
             </div>
           </div>
           <div class="actions">
@@ -314,6 +326,35 @@
       }
 
       function value(id) { return document.getElementById(id).value; }
+      document.querySelectorAll('[data-time]').forEach(function (group) {
+        var fields = group.children;
+        [Array.from({ length: 24 }, function (_, hour) { return hour; }), [0, 10, 20, 30, 40, 50]].forEach(function (values, index) {
+          values.forEach(function (number) {
+            var option = document.createElement('option');
+            option.value = String(number).padStart(2, '0');
+            option.textContent = option.value + (index === 0 ? '時' : '分');
+            fields[index + 1].appendChild(option);
+          });
+        });
+        group.addEventListener('change', function () {
+          document.getElementById(group.dataset.time).value = fields[0].value ? fields[0].value + 'T' + fields[1].value + ':' + fields[2].value : '';
+        });
+      });
+      function setTimeFields(id, dateValue) {
+        var local = localDate(dateValue);
+        var fields = document.querySelector('[data-time="' + id + '"]').children;
+        fields[0].value = local.slice(0, 10);
+        fields[1].value = local ? local.slice(11, 13) : '00';
+        var minute = local ? local.slice(14, 16) : '00';
+        Array.from(fields[2].querySelectorAll('[data-legacy-minute]')).forEach(function (option) { option.remove(); });
+        if (Number(minute) % 10 !== 0) {
+          var legacy = document.createElement('option');
+          legacy.value = minute; legacy.textContent = minute + '分（保存済み）'; legacy.dataset.legacyMinute = 'true';
+          fields[2].appendChild(legacy);
+        }
+        fields[2].value = minute;
+        document.getElementById(id).value = local;
+      }
       function iso(id) { var v = value(id); return v ? new Date(v).toISOString() : null; }
       function localDate(value) {
         if (!value) return '';
@@ -401,6 +442,8 @@
       function resetForm() {
         hideConfirm.hidden = true;
         form.reset();
+        setTimeFields('startsAt', null);
+        setTimeFields('endsAt', null);
         document.getElementById('noticeId').value = '';
         document.getElementById('revision').value = '';
         document.getElementById('hideButton').hidden = true;
@@ -425,8 +468,8 @@
         ['revision', 'regionId', 'title', 'body', 'category'].forEach(function (key) {
           document.getElementById(key).value = item[key] == null ? '' : item[key];
         });
-        document.getElementById('startsAt').value = localDate(item.startsAt);
-        document.getElementById('endsAt').value = localDate(item.endsAt);
+        setTimeFields('startsAt', item.startsAt);
+        setTimeFields('endsAt', item.endsAt);
         document.getElementById('hideButton').hidden = item.status === 'hidden';
         showEditorState(item);
         setStatus('');
