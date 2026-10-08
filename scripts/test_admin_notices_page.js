@@ -161,6 +161,10 @@ assert(
   'お知らせ一覧の公開中ラベルを緑背景の白文字で表示すること',
 );
 assert(
+  html.includes('.notice[data-status="expired"] .badge { background: var(--red); color: #fff; }'),
+  'お知らせ一覧の掲載期間終了ラベルを赤背景の白文字で表示すること',
+);
+assert(
   html.includes("timeZone: 'Asia/Tokyo'")
     && html.includes("formatJst(item.updatedAt)")
     && html.includes("return parts.year + '-' + parts.month + '-' + parts.day + ' ' + parts.hour + ':' + parts.minute;"),
