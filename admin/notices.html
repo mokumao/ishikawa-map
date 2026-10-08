@@ -485,12 +485,12 @@
             var category = document.createElement('p'); category.className = 'notice-category'; category.textContent = item.category || '分類なし';
             var body = document.createElement('p'); body.className = 'notice-body'; body.textContent = '内容：' + (item.body || '');
             var meta = document.createElement('p'); meta.className = 'notice-meta';
-            meta.appendChild(document.createTextNode('更新 ' + formatJst(item.updatedAt)));
+            meta.appendChild(document.createTextNode('更新 ' + formatJst(item.updatedAt).replace(/^(\d{4})-(\d{2})-(\d{2})/, function (_, year, month, day) { return year + '年' + Number(month) + '月' + Number(day) + '日'; })));
             [['掲載開始日：', item.startsAt], ['掲載終了日：', item.endsAt]].forEach(function (entry) {
               var dateText = formatJst(entry[1]);
               var dateLine = document.createElement('span');
               dateLine.style.display = 'block';
-              dateLine.textContent = entry[0] + (dateText ? dateText.slice(0, 10).replace(/-/g, ',') : '未設定');
+              dateLine.textContent = entry[0] + (dateText ? dateText.slice(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/, function (_, year, month, day) { return year + '年' + Number(month) + '月' + Number(day) + '日'; }) : '未設定');
               meta.appendChild(dateLine);
             });
             var footer = document.createElement('div'); footer.className = 'notice-footer';
