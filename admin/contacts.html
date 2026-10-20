@@ -39,7 +39,7 @@
 <body><main>
   <a href="https://ishikawa-map-admin.pages.dev/">管理者ページへ戻る</a>
   <h1>店舗主からのご連絡</h1>
-  <p class="note">管理者専用の受付・対応管理です。ここでの内容やメモは公開されません。現在、店舗主側の送信先はGoogleフォームのままです。</p>
+  <p class="note">管理者専用の受付・対応管理です。ここでの内容やメモは公開されません。Googleフォームの過去の回答は、この一覧には取り込まれていません。</p>
   <div class="tools">
     <label for="filter" style="margin:0">対応状況</label>
     <select id="filter"><option value="">すべて</option><option value="unread">未確認</option><option value="in_progress">対応中</option><option value="done">対応済み</option></select>
@@ -53,7 +53,7 @@
       <p id="hint">一覧から連絡を選択してください。</p>
       <form id="detail" hidden>
         <h2 id="store"></h2>
-        <dl><dt>受付日時</dt><dd id="created"></dd><dt>店舗番号</dt><dd id="storeId"></dd><dt>メールアドレス</dt><dd id="email"></dd></dl>
+        <dl><dt>受付日時</dt><dd id="created"></dd><dt>店舗番号</dt><dd id="storeId"></dd><dt>メールアドレス</dt><dd id="email"></dd><dt>新着メール通知</dt><dd id="notification"></dd></dl>
         <strong>連絡内容</strong><p id="body"></p>
         <label for="status">対応状況</label><select id="status"><option value="unread">未確認</option><option value="in_progress">対応中</option><option value="done">対応済み</option></select>
         <label for="memo">対応メモ（管理者用）</label><textarea id="memo" maxlength="10000"></textarea>
@@ -91,6 +91,7 @@
     $('storeId').textContent = item.storeId;
     $('created').textContent = stamp(item.createdAt);
     $('email').textContent = item.email || '記載なし';
+    $('notification').textContent = item.notificationState === 'sent' ? '送信済み' : item.notificationState === 'pending' ? '送信待ち（失敗時は自動再試行）' : '対象外';
     $('body').textContent = item.body;
     $('status').value = item.status; $('memo').value = item.memo;
     $('updated').textContent = '最終更新：' + stamp(item.updatedAt);

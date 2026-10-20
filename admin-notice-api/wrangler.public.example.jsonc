@@ -3,6 +3,7 @@
   "name": "ishikawa-map-public-notices",
   "main": "src/public.js",
   "compatibility_date": "2026-09-14",
+  "triggers": { "crons": ["*/10 * * * *"] },
   "vars": {
     "PUBLIC_ORIGINS": "https://mokumao.github.io"
   },

@@ -313,7 +313,7 @@
       </section>
 
       <section class="card request-card" id="requestCard">
-        <p class="intro">ご希望の項目を選んでください。送信内容は石川マップ管理者だけが確認するGoogleフォームへ送られます。</p>
+        <p class="intro">ご希望の項目を選んでください。送信内容は石川マップ管理者だけが確認します。</p>
         <h2 class="section-title">ご依頼の種類 <span class="required">必須</span></h2>
         <div class="choice-grid" role="group" aria-label="ご依頼の種類">
           <button type="button" class="choice-btn" data-request-type="delete">掲載情報の<span class="choice-emphasis">削除依頼</span></button>
@@ -416,7 +416,8 @@
             <legend class="panel-heading">その他のご連絡</legend>
             <div class="field">
               <label class="field-label" for="otherDetails">ご連絡内容 <span class="required">必須</span></label>
-              <textarea id="otherDetails" required></textarea>
+              <textarea id="otherDetails" maxlength="5000" required></textarea>
+              <input id="contactWebsite" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
             </div>
           </fieldset>
 
@@ -433,7 +434,7 @@
                 <span>「内容の確認が必要な場合、管理者からメールでご連絡することがあります」にチェックが入っていません。</span>
               </p>
             </div>
-            <p class="privacy-note">メールアドレスと理由は公開サイト・公開GitHubには保存されません。管理者の非公開Googleフォームにのみ送信されます。</p>
+            <p class="privacy-note">メールアドレスと理由は公開サイト・公開GitHubには保存されません。管理者専用の受付先へ送信されます。</p>
           </div>
 
           <div class="form-actions" id="formActions" hidden>
@@ -1005,6 +1006,13 @@
         if (event.key === 'Escape' && !timeWheelPicker.hidden) closeTimeWheel();
       });
 
+      var contactApi = 'https://ishikawa-map-public-notices.shinzatoisao1969.workers.dev';
+      var contactRouteReady = fetch(contactApi + '/api/v1/contact-config', { cache: 'no-store', signal: AbortSignal.timeout(5000) })
+        .then(function (response) { if (!response.ok) throw Error('config'); return response.json(); })
+        .then(function (config) { return config.enabled === true && (config.testOnly !== true || store && store.id === 0); }).catch(function () { return false; });
+      var contactSubmissionId = null;
+      var contactSubmissionBody = null;
+      var contactSending = false;
       ownerRequestForm.addEventListener('submit', function (event) {
         formStatus.textContent = '';
         if (blockMissingEmail() || blockMissingEmailConsent()) {
@@ -1045,6 +1053,54 @@
         if (selectedType === 'edit' && !editConfirmed) {
           event.preventDefault();
           openEditConfirmation(editChanges);
+          return;
+        }
+
+        if (selectedType === 'other') {
+          event.preventDefault();
+          if (contactSending) return;
+          contactSending = true;
+          document.querySelectorAll('[data-request-type]').forEach(function (button) { button.disabled = true; });
+          document.getElementById('otherDetails').readOnly = true;
+          submitBtn.disabled = true;
+          submitBtn.textContent = '送信しています…';
+          contactRouteReady.then(function (enabled) {
+            if (!enabled) {
+              // The old Google Forms route stays active until mail delivery and receipt are tested.
+              sendOtherToGoogle();
+              return;
+            }
+            var details = {
+              storeId: store.id, storeName: store.name,
+              body: document.getElementById('otherDetails').value.trim(),
+              email: contactConsent.checked ? ownerEmail.value.trim() : '',
+              consent: contactConsent.checked, website: document.getElementById('contactWebsite').value
+            };
+            var snapshot = JSON.stringify(details);
+            if (snapshot !== contactSubmissionBody) {
+              contactSubmissionId = crypto.randomUUID(); contactSubmissionBody = snapshot;
+            }
+            return fetch(contactApi + '/api/v1/contacts', {
+              method: 'POST', headers: { 'content-type': 'application/json' },
+              body: JSON.stringify(Object.assign({ id: contactSubmissionId }, details)),
+              signal: AbortSignal.timeout(20000)
+            }).then(function (response) {
+              return response.json().then(function (data) {
+                if (!response.ok || data.id !== contactSubmissionId) throw Error(data.message || '送信を確認できませんでした。');
+                requestCard.hidden = true; successCard.hidden = false; relistMessage.hidden = true;
+                successMessage.textContent = data.message;
+                successCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              });
+            });
+          }).catch(function (error) {
+            formStatus.textContent = (error.name === 'TimeoutError' || error.name === 'TypeError')
+              ? '送信結果を確認できませんでした。入力内容を残しています。同じ内容で再送信してください。'
+              : error.message;
+          }).finally(function () {
+            document.querySelectorAll('[data-request-type]').forEach(function (button) { button.disabled = false; });
+            document.getElementById('otherDetails').readOnly = false;
+            contactSending = false; submitBtn.disabled = false; submitBtn.textContent = '連絡内容を管理者へ送信する';
+          });
           return;
         }
 
@@ -1094,6 +1150,19 @@
           successCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 0);
       });
+
+      function sendOtherToGoogle() {
+        var lines = ['【店舗主向け依頼】', '依頼種別：その他', '店舗番号：' + store.id, '店舗名：' + store.name,
+          '住所：' + (store.address || '記載なし'), '連絡内容：' + document.getElementById('otherDetails').value.trim(),
+          'メール連絡への同意：' + (contactConsent.checked ? 'あり' : 'なし'),
+          'メールアドレス：' + (contactConsent.checked ? ownerEmail.value.trim() : '記載なし')];
+        document.getElementById('formPayload').value = lines.join('\n');
+        document.getElementById('formName').value = '店舗主向け依頼（店舗番号' + store.id + '）';
+        HTMLFormElement.prototype.submit.call(ownerRequestForm);
+        requestCard.hidden = true; successCard.hidden = false; relistMessage.hidden = true;
+        successMessage.textContent = 'ご依頼を送信しました。管理者が内容を確認します。';
+        successCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
 
       if ((location.hostname === '127.0.0.1' || location.hostname === 'localhost') && params.get('preview') === 'success') {
         requestCard.hidden = true;

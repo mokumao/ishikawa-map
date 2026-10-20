@@ -1,12 +1,27 @@
+import { intakeReady, receiveContact, deliverNotifications } from './contact-intake.js';
 const JSON_HEADERS = { 'content-type': 'application/json; charset=utf-8' };
 
 export default {
-  async fetch(request, env) {
+  async scheduled(event, env) { await deliverNotifications(env); },
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const cors = corsHeaders(request, env);
 
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: cors });
+    }
+    if (request.method === 'GET' && url.pathname === '/api/v1/contact-config') {
+      return json({ enabled: intakeReady(env), testOnly: env.CONTACTS_LIVE === 'test' }, 200, { ...cors, 'cache-control': 'no-store' });
+    }
+    if (request.method === 'POST' && url.pathname === '/api/v1/contacts') {
+      if (!cors['access-control-allow-origin']) return json({ message: '送信元を確認してください。' }, 403, cors);
+      try {
+        const result = await receiveContact(request, env);
+        ctx.waitUntil(deliverNotifications(env));
+        return json(result, 201, { ...cors, 'cache-control': 'no-store' });
+      } catch (error) {
+        return json({ message: error.status ? error.message : '送信を確認できませんでした。同じ内容で再送信してください。' }, error.status || 500, { ...cors, 'cache-control': 'no-store' });
+      }
     }
     if (request.method !== 'GET' || url.pathname !== '/api/v1/notices') {
       return json({ error: 'not_found' }, 404, cors);
@@ -32,7 +47,7 @@ function corsHeaders(request, env) {
   const origin = request.headers.get('Origin') || '';
   const allowed = String(env.PUBLIC_ORIGINS || '').split(',').map(value => value.trim()).filter(Boolean);
   const headers = {
-    'access-control-allow-methods': 'GET, OPTIONS',
+    'access-control-allow-methods': 'GET, POST, OPTIONS',
     'access-control-allow-headers': 'content-type',
     'vary': 'Origin',
   };

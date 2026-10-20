@@ -1,6 +1,7 @@
 const STATUSES = ['unread', 'in_progress', 'done'];
 const fields = `id, store_id AS storeId, store_name AS storeName, body, email, status,
-  memo, created_at AS createdAt, updated_at AS updatedAt, updated_by AS updatedBy, revision`;
+  memo, created_at AS createdAt, updated_at AS updatedAt, updated_by AS updatedBy, revision,
+  (SELECT state FROM contact_notifications WHERE contact_id = owner_contacts.id) AS notificationState`;
 
 export async function listContacts(db, url) {
   const status = url.searchParams.get('status') || '';
