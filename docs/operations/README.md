@@ -16,6 +16,8 @@
 
 ## 関連資料
 
+- [店舗主からのご連絡の段階移行](owner-contacts.md)
+
 - [現地確認リスト](../NOTES.md)
 - [店舗情報 修正・削除依頼システム仕様書](../owner-edit-request-spec.md)
 - 店舗・施設の調査手順：`$poi-survey`

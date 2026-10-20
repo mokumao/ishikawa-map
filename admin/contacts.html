@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>店舗主からのご連絡｜石川マップ管理</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #eef3f6; color: #183042; font-family: sans-serif; line-height: 1.6; }
+    main { max-width: 1100px; padding: 24px 16px; margin: auto; }
+    a { color: #0867b2; }
+    h1 { font-size: 24px; margin: 16px 0; }
+    h2 { font-size: 20px; margin: 0 0 12px; }
+    .panel { background: white; padding: 24px; border: 1px solid #d9e2e8; border-radius: 12px; min-width: 0; }
+    .tools { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 16px 0; }
+    button, select, textarea { font: inherit; }
+    button, select { min-height: 44px; padding: 8px 12px; border: 1px solid #0867b2; border-radius: 8px; background: white; color: #074f89; }
+    button { cursor: pointer; }
+    button:disabled { opacity: .55; cursor: default; }
+    button:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid #83bff0; outline-offset: 2px; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 16px; }
+    #list { display: grid; gap: 12px; align-content: start; }
+    .contact { text-align: left; width: 100%; overflow-wrap: anywhere; }
+    .contact[aria-pressed="true"] { background: #e5f2ff; border-width: 2px; }
+    .contact span { display: block; }
+    #detail { overflow-wrap: anywhere; }
+    #body { white-space: pre-wrap; margin: 16px 0; }
+    dl { margin: 12px 0; } dt { font-weight: bold; } dd { margin: 0 0 12px; white-space: pre-wrap; }
+    label { display: block; font-weight: bold; margin-top: 16px; }
+    textarea { display: block; width: 100%; min-height: 160px; padding: 12px; border: 1px solid #aebdc7; border-radius: 8px; resize: vertical; }
+    #save { background: #0867b2; color: white; margin-top: 16px; }
+    #message { min-height: 26px; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .note { color: #536c7a; font-size: 14px; }
+    [hidden] { display: none !important; }
+    @media(max-width: 760px) { main { padding: 16px 12px; } .layout { grid-template-columns: minmax(0, 1fr); } .panel { padding: 16px; } }
+  </style>
+</head>
+<body><main>
+  <a href="https://ishikawa-map-admin.pages.dev/">管理者ページへ戻る</a>
+  <h1>店舗主からのご連絡</h1>
+  <p class="note">管理者専用の受付・対応管理です。ここでの内容やメモは公開されません。現在、店舗主側の送信先はGoogleフォームのままです。</p>
+  <div class="tools">
+    <label for="filter" style="margin:0">対応状況</label>
+    <select id="filter"><option value="">すべて</option><option value="unread">未確認</option><option value="in_progress">対応中</option><option value="done">対応済み</option></select>
+    <button id="reload" type="button">再読み込み</button>
+    <span id="count"></span>
+  </div>
+  <p id="message" role="status" aria-live="polite"></p>
+  <div class="layout">
+    <section class="panel" aria-label="受付一覧"><h2>受付一覧</h2><div id="list"></div><div class="tools"><button id="prev" type="button">前へ</button><span id="page"></span><button id="next" type="button">次へ</button></div></section>
+    <section class="panel" aria-label="連絡の詳細">
+      <p id="hint">一覧から連絡を選択してください。</p>
+      <form id="detail" hidden>
+        <h2 id="store"></h2>
+        <dl><dt>受付日時</dt><dd id="created"></dd><dt>店舗番号</dt><dd id="storeId"></dd><dt>メールアドレス</dt><dd id="email"></dd></dl>
+        <strong>連絡内容</strong><p id="body"></p>
+        <label for="status">対応状況</label><select id="status"><option value="unread">未確認</option><option value="in_progress">対応中</option><option value="done">対応済み</option></select>
+        <label for="memo">対応メモ（管理者用）</label><textarea id="memo" maxlength="10000"></textarea>
+        <p class="note" id="updated"></p>
+        <button id="save" type="submit">対応状況とメモを保存</button>
+      </form>
+    </section>
+  </div>
+</main>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const labels = { unread: '未確認', in_progress: '対応中', done: '対応済み' };
+  let page = 1, items = [], selected = null, busy = false, total = 0;
+  const stamp = value => value ? new Intl.DateTimeFormat('ja-JP', { timeZone: 'Asia/Tokyo', dateStyle: 'medium', timeStyle: 'short' }).format(new Date(value)) : '未設定';
+  const dirty = () => selected && ($('status').value !== selected.status || $('memo').value !== selected.memo);
+  function canLeave() { return !busy && (!dirty() || confirm('保存していない変更があります。破棄して移動しますか？')); }
+  function setBusy(value) {
+    busy = value;
+    ['save', 'filter', 'reload', 'status', 'memo', 'prev', 'next'].forEach(id => $(id).disabled = value);
+    if (!value) { $('prev').disabled = page <= 1; $('next').disabled = page * 50 >= total; }
+  }
+  async function request(path, options = {}) {
+    const response = await fetch(path, { credentials: 'same-origin', cache: 'no-store', ...options });
+    let data;
+    try { data = await response.json(); } catch { throw Error('管理者として再ログインしてから、再読み込みしてください。'); }
+    if (!response.ok) throw Error(data.message || '読み込みに失敗しました。');
+    return data;
+  }
+  function select(item) {
+    if (!canLeave()) return;
+    selected = item;
+    $('hint').hidden = true; $('detail').hidden = false;
+    $('store').textContent = item.storeName;
+    $('storeId').textContent = item.storeId;
+    $('created').textContent = stamp(item.createdAt);
+    $('email').textContent = item.email || '記載なし';
+    $('body').textContent = item.body;
+    $('status').value = item.status; $('memo').value = item.memo;
+    $('updated').textContent = '最終更新：' + stamp(item.updatedAt);
+    document.querySelectorAll('.contact').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.id === item.id)));
+    $('store').scrollIntoView({ block: 'nearest' });
+  }
+  async function load() {
+    setBusy(true); $('message').textContent = '読み込み中…';
+    selected = null; $('detail').hidden = true; $('hint').hidden = false; $('list').replaceChildren();
+    total = 0;
+    try {
+      const data = await request('/api/v1/admin/contacts?status=' + encodeURIComponent($('filter').value) + '&page=' + page);
+      items = data.items; total = data.total;
+      $('count').textContent = total + '件'; $('page').textContent = page + 'ページ';
+      if (!items.length) $('list').textContent = '該当する連絡はありません。';
+      items.forEach(item => {
+        const button = document.createElement('button'); button.type = 'button'; button.className = 'contact'; button.dataset.id = item.id; button.setAttribute('aria-pressed', 'false');
+        [labels[item.status], item.storeName, '受付：' + stamp(item.createdAt)].forEach(text => { const line = document.createElement('span'); line.textContent = text; button.appendChild(line); });
+        button.addEventListener('click', () => select(item)); $('list').appendChild(button);
+      });
+      $('message').textContent = '';
+    } catch (error) { $('message').textContent = error.message; }
+    finally { setBusy(false); $('prev').disabled = page <= 1; $('next').disabled = page * 50 >= total; }
+  }
+  let filter = '';
+  $('filter').addEventListener('change', () => { if (!canLeave()) { $('filter').value = filter; return; } filter = $('filter').value; page = 1; load(); });
+  $('reload').addEventListener('click', () => { if (canLeave()) load(); });
+  $('prev').addEventListener('click', () => { if (canLeave()) { page--; load(); } });
+  $('next').addEventListener('click', () => { if (canLeave()) { page++; load(); } });
+  $('detail').addEventListener('submit', async event => {
+    event.preventDefault(); if (busy || !selected) return;
+    const status = $('status').value, memo = $('memo').value;
+    setBusy(true); $('message').textContent = '保存中…';
+    try {
+      const data = await request('/api/v1/admin/contacts/' + encodeURIComponent(selected.id), { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ status, memo, revision: selected.revision }) });
+      selected.status = status; selected.memo = memo; selected.revision = data.revision;
+      await load(); $('message').textContent = data.message;
+    } catch (error) { $('message').textContent = error.message; }
+    finally { setBusy(false); }
+  });
+  window.addEventListener('beforeunload', event => { if (dirty() || busy) { event.preventDefault(); event.returnValue = ''; } });
+  load();
+})();
+</script></body></html>

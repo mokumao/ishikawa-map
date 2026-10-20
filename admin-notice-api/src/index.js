@@ -1,5 +1,7 @@
 import { normalizeNoticeInput } from './validation.js';
 import adminPage from '../../admin/notices.html';
+import contactsPage from '../../admin/contacts.html';
+import { listContacts, updateContact } from './contacts.js';
 
 const JSON_HEADERS = { 'content-type': 'application/json; charset=utf-8' };
 
@@ -13,6 +15,10 @@ export default {
     }
 
     try {
+      if (request.method === 'GET' && ['/contacts', '/contacts.html'].includes(url.pathname)) {
+        await requireAdmin(env, ctx);
+        return new Response(contactsPage, { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' } });
+      }
       if (request.method === 'GET' && ['/', '/notices', '/notices.html'].includes(url.pathname)) {
         await requireAdmin(env, ctx);
         return new Response(adminPage, { headers: { 'content-type': 'text/html; charset=utf-8' } });
@@ -23,6 +29,14 @@ export default {
 
       if (!url.pathname.startsWith('/api/v1/admin/')) return json({ error: 'not_found' }, 404, cors);
       const actor = await requireAdmin(env, ctx);
+
+      if (request.method === 'GET' && url.pathname === '/api/v1/admin/contacts') {
+        return json(await listContacts(env.DB, url), 200, { ...cors, 'cache-control': 'no-store' });
+      }
+      const contactMatch = url.pathname.match(/^\/api\/v1\/admin\/contacts\/([a-zA-Z0-9-]+)$/);
+      if (request.method === 'PUT' && contactMatch) {
+        return json(await updateContact(env.DB, actor, contactMatch[1], await readJson(request)), 200, { ...cors, 'cache-control': 'no-store' });
+      }
 
       if (request.method === 'GET' && url.pathname === '/api/v1/admin/notices') {
         return json(await listAdminNotices(env.DB, url.searchParams.get('region') || 'ishikawa'), 200, cors);
