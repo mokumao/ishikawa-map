@@ -33,6 +33,10 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.12);
     border: 1px solid #cfd8dc;
   }
+  .shop-notices-card { scroll-margin-top: 16px; overflow-wrap: anywhere; }
+  .shop-notices-status { display: inline-block; margin: 12px 0; padding: 4px 12px; border-radius: 16px; background: #fff3e0; color: #8a4b00; font-size: 14px; font-weight: 700; }
+  .shop-notices-placeholder { margin-top: 16px; padding: 24px 16px; border: 1px dashed #b0bec5; border-radius: 8px; background: #f7fafc; line-height: 1.6; }
+  .shop-notices-placeholder p + p { margin-top: 8px; }
   main {
     max-width: 960px;
     margin: 0 auto;
@@ -534,6 +538,7 @@
     <a class="site-link-btn" href="#newsResources">追跡中の地域資源を見る</a>
     <a class="site-link-btn" href="#newsReview">石川ニュース自動運用を見る</a>
     <a class="site-link-btn" href="https://ishikawa-map-admin-notices.shinzatoisao1969.workers.dev/">管理者からのお知らせを管理</a>
+    <a class="site-link-btn" href="#shopNotices">店舗主からのお知らせを管理</a>
   </div>
 
   <section class="card">
@@ -632,6 +637,17 @@
       <p class="loading">候補を読み込んでいます…</p>
     </div>
     <p class="news-review-feedback" id="newsReviewFeedback" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="card shop-notices-card" id="shopNotices" aria-labelledby="shopNoticesTitle">
+    <h2 id="shopNoticesTitle">店舗主からのお知らせを管理</h2>
+    <span class="shop-notices-status">準備中</span>
+    <p>石川マップのお知らせ内「店舗主から」に掲載するお知らせの管理枠です。</p>
+    <div class="shop-notices-placeholder">
+      <p><strong>店舗主からのお知らせ一覧</strong></p>
+      <p>運用方法は未定です。相談後に、受付・確認・掲載などの機能を追加します。</p>
+      <p>現在、この枠からの投稿・編集・公開操作はできません。</p>
+    </div>
   </section>
 
   <section class="card card-list">
