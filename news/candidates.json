@@ -1,15 +1,15 @@
 {
   "regionId": "ishikawa",
   "regionName": "石川",
-  "updated": "2026-11-20T10:58:58.979890+09:00",
-  "count": 697,
-  "reviewCount": 38,
+  "updated": "2026-11-21T10:56:03.618370+09:00",
+  "count": 724,
+  "reviewCount": 41,
   "statusCounts": {
     "published": 2,
-    "review": 38,
-    "rejected": 5,
-    "duplicate": 187,
-    "expired": 465
+    "review": 41,
+    "rejected": 4,
+    "duplicate": 200,
+    "expired": 477
   },
   "sourceResults": [
     {
@@ -69,7 +69,7 @@
       "id": "google-news-bios-hill",
       "name": "ビオスの丘",
       "status": "success",
-      "entryCount": 48,
+      "entryCount": 47,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
@@ -91,29 +91,29 @@
       "id": "ryukyu-shimpo",
       "name": "琉球新報",
       "status": "success",
-      "entryCount": 66,
-      "candidateCount": 2,
+      "entryCount": 73,
+      "candidateCount": 3,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 2,
+      "contentUnavailableCount": 3,
       "error": null
     },
     {
       "id": "uruma-city",
       "name": "うるま市公式サイト",
       "status": "success",
-      "entryCount": 60,
-      "candidateCount": 0,
+      "entryCount": 62,
+      "candidateCount": 1,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 0,
+      "contentUnavailableCount": 1,
       "error": null
     },
     {
       "id": "region-facility-ishikawa-ishikawa-mountain",
       "name": "石川施設：石川岳",
       "status": "success",
-      "entryCount": 11,
+      "entryCount": 10,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
@@ -157,7 +157,7 @@
       "id": "region-facility-ishikawa-cave-okinawa",
       "name": "石川施設：CAVE OKINAWA",
       "status": "success",
-      "entryCount": 36,
+      "entryCount": 35,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
@@ -169,6 +169,17 @@
       "name": "石川施設：特別養護老人ホーム 楽寿園",
       "status": "success",
       "entryCount": 54,
+      "candidateCount": 5,
+      "publishedCount": 0,
+      "contentCheckedCount": 0,
+      "contentUnavailableCount": 5,
+      "error": null
+    },
+    {
+      "id": "region-facility-ishikawa-ishikawa-police-station",
+      "name": "石川施設：石川警察署",
+      "status": "success",
+      "entryCount": 51,
       "candidateCount": 3,
       "publishedCount": 0,
       "contentCheckedCount": 0,
@@ -176,21 +187,10 @@
       "error": null
     },
     {
-      "id": "region-facility-ishikawa-ishikawa-police-station",
-      "name": "石川施設：石川警察署",
-      "status": "success",
-      "entryCount": 53,
-      "candidateCount": 2,
-      "publishedCount": 0,
-      "contentCheckedCount": 0,
-      "contentUnavailableCount": 2,
-      "error": null
-    },
-    {
       "id": "region-facility-ishikawa-ishikawa-water-treatment-plant",
       "name": "石川施設：石川浄水場",
       "status": "success",
-      "entryCount": 28,
+      "entryCount": 36,
       "candidateCount": 1,
       "publishedCount": 0,
       "contentCheckedCount": 0,
@@ -267,11 +267,11 @@
       "id": "region-theme-ishikawa-bullfighting",
       "name": "石川固有テーマ：闘牛",
       "status": "success",
-      "entryCount": 58,
-      "candidateCount": 1,
+      "entryCount": 57,
+      "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 1,
+      "contentUnavailableCount": 0,
       "error": null
     },
     {
@@ -311,7 +311,7 @@
       "id": "region-theme-ishikawa-ishikawa-area-redevelopment",
       "name": "石川固有テーマ：石川庁舎周辺・石川公園のまちづくり",
       "status": "success",
-      "entryCount": 7,
+      "entryCount": 6,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
@@ -322,7 +322,7 @@
       "id": "region-theme-ishikawa-ishikawa-community-traditions",
       "name": "石川固有テーマ：石川地区の自治会行事・伝統芸能",
       "status": "success",
-      "entryCount": 10,
+      "entryCount": 9,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
@@ -344,29 +344,18 @@
       "id": "region-discovery-ishikawa-government",
       "name": "石川：行政・自治会",
       "status": "success",
-      "entryCount": 12,
-      "candidateCount": 0,
+      "entryCount": 14,
+      "candidateCount": 1,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 0,
+      "contentUnavailableCount": 1,
       "error": null
     },
     {
       "id": "region-discovery-ishikawa-events-culture",
       "name": "石川：催し・祭り・文化",
       "status": "success",
-      "entryCount": 30,
-      "candidateCount": 3,
-      "publishedCount": 0,
-      "contentCheckedCount": 0,
-      "contentUnavailableCount": 3,
-      "error": null
-    },
-    {
-      "id": "region-discovery-ishikawa-public-facilities",
-      "name": "石川：公共施設",
-      "status": "success",
-      "entryCount": 27,
+      "entryCount": 28,
       "candidateCount": 2,
       "publishedCount": 0,
       "contentCheckedCount": 0,
@@ -374,21 +363,32 @@
       "error": null
     },
     {
+      "id": "region-discovery-ishikawa-public-facilities",
+      "name": "石川：公共施設",
+      "status": "success",
+      "entryCount": 47,
+      "candidateCount": 4,
+      "publishedCount": 0,
+      "contentCheckedCount": 0,
+      "contentUnavailableCount": 4,
+      "error": null
+    },
+    {
       "id": "region-discovery-ishikawa-education",
       "name": "石川：学校・教育",
       "status": "success",
-      "entryCount": 12,
-      "candidateCount": 0,
+      "entryCount": 13,
+      "candidateCount": 1,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 0,
+      "contentUnavailableCount": 1,
       "error": null
     },
     {
       "id": "region-discovery-ishikawa-safety",
       "name": "石川：防災・安全",
       "status": "success",
-      "entryCount": 10,
+      "entryCount": 9,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
@@ -399,18 +399,18 @@
       "id": "region-discovery-ishikawa-health-welfare",
       "name": "石川：健康・福祉",
       "status": "success",
-      "entryCount": 10,
-      "candidateCount": 1,
+      "entryCount": 9,
+      "candidateCount": 2,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 1,
+      "contentUnavailableCount": 2,
       "error": null
     },
     {
       "id": "region-discovery-ishikawa-transport-construction",
       "name": "石川：交通・工事",
       "status": "success",
-      "entryCount": 47,
+      "entryCount": 12,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
@@ -421,7 +421,7 @@
       "id": "region-discovery-ishikawa-business-community",
       "name": "石川：商業・地域活動",
       "status": "success",
-      "entryCount": 15,
+      "entryCount": 17,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
@@ -489,7 +489,7 @@
       "sourceType": "official",
       "publishedAt": "2026-05-19T12:00:00+09:00",
       "discoveredAt": "2026-11-15T09:39:24.644551+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": "2026-12-27T00:00:00+09:00",
       "eventEndsAt": "2027-03-20T00:00:00+09:00",
       "expiresAt": "2027-03-20T23:59:59+09:00",
@@ -533,7 +533,7 @@
       "duplicateOf": null,
       "contentCheck": {
         "status": "checked",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://www.city.uruma.lg.jp/1007003000/contents/1408.html",
         "finalUrl": "https://www.lequio-tourist.okinawa/travel_03.php",
         "pageTitle": "観光闘牛開催日程",
@@ -962,7 +962,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-11-17T15:35:54+09:00",
       "discoveredAt": "2026-11-18T11:41:42.554249+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": "2026-12-13T00:00:00+09:00",
       "eventEndsAt": "2026-12-13T00:00:00+09:00",
       "expiresAt": "2026-12-13T23:59:59+09:00",
@@ -974,29 +974,23 @@
         "石川"
       ],
       "confidence": 45,
-      "status": "review",
-      "requiresReview": true,
+      "status": "duplicate",
+      "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区・日時・情報源の自動掲載条件を満たした",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事18件を代表記事へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "fc3c88f439b871e9a176",
       "facilityId": "ishikawa-hall",
       "eventMarkers": [
         "term:フェスティバル",
         "第38回全島獅子舞フェスティバル"
       ],
-      "relatedUrls": [
-        "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln?oc=5"
-      ],
-      "duplicateOf": null,
+      "relatedUrls": [],
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE83OVRpTlF2SFkwVjdNeGU5WDJyMWFkN21EdHBTd25tQmc5VGlnMGVJQVRINFhnS3FNdmNhR21FVVJMVnhXMDRtc2hIU3lFOFFVM0VfRHlDVk9rSjkwUW80a25aVkZiNzNWQXVZSkRGQ0xLSnduZDZGc3N6Sko?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE83OVRpTlF2SFkwVjdNeGU5WDJyMWFkN21EdHBTd25tQmc5VGlnMGVJQVRINFhnS3FNdmNhR21FVVJMVnhXMDRtc2hIU3lFOFFVM0VfRHlDVk9rSjkwUW80a25aVkZiNzNWQXVZSkRGQ0xLSnduZDZGc3N6Sko",
         "pageTitle": "",
@@ -1006,8 +1000,58 @@
         "eventStartsAt": "2026-12-13T00:00:00+09:00",
         "eventEndsAt": "2026-12-13T00:00:00+09:00",
         "venue": ""
-      },
-      "relatedCount": 18
+      }
+    },
+    {
+      "id": "20261213-region-discovery-ishikawa-public-facilities-fc3c88f439",
+      "title": "【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET",
+      "displayTitle": "【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET",
+      "summary": "【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます 地域ニュースサイト号外NET",
+      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE83OVRpTlF2SFkwVjdNeGU5WDJyMWFkN21EdHBTd25tQmc5VGlnMGVJQVRINFhnS3FNdmNhR21FVVJMVnhXMDRtc2hIU3lFOFFVM0VfRHlDVk9rSjkwUW80a25aVkZiNzNWQXVZSkRGQ0xLSnduZDZGc3N6Sko?oc=5",
+      "sourceId": "region-discovery-ishikawa-public-facilities",
+      "sourceName": "石川：公共施設",
+      "sourceType": "discovery",
+      "publishedAt": "2026-11-17T15:35:54+09:00",
+      "discoveredAt": "2026-11-18T11:41:42.554249+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": "2026-12-13T00:00:00+09:00",
+      "eventEndsAt": "2026-12-13T00:00:00+09:00",
+      "expiresAt": "2026-12-13T23:59:59+09:00",
+      "category": "event",
+      "localScore": 100,
+      "localEvidence": [
+        "うるま市と石川",
+        "石川会館",
+        "石川"
+      ],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
+      ],
+      "fingerprint": "90a21fc39344736bf64f",
+      "articleFingerprint": "fc3c88f439b871e9a176",
+      "facilityId": "ishikawa-hall",
+      "eventMarkers": [
+        "term:フェスティバル",
+        "第38回全島獅子舞フェスティバル"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE83OVRpTlF2SFkwVjdNeGU5WDJyMWFkN21EdHBTd25tQmc5VGlnMGVJQVRINFhnS3FNdmNhR21FVVJMVnhXMDRtc2hIU3lFOFFVM0VfRHlDVk9rSjkwUW80a25aVkZiNzNWQXVZSkRGQ0xLSnduZDZGc3N6Sko?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE83OVRpTlF2SFkwVjdNeGU5WDJyMWFkN21EdHBTd25tQmc5VGlnMGVJQVRINFhnS3FNdmNhR21FVVJMVnhXMDRtc2hIU3lFOFFVM0VfRHlDVk9rSjkwUW80a25aVkZiNzNWQXVZSkRGQ0xLSnduZDZGc3N6Sko",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": "2026-12-13T00:00:00+09:00",
+        "eventEndsAt": "2026-12-13T00:00:00+09:00",
+        "venue": ""
+      }
     },
     {
       "id": "20261213-region-discovery-ishikawa-events-culture-fc3c88f439",
@@ -1035,9 +1079,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "fc3c88f439b871e9a176",
       "facilityId": "ishikawa-hall",
       "eventMarkers": [
@@ -1045,58 +1089,7 @@
         "第38回全島獅子舞フェスティバル"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE83OVRpTlF2SFkwVjdNeGU5WDJyMWFkN21EdHBTd25tQmc5VGlnMGVJQVRINFhnS3FNdmNhR21FVVJMVnhXMDRtc2hIU3lFOFFVM0VfRHlDVk9rSjkwUW80a25aVkZiNzNWQXVZSkRGQ0xLSnduZDZGc3N6Sko?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE83OVRpTlF2SFkwVjdNeGU5WDJyMWFkN21EdHBTd25tQmc5VGlnMGVJQVRINFhnS3FNdmNhR21FVVJMVnhXMDRtc2hIU3lFOFFVM0VfRHlDVk9rSjkwUW80a25aVkZiNzNWQXVZSkRGQ0xLSnduZDZGc3N6Sko",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": "2026-12-13T00:00:00+09:00",
-        "eventEndsAt": "2026-12-13T00:00:00+09:00",
-        "venue": ""
-      }
-    },
-    {
-      "id": "20261213-region-discovery-ishikawa-public-facilities-fc3c88f439",
-      "title": "【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET",
-      "displayTitle": "【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET",
-      "summary": "【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます 地域ニュースサイト号外NET",
-      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE83OVRpTlF2SFkwVjdNeGU5WDJyMWFkN21EdHBTd25tQmc5VGlnMGVJQVRINFhnS3FNdmNhR21FVVJMVnhXMDRtc2hIU3lFOFFVM0VfRHlDVk9rSjkwUW80a25aVkZiNzNWQXVZSkRGQ0xLSnduZDZGc3N6Sko?oc=5",
-      "sourceId": "region-discovery-ishikawa-public-facilities",
-      "sourceName": "石川：公共施設",
-      "sourceType": "discovery",
-      "publishedAt": "2026-11-17T15:35:54+09:00",
-      "discoveredAt": "2026-11-18T11:41:42.554249+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
-      "eventStartsAt": "2026-12-13T00:00:00+09:00",
-      "eventEndsAt": "2026-12-13T00:00:00+09:00",
-      "expiresAt": "2026-12-13T23:59:59+09:00",
-      "category": "event",
-      "localScore": 100,
-      "localEvidence": [
-        "うるま市と石川",
-        "石川会館",
-        "石川"
-      ],
-      "confidence": 45,
-      "status": "duplicate",
-      "requiresReview": false,
-      "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
-      ],
-      "fingerprint": "8a2529a829c0e2e359cb",
-      "articleFingerprint": "fc3c88f439b871e9a176",
-      "facilityId": "ishikawa-hall",
-      "eventMarkers": [
-        "term:フェスティバル",
-        "第38回全島獅子舞フェスティバル"
-      ],
-      "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-20T10:58:58.979890+09:00",
@@ -1222,7 +1215,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-11-20T09:00:00+09:00",
       "discoveredAt": "2026-11-20T10:58:58.979890+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": "2026-11-28T00:00:00+09:00",
       "eventEndsAt": "2026-11-29T00:00:00+09:00",
       "expiresAt": "2026-11-29T23:59:59+09:00",
@@ -1248,7 +1241,7 @@
       "duplicateOf": null,
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE90QlU5b0ppS3MzTzRCeFZVWW1VaW5FNWducTlwTmFhOHQ2Q1RSSE5URk00VkZGOXlYaGkzTXlvZGVpLTA1aW8yRmtjanRZMkJFQjF4Q1FHOFVROTJjczZZ?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE90QlU5b0ppS3MzTzRCeFZVWW1VaW5FNWducTlwTmFhOHQ2Q1RSSE5URk00VkZGOXlYaGkzTXlvZGVpLTA1aW8yRmtjanRZMkJFQjF4Q1FHOFVROTJjczZZ",
         "pageTitle": "",
@@ -1257,6 +1250,1186 @@
         "error": "記事本文の主要部分を抽出できない",
         "eventStartsAt": "2026-11-28T00:00:00+09:00",
         "eventEndsAt": "2026-11-29T00:00:00+09:00",
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261121-region-facility-ishikawa-ishikawa-police-station-650fb1bdea",
+      "title": "交通死亡事故再発防げ 古殿のカーブ現場点検 道路の改良や拡幅求める 石川署など - 福島民報デジタル",
+      "displayTitle": "交通死亡事故再発防げ 古殿のカーブ現場点検 道路の改良や拡幅求める 石川署など - 福島民報デジタル",
+      "summary": "交通死亡事故再発防げ 古殿のカーブ現場点検 道路の改良や拡幅求める 石川署など 福島民報デジタル",
+      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBtZ2R6eG1TOFJVV3BsRmhSejQwU3lJQ3ppNERSRWJNTEZvbWZtSFE1ZlpSX2dKODFpdGJrcGZPY3NBTVhrYUh4R2M5VFY0c0U?oc=5",
+      "sourceId": "region-facility-ishikawa-ishikawa-police-station",
+      "sourceName": "石川施設：石川警察署",
+      "sourceType": "discovery",
+      "publishedAt": "2026-11-21T05:37:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-28T23:59:59+09:00",
+      "category": "news",
+      "localScore": 100,
+      "localEvidence": [
+        "石川署"
+      ],
+      "confidence": 45,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "慎重な確認が必要な内容のため判断保留",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない"
+      ],
+      "fingerprint": "e9b86601a8f3d9c786dd",
+      "articleFingerprint": "650fb1bdeac6b8733c64",
+      "facilityId": "ishikawa-police-station",
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBtZ2R6eG1TOFJVV3BsRmhSejQwU3lJQ3ppNERSRWJNTEZvbWZtSFE1ZlpSX2dKODFpdGJrcGZPY3NBTVhrYUh4R2M5VFY0c0U?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBtZ2R6eG1TOFJVV3BsRmhSejQwU3lJQ3ppNERSRWJNTEZvbWZtSFE1ZlpSX2dKODFpdGJrcGZPY3NBTVhrYUh4R2M5VFY0c0U",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261121-okinawa-times-969fc6b9e7",
+      "title": "爆音に負けず大声競う うるまラブ＆ピースフェスタ 幅広い世代が祭り満喫 107デシベル記録した高校生も - 沖縄タイムス社",
+      "displayTitle": "爆音に負けず大声競う うるまラブ&ピースフェスタ 幅広い世代が祭り満喫 107デシベル記録した高校生も",
+      "summary": "爆音に負けず大声競う うるまラブ＆ピースフェスタ 幅広い世代が祭り満喫 107デシベル記録した高校生も 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBWcGNXczIzcHQwQ0xid3d4ZTNoemFKV0xSSUpJbDBBa3FKTHRhc1lMaDJUMENJbFJxdDJGUHRxYkhTY3JzVFhJNEJNSkZOTHRibUJzaFNyUlZMcEFRSWc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-21T04:00:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-28T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "190bce0e99b5b0eade28",
+      "articleFingerprint": "969fc6b9e7d4794a689f",
+      "facilityId": null,
+      "eventMarkers": [
+        "爆音に負けず大声競ううるまラブピースフェスタ幅広い世代が祭り満喫107デシベル記録した高校生も"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBWcGNXczIzcHQwQ0xid3d4ZTNoemFKV0xSSUpJbDBBa3FKTHRhc1lMaDJUMENJbFJxdDJGUHRxYkhTY3JzVFhJNEJNSkZOTHRibUJzaFNyUlZMcEFRSWc?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBWcGNXczIzcHQwQ0xid3d4ZTNoemFKV0xSSUpJbDBBa3FKTHRhc1lMaDJUMENJbFJxdDJGUHRxYkhTY3JzVFhJNEJNSkZOTHRibUJzaFNyUlZMcEFRSWc",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261121-okinawa-times-b9f94400e9",
+      "title": "サッカーGK 育成に特化 JFA公認 仲松さん指導 八重瀬にスクール 県内3カ所目 - 沖縄タイムス社",
+      "displayTitle": "サッカーGK 育成に特化 JFA公認 仲松さん指導 八重瀬にスクール 県内3カ所目",
+      "summary": "サッカーGK 育成に特化 JFA公認 仲松さん指導 八重瀬にスクール 県内3カ所目 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1uUDNRNW94bHVSMjkyR0p4X3kyX3hLYTRXNTlXSE5RcUUtbC1ubTRJMDdLTXRGdHd2WUVMSF9jVjRGUnpHMGw0d0lpaDhGQ2xRV0YyTWsxOVZTWEFENWc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-21T04:00:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-28T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "9c26e127b257cce89a35",
+      "articleFingerprint": "b9f94400e93a02702260",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1uUDNRNW94bHVSMjkyR0p4X3kyX3hLYTRXNTlXSE5RcUUtbC1ubTRJMDdLTXRGdHd2WUVMSF9jVjRGUnpHMGw0d0lpaDhGQ2xRV0YyTWsxOVZTWEFENWc?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1uUDNRNW94bHVSMjkyR0p4X3kyX3hLYTRXNTlXSE5RcUUtbC1ubTRJMDdLTXRGdHd2WUVMSF9jVjRGUnpHMGw0d0lpaDhGQ2xRV0YyTWsxOVZTWEFENWc",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261121-okinawa-times-226231cd27",
+      "title": "比例31減 野党批判相次ぐ 自民「人口減少を考慮」 - 沖縄タイムス社",
+      "displayTitle": "比例31減 野党批判相次ぐ 自民「人口減少を考慮」",
+      "summary": "比例31減 野党批判相次ぐ 自民「人口減少を考慮」 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5vd0hrZ05IZ0Vpdm9KTkN1QnZCbDdwdmhTeWloMGNiRm5VcnpSV3M5d3VxRENrUGdnLXFHRnE5Q3BFclZmZjRUWnZkOWwwLUl0V3BlQzBOUDlkOE1WQWc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-21T03:59:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-28T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "fd3ff31b9fd4c6ab6c6e",
+      "articleFingerprint": "226231cd27c514ddd9b3",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5vd0hrZ05IZ0Vpdm9KTkN1QnZCbDdwdmhTeWloMGNiRm5VcnpSV3M5d3VxRENrUGdnLXFHRnE5Q3BFclZmZjRUWnZkOWwwLUl0V3BlQzBOUDlkOE1WQWc?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5vd0hrZ05IZ0Vpdm9KTkN1QnZCbDdwdmhTeWloMGNiRm5VcnpSV3M5d3VxRENrUGdnLXFHRnE5Q3BFclZmZjRUWnZkOWwwLUl0V3BlQzBOUDlkOE1WQWc",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261121-okinawa-times-a6e996c599",
+      "title": "介護や認知症 楽しく考える 25日 東村でイベント - 沖縄タイムス社",
+      "displayTitle": "介護や認知症 楽しく考える 25日 東村でイベント",
+      "summary": "介護や認知症 楽しく考える 25日 東村でイベント 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9QS1RPRDdGc211b1lWUXYyM1JMRzZ5UUNuVFhhazZDSkZlTVpxQmFtOTMzZnJEd1VNVU55SllOSkdkRGd2UnNxNFlOcTRQMzhpbzhqNHo4dk1EbDVxUmc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-21T03:58:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-28T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "b63a9983bef596c2960c",
+      "articleFingerprint": "a6e996c5998228aa6231",
+      "facilityId": null,
+      "eventMarkers": [
+        "介護や認知症楽しく考える25日東村でイベント"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9QS1RPRDdGc211b1lWUXYyM1JMRzZ5UUNuVFhhazZDSkZlTVpxQmFtOTMzZnJEd1VNVU55SllOSkdkRGd2UnNxNFlOcTRQMzhpbzhqNHo4dk1EbDVxUmc?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9QS1RPRDdGc211b1lWUXYyM1JMRzZ5UUNuVFhhazZDSkZlTVpxQmFtOTMzZnJEd1VNVU55SllOSkdkRGd2UnNxNFlOcTRQMzhpbzhqNHo4dk1EbDVxUmc",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261121-okinawa-times-b4fac6a3d4",
+      "title": "［県三役動静・市長動静］（21日） - 沖縄タイムス社",
+      "displayTitle": "[県三役動静・市長動静](21日)",
+      "summary": "［県三役動静・市長動静］（21日） 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE4yNjdWM1FCRU1VWmF3NmNmNklHdHc1RGZSZThLZ0R5NjdBaGZvVGo3VV9jNk1YWW9Xb3VoYmFDcnFTNVRib2wtNktKZ2NGdl84OEhHRm5oeEotOEZOU0E?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-21T03:57:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-28T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "202b1191bdc17b8a2888",
+      "articleFingerprint": "b4fac6a3d46ae9157653",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE4yNjdWM1FCRU1VWmF3NmNmNklHdHc1RGZSZThLZ0R5NjdBaGZvVGo3VV9jNk1YWW9Xb3VoYmFDcnFTNVRib2wtNktKZ2NGdl84OEhHRm5oeEotOEZOU0E?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE4yNjdWM1FCRU1VWmF3NmNmNklHdHc1RGZSZThLZ0R5NjdBaGZvVGo3VV9jNk1YWW9Xb3VoYmFDcnFTNVRib2wtNktKZ2NGdl84OEhHRm5oeEotOEZOU0E",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261121-okinawa-times-56b0735d1d",
+      "title": "［琉歌・詠でぃ遊ばな］（11月）仲程昌徳選 - 沖縄タイムス社",
+      "displayTitle": "[琉歌・詠でぃ遊ばな](11月)仲程昌徳選",
+      "summary": "［琉歌・詠でぃ遊ばな］（11月）仲程昌徳選 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE0yVTBYMjNvTElrMlVveXNocjFTYnF4a1VBajJOdnJ0MmJ4bi1MRV9CN0M4TDE5dE5TX1F5OUxYM19xR09GcTg1bnM3REtrUzhyT0ljOTN5clAxTFhkdWc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-21T03:57:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-28T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "1a73e81b998aeb987c75",
+      "articleFingerprint": "56b0735d1dcaba64f204",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE0yVTBYMjNvTElrMlVveXNocjFTYnF4a1VBajJOdnJ0MmJ4bi1MRV9CN0M4TDE5dE5TX1F5OUxYM19xR09GcTg1bnM3REtrUzhyT0ljOTN5clAxTFhkdWc?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE0yVTBYMjNvTElrMlVveXNocjFTYnF4a1VBajJOdnJ0MmJ4bi1MRV9CN0M4TDE5dE5TX1F5OUxYM19xR09GcTg1bnM3REtrUzhyT0ljOTN5clAxTFhkdWc",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261121-okinawa-times-999b55edce",
+      "title": "奥区公民館 完成喜ぶ 国頭 区民「活性化」に期待 - 沖縄タイムス社",
+      "displayTitle": "奥区公民館 完成喜ぶ 国頭 区民「活性化」に期待",
+      "summary": "奥区公民館 完成喜ぶ 国頭 区民「活性化」に期待 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1oWWgwbi1yNEhIaXdtb2RTQmtrN09zRmNPbFZBWnhTLUJjNE9KZndOaDgzcTNRVHVaRWcyWUdBM2hKbmI2aEJQY0VJVXZrUHZsZDRuZG5tUF9scDVKZEE?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-21T03:57:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-28T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "6fdb9aadabdfff10e931",
+      "articleFingerprint": "999b55edcec00d12e561",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1oWWgwbi1yNEhIaXdtb2RTQmtrN09zRmNPbFZBWnhTLUJjNE9KZndOaDgzcTNRVHVaRWcyWUdBM2hKbmI2aEJQY0VJVXZrUHZsZDRuZG5tUF9scDVKZEE?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1oWWgwbi1yNEhIaXdtb2RTQmtrN09zRmNPbFZBWnhTLUJjNE9KZndOaDgzcTNRVHVaRWcyWUdBM2hKbmI2aEJQY0VJVXZrUHZsZDRuZG5tUF9scDVKZEE",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261121-okinawa-times-51376a1ba7",
+      "title": "［囲碁］［第52期・碁聖戦］ 予選特選譜 第5局 第6譜 （102～124） - 沖縄タイムス社",
+      "displayTitle": "[囲碁][第52期・碁聖戦] 予選特選譜 第5局 第6譜 (102~124)",
+      "summary": "［囲碁］［第52期・碁聖戦］ 予選特選譜 第5局 第6譜 （102～124） 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA5bTJBcWtkRmJKRzZyeEtseG9rMlNWamdyQ0VidlphMTc3d2kyVjY1VGdmTVVEdW4wTUJvRUN3VnhOaEdIZ0ppdC1Oa1IxUVdyOHdoOXFhVDhqMnRwLWc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-21T03:57:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-28T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "710347ad1bf521a3da46",
+      "articleFingerprint": "51376a1ba73249b0cb45",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA5bTJBcWtkRmJKRzZyeEtseG9rMlNWamdyQ0VidlphMTc3d2kyVjY1VGdmTVVEdW4wTUJvRUN3VnhOaEdIZ0ppdC1Oa1IxUVdyOHdoOXFhVDhqMnRwLWc?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA5bTJBcWtkRmJKRzZyeEtseG9rMlNWamdyQ0VidlphMTc3d2kyVjY1VGdmTVVEdW4wTUJvRUN3VnhOaEdIZ0ppdC1Oa1IxUVdyOHdoOXFhVDhqMnRwLWc",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261121-okinawa-times-4a26378547",
+      "title": "文化財保全へ 名護市に寄付 沖縄ファミマ - 沖縄タイムス社",
+      "displayTitle": "文化財保全へ 名護市に寄付 沖縄ファミマ",
+      "summary": "文化財保全へ 名護市に寄付 沖縄ファミマ 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5jaV9ZSnJKamVUTFNsTnBCaWxnUDRLanJWcEtjcTkxeHF6bkZHanVUYjZPZC13TFRhcFVhZXFuZ1hhcVhFZHNUWUFZNVREcldjaTNKSWNuTTZjU2o4S1E?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-21T03:57:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-28T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "b5f73fac4a58d3df1416",
+      "articleFingerprint": "4a26378547670f84255f",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5jaV9ZSnJKamVUTFNsTnBCaWxnUDRLanJWcEtjcTkxeHF6bkZHanVUYjZPZC13TFRhcFVhZXFuZ1hhcVhFZHNUWUFZNVREcldjaTNKSWNuTTZjU2o4S1E?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5jaV9ZSnJKamVUTFNsTnBCaWxnUDRLanJWcEtjcTkxeHF6bkZHanVUYjZPZC13TFRhcFVhZXFuZ1hhcVhFZHNUWUFZNVREcldjaTNKSWNuTTZjU2o4S1E",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261121-region-facility-ishikawa-rakujuen-05777fa091",
+      "title": "東海菊花大会受賞者たたえる 三島・楽寿園で表彰式※大臣賞は全て伊豆以外なので、写真は田農の生徒で - 伊豆新聞デジタル",
+      "displayTitle": "東海菊花大会受賞者たたえる 三島・楽寿園で表彰式※大臣賞は全て伊豆以外なので、写真は田農の生徒で - 伊豆新聞デジタル",
+      "summary": "東海菊花大会受賞者たたえる 三島・楽寿園で表彰式※大臣賞は全て伊豆以外なので、写真は田農の生徒で 伊豆新聞デジタル",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5vV1NIdVppVXZQOEdSelRhYmRCVkdtSXQwdXRERGk2dE9DYU4zWUJUZTU1eVRxNTB2Ukd1VzJfYjJiUUxobDdqN1hZcFYtcnJ0WEN4XzhtaDZIV2pWSkE?oc=5",
+      "sourceId": "region-facility-ishikawa-rakujuen",
+      "sourceName": "石川施設：特別養護老人ホーム 楽寿園",
+      "sourceType": "discovery",
+      "publishedAt": "2026-11-21T03:01:36+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-28T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 45,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "同名施設の誤一致を防ぐため地域文脈の確認が必要",
+        "施設専用検索で発見したが、記事内に施設名を確認できない",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "2d7703024f3f15cf314f",
+      "articleFingerprint": "05777fa091a2095eb466",
+      "facilityId": "rakujuen",
+      "eventMarkers": [
+        "東海菊花大会受賞者たたえる三島楽寿園で表彰式大臣賞は全て伊豆以外なので写真は田農の生徒で伊豆新聞デジタル"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5vV1NIdVppVXZQOEdSelRhYmRCVkdtSXQwdXRERGk2dE9DYU4zWUJUZTU1eVRxNTB2Ukd1VzJfYjJiUUxobDdqN1hZcFYtcnJ0WEN4XzhtaDZIV2pWSkE?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5vV1NIdVppVXZQOEdSelRhYmRCVkdtSXQwdXRERGk2dE9DYU4zWUJUZTU1eVRxNTB2Ukd1VzJfYjJiUUxobDdqN1hZcFYtcnJ0WEN4XzhtaDZIV2pWSkE",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261120-okinawa-times-17f60be307",
+      "title": "４０歳涌井は７千万円で更改 今季４勝、２２年連続勝利 - 沖縄タイムス社",
+      "displayTitle": "40歳涌井は7千万円で更改 今季4勝、22年連続勝利",
+      "summary": "４０歳涌井は７千万円で更改 今季４勝、２２年連続勝利 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1nR2xWdUdMYjhXZUJWV2c5b3llZk05MFh4MFY5SlpjOG5KRk1NOVNPcUE5UksxMGcwMzF5YzJBV2FOODZZZmttTEVkX2ZBc25xMVQtTFoyYlBWVDdOX3c?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-20T18:22:28+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "889f0afb1ebcc25b32f6",
+      "articleFingerprint": "17f60be3078ed19d2c68",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1nR2xWdUdMYjhXZUJWV2c5b3llZk05MFh4MFY5SlpjOG5KRk1NOVNPcUE5UksxMGcwMzF5YzJBV2FOODZZZmttTEVkX2ZBc25xMVQtTFoyYlBWVDdOX3c?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1nR2xWdUdMYjhXZUJWV2c5b3llZk05MFh4MFY5SlpjOG5KRk1NOVNPcUE5UksxMGcwMzF5YzJBV2FOODZZZmttTEVkX2ZBc25xMVQtTFoyYlBWVDdOX3c",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261120-okinawa-times-db8397a61c",
+      "title": "第４０回「法人会全国青年の集い」島根大会 開催 - 沖縄タイムス社",
+      "displayTitle": "第40回「法人会全国青年の集い」島根大会 開催",
+      "summary": "第４０回「法人会全国青年の集い」島根大会 開催 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1sbG5zSmRra1hZMGJYZ0dOWjhqMGF6ZXFQQldMMHlqTkR4cmk4cUE1SkhLZW5BSDJ4QnFRYzlmaUs4QlNkejQ5STVjX2lJdzdUT252OFVSNGRkQWtWM1E?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-20T17:12:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "d927258d231e6eb77087",
+      "articleFingerprint": "db8397a61cf3b55f21c5",
+      "facilityId": null,
+      "eventMarkers": [
+        "第40回法人会全国青年の集い島根大会開催"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1sbG5zSmRra1hZMGJYZ0dOWjhqMGF6ZXFQQldMMHlqTkR4cmk4cUE1SkhLZW5BSDJ4QnFRYzlmaUs4QlNkejQ5STVjX2lJdzdUT252OFVSNGRkQWtWM1E?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1sbG5zSmRra1hZMGJYZ0dOWjhqMGF6ZXFQQldMMHlqTkR4cmk4cUE1SkhLZW5BSDJ4QnFRYzlmaUs4QlNkejQ5STVjX2lJdzdUT252OFVSNGRkQWtWM1E",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261120-okinawa-times-d69551fc41",
+      "title": "勝俣が首位維持、松山は３２位 男子ゴルフ第２日 - 沖縄タイムス社",
+      "displayTitle": "勝俣が首位維持、松山は32位 男子ゴルフ第2日",
+      "summary": "勝俣が首位維持、松山は３２位 男子ゴルフ第２日 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1PcDB2dFNUbUVqVUFWczQ3SFFoOF96X0Z4MDZTQk1tTmRORWFFU0JEdVRGMXhvMXdsVEFlNkJ2NmtKcEp0U3I0dFhCcjN3SGVHeHliVUtvWTNyZWVGVVE?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-20T17:11:22+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "525544e2163f2c343fdf",
+      "articleFingerprint": "d69551fc41b5f083339b",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1PcDB2dFNUbUVqVUFWczQ3SFFoOF96X0Z4MDZTQk1tTmRORWFFU0JEdVRGMXhvMXdsVEFlNkJ2NmtKcEp0U3I0dFhCcjN3SGVHeHliVUtvWTNyZWVGVVE?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1PcDB2dFNUbUVqVUFWczQ3SFFoOF96X0Z4MDZTQk1tTmRORWFFU0JEdVRGMXhvMXdsVEFlNkJ2NmtKcEp0U3I0dFhCcjN3SGVHeHliVUtvWTNyZWVGVVE",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261120-ryukyu-shimpo-d10753d0ae",
+      "title": "志賀原発事故想定し訓練 石川、避難の流れ確認 - 琉球新報デジタル",
+      "displayTitle": "志賀原発事故想定し訓練 石川、避難の流れ確認",
+      "summary": "志賀原発事故想定し訓練 石川、避難の流れ確認 琉球新報デジタル",
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1mMFFIOEZLTlFoMkdLRmJ1alZZSWxHbDE3SmM2TjRPWkM3VnYtVC0yTUpLQ2RIZ1Fia0pYZnU1cVZVU0MwdDhRM2dyc2pSMU5oYUktUEVlRnlvNWYz?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-11-20T17:10:44+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「志賀原発事故想定し訓練 石川、避難の流れ確認」へ統合"
+      ],
+      "fingerprint": "3f85b9cd85825d648843",
+      "articleFingerprint": "d10753d0ae36aebcc2d6",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20261120-okinawa-times-53d52362ef",
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1mMFFIOEZLTlFoMkdLRmJ1alZZSWxHbDE3SmM2TjRPWkM3VnYtVC0yTUpLQ2RIZ1Fia0pYZnU1cVZVU0MwdDhRM2dyc2pSMU5oYUktUEVlRnlvNWYz?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1mMFFIOEZLTlFoMkdLRmJ1alZZSWxHbDE3SmM2TjRPWkM3VnYtVC0yTUpLQ2RIZ1Fia0pYZnU1cVZVU0MwdDhRM2dyc2pSMU5oYUktUEVlRnlvNWYz",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      }
+    },
+    {
+      "id": "20261120-okinawa-times-53d52362ef",
+      "title": "志賀原発事故想定し訓練 石川、避難の流れ確認 - 沖縄タイムス社",
+      "displayTitle": "志賀原発事故想定し訓練 石川、避難の流れ確認",
+      "summary": "志賀原発事故想定し訓練 石川、避難の流れ確認 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBxSXdGajJUOWluU2ctMXpzZDdYRWJoSmpuRml4RXVaLUVpdWk1QlJsRnhHU2NhbDdfSTVlQUdVb2dOM3h4R0d1REhFOVF6Z1c0RXJzanByOGxkNl93UWc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-20T17:10:42+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 25,
+      "localEvidence": [
+        "石川"
+      ],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "同じ内容の記事1件を代表記事へ統合"
+      ],
+      "fingerprint": "3f85b9cd85825d648843",
+      "articleFingerprint": "53d52362efcb11455a11",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [
+        "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1mMFFIOEZLTlFoMkdLRmJ1alZZSWxHbDE3SmM2TjRPWkM3VnYtVC0yTUpLQ2RIZ1Fia0pYZnU1cVZVU0MwdDhRM2dyc2pSMU5oYUktUEVlRnlvNWYz?oc=5"
+      ],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBxSXdGajJUOWluU2ctMXpzZDdYRWJoSmpuRml4RXVaLUVpdWk1QlJsRnhHU2NhbDdfSTVlQUdVb2dOM3h4R0d1REhFOVF6Z1c0RXJzanByOGxkNl93UWc?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBxSXdGajJUOWluU2ctMXpzZDdYRWJoSmpuRml4RXVaLUVpdWk1QlJsRnhHU2NhbDdfSTVlQUdVb2dOM3h4R0d1REhFOVF6Z1c0RXJzanByOGxkNl93UWc",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 1
+    },
+    {
+      "id": "20261120-okinawa-times-9cab7bd229",
+      "title": "石川県気象防災速報（竜巻注意） 第２号＝気象庁発表 - 沖縄タイムス社",
+      "displayTitle": "石川県気象防災速報(竜巻注意) 第2号=気象庁発表",
+      "summary": "石川県気象防災速報（竜巻注意） 第２号＝気象庁発表 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1IT0J3a0psRldldHZmS3JseU8ybjBlUFB3eXhVREdwTXh1Unhic1ZELXZlT2lSNU9iNWx0VXhUYktnMnhjandoV01SX0pjajk4dTh4SlZUbWpWZTA3UkE?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-20T16:53:13+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [
+        "石川"
+      ],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "対象外地域との一致を検出",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "同じ内容の記事2件を代表記事へ統合"
+      ],
+      "fingerprint": "aeea8dae329cd342343a",
+      "articleFingerprint": "9cab7bd229856d003cca",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [
+        "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBjWFBIaklmblZlQnVNaDJrdnRpNmNsaTBnSWNjdzdrTHlMR25oS2VEUF9xMGo3SU9DSTVPWUZjLXVma3g3QkRyTUJjempkanFsODlpSFo3WTJIQ0xWZXc?oc=5",
+        "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5QNkZkUEFDTGlnTlFYejJHSGllVW9ueU04ZVRQaUY1TWpjSF84TUNzekpULXBDZUhENUEycG5sSF94UGhjcGF4UTN3TWFhV3dpeng3cGY0bTc2cUFI?oc=5"
+      ],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1IT0J3a0psRldldHZmS3JseU8ybjBlUFB3eXhVREdwTXh1Unhic1ZELXZlT2lSNU9iNWx0VXhUYktnMnhjandoV01SX0pjajk4dTh4SlZUbWpWZTA3UkE?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1IT0J3a0psRldldHZmS3JseU8ybjBlUFB3eXhVREdwTXh1Unhic1ZELXZlT2lSNU9iNWx0VXhUYktnMnhjandoV01SX0pjajk4dTh4SlZUbWpWZTA3UkE",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 2
+    },
+    {
+      "id": "20261120-ryukyu-shimpo-6338fd1b03",
+      "title": "石川県気象防災速報（竜巻注意） 第２号＝気象庁発表 - 琉球新報デジタル",
+      "displayTitle": "石川県気象防災速報(竜巻注意) 第2号=気象庁発表",
+      "summary": "石川県気象防災速報（竜巻注意） 第２号＝気象庁発表 琉球新報デジタル",
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5QNkZkUEFDTGlnTlFYejJHSGllVW9ueU04ZVRQaUY1TWpjSF84TUNzekpULXBDZUhENUEycG5sSF94UGhjcGF4UTN3TWFhV3dpeng3cGY0bTc2cUFI?oc=5",
+      "sourceId": "ryukyu-shimpo",
+      "sourceName": "琉球新報",
+      "sourceType": "media",
+      "publishedAt": "2026-11-20T16:53:13+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「石川県気象防災速報(竜巻注意) 第2号=気象庁発表」へ統合"
+      ],
+      "fingerprint": "aeea8dae329cd342343a",
+      "articleFingerprint": "6338fd1b03b74e01799f",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20261120-okinawa-times-9cab7bd229",
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5QNkZkUEFDTGlnTlFYejJHSGllVW9ueU04ZVRQaUY1TWpjSF84TUNzekpULXBDZUhENUEycG5sSF94UGhjcGF4UTN3TWFhV3dpeng3cGY0bTc2cUFI?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5QNkZkUEFDTGlnTlFYejJHSGllVW9ueU04ZVRQaUY1TWpjSF84TUNzekpULXBDZUhENUEycG5sSF94UGhjcGF4UTN3TWFhV3dpeng3cGY0bTc2cUFI",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      }
+    },
+    {
+      "id": "20261120-okinawa-times-3502800457",
+      "title": "石川県気象防災速報（竜巻注意） 第１号＝気象庁発表 - 沖縄タイムス社",
+      "displayTitle": "石川県気象防災速報(竜巻注意) 第1号=気象庁発表",
+      "summary": "石川県気象防災速報（竜巻注意） 第１号＝気象庁発表 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE0zMGxqLUFIelV4M201X0lCMUwxSXg4YVJWelRqcDQ4R05ha25BS0l4UHYyY2dRcGFhTVA4Vm9TdC1QdS1BMWtHOHQ5dTR3dUE2dk5acGJWQXh5NWxKMFE?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-20T15:33:15+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [
+        "石川"
+      ],
+      "confidence": 65,
+      "status": "rejected",
+      "requiresReview": false,
+      "reviewReasons": [
+        "対象外地域との一致を検出",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "同じ内容の記事1件を代表記事へ統合"
+      ],
+      "fingerprint": "f46b8cf678e81989997b",
+      "articleFingerprint": "3502800457b43d8b598e",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [
+        "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9oZ3VkTlhEcmhEWFdyWVZlSW8tNE9tNVoxLUU2ZW1Va2dBQXo0eENTd3dtUVBjU2RuWUtlWGthVklTbzl1UTc2aE1BcExOUU5MUlhyUEpWZzY5c3JnSXc?oc=5"
+      ],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE0zMGxqLUFIelV4M201X0lCMUwxSXg4YVJWelRqcDQ4R05ha25BS0l4UHYyY2dRcGFhTVA4Vm9TdC1QdS1BMWtHOHQ5dTR3dUE2dk5acGJWQXh5NWxKMFE?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE0zMGxqLUFIelV4M201X0lCMUwxSXg4YVJWelRqcDQ4R05ha25BS0l4UHYyY2dRcGFhTVA4Vm9TdC1QdS1BMWtHOHQ5dTR3dUE2dk5acGJWQXh5NWxKMFE",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 1
+    },
+    {
+      "id": "20261120-okinawa-times-64f11f25d4",
+      "title": "白寿祝ううるま市平安座の「ガージーバール」 花車パレードなど島を挙げて祝福 - 沖縄タイムス社",
+      "displayTitle": "白寿祝ううるま市平安座の「ガージーバール」 花車パレードなど島を挙げて祝福",
+      "summary": "白寿祝ううるま市平安座の「ガージーバール」 花車パレードなど島を挙げて祝福 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5ybEdYbVFGTkFlbVdsN3YwcG9VZlM4X0c1cjUzWU1oS3NzX0FKY0h5TGtLcHpsUXU0SlhBTXNUUWlzU2luSHpSZ0ZSNXpSellPc3NET0RNYW1HNmFBckE?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-20T13:33:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "うるま市内だが石川地区の根拠が不足",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "同じ内容の記事1件を代表記事へ統合"
+      ],
+      "fingerprint": "3f6be7a91a5272ec30cf",
+      "articleFingerprint": "64f11f25d4b0c316809f",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5ybEdYbVFGTkFlbVdsN3YwcG9VZlM4X0c1cjUzWU1oS3NzX0FKY0h5TGtLcHpsUXU0SlhBTXNUUWlzU2luSHpSZ0ZSNXpSellPc3NET0RNYW1HNmFBckE?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5ybEdYbVFGTkFlbVdsN3YwcG9VZlM4X0c1cjUzWU1oS3NzX0FKY0h5TGtLcHpsUXU0SlhBTXNUUWlzU2luSHpSZ0ZSNXpSellPc3NET0RNYW1HNmFBckE",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 1
+    },
+    {
+      "id": "20261120-okinawa-times-c1cffa302a",
+      "title": "衆院定数減、野党「合理性なし」 自民、人口減少を考慮 - 沖縄タイムス社",
+      "displayTitle": "衆院定数減、野党「合理性なし」 自民、人口減少を考慮",
+      "summary": "衆院定数減、野党「合理性なし」 自民、人口減少を考慮 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5MeXdhSDctZld1cDhGUGRwMWlKZ29NdXlZNzY5ZmhxbVRTUTF5aWVubUlES1U1VVpRc3lCTnMwUFhWd1BQMXVPUlhnSm9DdVIxTkZpUDhvSngxbDJGUFE?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-20T12:37:16+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "1afecbc90e159d89817f",
+      "articleFingerprint": "c1cffa302a858e2f53c3",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5MeXdhSDctZld1cDhGUGRwMWlKZ29NdXlZNzY5ZmhxbVRTUTF5aWVubUlES1U1VVpRc3lCTnMwUFhWd1BQMXVPUlhnSm9DdVIxTkZpUDhvSngxbDJGUFE?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5MeXdhSDctZld1cDhGUGRwMWlKZ29NdXlZNzY5ZmhxbVRTUTF5aWVubUlES1U1VVpRc3lCTnMwUFhWd1BQMXVPUlhnSm9DdVIxTkZpUDhvSngxbDJGUFE",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261120-okinawa-times-3efafba920",
+      "title": "県民スポーツ大会 テニスは那覇市が圧巻の5連覇、女子サッカーは島尻郡がPK戦制し頂点 - 沖縄タイムス社",
+      "displayTitle": "県民スポーツ大会 テニスは那覇市が圧巻の5連覇、女子サッカーは島尻郡がPK戦制し頂点",
+      "summary": "県民スポーツ大会 テニスは那覇市が圧巻の5連覇、女子サッカーは島尻郡がPK戦制し頂点 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFB2OFdYRVV5R0x2eHRCMndBbEVKcmc3aC03X05YWVZaTVlHWkdtSWdReG1BNFV5QVBaX3dEWkt4U0FwbHdxN1kxNlVSbHp2WGFqVTZWNU5KYzNPMnV6M1E?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-20T11:19:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "同じ内容の記事1件を代表記事へ統合"
+      ],
+      "fingerprint": "d075cf8fc5cbc0da038c",
+      "articleFingerprint": "3efafba9202f15b209e3",
+      "facilityId": null,
+      "eventMarkers": [
+        "県民スポーツ大会テニスは那覇市が圧巻の5連覇女子サッカーは島尻郡がpk戦制し頂点"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFB2OFdYRVV5R0x2eHRCMndBbEVKcmc3aC03X05YWVZaTVlHWkdtSWdReG1BNFV5QVBaX3dEWkt4U0FwbHdxN1kxNlVSbHp2WGFqVTZWNU5KYzNPMnV6M1E?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFB2OFdYRVV5R0x2eHRCMndBbEVKcmc3aC03X05YWVZaTVlHWkdtSWdReG1BNFV5QVBaX3dEWkt4U0FwbHdxN1kxNlVSbHp2WGFqVTZWNU5KYzNPMnV6M1E",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 1
+    },
+    {
+      "id": "20261120-okinawa-times-529959d34b",
+      "title": "首里城、復元作業も後世に 県産資材の活用や人材育成事業 沖縄県、初の記録集作成へ - 沖縄タイムス社",
+      "displayTitle": "首里城、復元作業も後世に 県産資材の活用や人材育成事業 沖縄県、初の記録集作成へ",
+      "summary": "首里城、復元作業も後世に 県産資材の活用や人材育成事業 沖縄県、初の記録集作成へ 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE03dksxTXgtcVh5dDBsVTIxeUVPaG90NWY2ZXhsR2owdk1fMnlEaXVBS3lpTmhEbFVPQ1VodFRtemc5b2FjT1NaT2s2VmpadThKa2IzanFQaVBPTk9uRVE?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-20T10:30:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "同じ内容の記事1件を代表記事へ統合"
+      ],
+      "fingerprint": "b940c2ab448d76910b34",
+      "articleFingerprint": "529959d34be5b2706fd7",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE03dksxTXgtcVh5dDBsVTIxeUVPaG90NWY2ZXhsR2owdk1fMnlEaXVBS3lpTmhEbFVPQ1VodFRtemc5b2FjT1NaT2s2VmpadThKa2IzanFQaVBPTk9uRVE?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE03dksxTXgtcVh5dDBsVTIxeUVPaG90NWY2ZXhsR2owdk1fMnlEaXVBS3lpTmhEbFVPQ1VodFRtemc5b2FjT1NaT2s2VmpadThKa2IzanFQaVBPTk9uRVE",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 1
+    },
+    {
+      "id": "20261120-okinawa-times-9f6d665d9f",
+      "title": "沖縄日本管財がうるま市役所で沖縄高等特別支援学校の就業体験を受け入れ - 沖縄タイムス社",
+      "displayTitle": "沖縄日本管財がうるま市役所で沖縄高等特別支援学校の就業体験を受け入れ",
+      "summary": "沖縄日本管財がうるま市役所で沖縄高等特別支援学校の就業体験を受け入れ 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA1OTNpdVJUSGNDLWVzSDNZT3lUOFdad0MzYy11X01lajBTRnVUT0VGbVlBVW5fdVZlVWhrcUc3SW1LRWRHdTFJRlc4NnBmc2xmYVlSd2VZVXZ0YVZza3c?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-20T10:00:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "うるま市内だが石川地区の根拠が不足",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "21a2c1684313cda748ef",
+      "articleFingerprint": "9f6d665d9f2ac241fcb9",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA1OTNpdVJUSGNDLWVzSDNZT3lUOFdad0MzYy11X01lajBTRnVUT0VGbVlBVW5fdVZlVWhrcUc3SW1LRWRHdTFJRlc4NnBmc2xmYVlSd2VZVXZ0YVZza3c?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA1OTNpdVJUSGNDLWVzSDNZT3lUOFdad0MzYy11X01lajBTRnVUT0VGbVlBVW5fdVZlVWhrcUc3SW1LRWRHdTFJRlc4NnBmc2xmYVlSd2VZVXZ0YVZza3c",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
         "venue": ""
       },
       "relatedCount": 0
@@ -1280,20 +2453,17 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "duplicate",
+      "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "同じ内容として代表記事「首里城、復元作業も後世に 県産資材の活用や人材育成事業 沖縄県、初の記録集作成へ」へ統合"
       ],
-      "fingerprint": "19a5c400f1963db336dc",
+      "fingerprint": "b940c2ab448d76910b34",
       "articleFingerprint": "23201d34619665ec4047",
       "facilityId": null,
       "eventMarkers": [],
       "relatedUrls": [],
-      "duplicateOf": null,
+      "duplicateOf": "20261120-okinawa-times-529959d34b",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-20T10:58:58.979890+09:00",
@@ -1307,7 +2477,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261120-okinawa-times-e042c4dc9d",
@@ -1328,13 +2499,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "feeae941a03636da4595",
       "articleFingerprint": "e042c4dc9d7d55299482",
@@ -1355,7 +2527,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261120-okinawa-times-873de50438",
@@ -1378,15 +2551,10 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "rejected",
+      "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "対象外地域との一致を検出",
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容として代表記事「石川県気象防災速報(竜巻注意) 第3号=気象庁発表」へ統合"
       ],
       "fingerprint": "828ef1e4eff5ef9c46ff",
       "articleFingerprint": "873de5043834756d7a8d",
@@ -1395,12 +2563,64 @@
       "relatedUrls": [
         "https://news.google.com/rss/articles/CBMiXkFVX3lxTE8ySTNVeW84aGE4ZFVtYTV6akI5MnpfdW81RzUtV2tyanBtWGYyQm91dF9oVzhiTV85SWU3dXpzS0NsYW94QmkxMzdEU2dPSU5WWi1yOXFxZ01teGhUYWc?oc=5"
       ],
-      "duplicateOf": null,
+      "duplicateOf": "20261119-okinawa-times-2efb592623",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-20T10:58:58.979890+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9ubzBxTWhaSENxdHhYUkdkUF91XzI5bWFvQ3J6ZlFRQ0U4NHJhajc5cHhnSnFpMUFOU3JzaU9EZEhrVGJoWVJVYm53cTRHN2FxTC14WjhZUGxhSjNGT1E?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9ubzBxTWhaSENxdHhYUkdkUF91XzI5bWFvQ3J6ZlFRQ0U4NHJhajc5cHhnSnFpMUFOU3JzaU9EZEhrVGJoWVJVYm53cTRHN2FxTC14WjhZUGxhSjNGT1E",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 1,
+      "previousStatus": "rejected"
+    },
+    {
+      "id": "20261120-region-facility-ishikawa-ishikawa-police-station-ea9d89a195",
+      "title": "■石川署が災害想定での機能移転訓練 - 琉球新報デジタル",
+      "displayTitle": "■石川署が災害想定での機能移転訓練",
+      "summary": "■石川署が災害想定での機能移転訓練 琉球新報デジタル",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9qeHM2VVpsUF9PNWEwTFk2MlBMRTFabUNwU1VfRTF3WklFdEgyUFpma1RMdHBHWnNyNTVENmg2UHVNNndVY1MwZGc4UktGSXBIQl9WOERBSjNzbWcxclBmTA?oc=5",
+      "sourceId": "region-facility-ishikawa-ishikawa-police-station",
+      "sourceName": "石川施設：石川警察署",
+      "sourceType": "discovery",
+      "publishedAt": "2026-11-20T05:00:00+09:00",
+      "discoveredAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 100,
+      "localEvidence": [
+        "石川署"
+      ],
+      "confidence": 45,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区・日時・情報源の自動掲載条件を満たした",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "同じ内容の記事1件を代表記事へ統合"
+      ],
+      "fingerprint": "ffadcd62915809302b74",
+      "articleFingerprint": "ea9d89a1957eb4b762fd",
+      "facilityId": "ishikawa-police-station",
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9qeHM2VVpsUF9PNWEwTFk2MlBMRTFabUNwU1VfRTF3WklFdEgyUFpma1RMdHBHWnNyNTVENmg2UHVNNndVY1MwZGc4UktGSXBIQl9WOERBSjNzbWcxclBmTA?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9qeHM2VVpsUF9PNWEwTFk2MlBMRTFabUNwU1VfRTF3WklFdEgyUFpma1RMdHBHWnNyNTVENmg2UHVNNndVY1MwZGc4UktGSXBIQl9WOERBSjNzbWcxclBmTA",
         "pageTitle": "",
         "matchedFacilities": [],
         "organizer": "",
@@ -1432,21 +2652,17 @@
         "石川署"
       ],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "duplicate",
+      "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区・日時・情報源の自動掲載条件を満たした",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容として代表記事「■石川署が災害想定での機能移転訓練」へ統合"
       ],
       "fingerprint": "ffadcd62915809302b74",
       "articleFingerprint": "ea9d89a1957eb4b762fd",
       "facilityId": "ishikawa-police-station",
       "eventMarkers": [],
       "relatedUrls": [],
-      "duplicateOf": null,
+      "duplicateOf": "20261120-region-facility-ishikawa-ishikawa-police-station-ea9d89a195",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-20T10:58:58.979890+09:00",
@@ -1460,53 +2676,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1
-    },
-    {
-      "id": "20261120-region-facility-ishikawa-ishikawa-police-station-ea9d89a195",
-      "title": "■石川署が災害想定での機能移転訓練 - 琉球新報デジタル",
-      "displayTitle": "■石川署が災害想定での機能移転訓練",
-      "summary": "■石川署が災害想定での機能移転訓練 琉球新報デジタル",
-      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9qeHM2VVpsUF9PNWEwTFk2MlBMRTFabUNwU1VfRTF3WklFdEgyUFpma1RMdHBHWnNyNTVENmg2UHVNNndVY1MwZGc4UktGSXBIQl9WOERBSjNzbWcxclBmTA?oc=5",
-      "sourceId": "region-facility-ishikawa-ishikawa-police-station",
-      "sourceName": "石川施設：石川警察署",
-      "sourceType": "discovery",
-      "publishedAt": "2026-11-20T05:00:00+09:00",
-      "discoveredAt": "2026-11-20T10:58:58.979890+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-11-27T23:59:59+09:00",
-      "category": "news",
-      "localScore": 100,
-      "localEvidence": [
-        "石川署"
-      ],
-      "confidence": 45,
-      "status": "duplicate",
-      "requiresReview": false,
-      "reviewReasons": [
-        "同じ内容として代表記事「■石川署が災害想定での機能移転訓練」へ統合"
-      ],
-      "fingerprint": "ffadcd62915809302b74",
-      "articleFingerprint": "ea9d89a1957eb4b762fd",
-      "facilityId": "ishikawa-police-station",
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": "20261120-ryukyu-shimpo-ea9d89a195",
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9qeHM2VVpsUF9PNWEwTFk2MlBMRTFabUNwU1VfRTF3WklFdEgyUFpma1RMdHBHWnNyNTVENmg2UHVNNndVY1MwZGc4UktGSXBIQl9WOERBSjNzbWcxclBmTA?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9qeHM2VVpsUF9PNWEwTFk2MlBMRTFabUNwU1VfRTF3WklFdEgyUFpma1RMdHBHWnNyNTVENmg2UHVNNndVY1MwZGc4UktGSXBIQl9WOERBSjNzbWcxclBmTA",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      }
+      "relatedCount": 1,
+      "previousStatus": "review"
     },
     {
       "id": "20261120-okinawa-times-c8cc3b13d9",
@@ -1527,6 +2698,52 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「白寿祝ううるま市平安座の「ガージーバール」 花車パレードなど島を挙げて祝福」へ統合"
+      ],
+      "fingerprint": "3f6be7a91a5272ec30cf",
+      "articleFingerprint": "c8cc3b13d9aaba77282a",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20261120-okinawa-times-64f11f25d4",
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5ybEdYbVFGTkFlbVdsN3YwcG9VZlM4X0c1cjUzWU1oS3NzX0FKY0h5TGtLcHpsUXU0SlhBTXNUUWlzU2luSHpSZ0ZSNXpSellPc3NET0RNYW1HNmFBckE?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5ybEdYbVFGTkFlbVdsN3YwcG9VZlM4X0c1cjUzWU1oS3NzX0FKY0h5TGtLcHpsUXU0SlhBTXNUUWlzU2luSHpSZ0ZSNXpSellPc3NET0RNYW1HNmFBckE",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0,
+      "previousStatus": "review"
+    },
+    {
+      "id": "20261120-okinawa-times-9052dba310",
+      "title": "汚水処理施設を提供 日米合意 ホワイトビーチ地区 - 沖縄タイムス社",
+      "displayTitle": "汚水処理施設を提供 日米合意 ホワイトビーチ地区",
+      "summary": "汚水処理施設を提供 日米合意 ホワイトビーチ地区 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9Uc09JaTA2dV9oWVQzQ2x2NVBtdHdnTlM0SmRpdFBvOHhVcWQzR3N1UE5TR3JvUzhsZW13bldyMDNnS2lrbEdadEtfTmNUR2x2SEd5U19RUGhwaFZha1E?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-20T03:57:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
       "status": "review",
       "requiresReview": true,
       "reviewReasons": [
@@ -1535,17 +2752,65 @@
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留"
       ],
-      "fingerprint": "69121367c8c751b19a32",
-      "articleFingerprint": "c8cc3b13d9aaba77282a",
+      "fingerprint": "e2f4502a5b7315623661",
+      "articleFingerprint": "9052dba310aad5ad2824",
       "facilityId": null,
       "eventMarkers": [],
       "relatedUrls": [],
       "duplicateOf": null,
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5ybEdYbVFGTkFlbVdsN3YwcG9VZlM4X0c1cjUzWU1oS3NzX0FKY0h5TGtLcHpsUXU0SlhBTXNUUWlzU2luSHpSZ0ZSNXpSellPc3NET0RNYW1HNmFBckE?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5ybEdYbVFGTkFlbVdsN3YwcG9VZlM4X0c1cjUzWU1oS3NzX0FKY0h5TGtLcHpsUXU0SlhBTXNUUWlzU2luSHpSZ0ZSNXpSellPc3NET0RNYW1HNmFBckE",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9Uc09JaTA2dV9oWVQzQ2x2NVBtdHdnTlM0SmRpdFBvOHhVcWQzR3N1UE5TR3JvUzhsZW13bldyMDNnS2lrbEdadEtfTmNUR2x2SEd5U19RUGhwaFZha1E?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9Uc09JaTA2dV9oWVQzQ2x2NVBtdHdnTlM0SmRpdFBvOHhVcWQzR3N1UE5TR3JvUzhsZW13bldyMDNnS2lrbEdadEtfTmNUR2x2SEd5U19RUGhwaFZha1E",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261120-okinawa-times-1181615dd4",
+      "title": "［記者のメモ］知事応接室 初めて訪問 - 沖縄タイムス社",
+      "displayTitle": "[記者のメモ]知事応接室 初めて訪問",
+      "summary": "［記者のメモ］知事応接室 初めて訪問 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9CSEhPdUFqRDJWdVRpcTh6UTRWUDFpSUVLR25wUVRHM1JORmQwSFFsM0dxN3lhR3VmOEJKVDktMEdoN0F2RHVybk1ucGo5QUZ4M3VZd1hkYXMzbzRBOGc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-20T03:57:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-27T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "4c0f95cd159b22998d3e",
+      "articleFingerprint": "1181615dd45361cf9fe7",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9CSEhPdUFqRDJWdVRpcTh6UTRWUDFpSUVLR25wUVRHM1JORmQwSFFsM0dxN3lhR3VmOEJKVDktMEdoN0F2RHVybk1ucGo5QUZ4M3VZd1hkYXMzbzRBOGc?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9CSEhPdUFqRDJWdVRpcTh6UTRWUDFpSUVLR25wUVRHM1JORmQwSFFsM0dxN3lhR3VmOEJKVDktMEdoN0F2RHVybk1ucGo5QUZ4M3VZd1hkYXMzbzRBOGc",
         "pageTitle": "",
         "matchedFacilities": [],
         "organizer": "",
@@ -1575,22 +2840,19 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "duplicate",
+      "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "同じ内容として代表記事「県民スポーツ大会 テニスは那覇市が圧巻の5連覇、女子サッカーは島尻郡がPK戦制し頂点」へ統合"
       ],
-      "fingerprint": "21fd87824a68aeec1078",
+      "fingerprint": "d075cf8fc5cbc0da038c",
       "articleFingerprint": "9b060c5b3e0a1d934d33",
       "facilityId": null,
       "eventMarkers": [
         "那覇テニス5連覇県民スポーツ大会"
       ],
       "relatedUrls": [],
-      "duplicateOf": null,
+      "duplicateOf": "20261120-okinawa-times-3efafba920",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-20T10:58:58.979890+09:00",
@@ -1604,7 +2866,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261120-okinawa-times-1d89c5dfc8",
@@ -1625,14 +2888,15 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容の記事1件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "87419f6c0542d9964893",
       "articleFingerprint": "1d89c5dfc864d80c9efc",
@@ -1655,7 +2919,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "review"
     },
     {
       "id": "20261119-okinawa-times-0731508e54",
@@ -1676,13 +2941,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "f81456f1e3aab635e164",
       "articleFingerprint": "0731508e54c1fbd20fb6",
@@ -1703,7 +2969,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261119-okinawa-times-ebed1297a6",
@@ -1724,13 +2991,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "72e9fbb1dde2141c979a",
       "articleFingerprint": "ebed1297a6738104ae35",
@@ -1751,7 +3019,106 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
+    },
+    {
+      "id": "20261119-region-discovery-ishikawa-public-facilities-0cce3dced2",
+      "title": "第12回にこにこキッズフェスタ - うるま市",
+      "displayTitle": "第12回にこにこキッズフェスタ - うるま市",
+      "summary": "第12回にこにこキッズフェスタ うるま市",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBGZG5lbVZQa3VEMGJ0d0JkZ3F3X0RJVnp3eUZYcVRFLVdVTmdudl82RVN5R1RTeVYtUmlTVDNvaEw2ZnVlczRzWkg3TmZrNFFjTmRmTGNlUXJBb0RGQzBSckstOXRKV0VSYUR5aFd3?oc=5",
+      "sourceId": "region-discovery-ishikawa-public-facilities",
+      "sourceName": "石川：公共施設",
+      "sourceType": "discovery",
+      "publishedAt": "2026-11-19T17:00:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-26T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 45,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "うるま市内だが石川地区の根拠が不足",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "同じ内容の記事3件を代表記事へ統合"
+      ],
+      "fingerprint": "92dd8ed756b82d623427",
+      "articleFingerprint": "0cce3dced2249621ee83",
+      "facilityId": null,
+      "eventMarkers": [
+        "第12回にこにこキッズフェスタうるま市"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBGZG5lbVZQa3VEMGJ0d0JkZ3F3X0RJVnp3eUZYcVRFLVdVTmdudl82RVN5R1RTeVYtUmlTVDNvaEw2ZnVlczRzWkg3TmZrNFFjTmRmTGNlUXJBb0RGQzBSckstOXRKV0VSYUR5aFd3?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBGZG5lbVZQa3VEMGJ0d0JkZ3F3X0RJVnp3eUZYcVRFLVdVTmdudl82RVN5R1RTeVYtUmlTVDNvaEw2ZnVlczRzWkg3TmZrNFFjTmRmTGNlUXJBb0RGQzBSckstOXRKV0VSYUR5aFd3",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 3
+    },
+    {
+      "id": "20261119-region-discovery-ishikawa-health-welfare-0cce3dced2",
+      "title": "第12回にこにこキッズフェスタ - うるま市",
+      "displayTitle": "第12回にこにこキッズフェスタ - うるま市",
+      "summary": "第12回にこにこキッズフェスタ うるま市",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBGZG5lbVZQa3VEMGJ0d0JkZ3F3X0RJVnp3eUZYcVRFLVdVTmdudl82RVN5R1RTeVYtUmlTVDNvaEw2ZnVlczRzWkg3TmZrNFFjTmRmTGNlUXJBb0RGQzBSckstOXRKV0VSYUR5aFd3?oc=5",
+      "sourceId": "region-discovery-ishikawa-health-welfare",
+      "sourceName": "石川：健康・福祉",
+      "sourceType": "discovery",
+      "publishedAt": "2026-11-19T17:00:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-26T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「第12回にこにこキッズフェスタ - うるま市」へ統合"
+      ],
+      "fingerprint": "92dd8ed756b82d623427",
+      "articleFingerprint": "0cce3dced2249621ee83",
+      "facilityId": null,
+      "eventMarkers": [
+        "第12回にこにこキッズフェスタうるま市"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": "20261119-region-discovery-ishikawa-public-facilities-0cce3dced2",
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBGZG5lbVZQa3VEMGJ0d0JkZ3F3X0RJVnp3eUZYcVRFLVdVTmdudl82RVN5R1RTeVYtUmlTVDNvaEw2ZnVlczRzWkg3TmZrNFFjTmRmTGNlUXJBb0RGQzBSckstOXRKV0VSYUR5aFd3?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBGZG5lbVZQa3VEMGJ0d0JkZ3F3X0RJVnp3eUZYcVRFLVdVTmdudl82RVN5R1RTeVYtUmlTVDNvaEw2ZnVlczRzWkg3TmZrNFFjTmRmTGNlUXJBb0RGQzBSckstOXRKV0VSYUR5aFd3",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      }
     },
     {
       "id": "20261119-okinawa-times-d78ae5dca9",
@@ -1772,13 +3139,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "a5d62fde02f2cb239208",
       "articleFingerprint": "d78ae5dca97fde0916bd",
@@ -1799,7 +3167,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261119-okinawa-times-b243f04b36",
@@ -1812,7 +3181,7 @@
       "sourceType": "media",
       "publishedAt": "2026-11-19T16:54:02+09:00",
       "discoveredAt": "2026-11-20T10:58:58.979890+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-11-26T23:59:59+09:00",
@@ -1836,7 +3205,7 @@
       "duplicateOf": null,
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5JVzZBdkxNdDdWQW5WZGx6NVgzMEpuUF90WERpTm9YbTBTMWhsSUVTR3ZQMWVkX1dxLTR5N3VWc1FpdG1IeGlLQ1Bsd05JQ29OSkpKV0VLaFFZWXp2N3c?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5JVzZBdkxNdDdWQW5WZGx6NVgzMEpuUF90WERpTm9YbTBTMWhsSUVTR3ZQMWVkX1dxLTR5N3VWc1FpdG1IeGlLQ1Bsd05JQ29OSkpKV0VLaFFZWXp2N3c",
         "pageTitle": "",
@@ -1868,13 +3237,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "e709b357c50cab314978",
       "articleFingerprint": "2eb5653dcd5e76f3605a",
@@ -1895,7 +3265,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261119-region-theme-ishikawa-bullfighting-89ec81f585",
@@ -1946,7 +3317,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261119-region-discovery-ishikawa-events-culture-89ec81f585",
@@ -1997,7 +3369,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261119-okinawa-times-0414e79120",
@@ -2076,7 +3449,8 @@
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留",
         "同じ内容の記事10件を代表記事へ統合",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
+        "掲載・判断期間を過ぎたため監査記録へ移動",
+        "同じ内容の記事9件を代表記事へ統合"
       ],
       "fingerprint": "a679098e4f0aed36b7ad",
       "articleFingerprint": "eacc44f265c68c53c217",
@@ -2091,8 +3465,7 @@
         "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1lVTgwdUd0UWxaOEFRbEM1c1pObHMwTXZyRExXR1JCUnNWQmZjX1JMMU8wVDVLamhOZTIwWW1MWEpwRlprUW5nTWxTTkRKMkZlTFBoM0YzdHZDN2dqV1FoOA?oc=5",
         "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1KbTQzMHFORFRuMWZmQnd3TTFwbWRwaU9fNUF2SzBFMGJBNE1NZjJzZEwzRk1oYW9selphLTE4MkJGcEc1U0NyMy1XeVgzX0dfMVZ1SGktYWdDYmJwNFhmbg?oc=5",
         "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1seVJzREZSVFNtREQ4SFdUaTEyTkpRRzNzVkMwSzdrVm1rT0xkbF9QeW82ald0Y05wbWhtMmVPYTkyXzcwcTE5Z2ZqNEtIWXp4LUV2SUY4Z255SkpkOTVpRA?oc=5",
-        "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5GNjMzVkVlZnlkX0k3NW9IRzdUVFBqZjNwWUhPMW5KYXRzdEtldC1KMzZGQ0dKUlFNeUs0RjJldUZoLWlCTWxsWURGLThUc282eElOaUl6UURsRWpBdlk4Sg?oc=5",
-        "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5YLWlnam9JbXdLUDNCYmVacXBXZTFodFFqX2FsZFkwaXhtX3psZndOUjg3ZEMwbG8tUktYR0czTVctcnBNWWUyS1gtcDVGcEQxWW9fZm03Mm1vajRoR3lyLQ?oc=5"
+        "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5GNjMzVkVlZnlkX0k3NW9IRzdUVFBqZjNwWUhPMW5KYXRzdEtldC1KMzZGQ0dKUlFNeUs0RjJldUZoLWlCTWxsWURGLThUc282eElOaUl6UURsRWpBdlk4Sg?oc=5"
       ],
       "duplicateOf": null,
       "contentCheck": {
@@ -2108,7 +3481,7 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 10,
+      "relatedCount": 9,
       "previousStatus": "review"
     },
     {
@@ -2122,7 +3495,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-11-19T05:10:00+09:00",
       "discoveredAt": "2026-11-19T11:11:43.205640+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-11-26T23:59:59+09:00",
@@ -2148,9 +3521,59 @@
       "duplicateOf": null,
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMibEFVX3lxTE9BTkhCTHZBZzg0TXctUzRnQVpyYnBHUUZTczhuMGg3TWsyYVllWTVMNGtqY0VUcEZUaWFzN0k3b1VLamFmRTNpMjBYd1E3eGVxeDVqamtxd0lwaUhLRElvVGZCSm1fSlNIdjR2RQ?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMibEFVX3lxTE9BTkhCTHZBZzg0TXctUzRnQVpyYnBHUUZTczhuMGg3TWsyYVllWTVMNGtqY0VUcEZUaWFzN0k3b1VLamFmRTNpMjBYd1E3eGVxeDVqamtxd0lwaUhLRElvVGZCSm1fSlNIdjR2RQ",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 0
+    },
+    {
+      "id": "20261119-region-facility-ishikawa-rakujuen-c450977e84",
+      "title": "8000の菊、本堂彩る 大型盆景で清水寺再現 三島・楽寿園 ／静岡 - 毎日新聞",
+      "displayTitle": "8000の菊、本堂彩る 大型盆景で清水寺再現 三島・楽寿園 /静岡 - 毎日新聞",
+      "summary": "8000の菊、本堂彩る 大型盆景で清水寺再現 三島・楽寿園 ／静岡 毎日新聞",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1VemFrd3ppTUlBaUhPaGNNTmJvVjZsTjUyUkZicV9oTWRMZl9oZkU3RVMwUnBIVWpwdWZPbjBEQWVjOXdZRmF5djNtNDF2SVZPVmowQlZmaXJZdUxNM255NUctcHRQN3Ji?oc=5",
+      "sourceId": "region-facility-ishikawa-rakujuen",
+      "sourceName": "石川施設：特別養護老人ホーム 楽寿園",
+      "sourceType": "discovery",
+      "publishedAt": "2026-11-19T05:03:46+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-26T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 45,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "同名施設の誤一致を防ぐため地域文脈の確認が必要",
+        "施設専用検索で発見したが、記事内に施設名を確認できない",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+      ],
+      "fingerprint": "7d5e98bf59280d67df3f",
+      "articleFingerprint": "c450977e84a0a5713017",
+      "facilityId": "rakujuen",
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1VemFrd3ppTUlBaUhPaGNNTmJvVjZsTjUyUkZicV9oTWRMZl9oZkU3RVMwUnBIVWpwdWZPbjBEQWVjOXdZRmF5djNtNDF2SVZPVmowQlZmaXJZdUxNM255NUctcHRQN3Ji?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1VemFrd3ppTUlBaUhPaGNNTmJvVjZsTjUyUkZicV9oTWRMZl9oZkU3RVMwUnBIVWpwdWZPbjBEQWVjOXdZRmF5djNtNDF2SVZPVmowQlZmaXJZdUxNM255NUctcHRQN3Ji",
         "pageTitle": "",
         "matchedFacilities": [],
         "organizer": "",
@@ -2172,7 +3595,7 @@
       "sourceType": "media",
       "publishedAt": "2026-11-19T04:03:11+09:00",
       "discoveredAt": "2026-11-19T11:11:43.205640+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-11-26T23:59:59+09:00",
@@ -2199,7 +3622,7 @@
       "duplicateOf": null,
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5OLWpmZ2RBQ053VjdwaVByaTVqNVJFSjhxMzNDemR3N09abm9vM1lwMEQwVHZUMHVkNzFYSEU5eHlDWVNQcmtvX3RTWkl3NWNjYVpXTWZJX1ktU1BSa3c?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5OLWpmZ2RBQ053VjdwaVByaTVqNVJFSjhxMzNDemR3N09abm9vM1lwMEQwVHZUMHVkNzFYSEU5eHlDWVNQcmtvX3RTWkl3NWNjYVpXTWZJX1ktU1BSa3c",
         "pageTitle": "",
@@ -2223,7 +3646,7 @@
       "sourceType": "media",
       "publishedAt": "2026-11-19T03:58:00+09:00",
       "discoveredAt": "2026-11-19T11:11:43.205640+09:00",
-      "checkedAt": "2026-11-19T11:11:43.205640+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-11-26T23:59:59+09:00",
@@ -2231,14 +3654,13 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "expired",
-      "requiresReview": false,
+      "status": "review",
+      "requiresReview": true,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
       ],
       "fingerprint": "7ec1c251b371652c2449",
       "articleFingerprint": "8ea677bc8018b33ab661",
@@ -2248,7 +3670,7 @@
       "duplicateOf": null,
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-19T11:11:43.205640+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE0xeS1JYVdqTDFjZGpQNUx5YWtPNUxGYzhTQUhteU1ORUN3M2d4Ul9NOVFKem9hUVM5R0h5bGlXVHF5dUgwaE5GMFJ6VTljYllrUE5nb3JBbENISm1lb2c?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE0xeS1JYVdqTDFjZGpQNUx5YWtPNUxGYzhTQUhteU1ORUN3M2d4Ul9NOVFKem9hUVM5R0h5bGlXVHF5dUgwaE5GMFJ6VTljYllrUE5nb3JBbENISm1lb2c",
         "pageTitle": "",
@@ -2259,8 +3681,7 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0,
-      "previousStatus": "review"
+      "relatedCount": 0
     },
     {
       "id": "20261119-okinawa-times-f240d365e5",
@@ -2281,13 +3702,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "d92210ce8a66c0e6b860",
       "articleFingerprint": "f240d365e5ac6f9110b3",
@@ -2308,7 +3730,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261119-okinawa-times-a7afde1043",
@@ -2329,13 +3752,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "3ac84d35ec70518bad93",
       "articleFingerprint": "a7afde1043d3b4d6c6b5",
@@ -2356,7 +3780,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261119-okinawa-times-43c4754bd3",
@@ -2419,7 +3844,7 @@
       "sourceType": "media",
       "publishedAt": "2026-11-19T01:53:01+09:00",
       "discoveredAt": "2026-11-19T11:11:43.205640+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-11-26T23:59:59+09:00",
@@ -2429,20 +3854,27 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "duplicate",
+      "status": "rejected",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「石川県気象防災速報(竜巻注意) 第3号=気象庁発表」へ統合"
+        "対象外地域との一致を検出",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "石川地区との関連根拠が基準未満のため自動除外",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "同じ内容の記事1件を代表記事へ統合"
       ],
       "fingerprint": "828ef1e4eff5ef9c46ff",
       "articleFingerprint": "2efb5926232c2d223414",
       "facilityId": null,
       "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": "20261120-okinawa-times-873de50438",
+      "relatedUrls": [
+        "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9ubzBxTWhaSENxdHhYUkdkUF91XzI5bWFvQ3J6ZlFRQ0U4NHJhajc5cHhnSnFpMUFOU3JzaU9EZEhrVGJoWVJVYm53cTRHN2FxTC14WjhZUGxhSjNGT1E?oc=5"
+      ],
+      "duplicateOf": null,
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE8ySTNVeW84aGE4ZFVtYTV6akI5MnpfdW81RzUtV2tyanBtWGYyQm91dF9oVzhiTV85SWU3dXpzS0NsYW94QmkxMzdEU2dPSU5WWi1yOXFxZ01teGhUYWc?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE8ySTNVeW84aGE4ZFVtYTV6akI5MnpfdW81RzUtV2tyanBtWGYyQm91dF9oVzhiTV85SWU3dXpzS0NsYW94QmkxMzdEU2dPSU5WWi1yOXFxZ01teGhUYWc",
         "pageTitle": "",
@@ -2452,7 +3884,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "relatedCount": 1
     },
     {
       "id": "20261119-okinawa-times-c7a959bda6",
@@ -2465,7 +3898,7 @@
       "sourceType": "media",
       "publishedAt": "2026-11-19T00:27:03+09:00",
       "discoveredAt": "2026-11-19T11:11:43.205640+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-11-26T23:59:59+09:00",
@@ -2475,24 +3908,20 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "rejected",
+      "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "対象外地域との一致を検出",
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない"
+        "同じ内容として代表記事「石川県気象防災速報(竜巻注意) 第2号=気象庁発表」へ統合"
       ],
       "fingerprint": "aeea8dae329cd342343a",
       "articleFingerprint": "c7a959bda6790b68e1af",
       "facilityId": null,
       "eventMarkers": [],
       "relatedUrls": [],
-      "duplicateOf": null,
+      "duplicateOf": "20261120-okinawa-times-9cab7bd229",
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBjWFBIaklmblZlQnVNaDJrdnRpNmNsaTBnSWNjdzdrTHlMR25oS2VEUF9xMGo3SU9DSTVPWUZjLXVma3g3QkRyTUJjempkanFsODlpSFo3WTJIQ0xWZXc?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBjWFBIaklmblZlQnVNaDJrdnRpNmNsaTBnSWNjdzdrTHlMR25oS2VEUF9xMGo3SU9DSTVPWUZjLXVma3g3QkRyTUJjempkanFsODlpSFo3WTJIQ0xWZXc",
         "pageTitle": "",
@@ -2502,8 +3931,7 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      },
-      "relatedCount": 0
+      }
     },
     {
       "id": "20261118-okinawa-times-823dc5ac90",
@@ -2516,7 +3944,7 @@
       "sourceType": "media",
       "publishedAt": "2026-11-18T23:33:03+09:00",
       "discoveredAt": "2026-11-19T11:11:43.205640+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-11-25T23:59:59+09:00",
@@ -2526,24 +3954,20 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "rejected",
+      "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "対象外地域との一致を検出",
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "石川地区との関連根拠が基準未満のため自動除外",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない"
+        "同じ内容として代表記事「石川県気象防災速報(竜巻注意) 第1号=気象庁発表」へ統合"
       ],
       "fingerprint": "f46b8cf678e81989997b",
       "articleFingerprint": "823dc5ac90cb69b24e57",
       "facilityId": null,
       "eventMarkers": [],
       "relatedUrls": [],
-      "duplicateOf": null,
+      "duplicateOf": "20261120-okinawa-times-3502800457",
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9oZ3VkTlhEcmhEWFdyWVZlSW8tNE9tNVoxLUU2ZW1Va2dBQXo0eENTd3dtUVBjU2RuWUtlWGthVklTbzl1UTc2aE1BcExOUU5MUlhyUEpWZzY5c3JnSXc?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9oZ3VkTlhEcmhEWFdyWVZlSW8tNE9tNVoxLUU2ZW1Va2dBQXo0eENTd3dtUVBjU2RuWUtlWGthVklTbzl1UTc2aE1BcExOUU5MUlhyUEpWZzY5c3JnSXc",
         "pageTitle": "",
@@ -2553,8 +3977,346 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
+      }
+    },
+    {
+      "id": "20261118-google-news-ishikawa-322b21caf6",
+      "title": "第38回全島獅子舞フェスティバル開催のお知らせ - うるま市",
+      "displayTitle": "第38回全島獅子舞フェスティバル開催のお知らせ - うるま市",
+      "summary": "第38回全島獅子舞フェスティバル開催のお知らせ うるま市",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln?oc=5",
+      "sourceId": "google-news-ishikawa",
+      "sourceName": "Google ニュース（うるま市 石川）",
+      "sourceType": "discovery",
+      "publishedAt": "2026-11-18T17:00:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-25T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
+      ],
+      "fingerprint": "90a21fc39344736bf64f",
+      "articleFingerprint": "322b21caf6e90000a480",
+      "facilityId": null,
+      "eventMarkers": [
+        "term:フェスティバル",
+        "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      }
+    },
+    {
+      "id": "20261118-uruma-city-322b21caf6",
+      "title": "第38回全島獅子舞フェスティバル開催のお知らせ - うるま市",
+      "displayTitle": "第38回全島獅子舞フェスティバル開催のお知らせ - うるま市",
+      "summary": "第38回全島獅子舞フェスティバル開催のお知らせ うるま市",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln?oc=5",
+      "sourceId": "uruma-city",
+      "sourceName": "うるま市公式サイト",
+      "sourceType": "official",
+      "publishedAt": "2026-11-18T17:00:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-25T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [
+        "うるま市等の公式発信"
+      ],
+      "confidence": 75,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "うるま市内だが石川地区の根拠が不足",
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区との関連根拠が不足",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "同じ内容の記事25件を代表記事へ統合"
+      ],
+      "fingerprint": "90a21fc39344736bf64f",
+      "articleFingerprint": "322b21caf6e90000a480",
+      "facilityId": null,
+      "eventMarkers": [
+        "term:フェスティバル",
+        "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
+      ],
+      "relatedUrls": [
+        "https://news.google.com/rss/articles/CBMifEFVX3lxTE83OVRpTlF2SFkwVjdNeGU5WDJyMWFkN21EdHBTd25tQmc5VGlnMGVJQVRINFhnS3FNdmNhR21FVVJMVnhXMDRtc2hIU3lFOFFVM0VfRHlDVk9rSjkwUW80a25aVkZiNzNWQXVZSkRGQ0xLSnduZDZGc3N6Sko?oc=5"
+      ],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 25
+    },
+    {
+      "id": "20261118-region-discovery-ishikawa-government-322b21caf6",
+      "title": "第38回全島獅子舞フェスティバル開催のお知らせ - うるま市",
+      "displayTitle": "第38回全島獅子舞フェスティバル開催のお知らせ - うるま市",
+      "summary": "第38回全島獅子舞フェスティバル開催のお知らせ うるま市",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln?oc=5",
+      "sourceId": "region-discovery-ishikawa-government",
+      "sourceName": "石川：行政・自治会",
+      "sourceType": "discovery",
+      "publishedAt": "2026-11-18T17:00:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-25T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
+      ],
+      "fingerprint": "90a21fc39344736bf64f",
+      "articleFingerprint": "322b21caf6e90000a480",
+      "facilityId": null,
+      "eventMarkers": [
+        "term:フェスティバル",
+        "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      }
+    },
+    {
+      "id": "20261118-region-discovery-ishikawa-events-culture-322b21caf6",
+      "title": "第38回全島獅子舞フェスティバル開催のお知らせ - うるま市",
+      "displayTitle": "第38回全島獅子舞フェスティバル開催のお知らせ - うるま市",
+      "summary": "第38回全島獅子舞フェスティバル開催のお知らせ うるま市",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln?oc=5",
+      "sourceId": "region-discovery-ishikawa-events-culture",
+      "sourceName": "石川：催し・祭り・文化",
+      "sourceType": "discovery",
+      "publishedAt": "2026-11-18T17:00:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-25T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
+      ],
+      "fingerprint": "90a21fc39344736bf64f",
+      "articleFingerprint": "322b21caf6e90000a480",
+      "facilityId": null,
+      "eventMarkers": [
+        "term:フェスティバル",
+        "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      }
+    },
+    {
+      "id": "20261118-region-discovery-ishikawa-public-facilities-322b21caf6",
+      "title": "第38回全島獅子舞フェスティバル開催のお知らせ - うるま市",
+      "displayTitle": "第38回全島獅子舞フェスティバル開催のお知らせ - うるま市",
+      "summary": "第38回全島獅子舞フェスティバル開催のお知らせ うるま市",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln?oc=5",
+      "sourceId": "region-discovery-ishikawa-public-facilities",
+      "sourceName": "石川：公共施設",
+      "sourceType": "discovery",
+      "publishedAt": "2026-11-18T17:00:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-25T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
+      ],
+      "fingerprint": "90a21fc39344736bf64f",
+      "articleFingerprint": "322b21caf6e90000a480",
+      "facilityId": null,
+      "eventMarkers": [
+        "term:フェスティバル",
+        "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      }
+    },
+    {
+      "id": "20261118-region-discovery-ishikawa-education-322b21caf6",
+      "title": "第38回全島獅子舞フェスティバル開催のお知らせ - うるま市",
+      "displayTitle": "第38回全島獅子舞フェスティバル開催のお知らせ - うるま市",
+      "summary": "第38回全島獅子舞フェスティバル開催のお知らせ うるま市",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln?oc=5",
+      "sourceId": "region-discovery-ishikawa-education",
+      "sourceName": "石川：学校・教育",
+      "sourceType": "discovery",
+      "publishedAt": "2026-11-18T17:00:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-25T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
+      ],
+      "fingerprint": "90a21fc39344736bf64f",
+      "articleFingerprint": "322b21caf6e90000a480",
+      "facilityId": null,
+      "eventMarkers": [
+        "term:フェスティバル",
+        "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      }
+    },
+    {
+      "id": "20261118-region-discovery-ishikawa-health-welfare-322b21caf6",
+      "title": "第38回全島獅子舞フェスティバル開催のお知らせ - うるま市",
+      "displayTitle": "第38回全島獅子舞フェスティバル開催のお知らせ - うるま市",
+      "summary": "第38回全島獅子舞フェスティバル開催のお知らせ うるま市",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln?oc=5",
+      "sourceId": "region-discovery-ishikawa-health-welfare",
+      "sourceName": "石川：健康・福祉",
+      "sourceType": "discovery",
+      "publishedAt": "2026-11-18T17:00:00+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-25T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
+      ],
+      "fingerprint": "90a21fc39344736bf64f",
+      "articleFingerprint": "322b21caf6e90000a480",
+      "facilityId": null,
+      "eventMarkers": [
+        "term:フェスティバル",
+        "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Ud1JVV0hySEl2STFSQ3haanIxLUllcUpHVF9jYzhEaE9VdlhGZEh0c0xtc0NMSWZfUkxLbzcxMVNYSXQzcllSUG1BVGNfYzA1a3NxX1FVMVRtQXNaYUQtcXZmMXJicHVIQU9DU0ln",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      }
     },
     {
       "id": "20261118-okinawa-times-6ce740d623",
@@ -2575,13 +4337,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "8d04cd236996933568a6",
       "articleFingerprint": "6ce740d62397c169ebd0",
@@ -2602,7 +4365,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261118-okinawa-times-ca3d79071a",
@@ -2623,13 +4387,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "041eca5eb8d06c227f74",
       "articleFingerprint": "ca3d79071ad20ac40063",
@@ -2650,7 +4415,115 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
+    },
+    {
+      "id": "20261118-okinawa-times-74fc9ce959",
+      "title": "ハーリー会場が学習発表の舞台に 石川中3年生が堂々エイサー「いい思い出に」 うるま市 - 沖縄タイムス社",
+      "displayTitle": "ハーリー会場が学習発表の舞台に 石川中3年生が堂々エイサー「いい思い出に」 うるま市",
+      "summary": "ハーリー会場が学習発表の舞台に 石川中3年生が堂々エイサー「いい思い出に」 うるま市 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5XTzVjUnZqb1I4S2NqQlNlYnZlcU9La1FFTlM5bU5nVEFXbEFaODVUZDhldXFyZXFaWXNmbEtNREM2SnNtcHN3VEpQeFJuZnp2bTVyZFlNYmdDWGtUdWc?oc=5",
+      "sourceId": "okinawa-times",
+      "sourceName": "沖縄タイムス",
+      "sourceType": "media",
+      "publishedAt": "2026-11-18T11:46:00+09:00",
+      "discoveredAt": "2026-11-19T11:11:43.205640+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-25T23:59:59+09:00",
+      "category": "news",
+      "localScore": 65,
+      "localEvidence": [
+        "うるま市と石川",
+        "石川"
+      ],
+      "confidence": 65,
+      "status": "review",
+      "requiresReview": true,
+      "reviewReasons": [
+        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
+        "石川地区・日時・情報源の自動掲載条件を満たした",
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "同じ内容の記事6件を代表記事へ統合"
+      ],
+      "fingerprint": "ca1ee5b76ae95d686f3c",
+      "articleFingerprint": "74fc9ce959194873c35b",
+      "facilityId": null,
+      "eventMarkers": [
+        "term:エイサー",
+        "ハーリー会場が学習発表の舞台に石川中3年生が堂々エイサーいい思い出にうるま市"
+      ],
+      "relatedUrls": [
+        "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9abkJIMHFvQk1jX1pfY1RKaURRVW1CRFhfb1U2OF9hdldVaDBabzZzVlNXNS1mU251M0VmTXJZVV9vSXAtcndNZjBTQ3BfaUJ3WVQ0dl9YZHhlTnI0czRxYTN2aklxdw?oc=5"
+      ],
+      "duplicateOf": null,
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5XTzVjUnZqb1I4S2NqQlNlYnZlcU9La1FFTlM5bU5nVEFXbEFaODVUZDhldXFyZXFaWXNmbEtNREM2SnNtcHN3VEpQeFJuZnp2bTVyZFlNYmdDWGtUdWc?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5XTzVjUnZqb1I4S2NqQlNlYnZlcU9La1FFTlM5bU5nVEFXbEFaODVUZDhldXFyZXFaWXNmbEtNREM2SnNtcHN3VEpQeFJuZnp2bTVyZFlNYmdDWGtUdWc",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      },
+      "relatedCount": 6
+    },
+    {
+      "id": "20261118-region-discovery-ishikawa-events-culture-74fc9ce959",
+      "title": "ハーリー会場が学習発表の舞台に 石川中3年生が堂々エイサー「いい思い出に」 うるま市 - 沖縄タイムス社",
+      "displayTitle": "ハーリー会場が学習発表の舞台に 石川中3年生が堂々エイサー「いい思い出に」 うるま市",
+      "summary": "ハーリー会場が学習発表の舞台に 石川中3年生が堂々エイサー「いい思い出に」 うるま市 沖縄タイムス社",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5XTzVjUnZqb1I4S2NqQlNlYnZlcU9La1FFTlM5bU5nVEFXbEFaODVUZDhldXFyZXFaWXNmbEtNREM2SnNtcHN3VEpQeFJuZnp2bTVyZFlNYmdDWGtUdWc?oc=5",
+      "sourceId": "region-discovery-ishikawa-events-culture",
+      "sourceName": "石川：催し・祭り・文化",
+      "sourceType": "discovery",
+      "publishedAt": "2026-11-18T11:46:00+09:00",
+      "discoveredAt": "2026-11-19T11:11:43.205640+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-25T23:59:59+09:00",
+      "category": "news",
+      "localScore": 65,
+      "localEvidence": [
+        "うるま市と石川",
+        "石川"
+      ],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「ハーリー会場が学習発表の舞台に 石川中3年生が堂々エイサー「いい思い出に」 うるま市」へ統合"
+      ],
+      "fingerprint": "ca1ee5b76ae95d686f3c",
+      "articleFingerprint": "74fc9ce959194873c35b",
+      "facilityId": null,
+      "eventMarkers": [
+        "term:エイサー",
+        "ハーリー会場が学習発表の舞台に石川中3年生が堂々エイサーいい思い出にうるま市"
+      ],
+      "relatedUrls": [],
+      "duplicateOf": "20261118-okinawa-times-74fc9ce959",
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5XTzVjUnZqb1I4S2NqQlNlYnZlcU9La1FFTlM5bU5nVEFXbEFaODVUZDhldXFyZXFaWXNmbEtNREM2SnNtcHN3VEpQeFJuZnp2bTVyZFlNYmdDWGtUdWc?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5XTzVjUnZqb1I4S2NqQlNlYnZlcU9La1FFTlM5bU5nVEFXbEFaODVUZDhldXFyZXFaWXNmbEtNREM2SnNtcHN3VEpQeFJuZnp2bTVyZFlNYmdDWGtUdWc",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      }
     },
     {
       "id": "20261118-google-news-ishikawa-74fc9ce959",
@@ -2700,114 +4573,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
-    },
-    {
-      "id": "20261118-okinawa-times-74fc9ce959",
-      "title": "ハーリー会場が学習発表の舞台に 石川中3年生が堂々エイサー「いい思い出に」 うるま市 - 沖縄タイムス社",
-      "displayTitle": "ハーリー会場が学習発表の舞台に 石川中3年生が堂々エイサー「いい思い出に」 うるま市",
-      "summary": "ハーリー会場が学習発表の舞台に 石川中3年生が堂々エイサー「いい思い出に」 うるま市 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5XTzVjUnZqb1I4S2NqQlNlYnZlcU9La1FFTlM5bU5nVEFXbEFaODVUZDhldXFyZXFaWXNmbEtNREM2SnNtcHN3VEpQeFJuZnp2bTVyZFlNYmdDWGtUdWc?oc=5",
-      "sourceId": "okinawa-times",
-      "sourceName": "沖縄タイムス",
-      "sourceType": "media",
-      "publishedAt": "2026-11-18T11:44:00+09:00",
-      "discoveredAt": "2026-11-19T11:11:43.205640+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-11-25T23:59:59+09:00",
-      "category": "news",
-      "localScore": 65,
-      "localEvidence": [
-        "うるま市と石川",
-        "石川"
-      ],
-      "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
-      "reviewReasons": [
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区・日時・情報源の自動掲載条件を満たした",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事6件を代表記事へ統合"
-      ],
-      "fingerprint": "ca1ee5b76ae95d686f3c",
-      "articleFingerprint": "74fc9ce959194873c35b",
-      "facilityId": null,
-      "eventMarkers": [
-        "term:エイサー",
-        "ハーリー会場が学習発表の舞台に石川中3年生が堂々エイサーいい思い出にうるま市"
-      ],
-      "relatedUrls": [
-        "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9abkJIMHFvQk1jX1pfY1RKaURRVW1CRFhfb1U2OF9hdldVaDBabzZzVlNXNS1mU251M0VmTXJZVV9vSXAtcndNZjBTQ3BfaUJ3WVQ0dl9YZHhlTnI0czRxYTN2aklxdw?oc=5"
-      ],
-      "duplicateOf": null,
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5XTzVjUnZqb1I4S2NqQlNlYnZlcU9La1FFTlM5bU5nVEFXbEFaODVUZDhldXFyZXFaWXNmbEtNREM2SnNtcHN3VEpQeFJuZnp2bTVyZFlNYmdDWGtUdWc?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5XTzVjUnZqb1I4S2NqQlNlYnZlcU9La1FFTlM5bU5nVEFXbEFaODVUZDhldXFyZXFaWXNmbEtNREM2SnNtcHN3VEpQeFJuZnp2bTVyZFlNYmdDWGtUdWc",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
       },
-      "relatedCount": 6
-    },
-    {
-      "id": "20261118-region-discovery-ishikawa-events-culture-74fc9ce959",
-      "title": "ハーリー会場が学習発表の舞台に 石川中3年生が堂々エイサー「いい思い出に」 うるま市 - 沖縄タイムス社",
-      "displayTitle": "ハーリー会場が学習発表の舞台に 石川中3年生が堂々エイサー「いい思い出に」 うるま市",
-      "summary": "ハーリー会場が学習発表の舞台に 石川中3年生が堂々エイサー「いい思い出に」 うるま市 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5XTzVjUnZqb1I4S2NqQlNlYnZlcU9La1FFTlM5bU5nVEFXbEFaODVUZDhldXFyZXFaWXNmbEtNREM2SnNtcHN3VEpQeFJuZnp2bTVyZFlNYmdDWGtUdWc?oc=5",
-      "sourceId": "region-discovery-ishikawa-events-culture",
-      "sourceName": "石川：催し・祭り・文化",
-      "sourceType": "discovery",
-      "publishedAt": "2026-11-18T11:44:00+09:00",
-      "discoveredAt": "2026-11-19T11:11:43.205640+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-11-25T23:59:59+09:00",
-      "category": "news",
-      "localScore": 65,
-      "localEvidence": [
-        "うるま市と石川",
-        "石川"
-      ],
-      "confidence": 45,
-      "status": "duplicate",
-      "requiresReview": false,
-      "reviewReasons": [
-        "同じ内容として代表記事「ハーリー会場が学習発表の舞台に 石川中3年生が堂々エイサー「いい思い出に」 うるま市」へ統合"
-      ],
-      "fingerprint": "ca1ee5b76ae95d686f3c",
-      "articleFingerprint": "74fc9ce959194873c35b",
-      "facilityId": null,
-      "eventMarkers": [
-        "term:エイサー",
-        "ハーリー会場が学習発表の舞台に石川中3年生が堂々エイサーいい思い出にうるま市"
-      ],
-      "relatedUrls": [],
-      "duplicateOf": "20261118-okinawa-times-74fc9ce959",
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5XTzVjUnZqb1I4S2NqQlNlYnZlcU9La1FFTlM5bU5nVEFXbEFaODVUZDhldXFyZXFaWXNmbEtNREM2SnNtcHN3VEpQeFJuZnp2bTVyZFlNYmdDWGtUdWc?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5XTzVjUnZqb1I4S2NqQlNlYnZlcU9La1FFTlM5bU5nVEFXbEFaODVUZDhldXFyZXFaWXNmbEtNREM2SnNtcHN3VEpQeFJuZnp2bTVyZFlNYmdDWGtUdWc",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      }
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261118-okinawa-times-ff715f892d",
@@ -2870,7 +4637,7 @@
       "sourceType": "media",
       "publishedAt": "2026-11-18T11:19:00+09:00",
       "discoveredAt": "2026-11-19T11:11:43.205640+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-11-25T23:59:59+09:00",
@@ -2895,7 +4662,7 @@
       "duplicateOf": null,
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5lWTNscWVKQ1djbl9SajhWVERIVm5SSDN5c1BjaHduQnY3Q1IwbUpwdmJ0RDB6XzdwU0swRElfM25MbE9hLWZUSEd5dGxpVXdvVV9PTHE0bW8xTThwNHc?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5lWTNscWVKQ1djbl9SajhWVERIVm5SSDN5c1BjaHduQnY3Q1IwbUpwdmJ0RDB6XzdwU0swRElfM25MbE9hLWZUSEd5dGxpVXdvVV9PTHE0bW8xTThwNHc",
         "pageTitle": "",
@@ -3076,7 +4843,7 @@
       "sourceType": "media",
       "publishedAt": "2026-11-18T05:00:00+09:00",
       "discoveredAt": "2026-11-18T11:41:42.554249+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-11-25T23:59:59+09:00",
@@ -3103,7 +4870,7 @@
       "duplicateOf": null,
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE94eUY4MjRwRDBIN3FoTGFjYng5UWUtTUZkYVFKTS1KZk4wV0Q2eEZRZmFGRU9kNGFITnMzRDFPdVNWZkFaeGNFZ2h6RnFrXzJqSmRvYXdvcXROeW5OTndrVw?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE94eUY4MjRwRDBIN3FoTGFjYng5UWUtTUZkYVFKTS1KZk4wV0Q2eEZRZmFGRU9kNGFITnMzRDFPdVNWZkFaeGNFZ2h6RnFrXzJqSmRvYXdvcXROeW5OTndrVw",
         "pageTitle": "",
@@ -3127,7 +4894,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-11-18T05:00:00+09:00",
       "discoveredAt": "2026-11-18T11:41:42.554249+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-11-25T23:59:59+09:00",
@@ -3151,7 +4918,7 @@
       "duplicateOf": "20261118-ryukyu-shimpo-a68431efd8",
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE94eUY4MjRwRDBIN3FoTGFjYng5UWUtTUZkYVFKTS1KZk4wV0Q2eEZRZmFGRU9kNGFITnMzRDFPdVNWZkFaeGNFZ2h6RnFrXzJqSmRvYXdvcXROeW5OTndrVw?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE94eUY4MjRwRDBIN3FoTGFjYng5UWUtTUZkYVFKTS1KZk4wV0Q2eEZRZmFGRU9kNGFITnMzRDFPdVNWZkFaeGNFZ2h6RnFrXzJqSmRvYXdvcXROeW5OTndrVw",
         "pageTitle": "",
@@ -3431,13 +5198,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "ced0b0fca6895cbd0427",
       "articleFingerprint": "d9591af08f525d4b9c09",
@@ -3458,7 +5226,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261118-okinawa-times-8afa8eefc5",
@@ -3479,13 +5248,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "df21f9636d4d803c66e0",
       "articleFingerprint": "8afa8eefc5ae8e7ef72b",
@@ -3506,7 +5276,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261118-okinawa-times-0c50497c55",
@@ -3627,13 +5398,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "9cb6fda607c7c032559b",
       "articleFingerprint": "45baf63df5e74f134864",
@@ -3654,7 +5426,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261117-okinawa-times-c6f929706c",
@@ -3775,14 +5548,15 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "対象外地域との一致を検出",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "石川地区との関連根拠が基準未満のため自動除外",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない"
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "468afab97fa1a30b2a00",
       "articleFingerprint": "01531e2828fe6ef5fc2b",
@@ -3803,7 +5577,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20261117-okinawa-times-299aac9a6a",
@@ -4026,15 +5801,16 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "うるま市内だが石川地区の根拠が不足",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容の記事1件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "75dcb3521ceb684cf51c",
       "articleFingerprint": "22958764e09d4e5befed",
@@ -4055,7 +5831,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "review"
     },
     {
       "id": "20261117-okinawa-times-e5aef2d6e4",
@@ -4122,15 +5899,16 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "うるま市内だが石川地区の根拠が不足",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容の記事1件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "ef81164d133d3cb9b166",
       "articleFingerprint": "0c1d472a32f613247a61",
@@ -4151,7 +5929,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "review"
     },
     {
       "id": "20261117-okinawa-times-7ba3cc7159",
@@ -4571,13 +6350,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "e6ab2f979d34c9c9cfc5",
       "articleFingerprint": "bc4bbc45682dcc159791",
@@ -4598,7 +6378,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261117-okinawa-times-ffa3f10593",
@@ -4619,13 +6400,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "c808e0da4d7df5e1231f",
       "articleFingerprint": "ffa3f105939b2feab5a7",
@@ -4646,7 +6428,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261117-okinawa-times-6b6191e621",
@@ -4667,13 +6450,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "4cd25f95b88c2d58d63a",
       "articleFingerprint": "6b6191e621811639d9d9",
@@ -4694,7 +6478,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261117-okinawa-times-9937022cb8",
@@ -5140,7 +6925,7 @@
         "venue": ""
       },
       "relatedCount": 0,
-      "previousStatus": "review"
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261117-okinawa-times-bde666a4b9",
@@ -5453,7 +7238,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-11-16T17:35:29+09:00",
       "discoveredAt": "2026-11-17T12:20:54.762263+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-11-23T23:59:59+09:00",
@@ -5481,7 +7266,7 @@
       "duplicateOf": null,
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1Fd0t1cGdhNlAwMUhaZlBrUWdQa1A0enlleUZZR1c4bXpNYjgxNGc1V0FWTUNkOHppWTF1WUlxV09yanJaUUdrWlJGdzlkTVIwcDltRQ?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1Fd0t1cGdhNlAwMUhaZlBrUWdQa1A0enlleUZZR1c4bXpNYjgxNGc1V0FWTUNkOHppWTF1WUlxV09yanJaUUdrWlJGdzlkTVIwcDltRQ",
         "pageTitle": "",
@@ -5555,7 +7340,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-11-16T17:00:00+09:00",
       "discoveredAt": "2026-11-19T11:11:43.205640+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-11-23T23:59:59+09:00",
@@ -5582,7 +7367,7 @@
       "duplicateOf": null,
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1obUhJM1liUmYwSVE4ZjhIajhjNkFyRGNrVW9JZjlWa2xyeVJtZW9OLUlNWnN5YjVKeWdMWllmUExvclRNbmVDaVZ6ZE5FVnZFWkJoSA?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1obUhJM1liUmYwSVE4ZjhIajhjNkFyRGNrVW9JZjlWa2xyeVJtZW9OLUlNWnN5YjVKeWdMWllmUExvclRNbmVDaVZ6ZE5FVnZFWkJoSA",
         "pageTitle": "",
@@ -7410,7 +9195,7 @@
       "sourceType": "discovery",
       "publishedAt": "2026-11-14T14:08:34+09:00",
       "discoveredAt": "2026-11-15T09:39:24.644551+09:00",
-      "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
       "eventStartsAt": null,
       "eventEndsAt": null,
       "expiresAt": "2026-11-21T23:59:59+09:00",
@@ -7425,7 +9210,8 @@
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "同じ内容の記事1件を代表記事へ統合"
       ],
       "fingerprint": "997378e25976187c13a5",
       "articleFingerprint": "01b1c3e7481bff30d3eb",
@@ -7435,7 +9221,7 @@
       "duplicateOf": null,
       "contentCheck": {
         "status": "unavailable",
-        "checkedAt": "2026-11-20T10:58:58.979890+09:00",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
         "requestedUrl": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1QT2J0SC1ieTdRTXJoNzd6Tk9YUGM2ejdvd21NckFUaUw2eGMtOVI0VTdBSVJjV1JHRG04djRoUGR1dTViblkxMjQzNnZoMm9ZUXAtZjlaclM0SHc?oc=5",
         "finalUrl": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1QT2J0SC1ieTdRTXJoNzd6Tk9YUGM2ejdvd21NckFUaUw2eGMtOVI0VTdBSVJjV1JHRG04djRoUGR1dTViblkxMjQzNnZoMm9ZUXAtZjlaclM0SHc",
         "pageTitle": "",
@@ -7446,7 +9232,51 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 1
+    },
+    {
+      "id": "20261114-region-discovery-ishikawa-public-facilities-01b1c3e748",
+      "title": "劇場版～KIMUTAKA-RYUJIN mix(沖縄県)の情報 - ウォーカープラス",
+      "displayTitle": "劇場版~KIMUTAKA-RYUJIN mix(沖縄県)の情報",
+      "summary": "劇場版～KIMUTAKA-RYUJIN mix(沖縄県)の情報 ウォーカープラス",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1QT2J0SC1ieTdRTXJoNzd6Tk9YUGM2ejdvd21NckFUaUw2eGMtOVI0VTdBSVJjV1JHRG04djRoUGR1dTViblkxMjQzNnZoMm9ZUXAtZjlaclM0SHc?oc=5",
+      "sourceId": "region-discovery-ishikawa-public-facilities",
+      "sourceName": "石川：公共施設",
+      "sourceType": "discovery",
+      "publishedAt": "2026-11-14T14:08:34+09:00",
+      "discoveredAt": "2026-11-21T10:56:03.618370+09:00",
+      "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+      "eventStartsAt": null,
+      "eventEndsAt": null,
+      "expiresAt": "2026-11-21T23:59:59+09:00",
+      "category": "news",
+      "localScore": 0,
+      "localEvidence": [],
+      "confidence": 45,
+      "status": "duplicate",
+      "requiresReview": false,
+      "reviewReasons": [
+        "同じ内容として代表記事「劇場版~KIMUTAKA-RYUJIN mix(沖縄県)の情報」へ統合"
+      ],
+      "fingerprint": "997378e25976187c13a5",
+      "articleFingerprint": "01b1c3e7481bff30d3eb",
+      "facilityId": null,
+      "eventMarkers": [],
+      "relatedUrls": [],
+      "duplicateOf": "20261114-region-facility-ishikawa-ishikawa-hall-01b1c3e748",
+      "contentCheck": {
+        "status": "unavailable",
+        "checkedAt": "2026-11-21T10:56:03.618370+09:00",
+        "requestedUrl": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1QT2J0SC1ieTdRTXJoNzd6Tk9YUGM2ejdvd21NckFUaUw2eGMtOVI0VTdBSVJjV1JHRG04djRoUGR1dTViblkxMjQzNnZoMm9ZUXAtZjlaclM0SHc?oc=5",
+        "finalUrl": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1QT2J0SC1ieTdRTXJoNzd6Tk9YUGM2ejdvd21NckFUaUw2eGMtOVI0VTdBSVJjV1JHRG04djRoUGR1dTViblkxMjQzNnZoMm9ZUXAtZjlaclM0SHc",
+        "pageTitle": "",
+        "matchedFacilities": [],
+        "organizer": "",
+        "error": "記事本文の主要部分を抽出できない",
+        "eventStartsAt": null,
+        "eventEndsAt": null,
+        "venue": ""
+      }
     },
     {
       "id": "20261114-okinawa-times-db1914ea4a",
@@ -8493,15 +10323,10 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "review",
-      "requiresReview": true,
+      "status": "duplicate",
+      "requiresReview": false,
       "reviewReasons": [
-        "うるま市内だが石川地区の根拠が不足",
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容として代表記事「第12回にこにこキッズフェスタ - うるま市」へ統合"
       ],
       "fingerprint": "92dd8ed756b82d623427",
       "articleFingerprint": "0cce3dced2249621ee83",
@@ -8510,7 +10335,7 @@
         "第12回にこにこキッズフェスタうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": null,
+      "duplicateOf": "20261119-region-discovery-ishikawa-public-facilities-0cce3dced2",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-20T10:58:58.979890+09:00",
@@ -8524,7 +10349,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "review"
     },
     {
       "id": "20261113-region-discovery-ishikawa-health-welfare-0cce3dced2",
@@ -8557,7 +10383,7 @@
         "第12回にこにこキッズフェスタうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261113-region-discovery-ishikawa-public-facilities-0cce3dced2",
+      "duplicateOf": "20261119-region-discovery-ishikawa-public-facilities-0cce3dced2",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-20T10:58:58.979890+09:00",
@@ -8570,7 +10396,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261113-okinawa-times-07486110e1",
@@ -8727,7 +10554,7 @@
         "venue": ""
       },
       "relatedCount": 4,
-      "previousStatus": "review"
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261113-region-facility-ishikawa-rakujuen-82f424d970",
@@ -9474,9 +11301,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": null,
       "eventMarkers": [
@@ -9484,7 +11311,7 @@
         "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-19T11:11:43.205640+09:00",
@@ -9524,9 +11351,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": null,
       "eventMarkers": [
@@ -9536,7 +11363,7 @@
       "relatedUrls": [
         "https://news.google.com/rss/articles/CBMifEFVX3lxTE83OVRpTlF2SFkwVjdNeGU5WDJyMWFkN21EdHBTd25tQmc5VGlnMGVJQVRINFhnS3FNdmNhR21FVVJMVnhXMDRtc2hIU3lFOFFVM0VfRHlDVk9rSjkwUW80a25aVkZiNzNWQXVZSkRGQ0xLSnduZDZGc3N6Sko?oc=5"
       ],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-19T11:11:43.205640+09:00",
@@ -9551,7 +11378,7 @@
         "venue": ""
       },
       "relatedCount": 17,
-      "previousStatus": "review"
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261112-region-discovery-ishikawa-government-322b21caf6",
@@ -9575,9 +11402,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": null,
       "eventMarkers": [
@@ -9585,7 +11412,7 @@
         "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-19T11:11:43.205640+09:00",
@@ -9623,9 +11450,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": null,
       "eventMarkers": [
@@ -9633,7 +11460,7 @@
         "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-19T11:11:43.205640+09:00",
@@ -9671,9 +11498,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": null,
       "eventMarkers": [
@@ -9681,7 +11508,7 @@
         "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-19T11:11:43.205640+09:00",
@@ -9719,9 +11546,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": null,
       "eventMarkers": [
@@ -9729,7 +11556,7 @@
         "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-19T11:11:43.205640+09:00",
@@ -9767,9 +11594,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": null,
       "eventMarkers": [
@@ -9777,7 +11604,7 @@
         "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-19T11:11:43.205640+09:00",
@@ -26785,9 +28612,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": null,
       "eventMarkers": [
@@ -26795,7 +28622,7 @@
         "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-05T10:14:25.050633+09:00",
@@ -26835,9 +28662,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": null,
       "eventMarkers": [
@@ -26845,7 +28672,7 @@
         "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-05T10:14:25.050633+09:00",
@@ -26884,9 +28711,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": "ishikawa-hall",
       "eventMarkers": [
@@ -26894,7 +28721,7 @@
         "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-05T10:14:25.050633+09:00",
@@ -26932,9 +28759,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": null,
       "eventMarkers": [
@@ -26942,7 +28769,7 @@
         "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-05T10:14:25.050633+09:00",
@@ -26980,9 +28807,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": null,
       "eventMarkers": [
@@ -26990,7 +28817,7 @@
         "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-05T10:14:25.050633+09:00",
@@ -27028,9 +28855,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": null,
       "eventMarkers": [
@@ -27038,7 +28865,7 @@
         "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-05T10:14:25.050633+09:00",
@@ -27076,9 +28903,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": null,
       "eventMarkers": [
@@ -27086,7 +28913,7 @@
         "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-05T10:14:25.050633+09:00",
@@ -27124,9 +28951,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": null,
       "eventMarkers": [
@@ -27134,7 +28961,7 @@
         "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-05T10:14:25.050633+09:00",
@@ -27172,9 +28999,9 @@
       "status": "duplicate",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「【うるま市】荒天で中止になった「第38回全島獅子舞フェスティバル」が12月13日に石川会館で振替開催されます - 地域ニュースサイト号外NET」へ統合"
+        "同じ内容として代表記事「第38回全島獅子舞フェスティバル開催のお知らせ - うるま市」へ統合"
       ],
-      "fingerprint": "8a2529a829c0e2e359cb",
+      "fingerprint": "90a21fc39344736bf64f",
       "articleFingerprint": "322b21caf6e90000a480",
       "facilityId": null,
       "eventMarkers": [
@@ -27182,7 +29009,7 @@
         "第38回全島獅子舞フェスティバル開催のお知らせうるま市"
       ],
       "relatedUrls": [],
-      "duplicateOf": "20261213-region-facility-ishikawa-ishikawa-hall-fc3c88f439",
+      "duplicateOf": "20261118-uruma-city-322b21caf6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-03T11:44:12.122252+09:00",
@@ -33000,7 +34827,7 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1,
+      "relatedCount": 0,
       "previousStatus": "review"
     },
     {
@@ -34963,520 +36790,6 @@
         "venue": ""
       },
       "relatedCount": 1,
-      "previousStatus": "duplicate"
-    },
-    {
-      "id": "20261022-okinawa-times-cf53d172d3",
-      "title": "【京王百貨店 新宿店】「石川・福井 物産展」を開催します - 沖縄タイムス社",
-      "displayTitle": "【京王百貨店 新宿店】「石川・福井 物産展」を開催します",
-      "summary": "【京王百貨店 新宿店】「石川・福井 物産展」を開催します 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5CMmVjVlV3a19aTHJLMUhzTHIyQ0t4S2RUQ1hpYklnOVpHYUZEcklJZ2h4bmlGSjU2TFh1RW93eGgtd0hsMm5tTlc3WHktZU5oYTlSUlJfaWZqZ0ZTelE?oc=5",
-      "sourceId": "okinawa-times",
-      "sourceName": "沖縄タイムス",
-      "sourceType": "media",
-      "publishedAt": "2026-10-22T10:00:00+09:00",
-      "discoveredAt": "2026-10-23T08:49:43.349722+09:00",
-      "checkedAt": "2026-10-24T08:43:26.716430+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-10-29T23:59:59+09:00",
-      "category": "news",
-      "localScore": 25,
-      "localEvidence": [
-        "石川"
-      ],
-      "confidence": 65,
-      "status": "expired",
-      "requiresReview": false,
-      "reviewReasons": [
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
-      ],
-      "fingerprint": "34981a8bd19018f186e6",
-      "articleFingerprint": "cf53d172d34bd98822db",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": null,
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-10-24T08:43:26.716430+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5CMmVjVlV3a19aTHJLMUhzTHIyQ0t4S2RUQ1hpYklnOVpHYUZEcklJZ2h4bmlGSjU2TFh1RW93eGgtd0hsMm5tTlc3WHktZU5oYTlSUlJfaWZqZ0ZTelE?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5CMmVjVlV3a19aTHJLMUhzTHIyQ0t4S2RUQ1hpYklnOVpHYUZEcklJZ2h4bmlGSjU2TFh1RW93eGgtd0hsMm5tTlc3WHktZU5oYTlSUlJfaWZqZ0ZTelE",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 0,
-      "previousStatus": "review"
-    },
-    {
-      "id": "20261022-ryukyu-shimpo-7c50a8fcfa",
-      "title": "「市町村」の記事一覧 - 琉球新報デジタル",
-      "displayTitle": "「市町村」の記事一覧",
-      "summary": "「市町村」の記事一覧 琉球新報デジタル",
-      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5YLWlnam9JbXdLUDNCYmVacXBXZTFodFFqX2FsZFkwaXhtX3psZndOUjg3ZEMwbG8tUktYR0czTVctcnBNWWUyS1gtcDVGcEQxWW9fZm03Mm1vajRoR3lyLQ?oc=5",
-      "sourceId": "ryukyu-shimpo",
-      "sourceName": "琉球新報",
-      "sourceType": "media",
-      "publishedAt": "2026-10-22T05:12:54+09:00",
-      "discoveredAt": "2026-10-22T08:52:17.494268+09:00",
-      "checkedAt": "2026-10-22T08:52:17.494268+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-10-29T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 65,
-      "status": "duplicate",
-      "requiresReview": false,
-      "reviewReasons": [
-        "同じ内容として代表記事「「市町村」の記事一覧」へ統合"
-      ],
-      "fingerprint": "a679098e4f0aed36b7ad",
-      "articleFingerprint": "7c50a8fcfabe2d59927f",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [
-        "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5oanU5U194ZnFqT3VFUnJOZWZUdThrZ0NNWlUydnA0WEoyRGJDMW1NMjZFRWUxbDJwZUxUNVNta2RlUTUxM1J2ZHVUcmxWdlNiVlVfRVFsT204dEZYc0VKTA?oc=5",
-        "https://news.google.com/rss/articles/CBMiYEFVX3lxTE10UmZ0UDNUZ2dUa0FCS3pZRjBtYTdsM2U2S09jZGZ0WEFnLUQxZFY4QmZFcXlpUk44WEIyQmVxcjlza0dmazQyajJYRmNMRHh5Zkdsclh6em5ZWFhEbnlLRA?oc=5",
-        "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9XUGVCNkFQalBfTG55OUlySEdXS2Nlek5EZWFwanM1UzRvRzhMQ1pwRUxiRW9ENF81aUhaSjZaYWphcVZENjA5NEdyZEkzMlE5dk43SG53T0JhYXRRcjJfWA?oc=5",
-        "https://news.google.com/rss/articles/CBMiYEFVX3lxTE10T0ktdmctR3lvNnh6OGpRMkJnMnNPbDFaZGI1REliMHdVUE41QU94S25LRkRyeHZ4bmhxTjlPSWZLTEQ3Q0xDYzdyTml3SFhTd2VSTjZ4cTZ2RUhTcW9YSA?oc=5",
-        "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBkVC1QdTFJblRJOVN5RDdRczBlSmNXQTZlRWl2LTZubWo0WHd2VDE3SmEweFhwRTJfblpJRDE0LVpCOGVZREwtM2VOazZsSjh1SXE1TGtUV1F2WUxfRllvRg?oc=5",
-        "https://news.google.com/rss/articles/CBMiYEFVX3lxTE8wLVBSNnNadEhDNjdQbThBcjhRY0lfSXFCaHdKMDl6OHJOUThRNUZtUG4zbjUxTHBUd0lMaFY2eDZfcm1ySzJ1ZUF2WW9SWlFuZXV1QVp2bFVtdWdNY1BLRQ?oc=5",
-        "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1jVHFfTWpEZDdOQ3FuTHNLMWlwNWlmeHVUcHg2cHhORFFSUkx6UHV6UnB5Yk12NGlCMU5nNk1ZYnFwdXFXNTQ5Qzh0Z0I0VmY5R09aVE1VM1JpdUsyQy1mRg?oc=5",
-        "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5kQTdOVVZ0QnZiVmlpRFo0d1pIbVJ2NnZQZVJQZkYzbnB3RlN2azd6c1VTVC1jTUIzRVV3RzJZX2ZjQW90clJRd0h6R2luTVJ0NWlXOW5vMVVXSjlQT0dVZQ?oc=5"
-      ],
-      "duplicateOf": "20261119-ryukyu-shimpo-eacc44f265",
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-10-22T08:52:17.494268+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5YLWlnam9JbXdLUDNCYmVacXBXZTFodFFqX2FsZFkwaXhtX3psZndOUjg3ZEMwbG8tUktYR0czTVctcnBNWWUyS1gtcDVGcEQxWW9fZm03Mm1vajRoR3lyLQ?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5YLWlnam9JbXdLUDNCYmVacXBXZTFodFFqX2FsZFkwaXhtX3psZndOUjg3ZEMwbG8tUktYR0czTVctcnBNWWUyS1gtcDVGcEQxWW9fZm03Mm1vajRoR3lyLQ",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 8,
-      "previousStatus": "duplicate"
-    },
-    {
-      "id": "20261022-okinawa-times-b688035ff1",
-      "title": "［40th Anniversary NAHAマラソン］ 駆け抜けた40年 - 沖縄タイムス社",
-      "displayTitle": "[40th Anniversary NAHAマラソン] 駆け抜けた40年",
-      "summary": "［40th Anniversary NAHAマラソン］ 駆け抜けた40年 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA0MFd1QXdIeHNKbmlGRVI1M0pSY29tN0dIN0IwczdUZElUa1lld2NvaVdNd3VXSG02UnFTS3NHQTY5c0RkbXJUcFM5YzltSVl6YXhNamJyekEzSFkxZFE?oc=5",
-      "sourceId": "okinawa-times",
-      "sourceName": "沖縄タイムス",
-      "sourceType": "media",
-      "publishedAt": "2026-10-22T04:00:00+09:00",
-      "discoveredAt": "2026-10-22T08:52:17.494268+09:00",
-      "checkedAt": "2026-10-22T08:52:17.494268+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-10-29T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 65,
-      "status": "expired",
-      "requiresReview": false,
-      "reviewReasons": [
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
-      ],
-      "fingerprint": "0e6969edac9151f7fe47",
-      "articleFingerprint": "b688035ff1a21ea1ddc4",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": null,
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-10-22T08:52:17.494268+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA0MFd1QXdIeHNKbmlGRVI1M0pSY29tN0dIN0IwczdUZElUa1lld2NvaVdNd3VXSG02UnFTS3NHQTY5c0RkbXJUcFM5YzltSVl6YXhNamJyekEzSFkxZFE?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA0MFd1QXdIeHNKbmlGRVI1M0pSY29tN0dIN0IwczdUZElUa1lld2NvaVdNd3VXSG02UnFTS3NHQTY5c0RkbXJUcFM5YzltSVl6YXhNamJyekEzSFkxZFE",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 0,
-      "previousStatus": "review"
-    },
-    {
-      "id": "20261022-okinawa-times-99a8cc97e4",
-      "title": "［軟式野球］◇第19回中部北地区選手権大会 - 沖縄タイムス社",
-      "displayTitle": "[軟式野球]◇第19回中部北地区選手権大会",
-      "summary": "［軟式野球］◇第19回中部北地区選手権大会 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5vX1JuRkNJVHVCa09pNU1WOWdENmRkS1RNNEtnZ3Q1cTZFUS1ZVnUxWF9ZVkIyNGR4UG9wQTZGbWdQR2Ytbk51Y0NXVVMyOTd6dXk4Uk5URVhKbUpjcGc?oc=5",
-      "sourceId": "okinawa-times",
-      "sourceName": "沖縄タイムス",
-      "sourceType": "media",
-      "publishedAt": "2026-10-22T03:57:00+09:00",
-      "discoveredAt": "2026-10-22T08:52:17.494268+09:00",
-      "checkedAt": "2026-10-22T08:52:17.494268+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-10-29T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 65,
-      "status": "expired",
-      "requiresReview": false,
-      "reviewReasons": [
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事1件を代表記事へ統合",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
-      ],
-      "fingerprint": "0f1001f38e7cf6714827",
-      "articleFingerprint": "99a8cc97e426ac05d23e",
-      "facilityId": null,
-      "eventMarkers": [
-        "軟式野球第19回中部北地区選手権大会"
-      ],
-      "relatedUrls": [
-        "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5XczhfSWpuWHBSSGlCaWloV085OFJTZHphSG1UYW9oVF91NHFNV0J0Ul9raWJ3YXp1N2lJckljZzJtcWpHN0hkU25aQ2Z5RkRsbi00LTZBWHdqVlk2UGc?oc=5"
-      ],
-      "duplicateOf": null,
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-10-22T08:52:17.494268+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5vX1JuRkNJVHVCa09pNU1WOWdENmRkS1RNNEtnZ3Q1cTZFUS1ZVnUxWF9ZVkIyNGR4UG9wQTZGbWdQR2Ytbk51Y0NXVVMyOTd6dXk4Uk5URVhKbUpjcGc?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5vX1JuRkNJVHVCa09pNU1WOWdENmRkS1RNNEtnZ3Q1cTZFUS1ZVnUxWF9ZVkIyNGR4UG9wQTZGbWdQR2Ytbk51Y0NXVVMyOTd6dXk4Uk5URVhKbUpjcGc",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 0,
-      "previousStatus": "review"
-    },
-    {
-      "id": "20261022-okinawa-times-9d6cb81d11",
-      "title": "うるま市議選2026 候補者詳細｜國吉亮 - 沖縄タイムス社",
-      "displayTitle": "うるま市議選2026 候補者詳細|國吉亮",
-      "summary": "うるま市議選2026 候補者詳細｜國吉亮 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNcVQ3R2FJaFBsbngyckhjNjNGVkdNQ29DVGFKWXNGYTlwT2c3ZXVOaVp0OS05c1ZtaEdsZ0otQmlSc2w5LTMyWXdaOUZPMV9FQWlGQklwa3FWUnhTaGVPQnRhcWNYaUpaUF85X1BFaEpHUjVrZ044TTVyY2xlV1dxNTdhQXAzTmJJM3hrbUp6ZXBRbEhDY2NlbEJSdS0tZEVzM25hc24xajBpUWZoZ216NjhmN01ia0pTckZBUVhKenM1aUdiel85TkxnWTNRdDFaN1l1MzlmQmhUdw?oc=5",
-      "sourceId": "okinawa-times",
-      "sourceName": "沖縄タイムス",
-      "sourceType": "media",
-      "publishedAt": "2026-10-22T00:13:32+09:00",
-      "discoveredAt": "2026-10-23T08:49:43.349722+09:00",
-      "checkedAt": "2026-10-24T08:43:26.716430+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-10-29T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 65,
-      "status": "expired",
-      "requiresReview": false,
-      "reviewReasons": [
-        "うるま市内だが石川地区の根拠が不足",
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事3件を代表記事へ統合",
-        "掲載・判断期間を過ぎたため監査記録へ移動",
-        "同じ内容の記事2件を代表記事へ統合",
-        "同じ内容の記事1件を代表記事へ統合"
-      ],
-      "fingerprint": "45232fac6b66b34f4a84",
-      "articleFingerprint": "9d6cb81d11fa750a558e",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [
-        "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPOHllU0dfd2NOZzNMa203VVlZdlZDRUhJeC1JdXlUTHJOclZFQWZUdHQ1cHc3amZONzUtaEhfOFZZak15VTF2cldoOXhVS3cydjJWNGlCSmhUMi1QUk12a0M2V2dTaU53RDUzRXdRV3RKUl9jbThiOERTVjRTR3pwMXo2bHR1WV9HV2dWVmQ2Wm15dmdnblhFOG5ZblZFdjNTWm1SQ085OWxUUlQ0VDA3YUFqR3BFZm4wNlRPbVJfWXAzdw?oc=5"
-      ],
-      "duplicateOf": null,
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-10-24T08:43:26.716430+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNcVQ3R2FJaFBsbngyckhjNjNGVkdNQ29DVGFKWXNGYTlwT2c3ZXVOaVp0OS05c1ZtaEdsZ0otQmlSc2w5LTMyWXdaOUZPMV9FQWlGQklwa3FWUnhTaGVPQnRhcWNYaUpaUF85X1BFaEpHUjVrZ044TTVyY2xlV1dxNTdhQXAzTmJJM3hrbUp6ZXBRbEhDY2NlbEJSdS0tZEVzM25hc24xajBpUWZoZ216NjhmN01ia0pTckZBUVhKenM1aUdiel85TkxnWTNRdDFaN1l1MzlmQmhUdw?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNcVQ3R2FJaFBsbngyckhjNjNGVkdNQ29DVGFKWXNGYTlwT2c3ZXVOaVp0OS05c1ZtaEdsZ0otQmlSc2w5LTMyWXdaOUZPMV9FQWlGQklwa3FWUnhTaGVPQnRhcWNYaUpaUF85X1BFaEpHUjVrZ044TTVyY2xlV1dxNTdhQXAzTmJJM3hrbUp6ZXBRbEhDY2NlbEJSdS0tZEVzM25hc24xajBpUWZoZ216NjhmN01ia0pTckZBUVhKenM1aUdiel85TkxnWTNRdDFaN1l1MzlmQmhUdw",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 1,
-      "previousStatus": "review"
-    },
-    {
-      "id": "20261021-ryukyu-shimpo-e8feda67a3",
-      "title": "【写真たっぷり】沖縄そば、記者が全15店食べ歩き 人気店は訪問3度目でようやく実食かなう - 琉球新報デジタル",
-      "displayTitle": "【写真たっぷり】沖縄そば、記者が全15店食べ歩き 人気店は訪問3度目でようやく実食かなう",
-      "summary": "【写真たっぷり】沖縄そば、記者が全15店食べ歩き 人気店は訪問3度目でようやく実食かなう 琉球新報デジタル",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE8zdUowTUlqMkxIenJBaHdiR2pIWUhzRXBLRUoyX25LVDgyU0U3b2NJLUV2VUJCWVp4aE04c3J1dDl6QUR6YmNUbEZRcEtiRE9tTDN6QkprbURZbDRnb1kzYVJ5VHZmYnE2Qnc?oc=5",
-      "sourceId": "ryukyu-shimpo",
-      "sourceName": "琉球新報",
-      "sourceType": "media",
-      "publishedAt": "2026-10-21T19:57:33+09:00",
-      "discoveredAt": "2026-10-22T08:52:17.494268+09:00",
-      "checkedAt": "2026-10-23T08:49:43.349722+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-10-28T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 65,
-      "status": "duplicate",
-      "requiresReview": false,
-      "reviewReasons": [
-        "同じ内容として代表記事「【写真たっぷり】沖縄そば、記者が全15店食べ歩き 人気店は訪問3度目でようやく実食かなう」へ統合"
-      ],
-      "fingerprint": "314192f1e318a0397065",
-      "articleFingerprint": "e8feda67a36998de15f4",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": "20261024-ryukyu-shimpo-e8feda67a3",
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-10-23T08:49:43.349722+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiakFVX3lxTE8zdUowTUlqMkxIenJBaHdiR2pIWUhzRXBLRUoyX25LVDgyU0U3b2NJLUV2VUJCWVp4aE04c3J1dDl6QUR6YmNUbEZRcEtiRE9tTDN6QkprbURZbDRnb1kzYVJ5VHZmYnE2Qnc?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiakFVX3lxTE8zdUowTUlqMkxIenJBaHdiR2pIWUhzRXBLRUoyX25LVDgyU0U3b2NJLUV2VUJCWVp4aE04c3J1dDl6QUR6YmNUbEZRcEtiRE9tTDN6QkprbURZbDRnb1kzYVJ5VHZmYnE2Qnc",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 4,
-      "previousStatus": "duplicate"
-    },
-    {
-      "id": "20261021-okinawa-times-b17c7b73c1",
-      "title": "石狩・空知・後志地方気象防災速報（竜巻注意） 第１号＝気象庁発表 - 沖縄タイムス社",
-      "displayTitle": "石狩・空知・後志地方気象防災速報(竜巻注意) 第1号=気象庁発表",
-      "summary": "石狩・空知・後志地方気象防災速報（竜巻注意） 第１号＝気象庁発表 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBDRk5iREtxSWpQeGg0d3I3c0R0eVFPQUlZSFdMYlBxaGFIeWNZYk5Wa2lNWG54cHRhbm1NellZVUs0NERpaXU1YnZod1huRlZqSzZ6a0xQZkY1cVZoMEE?oc=5",
-      "sourceId": "okinawa-times",
-      "sourceName": "沖縄タイムス",
-      "sourceType": "media",
-      "publishedAt": "2026-10-21T19:43:01+09:00",
-      "discoveredAt": "2026-10-22T08:52:17.494268+09:00",
-      "checkedAt": "2026-10-22T08:52:17.494268+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-10-28T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 65,
-      "status": "expired",
-      "requiresReview": false,
-      "reviewReasons": [
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
-      ],
-      "fingerprint": "fcda908b2c825d833877",
-      "articleFingerprint": "b17c7b73c11ee2093f7b",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": null,
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-10-22T08:52:17.494268+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBDRk5iREtxSWpQeGg0d3I3c0R0eVFPQUlZSFdMYlBxaGFIeWNZYk5Wa2lNWG54cHRhbm1NellZVUs0NERpaXU1YnZod1huRlZqSzZ6a0xQZkY1cVZoMEE?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBDRk5iREtxSWpQeGg0d3I3c0R0eVFPQUlZSFdMYlBxaGFIeWNZYk5Wa2lNWG54cHRhbm1NellZVUs0NERpaXU1YnZod1huRlZqSzZ6a0xQZkY1cVZoMEE",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 0,
-      "previousStatus": "review"
-    },
-    {
-      "id": "20261021-okinawa-times-d0244dfabe",
-      "title": "うるま市議選2026 候補者詳細｜國吉亮 - 沖縄タイムス社",
-      "displayTitle": "うるま市議選2026 候補者詳細|國吉亮",
-      "summary": "うるま市議選2026 候補者詳細｜國吉亮 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPOHllU0dfd2NOZzNMa203VVlZdlZDRUhJeC1JdXlUTHJOclZFQWZUdHQ1cHc3amZONzUtaEhfOFZZak15VTF2cldoOXhVS3cydjJWNGlCSmhUMi1QUk12a0M2V2dTaU53RDUzRXdRV3RKUl9jbThiOERTVjRTR3pwMXo2bHR1WV9HV2dWVmQ2Wm15dmdnblhFOG5ZblZFdjNTWm1SQ085OWxUUlQ0VDA3YUFqR3BFZm4wNlRPbVJfWXAzdw?oc=5",
-      "sourceId": "okinawa-times",
-      "sourceName": "沖縄タイムス",
-      "sourceType": "media",
-      "publishedAt": "2026-10-21T18:39:46+09:00",
-      "discoveredAt": "2026-10-22T08:52:17.494268+09:00",
-      "checkedAt": "2026-10-22T08:52:17.494268+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-10-28T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 65,
-      "status": "duplicate",
-      "requiresReview": false,
-      "reviewReasons": [
-        "同じ内容として代表記事「うるま市議選2026 候補者詳細|國吉亮」へ統合"
-      ],
-      "fingerprint": "45232fac6b66b34f4a84",
-      "articleFingerprint": "d0244dfabec03bbc72ba",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [
-        "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQOUVkTUluMDN5N2RfelR3Y2hLRW5aenBMelpjNllvdzRHWHR3cmF1V0ZoM2Y1UG5XNi1GOUp1aDkxVi1ieHJrbFA4MzlyUEgzSmJ2TzJvU0RBRnBCUlFnbjhTNlhucmFMX2I3cjlPNHRGZmlHRUdDWi04VHByV29zYTlxbTJCYnIyVlltQXVTeWxGQmFycl81Z0Z4WEpjT3RtZUNqZjRrUllFUQ?oc=5"
-      ],
-      "duplicateOf": "20261022-okinawa-times-9d6cb81d11",
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-10-22T08:52:17.494268+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPOHllU0dfd2NOZzNMa203VVlZdlZDRUhJeC1JdXlUTHJOclZFQWZUdHQ1cHc3amZONzUtaEhfOFZZak15VTF2cldoOXhVS3cydjJWNGlCSmhUMi1QUk12a0M2V2dTaU53RDUzRXdRV3RKUl9jbThiOERTVjRTR3pwMXo2bHR1WV9HV2dWVmQ2Wm15dmdnblhFOG5ZblZFdjNTWm1SQ085OWxUUlQ0VDA3YUFqR3BFZm4wNlRPbVJfWXAzdw?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPOHllU0dfd2NOZzNMa203VVlZdlZDRUhJeC1JdXlUTHJOclZFQWZUdHQ1cHc3amZONzUtaEhfOFZZak15VTF2cldoOXhVS3cydjJWNGlCSmhUMi1QUk12a0M2V2dTaU53RDUzRXdRV3RKUl9jbThiOERTVjRTR3pwMXo2bHR1WV9HV2dWVmQ2Wm15dmdnblhFOG5ZblZFdjNTWm1SQ085OWxUUlQ0VDA3YUFqR3BFZm4wNlRPbVJfWXAzdw",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 2,
-      "previousStatus": "duplicate"
-    },
-    {
-      "id": "20261021-uruma-city-c906752249",
-      "title": "市ホームページ・AIチャットボット一時停止のご案内 - うるま市公式ホームページ",
-      "displayTitle": "市ホームページ・AIチャットボット一時停止のご案内 - うるま市公式ホームページ",
-      "summary": "市ホームページ・AIチャットボット一時停止のご案内 うるま市公式ホームページ",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFByM2Yta1RxanFId2ZybmUwUno5d2hqN2R0S05VcjY1MVRaYnEta0poYVJKT1VtcDB6WG5aZzQ0cy1YdnNuc05yR3NpaE5CVHNEVkZyRFlPOS11R2JI?oc=5",
-      "sourceId": "uruma-city",
-      "sourceName": "うるま市公式サイト",
-      "sourceType": "official",
-      "publishedAt": "2026-10-21T18:30:00+09:00",
-      "discoveredAt": "2026-10-25T07:49:37.533599+09:00",
-      "checkedAt": "2026-10-25T07:49:37.533599+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-10-28T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [
-        "うるま市等の公式発信"
-      ],
-      "confidence": 75,
-      "status": "expired",
-      "requiresReview": false,
-      "reviewReasons": [
-        "うるま市内だが石川地区の根拠が不足",
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事1件を代表記事へ統合",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
-      ],
-      "fingerprint": "23c14a2e9dc54be570fc",
-      "articleFingerprint": "c9067522493a890a6918",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": null,
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-10-25T07:49:37.533599+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFByM2Yta1RxanFId2ZybmUwUno5d2hqN2R0S05VcjY1MVRaYnEta0poYVJKT1VtcDB6WG5aZzQ0cy1YdnNuc05yR3NpaE5CVHNEVkZyRFlPOS11R2JI?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFByM2Yta1RxanFId2ZybmUwUno5d2hqN2R0S05VcjY1MVRaYnEta0poYVJKT1VtcDB6WG5aZzQ0cy1YdnNuc05yR3NpaE5CVHNEVkZyRFlPOS11R2JI",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 1,
-      "previousStatus": "review"
-    },
-    {
-      "id": "20261021-uruma-city-9e81d1cc83",
-      "title": "市ホームページ・AIチャットボット一時停止のご案内 - うるま市",
-      "displayTitle": "市ホームページ・AIチャットボット一時停止のご案内 - うるま市",
-      "summary": "市ホームページ・AIチャットボット一時停止のご案内 うるま市",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFByM2Yta1RxanFId2ZybmUwUno5d2hqN2R0S05VcjY1MVRaYnEta0poYVJKT1VtcDB6WG5aZzQ0cy1YdnNuc05yR3NpaE5CVHNEVkZyRFlPOS11R2JI?oc=5",
-      "sourceId": "uruma-city",
-      "sourceName": "うるま市公式サイト",
-      "sourceType": "official",
-      "publishedAt": "2026-10-21T18:30:00+09:00",
-      "discoveredAt": "2026-10-22T08:52:17.494268+09:00",
-      "checkedAt": "2026-10-24T08:43:26.716430+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-10-28T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [
-        "うるま市等の公式発信"
-      ],
-      "confidence": 75,
-      "status": "duplicate",
-      "requiresReview": false,
-      "reviewReasons": [
-        "同じ内容として代表記事「市ホームページ・AIチャットボット一時停止のご案内 - うるま市公式ホームページ」へ統合"
-      ],
-      "fingerprint": "23c14a2e9dc54be570fc",
-      "articleFingerprint": "9e81d1cc83a1888c0ad2",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": "20261021-uruma-city-c906752249",
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-10-24T08:43:26.716430+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFByM2Yta1RxanFId2ZybmUwUno5d2hqN2R0S05VcjY1MVRaYnEta0poYVJKT1VtcDB6WG5aZzQ0cy1YdnNuc05yR3NpaE5CVHNEVkZyRFlPOS11R2JI?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFByM2Yta1RxanFId2ZybmUwUno5d2hqN2R0S05VcjY1MVRaYnEta0poYVJKT1VtcDB6WG5aZzQ0cy1YdnNuc05yR3NpaE5CVHNEVkZyRFlPOS11R2JI",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 0,
       "previousStatus": "duplicate"
     },
     {
