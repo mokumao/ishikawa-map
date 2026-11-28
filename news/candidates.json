@@ -1,15 +1,15 @@
 {
   "regionId": "ishikawa",
   "regionName": "石川",
-  "updated": "2026-11-27T12:26:18.997961+09:00",
-  "count": 730,
-  "reviewCount": 56,
+  "updated": "2026-11-28T12:01:45.130918+09:00",
+  "count": 722,
+  "reviewCount": 12,
   "statusCounts": {
     "published": 2,
-    "review": 56,
-    "rejected": 8,
-    "duplicate": 231,
-    "expired": 433
+    "review": 12,
+    "rejected": 0,
+    "duplicate": 229,
+    "expired": 479
   },
   "sourceResults": [
     {
@@ -24,24 +24,24 @@
     {
       "id": "google-news-ishikawa",
       "name": "Google ニュース（うるま市 石川）",
-      "status": "success",
-      "entryCount": 100,
-      "candidateCount": 5,
+      "status": "error",
+      "entryCount": 0,
+      "candidateCount": 0,
       "publishedCount": 1,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 5,
-      "error": null
+      "contentUnavailableCount": 0,
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "google-news-ishikawa-dome",
       "name": "石川ドーム・闘牛",
-      "status": "success",
-      "entryCount": 91,
-      "candidateCount": 1,
+      "status": "error",
+      "entryCount": 0,
+      "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 1,
-      "error": null
+      "contentUnavailableCount": 0,
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "togyu-okinawa-blog",
@@ -57,79 +57,79 @@
     {
       "id": "google-news-ishikawa-nature",
       "name": "石川少年自然の家",
-      "status": "success",
-      "entryCount": 23,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "google-news-bios-hill",
       "name": "ビオスの丘",
-      "status": "success",
-      "entryCount": 44,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "okinawa-times",
       "name": "沖縄タイムス",
-      "status": "success",
-      "entryCount": 100,
-      "candidateCount": 29,
+      "status": "error",
+      "entryCount": 0,
+      "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 29,
-      "error": null
+      "contentUnavailableCount": 0,
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "ryukyu-shimpo",
       "name": "琉球新報",
-      "status": "success",
-      "entryCount": 100,
-      "candidateCount": 25,
+      "status": "error",
+      "entryCount": 0,
+      "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 25,
-      "error": null
+      "contentUnavailableCount": 0,
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "uruma-city",
       "name": "うるま市公式サイト",
-      "status": "success",
-      "entryCount": 65,
-      "candidateCount": 1,
+      "status": "error",
+      "entryCount": 0,
+      "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 1,
-      "error": null
+      "contentUnavailableCount": 0,
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-facility-ishikawa-ishikawa-mountain",
       "name": "石川施設：石川岳",
-      "status": "success",
-      "entryCount": 12,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-facility-ishikawa-ishikawa-history-museum",
       "name": "石川施設：石川歴史民俗資料館",
-      "status": "success",
-      "entryCount": 12,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-facility-ishikawa-ishikawa-library",
@@ -145,288 +145,288 @@
     {
       "id": "region-facility-ishikawa-ishikawa-hall",
       "name": "石川施設：うるま市石川会館",
-      "status": "success",
-      "entryCount": 25,
-      "candidateCount": 1,
+      "status": "error",
+      "entryCount": 0,
+      "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 1,
-      "error": null
+      "contentUnavailableCount": 0,
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-facility-ishikawa-cave-okinawa",
       "name": "石川施設：CAVE OKINAWA",
-      "status": "success",
-      "entryCount": 32,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-facility-ishikawa-rakujuen",
       "name": "石川施設：特別養護老人ホーム 楽寿園",
-      "status": "success",
-      "entryCount": 100,
-      "candidateCount": 5,
+      "status": "error",
+      "entryCount": 0,
+      "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 5,
-      "error": null
+      "contentUnavailableCount": 0,
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-facility-ishikawa-ishikawa-police-station",
       "name": "石川施設：石川警察署",
-      "status": "success",
-      "entryCount": 72,
-      "candidateCount": 1,
+      "status": "error",
+      "entryCount": 0,
+      "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 1,
-      "error": null
+      "contentUnavailableCount": 0,
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-facility-ishikawa-ishikawa-water-treatment-plant",
       "name": "石川施設：石川浄水場",
-      "status": "success",
-      "entryCount": 51,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-facility-ishikawa-ishikawa-park",
       "name": "石川施設：石川公園",
-      "status": "success",
-      "entryCount": 10,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-facility-ishikawa-new-ishikawa-kitchen",
       "name": "石川施設：新石川調理場",
-      "status": "success",
-      "entryCount": 8,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-facility-ishikawa-johoku-community",
       "name": "石川施設：城北区自治会",
-      "status": "success",
-      "entryCount": 3,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-facility-ishikawa-iha-community",
       "name": "石川施設：伊波区自治会",
-      "status": "success",
-      "entryCount": 1,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-facility-ishikawa-kadekaru-community",
       "name": "石川施設：嘉手苅区自治会",
-      "status": "success",
-      "entryCount": 2,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-facility-ishikawa-yamashiro-community",
       "name": "石川施設：山城自治会",
-      "status": "success",
-      "entryCount": 2,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-theme-ishikawa-bullfighting",
       "name": "石川固有テーマ：闘牛",
-      "status": "success",
-      "entryCount": 57,
-      "candidateCount": 1,
+      "status": "error",
+      "entryCount": 0,
+      "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 1,
-      "error": null
+      "contentUnavailableCount": 0,
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-theme-ishikawa-ishikawa-mihoso-festival",
       "name": "石川固有テーマ：石川みほそまつり",
-      "status": "success",
-      "entryCount": 10,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-theme-ishikawa-yamashiro-tea",
       "name": "石川固有テーマ：山城茶",
-      "status": "success",
-      "entryCount": 12,
-      "candidateCount": 1,
+      "status": "error",
+      "entryCount": 0,
+      "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 1,
-      "error": null
+      "contentUnavailableCount": 0,
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-theme-ishikawa-okinawa-water-festival",
       "name": "石川固有テーマ：おきなわみずまつり",
-      "status": "success",
-      "entryCount": 4,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-theme-ishikawa-ishikawa-area-redevelopment",
       "name": "石川固有テーマ：石川庁舎周辺・石川公園のまちづくり",
-      "status": "success",
-      "entryCount": 6,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-theme-ishikawa-ishikawa-community-traditions",
       "name": "石川固有テーマ：石川地区の自治会行事・伝統芸能",
-      "status": "success",
-      "entryCount": 9,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-theme-ishikawa-ishikawa-yam-imo",
       "name": "石川固有テーマ：石川地区の山芋スーブ",
-      "status": "success",
-      "entryCount": 8,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-discovery-ishikawa-government",
       "name": "石川：行政・自治会",
-      "status": "success",
-      "entryCount": 15,
-      "candidateCount": 1,
+      "status": "error",
+      "entryCount": 0,
+      "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 1,
-      "error": null
+      "contentUnavailableCount": 0,
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-discovery-ishikawa-events-culture",
       "name": "石川：催し・祭り・文化",
-      "status": "success",
-      "entryCount": 27,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-discovery-ishikawa-public-facilities",
       "name": "石川：公共施設",
-      "status": "success",
-      "entryCount": 50,
-      "candidateCount": 1,
+      "status": "error",
+      "entryCount": 0,
+      "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
-      "contentUnavailableCount": 1,
-      "error": null
+      "contentUnavailableCount": 0,
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-discovery-ishikawa-education",
       "name": "石川：学校・教育",
-      "status": "success",
-      "entryCount": 49,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-discovery-ishikawa-safety",
       "name": "石川：防災・安全",
-      "status": "success",
-      "entryCount": 11,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-discovery-ishikawa-health-welfare",
       "name": "石川：健康・福祉",
-      "status": "success",
-      "entryCount": 10,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-discovery-ishikawa-transport-construction",
       "name": "石川：交通・工事",
-      "status": "success",
-      "entryCount": 12,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     },
     {
       "id": "region-discovery-ishikawa-business-community",
       "name": "石川：商業・地域活動",
-      "status": "success",
-      "entryCount": 46,
+      "status": "error",
+      "entryCount": 0,
       "candidateCount": 0,
       "publishedCount": 0,
       "contentCheckedCount": 0,
       "contentUnavailableCount": 0,
-      "error": null
+      "error": "<unknown>:2:252: not well-formed (invalid token)"
     }
   ],
   "candidates": [
@@ -489,7 +489,7 @@
       "sourceType": "specialist",
       "publishedAt": "2026-11-19T17:12:00+09:00",
       "discoveredAt": "2026-11-23T10:20:53.764495+09:00",
-      "checkedAt": "2026-11-27T12:26:18.997961+09:00",
+      "checkedAt": "2026-11-28T12:01:45.130918+09:00",
       "eventStartsAt": "2027-01-03T00:00:00+09:00",
       "eventEndsAt": "2027-01-03T00:00:00+09:00",
       "expiresAt": "2027-01-03T23:59:59+09:00",
@@ -517,7 +517,7 @@
       "duplicateOf": "20261227-uruma-official-bullfighting-59dc7a8c21",
       "contentCheck": {
         "status": "checked",
-        "checkedAt": "2026-11-27T12:26:18.997961+09:00",
+        "checkedAt": "2026-11-28T12:01:45.130918+09:00",
         "requestedUrl": "https://togyu.ti-da.net/e13186752.html",
         "finalUrl": "https://togyu.ti-da.net/e13186752.html",
         "pageTitle": "2027年1月3日（日）新春スペシャルマッチ大闘牛大会│【公式】闘牛 in Okinawa Blog",
@@ -540,7 +540,7 @@
       "sourceType": "specialist",
       "publishedAt": "2026-11-24T11:47:45+09:00",
       "discoveredAt": "2026-11-25T12:55:12.564785+09:00",
-      "checkedAt": "2026-11-27T12:26:18.997961+09:00",
+      "checkedAt": "2026-11-28T12:01:45.130918+09:00",
       "eventStartsAt": "2027-01-02T00:00:00+09:00",
       "eventEndsAt": "2027-01-02T00:00:00+09:00",
       "expiresAt": "2027-01-02T23:59:59+09:00",
@@ -568,7 +568,7 @@
       "duplicateOf": "20261227-uruma-official-bullfighting-59dc7a8c21",
       "contentCheck": {
         "status": "checked",
-        "checkedAt": "2026-11-27T12:26:18.997961+09:00",
+        "checkedAt": "2026-11-28T12:01:45.130918+09:00",
         "requestedUrl": "https://togyu.ti-da.net/e13188445.html",
         "finalUrl": "https://togyu.ti-da.net/e13188445.html",
         "pageTitle": "2027年1月2日（土） 新春華牛大闘牛大会│【公式】闘牛 in Okinawa Blog",
@@ -591,7 +591,7 @@
       "sourceType": "official",
       "publishedAt": "2026-05-19T12:00:00+09:00",
       "discoveredAt": "2026-11-15T09:39:24.644551+09:00",
-      "checkedAt": "2026-11-27T12:26:18.997961+09:00",
+      "checkedAt": "2026-11-28T12:01:45.130918+09:00",
       "eventStartsAt": "2026-12-27T00:00:00+09:00",
       "eventEndsAt": "2027-03-20T00:00:00+09:00",
       "expiresAt": "2027-03-20T23:59:59+09:00",
@@ -622,10 +622,10 @@
         "石川多目的ドーム観光闘牛の開催日程"
       ],
       "relatedUrls": [
-        "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1Nc2lzakVFanljd1ZlaVBhOUdyd3lrZTNIYkZrR0VvSkdHQW5tR0Z3N1JmSjZ6VzRObzNqYkwzNVN3MEFDUjc4MW5EVXBidFNhSE9NUllVVDB3Qnd1UUE?oc=5",
         "https://togyu.ti-da.net/e13188445.html",
         "https://togyu.ti-da.net/e13186752.html",
         "https://togyu.ti-da.net/e13184827.html",
+        "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1Nc2lzakVFanljd1ZlaVBhOUdyd3lrZTNIYkZrR0VvSkdHQW5tR0Z3N1JmSjZ6VzRObzNqYkwzNVN3MEFDUjc4MW5EVXBidFNhSE9NUllVVDB3Qnd1UUE?oc=5",
         "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9sNk41VWw1VDBEc3F5d1JFMUlyQ0liMGdIdDhFRGh5VWhIQWhULTI5NlZjNjV2bnJ3a05ETU5xU1MxWWxleUVSc1pmTkpjWHpiRHYxTExhSzRIcl90WVE?oc=5",
         "https://news.google.com/rss/articles/CBMiYkFVX3lxTE90VWxxdW41aFhYQ0R0TWxNNTFnNU5zaFZfSFNScElZS0x1OURXX2JOZWdKMzdUeTFpWWQzX0ZxaDhnYlFUM0ZGWm02STF4QUZlcThaaFk3VW13ZGpQWTkycU5n?oc=5",
         "https://news.google.com/rss/articles/CBMijgFBVV95cUxPd2JTRzQzdUs4b3VCeHVqVDJLNVhkSE9DS21FQjhkY1dmUjZKUlAwc3JqUjNUMlpqRDE5T25LODBpTloxTU5hZlZSOGRCZTFBZTBabDFzblNfVXdFRFdqdW02NVA4Q0FXQWxCRW5wOG5DZUJBajJ4eWZNRGlyMDVLd1BiN2lMOEhIbThIMGF3?oc=5",
@@ -638,7 +638,7 @@
       "duplicateOf": null,
       "contentCheck": {
         "status": "checked",
-        "checkedAt": "2026-11-27T12:26:18.997961+09:00",
+        "checkedAt": "2026-11-28T12:01:45.130918+09:00",
         "requestedUrl": "https://www.city.uruma.lg.jp/1007003000/contents/1408.html",
         "finalUrl": "https://www.lequio-tourist.okinawa/travel_03.php",
         "pageTitle": "観光闘牛開催日程",
@@ -1426,7 +1426,7 @@
       "sourceType": "specialist",
       "publishedAt": "2026-11-14T09:29:00+09:00",
       "discoveredAt": "2026-11-15T09:39:24.644551+09:00",
-      "checkedAt": "2026-11-27T12:26:18.997961+09:00",
+      "checkedAt": "2026-11-28T12:01:45.130918+09:00",
       "eventStartsAt": "2026-11-29T00:00:00+09:00",
       "eventEndsAt": "2026-11-29T00:00:00+09:00",
       "expiresAt": "2026-11-29T23:59:59+09:00",
@@ -1455,7 +1455,7 @@
       "duplicateOf": "20261227-uruma-official-bullfighting-59dc7a8c21",
       "contentCheck": {
         "status": "checked",
-        "checkedAt": "2026-11-27T12:26:18.997961+09:00",
+        "checkedAt": "2026-11-28T12:01:45.130918+09:00",
         "requestedUrl": "https://togyu.ti-da.net/e13184827.html",
         "finalUrl": "https://togyu.ti-da.net/e13184827.html",
         "pageTitle": "202611月29日（日）沖縄闘牛千秋楽 与勝闘牛大会 │【公式】闘牛 in Okinawa Blog",
@@ -1682,14 +1682,15 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容の記事1件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "4faed1e1fe88d68503ec",
       "articleFingerprint": "e47f1230b78c25233bb5",
@@ -1712,7 +1713,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "review"
     },
     {
       "id": "20261127-okinawa-times-a4e9744c52",
@@ -1756,7 +1758,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261127-ryukyu-shimpo-37c45f753f",
@@ -1777,13 +1780,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "173d3b51d6fc42bc2bb0",
       "articleFingerprint": "37c45f753fddcc1121d2",
@@ -1804,7 +1808,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261127-okinawa-times-88cac3e9f3",
@@ -1825,14 +1830,15 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事2件を代表記事へ統合"
+        "同じ内容の記事2件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "91a0f5f65fa7a75a2f70",
       "articleFingerprint": "88cac3e9f3c781cc3208",
@@ -1856,7 +1862,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 2
+      "relatedCount": 2,
+      "previousStatus": "review"
     },
     {
       "id": "20261127-okinawa-times-fea1d5a3aa",
@@ -1877,13 +1884,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "8d09e338897dc347f323",
       "articleFingerprint": "fea1d5a3aa3ca3b28948",
@@ -1904,7 +1912,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261127-ryukyu-shimpo-5b280c138a",
@@ -1925,13 +1934,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "c9fafa979784f61b4762",
       "articleFingerprint": "5b280c138a0c5c42dea5",
@@ -1952,7 +1962,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261127-google-news-ishikawa-b20c7bc499",
@@ -1998,7 +2009,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261127-ryukyu-shimpo-b20c7bc499",
@@ -2021,14 +2033,15 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容の記事1件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "6d4af08e279835da93f3",
       "articleFingerprint": "b20c7bc4994abee079f0",
@@ -2049,7 +2062,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "review"
     },
     {
       "id": "20261127-ryukyu-shimpo-3eb5d12ba4",
@@ -2070,13 +2084,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "e86703065f6b3f343e6b",
       "articleFingerprint": "3eb5d12ba4e1662c1c9a",
@@ -2097,7 +2112,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261127-ryukyu-shimpo-773cfc6272",
@@ -2118,13 +2134,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "d201fcb1724424563c6c",
       "articleFingerprint": "773cfc6272f306fce4c2",
@@ -2145,7 +2162,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261127-okinawa-times-f639358208",
@@ -2168,14 +2186,15 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "対象外地域との一致を検出",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "石川地区との関連根拠が基準未満のため自動除外",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない"
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "273af6b4431615229ee5",
       "articleFingerprint": "f639358208b989b2eb57",
@@ -2196,7 +2215,8 @@
         "eventEndsAt": "2026-11-27T00:00:00+09:00",
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20261126-okinawa-times-dc75eb4f2d",
@@ -2219,14 +2239,15 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容の記事1件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "71eac007698a9571a228",
       "articleFingerprint": "dc75eb4f2d08ad6e0c89",
@@ -2249,7 +2270,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "review"
     },
     {
       "id": "20261126-ryukyu-shimpo-c07808562e",
@@ -2293,7 +2315,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261126-okinawa-times-98eea811d7",
@@ -2314,13 +2337,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "494c41104b61a5ce2f59",
       "articleFingerprint": "98eea811d7fa3cc8d0b1",
@@ -2341,7 +2365,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261126-ryukyu-shimpo-794acd07dd",
@@ -2362,13 +2387,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "9a91aae1891dfa34f0b1",
       "articleFingerprint": "794acd07dd346e42e237",
@@ -2389,7 +2415,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261126-ryukyu-shimpo-7a7b5e3279",
@@ -2410,14 +2437,15 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "対象外地域との一致を検出",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "石川地区との関連根拠が基準未満のため自動除外",
-        "リンク先本文を取得できず: HTTPError: HTTP Error 429: Too Many Requests"
+        "リンク先本文を取得できず: HTTPError: HTTP Error 429: Too Many Requests",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "488972adb3513ff93119",
       "articleFingerprint": "7a7b5e3279184470ee05",
@@ -2440,7 +2468,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20261126-okinawa-times-beb3cffa50",
@@ -2513,14 +2542,15 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "人名の「石川」との一致を検出",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "石川地区との関連根拠が基準未満のため自動除外",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない"
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "bc31cc174e78eb90dfff",
       "articleFingerprint": "6dcb50c099c28851e90d",
@@ -2541,7 +2571,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20261126-okinawa-times-65fd9715f0",
@@ -2562,13 +2593,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "5a95755703f728fc5612",
       "articleFingerprint": "65fd9715f045c534b528",
@@ -2589,7 +2621,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261126-ryukyu-shimpo-9733b344d0",
@@ -2722,13 +2755,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "a303cf03b37c00383063",
       "articleFingerprint": "a0e6c445e414d08e2f4d",
@@ -2749,7 +2783,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261126-ryukyu-shimpo-f0353f9a99",
@@ -2770,7 +2805,7 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "人名の「石川」との一致を検出",
@@ -2778,7 +2813,8 @@
         "石川地区との関連根拠が不足",
         "石川地区との関連根拠が基準未満のため自動除外",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容の記事1件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "3e0cf58ed66479edd91b",
       "articleFingerprint": "f0353f9a99c38f52533f",
@@ -2801,7 +2837,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "rejected"
     },
     {
       "id": "20261126-ryukyu-shimpo-5ca4278247",
@@ -2822,13 +2859,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "b75324fc0754e8ed44d1",
       "articleFingerprint": "5ca4278247e09238244e",
@@ -2849,7 +2887,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261126-ryukyu-shimpo-024d5b1b22",
@@ -2870,13 +2909,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "d33374397bd8b7ab8fc7",
       "articleFingerprint": "024d5b1b22e36896904a",
@@ -2897,7 +2937,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261126-okinawa-times-52ee17c191",
@@ -2943,7 +2984,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261126-okinawa-times-2bf62e7f4c",
@@ -3069,14 +3111,15 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "対象外地域との一致を検出",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "石川地区との関連根拠が基準未満のため自動除外",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない"
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "19529d369d6d7fb416c9",
       "articleFingerprint": "38dcc39e8fb83adc97da",
@@ -3097,7 +3140,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20261125-ryukyu-shimpo-15c9c41b6e",
@@ -3118,13 +3162,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "94271a32650f0249703e",
       "articleFingerprint": "15c9c41b6ea70d645ac1",
@@ -3145,7 +3190,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-ryukyu-shimpo-ed799e5c92",
@@ -3216,14 +3262,15 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "対象外地域との一致を検出",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "石川地区との関連根拠が基準未満のため自動除外",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない"
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "96b79ed9761241fe61bb",
       "articleFingerprint": "1916bd2134f73c7faf31",
@@ -3244,7 +3291,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20261125-region-discovery-ishikawa-government-c7f460092e",
@@ -3265,14 +3313,15 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "うるま市内だが石川地区の根拠が不足",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "c57b825c669980050952",
       "articleFingerprint": "c7f460092eec2194dad8",
@@ -3293,7 +3342,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-ryukyu-shimpo-519cfd659a",
@@ -3314,13 +3364,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "9d1cda4f3a690b4bd8b8",
       "articleFingerprint": "519cfd659a42d4efc7d6",
@@ -3341,7 +3392,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-ryukyu-shimpo-df935c8ca0",
@@ -3362,7 +3414,7 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "人名の「石川」との一致を検出",
@@ -3370,7 +3422,8 @@
         "石川地区との関連根拠が不足",
         "石川地区との関連根拠が基準未満のため自動除外",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容の記事1件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "89195a42dd24630c7a7f",
       "articleFingerprint": "df935c8ca0c7323ddb4c",
@@ -3395,7 +3448,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "rejected"
     },
     {
       "id": "20261125-okinawa-times-d7353e4fa2",
@@ -3443,7 +3497,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261125-ryukyu-shimpo-e1ea2a3336",
@@ -3464,13 +3519,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "6eedbeb5c39c73f136af",
       "articleFingerprint": "e1ea2a33364b5fdb919d",
@@ -3491,7 +3547,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-ryukyu-shimpo-49a6c0f61c",
@@ -3686,7 +3743,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261125-okinawa-times-cea65a280b",
@@ -3707,15 +3765,16 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "うるま市内だが石川地区の根拠が不足",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事2件を代表記事へ統合"
+        "同じ内容の記事2件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "d51d6ff1385986db9987",
       "articleFingerprint": "cea65a280b9a250a8c78",
@@ -3738,7 +3797,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 2
+      "relatedCount": 2,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-okinawa-times-320636f6c5",
@@ -3782,7 +3842,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261125-ryukyu-shimpo-9cf35ebcf8",
@@ -3891,7 +3952,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261125-google-news-ishikawa-dome-c4bec85c13",
@@ -3943,7 +4005,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261125-ryukyu-shimpo-c4bec85c13",
@@ -3995,7 +4058,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261125-ryukyu-shimpo-a2b40c8dbd",
@@ -4016,15 +4080,16 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "うるま市内だが石川地区の根拠が不足",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容の記事1件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "462eb62d8414cd3fe579",
       "articleFingerprint": "a2b40c8dbda3ed9d2ce3",
@@ -4045,7 +4110,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-region-theme-ishikawa-bullfighting-c4bec85c13",
@@ -4098,7 +4164,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261125-ryukyu-shimpo-978de9de08",
@@ -4582,13 +4649,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "02594ef2bc62d43a7bd0",
       "articleFingerprint": "710f6de076883a66f471",
@@ -4609,7 +4677,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-okinawa-times-4269245f34",
@@ -4630,13 +4699,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "8ef3a43fac9df8414516",
       "articleFingerprint": "4269245f34d6689bbc02",
@@ -4657,7 +4727,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-okinawa-times-5590cd54df",
@@ -4726,13 +4797,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "aafb9ed0d77cf508acd1",
       "articleFingerprint": "21a5dfe01c5e962f99ea",
@@ -4753,7 +4825,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-okinawa-times-a9411e83d7",
@@ -4824,13 +4897,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "cb11ff87601825fc68c7",
       "articleFingerprint": "1cb59771f4f0791496c7",
@@ -4851,7 +4925,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-okinawa-times-abc9415b82",
@@ -4872,13 +4947,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "975e68a8b58ba93c6ba2",
       "articleFingerprint": "abc9415b82a88c6a2ecf",
@@ -4899,7 +4975,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-okinawa-times-86937a9742",
@@ -4920,13 +4997,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "fc5548c2cf43cee8e522",
       "articleFingerprint": "86937a9742b920f44e79",
@@ -4947,7 +5025,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-okinawa-times-7f492dad9c",
@@ -4968,13 +5047,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "1249f6446a69004a9740",
       "articleFingerprint": "7f492dad9c12b5e2184c",
@@ -4995,7 +5075,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-okinawa-times-91737dae73",
@@ -5016,13 +5097,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "3f0275af79ecae45e151",
       "articleFingerprint": "91737dae7359c478beb4",
@@ -5043,7 +5125,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-okinawa-times-068e5a9549",
@@ -5064,13 +5147,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "5790b3a54d2fffd986fd",
       "articleFingerprint": "068e5a95491df44af064",
@@ -5091,7 +5175,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-okinawa-times-eeaef48267",
@@ -5112,13 +5197,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "cee24e7dd48665b02a2a",
       "articleFingerprint": "eeaef48267e73c057711",
@@ -5139,7 +5225,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-okinawa-times-c234908124",
@@ -5160,13 +5247,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "1a064715b7d3dc857c59",
       "articleFingerprint": "c23490812462e002b6b9",
@@ -5187,7 +5275,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-okinawa-times-c079921c4d",
@@ -5208,13 +5297,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "32dc08d8879a57036d2c",
       "articleFingerprint": "c079921c4d731fb78557",
@@ -5235,7 +5325,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261125-okinawa-times-bea8cd7157",
@@ -5356,13 +5447,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "be2ab270d88ffce4ed81",
       "articleFingerprint": "a56513f51d1a40c5001a",
@@ -5383,7 +5475,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261124-ryukyu-shimpo-80e288e1eb",
@@ -5404,13 +5497,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "0dca588a1c8c28d75460",
       "articleFingerprint": "80e288e1eb1c46661bb3",
@@ -5431,7 +5525,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261124-okinawa-times-b8f4195a8a",
@@ -5562,14 +5657,15 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "rejected",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
         "対象外地域との一致を検出",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "石川地区との関連根拠が基準未満のため自動除外",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない"
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "9bf2f8e9ab4145b85897",
       "articleFingerprint": "94b910452420ae1c7dac",
@@ -5590,7 +5686,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "rejected"
     },
     {
       "id": "20261124-okinawa-times-87a93c2d25",
@@ -5815,13 +5912,14 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "7f8ba8cc65ed861dd99d",
       "articleFingerprint": "8d3129996d40d6cee920",
@@ -5842,7 +5940,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261124-ryukyu-shimpo-c666a8f8e6",
@@ -6277,15 +6376,16 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "同名施設の誤一致を防ぐため地域文脈の確認が必要",
         "施設専用検索で発見したが、記事内に施設名を確認できない",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留"
+        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "8a92400c012970d82444",
       "articleFingerprint": "b52fc658db534a4e90e4",
@@ -6308,7 +6408,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261123-okinawa-times-41fc59f90d",
@@ -6481,8 +6582,8 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "同名施設の誤一致を防ぐため地域文脈の確認が必要",
         "施設専用検索で発見したが、記事内に施設名を確認できない",
@@ -6490,7 +6591,8 @@
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事2件を代表記事へ統合"
+        "同じ内容の記事2件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "2d7703024f3f15cf314f",
       "articleFingerprint": "05777fa091a2095eb466",
@@ -6515,7 +6617,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 2
+      "relatedCount": 2,
+      "previousStatus": "review"
     },
     {
       "id": "20261122-okinawa-times-16234da581",
@@ -6589,15 +6692,16 @@
         "うるま市等の公式発信"
       ],
       "confidence": 75,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "うるま市内だが石川地区の根拠が不足",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事2件を代表記事へ統合"
+        "同じ内容の記事2件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "04f7fe348b62e606c3ab",
       "articleFingerprint": "18bdb73cc7c911fec0e5",
@@ -6620,7 +6724,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 2
+      "relatedCount": 2,
+      "previousStatus": "review"
     },
     {
       "id": "20261122-uruma-city-3029ce2f39",
@@ -6670,7 +6775,7 @@
         "venue": ""
       },
       "relatedCount": 1,
-      "previousStatus": "review"
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261122-region-facility-ishikawa-rakujuen-530bf42e93",
@@ -6691,8 +6796,8 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 45,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "同名施設の誤一致を防ぐため地域文脈の確認が必要",
         "施設専用検索で発見したが、記事内に施設名を確認できない",
@@ -6700,7 +6805,8 @@
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事2件を代表記事へ統合"
+        "同じ内容の記事2件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "9908758eaedf2e3c382c",
       "articleFingerprint": "530bf42e93afbb497416",
@@ -6726,7 +6832,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 2
+      "relatedCount": 2,
+      "previousStatus": "review"
     },
     {
       "id": "20261122-ryukyu-shimpo-e61142a207",
@@ -6804,15 +6911,16 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "うるま市内だが石川地区の根拠が不足",
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容の記事1件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "8b93e871227dc27fc07b",
       "articleFingerprint": "0308a8fd46d5af8460f9",
@@ -6833,7 +6941,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "review"
     },
     {
       "id": "20261122-ryukyu-shimpo-c7952d5681",
@@ -6856,14 +6965,15 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "石川地区との関連根拠が不足",
         "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
         "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容の記事1件を代表記事へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "52e677b350749f8db3b1",
       "articleFingerprint": "c7952d568120334c4a85",
@@ -6884,7 +6994,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "review"
     },
     {
       "id": "20261122-region-theme-ishikawa-yamashiro-tea-0308a8fd46",
@@ -6930,7 +7041,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261122-ryukyu-shimpo-ad4b6483d4",
@@ -7597,10 +7709,12 @@
         "石川"
       ],
       "confidence": 65,
-      "status": "duplicate",
+      "status": "expired",
       "requiresReview": false,
       "reviewReasons": [
-        "同じ内容として代表記事「水俣で「石川さゆりショー」開催 胎児性患者「最後の機会」」へ統合"
+        "同じ内容として代表記事「水俣で「石川さゆりショー」開催 胎児性患者「最後の機会」」へ統合",
+        "掲載・判断期間を過ぎたため監査記録へ移動",
+        "同じ内容の記事1件を代表記事へ統合"
       ],
       "fingerprint": "d79c34b9a61734d3182d",
       "articleFingerprint": "f35c6d30d60e127c7ab8",
@@ -7645,14 +7759,10 @@
       "localScore": 0,
       "localEvidence": [],
       "confidence": 65,
-      "status": "review",
-      "requiresReview": true,
+      "status": "duplicate",
+      "requiresReview": false,
       "reviewReasons": [
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事1件を代表記事へ統合"
+        "同じ内容として代表記事「水俣で「石川さゆりショー」開催 胎児性患者「最後の機会」」へ統合"
       ],
       "fingerprint": "d79c34b9a61734d3182d",
       "articleFingerprint": "c9b3ac3e30a9c1b7dbed",
@@ -7661,7 +7771,7 @@
       "relatedUrls": [
         "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9UdktpWE54MHo3eXBhRU5MWEphNDU3Z1lQcFNBOTNpc2hHQlgzME80d09WYm9UNXpwdDZ3czNMSjQyQWJ1WEJCRHE1ZWZqX29HbzhtdTVsWWVJWUZuakE?oc=5"
       ],
-      "duplicateOf": null,
+      "duplicateOf": "20261121-okinawa-times-f35c6d30d6",
       "contentCheck": {
         "status": "unavailable",
         "checkedAt": "2026-11-27T12:26:18.997961+09:00",
@@ -7675,7 +7785,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1
+      "relatedCount": 1,
+      "previousStatus": "review"
     },
     {
       "id": "20261121-okinawa-times-8874319813",
@@ -7944,12 +8055,13 @@
         "石川署"
       ],
       "confidence": 45,
-      "status": "review",
-      "requiresReview": true,
+      "status": "expired",
+      "requiresReview": false,
       "reviewReasons": [
         "Googleニュース経由のため配信元記事を確認できるリンクを使用",
         "慎重な確認が必要な内容のため判断保留",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない"
+        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
+        "掲載・判断期間を過ぎたため監査記録へ移動"
       ],
       "fingerprint": "e9b86601a8f3d9c786dd",
       "articleFingerprint": "650fb1bdeac6b8733c64",
@@ -7970,7 +8082,8 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 0
+      "relatedCount": 0,
+      "previousStatus": "review"
     },
     {
       "id": "20261121-region-facility-ishikawa-rakujuen-18bb976b34",
@@ -8016,7 +8129,8 @@
         "eventStartsAt": null,
         "eventEndsAt": null,
         "venue": ""
-      }
+      },
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261121-okinawa-times-969fc6b9e7",
@@ -9461,7 +9575,7 @@
         "venue": ""
       },
       "relatedCount": 1,
-      "previousStatus": "review"
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261120-ryukyu-shimpo-ea9d89a195",
@@ -25879,7 +25993,7 @@
         "venue": ""
       },
       "relatedCount": 1,
-      "previousStatus": "review"
+      "previousStatus": "duplicate"
     },
     {
       "id": "20261108-okinawa-times-ad2913f05c",
@@ -31992,7 +32106,7 @@
         "eventEndsAt": null,
         "venue": ""
       },
-      "relatedCount": 1,
+      "relatedCount": 0,
       "previousStatus": "review"
     },
     {
@@ -36648,418 +36762,6 @@
         "venue": ""
       },
       "previousStatus": "duplicate"
-    },
-    {
-      "id": "20261029-okinawa-times-02338e327f",
-      "title": "南米から帰郷 同級生歓迎 うるま 模合「南風23会」 - 沖縄タイムス社",
-      "displayTitle": "南米から帰郷 同級生歓迎 うるま 模合「南風23会」",
-      "summary": "南米から帰郷 同級生歓迎 うるま 模合「南風23会」 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA0SmtTU0FXckZUZnhsUWE2LVBOc1QwUFUzMXNwejNYU0NnUHd4LWRVTVF1a2pZaUkwUXRpUkp4dTNkUlMwNi1rcUtVODBPbGRNWXBSS1pCTUhPM0N6enc?oc=5",
-      "sourceId": "okinawa-times",
-      "sourceName": "沖縄タイムス",
-      "sourceType": "media",
-      "publishedAt": "2026-10-29T03:57:00+09:00",
-      "discoveredAt": "2026-11-02T09:10:24.776941+09:00",
-      "checkedAt": "2026-11-04T09:59:48.838004+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-11-05T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 65,
-      "status": "expired",
-      "requiresReview": false,
-      "reviewReasons": [
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
-      ],
-      "fingerprint": "a7764f4887d559e63ff5",
-      "articleFingerprint": "02338e327f7eb910c460",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": null,
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-11-04T09:59:48.838004+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA0SmtTU0FXckZUZnhsUWE2LVBOc1QwUFUzMXNwejNYU0NnUHd4LWRVTVF1a2pZaUkwUXRpUkp4dTNkUlMwNi1rcUtVODBPbGRNWXBSS1pCTUhPM0N6enc?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA0SmtTU0FXckZUZnhsUWE2LVBOc1QwUFUzMXNwejNYU0NnUHd4LWRVTVF1a2pZaUkwUXRpUkp4dTNkUlMwNi1rcUtVODBPbGRNWXBSS1pCTUhPM0N6enc",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 0,
-      "previousStatus": "review"
-    },
-    {
-      "id": "20261029-okinawa-times-2be87eb66f",
-      "title": "子や孫が集まり 健康長寿願う うるま与那城西原 上地キヨさん カジマヤー各地で祝う - 沖縄タイムス社",
-      "displayTitle": "子や孫が集まり 健康長寿願う うるま与那城西原 上地キヨさん カジマヤー各地で祝う",
-      "summary": "子や孫が集まり 健康長寿願う うるま与那城西原 上地キヨさん カジマヤー各地で祝う 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5kdnNqZ29abFpTZDFPMHdFRWdyb3dUdnFQNFR1bmNiMU9wQlVNaEZ2M2lPRVd1VEEwTXBJY25IYzMzNlJpck5RM1FQRExSUWZGYXQ3RTFSUTU0a1BBZkE?oc=5",
-      "sourceId": "okinawa-times",
-      "sourceName": "沖縄タイムス",
-      "sourceType": "media",
-      "publishedAt": "2026-10-29T03:57:00+09:00",
-      "discoveredAt": "2026-11-02T09:10:24.776941+09:00",
-      "checkedAt": "2026-11-02T09:10:24.776941+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-11-05T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 65,
-      "status": "expired",
-      "requiresReview": false,
-      "reviewReasons": [
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
-      ],
-      "fingerprint": "1d18e134e6b3e085e62d",
-      "articleFingerprint": "2be87eb66fab4e24ae7d",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": null,
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-11-02T09:10:24.776941+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5kdnNqZ29abFpTZDFPMHdFRWdyb3dUdnFQNFR1bmNiMU9wQlVNaEZ2M2lPRVd1VEEwTXBJY25IYzMzNlJpck5RM1FQRExSUWZGYXQ3RTFSUTU0a1BBZkE?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5kdnNqZ29abFpTZDFPMHdFRWdyb3dUdnFQNFR1bmNiMU9wQlVNaEZ2M2lPRVd1VEEwTXBJY25IYzMzNlJpck5RM1FQRExSUWZGYXQ3RTFSUTU0a1BBZkE",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 0,
-      "previousStatus": "review"
-    },
-    {
-      "id": "20261028-uruma-city-efb73b27ae",
-      "title": "保護者向けレクチャー「こどもとねむり」を開催します！ - うるま市",
-      "displayTitle": "保護者向けレクチャー「こどもとねむり」を開催します! - うるま市",
-      "summary": "保護者向けレクチャー「こどもとねむり」を開催します！ うるま市",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5PQW9VSWU3eDl6U0xpZk5SWHBka1N1SWtLUzM1OVotX0JtQmViMkhtLVVjYlNxbWlkbzRTR0t6R2xhUF9BMjZDdFVrODYzQkNSNkRNNVE2SHMzc3FwQlllS0l1OWYweGFnVWxLZVZR?oc=5",
-      "sourceId": "uruma-city",
-      "sourceName": "うるま市公式サイト",
-      "sourceType": "official",
-      "publishedAt": "2026-10-28T21:15:04+09:00",
-      "discoveredAt": "2026-11-03T11:44:12.122252+09:00",
-      "checkedAt": "2026-11-04T09:59:48.838004+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-11-04T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [
-        "うるま市等の公式発信"
-      ],
-      "confidence": 75,
-      "status": "expired",
-      "requiresReview": false,
-      "reviewReasons": [
-        "うるま市内だが石川地区の根拠が不足",
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
-      ],
-      "fingerprint": "77b1c7ce9b4db7b824ce",
-      "articleFingerprint": "efb73b27ae299792e069",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": null,
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-11-04T09:59:48.838004+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5PQW9VSWU3eDl6U0xpZk5SWHBka1N1SWtLUzM1OVotX0JtQmViMkhtLVVjYlNxbWlkbzRTR0t6R2xhUF9BMjZDdFVrODYzQkNSNkRNNVE2SHMzc3FwQlllS0l1OWYweGFnVWxLZVZR?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5PQW9VSWU3eDl6U0xpZk5SWHBka1N1SWtLUzM1OVotX0JtQmViMkhtLVVjYlNxbWlkbzRTR0t6R2xhUF9BMjZDdFVrODYzQkNSNkRNNVE2SHMzc3FwQlllS0l1OWYweGFnVWxLZVZR",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 0,
-      "previousStatus": "review"
-    },
-    {
-      "id": "20261028-region-facility-ishikawa-ishikawa-library-039c6f6ac5",
-      "title": "読書週間イベント「ブックフェスタinうるま」 - うるま市",
-      "displayTitle": "読書週間イベント「ブックフェスタinうるま」 - うるま市",
-      "summary": "読書週間イベント「ブックフェスタinうるま」 うるま市",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9tT2hHMjFWc1JTRVhqSHFadDFyRGtHZ09kMUI5UlBsVU15Y0JKenlTbjV1Mzk1UC1leHhoNnMwc05sOFZ6Q3hmcmpsUGhRZEZaWlhFX3AxRHhrVzdJZHFEUzFSVk1oTnFqb2lISFd3?oc=5",
-      "sourceId": "region-facility-ishikawa-ishikawa-library",
-      "sourceName": "石川施設：石川図書館",
-      "sourceType": "discovery",
-      "publishedAt": "2026-10-28T16:00:00+09:00",
-      "discoveredAt": "2026-11-02T09:10:24.776941+09:00",
-      "checkedAt": "2026-11-04T09:59:48.838004+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-11-04T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 45,
-      "status": "duplicate",
-      "requiresReview": false,
-      "reviewReasons": [
-        "同じ内容として代表記事「読書週間イベント「ブックフェスタinうるま」 - うるま市」へ統合"
-      ],
-      "fingerprint": "4ded7b42b137028adca0",
-      "articleFingerprint": "039c6f6ac573f63f97ab",
-      "facilityId": "ishikawa-library",
-      "eventMarkers": [
-        "ブックフェスタinうるま",
-        "読書週間イベントブックフェスタinうるまうるま市"
-      ],
-      "relatedUrls": [],
-      "duplicateOf": "20261104-region-facility-ishikawa-ishikawa-library-039c6f6ac5",
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-11-04T09:59:48.838004+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9tT2hHMjFWc1JTRVhqSHFadDFyRGtHZ09kMUI5UlBsVU15Y0JKenlTbjV1Mzk1UC1leHhoNnMwc05sOFZ6Q3hmcmpsUGhRZEZaWlhFX3AxRHhrVzdJZHFEUzFSVk1oTnFqb2lISFd3?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9tT2hHMjFWc1JTRVhqSHFadDFyRGtHZ09kMUI5UlBsVU15Y0JKenlTbjV1Mzk1UC1leHhoNnMwc05sOFZ6Q3hmcmpsUGhRZEZaWlhFX3AxRHhrVzdJZHFEUzFSVk1oTnFqb2lISFd3",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 2,
-      "previousStatus": "duplicate"
-    },
-    {
-      "id": "20261028-region-facility-ishikawa-rakujuen-491810e55e",
-      "title": "三島麦空（MISHIMA MUGISORA） - アットエス",
-      "displayTitle": "三島麦空(MISHIMA MUGISORA) - アットエス",
-      "summary": "三島麦空（MISHIMA MUGISORA） アットエス",
-      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE8ta1FTTzlPdDBvb3ptYWZKTWNRYlp1ZUNQNVlZODc2RzVRVVpkd1RPQXNObVNfdVNDaXJhXzE3VGhfQXRCc1BCLU5ESUNZZDl4dndzNg?oc=5",
-      "sourceId": "region-facility-ishikawa-rakujuen",
-      "sourceName": "石川施設：特別養護老人ホーム 楽寿園",
-      "sourceType": "discovery",
-      "publishedAt": "2026-10-28T16:00:00+09:00",
-      "discoveredAt": "2026-10-31T09:18:54.990253+09:00",
-      "checkedAt": "2026-11-04T09:59:48.838004+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-11-04T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 45,
-      "status": "expired",
-      "requiresReview": false,
-      "reviewReasons": [
-        "施設専用検索で発見したが、記事内に施設名を確認できない",
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
-      ],
-      "fingerprint": "3d620611286236aacf69",
-      "articleFingerprint": "491810e55e37f4adf9fc",
-      "facilityId": "rakujuen",
-      "eventMarkers": [],
-      "relatedUrls": [],
-      "duplicateOf": null,
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-11-04T09:59:48.838004+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE8ta1FTTzlPdDBvb3ptYWZKTWNRYlp1ZUNQNVlZODc2RzVRVVpkd1RPQXNObVNfdVNDaXJhXzE3VGhfQXRCc1BCLU5ESUNZZDl4dndzNg?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE8ta1FTTzlPdDBvb3ptYWZKTWNRYlp1ZUNQNVlZODc2RzVRVVpkd1RPQXNObVNfdVNDaXJhXzE3VGhfQXRCc1BCLU5ESUNZZDl4dndzNg",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 0,
-      "previousStatus": "review"
-    },
-    {
-      "id": "20261028-okinawa-times-8ca9ec34db",
-      "title": "うるま市議選2026 候補者詳細｜伊波洋 - 沖縄タイムス社",
-      "displayTitle": "うるま市議選2026 候補者詳細|伊波洋",
-      "summary": "うるま市議選2026 候補者詳細｜伊波洋 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxOR3ZMdHoyb1FuMjV6cXBkWVIybHhqSzhDMWM5dG1LLUx1ZWFxcllreGJLd0dOUUJfbFlBOHpCdmRrUGJ1MlVlRXYwT0NFQlVPR09zN280N3dnempvY0stN2VZaW43RjNnZGhBeWVkRG5CcS1jaWlNTDkzWjFnZC1TSXF3bTM0a0dGdV9LR3RoVzhpNkNBSEVjZGpiVk8wNUNfTVl0T2d0Qk9RU0tQSzVnZVNraVpjSV8yWmJubm52SkEtTDJpT3NQWkxrQzhzc1V0ckhJLUJxNXBUQmJyODZSSHFwOVNOR0p2ZkpzUVFpalgzdw?oc=5",
-      "sourceId": "okinawa-times",
-      "sourceName": "沖縄タイムス",
-      "sourceType": "media",
-      "publishedAt": "2026-10-28T14:38:05+09:00",
-      "discoveredAt": "2026-11-04T09:59:48.838004+09:00",
-      "checkedAt": "2026-11-04T09:59:48.838004+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-11-04T23:59:59+09:00",
-      "category": "news",
-      "localScore": 25,
-      "localEvidence": [
-        "伊波"
-      ],
-      "confidence": 65,
-      "status": "expired",
-      "requiresReview": false,
-      "reviewReasons": [
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "同じ内容の記事1件を代表記事へ統合",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
-      ],
-      "fingerprint": "709d0dd6e866a32eae86",
-      "articleFingerprint": "8ca9ec34db15b5cfda21",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [
-        "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOVzVfaWRXWGk1dHFqaFhpT1F4NXFVa2VGTGI0cmRydm52QS10d2F2YXM3UVJPWURJWEgycHVKeFVnZWVwb1ViZnNpaFJnQTA3ZVBieHZJSnhqMEVVdU13WGgyVnlVUlFOZ2FpMmJoOTZ3dkk4ZGh0ZU15ZWZaUGFiYXpoMFRmclZqb2I5TEptSWF4czdyYTV1VzNCS1hvQng5OEcyVmJTczJfckhGLTZmbEhfV08yOUJVVG5abUJxWGg0dw?oc=5"
-      ],
-      "duplicateOf": null,
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-11-04T09:59:48.838004+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxOR3ZMdHoyb1FuMjV6cXBkWVIybHhqSzhDMWM5dG1LLUx1ZWFxcllreGJLd0dOUUJfbFlBOHpCdmRrUGJ1MlVlRXYwT0NFQlVPR09zN280N3dnempvY0stN2VZaW43RjNnZGhBeWVkRG5CcS1jaWlNTDkzWjFnZC1TSXF3bTM0a0dGdV9LR3RoVzhpNkNBSEVjZGpiVk8wNUNfTVl0T2d0Qk9RU0tQSzVnZVNraVpjSV8yWmJubm52SkEtTDJpT3NQWkxrQzhzc1V0ckhJLUJxNXBUQmJyODZSSHFwOVNOR0p2ZkpzUVFpalgzdw?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxOR3ZMdHoyb1FuMjV6cXBkWVIybHhqSzhDMWM5dG1LLUx1ZWFxcllreGJLd0dOUUJfbFlBOHpCdmRrUGJ1MlVlRXYwT0NFQlVPR09zN280N3dnempvY0stN2VZaW43RjNnZGhBeWVkRG5CcS1jaWlNTDkzWjFnZC1TSXF3bTM0a0dGdV9LR3RoVzhpNkNBSEVjZGpiVk8wNUNfTVl0T2d0Qk9RU0tQSzVnZVNraVpjSV8yWmJubm52SkEtTDJpT3NQWkxrQzhzc1V0ckhJLUJxNXBUQmJyODZSSHFwOVNOR0p2ZkpzUVFpalgzdw",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 1,
-      "previousStatus": "review"
-    },
-    {
-      "id": "20261028-okinawa-times-8b11928e04",
-      "title": "うるま市議選2026 候補者詳細｜伊波洋 - 沖縄タイムス社",
-      "displayTitle": "うるま市議選2026 候補者詳細|伊波洋",
-      "summary": "うるま市議選2026 候補者詳細｜伊波洋 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOVzVfaWRXWGk1dHFqaFhpT1F4NXFVa2VGTGI0cmRydm52QS10d2F2YXM3UVJPWURJWEgycHVKeFVnZWVwb1ViZnNpaFJnQTA3ZVBieHZJSnhqMEVVdU13WGgyVnlVUlFOZ2FpMmJoOTZ3dkk4ZGh0ZU15ZWZaUGFiYXpoMFRmclZqb2I5TEptSWF4czdyYTV1VzNCS1hvQng5OEcyVmJTczJfckhGLTZmbEhfV08yOUJVVG5abUJxWGg0dw?oc=5",
-      "sourceId": "okinawa-times",
-      "sourceName": "沖縄タイムス",
-      "sourceType": "media",
-      "publishedAt": "2026-10-28T12:49:52+09:00",
-      "discoveredAt": "2026-10-29T09:33:26.254641+09:00",
-      "checkedAt": "2026-10-31T09:18:54.990253+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-11-04T23:59:59+09:00",
-      "category": "news",
-      "localScore": 25,
-      "localEvidence": [
-        "伊波"
-      ],
-      "confidence": 65,
-      "status": "duplicate",
-      "requiresReview": false,
-      "reviewReasons": [
-        "同じ内容として代表記事「うるま市議選2026 候補者詳細|伊波洋」へ統合"
-      ],
-      "fingerprint": "709d0dd6e866a32eae86",
-      "articleFingerprint": "8b11928e04ca8e2f82e0",
-      "facilityId": null,
-      "eventMarkers": [],
-      "relatedUrls": [
-        "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQLU1neFBqQVlHSjRmRjNzVC1saHN5OUR6T2ZxYkxaQVVMalJFSHZQZlNzMmg4d2UySWwtdGdna0xzVGtkZGxwTE5iMTdVVFhpWENVVER6ZmpBU2ZyVGVjRXprX3R0Q3VLTmU3U2hnU21qV3VOS1VBb25paUtUWlpuTDNfTlM3RWlYZkVKUGo0X2dWRlVhYjhsbFdsekxVOWVYNkZmelhhTHVNZw?oc=5"
-      ],
-      "duplicateOf": "20261028-okinawa-times-8ca9ec34db",
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-10-31T09:18:54.990253+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOVzVfaWRXWGk1dHFqaFhpT1F4NXFVa2VGTGI0cmRydm52QS10d2F2YXM3UVJPWURJWEgycHVKeFVnZWVwb1ViZnNpaFJnQTA3ZVBieHZJSnhqMEVVdU13WGgyVnlVUlFOZ2FpMmJoOTZ3dkk4ZGh0ZU15ZWZaUGFiYXpoMFRmclZqb2I5TEptSWF4czdyYTV1VzNCS1hvQng5OEcyVmJTczJfckhGLTZmbEhfV08yOUJVVG5abUJxWGg0dw?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOVzVfaWRXWGk1dHFqaFhpT1F4NXFVa2VGTGI0cmRydm52QS10d2F2YXM3UVJPWURJWEgycHVKeFVnZWVwb1ViZnNpaFJnQTA3ZVBieHZJSnhqMEVVdU13WGgyVnlVUlFOZ2FpMmJoOTZ3dkk4ZGh0ZU15ZWZaUGFiYXpoMFRmclZqb2I5TEptSWF4czdyYTV1VzNCS1hvQng5OEcyVmJTczJfckhGLTZmbEhfV08yOUJVVG5abUJxWGg0dw",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 0,
-      "previousStatus": "duplicate"
-    },
-    {
-      "id": "20261028-okinawa-times-164b3be3d0",
-      "title": "名勝負を映像と解説で堪能 本物の闘牛登場に歓声も 沖縄・うるま市で鑑賞会 - 沖縄タイムス社",
-      "displayTitle": "名勝負を映像と解説で堪能 本物の闘牛登場に歓声も 沖縄・うるま市で鑑賞会",
-      "summary": "名勝負を映像と解説で堪能 本物の闘牛登場に歓声も 沖縄・うるま市で鑑賞会 沖縄タイムス社",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA2Y1JmR0p3QkZGTUw3Y0xtY3UyaHRhMjlkSVdPZmRTWkJsNXR2M1NWT3NvNlJmMi1kRWVxRmE3U1dwcU9kVDNzbF9CZkhTekVuUl9TX1Nxb3lkQUEtRFE?oc=5",
-      "sourceId": "okinawa-times",
-      "sourceName": "沖縄タイムス",
-      "sourceType": "media",
-      "publishedAt": "2026-10-28T12:29:00+09:00",
-      "discoveredAt": "2026-11-02T09:10:24.776941+09:00",
-      "checkedAt": "2026-11-02T09:10:24.776941+09:00",
-      "eventStartsAt": null,
-      "eventEndsAt": null,
-      "expiresAt": "2026-11-04T23:59:59+09:00",
-      "category": "news",
-      "localScore": 0,
-      "localEvidence": [],
-      "confidence": 65,
-      "status": "expired",
-      "requiresReview": false,
-      "reviewReasons": [
-        "うるま市内だが石川地区の根拠が不足",
-        "Googleニュース経由のため配信元記事を確認できるリンクを使用",
-        "石川地区との関連根拠が不足",
-        "リンク先本文を取得できず: 記事本文の主要部分を抽出できない",
-        "記事本文を確認できないため自動掲載・自動除外せず判断保留",
-        "掲載・判断期間を過ぎたため監査記録へ移動"
-      ],
-      "fingerprint": "7825c91608c8332c135a",
-      "articleFingerprint": "164b3be3d095b4c64bea",
-      "facilityId": null,
-      "eventMarkers": [
-        "term:闘牛",
-        "名勝負を映像と解説で堪能本物の闘牛登場に歓声も沖縄うるま市で鑑賞会"
-      ],
-      "relatedUrls": [],
-      "duplicateOf": null,
-      "contentCheck": {
-        "status": "unavailable",
-        "checkedAt": "2026-11-02T09:10:24.776941+09:00",
-        "requestedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA2Y1JmR0p3QkZGTUw3Y0xtY3UyaHRhMjlkSVdPZmRTWkJsNXR2M1NWT3NvNlJmMi1kRWVxRmE3U1dwcU9kVDNzbF9CZkhTekVuUl9TX1Nxb3lkQUEtRFE?oc=5",
-        "finalUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA2Y1JmR0p3QkZGTUw3Y0xtY3UyaHRhMjlkSVdPZmRTWkJsNXR2M1NWT3NvNlJmMi1kRWVxRmE3U1dwcU9kVDNzbF9CZkhTekVuUl9TX1Nxb3lkQUEtRFE",
-        "pageTitle": "",
-        "matchedFacilities": [],
-        "organizer": "",
-        "error": "記事本文の主要部分を抽出できない",
-        "eventStartsAt": null,
-        "eventEndsAt": null,
-        "venue": ""
-      },
-      "relatedCount": 0,
-      "previousStatus": "review"
     },
     {
       "id": "20261017-uruma-official-bullfighting-96da6665f4",
